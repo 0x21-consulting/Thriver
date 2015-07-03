@@ -6,12 +6,8 @@
 	{{> header}}
 	{{> masthead}}
 	<main class="content-wrapper">
-		{{> calloutA}}
-		{{> work}}
-		{{> community}}
-		{{> calloutB}}
-		{{> who}}
-		{{> providers}}
-		{{> contact}}
+        {{#each sections}}
+		    {{> Template.dynamic template=template }}
+        {{/each}}
 	</main>
 </body>
