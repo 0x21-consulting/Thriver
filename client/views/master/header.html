@@ -8,11 +8,17 @@
        <div class="pure-u-1 pure-u-md-2-3 nav">
            <div class="pure-menu pure-menu-horizontal custom-can-transform">
                <ul class="pure-menu-list">
-                   <li class="pure-menu-item"><a href="#" class="pure-menu-link">Menu Item</a></li>
-                   <li class="pure-menu-item"><a href="#" class="pure-menu-link">Menu Item</a></li>
-                   <li class="pure-menu-item"><a href="#" class="pure-menu-link">Menu Item</a></li>
+                   {{#each sections}}
+                       {{> menuItem}}
+                   {{/each}}
                </ul>
            </div>
        </div>
    </header>
+</template>
+
+<template name="menuItem">
+    <li class="pure-menu-item">
+        <a href="#{{anchor}}" class="pure-menu-link">{{name}}</a>
+    </li>
 </template>
