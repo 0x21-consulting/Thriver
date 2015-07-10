@@ -10,4 +10,7 @@
 		    {{> Template.dynamic template=template }}
         {{/each}}
 	</main>
+    {{#if isAdmin}}
+        {{> admin}}
+    {{/if}}
 </body>

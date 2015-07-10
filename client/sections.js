@@ -15,4 +15,4 @@ Template.header.helpers({
     sections: function () {
         return Sections.find({ showInMenu: true });
     }
-});
+}); 

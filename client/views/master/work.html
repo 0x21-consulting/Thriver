@@ -1,10 +1,13 @@
 <template name="work">
-   <section class="work pure-g" id="{{anchor}}">
-   	<div class="pure-u-1 pure-u-md-17-24 display">
-   		<!--Display panels-->
-   	</div>
-   	<div class="pure-u-1 pure-u-md-7-24 legend">
-   		<!--UL of toggle switches-->
-   	</div>
-   </section>
+    <section class="work pure-g" id="{{anchor}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+   	    <div class="pure-u-1 pure-u-md-17-24 display">
+   		    <!--Display panels-->
+   	    </div>
+   	    <div class="pure-u-1 pure-u-md-7-24 legend">
+            <!--UL of toggle switches-->
+   	    </div>
+    </section>
 </template>

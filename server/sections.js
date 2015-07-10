@@ -1,6 +1,7 @@
-var sections = new Mongo.Collection('sections');
+Sections = new Mongo.Collection('sections');
+Page     = new Mongo.Collection('page');
 
 // Publish sections -- they're public
 Meteor.publish('sections', function () {
-    return sections.find({}, { sort: { order: 1 }});;
+    return Sections.find({}, { sort: { order: 1 }});;
 });

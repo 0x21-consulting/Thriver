@@ -1,12 +1,14 @@
 <template name="who">
-	<section class="who-we-are" id="{{anchor}}">
-		<div class="set-toggle">
-			<ul>
-				<li>WCASA Staff</li>
-				<li>Board of Directors</li>
-			</ul>
-		</div>
-		<div class="members">
-		</div>
-	</section>
+    <section class="who-we-are" id="{{anchor}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="set-toggle">
+            <ul>
+                <li>WCASA Staff</li>
+                <li>Board of Directors</li>
+            </ul>
+        </div>
+		<div class="members"></div>
+    </section>
 </template>

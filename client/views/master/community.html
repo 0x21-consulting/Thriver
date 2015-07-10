@@ -1,6 +1,8 @@
 <template name="community">
-   <section class="community" id="{{anchor}}">
-   	<div class="slider">
-   	</div>
-   </section>
+    <section class="community" id="{{anchor}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+   	    <div class="slider"></div>
+    </section>
 </template>

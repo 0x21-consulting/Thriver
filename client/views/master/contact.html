@@ -1,5 +1,8 @@
 <template name="contact">
-   <section class="contact" id="{{anchor}}">
-   	<h2>Contact WCASA</h2>
-   </section>
+    <section class="contact" id="{{anchor}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+   	    <h2>Contact WCASA</h2>
+    </section>
 </template>

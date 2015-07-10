@@ -1,3 +1,4 @@
 .meteor/local
 .meteor/meteorite
 db.coffee
+.DS_Store
