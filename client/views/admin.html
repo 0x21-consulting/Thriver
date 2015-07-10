@@ -1,0 +1,14 @@
+<!-- Admin panel on right side of page -->
+<template name="admin">
+    <aside id="admin-controls">
+        <button id="newSection" draggable="true">&#xf12e;</button>
+    </aside>
+</template>
+
+<!-- Admin controls on each section -->
+<template name="sectionAdmin">
+    <aside class="section-controls">
+        <button class="section-delete">&#xf014;</button>
+        <input type="text" class="section-name" placeholder="Section Name" value="{{name}}" />
+    </aside>
+</template>

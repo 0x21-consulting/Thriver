@@ -1,0 +1,10 @@
+<template name="callout">
+	<section class="callout first" id="{{anchor}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+		<h3>
+            {{#markdown}} {{content}} {{/markdown}}
+		</h3>
+	</section>
+</template>

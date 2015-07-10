@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.3.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+#admin-controls {
+    position: fixed;
+    background: #fff;
+    right: 0;
+    top: 25%;
+    border-radius: 5px 0 0 5px;
+    box-shadow: -5px 5px 25px -1px rgba(0,0,0,.2);
+    text-align: center;
+    padding: 10px;
+}
+#admin-controls, .section-controls {
+    font-family: 'FontAwesome';
+    font-size: 50px;
+    text-rendering: auto; // optimizelegibility throws things off #1094
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+    transition: opacity .2s ease-in;
+    opacity: .5;
+}
+#admin-controls:hover, .section-controls:hover { opacity: 1; }
+.section-controls {
+    position: absolute;
+    font-size: 20px;
+}
+.section-controls input { line-height: 21px; }
+
+// Placeholder element
+section.placeholder {
+    border: 5px dotted #ccc;
+    color: #ccc;
+    padding: 50px;
+    text-align: center;
+}
+// Templates menu
+#templatesMenu {
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 0 25px -1px rgba(0,0,0,.2);
+    border-radius: 5px;
+    padding: 10px 0 0 0;
+    text-align: center;
+}
+#templatesMenu > a {
+    padding: 10px 50px;
+    display: block;
+    text-decoration: none;
+    color: #06a;
+}
+#templatesMenu > a:hover {
+    background: #06a;
+    color: #fff;
+}
+
+// For drag and drop to work without any existing sections,
+// <main> needs to have some rendered size
+main { min-height: 50px; }
