@@ -18,11 +18,12 @@ Meteor.methods({
         
         // Add new section
         Sections.insert({
-            name: '',
-            anchor: '',
-            content: '',
+            name: null,
+            content: null,
             template: template,
-            order: order
+            order: order,
+            displayOnPage: true,
+            tabs: []
         });
     },
     
@@ -56,7 +57,7 @@ Meteor.methods({
     },
     
     // Update a section's name and anchor
-    updateSection: function (id, name, anchor) {
+    updateSection: function (id, name) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
@@ -64,14 +65,11 @@ Meteor.methods({
         // Mutual Suspicion
         id = '' + id;
         name = '' + name;
-        anchor = '' + anchor;
         
         // Update section
         Sections.update({ '_id': id }, {
             $set: {
-                name: name,
-                anchor: anchor,
-                showInMenu: name.length? true : false
+                name: name
             }
         });
     }

@@ -134,47 +134,8 @@ Template.body.onCreated(isAdmin);
 Accounts.onLogin(isAdmin);
 
 // Whether to show admin controls on page
-Template.body.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.callout.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.community.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.contact.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.providers.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.who.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
-});
-Template.work.helpers({
-    isAdmin: function () {
-        // Make the reactive variable available to the template
-        return Session.get('isAdmin');
-    }
+Template.registerHelper('isAdmin', function () {
+    return Session.get('isAdmin');
 });
 
 // Bind drag and drop events for adding new sections
@@ -280,35 +241,15 @@ Template.sectionAdmin.events({
             return filename.join(' ');
         },
         
-        // Lowercase for use as element ID
-        anchor = function (name) {
-            var removeName;
-            
-            // Mutual Suspicion
-            name = '' + name;
-            
-            // Is the name an empty string?
-            removeName = !name.length;
-            
-            // Make all lower case, then replace spaces with hyphens
-            name = name.toLowerCase().trim().replace(' ', '-').
-            
-            // anchors can't begin with numbers
-            replace(/^\d*/g, '');
-            
-            if (removeName || name.length > 0)
-                return name;
-                
-            throw new Meteor.Error('Name cannot be all numbers.');
-        },
-        
         // Grep name from text field
         name = event.currentTarget.value;
         
-        console.debug(event.delegateTarget.dataset.id, capitalize(name), anchor(name));
         // Now update section with new parameters
         Meteor.call('updateSection', event.delegateTarget.dataset.id, 
-            capitalize(name), anchor(name));
+            capitalize(name));
+            
+        // BUG: Reactivity doesn't keep proper order
+        location.reload();
     }
 });
 
