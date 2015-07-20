@@ -2,6 +2,11 @@
 	<section class="masthead">
 		<div class="va-object centered">
 			<h1>Headline</h1>
+                <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
 		</div>
 		<div class="down-arrow">
 			<span class="glyphicon glyphicon-chevron-right masthead-directions"></span>

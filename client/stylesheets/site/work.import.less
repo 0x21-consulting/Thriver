@@ -1,13 +1,105 @@
-.work{
-	background: #dedede;
-	padding:20px 0px;
-	.legend{
-		background: #313131;
-		height: 600px;
-	}
-	.display{
-		background: #fff;
-		height: 600px;
-		border-right: 20px solid #dedede;
-	}
+.work.tabs.tabs-right{
+    // Tab Defaults
+    article{
+        display: none;
+        .content{
+            padding-left: 125px;
+            padding-right: 60px;
+            padding:30px 60px 125px 125px;
+            max-width: 600px;
+            background-color: rgb(255,255,255);
+        }
+        h2{
+            position: relative;
+            border-bottom: 5px solid @blue;
+            background-color: @lightGray;
+            padding: 30px 30px 30px 125px;
+            font-size: 40px;
+            font-weight: 100;
+            line-height: 28px;
+            span{
+                display: block;
+                position: absolute;
+                left: 0px;
+                padding: 30px;
+                top: 0px;
+                color: @white;
+                background-color: @gray;
+            }
+        }
+    }
+    article.active{
+        display: block;
+    }
+
+
+    // Work Styles
+    background-color: @darkGray;
+    padding: 20px 0px;
+    main{
+        float: left;
+        width: 68%;
+        margin-right: 2%;
+    }
+
+    //Menu 
+    menu{
+        float: left;
+        width: 30%;
+        background: @gray50;
+        li{
+            padding: 2px 30px 0px 0px;
+            color:@white;
+            font-weight: bold;
+            background-color: @fontBlack;
+            margin-bottom: 5px;
+            line-height: 50px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            &:last-child{
+                margin-bottom: 0px;
+            }
+            span{
+                display: block;
+                float: left;
+                line-height: 52px;
+                background-color: @gray34;
+                padding: 0px 20px;
+                font-size: 21px;
+                font-weight: 100;
+                margin-right: 10px;
+                margin-top: -2px;
+                cursor: pointer;
+            }
+
+        }
+        li.active, li:hover{
+            background-color: @deepGray;
+            span{
+                background-color: @bgBlack;
+                &:after{
+                    content:'';
+                    background-color: @blue;
+                    width: 5px;
+                    position: absolute;
+                    height: 100%;
+                    left: -5px;
+                }
+            }
+            &:after{
+                content: '';
+                position: absolute;
+                left: -11px;
+                top: 50%;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 6px 7px 6px 0;
+                border-color: transparent @blue transparent transparent;
+                margin-top: -5.5px;
+            }
+        }
+    }
 }

@@ -1,13 +1,75 @@
 <template name="work">
-    <section class="work pure-g" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="work tabs tabs-right" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-   	    <div class="pure-u-1 pure-u-md-17-24 display">
-   		    <!--Display panels-->
-   	    </div>
-   	    <div class="pure-u-1 pure-u-md-7-24 legend">
-            <!--UL of toggle switches-->
-   	    </div>
+        <main>
+            <article class="active">
+                {{> article1}}
+            </article>
+            <article>
+                {{> article2}}
+            </article>
+            <article>
+                {{> article3}}
+            </article>
+        </main>
+        <menu>
+            <ul>
+                <li class="active"><span class="fa">&#xf0a6;</span> Prevention</li>
+                <li><span class="fa">&#xf0a6;</span> Advocacy</li>
+                <li><span class="fa">&#xf0a6;</span> Evaluation</li>
+            </ul>
+        </menu>
     </section>
+    <script>
+        $('.tabs li').click(function(){
+            var x = $(this).index() + 1;
+            $('.tabs menu li').removeClass("active");
+            $('.tabs article').removeClass("active");
+            $(this).addClass("active");
+            $(this).parent().parent().siblings().find( "article:nth-child(" + x + ")" ).addClass("active");
+        });
+    </script>
+</template>
+
+
+
+<!--To be converted into database fields-->
+<template name="article1">
+    <h2><span class="fa">&#xf0a6;</span> Prevention</h2>
+    <div class="content">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam neque non blandit pulvinar. In iaculis metus id leo dapibus gravida. Donec laoreet nisl felis, id laoreet ex hendrerit ut. Suspendisse cursus diam nunc, vitae dapibus lacus feugiat at. Vivamus et auctor elit, a iaculis magna. Suspendisse potenti. 
+        </p>
+        <p>
+            Integer ornare molestie ex, fermentum venenatis lectus consequat pellentesque. Aliquam rhoncus ipsum eu diam tristique efficitur.
+        </p>
+        <p>
+            Ut eget condimentum purus. Nam vel sem sapien. Etiam sed lectus tellus. Cras sagittis ultricies arcu, ut accumsan lectus placerat cursus. 
+        </p>
+    </div>
+</template>
+
+<template name="article2">
+    <h2><span class="fa">&#xf0a6;</span> Advocacy</h2>
+    <div class="content">
+        <p>
+            Cras pharetra aliquet massa, non cursus metus hendrerit quis. Proin a pharetra turpis. Phasellus vel est et metus tincidunt tristique at vitae eros. Sed lectus purus, accumsan quis molestie ut, faucibus ac lectus. Aliquam libero sapien, accumsan vel odio in, congue rhoncus felis. Curabitur libero ipsum, pulvinar id ante vitae, consequat posuere lorem.
+        </p>
+        <p>
+            Nulla libero quam, suscipit at interdum vel, porta at dui. Proin sit amet sem at diam scelerisque finibus a sit amet tellus. Nam non urna est. Fusce ultrices ligula a suscipit congue.
+        </p>
+    </div>
+</template>
+<template name="article3">
+    <h2><span class="fa">&#xf0a6;</span> Evaluation</h2>
+    <div class="content">
+        <p>
+            Vivamus quis elit ante. Phasellus tincidunt metus vel rutrum commodo. Sed interdum iaculis lacus non viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean porta nulla ac purus scelerisque egestas. Vestibulum volutpat felis non quam varius, ac ullamcorper sapien venenatis.
+        </p>
+        <p>
+            Phasellus consequat elit et suscipit consequat. Pellentesque lobortis velit neque. Vivamus pulvinar et magna vel scelerisque. Nunc lacinia efficitur mi. Maecenas eget aliquet ante, vel viverra purus. Vivamus sodales rhoncus elit id lacinia. Praesent hendrerit aliquet hendrerit. In hac habitasse platea dictumst. Nam sodales, orci eu consectetur pulvinar, enim eros ullamcorper justo, fringilla aliquet neque odio nec dui. Proin at nisl tincidunt, bibendum elit et, efficitur tortor.
+        </p>
+    </div>
 </template>
