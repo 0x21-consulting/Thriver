@@ -57,7 +57,7 @@ Meteor.methods({
     },
     
     // Update a section's name and anchor
-    updateSection: function (id, name) {
+    updateSectionName: function (id, name) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
@@ -70,6 +70,24 @@ Meteor.methods({
         Sections.update({ '_id': id }, {
             $set: {
                 name: name
+            }
+        });
+    },
+    
+    // Update a section's content
+    updateSectionContent: function (id, content) {
+        // Check Authorization
+        if (!Meteor.userId() || !Meteor.user().admin)
+            throw new Meteor.Error('not-authorized');
+        
+        // Mutual Suspicion
+        id = '' + id;
+        content = '' + content;
+        
+        // Update section
+        Sections.update({ '_id': id}, {
+            $set: {
+                content: content
             }
         });
     }

@@ -1,10 +1,11 @@
 <template name="callout">
-	<section class="callout first" id="{{anchor}}" data-id="{{_id}}">
+	<section class="callout" id="{{anchor}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-		<h3>
-            {{#markdown}} {{content}} {{/markdown}}
+        {{! TODO: Why keep the content in the DOM twice? }}
+		<h3 class="content" data-content="{{content}}">
+            {{#markdown}}{{content}}{{/markdown}}
 		</h3>
 	</section>
 </template>
