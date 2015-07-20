@@ -8,22 +8,20 @@
     text-align: center;
     padding: 10px;
 }
-#admin-controls, .section-controls {
+#admin-controls button, .section-controls button {
     font-family: 'FontAwesome';
     font-size: 50px;
+    vertical-align: middle;
     text-rendering: auto; // optimizelegibility throws things off #1094
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transform: translate(0, 0); // ensures no half-pixel rendering in firefox
-    transition: opacity .2s ease-in;
-    opacity: .5;
 }
+#admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
 #admin-controls:hover, .section-controls:hover { opacity: 1; }
-.section-controls {
-    position: absolute;
-    font-size: 20px;
-}
-.section-controls input { line-height: 21px; }
+.section-controls button { font-size: 20px; }
+.section-controls { position: absolute; }
+.section-controls input { line-height: 21px; vertical-align: middle; }
 
 // Placeholder element
 section.placeholder {
