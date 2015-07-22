@@ -4,18 +4,125 @@
     margin-bottom: 1em;
     -webkit-font-smoothing: antialiased;
     height: 4.5em;
-    overflow: hidden;
-    -webkit-transition: height 0.5s;
-    -moz-transition: height 0.5s;
-    -ms-transition: height 0.5s;
-    transition: height 0.5s;
     position: fixed;
     width: 100%;
     line-height: 4em;
     top: 0px;
     z-index: 9;
+    .brand img {
+        height: 42px;
+        padding-top: 16px;
+        padding-left: 25px;
+        }
+    nav, ul, li{
+        display: inline-block;
+        height: 100%;
+    }
+    nav{
+        text-align: right;
+        float: right;
+        li{
+            height: auto;
+            line-height: 72px;
+            #login-buttons a, .accounts-dialog a{
+                text-decoration: none;
+            }
+        }
+        li.login a.login-link-text {
+            line-height: 72px;
+            color: @white;
+            background-color: @teal;
+            padding-left: 25px;
+            padding-right: 25px;
+            &:hover{
+                background-color: darken(@teal, 10%);
+            }
+        }
+        a{
+            color: @gray91;
+            font-weight: bold;
+            display: block;
+            padding-right: 25px;
+            &:hover{
+                color: @deepGray;
+            }
+        }
+    }
 }
 
-.nav{
-    text-align: right;
+
+div#login-dropdown-list {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -166px;
+    margin-left: -157px;
+    padding: 40px;
+    box-shadow: 0px 0px 19px rgba(0,0,0,1);
+    -webkit-box-shadow: 0px 0px 19px rgba(0,0,0,1);
+    z-index: 999;
+    &:after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.2);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: -2;
+    }
+    a.login-close-text {
+        position: absolute;
+        right: 0px;
+        top: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        color:@white;
+        &:after {
+            content: "\f00d";
+            color: #bbb;
+            font-size: 25px;
+            font-family: fontawesome;
+            position: relative;
+            top: -13px;
+            right: -15px;
+            font-weight: 100 !important;
+        }
+        &:hover:after{
+            color: #999;
+        }
+
+    }
+    label {
+        float: left;
+        padding-bottom: 2px;
+        font-size: 16px;
+    }
+    .login-form.login-password-form input {
+        background-color: #ddd;
+        border: none;
+        line-height: 30px;
+        &:focus{
+            outline: none;
+            background-color: #bbb;
+        }
+    }
+    .additional-link-container a {
+        display: inline-block;
+        padding: 0px;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .login-button, .login-button {
+        background-color: @teal;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        line-height: 31px;
+        margin-top: 20px;
+        &:hover{
+            background-color: darken(@teal, 10%);
+        }
+    }
 }

@@ -1,3 +1,16 @@
+/* ////////////////// Tonight To-Dos ////////////////////
+    -Place "Need a Home" LESS in correct section
+    - Finish Header + Signin Form
+    - Finish Slider
+    - Finish Lower Tabs
+    -Introduce Drawer?
+    -Remove static content
+    -Add hover states
+    -Provide synopsis of updates
+*/
+
+
+
 @font-face {
     font-family: 'Raleway';
     font-style: normal;
@@ -73,7 +86,69 @@ table {
 }
 
 
-// THIS NEEDS A HOME
+//Custom Resets
+    a, a:link, a:hover, a:active, a:focus{
+        outline: none;
+        text-decoration: none;
+    }
+    p{
+        margin-bottom: 20px;
+    }
+
+
+//Typography
+    @baseFontSize: 16px;
+    @baseLineHeight: 24px;
+    @baseLetterSpacing : 1px;
+    @baseFont: "Raleway", sans-serif;
+    @heroHeadlineFontSize: 5em;
+    .fa{font-family: "FontAwesome";}
+
+//Colors
+    //Neutrals
+        @lightGray: rgb(244,244,244);
+        @gray: rgb(235,235,235);
+        @darkGray: rgb(222,222,222);
+        @deepGray: rgb(28,28,28);
+        @gray50: rgb(48,48,48);
+        @gray34: rgb(34,34,34);
+        @gray91: rgb(91,91,91);
+        @fontBlack: rgb(41,41,41);
+        @bgBlack: rgb(15,15,15);
+        @white: rgb(255,255,255);
+    //Accents
+        @blue: rgb(24,134,197);
+        @yellow: rgb(255,227,63);
+        @teal: rgb(44,181,191);
+        @melon: rgb(223,79,79);
+
+//Displays
+    .clearFix{
+        content:"";
+        display:table;
+        clear:both;
+    }
+
+    section:after{
+            .clearFix;
+    }
+
+
+body, p, ul, ol, h1, h2, h3, h4, h5{
+    font-family: @baseFont;
+    letter-spacing: @baseLetterSpacing;
+}
+
+body, p, ul, ol{
+    font-size: @baseFontSize;
+    letter-spacing: @baseLetterSpacing;
+    line-height: @baseLineHeight;
+    color: @fontBlack;
+}
+
+
+
+///////////////////////// // THIS NEEDS A HOME
 .va-object{
     display: table-cell;
     vertical-align: middle;
@@ -108,52 +183,5 @@ table {
     }
 }
 
-//Typography
-    @baseFontSize: 16px;
-    @baseLineHeight: 24px;
-    @baseLetterSpacing : 1px;
-    @baseFont: "Raleway", sans-serif;
-    @heroHeadlineFontSize: 5em;
-    .fa{font-family: "FontAwesome";}
 
-//Colors
-    //Neutrals
-        @lightGray: rgb(244,244,244);
-        @gray: rgb(235,235,235);
-        @darkGray: rgb(222,222,222);
-        @deepGray: rgb(28,28,28);
-        @gray50: rgb(48,48,48);
-        @gray34: rgb(34,34,34);
-        @fontBlack: rgb(41,41,41);
-        @bgBlack: rgb(15,15,15);
-        @white: rgb(255,255,255);
-    //Accents
-        @blue: rgb(24,134,197);
-
-//Displays
-    .clearFix{
-        content:"";
-        display:table;
-        clear:both;
-    }
-
-    section:after{
-            .clearFix;
-    }
-
-
-body, p, ul, ol, h1, h2, h3, h4, h5{
-    font-family: @baseFont;
-    letter-spacing: @baseLetterSpacing;
-}
-
-body, p, ul, ol{
-    font-size: @baseFontSize;
-    letter-spacing: @baseLetterSpacing;
-    line-height: @baseLineHeight;
-    color: @fontBlack;
-}
-
-h2{
-
-}
+/////////////////////////////// Need a home END
