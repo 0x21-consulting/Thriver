@@ -4,6 +4,10 @@
             {{> sectionAdmin}}
         {{/if}}
         <main>
+            {{#each tabs}}
+                {{> article id=this}}
+            {{/each}}
+            <!--
             <article class="active">
                 {{> article1}}
             </article>
@@ -13,27 +17,45 @@
             <article>
                 {{> article3}}
             </article>
+            -->
         </main>
-        <menu>
+        <menu class="tabs">
             <ul>
+                {{#each tabs}}
+                    {{> tab id=this}}
+                {{/each}}
+                <!--
                 <li class="active"><span class="fa">&#xf0a6;</span> Prevention</li>
                 <li><span class="fa">&#xf0a6;</span> Advocacy</li>
                 <li><span class="fa">&#xf0a6;</span> Evaluation</li>
+                -->
             </ul>
         </menu>
     </section>
     <script>
-        $('.tabs li').click(function(){
+        // TODO: move to sections.js
+        /*$('.tabs li').click(function(){
             var x = $(this).index() + 1;
             $('.tabs menu li').removeClass("active");
             $('.tabs article').removeClass("active");
             $(this).addClass("active");
             $(this).parent().parent().siblings().find( "article:nth-child(" + x + ")" ).addClass("active");
-        });
+        });*/
     </script>
 </template>
 
+<template name="tab">
+    <li data-id="{{id}}" data-icon="{{icon id}}">{{name id}}</li>
+</template>
 
+<template name="article">
+    <article data-id="{{id}}">
+        <h2><span class="fa">{{icon id}}</span> {{name id}}</h2>
+        <div class="content">
+            {{#markdown}}{{content id}}{{/markdown}}
+        </div>
+    </article>
+</template>
 
 <!--To be converted into database fields-->
 <template name="article1">

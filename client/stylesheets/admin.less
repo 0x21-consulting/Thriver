@@ -20,7 +20,7 @@
 #admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
 #admin-controls:hover, .section-controls:hover { opacity: 1; }
 .section-controls button { font-size: 20px; }
-.section-controls { position: absolute; }
+.section-controls { position: absolute; z-index: 1; }
 .section-controls input { line-height: 21px; vertical-align: middle; }
 
 // Placeholder element
@@ -52,4 +52,6 @@ section.placeholder {
 
 // For drag and drop to work without any existing sections,
 // <main> needs to have some rendered size
-main { min-height: 50px; }
+main { min-height: 100px; }
+// Same goes for any section's tabs
+menu.tabs { min-height: 100px; }
