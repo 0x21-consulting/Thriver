@@ -9,13 +9,13 @@
             {{/each}}
             <!--Remove me-->
             <article class="active">
-                {{> article1}}
+                {{> article4}}
             </article>
             <article>
-                {{> article2}}
+                {{> article5}}
             </article>
             <article>
-                {{> article3}}
+                {{> article6}}
             </article>
             <!--Remove me end-->
         </main>
@@ -44,21 +44,8 @@
     </script>
 </template>
 
-<template name="tab">
-    <li data-id="{{id}}" data-icon="{{icon id}}">{{name id}}</li>
-</template>
-
-<template name="article">
-    <article data-id="{{id}}">
-        <h2><span class="fa">{{icon id}}</span> {{name id}}</h2>
-        <div class="content">
-            {{#markdown}}{{content id}}{{/markdown}}
-        </div>
-    </article>
-</template>
-
 <!--To be converted into database fields-->
-<template name="article1">
+<template name="article4">
     <div class="content">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam neque non blandit pulvinar. In iaculis metus id leo dapibus gravida. Donec laoreet nisl felis, id laoreet ex hendrerit ut. Suspendisse cursus diam nunc, vitae dapibus lacus feugiat at. Vivamus et auctor elit, a iaculis magna. Suspendisse potenti. 
@@ -72,7 +59,7 @@
     </div>
 </template>
 
-<template name="article2">
+<template name="article5">
     <div class="content">
         <p>
             Cras pharetra aliquet massa, non cursus metus hendrerit quis. Proin a pharetra turpis. Phasellus vel est et metus tincidunt tristique at vitae eros. Sed lectus purus, accumsan quis molestie ut, faucibus ac lectus. Aliquam libero sapien, accumsan vel odio in, congue rhoncus felis. Curabitur libero ipsum, pulvinar id ante vitae, consequat posuere lorem.
@@ -82,7 +69,7 @@
         </p>
     </div>
 </template>
-<template name="article3">
+<template name="article6">
     <div class="content">
         <p>
             Vivamus quis elit ante. Phasellus tincidunt metus vel rutrum commodo. Sed interdum iaculis lacus non viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean porta nulla ac purus scelerisque egestas. Vestibulum volutpat felis non quam varius, ac ullamcorper sapien venenatis.
