@@ -18,7 +18,27 @@ var edit = function (id) {
         
         // Restore element
         this.innerHTML = marked(this.dataset.content);
-        this.dataset.originalContent = null;
+        //this.dataset.originalContent = null;
+        this.contentEditable = false;
+    };
+},
+
+// Tab name editing
+// Keep ID in scope
+editTab = function (id) {
+    return function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+        debugger;
+        var name = this.textContent.trim();
+        
+        // If the content is different than prior, update tab name
+        if (this.dataset.content !== name) {
+            Meteor.call('updateTabName', id, name);
+        }
+        
+        // Restore element
+        this.dataset.content = null;
         this.contentEditable = false;
     };
 };
@@ -31,23 +51,33 @@ Template.sectionAdmin.events({
         event.preventDefault();
         
         var parent = event.delegateTarget,
-            that   = parent.querySelector(':scope > .content');
-        if (!that) return;
+            that   = parent.querySelector(':scope > .content'),
+            those  = parent.querySelectorAll(':scope menu.tabs li'),
+            i = 0, j = those.length;
         
-        // Note the existing content
-        //that.dataset.originalContent = that.textContent.trim();
+        if (that) {
+            // Main content section
+            that.addEventListener('blur', edit(parent.dataset.id) );
+            
+            // Replace content with markdown
+            that.textContent = that.dataset.content;
+            
+            // Focus editable element
+            that.focus();
+        }
         
-        // Make section editable
-        that.contentEditable = 'true';
-        
-        // Bind edit handler
-        that.addEventListener('blur', edit(parent.dataset.id) );
-        
-        // Replace content with markdown
-        that.textContent = that.dataset.content;
-        
-        // Focus editable element
-        that.focus();
+        for (; i < j; ++i) {
+            that = those[i];
+            
+            // Make section editable
+            that.contentEditable = 'true';
+            
+            // Copy text content to dataset to check if there was any change
+            that.dataset.content = that.textContent.trim();
+            
+            // Bind edit handler
+            that.addEventListener('blur', editTab(that.dataset.id) );
+        }
     },
     // Add or modify section name
     'change input.section-name': function (event) {
