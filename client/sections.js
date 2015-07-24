@@ -2,12 +2,10 @@ var Sections = new Mongo.Collection('sections'),
 
 // Helper for changing tabs
 changeTabs = function (event) {
-    console.debug(event);
     var parent = event.delegateTarget.parentElement.parentElement,
         active = parent.querySelectorAll('.active'),
         i = 0, j = active.length;
-        
-    console.debug('active', active);
+    
     // Remove active class from all elements under parent
     for (; i < j; ++i)
         active[i].classList.remove('active');
@@ -59,7 +57,7 @@ Template.body.helpers({
 // Pass to header template for menu
 Template.header.helpers({
     sections: function () {
-        return Sections.find({ displayOnPage: true, name: { $ne: null } });
+        return Sections.find({ displayOnPage: true, name: { $nin: [null, ''] } });
     }
 }); 
 

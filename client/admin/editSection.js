@@ -29,16 +29,17 @@ editTab = function (id) {
     return function (event) {
         event.stopPropagation();
         event.preventDefault();
-        debugger;
+        
         var name = this.textContent.trim();
         
         // If the content is different than prior, update tab name
         if (this.dataset.content !== name) {
+            this.textContent = '';
             Meteor.call('updateTabName', id, name);
         }
         
         // Restore element
-        this.dataset.content = null;
+        this.dataset.content = '';
         this.contentEditable = false;
     };
 };
@@ -62,6 +63,9 @@ Template.sectionAdmin.events({
             // Replace content with markdown
             that.textContent = that.dataset.content;
             
+            // Make section editable
+            that.contentEditable = 'true';
+            
             // Focus editable element
             that.focus();
         }
@@ -69,11 +73,11 @@ Template.sectionAdmin.events({
         for (; i < j; ++i) {
             that = those[i];
             
-            // Make section editable
-            that.contentEditable = 'true';
-            
             // Copy text content to dataset to check if there was any change
             that.dataset.content = that.textContent.trim();
+            
+            // Make section editable
+            that.contentEditable = 'true';
             
             // Bind edit handler
             that.addEventListener('blur', editTab(that.dataset.id) );

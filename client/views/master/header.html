@@ -5,20 +5,12 @@
         </a>
         <nav>
            <ul>
-                <!--Remove Me-->
-                <li><a href="#">Menu Item</a></li>
-                <li><a href="#">Menu Item</a></li>
-                <li><a href="#">Menu Item</a></li>
-                <li><a href="#">Menu Item</a></li>
-                <!--Remove Me End-->
-                <li>
-                   {{#each sections}}
-                       {{> menuItem}}
-                   {{/each}}
-                </li>
-                <li class="login">
-                    {{> loginButtons}}
-                </li>
+               {{#each sections}}
+                   {{> menuItem}}
+               {{/each}}
+               <li class="login">
+                   {{> loginButtons}}
+               </li>
            </ul>
         </nav>
    </header>
