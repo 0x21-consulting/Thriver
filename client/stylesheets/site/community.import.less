@@ -1,9 +1,42 @@
-.community{
+.community.tabs.tabs-bottom{
 	background: #dedede;
-	border-top: 6px solid #f56f76;
-	height: 600px;
-	.slider{
-		background: #fff;
-		height: 80%;
+	border-top: 6px solid @melon;
+	article{
+		background: @white;
+		padding: 145px 200px 125px 200px;
 	}
+    menu{
+        ul {
+            margin-top: 10px;
+            text-align: center;
+        }
+        li {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            padding: 20px;
+            background-color: @gray50;
+            color: #fff;
+            margin-right: 6px;
+            &:hover{
+                background-color: @deepGray;
+            }
+            &:focus{
+                background-color: @bgBlack;
+            }
+        }
+        li.active{
+            background-color: @white;
+            color: @fontBlack;
+            &:before{
+                content:'';
+                background-color: @white;
+                position: absolute;
+                width: 100%;
+                height: 20px;
+                top: -20px;
+                left:0px;
+            }
+        }
+    }
 }
