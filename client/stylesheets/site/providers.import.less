@@ -49,7 +49,19 @@
         height: 400px;
         overflow: hidden;
         width: 100%;
+        position: relative;
         border-top: 5px solid @melon;
+        &:after{
+            content:'';
+            position: absolute;
+            bottom: 0px;
+            left:60px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 31.5px 24px 31.5px;
+            border-color: transparent transparent @melon transparent;
+        }
     }
     .details{
         padding: 70px;
