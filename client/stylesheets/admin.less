@@ -7,6 +7,7 @@
     box-shadow: -5px 5px 25px -1px rgba(0,0,0,.2);
     text-align: center;
     padding: 10px;
+    z-index: 100; // keep on top
 }
 #admin-controls button, .section-controls button {
     font-family: 'FontAwesome';
@@ -20,7 +21,11 @@
 #admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
 #admin-controls:hover, .section-controls:hover { opacity: 1; }
 .section-controls button { font-size: 20px; }
-.section-controls { position: absolute; z-index: 1; }
+.section-controls {
+    position: absolute;
+    z-index: 100;
+    top: 0; // ensure proper placement despite section margins and padding
+}
 .section-controls input { line-height: 21px; vertical-align: middle; }
 
 // Placeholder element
@@ -55,3 +60,7 @@ section.placeholder {
 main { min-height: 100px; }
 // Same goes for any section's tabs
 menu.tabs { min-height: 100px; }
+
+// To ensure proper placement of admin controls (which are positioned
+// absolutely) we need to relatively position all main sections
+main.content-wrapper > section { position: relative; }

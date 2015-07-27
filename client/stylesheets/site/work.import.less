@@ -16,6 +16,7 @@
             font-size: 40px;
             font-weight: 100;
             line-height: 28px;
+            min-height: 28px; // allow proper height without text - Micah
             span{
                 display: block;
                 position: absolute;
@@ -30,7 +31,10 @@
 
     // Work Styles
     background-color: @darkGray;
-    padding: 20px 0px;
+    // We shouldn't use padding to separate sections for the sole
+    // reason of ensuring a particular background color between those sections.
+    // We can be more deliberate here. - Micah
+    margin: 20px 0px; // changed padding to margin
     main{
         float: left;
         width: 68%;

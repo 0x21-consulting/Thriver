@@ -64,25 +64,51 @@ Template.header.helpers({
 // Tabs
 Template.tab.helpers({
     name: function (id) {
-        return Sections.findOne({ '_id': id }, { '_id': 0, name: 1 }).name;
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, name: 1 });
+        if (result)
+            return result.name;
     },
     icon: function (id) {
-        return Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 }).icon;
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
+        if (result)
+            return result.icon;
     }
 });
 
 // Articles
 Template.article.helpers({
     content: function (id) {
-        return Sections.findOne({ '_id': id }, { '_id': 0, content: 1 }).content;
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, content: 1 });
+        if (result)
+            return result.content;
     },
     icon: function (id) {
-        return Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 }).icon;
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
+        if (result)
+            return result.icon;
     },
     name: function (id) {
-        return Sections.findOne({ '_id': id }, { '_id': 0, name: 1 }).name;
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, name: 1 });
+        if (result)
+            return result.name;
     }
 });
+
 // Set the first tab as active
 Template.tab.onRendered(function () {
     var parent;
@@ -100,4 +126,16 @@ Template.tab.onRendered(function () {
 // Helper for changing tabs
 Template.tab.events({
     'click li': changeTabs
+});
+
+// Markdown helper
+Template.registerHelper('markdown', function (text, options) {
+    // Ignore if no text
+    if (!text) return;
+    
+    // Convert markdown to html
+    text = marked('' + text);
+    
+    // Remove <p> tags
+    return text.trim().replace(/^<p>/i,'').replace(/<\/p>$/i,'');
 });

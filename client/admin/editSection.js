@@ -5,21 +5,26 @@ var edit = function (id) {
         event.stopPropagation();
         event.preventDefault();
         
-        var content = this.textContent.trim();
+        var content = toMarkdown(this.innerHTML).
+            replace(/<\/{0,1}div>/gi,'');
         
         // If the content is different than prior, update section
         //if (this.dataset.originalContent !== this.textContent.trim()) {
         if (this.dataset.content !== content) {
-            console.debug('Original:', this.dataset.content);
-            console.debug('New:', content);
-            this.innerHTML = '';
+            //this.innerHTML = '';
             Meteor.call('updateSectionContent', id, content);
+        } else {
+            // Restore element
+            this.innerHTML = marked(this.dataset.content).trim().
+                replace(/^<p>/i, '').replace(/<\/p>$/i, '');
         }
         
-        // Restore element
-        this.innerHTML = marked(this.dataset.content);
-        //this.dataset.originalContent = null;
+        // Should no longer be editable
         this.contentEditable = false;
+        
+        // removeEventListener doesn't work for some reason,
+        // so just replace the element with its clone
+        this.parentElement.replaceChild(this.cloneNode(true), this);
     };
 },
 

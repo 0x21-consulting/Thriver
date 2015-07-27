@@ -111,6 +111,7 @@ Meteor.methods({
         // Add tab
         Sections.insert({
             name: null,
+            icon: '\uf0e9',               // use default (umbrella)
             content: null,
             template: null,
             order: order,

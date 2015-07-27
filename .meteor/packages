@@ -8,7 +8,6 @@ meteor-platform
 less
 nemo64:bootstrap
 bootstrap3:glyphicons
-markdown
 accounts-ui
 accounts-password
 reactive-var

@@ -1,8 +1,56 @@
 <template name="providers">
-    <section class="providers" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="providers drawer" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
    	    <h2>Locate a WCASA Service Provider Nearest to You</h2>
+        <form>
+            <select class="county">
+                <option value="Jefferson">Jefferson</option>
+                <option value="Milwaukee">Milwaukee</option>
+                <option value="Racine">Racine</option>
+            </select>
+            <input type="number" pattern="[0-9]*" maxlength="5" min="0" name="zip" id="zip">
+            <input class="submit" type="submit" value="Submit">
+        </form>
+        <figure class="map">
+            Map Embed
+        </figure>
+        <article class="location-details details">
+            <h2>People Against Domestic and Sexual Abuse (PADA)</h2>
+            <p class="county-served">County Served: Jefferson</p>
+            <div class="left">
+                <address>
+                    P.O. Box 395<br>
+                    Jefferson, WI 53549
+                </address>
+                <p>Phone:<b>(920)674-6748</b></p>
+                <p>Crisis Line:<b>(920)674-6768</b></p>
+            </div>
+            <div class="right">
+                <a href="mailto:pada@idcnet.com" class="email">pada@idcnet.com</a>
+                <a href="padajc.org" class="website">padajc.org</a>
+                <a href="facebook.com" class="Facebook">PADA on Facebook</a>
+            </div>
+            <button class="cta">Jobs &amp; More</button>
+        </article>
     </section>
+
+
+
+<script>
+    var map = $('.map');
+    var details = $('.details');
+    var submit = $('.submit');
+    submit.click(function(){
+        event.preventDefault();
+        map.addClass('active');
+        details.addClass('active');
+    });
+    $('select.county').on('change', function() {
+        map.addClass('active');
+        details.addClass('active');
+    });
+</script>
+
 </template>

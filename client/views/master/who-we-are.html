@@ -1,14 +1,190 @@
 <template name="who">
-    <section class="who-we-are" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="who-we-are tabs tabs-top" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-        <div class="set-toggle">
+        <menu class="tabs set-toggle">
             <ul>
-                <li>WCASA Staff</li>
+                {{#each tabs}}
+                    {{> tab id=this}}
+                {{/each}}
+                <!--Remove me-->
+                <li class="active">WCASA Staff</li>
                 <li>Board of Directors</li>
+                <!--Remove me end-->
             </ul>
-        </div>
-		<div class="members"></div>
+        </menu>
+        <main class="members">
+            {{#each tabs}}
+                {{> article id=this}}
+            {{/each}}
+            <!--Remove me-->
+            <article class="active">
+                {{> slider}}
+            </article>
+            <article>
+                {{> slider2}}
+            </article>
+            <!--Remove me end-->
+        </main>
     </section>
+    <script>
+        // TODO: move to sections.js
+        $('.tabs.who-we-are menu li').click(function(){
+            var x = $(this).index() + 1;
+            $('.tabs.who-we-are menu li').removeClass("active");
+            $('.tabs.who-we-are article').removeClass("active");
+            $(this).addClass("active");
+            $(this).parent().parent().siblings().find( "article:nth-child(" + x + ")" ).addClass("active");
+        });
+    </script>
+</template>
+
+
+
+
+<!--Slider template-->
+<template name="slider">
+    <section class="slider contacts">
+        <main class="slider-content">
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+                {{> figure}}
+        </main>
+    </section>
+    <nav class="slider-nav">
+        <ul>
+            <li class="prev slider-nav">&#9664;</li>
+            <li class="next slider-nav">&#9654;</li>
+        </ul>
+    </nav>
+
+    <script>
+    //Jquery for slider
+        $('li.slider-nav').click(function(){
+            var windowSize = $(window).width();
+            var sliderContent = $('main.slider-content');
+            var transitState = parseInt($('main.slider-content').css('left'), 10);
+            var sliderWidth = 0;
+            $('figure').each(function() {
+                sliderWidth += $(this).outerWidth( true );
+            });
+            var windowDif = sliderWidth-windowSize;
+            var transitAmt = sliderWidth * 0.2;
+            var transitLiveNext = -transitState + transitAmt;
+            var transitLivePrev = -(-transitState - transitAmt);
+
+            if($(this).hasClass('prev')){
+                if(-transitState &lt;&#61; transitAmt){
+                    sliderContent.css( "left", "0" );
+                } else{
+                    sliderContent.css( "left", transitLivePrev);
+                }
+            }
+            if($(this).hasClass('next')){
+                if(-transitState &lt;&#61; windowDif - transitAmt){
+                    sliderContent.css( "left", -windowDif );
+                } else{
+                    sliderContent.css( "left", -transitLiveNext);
+                }
+            }
+        });
+    </script>
+</template>
+
+
+<!--Profile Figure Template-->
+<template name="figure">
+    <figure>
+        <img src="/lib/img/profile-1.jpg" alt="" />
+        <div class="details">
+            <h4>Jeff Goldblum, BS</h4>
+            <h5>Office Manager</h5>
+            <a href="mailto:jeffg@wcasa.org">jeffg@wcasa.org</a>
+        </div>
+    </figure>
+</template>
+
+<template name="figure2">
+    <figure>
+        <img src="/lib/img/profile-2.jpg" alt="" />
+        <div class="details">
+            <h4>David Hasselhoff, BS</h4>
+            <h5>Office Manager</h5>
+            <a href="mailto:davidh@wcasa.org">davidh@wcasa.org</a>
+        </div>
+    </figure>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+<!--Duplicate of Slider template with different content for visual contrast (NOT NEEDED)-->
+<template name="slider2">
+    <section class="slider contacts">
+        <main class="slider-content">
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+                {{> figure2}}
+        </main>
+    </section>
+    <nav class="slider-nav">
+        <ul>
+            <li class="prev slider-nav">&#9664;</li>
+            <li class="next slider-nav">&#9654;</li>
+        </ul>
+    </nav>
+
+    <script>
+    //Jquery for slider
+        $('li.slider-nav').click(function(){
+            var windowSize = $(window).width();
+            var sliderContent = $('main.slider-content');
+            var transitState = parseInt($('main.slider-content').css('left'), 10);
+            var sliderWidth = 0;
+            $('figure').each(function() {
+                sliderWidth += $(this).outerWidth( true );
+            });
+            var windowDif = sliderWidth-windowSize;
+            var transitAmt = sliderWidth * 0.2;
+            var transitLiveNext = -transitState + transitAmt;
+            var transitLivePrev = -(-transitState - transitAmt);
+
+            if($(this).hasClass('prev')){
+                if(-transitState &lt;&#61; transitAmt){
+                    sliderContent.css( "left", "0" );
+                } else{
+                    sliderContent.css( "left", transitLivePrev);
+                }
+            }
+            if($(this).hasClass('next')){
+                if(-transitState &lt;&#61; windowDif - transitAmt){
+                    sliderContent.css( "left", -windowDif );
+                } else{
+                    sliderContent.css( "left", -transitLiveNext);
+                }
+            }
+        });
+    </script>
 </template>
