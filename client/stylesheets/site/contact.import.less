@@ -1,4 +1,65 @@
 .contact{
-	background: #424647;
-	height: 600px;
+	background: @blueAsh;
+    padding: 70px;        
+    color: @white;
+    img.footer-brand {
+        position: absolute;
+        right: 70px;
+        top: 76px;
+    }
+    h2{
+        font-size: 32px;
+        line-height: 38px;
+        max-width: 1400px;
+        margin-bottom: 0px;
+        font-weight: 100;
+        text-transform: uppercase;
+        padding-bottom: 40px;
+    }
+    form{
+        label{
+            line-height: 18px;
+            padding: 10px 0px 5px 0px;
+        }
+        label, input, textarea{
+            clear: both;
+            display: block;
+            width: 60%;
+        }
+        textarea{
+            width: 90%;
+            height: 109px;
+        }
+        input{
+            height: 39px;
+            line-height: 39px;
+        }
+        .button{
+            width: auto;
+            text-indent: 0px;
+            height: auto;
+            margin-top: 20px;
+        }
+    }
+    .footer-map, form{
+        float: left;
+        width: 48%;
+    }
+    .footer-map{
+        text-align: right;
+        margin-left: 4%;
+        position: relative;
+        top: 30px;
+        height: 300px;
+        overflow: hidden;
+        address {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 30px 20px;
+            background-color: @darkGray;
+            background-color: rgba(0,0,0,0.8);
+            text-align: left;
+        }
+    }
 }

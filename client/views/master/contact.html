@@ -4,20 +4,20 @@
             {{> sectionAdmin}}
         {{/if}}
    	    <h2>Contact WCASA</h2>
-        <!-- Brand Image <img src="wcasa-full.png" alt="wcasa" />  -->
+        <img class="footer-brand" src="/lib/img/brand-lrg.png" alt="wcasa" /> 
         <form>
-            <label for="comments">Name</label>
+            <label for="name">Name</label>
             <input id="name" type="text" name="name">
-            <br>
-            <label for="comments">Email</label>
+            <label for="email">Email</label>
             <input id="email" type="text" name="email">
             <label for="comments">Comments</label>
             <textarea id="comments" cols="20" rows="3" name="comments">
             </textarea>
-            <input type="submit" value="Submit">
+            <input class="button button-melon" type="submit" value="Submit">
         </form>
         <figure class="footer-map">
-            <!--Map url-->
+            <img src="/lib/img/temp-map.jpg" style="width:100%;
+            height:auto;min-height:400px;" alt="Temp Google Map, to be removed" />
             <address>
                 2801 West Beltline Highway<br>
                 Suite 202<br>
@@ -31,13 +31,15 @@
 
 
 <template name="footer">
-    <ul>
-        <li>&copy; 2010-2015 Wisconsin Coalition Against Sexual Assault, Inc.</li>
-        <li>Phone (608) 257-1516</li>
-        <li>Fax (608)257-2150</li>
-        <li><a href=“mailto:wcasa@wcasa.org”>wcasa@wcasa.org</a></li>
-        <li>top</li>
-    </ul>
+    <footer class="footer">
+        <ul>
+            <li>&copy; 2010-2015 Wisconsin Coalition Against Sexual Assault, Inc.</li>
+            <li>Phone (608) 257-1516</li>
+            <li>Fax (608)257-2150</li>
+            <li><a href="mailto:wcasa@wcasa.org">wcasa@wcasa.org</a></li>
+            <li class="top">top</li>
+        </ul>
+    </footer>
 </template>
 
 

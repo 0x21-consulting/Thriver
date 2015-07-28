@@ -114,6 +114,7 @@ table {
         @teal: rgb(44,181,191);
         @melon: rgb(223,79,79);
         @aqua: rgb(56,109,141);
+        @blueAsh: rgb(66,70,70);
 
 //Displays
     .clearFix{
@@ -193,7 +194,7 @@ body {
 
 
 // Buttons
-button {
+button, .button {
     border: none;
     -webkit-border-radius: 0px;
     border-radius: 0px;
@@ -213,6 +214,15 @@ button {
     border-color: @gray50;
     &:hover{
         background-color: lighten(@aqua, 10%);
+        border-color: lighten(@gray50, 10%);
+    }
+}
+
+.button-melon{
+    background-color: @melon;
+    border-color: @gray50;
+    &:hover{
+        background-color: lighten(@melon, 10%);
         border-color: lighten(@gray50, 10%);
     }
 }

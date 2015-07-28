@@ -50,7 +50,7 @@ label {
     }
 }
 
-input{
+input, textarea{
     background: @darkGray;
     border:none;
     height: 52px;
@@ -63,7 +63,13 @@ input{
         background:@gray195; 
     }
 }
-
+textarea{
+    height: auto;
+    line-height: 18px;
+    text-indent: 0px;
+    padding:20px;
+    resize: none;
+}
 input.submit{
     padding: 0px 20px 0px 0px;
     font-size: 23px;
