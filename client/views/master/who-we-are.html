@@ -5,9 +5,9 @@
         {{/if}}
         <menu class="tabs set-toggle">
             <ul>
-                {{#each tabs}}
+                <!--{{#each tabs}}
                     {{> tab id=this}}
-                {{/each}}
+                {{/each}}-->
                 <!--Remove me-->
                 <li class="active">WCASA Staff</li>
                 <li>Board of Directors</li>
@@ -15,15 +15,15 @@
             </ul>
         </menu>
         <main class="members">
-            {{#each tabs}}
+            <!--{{#each tabs}}
                 {{> article id=this}}
-            {{/each}}
+            {{/each}}-->
             <!--Remove me-->
             <article class="active">
-                {{> slider}}
+                {{> slider people=staff }}
             </article>
             <article>
-                {{> slider2}}
+                {{> slider people=board }}
             </article>
             <!--Remove me end-->
         </main>
@@ -47,16 +47,9 @@
 <template name="slider">
     <section class="slider contacts">
         <main class="slider-content">
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
-                {{> figure}}
+                {{#each people}}
+                    {{> person}}
+                {{/each}}
         </main>
     </section>
     <nav class="slider-nav">
@@ -101,7 +94,18 @@
 
 
 <!--Profile Figure Template-->
-<template name="figure">
+<template name="person">
+    <figure>
+        <img src="{{picture}}" alt="{{name}}" />
+        <div class="details">
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+    </figure>
+</template>
+
+<template name="figure1">
     <figure>
         <img src="/lib/img/profile-1.jpg" alt="" />
         <div class="details">

@@ -1,7 +1,5 @@
-var Sections = new Mongo.Collection('sections'),
-
 // Helper for changing tabs
-changeTabs = function (event) {
+var changeTabs = function (event) {
     var parent = event.delegateTarget.parentElement.parentElement,
         active = parent.querySelectorAll('.active'),
         i = 0, j = active.length;
@@ -16,7 +14,17 @@ changeTabs = function (event) {
         
     // Make tab active, too
     event.target.classList.add('active');
-};
+},
+
+// Collections
+Sections  = new Mongo.Collection('sections'),
+People    = new Mongo.Collection('people'),
+Providers = new Mongo.Collection('providers');
+
+// Subscriptions
+Meteor.subscribe('sections');
+Meteor.subscribe('people');
+Meteor.subscribe('providers');
 
 // Dynamically generate anchor name
 Template.registerHelper('anchor', function (name) {
@@ -43,9 +51,6 @@ Template.registerHelper('anchor', function (name) {
         
     throw new Meteor.Error('Name must contain letters.');
 });
-
-// Subscribe to sections Mongo collection
-Meteor.subscribe("sections");
 
 // Render sections on page
 Template.body.helpers({
@@ -138,4 +143,22 @@ Template.registerHelper('markdown', function (text, options) {
     
     // Remove <p> tags
     return text.trim().replace(/^<p>/i,'').replace(/<\/p>$/i,'');
+});
+
+// People
+Template.who.helpers({
+    staff: function () {
+        return People.find({ boardMember: false });
+    },
+    board: function () {
+        return People.find({ boardMember: true });
+    }
+});
+
+// Sliders
+Template.registerHelper('slider', function () {
+    var windowWidth = document.body.offsetWidth,
+        elemWidth   = this.offsetWidth;
+        
+    console.debug(this);
 });
