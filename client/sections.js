@@ -19,12 +19,14 @@ var changeTabs = function (event) {
 // Collections
 Sections  = new Mongo.Collection('sections'),
 People    = new Mongo.Collection('people'),
-Providers = new Mongo.Collection('providers');
+Providers = new Mongo.Collection('providers'),
+Counties  = new Mongo.Collection('counties');
 
 // Subscriptions
 Meteor.subscribe('sections');
 Meteor.subscribe('people');
 Meteor.subscribe('providers');
+Meteor.subscribe('counties');
 
 // Dynamically generate anchor name
 Template.registerHelper('anchor', function (name) {
@@ -161,4 +163,34 @@ Template.registerHelper('slider', function () {
         elemWidth   = this.offsetWidth;
         
     console.debug(this);
+});
+
+// Counties
+Template.providers.helpers({
+    // All counties (for dropdown list)
+    counties: function () {
+        return Counties.find({});
+    }
+});
+Template.providers.events({
+    'click #zip + .submit': function (event) {
+        var zip = event.currentTarget.parentElement.querySelector('#zip'),
+            county = '',
+            providers  = [];
+        
+        // Who knows
+        if (!zip) throw new Error('No ZIP element?');
+        
+        // Get county
+        county = Counties.findOne({ zips: 
+            // Minimongo doesn't support $eq for some reason
+            { $elemMatch: { $in: [zip.value] } }})
+        console.debug('County:', county.name);
+        
+        // Now get providers that support that county
+        Providers.find({ counties: { $elemMatch: { $in: [county.name] }}}).
+            forEach(function (provider) {
+                console.debug('Provider:', provider);
+        });
+    }
 });

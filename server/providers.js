@@ -1,5 +1,6 @@
 // SASPs
-var providers = new Mongo.Collection('providers');
+var providers = new Mongo.Collection('providers'),
+    counties  = new Mongo.Collection('counties');
 
 // Structure
 //   _id                 {string}    auto_incr
@@ -17,4 +18,8 @@ var providers = new Mongo.Collection('providers');
 // Publish providers
 Meteor.publish('providers', function () {
     return providers.find({});
+});
+// Publish counties
+Meteor.publish('counties', function () {
+    return counties.find({});
 });

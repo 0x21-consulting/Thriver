@@ -8,14 +8,15 @@
             <label for="county">Find by County</label>
             <span class="select">
                 <select id="county" class="county">
-                    <option value="Jefferson">Jefferson</option>
-                    <option value="Milwaukee">Milwaukee</option>
-                    <option value="Racine">Racine</option>
+                    {{#each counties}}
+                        {{> county}}
+                    {{/each}}
                 </select>
             </span>
                 <label for="zip">Find by Zip Code</label>
                 <span class="float-right">
-                    <input id="zip" type="number" pattern="[0-9]*" maxlength="5" min="0" name="zip">
+                    <input id="zip" type="number" pattern="[0-9]*" maxlength="5" 
+                        min="53001" max="54990" name="zip">
                     <input class="submit" type="submit" value="Go">
                 </span>
         </form>
@@ -60,4 +61,8 @@
     });
 </script>
 
+</template>
+
+<template name="county">
+    <option value="{{_id}}">{{name}}</option>
 </template>
