@@ -1,0 +1,74 @@
+<!-- This file is broken into three templates. 
+    -communityCarouselEvents is a temporary template replicating the community tabs for containing purposes.
+    -carousel is the template for containing the event data.
+    -event is a the content of a given event
+-->
+
+<template name="communityCarouselEvents">
+    <section class="community tabs tabs-bottom" id="{{anchor name=name}}" data-id="{{_id}}">
+        <main>
+            <!--Important that the article has a class of carousel-->
+            <article class="active carousel">
+                {{> carousel}}
+            </article>
+            <article>
+                Another tab
+            </article>
+            <article>
+                Another tab
+            </article>
+        </main>
+        <menu class="tabs">
+            <ul>
+                <li class="active">Events</li>
+                <li>Advocacy</li>
+                <li>Evaluation</li>
+            </ul>
+        </menu>
+    </section>
+
+<!--Calendar: Not sure where this technically should technically live. I simply have it toggled via display block/none for now -->
+{{> calendar}}
+</template>
+
+
+<template name="carousel">
+    <section class="carousel events">
+        <main>
+            <figure class="active">
+            {{> event}}
+            </figure>
+            <figure>
+            {{> event}}
+            </figure>
+            <figure>
+            {{> event}}
+            </figure>
+        </main>
+        <nav>
+            <ul>
+                <li class="prev">&#9664;</li>
+                <li class="next">&#9658;</li>
+            </ul>
+        </nav>
+    </section>
+</template>
+
+
+<template name="event">
+    <img class="featured" src="/lib/img/temp-event-featured.jpg" alt="" />
+    <h2>Survivors &amp; Allies Task Force Meeting</h2>
+    <p>
+        Survivors and Allies Task Force Meetings are held to bring Wisconsin survivors and their allies together so they may network and discuss new developments in the sexual assault movement. It is important to make the connection between the two groups. The purpose of the meeting is to provide survivors with opportunities to voice their concerns and suggestions about current issues that the sexual assault movement is facing.
+    </p>
+
+    <p>
+        <b>Featured sessions:</b> Healing thru Art, Boundaries, Survivor Stories, Healthy Relationships
+    </p>
+    <p>
+        <button class="button event-register button-melon">Register for event</button>
+        <button class="button view-calendar button-melon">View Calendar</button>
+    </p>
+    <button class="map-details">October 18 @ Hilton Garden Inn, Green Bay <span>Map</span>
+    </button>
+</template>
