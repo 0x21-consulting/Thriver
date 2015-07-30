@@ -173,12 +173,26 @@ Template.providers.helpers({
     }
 });
 Template.providers.events({
+    // County drop-down list
+    'change #county': function (event) {
+        var name = event.target.value;
+        
+        // Mutual Suspician
+        if (!name) throw new Error('Invalid county');
+        
+        // Get all providers for that county
+        Providers.find({ counties: { $elemMatch: { $in: [name] }}}).
+            forEach(function (provider) {
+                console.debug('Provider:', provider);
+        });
+    },
+    // Clicking ZIP Code GO button
     'click #zip + .submit': function (event) {
         var zip = event.currentTarget.parentElement.querySelector('#zip'),
             county = '',
             providers  = [];
         
-        // Who knows
+        // Mutual Suspicion
         if (!zip) throw new Error('No ZIP element?');
         
         // Get county
