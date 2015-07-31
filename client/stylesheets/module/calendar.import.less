@@ -1,0 +1,161 @@
+#calendar{
+    background: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 60px;
+    height: 80%;
+    text-align: center;
+    button{
+        background: none;
+        color: #aaa;
+        font-size: 30px;
+        font-weight: 100;
+        padding: 0px;
+        border: none;
+        cursor: pointer;
+    }
+    button.close-calendar{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    header{
+        position: absolute;
+        top: 135px;
+        width: 100%;
+        margin-left: -10%;
+        a{
+            cursor: pointer;
+            font-size: 20px;
+            color: @blueAsh;
+            padding: 40px;
+            &:hover{
+                color: darken(@blueAsh, 5%);
+            }
+        }
+        .previous{
+            float: left;
+        }
+        .next{
+            float: right;
+        }
+    }
+    h2{
+
+    }
+    h2, h3{
+        position: relative;
+        font-size: 28px;
+        line-height: 32px;
+        font-weight: 100;
+        padding: 0px 20px 0px 20px;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 0px;
+        text-transform: uppercase;
+        text-align: center;
+        display: inline;
+    }
+    h3{
+        padding: 0px;
+        font-size: 18px;
+        text-transform: none;
+        margin-bottom: 30px;
+        display: inline-block;
+    }
+    menu{
+        display: inline;
+        a{
+            font-size: 23px;
+            color: #ccc;
+            .colorChangeLinear;
+            &:hover{
+                color: lighten(@teal, 5%);
+            }
+        }
+        a.active{
+            color: @teal;
+            &:hover{
+                color: @teal;
+            }
+        }
+    }
+
+
+
+
+    /* Calendar Header */
+    .th, .week { display: flex; }
+    .th>span {
+        border-bottom: 4px solid rgba(255,0,0,0.3);
+        padding: 0 2px 2px 0;
+        text-align: right;
+    }
+    .week>div {
+        border-top: 1px solid #eee;
+        padding: 20px 2px 2px;
+        min-height: 50px;
+        position: relative; /* allow ::after psuedo element absolute positioning */
+    }
+    .th>span, .week>div {
+        width: 100%;
+        margin-right: 5px;
+        color: #333;
+    }
+    .week > div::after {
+        content: attr(data-date);
+        display: block;
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        color: #aaa;
+        font-size: 16px;
+    }
+    .th span {
+        background:lighten(@melon, 10%);
+        color: #fff;
+        text-align: center;
+        margin-right: 5px;
+        border-right: none;
+        text-transform: uppercase;
+        line-height: 53px;
+    line-height: 55px;
+    padding: 2px 11px 0px 11px;
+    }
+    /* Transactions */
+    .week span {
+        display: block;
+        border-radius: 3px;
+        padding: 0 3px;
+        margin-bottom: 2px;
+    }
+    .week>div>span:last-child { margin-bottom: 0; }
+    .expense { /*background:rgba(255,0,0,.3)*/ color: rgb(255,0,0); font-weight: bold; }
+    .income { /*background:rgba(100,255,50,.3)*/ color: rgb(50,200,10); font-weight: bold; }
+    /* Weekends */
+    .th>span:first-child, .th>span:last-child {background:lighten(@melon, 5%)}
+    .week>div:first-child, .week>div:last-child {background: #f2f2f2;}
+    .th>span:last-child, .week>div:last-child {margin-right:0}
+
+    /* Forms */
+    #forms { display: flex; }
+    form { margin-bottom: 20px; width: 100%; }
+    form:last-child { text-align: right; }
+    .options {display:inline-block}
+    input[type="submit"] {
+        width: 115px;
+        height: 40px;
+        border: 1px solid;
+        background: none;
+        color: #06a;
+        font-size: 1em;
+        margin-top: 10px;
+    }
+    input[type="submit"][disabled] {
+        color: #ddd;
+    }
+}

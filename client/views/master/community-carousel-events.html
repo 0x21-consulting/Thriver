@@ -1,7 +1,11 @@
-<!-- This file is broken into three templates. 
+<!-- This file is broken into multiple templates. 
     -communityCarouselEvents is a temporary template replicating the community tabs for containing purposes.
     -carousel is the template for containing the event data.
     -event is a the content of a given event
+    -calendaritems (Contains the slightly modified view of each element [Could be broken down into single template w/conditionals:])
+        -today
+        -past-event
+        -upcoming-event
 -->
 
 <template name="communityCarouselEvents">
@@ -25,10 +29,9 @@
                 <li>Evaluation</li>
             </ul>
         </menu>
+        <!--Calendar: Not sure where this technically should technically live. I simply have it toggled via display block/none for now -->
+        {{> calendar}}
     </section>
-
-<!--Calendar: Not sure where this technically should technically live. I simply have it toggled via display block/none for now -->
-{{> calendar}}
 </template>
 
 
@@ -52,6 +55,32 @@
             </ul>
         </nav>
     </section>
+
+<script>
+    $('.carousel nav li').click(function(){
+        var left = parseInt($('.carousel main').css('left'));
+        var carouselWidth = $('.carousel main').width();
+        if($(this).hasClass('prev')){
+            if(left == 0 ){
+                // do nothing
+            }
+            else { 
+                var prevLeft = left + carouselWidth;
+                $('.carousel main').css({left: prevLeft});
+            }
+        }
+        if($(this).hasClass('next')){
+            if(left == - $('.carousel main figure').length * carouselWidth + carouselWidth){
+                // do nothing
+            }
+            else { 
+                var nextLeft = left - carouselWidth;
+                $('.carousel main').css({left: nextLeft});
+            }
+        }
+    });
+</script>
+
 </template>
 
 
@@ -72,3 +101,4 @@
     <button class="map-details">October 18 @ Hilton Garden Inn, Green Bay <span>Map</span>
     </button>
 </template>
+

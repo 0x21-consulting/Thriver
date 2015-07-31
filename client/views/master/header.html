@@ -1,16 +1,22 @@
 <template name="header">
-    <header class="header" id="menu">
+    <header class="header top" id="menu">
+        <aside class="utility-nav">
+          <ul>
+            <li class="login">
+            {{> loginButtons}}
+            </li>
+          </ul>
+        </aside>
+
         <a href="#masthead" class="brand">
             <img src="/lib/img/brand-min.png" alt="WCASA" />
+            <img class="top" src="/lib/img/wisconsin-coalition-against-sexual-assault-top.png" alt="WCASA" />
         </a>
         <nav>
            <ul>
                {{#each sections}}
                    {{> menuItem}}
                {{/each}}
-               <li class="login">
-                   {{> loginButtons}}
-               </li>
            </ul>
         </nav>
    </header>
