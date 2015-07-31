@@ -100,5 +100,24 @@
     </p>
     <button class="map-details">October 18 @ Hilton Garden Inn, Green Bay <span>Map</span>
     </button>
+
+<script>
+$('button.view-calendar').click(function(){
+      $('section#calendar').addClass('active');
+ });
+
+$('button.close-calendar').click(function(){
+      $('section#calendar').removeClass('active');
+ });
+
+$('button.list-view').click(function(){
+      $('section#calendar-list').addClass('active');
+ });
+
+$('button.gride-view').click(function(){
+      $('section#calendar-list').addClass('active');
+ });
+</script>
+
 </template>
 
