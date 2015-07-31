@@ -1,13 +1,11 @@
 <head>
     <meta charset="utf-8" />
     <title>WCASA</title>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 </head>
 <body>
 	{{> header}}
 	{{> masthead}}
     {{> communityCarouselEvents}}
-    {{> providers}}
 	<main class="content-wrapper">
         {{#each sections}}
 		    {{> Template.dynamic template=template }}

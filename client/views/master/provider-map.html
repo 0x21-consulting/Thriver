@@ -2,7 +2,7 @@
     <div id="map-canvas"></div>
     <script>
         // Map Initializer
-        function initialize() {
+        /*function initialize() {
             // Map Options
             var mapOptions = {
                 scrollwheel: false,
@@ -79,7 +79,7 @@
             google.maps.event.addListener(marker, 'mouseout', function() {
               marker.setIcon(markerPin, this);
             });
-        }
+        }*/
 
         //Display a label next to the marker
         function providerTitle(marker, num) {
@@ -95,8 +95,5 @@
             });
             google.maps.event.trigger(marker,'click');
         }
-
-        // Load the Map
-        google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </template>

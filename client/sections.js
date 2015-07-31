@@ -19,8 +19,8 @@ var changeTabs = function (event) {
 // Collections
 Sections  = new Mongo.Collection('sections'),
 People    = new Mongo.Collection('people'),
-Providers = new Mongo.Collection('providers'),
 Counties  = new Mongo.Collection('counties');
+Providers = new Mongo.Collection('providers');
 
 // Subscriptions
 Meteor.subscribe('sections');
