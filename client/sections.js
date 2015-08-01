@@ -165,11 +165,19 @@ Template.registerHelper('slider', function () {
     console.debug(this);
 });
 
-// Counties
+// Counties and other provider data
 Template.providers.helpers({
     // All counties (for dropdown list)
     counties: function () {
         return Counties.find({});
+    },
+    // The current provider
+    currentProvider: function () {
+        return Session.get('currentProvider');
+    },
+    // Current provider's counties served
+    providerCounties: function () {
+        return this.counties.join(', ');
     }
 });
 Template.providers.events({
