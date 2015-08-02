@@ -64,9 +64,17 @@ initialize = function () {
                 // Get the distance from current location for each provider
                 providers = Providers.find({}, { coordinates: 1 }).map(function (provider) {
                     // Calculate distance
-                    var distance = Math.sqrt(
+                    /*var distance = Math.sqrt(
                         Math.pow(position.coords.latitude  - provider.coordinates[0], 2)  +
-                        Math.pow(position.coords.longitude - provider.coordinates[1], 2) );
+                        Math.pow(position.coords.longitude - provider.coordinates[1], 2) );*/
+                        
+                    // Calculate distance in meters taking into account mercator projection
+                    var distance = google.maps.geometry.spherical.computeDistanceBetween(
+                        new google.maps.LatLng(position.coords.latitude,
+                            position.coords.longitude),
+                        new google.maps.LatLng(provider.coordinates[0],
+                            provider.coordinates[1])
+                    );
                     
                     return { id: provider._id, distance: distance };
                 });
@@ -85,20 +93,6 @@ initialize = function () {
                 
                 // Show results
                 Session.set('currentProvider', closest);
-                
-                /*var parser = new geoXML3.parser({ map: map });
-                console.debug(parser);
-                parser.parse('/kml/dane.xml');
-                
-                var county = new google.maps.KmlLayer(
-                    'https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&cad=rja&uact=8&ved=0CEIQFjAFahUKEwiS56zm0oTHAhUB7YAKHQoQAOI&url=http%3A%2F%2Fwww.nohrsc.noaa.gov%2Fdata%2Fvector%2Fmaster%2Fcnt_us.kmz&ei=6gi7VZLKGoHagwSKoICQDg&usg=AFQjCNFuWrQr5e84jhSo2bWp09QO-MtoMg&sig2=gAvpWT8iDoBPLeN3OMyNRQ', {
-                    preserveViewport: false,
-                });
-                county.setMap(map);
-                
-                google.maps.event.addListener(county, 'status_changed', function () {
-                    console.debug(county.getStatus());
-                });*/
             });
     },
     
@@ -156,7 +150,7 @@ initialize = function () {
     // Create maps API script
     script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-        '&signed_in=true&callback=initializeMap';
+        '&signed_in=true&libraries=geometry&callback=initializeMap';
     document.body.appendChild(script);
     
     // Maps API will look for initialize script in global scope
@@ -165,7 +159,7 @@ initialize = function () {
 
 // Helper for moving map based on provider locations
 moveMap = function (county) {
-    var providers = [],
+    var providers = [], x = [], y = [],
         centerX = centerY = i = j = 0;
     
     // Mutual Suspician
@@ -174,29 +168,48 @@ moveMap = function (county) {
     
     // Get coordinates for all providers for that county
     providers = Providers.find({ counties: { $elemMatch: { $in: [county] }}},
-        { coordinates: 1 }).map(function (provider) {
+        { coordinates: 1, name:1 }).map(function (provider) {
             // We only care about the coordinates
             return {
                 coordinates: provider.coordinates,
-                id: provider._id
+                id: provider._id,
+                name: provider.name
             };
     });
     
-    // Add latitude and longitude values
-    for (j = providers.length; i < j; ++i) {
-        centerX += providers[i].coordinates[0];
-        centerY += providers[i].coordinates[1];
-    }
+    // Calculate bounding box
+    // Determine lowest and highest Lat values
+    providers.sort(function (a, b) {
+        return b.coordinates[0] - a.coordinates[0];
+    });
+    x = [ providers[0].coordinates[0], providers[providers.length - 1].coordinates[0] ];
     
-    // Pan to point
-    map.panTo(new google.maps.LatLng(
-        centerX / j,
-        centerY / j
+    // Determine lowest and highest Lon values
+    providers.sort(function (a, b) {
+        return b.coordinates[1] - a.coordinates[1];
+    });
+    y = [ providers[0].coordinates[1], providers[providers.length - 1].coordinates[1] ];
+    
+    // Bounds
+    map.fitBounds(new google.maps.LatLngBounds(
+        new google.maps.LatLng( x[1], y[1] ), // Southwest
+        new google.maps.LatLng( x[0], y[0] )  // to Northeast
     ));
     
     // If there was only one result, click on it for the user
     if (j === 1)
         Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
+},
+
+// Get X and Y Coordinates based on web mercator projection
+getXY = function (lat, lon) {
+    console.info('Meters per pixel', 156543.03392 * Math.cos(lat * Math.PI / 180)
+        / Math.pow(2, 12));
+    return [
+        128 / Math.PI * Math.pow(2, 12) * (lon + Math.PI),
+        128 / Math.PI * Math.pow(2, 12) * (Math.PI - 
+            Math.log( Math.tan( Math.PI / 4 + lat / 2 ) ))
+    ];
 },
 
 // Get county from ZIP code number
