@@ -1,13 +1,49 @@
 <template name="calendarList">
         <section id="calendar-list">
-            <h3>Events</h3>
+            <h3 class="fa list-view">&#xf03a; Events List</h3>
                 <ul>
-                    <li><a class="details-ref" href="#"><span>1/21</span> An upcoming event title</a></li>
-                    <li><a class="details-ref" href="#"><span>1/21</span> An upcoming event title</a></li>
-                    <li><a class="details-ref" href="#"><span>1/21</span> An upcoming event title</a></li>
-                    <li><a class="details-ref" href="#"><span>1/21</span> An upcoming event title</a></li>
-                    <li><a href="#"><span>1/21</span> An upcoming event title</a></li>
-                    <li><a class="details-ref" href="#"><span>1/21</span> An upcoming event title</a></li>
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
+                    {{> eventListItem}}
                 </ul>
         </section>
+</template>
+
+
+<template name="eventListItem">
+    <li>
+        <a class="details-ref" href="#">
+            <time class="date" datetime="2008-02-14 20:00">
+                <span>
+                    21
+                </span>
+                Aug
+                <!--Would it make sense here to put a function which renders a variable based on the speificed datetime property? For instance:
+                        if datetime is before current date
+                            "<span class="passed-event">
+                                {{> date}}"
+                            </span>"
+                        if datetime is today
+                            "<span class="today">
+                                Today
+                            </span>"
+                        if datetime is after today
+                            "<span class="upcoming">
+                                Today
+                            </span>"
+                    -->
+            </time>
+            <img src="/lib/img/temp-event-featured.jpg" alt="" />
+            <div class="event-meta">
+                <h4>An upcoming event title</h4>
+                <time>4:00pm to 11:00pm</time>
+                <address>Location: Event Hall, Milwaukee.</address>
+            </div>
+        </a>
+    </li>
 </template>
