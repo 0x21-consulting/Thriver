@@ -1,16 +1,18 @@
 #calendar{
     background: #fff;
-    position: absolute;
-    visibility: hidden;
+    position: relative;
+    visibility: visible;
     .easeInOutAll;
-    top: 100%;
     left: 0px;
-    width: 80%;
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 100%;
     padding-top: 60px;
     height: 80%;
     text-align: center;
+    .calendar-view{
+        width: 61%;
+        padding-left: 5%;
+        float: left;
+    }
     button{
         background: none;
         color: #aaa;
@@ -32,8 +34,8 @@
     header{
         position: absolute;
         top: 135px;
-        width: 100%;
-        margin-left: -10%;
+        width: 76%;
+        margin-left: -7.5%;
         a{
             cursor: pointer;
             font-size: 20px;
@@ -125,12 +127,10 @@
         background:lighten(@melon, 10%);
         color: #fff;
         text-align: center;
-        margin-right: 5px;
+        font-size: 12px;
         border-right: none;
         text-transform: uppercase;
-        line-height: 53px;
     line-height: 55px;
-    padding: 2px 11px 0px 11px;
     }
     /* Transactions */
     .week span {
@@ -173,12 +173,17 @@
 
 
 #calendar-list{
-    visibility: hidden;
+    /*visibility: hidden;*/
     opacity: 0;
     position: absolute;
     top: 60px;
     z-index: 1;
     height: 500px;
+    width: 28%;
+    opacity: 1;
+    float: right;
+    position: static;
+    background-color: @lightGray;
 }
 #calendar-list.active{
     visibility: visible;

@@ -17,7 +17,7 @@
                 total = calendar.lastDay(35); // days in month
 
             // Title Month
-            d.querySelector('#calendar h2').innerHTML = calendar.monthName() + ' ' + calendar.year;
+            d.querySelector('#calendar h3').innerHTML = calendar.monthName() + ' ' + calendar.year;
 
             // Clear month
             month.innerHTML = '';
