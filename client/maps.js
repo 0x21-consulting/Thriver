@@ -1,13 +1,16 @@
 // Subscribe to Provider data
 Meteor.subscribe('providers');
+Meteor.subscribe('counties');
+
+var Counties  = new Mongo.Collection('counties'),
+
+// Map handler
+map = {},
 
 // Initialize Google Maps API
-var initialize = function () {
-    // Map handler
-    var map,
-    
+initialize = function () {
     // Map Initialization function
-    initialize = function () {
+    var initialize = function () {
         var mapElement = document.querySelector('#map-canvas'),
         
         // Map options
@@ -16,9 +19,11 @@ var initialize = function () {
             zoom        : 12,
             center      : new google.maps.LatLng(43.1, -89.4),
             zoomControl : true,
+            minZoom     : 6,
+            maxZoom     : 13,
             streetViewControl: false,
             zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.LARGE
+                style: 3
             }
         };
         
@@ -41,10 +46,11 @@ var initialize = function () {
             
             // Add hover effect
             google.maps.event.addListener(marker, 'mouseover', mouseover);
-            google.maps.event.addListener(marker, 'mouseout', mouseout);
+            google.maps.event.addListener(marker, 'mouseout',  mouseout);
             
             // Display Label
-            google.maps.event.addListener(marker, 'click', displayLabel);
+            google.maps.event.addListener(marker, 'mouseover', displayLabel);
+            google.maps.event.addListener(marker, 'mouseout',  hideLabel);
             
             // Add to map
             marker.setMap(map);
@@ -70,7 +76,6 @@ var initialize = function () {
                 
                 // Get closest provider
                 closest = Providers.findOne({ _id: providers[0].id });
-                console.debug(closest, map);
                 
                 // Center on it
                 map.panTo(new google.maps.LatLng(
@@ -125,7 +130,7 @@ var initialize = function () {
         this.setIcon(createPin('#f56f76'), this);
     },
     
-    // Display info label on click
+    // Display info label on hover
     displayLabel = function () {
         // Close any existing infowindow
         if (map.infowindow)
@@ -142,6 +147,11 @@ var initialize = function () {
         // Show results
         Session.set('currentProvider', Providers.findOne({ _id: this.id }));
     },
+    // Hide info label on mouseout
+    hideLabel = function () {
+        if (map.infowindow)
+            map.infowindow.close();
+    },
     
     // Create maps API script
     script = document.createElement('script');
@@ -151,9 +161,85 @@ var initialize = function () {
     
     // Maps API will look for initialize script in global scope
     window.initializeMap = initialize;
+},
+
+// Helper for moving map based on provider locations
+moveMap = function (county) {
+    var providers = [],
+        centerX = centerY = i = j = 0;
+    
+    // Mutual Suspician
+    county = '' + county;
+    if (!county) throw new Error('Invalid county');
+    
+    // Get coordinates for all providers for that county
+    providers = Providers.find({ counties: { $elemMatch: { $in: [county] }}},
+        { coordinates: 1 }).map(function (provider) {
+            // We only care about the coordinates
+            return {
+                coordinates: provider.coordinates,
+                id: provider._id
+            };
+    });
+    
+    // Add latitude and longitude values
+    for (j = providers.length; i < j; ++i) {
+        centerX += providers[i].coordinates[0];
+        centerY += providers[i].coordinates[1];
+    }
+    
+    // Pan to point
+    map.panTo(new google.maps.LatLng(
+        centerX / j,
+        centerY / j
+    ));
+    
+    // If there was only one result, click on it for the user
+    if (j === 1)
+        Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
+},
+
+// Get county from ZIP code number
+getCounty = function (zip) {
+    var county = '';
+    
+    // Mutual Suspicion
+    if (!zip) throw new Error('No ZIP element?');
+    
+    // Get county
+    county = Counties.findOne({ zips: 
+        // Minimongo doesn't support $eq for some reason
+        { $elemMatch: { $in: [zip] } }});
+    
+    // Now get providers that support that county
+    moveMap(county.name);
 };
 
 // On proper initialization (meteor sucks at handling race conditions)
 Template.body.onRendered(function () {
     Template.providers.onRendered(initialize);
+});
+
+Template.providers.events({
+    // County drop-down list
+    'change #county': function (event) {
+        var name = event.target.value;
+        
+        // Mutual Suspician
+        if (!name) throw new Error('Invalid county');
+        
+        moveMap(name);
+    },
+    // Clicking ZIP Code GO button
+    'click #zip + .submit': function (event) {
+        // Stop form submission
+        event.preventDefault();
+        
+        getCounty(event.currentTarget.parentElement.querySelector('#zip').value);
+    },
+    // Reaching 5 digits
+    'keyup #zip': function (event) {
+        if (event.currentTarget.value.length === 5)
+            getCounty(event.currentTarget.value);
+    }
 });

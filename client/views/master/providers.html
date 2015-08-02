@@ -8,15 +8,17 @@
             <label for="county">Find by County</label>
             <span class="select">
                 <select id="county" class="county">
+                    <option>- Select a County -</option>
                     {{#each counties}}
-                        {{> county}}
+                        <option value="{{this}}">{{this}}</option>
                     {{/each}}
                 </select>
             </span>
                 <label for="zip">Find by Zip Code</label>
                 <span class="float-right">
                     <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
-                    <input id="zip" type="number" pattern="[0-9]*" maxlength="5" 
+                    <input id="zip" type="text" pattern="[0-9]*" 
+                        maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
                         min="53001" max="54990" name="zip">
                     <input class="submit" type="submit" value="Go">
                 </span>
@@ -44,8 +46,4 @@
             {{/with}}
         </article>
     </section>
-</template>
-
-<template name="county">
-    <option value="{{name}}">{{name}}</option>
 </template>

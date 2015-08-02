@@ -96,7 +96,11 @@
 <!--Profile Figure Template-->
 <template name="person">
     <figure>
-        <img src="{{picture}}" alt="{{name}}" />
+        {{#if picture}}
+            <img src="{{picture}}" alt="{{name}}" />
+        {{else}}
+            <img src="{{avatar.avatar}}" alt="{{name}}" />
+        {{/if}}
         <div class="details">
             <h4>{{name}}</h4>
             <h5>{{title}}</h5>

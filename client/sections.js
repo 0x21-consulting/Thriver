@@ -18,15 +18,15 @@ var changeTabs = function (event) {
 
 // Collections
 Sections  = new Mongo.Collection('sections'),
-People    = new Mongo.Collection('people'),
-Counties  = new Mongo.Collection('counties');
+People    = new Mongo.Collection('people');
 Providers = new Mongo.Collection('providers');
+Site      = new Mongo.Collection('site');
 
 // Subscriptions
 Meteor.subscribe('sections');
 Meteor.subscribe('people');
 Meteor.subscribe('providers');
-Meteor.subscribe('counties');
+Meteor.subscribe('site');
 
 // Dynamically generate anchor name
 Template.registerHelper('anchor', function (name) {
@@ -156,6 +156,11 @@ Template.who.helpers({
         return People.find({ boardMember: true });
     }
 });
+Template.person.helpers({
+    avatar: function () {
+        return Site.findOne({}, { avatar: 1 });
+    }
+});
 
 // Sliders
 Template.registerHelper('slider', function () {
@@ -168,8 +173,21 @@ Template.registerHelper('slider', function () {
 // Counties and other provider data
 Template.providers.helpers({
     // All counties (for dropdown list)
+    // NOTE: We only want to display counties which have providers,
+    //       which is why we aren't using the counties collection here
     counties: function () {
-        return Counties.find({});
+        //return zipCodes.find({});
+        
+        // NOTE: Meteor's mongo driver still doesn't support
+        //   db.collection.distinct(), so we have to hack it
+        return _.chain(
+            Providers.find({}, { counties: 1 }).map(function (provider) {
+                return provider.counties;
+        })).
+        
+        // provider.counties is an array, so we have to flatten them all,
+        // then sort them alphabetically, then return distinct ones
+        flatten().sort().uniq().value();
     },
     // The current provider
     currentProvider: function () {
@@ -178,41 +196,5 @@ Template.providers.helpers({
     // Current provider's counties served
     providerCounties: function () {
         return this.counties.join(', ');
-    }
-});
-Template.providers.events({
-    // County drop-down list
-    'change #county': function (event) {
-        var name = event.target.value;
-        
-        // Mutual Suspician
-        if (!name) throw new Error('Invalid county');
-        
-        // Get all providers for that county
-        Providers.find({ counties: { $elemMatch: { $in: [name] }}}).
-            forEach(function (provider) {
-                console.debug('Provider:', provider);
-        });
-    },
-    // Clicking ZIP Code GO button
-    'click #zip + .submit': function (event) {
-        var zip = event.currentTarget.parentElement.querySelector('#zip'),
-            county = '',
-            providers  = [];
-        
-        // Mutual Suspicion
-        if (!zip) throw new Error('No ZIP element?');
-        
-        // Get county
-        county = Counties.findOne({ zips: 
-            // Minimongo doesn't support $eq for some reason
-            { $elemMatch: { $in: [zip.value] } }})
-        console.debug('County:', county.name);
-        
-        // Now get providers that support that county
-        Providers.find({ counties: { $elemMatch: { $in: [county.name] }}}).
-            forEach(function (provider) {
-                console.debug('Provider:', provider);
-        });
     }
 });
