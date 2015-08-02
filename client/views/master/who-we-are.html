@@ -5,27 +5,17 @@
         {{/if}}
         <menu class="tabs set-toggle">
             <ul>
-                <!--{{#each tabs}}
-                    {{> tab id=this}}
-                {{/each}}-->
-                <!--Remove me-->
                 <li class="active">WCASA Staff</li>
                 <li>Board of Directors</li>
-                <!--Remove me end-->
             </ul>
         </menu>
         <main class="members">
-            <!--{{#each tabs}}
-                {{> article id=this}}
-            {{/each}}-->
-            <!--Remove me-->
             <article class="active">
                 {{> slider people=staff }}
             </article>
             <article>
                 {{> slider people=board }}
             </article>
-            <!--Remove me end-->
         </main>
     </section>
     <script>
@@ -52,44 +42,12 @@
                 {{/each}}
         </main>
     </section>
-    <nav class="slider-nav">
+    <!--<nav class="slider-nav">
         <ul>
             <li class="prev slider-nav">&#9664;</li>
             <li class="next slider-nav">&#9654;</li>
         </ul>
-    </nav>
-
-    <script>
-    //Jquery for slider
-        $('li.slider-nav').click(function(){
-            var windowSize = $(window).width();
-            var sliderContent = $('main.slider-content');
-            var transitState = parseInt($('main.slider-content').css('left'), 10);
-            var sliderWidth = 0;
-            $('figure').each(function() {
-                sliderWidth += $(this).outerWidth( true );
-            });
-            var windowDif = sliderWidth-windowSize;
-            var transitAmt = sliderWidth * 0.2;
-            var transitLiveNext = -transitState + transitAmt;
-            var transitLivePrev = -(-transitState - transitAmt);
-
-            if($(this).hasClass('prev')){
-                if(-transitState &lt;&#61; transitAmt){
-                    sliderContent.css( "left", "0" );
-                } else{
-                    sliderContent.css( "left", transitLivePrev);
-                }
-            }
-            if($(this).hasClass('next')){
-                if(-transitState &lt;&#61; windowDif - transitAmt){
-                    sliderContent.css( "left", -windowDif );
-                } else{
-                    sliderContent.css( "left", -transitLiveNext);
-                }
-            }
-        });
-    </script>
+    </nav>-->
 </template>
 
 
@@ -109,7 +67,7 @@
     </figure>
 </template>
 
-<template name="figure1">
+<!--<template name="figure1">
     <figure>
         <img src="/lib/img/profile-1.jpg" alt="" />
         <div class="details">
@@ -129,20 +87,10 @@
             <a href="mailto:davidh@wcasa.org">davidh@wcasa.org</a>
         </div>
     </figure>
-</template>
-
-
-
-
-
-
-
-
-
-
+</template>-->
 
 <!--Duplicate of Slider template with different content for visual contrast (NOT NEEDED)-->
-<template name="slider2">
+<!--<template name="slider2">
     <section class="slider contacts">
         <main class="slider-content">
                 {{> figure2}}
@@ -162,37 +110,5 @@
             <li class="prev slider-nav">&#9664;</li>
             <li class="next slider-nav">&#9654;</li>
         </ul>
-    </nav>
-
-    <script>
-    //Jquery for slider
-        $('li.slider-nav').click(function(){
-            var windowSize = $(window).width();
-            var sliderContent = $('main.slider-content');
-            var transitState = parseInt($('main.slider-content').css('left'), 10);
-            var sliderWidth = 0;
-            $('figure').each(function() {
-                sliderWidth += $(this).outerWidth( true );
-            });
-            var windowDif = sliderWidth-windowSize;
-            var transitAmt = sliderWidth * 0.2;
-            var transitLiveNext = -transitState + transitAmt;
-            var transitLivePrev = -(-transitState - transitAmt);
-
-            if($(this).hasClass('prev')){
-                if(-transitState &lt;&#61; transitAmt){
-                    sliderContent.css( "left", "0" );
-                } else{
-                    sliderContent.css( "left", transitLivePrev);
-                }
-            }
-            if($(this).hasClass('next')){
-                if(-transitState &lt;&#61; windowDif - transitAmt){
-                    sliderContent.css( "left", -windowDif );
-                } else{
-                    sliderContent.css( "left", -transitLiveNext);
-                }
-            }
-        });
-    </script>
+    </nav>-->
 </template>
