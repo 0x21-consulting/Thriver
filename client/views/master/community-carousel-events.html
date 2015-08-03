@@ -29,7 +29,7 @@
                 <li>Evaluation</li>
             </ul>
         </menu>
-        <!--Calendar: Not sure where this technically should technically live. I simply have it toggled via display block/none for now -->
+        <!--Carousel: Not sure where this technically should technically live. I simply have it toggled via display block/none for now -->
         {{> carousel}}
     </section>
 </template>
@@ -38,86 +38,48 @@
 <template name="carousel">
     <section class="carousel events">
         <main>
-            <figure class="active">
-            {{> event}}
-            </figure>
-            <figure>
-            {{> event}}
-            </figure>
-            <figure>
-            {{> event}}
-            </figure>
+            <!--First one needs active class-->          
+            {{> eventDetailActive}}
+            {{> eventDetail}}
+            {{> eventDetail}}
         </main>
         <nav>
             <ul>
                 <li class="prev">&#9664;</li>
                 <li class="next">&#9658;</li>
+                <li class="close-carousel">&#xf00d;</li>
             </ul>
         </nav>
     </section>
 
-<script>
-    $('.carousel nav li').click(function(){
-        var left = parseInt($('.carousel main').css('left'));
-        var carouselWidth = $('.carousel main').width();
-        if($(this).hasClass('prev')){
-            if(left == 0 ){
-                // do nothing
+    <script>
+        $('.carousel nav li').click(function(){
+            var left = parseInt($('.carousel main').css('left'));
+            var carouselWidth = $('.carousel main').width();
+            if($(this).hasClass('prev')){
+                if(left == 0 ){
+                    // do nothing
+                }
+                else { 
+                    var prevLeft = left + carouselWidth;
+                    $('.carousel main').css({left: prevLeft});
+                }
             }
-            else { 
-                var prevLeft = left + carouselWidth;
-                $('.carousel main').css({left: prevLeft});
+            if($(this).hasClass('next')){
+                if(left == - $('.carousel main article').length * carouselWidth + carouselWidth){
+                    // do nothing
+                }
+                else { 
+                    var nextLeft = left - carouselWidth;
+                    $('.carousel main').css({left: nextLeft});
+                }
             }
-        }
-        if($(this).hasClass('next')){
-            if(left == - $('.carousel main figure').length * carouselWidth + carouselWidth){
-                // do nothing
-            }
-            else { 
-                var nextLeft = left - carouselWidth;
-                $('.carousel main').css({left: nextLeft});
-            }
-        }
-    });
-</script>
-
+        });
+        $('.details-ref').click(function(){
+            $('.carousel').addClass('active');
+         });
+        $('.close-carousel').click(function(){
+            $('.carousel').removeClass('active');
+         });
+    </script>
 </template>
-
-
-<template name="event">
-    <img class="featured" src="/lib/img/temp-event-featured.jpg" alt="" />
-    <h2>Survivors &amp; Allies Task Force Meeting</h2>
-    <p>
-        Survivors and Allies Task Force Meetings are held to bring Wisconsin survivors and their allies together so they may network and discuss new developments in the sexual assault movement. It is important to make the connection between the two groups. The purpose of the meeting is to provide survivors with opportunities to voice their concerns and suggestions about current issues that the sexual assault movement is facing.
-    </p>
-
-    <p>
-        <b>Featured sessions:</b> Healing thru Art, Boundaries, Survivor Stories, Healthy Relationships
-    </p>
-    <p>
-        <button class="button event-register button-melon">Register for event</button>
-        <button class="button view-calendar button-melon">View Calendar</button>
-    </p>
-    <button class="map-details">October 18 @ Hilton Garden Inn, Green Bay <span>Map</span>
-    </button>
-
-<script>
-$('button.view-calendar').click(function(){
-      $('section#calendar').addClass('active');
- });
-
-$('button.close-calendar').click(function(){
-      $('section#calendar').removeClass('active');
- });
-
-$('button.list-view').click(function(){
-      $('section#calendar-list').addClass('active');
- });
-
-$('button.gride-view').click(function(){
-      $('section#calendar-list').addClass('active');
- });
-</script>
-
-</template>
-
