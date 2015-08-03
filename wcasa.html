@@ -5,9 +5,9 @@
 </head>
 <body>
 	{{> header}}
-	{{> masthead}}
-    {{> communityCarouselEvents}}
 	<main class="content-wrapper">
+        {{> masthead}}
+        {{> communityCarouselEvents}}
         {{#each sections}}
 		    {{> Template.dynamic template=template }}
         {{/each}}
