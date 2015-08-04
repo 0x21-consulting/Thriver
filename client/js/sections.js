@@ -62,7 +62,7 @@ Template.body.helpers({
 });
 
 // Pass to header template for menu
-Template.header.helpers({
+Template.mainNav.helpers({
     sections: function () {
         return Sections.find({ displayOnPage: true, name: { $nin: [null, ''] } });
     }

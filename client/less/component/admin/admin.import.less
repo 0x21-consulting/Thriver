@@ -17,16 +17,35 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+    
+    // Override blanket button styles
+    display: inline;
+    padding: 2px 6px 3px;
+    border: 2px outset buttonface;
+    color: #000;
+    letter-spacing: 0;
 }
 #admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
 #admin-controls:hover, .section-controls:hover { opacity: 1; }
-.section-controls button { font-size: 20px; }
+.section-controls button {
+    font-size: 20px;
+}
 .section-controls {
     position: absolute;
-    z-index: 100;
+    z-index: 3;
     top: 0; // ensure proper placement despite section margins and padding
 }
-.section-controls input { line-height: 21px; vertical-align: middle; }
+.section-controls input {
+    line-height: 21px;
+    vertical-align: middle;
+    
+    // Override blanket input styles
+    background: #fff;
+    border: 2px inset;
+    height: 21px;
+    font-size: 14px;
+    text-indent: 3px;
+}
 
 // Placeholder element
 section.placeholder {
