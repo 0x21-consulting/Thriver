@@ -1,0 +1,17 @@
+<template name="carousel">
+    <section class="carousel events">
+        <main>
+            <!--First one needs active class-->          
+            {{> eventDetailActive}}
+            {{> eventDetail}}
+            {{> eventDetail}}
+        </main>
+        <nav>
+            <ul>
+                <li class="prev">&#9664;</li>
+                <li class="next">&#9658;</li>
+                <li class="close-carousel">&#xf00d;</li>
+            </ul>
+        </nav>
+    </section>
+</template>
