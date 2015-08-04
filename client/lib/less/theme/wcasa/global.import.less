@@ -1,0 +1,132 @@
+//Custom Resets
+    a, a:link, a:hover, a:active, a:focus{
+        outline: none;
+        text-decoration: none;
+    }
+    p{
+        margin-bottom: 20px;
+    }
+
+
+//Media Queries
+    @desk-lg:  ~"(min-width: 1600px)";
+    @desk-sm:  ~"(max-width: 1200px)";
+    @tab-lg:  ~"(max-width: 1024px)";
+    @tab-sm:  ~"(max-width: 900px)";
+    @mob-lg:  ~"(max-width: 767px)";
+    @mob-sm:  ~"(max-width: 500px)";
+    //Use @media @query-size {}
+
+//Displays
+    .clearFix{
+        content:"";
+        display:table;
+        clear:both;
+    }
+
+    section:after{
+            .clearFix;
+    }
+
+
+body, p, ul, ol, h1, h2, h3, h4, h5{
+    font-family: @baseFont;
+    letter-spacing: @baseLetterSpacing;
+}
+
+body, p, ul, ol{
+    font-size: @baseFontSize;
+    letter-spacing: @baseLetterSpacing;
+    line-height: @baseLineHeight;
+    color: @fontBlack;
+}
+
+body {
+    // We shouldn't use padding to separate sections for the sole
+    // reason of ensuring a particular background color between those sections.
+    // We can be more deliberate here. - Micah
+    background: @darkGray;
+}
+
+///////////////////////// // THIS NEEDS A HOME
+.va-object{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.pure-g > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.l-box {
+    padding: 1em;
+}
+
+.centered{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.callout{ 
+    // We shouldn't use padding to separate sections for the sole
+    // reason of ensuring a particular background color between those sections.
+    // We can be more deliberate here. - Micah
+    background: @white;
+    h3 {
+        border-left: 100px solid #386d8d;
+        padding:2em;
+        margin: 0px;
+        max-width: 900px;
+    }
+    h3, h3 p {
+        font-size: 32px;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #2b2b2b;
+        letter-spacing: 0.05em;
+        line-height: 1.5em;
+    }
+    h3 :last-child { margin-bottom: 0; } // added to remove excess white space
+}
+
+
+/////////////////////////////// Need a home END
+
+
+// Buttons
+button, .button {
+    border: none;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    color: #fff;
+    padding: 20px;
+    display: block;
+    text-transform: uppercase;
+    border-bottom: 5px solid #222;
+    font-size: 16px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    cursor: pointer;
+    &:focus{
+        outline: none;
+    }
+}
+
+.button-aqua{
+    background-color: @aqua;
+    border-color: @gray50;
+    &:hover{
+        background-color: lighten(@aqua, 10%);
+        border-color: lighten(@gray50, 10%);
+    }
+}
+
+.button-melon{
+    background-color: @melon;
+    border-color: @gray50;
+    &:hover{
+        background-color: lighten(@melon, 10%);
+        border-color: lighten(@gray50, 10%);
+    }
+}

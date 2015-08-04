@@ -1,0 +1,27 @@
+<template name="utilityNav">
+    <aside class="utility-nav">
+        <ul>
+            <li class="menu-toggle">
+                {{> menuToggle}}
+            </li>
+            <li class="brand-small">
+                <a href="#" title="Top">
+                    <!--<img alt="WCASA" src="/lib/img/brand-small.png" />-->
+                    Wisconsin Coalition Against Sexual Assault
+                </a>
+            </li>
+            <li class="get-help">
+                <a href="javascript:void(0)" title="Get Help"><span>&#xf06a;</span> Get Help</a>
+            </li>
+            <li class="donate">
+                <a href="javascript:void(0)" title="Donate"><span>&#xf004;</span> Donate</a>
+            </li>
+            <li class="notifications fa">
+                <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
+            </li>
+            <li class="login">
+                {{> loginButtons}}
+            </li>
+        </ul>
+    </aside>
+</template>

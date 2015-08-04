@@ -1,0 +1,141 @@
+//Note the !important overrides are to override Meteor's login form styles.
+//It would be nice to be able to modify the markup and css that outputs from meteor regarding this.
+
+//Login Modal
+div#login-dropdown-list {
+    top: 24px;
+    right: 0px;
+    left: inherit;
+    position: absolute;
+    margin: 0px !important;
+    background-color: darken(@teal, 5%);
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow:none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    width: 256px;
+    padding: 30px;
+    /* Overlay
+    &:after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.2);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: -2;
+    }*/
+    a.login-close-text {
+        position: absolute;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        color:@white;
+        top: -34px !important;
+        right: 1px !important;
+        display: block;
+        color: white;
+        background-color: darken(@teal, 5%);
+        width: 112px;
+        height: 26px !important;
+        text-decoration: none;
+        text-align: left;
+        text-indent: 21px;
+        line-height: 34px;
+        font-size: 14px;
+        .backgroundColorChangeLinear;
+        &:after {
+            content: "\f00d";
+            color: @white;
+            font-size: 14px;
+            font-family: fontawesome;
+            position: relative;
+            top: -1px;
+            right: -5px;
+            font-weight: 100 !important;
+        }
+        &:hover{
+            background-color: darken(@teal, 7%);
+        }
+
+    }
+    label {
+        float: left;
+        padding-bottom: 2px;
+        font-size: 16px;
+        color: @white;
+    }
+    input {
+        border: none !important;
+        line-height: 30px !important;
+        background-color: @white !important;
+        border-radius: 0px !important;
+        -webkit-border-radius: 0px !important;
+        margin-bottom: 10px !important;
+        text-indent: 5px !important;
+        .backgroundColorChangeLinear;
+        &:focus{
+            outline: none !important;
+            background-color: lighten(@teal, 45%) !important;
+        }
+    }
+    .additional-link-container a {
+        display: inline-block;
+        padding: 0px;
+        margin-top: 10px;
+        text-transform: none !important;
+        text-decoration: none !important;
+        font-size: 12px !important;
+        padding-top: 11px !important;
+        .colorChangeLinear;
+        &:hover{
+            color: @yellow;
+        }
+    }
+    .login-button, .login-button {
+        background-color: @teal;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        line-height: 31px;
+        margin-top: 20px;
+        border-bottom: 5px solid darken(@teal, 20%);
+        border-radius: 0px;
+        -webkit-border-radius:0px;
+        border-top: 5px solid @teal;
+        
+        &:hover{
+            background-color: darken(@teal, 10%);
+            border-top: 5px solid darken(@teal, 10%);
+        }
+        &:focus, &:active{
+            box-shadow: none;
+            border-top: 5px solid darken(@teal, 12%);
+            border-bottom: 5px solid darken(@teal, 10%);
+        }
+    }
+    a#login-name-link {
+        text-decoration: none !important;
+        padding-right: 20px;
+    }
+    div#login-buttons-open-change-password {
+        margin-top: 0px !important;
+    }
+}
+
+
+
+//Errors
+.accounts-dialog .error-message {
+    text-transform: uppercase;
+    text-align: left;
+    background-color: @melon;
+    color: @white !important;
+    padding: 10px 5px 10px 5px;
+    text-align: center;
+    text-transform: uppercase;
+    /* border: 3px solid #fff; */
+    margin-top: 12px;
+}
