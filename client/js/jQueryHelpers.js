@@ -8,27 +8,29 @@ Template.body.onRendered(function () {
     //Animate elements as they load in
 
 
-    //Header State Change (window.scroll)
-    window.addEventListener("scroll",function() { 
-        if(window.scrollY > 160) {
-            $('body').addClass('scrolled');
-        }
-        else {
-            $('body').removeClass('scrolled');
-            $('header nav').removeClass('active');
-        }
+    // Header State Change (window.scroll)
+    window.addEventListener('scroll', function (event) {
+        if (!document.body.classList.contains('scrolled'))
+            if (window.scrollY > 160) 
+                document.body.classList.add('scrolled');
+        
+        if (document.body.classList.contains('scrolled'))
+            if (window.scrollY < 160) {
+                document.body.classList.remove('scrolled');
+                document.querySelector('header nav').classList.remove('active');
+            }
     },false);
 
-
-
-    //Menu Toggle Click
-    $('.menu-toggle').click(function(){
-        $('body').toggleClass('open-nav');
+    // Menu Toggle Click
+    document.querySelector('.menu-toggle').addEventListener('mouseup', function () {
+        if (document.body.classList.contains('open-nav'))
+            document.body.classList.remove('open-nav');
+        else
+            document.body.classList.add('open-nav');
     });
 
 
-
-    //Carousel Function
+    // Carousel Function
     $('.carousel nav li').click(function(){
         var left = parseInt($('.carousel main').css('left'));
         var carouselWidth = $('.carousel main').width();
