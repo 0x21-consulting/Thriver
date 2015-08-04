@@ -159,8 +159,7 @@ initialize = function () {
 
 // Helper for moving map based on provider locations
 moveMap = function (county) {
-    var providers = [], x = [], y = [],
-        centerX = centerY = i = j = 0;
+    var providers = [], x = [], y = [];
     
     // Mutual Suspician
     county = '' + county;
@@ -197,7 +196,7 @@ moveMap = function (county) {
     ));
     
     // If there was only one result, click on it for the user
-    if (j === 1)
+    if (providers.length === 1)
         Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
 },
 
