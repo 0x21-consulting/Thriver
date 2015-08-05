@@ -29,7 +29,6 @@ Template.body.onRendered(function () {
             document.body.classList.add('open-nav');
     });
 
-
     // Carousel Function
     $('.carousel nav li').click(function(){
         var left = parseInt($('.carousel main').css('left'));
@@ -40,25 +39,33 @@ Template.body.onRendered(function () {
             }
             else { 
                 var prevLeft = left + carouselWidth;
-                $('.carousel main').css({left: prevLeft});
+                $('section.carousel main').css({left: prevLeft});
             }
         }
         if($(this).hasClass('next')){
-            if(left == - $('.carousel main article').length * carouselWidth + carouselWidth){
+            if(left == - $('section.carousel main article').length * carouselWidth + carouselWidth){
                 // do nothing
             }
             else { 
                 var nextLeft = left - carouselWidth;
-                $('.carousel main').css({left: nextLeft});
+                $('section.carousel main').css({left: nextLeft});
             }
         }
     });
     $('.details-ref').click(function(){
-        $('.carousel').addClass('active');
+        $('section.carousel').addClass('active');
      });
     $('.close-carousel').click(function(){
-        $('.carousel').removeClass('active');
+        $('section.carousel').removeClass('active');
      });
 
+
+    //Toggle visibility of the List View in Events
+    $('h4.list-view').click(function(){
+        $('body').addClass('calendar-list-hide');
+     });
+    $('span.show-list').click(function(){
+        $('body').removeClass('calendar-list-hide');
+     });
 
 }); //End jQuery Helpers

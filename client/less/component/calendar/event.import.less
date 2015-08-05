@@ -1,0 +1,223 @@
+.carousel.events{
+    width: 60%;
+    overflow: hidden;
+    position: relative;
+    visibility: hidden;
+    .easeInOutAll;
+    position: absolute;
+    right: -60%;
+    z-index: 4;
+    h3.registration-headline, a.event-close{
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: @white;
+        padding: 20px;
+        background-color: @blueAsh;
+        text-align: center;
+        cursor: pointer;
+        //.easeInOutAll;
+        position: absolute !important; //Need to review #calendar styles
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        line-height: 64px !important; //Need to review #calendar styles
+        span{
+            position: relative;
+            left: 0px;
+        }
+    }
+    a.event-close{
+        line-height: 24px !important; //Need to review #calendar styles
+        padding: 20px 26px;
+        &:hover{
+            background-color: darken(@blueAsh, 3%);
+            color: @white;
+            span{
+                left: -2px;
+            }
+        }
+    }
+    nav{
+        position: absolute;
+        top: 50%;
+        margin-top: -30px;
+        width: 100%;
+        ul{
+            width: 100%;
+        }
+        li{
+            cursor: pointer;
+            font-size: 20px;
+            color: @blueAsh;
+            padding: 40px;
+            &:hover{
+                color: darken(@blueAsh, 5%);
+            }
+        }
+        .prev{
+            float: left;
+        }
+        .next{
+            float: right;
+        }
+    }
+    article.event-detail{
+        width: 100%;
+        margin:0px;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        padding: 0px;
+        border:none;
+        border-left: 5px solid #eee;
+        time {
+            margin-left: 20px;
+            span{
+                line-height: 30px;
+                display: inline-block;
+                background-color: lighten(@melon, 3%);
+                position: relative;
+                left: -5px;
+                padding: 5px;
+                &.date{
+                    background-color: @melon;
+                    left: 0px;
+                }
+            }
+            color: #fff;
+        }
+        img.featured{
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+        }
+        h2{
+            position: relative;
+            font-size: 28px;
+            line-height: 32px;
+            font-weight: 100;
+            padding: 20px 20px 10px 20px;
+            border-bottom: 4px solid #ebebeb;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+        p{
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            white-space: normal;
+        }
+        h4{
+            text-transform: uppercase;
+            font-weight: 100;
+            font-size: 30px;
+            white-space: normal;
+            line-height: 32px;
+            margin: 20px;
+            color: @melon;
+        }
+        button{
+            border-color: #c7d1d2;
+            display: inline-block;
+            &:after{
+                content: '\25BA';
+                font-size: 10px;
+                position: relative;
+                top: -1px;
+                left: 6px;
+            }
+        }
+
+        button.map-details{
+            background-color: #f3f3f3;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 0px 0px 0px 20px;
+            border:none;
+            color: @fontBlack;
+            font-size: 16px;
+            text-transform: none;
+            &:after{
+                display: none;
+            }
+            span {
+                display: inline-block;
+                background-color: @bgBlack;
+                color: #fff;
+                padding: 20px 25px 20px 20px;
+                text-transform: uppercase;
+                &:after{
+                    content: '\25BA';
+                    font-size: 10px;
+                    position: relative;
+                    top: -1px;
+                    left: 6px;
+                }
+            }
+            &:hover{
+                background-color: darken(#f3f3f3, 2%);
+                span{
+                    background-color: darken(@bgBlack, 2%);
+                    color: @yellow;
+                }
+            }
+        }
+        ul.share{
+            position: absolute;
+            right: 0px;
+            top: -1px;
+            width: 50px;
+            li a{
+                display: block;
+                color: @white;
+                height: 50px;
+                width: 50px;
+                line-height: 50px;
+                text-indent: -4px;
+                .backgroundColorChangeLinear;
+                &.facebook{
+                    background-color: @facebookBlue;
+                    &:hover{
+                        background-color: darken(@facebookBlue, 3%)
+                    }
+                }
+                &.twitter{
+                    background-color: @twitterBlue;
+                    &:hover{
+                        background-color: darken(@twitterBlue, 3%)
+                    }
+                }
+                &.calendar{
+                    background-color: @yellow;
+                    &:hover{
+                        background-color: darken(@yellow, 3%)
+                    }
+                }
+                &.print{
+                    background-color: @blueAsh;
+                    &:hover{
+                        background-color: darken(@blueAsh, 3%)
+                    }
+                }
+            }
+        }
+    }
+    main{
+        width: 100%;
+        overflow: visible;
+        white-space: nowrap;
+        position: relative;
+        left:0%;
+        margin-top: 65px;
+        .easeInOutAll;
+    }
+}
+
+.carousel.events.active{
+    visibility: visible;
+    right: 0px;
+}

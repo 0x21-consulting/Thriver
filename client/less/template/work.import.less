@@ -1,44 +1,44 @@
 .work.tabs.tabs-right{
     // Tab Defaults
+    background-color: @white;
+    padding-bottom:160px;
+    border-top: 5px solid @deepGray;
+    margin:0px;
     article{
         background-color: @white;
         .content{
-            padding-left: 125px;
-            padding-right: 60px;
-            padding:30px 60px 125px 125px;
+            padding:40px 60px 125px 159px;
             max-width: 600px;
+            margin: 0px;
         }
         h2{
             position: relative;
-            border-bottom: 5px solid @blue;
-            background-color: @lightGray;
-            padding: 30px 30px 30px 125px;
+            border-bottom: 5px solid darken(@blue, 5%);
+            background-color: lighten(@fontBlack, 5%);
+            padding: 30px 30px 30px 164px;
             font-size: 40px;
             font-weight: 100;
             line-height: 28px;
+            text-transform: uppercase;
+            color:@white;
             min-height: 28px; // allow proper height without text - Micah
             span{
-                display: block;
-                position: absolute;
-                left: 0px;
-                padding: 30px;
-                top: 0px;
-                color: @white;
-                background-color: @gray;
+                width: 50px;
+                height: 50px;
+                color: lighten(@fontBlack, 5%);
+                background-color: @white;
+                border-radius: 50%;
+                -webkit-border-radius: 50%;
+                display: inline-block;
+                line-height: 53px;
+                text-indent: 6px;
             }
         }
     }
 
-    // Work Styles
-    background-color: @darkGray;
-    // We shouldn't use padding to separate sections for the sole
-    // reason of ensuring a particular background color between those sections.
-    // We can be more deliberate here. - Micah
-    margin: 20px 0px; // changed padding to margin
     main{
         float: left;
-        width: 68%;
-        margin-right: 2%;
+        width: 70%;
     }
 
     //Menu 
@@ -46,19 +46,42 @@
         float: left;
         width: 30%;
         background: @gray50;
+        ul{
+            border-bottom: 5px solid @blue;
+        }
+        &:hover h4{
+            color: #fff;
+        }
+        h4{
+            font-size: 20px;
+            color: #ccc;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-align: left;
+            padding: 20px 0px;
+            border-bottom: 5px solid darken(@blue, 5%);
+            line-height: 70px;
+            text-indent: 20px;
+            .easeInOutAll;
+            span.title-icon{
+                font-weight: 100;
+            }
+        }
         li{
             padding-right: 30px;
             color: @white;
             font-weight: bold;
             background-color: @fontBlack;
-            margin-bottom: 5px;
+            border-bottom: 5px solid @fontBlack;
             line-height: 50px;
             font-size: 14px;
             letter-spacing: 1px;
             cursor: pointer;
             position: relative;
+            .easeInOutAll;
+            font-weight: 300;
             &:last-child{
-                margin-bottom: 0px;
+                border-bottom: 0px;
             }
             span{
                 /*display: block;
@@ -72,6 +95,7 @@
                 margin-right: 10px;
                 margin-top: -2px;
                 cursor: pointer;
+                .easeInOutAll;
             }
 
         }
@@ -81,7 +105,7 @@
                 background-color: @bgBlack;
                 &:after{
                     content:'';
-                    background-color: @blue;
+                    background-color: darken(@blue, 5%);
                     width: 5px;
                     position: absolute;
                     height: 100%;
@@ -104,6 +128,22 @@
                 border-width: 6px 7px 6px 0;
                 border-color: transparent @blue transparent transparent;
                 margin-top: -5.5px;
+            }
+        }
+        li:hover{
+            &::before {
+                border-left: 5px solid darken(@blue, 5%);
+            }
+            &:after{
+                border-color: transparent darken(@blue, 5%) transparent transparent;
+            }
+        }
+        li.active:hover{
+            &::before {
+                border-left: 5px solid @blue;
+            }
+            &:after{
+                border-color: transparent @blue transparent transparent;
             }
         }
         li::before {

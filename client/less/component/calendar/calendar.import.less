@@ -1,16 +1,23 @@
+/*To be deleted*/
+section.th {
+    overflow: hidden;
+}
+
+
 #calendar{
     background: #fff;
     position: relative;
     visibility: visible;
+    height: 750px;
+    overflow: hidden;
+    background-color: #f2f2f2;
     .easeInOutAll;
     left: 0px;
     width: 100%;
-    padding-top: 60px;
-    height: 80%;
-    text-align: center;
+    margin-top: 40px;
+    text-align: left;
     .calendar-view{
-        width: 61%;
-        padding-left: 5%;
+        width: 60%;
         float: left;
     }
     button{
@@ -32,44 +39,50 @@
         }
     }
     header{
+        cursor: pointer;
+        font-size: 20px;
+        color: #424646;
+        padding: 23px 0px;
         position: absolute;
-        top: 135px;
-        width: 76%;
-        margin-left: -7.5%;
+        margin-top: -117px;
+        right: 0px;
+        width: 60%;
         a{
             cursor: pointer;
             font-size: 20px;
-            color: @blueAsh;
-            padding: 40px;
+            color: #fff;
+            padding: 20px;
+            background-color: #aeaeae;
             &:hover{
                 color: darken(@blueAsh, 5%);
             }
         }
         .previous{
-            float: left;
+            position: absolute;
+            left: 0px;
         }
         .next{
             float: right;
         }
     }
     h2{
-
+        display: block;
+        background-color: @white;
     }
     h2, h3{
         position: relative;
         font-size: 28px;
         line-height: 32px;
         font-weight: 100;
-        padding: 0px 20px 0px 20px;
+        padding: 0px 20px 20px 70px;
         width: 100%;
         margin: 0 auto;
         margin-bottom: 0px;
         text-transform: uppercase;
-        text-align: center;
-        display: inline;
+        text-align: left;
     }
     h3{
-        padding: 0px;
+        padding: 0px 0px 0px 70px;
         font-size: 18px;
         text-transform: none;
         margin-bottom: 30px;
@@ -144,7 +157,7 @@
     .income { /*background:rgba(100,255,50,.3)*/ color: rgb(50,200,10); font-weight: bold; }
     /* Weekends */
     .th>span:first-child, .th>span:last-child {background:lighten(@melon, 5%)}
-    .week>div:first-child, .week>div:last-child {background: #f2f2f2;}
+    .week>div:first-child, .week>div:last-child {background: #f9f9f9;}
     .th>span:last-child, .week>div:last-child {margin-right:0}
 
     /* Forms */
@@ -172,61 +185,44 @@
 }
 
 
-#calendar-list{
-    /*visibility: hidden;*/
-    opacity: 0;
+//For hide list view
+span.show-list {
+    height: 64px;
+    width: 64px;
+    display: block;
+    color: #fff;
+    line-height: 60px;
+    text-align: center;
+    background-color: @teal;
     position: absolute;
-    top: 60px;
-    z-index: 1;
-    height: 500px;
-    width: 28%;
-    opacity: 1;
-    float: right;
-    position: static;
-    text-align: left;
-    li{
-        clear: both;
-        position: relative;
-        time.date{
-            display: block;
-            position: absolute;
-            top: 0px;
+    left: -63px;
+    margin-top: 63px;
+    z-index: 10;
+    cursor: pointer;
+    .easeInOutAll;
+    &:hover{
+        background-color: darken(@teal, 3%);
+    }
+}
+body.calendar-list-hide{
+    #calendar{
+        span.show-list.fa {
             left: 0px;
-            z-index: 2;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            padding: 0px;
-            background-color: teal;
-            text-align: center;
-            color: #fff;
         }
-        img{
-            display: block;
-            float: left;
-            height: 100px;
-            width: 100px;
+        .carousel.events{
+            width: 100%;
+        }
+        #calendar-list {
+            margin-left: -40%;
+            .easeInOutAll;
+        }
+        .calendar-view {
+            width: 100%;
+            .easeInOutAll;
+        }
+        header{
+            width: 100%;
+            .easeInOutAll;
         }
     }
-    h3{
-        text-align: left;
-        border-bottom: 4px solid #eee;
-        line-height: 49px;
-        color: #aaa;
-        text-transform: uppercase;
-        padding-bottom: 0px;
-        padding-top: 10px;
-        position: relative;
-    }
-
 }
-#calendar-list.active{
-    visibility: visible;
-    opacity: 1;
-}
-
-
-
-
-
-
