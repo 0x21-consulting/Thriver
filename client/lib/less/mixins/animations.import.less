@@ -1,0 +1,46 @@
+.slideDown{
+    -moz-animation-name: dropIn;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 300ms;
+    -moz-animation-delay: 1000ms;
+
+    -webkit-animation-name: dropIn;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 300ms;
+    -webkit-animation-delay: 1000ms;
+
+    animation-name: dropIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 300ms;
+    animation-delay: 1000ms;
+}
+
+
+
+@-moz-keyframes dropIn {
+    0% {
+        -moz-transform: translateY(-40px);
+    }
+    100% {
+        -moz-transform: translateY(0);
+    }
+}
+@-webkit-keyframes dropIn {
+    0% {
+        -webkit-transform: translateY(-40px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+@keyframes dropIn {
+    0% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
