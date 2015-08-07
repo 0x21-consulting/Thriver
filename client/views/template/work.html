@@ -5,7 +5,12 @@
         {{/if}}
         <main>
             {{#each tabs}}
-                {{> article id=this}}
+                <!--{{> article id=this}}-->
+                {{#with that=this}}
+                    {{#with template that}}
+                        {{> Template.dynamic template=this data=../that }}
+                    {{/with}}
+                {{/with}}
             {{/each}}
         </main>
         <menu class="tabs">
@@ -23,9 +28,12 @@
 </template>
 
 <template name="article">
-    <article data-id="{{id}}">
-        <h2><span class="fa">{{icon id}}</span> {{name id}}</h2>
-        <div class="content">
+    <article data-id="{{this}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <h2><span class="fa">{{icon this}}</span> {{name this}}</h2>
+        <div class="content" data-content="{{content this}}">
             {{{markdown content}}}
         </div>
     </article>

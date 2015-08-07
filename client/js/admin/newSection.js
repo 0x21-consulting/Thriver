@@ -1,5 +1,8 @@
+// Subscriptions
+Meteor.subscribe('site');
+
 // Handle new section creation
-var newSection = function (sectionType, id) {
+newSection = function (sectionType, id) {
     var section = document.createElement('section'),
         oldSection = document.querySelector('.placeholder');
     
@@ -53,17 +56,7 @@ newPageSection = function (event) {
     event.stopPropagation();
     
     var menu = document.createElement('menu'), // best semantically
-        a, i = 0, j,
-        
-    // TODO: make this dynamic
-    templates = [
-        { name: 'Callout',      template: 'callout'     },
-        { name: 'Community',    template: 'community'   },
-        { name: 'Contact',      template: 'contact'     },
-        { name: 'Providers',    template: 'providers'   },
-        { name: 'Who We Are',   template: 'who'         },
-        { name: 'Work',         template: 'work'        }
-    ],
+        a, i = 0, j, templates,
     
     // Function for applying templates on click
     setTemplate = function (event) {
@@ -103,6 +96,11 @@ newPageSection = function (event) {
             location.reload();
         });
     };
+    
+    // Get Templates
+    templates = Site.findOne({},{ templates: 1 });
+    if (templates)
+        templates = templates.templates;
     
     // Create menu
     menu.id = 'templatesMenu';

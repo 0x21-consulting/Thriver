@@ -1,3 +1,15 @@
+// Subscriptions
+Meteor.subscribe('sections');
+Meteor.subscribe('people');
+Meteor.subscribe('providers');
+Meteor.subscribe('site');
+
+// Collections
+Sections  = new Mongo.Collection('sections');
+People    = new Mongo.Collection('people');
+Providers = new Mongo.Collection('providers');
+Site      = new Mongo.Collection('site');
+
 // Helper for changing tabs
 var changeTabs = function (event) {
     var parent = event.delegateTarget.parentElement.parentElement,
@@ -14,19 +26,7 @@ var changeTabs = function (event) {
         
     // Make tab active, too
     event.target.classList.add('active');
-},
-
-// Collections
-Sections  = new Mongo.Collection('sections'),
-People    = new Mongo.Collection('people');
-Providers = new Mongo.Collection('providers');
-Site      = new Mongo.Collection('site');
-
-// Subscriptions
-Meteor.subscribe('sections');
-Meteor.subscribe('people');
-Meteor.subscribe('providers');
-Meteor.subscribe('site');
+};
 
 // Dynamically generate anchor name
 Template.registerHelper('anchor', function (name) {
@@ -67,6 +67,19 @@ Template.mainNav.helpers({
         return Sections.find({ displayOnPage: true, name: { $nin: [null, ''] } });
     }
 }); 
+
+// Work helpers
+Template.work.helpers({
+    template: function (id) {
+        var result;
+        id = id || this.id;
+        console.debug(id);
+        result = Sections.findOne({ '_id': id }, { '_id': 0, template: 1 });
+        
+        if (result)
+            return result.template;
+    }
+});
 
 // Tabs
 Template.tab.helpers({
