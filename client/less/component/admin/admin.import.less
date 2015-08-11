@@ -27,6 +27,9 @@
 }
 #admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
 #admin-controls:hover, .section-controls:hover { opacity: 1; }
+article.active .section-controls {
+    margin-top: 30px;
+}
 .section-controls button {
     font-size: 20px;
 }
@@ -55,21 +58,22 @@ section.placeholder {
     text-align: center;
 }
 // Templates menu
-#templatesMenu {
+#templates-menu {
     position: absolute;
+    z-index: 2;
     background: #fff;
     box-shadow: 0 0 25px -1px rgba(0,0,0,.2);
     border-radius: 5px;
     padding: 10px 0 0 0;
     text-align: center;
 }
-#templatesMenu > a {
+#templates-menu > a {
     padding: 10px 50px;
     display: block;
     text-decoration: none;
     color: #06a;
 }
-#templatesMenu > a:hover {
+#templates-menu > a:hover {
     background: #06a;
     color: #fff;
 }

@@ -24,7 +24,8 @@
 </template>
 
 <template name="tab">
-    <li data-id="{{id}}" data-icon="{{icon id}}">{{name id}}</li>
+    <li data-id="{{id}}" data-icon="{{icon id}}" 
+        data-parent="{{../../_id}}">{{name id}}</li>
 </template>
 
 <template name="article">
@@ -34,7 +35,9 @@
         {{/if}}
         <h2><span class="fa">{{icon this}}</span> {{name this}}</h2>
         <div class="content" data-content="{{content this}}">
-            {{{markdown content}}}
+            {{#with content this}}
+                {{{markdown this}}}
+            {{/with}}
         </div>
     </article>
 </template>

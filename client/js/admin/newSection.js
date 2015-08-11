@@ -160,7 +160,7 @@ newSectionTab = function (id) {
         //location.reload();
     }
 };
-
+/*
 // Bind drag and drop events for adding new sections
 Template.body.events({
     // Drop before or after section element
@@ -245,3 +245,4 @@ Template.body.events({
             elem.querySelector('ul').appendChild(newSection('tab', id));
     },
 });
+*/

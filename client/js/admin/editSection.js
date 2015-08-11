@@ -7,7 +7,7 @@ var edit = function (id) {
         
         var content = toMarkdown(this.innerHTML).
             replace(/<\/{0,1}div>/gi,'');
-        
+        console.debug(content, this.dataset.content);
         // If the content is different than prior, update section
         //if (this.dataset.originalContent !== this.textContent.trim()) {
         if (this.dataset.content !== content) {
@@ -39,7 +39,7 @@ editTab = function (id) {
         
         // If the content is different than prior, update tab name
         if (this.dataset.content !== name) {
-            this.textContent = '';
+            //this.textContent = '';
             Meteor.call('updateTabName', id, name);
         }
         

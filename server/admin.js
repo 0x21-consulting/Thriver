@@ -8,40 +8,67 @@ Meteor.methods({
     // Section-related methods
     //
     
-    // Add new section
-    addSection: function (template, order) {
+    /**
+     * Add new section
+     * @method
+     *   @param {string} template - Name of template to apply to section
+     *   @param {number} index    - The index of the section relative to its siblings
+     *   @param {string} parent   - The ID of a section's parent (optional)
+     */
+    addSection: function (template, index, parent) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
         
         // Mutual Suspicion
         template = '' + template;
-        order = parseInt(order);
+        index    = parseInt(index);
         
         // Add new section
         Sections.insert({
-            name: null,
-            content: null,
-            template: template,
-            order: order,
-            displayOnPage: true,
-            tabs: []
+            name         : null,
+            icon         : '\uf0e9',  // default icon: umbrella
+            content      : null,
+            template     : template,
+            order        : index,
+            displayOnPage: parent? false : true,
+            tabs         : []
+        },
+        // Update parent section, if there is one, to include section
+        function (error, id) {
+            if (error) throw new Meteor.Error(error);
+            
+            // If no parent, do nothing
+            if (!parent) 
+                return;
+            
+            // Update parent element to include new child
+            Sections.update({ '_id': parent }, {
+                $addToSet: {
+                    tabs: id
+                }
+            });
         });
     },
     
-    // Update section order
-    updateSectionOrder: function (id, order) {
+    /**
+     * Update section order
+     * @method
+     *   @param {string} sectionId - ID of section to update
+     *   @param {number} newIndex  - New index location of section
+     */
+    updateSectionOrder: function (sectionId, newIndex) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
         
         // Mutual Suspicion
-        id = '' + id;
-        order = parseInt(order);
+        sectionId = '' + sectionId;
+        newIndex  = parseInt(newIndex);
         
         // Update order
-        Sections.update({ '_id': id }, {
-            $set: { 'order': order }
+        Sections.update({ '_id': sectionId }, {
+            $set: { 'order': newIndex }
         });
     },
     
@@ -51,8 +78,21 @@ Meteor.methods({
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
         
+        var tabs, i, j;
+        
         // Mutual Suspicion
         id = '' + id;
+        
+        // Delete any tabs
+        tabs = Sections.findOne({ '_id': id }, { tabs: 1 });
+        if (tabs && tabs.tabs instanceof Array) {
+            tabs = tabs.tabs;
+            
+            // Remove each tab, one at a time
+            for (i = 0, j = tabs.length; i < j; ++i) {
+                Sections.remove({ '_id': tabs[i] });
+            }
+        }
         
         // Delete section
         Sections.remove({ '_id': id });

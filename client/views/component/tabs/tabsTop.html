@@ -13,7 +13,11 @@
     </menu>
     <main>
         {{#each tabs}}
-            {{> article id=this}}
+            {{#with that=this}}
+                {{#with template that}}
+                    {{> Template.dynamic template=this data=../that }}
+                {{/with}}
+            {{/with}}
         {{/each}}
         <!--<article class="active carousel">
             {{> calendar}}
