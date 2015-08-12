@@ -5,22 +5,29 @@ var edit = function (id) {
         event.stopPropagation();
         event.preventDefault();
         
-        var content = toMarkdown(this.innerHTML).
-            replace(/<\/{0,1}div>/gi,'');
-        console.debug(content, this.dataset.content);
+        var content = toMarkdown(this.innerHTML.
+            replace(/\n/gm, '<br>').                    // preserve new lines
+            replace(/<(\/)?(div|span).*?>/gmi,'<$1p>'). // toss div and span elements
+            replace(/<script.+?<\/script>/gmi, ''));    // no scripts!
+        
         // If the content is different than prior, update section
-        //if (this.dataset.originalContent !== this.textContent.trim()) {
         if (this.dataset.content !== content) {
-            //this.innerHTML = '';
+            console.info('Content is different.');
+            
+            // Update content in db
             Meteor.call('updateSectionContent', id, content);
-        } else {
-            // Restore element
-            this.innerHTML = marked(this.dataset.content).trim().
-                replace(/^<p>/i, '').replace(/<\/p>$/i, '');
+            
+            // Meteor is not reactive enough grr
+            this.dataset.content = content;
         }
+        
+        // Restore element
+        var text = marked(this.dataset.content);
+        this.innerHTML = text;
         
         // Should no longer be editable
         this.contentEditable = false;
+        this.style.whiteSpace = 'inherit';
         
         // removeEventListener doesn't work for some reason,
         // so just replace the element with its clone
@@ -39,7 +46,6 @@ editTab = function (id) {
         
         // If the content is different than prior, update tab name
         if (this.dataset.content !== name) {
-            //this.textContent = '';
             Meteor.call('updateTabName', id, name);
         }
         
@@ -66,6 +72,7 @@ Template.sectionAdmin.events({
             that.addEventListener('blur', edit(parent.dataset.id) );
             
             // Replace content with markdown
+            that.style.whiteSpace = 'pre-line'; // preserve newlines
             that.textContent = that.dataset.content;
             
             // Make section editable
