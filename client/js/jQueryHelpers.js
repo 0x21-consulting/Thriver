@@ -103,16 +103,16 @@ Template.body.onRendered(function () {
 
 
     //Smooth Scrolling (Unable to target)
-    $('nav li a').click(function(){
-        //var elemID = '#' + this.id;
-        //$('html, body').animate({
-            //scrollTop: $(elemID).offset().top + 92
-        //}, 2000);        
+    /*$('nav li a').click(function(){
+        var elemID = '#' + this.id;
+        $('html, body').animate({
+            scrollTop: $(elemID).offset().top + 92
+        }, 2000);        
     });
 
 
 //Illuminate Current Nav Item (Unable to target)
-$(document).ready(function(){
+/*$(document).ready(function(){
     var section1Height = $('#work').height();
     var section2Height = $('#community').height();
     var section3Height = $('#who-we-are').height();
@@ -137,14 +137,12 @@ $(document).ready(function(){
             $('a[href="#contact"]').addClass("current").not().removeClass("current");
         }
     });
-});
+});*/
 
 
-//Fix the Work Section Sidebar
-$(window).scroll(function () {
+//Fix the Work Section Sidebar (Cant target on production but can on local)
+/*$(window).scroll(function () {
     var position = $('#work').offset();
-    //var menuHeight = $('#work .tabs .elements').outerHeight() -82;
-    //alert(menuHeight);
     var threshold = position.top -93;
     var positionBtm = $('#community').offset();
     var btmThreshold = positionBtm.top;
@@ -153,7 +151,7 @@ $(window).scroll(function () {
     } else{
         $('.work .tabs').removeClass('fixed bottom');
     }
-});
+});*/
 
 
 }); //End jQuery Helpers
