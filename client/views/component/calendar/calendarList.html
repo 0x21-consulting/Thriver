@@ -1,20 +1,15 @@
 <template name="calendarList">
-        <section id="calendar-list" class="calendar-list">
-            <h4 class="fa list-view">
-                <span>&#xf053;</span> 
-                List View
-            </h4>
-                <ul>
+    <section id="calendar-list" class="calendar-list">
+        <h4 class="fa list-view">
+            <span>&#xf053;</span> 
+            List View
+        </h4>
+            <ul>
+                {{#each events}}
                     {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                    {{> eventListItem}}
-                </ul>
-        </section>
+                {{/each}}
+            </ul>
+    </section>
 </template>
 
 
@@ -23,11 +18,11 @@
         <a class="details-ref" href="javascript:void(0)">
             <img src="/lib/img/temp-event-featured.jpg" alt="" />
             <div class="event-meta">
-                <h4>An upcoming event title</h4>
-                <time datetime="2008-02-14 20:00">
-                    <span class="date"><b>21</b>Aug</span>
-                    <span class="time">4:00pm to 11:00pm</span></time>
-                <address>Location: Event Hall, Milwaukee.</address>
+                <h4>{{name}}</h4>
+                <time datetime="{{start}}">
+                    <span class="date">{{date this}}</span>
+                    <span class="time">{{time this}}</span></time>
+                <address>Location: {{location}}</address>
             </div>
         </a>
     </li>

@@ -5,14 +5,20 @@ var events = new Mongo.Collection('events');
 //   _id         {int}      auto_incr
 //   name        {string}
 //   description {string}
-//   cost        {float} || {Cost[]}
+//   address     {string}
+//   location    {Coordinates}
+//   cost        {float} || {Cost[]}    USD
 //   start       {datetime}
 //   end         {datetime}
+
+// Structure {Coordinates} - Used for geolocation and Google Maps
+//   latitude    {number}
+//   longitude   {number}
 
 // Structure {Cost} - Used for price tiers
 //   order       {int}
 //   description {string}
-//   cost        {float}
+//   cost        {float}    USD
 
 // Structure {datetime}
 //   {string} - 'YYYY-MM-DD HH:MM:SS.mmm' - Times in Zulu
