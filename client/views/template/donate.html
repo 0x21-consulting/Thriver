@@ -1,0 +1,54 @@
+<template name="donate">
+    <section class="donate-object">
+        <div class="donate-inner">
+            <h2><span class="fa">&#xf004;</span> Donate</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <form>
+                <p>This is to be updated with a PayPal form.</p>
+                <table>
+                    <tr>
+                        <td><h3>Amount:</h3></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="50" name="amount" value="50" checked><label for="50" class="radio">50</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="100" name="amount" value="100"><label for="100" class="radio recommended">100 (Recommended)</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="250" name="amount" value="100"><label for="250" class="radio">250</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="500" name="amount" value="100"><label for="500" class="radio">500</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="1000" name="amount" value="100"><label for="1000" class="radio">1000</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="Other" name="amount" value="100"><label for="Other" class="radio">Other</label> <input type="text" class="other-amount" name="other-amount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="firstname">First name:</label> <input id="firstname" type="text" name="firstname"></td>
+                        <td><label for="lastname">Last name:</label> <input id="lastname" type="text" name="lastname"></td>
+                    </tr>
+                    <tr>
+                        <td><br><h3>All other required fields:</h3></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="everything-else"></td>
+                    </tr>
+                    <tr>
+                        <td><input class="button button-melon" type="submit" value="Donate"></td>
+                    </tr>
+                </table>
+            </form>
+            <button class="close-donate fa">&#xf00d;</button>
+        </div>
+    </section>
+</template>

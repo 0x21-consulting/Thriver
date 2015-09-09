@@ -8,6 +8,16 @@
 	.va-object.centered{
 		position: relative;
 		top: 33px;
+		background-color: rgba(0,0,0,0.2);
+		@media (max-width:920px){
+			vertical-align: top;
+			padding-top: 200px;
+		}
+		@media (max-width:767px){
+			vertical-align: top;
+			padding: 40px 20px;
+			background-color: rgba(0,0,0,0.35);
+		}
 	}
 	.va-object.centered:after {
 	    content: '';
@@ -42,15 +52,27 @@
 		//background-color: rgba(255,245,157,0.15);
 		float: left;
 		text-align: left;
+		@media (max-width:767px){
+			margin: 0px;
+			font-size: 1.7em;
+			line-height: 30px;
+		}
 	}
 	h2{
 		clear: both;
 		font-weight: 100;
 		font-size: 20px;
+		line-height: 28px;
 		padding-top: 30px;
 		color: @white;
 		text-align: left;
 		margin-left: 40px;
+		max-width: 900px;
+		@media (max-width:767px){
+			margin:20px 0px 0px 0px;
+			font-size: 16px;
+			line-height: 20px;
+		}
 	}
 	button{
 		margin: 14px 0px 0px 40px;
@@ -61,9 +83,18 @@
 		font-weight: 800;
 		position: relative;
 		z-index: 3;
+		@media (max-width:767px){
+			margin: 20px 0px 0px 0px;
+		}
+		span{
+			font-size: 21px;
+			font-weight: 100;
+			position: relative;
+			top: 2px;
+		}
 		.backgroundColorChangeLinear;
 		&:hover{
-			background-color: @melon;
+			background-color: @teal;
 		}
 	}
 	.down-arrow{

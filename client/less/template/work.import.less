@@ -1,14 +1,15 @@
 .work.tabs.tabs-right{
     // Tab Defaults
     background-color: @white;
-    padding-bottom:160px;
+    //padding-bottom:160px;
     border-top: 5px solid @deepGray;
     margin:0px;
+    min-height: 100vh;
     article{
         background-color: @white;
         .content{
             padding:40px 60px 125px 159px;
-            max-width: 600px;
+            max-width: 900px;
             margin: 0px;
         }
         h2{
@@ -46,6 +47,7 @@
         float: left;
         width: 30%;
         background: @gray50;
+        min-height: 100vh;
         ul{
             border-bottom: 5px solid @blue;
         }
@@ -155,5 +157,10 @@
             width: 55px; height: 55px;
             text-align: center;
         }
+    }
+    menu.fixed{
+        position: fixed;
+        right: 0px;
+        top: 93px;
     }
 }
