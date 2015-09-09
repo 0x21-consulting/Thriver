@@ -68,4 +68,90 @@ Template.body.onRendered(function () {
         $('body').removeClass('calendar-list-hide');
      });
 
+    //Toggle visibility of the Alerts
+    $('.alerts').click(function(){
+        if($('.alerts').hasClass('active')){
+            $('.alerts').removeClass('active');
+        } else{
+            $('.alerts').removeClass('active');
+            $(this).addClass('active');
+        }
+     });
+
+    //Toggle visibility of Donate Tab
+    $('.donate .toggle').click(function(){
+        if($('body').hasClass('donation-active')){
+            $('body').removeClass('donation-active');
+        } else{
+            $('body').addClass('donation-active');
+        }
+     });
+
+    $('.donate .close-donate').click(function(){
+        if($('body').hasClass('donation-active')){
+            $('body').removeClass('donation-active');
+        } else{
+            //Do Nothing
+        }
+     });
+
+    $('nav').click(function(){
+        if ($(window).width() < 768) {
+           $('body').removeClass('open-nav');
+        }
+     });
+
+
+    //Smooth Scrolling (Unable to target)
+    /*$('nav li a').click(function(){
+        var elemID = '#' + this.id;
+        $('html, body').animate({
+            scrollTop: $(elemID).offset().top + 92
+        }, 2000);        
+    });
+
+
+//Illuminate Current Nav Item (Unable to target)
+/*$(document).ready(function(){
+    var section1Height = $('#work').height();
+    var section2Height = $('#community').height();
+    var section3Height = $('#who-we-are').height();
+    var section4Height = $('#providers').height();
+    var section5Height = $('#contact').height();
+
+    $(window).scroll(function() {
+        var winTop = $(window).scrollTop();
+        if(winTop >= section1Height && winTop <= section2Height){
+            $('a[href="#work"]').addClass("current").not().removeClass("current");
+        } 
+        else if(winTop >= section2Height && winTop <= section3Height){
+            $('a[href="#community"]').addClass("current").not().removeClass("current");
+        } 
+        else if(winTop >= section3Height && winTop <= section4Height){
+            $('a[href="#who-we-are"]').addClass("current").not().removeClass("current");
+        } 
+        else if(winTop >= section4Height && winTop <= section5Height){
+            $('a[href="#providers"]').addClass("current").not().removeClass("current");
+        } 
+        else if(winTop >= section5Height){
+            $('a[href="#contact"]').addClass("current").not().removeClass("current");
+        }
+    });
+});*/
+
+
+//Fix the Work Section Sidebar (Cant target on production but can on local)
+/*$(window).scroll(function () {
+    var position = $('#work').offset();
+    var threshold = position.top -93;
+    var positionBtm = $('#community').offset();
+    var btmThreshold = positionBtm.top;
+    if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
+        $('.work .tabs').addClass('fixed');
+    } else{
+        $('.work .tabs').removeClass('fixed bottom');
+    }
+});*/
+
+
 }); //End jQuery Helpers

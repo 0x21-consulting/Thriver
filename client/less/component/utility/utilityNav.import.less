@@ -7,6 +7,9 @@
     position: fixed;
     z-index: 99;
     top: 0;
+    @media (max-width:767px){
+        background-color: transparent;
+    }
     ul{
         display: block;
         width: 100%;
@@ -14,6 +17,7 @@
     ul, li{
         line-height: 32px;
     }
+
     li{
         color: rgba(255,255,255,0.8);
         text-transform: none;
@@ -28,6 +32,25 @@
             }
         }
     }
+    li.social{
+        margin-right: 4px;
+        a{
+            padding: 0px;
+            font-size: 18px;
+            font-weight: 100;
+            line-height: 29px;
+            position: relative;
+            top: 2px;
+            left: 10px;
+            .colorChangeLinear;
+            &:hover{
+                color: @yellow;
+            }
+        }
+        @media (max-width:767px){
+            display: none;
+        }
+    }
 
     //Utility Nav Menu Items
     li.menu-toggle{
@@ -38,6 +61,9 @@
         height: 32px;
         width: 32px;
         .menuToggleHide;
+        @media (max-width:767px){
+            left: inherit;
+        }
     }
     li.brand-small{
         position: absolute;
@@ -71,26 +97,19 @@
             margin-right: 0px;
             position: relative;
             left:5px;
+            //height: 32px;
             .backgroundColorChangeLinear;
             &:hover{
                 background-color: darken(@teal, 5%);
             }
-            &:before{
-                content: '4';
-                background-color: @melon;
-                height: 14px;
-                width: 14px;
-                line-height: 14px;
-                position: absolute;
-                display: block;
-                font-size: 10px;
-                -webkit-border-radius: 50%;
-                border-radius: 50%;
-                text-align: center;
-                margin-left: 7px;
-                margin-top: 1px;
-            }
         }
+        @media (max-width:767px){
+            position: absolute;
+            top: 32px;
+            right: 3px;
+            z-index: 8;
+        }
+        ul a{ left: 0px;}
     }
     li.donate{
         background-color: #222;
@@ -101,10 +120,20 @@
             .colorChangeLinear;
         }
         padding: 0px 20px;
+        @media (max-width:767px){
+            background-color: transparent;
+            position: absolute;
+            z-index: -5;
+        }
         &:hover{
             background-color: #000;
             a span{
                 color: @melon;
+            }
+        }
+        a.toggle{
+            @media (max-width:767px){
+                display: none;
             }
         }
     }
@@ -117,10 +146,13 @@
         &:hover{
             background-color: darken(@melon, 5%);
         }
+        @media (max-width:767px){
+            display: none;
+        }
     }
     li.login{
         background-color: @teal;
-        padding-left: 20px;
+        padding: 0px 20px 0px 10px;
         .backgroundColorChangeLinear;
         &:hover{
             background-color: darken(@teal, 5%);
@@ -129,6 +161,14 @@
             &:hover{
                 color: @white;
             }
+        }
+        @media (max-width:767px){
+            position: absolute;
+            width: 100%;
+            top: 32px;
+            left: 0px;
+            text-align: left;
+            text-indent: 3px;
         }
     }
     a{
@@ -148,3 +188,94 @@
         }
     }
 } //End Utility Nav
+
+
+//Alerts
+.alerts{   
+    position: relative;        
+    &:before{
+        content: '4';
+        background-color: @melon;
+        height: 14px;
+        width: 14px;
+        line-height: 14px;
+        position: absolute;
+        display: block;
+        font-size: 10px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        text-align: center;
+        margin-left: 8px;
+        z-index: 9;
+        margin-top: 4px;
+        pointer-events: none;
+    }
+    ul{
+        position: absolute;
+        width: 340px;
+        height: auto;
+        text-align: left;
+        background-color: @white;
+        right: -1px;
+        max-height: 600px;
+        overflow-y: scroll;
+        border: 4px solid @teal;
+        visibility: hidden;
+        opacity: 0;
+        top: -600px;
+        .easeInOutAll;
+        li{
+            display: block;
+            color: @deepGray;
+            padding: 20px 15px;
+            font-size: 14px;
+            line-height: 23px;
+            font-weight: 500;
+            border-bottom: 4px solid @gray;
+            letter-spacing: 0.5px;
+            &:last-child{
+                border:none;
+            }
+            a{
+                left:0px;
+            }
+        }
+    }
+    ul.twitter-notifications{
+        border-color: @somberBlue;
+        li{
+            color: @deepGray;
+            &:first-child{
+                padding: 0px;
+                a{
+                    background-color: @twitterBlue;
+                    color: @white;
+                    padding: 20px;
+                    display: block;
+                    width: 100%;
+                    &:hover{
+                        background-color: darken(@twitterBlue, 5%);
+                    }
+                }
+            }
+        }
+        a{
+            display: inline;
+            position: static;
+            font-weight: 600;
+            color: @blue;
+            text-transform: none;
+            font-size: 14px;
+            &:hover{
+                color: darken(@blue, 5%);
+            }
+        }
+    }
+}
+
+//Active alerts
+.alerts.active ul{
+    visibility: visible;
+    opacity: 1;
+    top: 33px;
+}

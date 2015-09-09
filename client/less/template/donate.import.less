@@ -1,0 +1,105 @@
+
+//Donate Object
+.donate-object{
+    width: 100%;
+    position: fixed;
+    visibility: hidden;
+    top: -100%;
+    z-index: 105;
+    .easeInOutAll;
+    left: 0px;
+    background-color: @lightGray;
+    text-align: left;
+    border-bottom: 5px solid @melon;
+    border-top: 5px solid @melon;
+    .donate-inner{
+        padding:30px;
+        margin: 0 auto;
+        max-width: 900px;
+    }
+   h2{
+        font-size: 42px;
+        line-height: 38px;
+        max-width: 1400px;
+        margin-bottom: 0px;
+        font-weight: 100;
+        text-transform: uppercase;
+        padding-bottom: 40px;
+        color: @deepGray;
+        span{
+            color: @melon;
+        }
+    }
+    h3{
+        font-size: 16px;
+    }
+    p{
+        font-weight: 500;
+    }
+    form{
+        color: @deepGray;
+        table{
+            width: 100%;
+            td{
+                width: 100px;
+            }
+        }
+
+        input[type="radio"]{
+            width: auto;
+            cursor: pointer;
+            clear: left;
+            height: auto;
+            &:hover + label{
+                color: @teal;
+            }
+            &:hover + label.recommended{
+                color: @teal;
+            }
+        }
+        label.recommended{
+            color: darken(@teal, 5%);
+            &:hover{
+                color: @teal;
+            }
+        }
+        label{
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 24px;
+            cursor: pointer;
+            .colorChangeLinear;
+            &:hover{
+                color: @teal;
+            }
+        }
+        .button{
+            text-indent: 0px;
+            height: auto;
+            padding: 20px;
+            line-height: 30px;
+            margin-top: 30px;
+        }
+    }
+    button.close-donate{
+        position: absolute;
+        top: 11px;
+        right: 0px;
+        background-color: transparent;
+        color: @deepGray;
+        &:hover{
+            color: darken(@deepGray, 5%);
+        }
+        font-size: 40px;
+        border: none;
+    }
+}
+
+
+//Active Donation State
+body.donation-active{
+    .donate-object{
+        top: 32px;
+        visibility: visible;
+    }
+}

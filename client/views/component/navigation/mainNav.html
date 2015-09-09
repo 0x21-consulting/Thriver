@@ -1,17 +1,25 @@
 <template name="mainNav">
     <nav>
         <ul>
-            <!--<li><a href="#work">Work</a></li>
-            <li><a href="#community">Community</a></li>
-            <li><a href="#who-we-are">Who We Are</a></li>
-            <li><a href="#providers">Providers</a></li>
-            <li><a href="#contact">Contact</a></li>-->
             {{#each sections}}
                 {{> menuItem}}
             {{/each}}
-            <li class="social"><a class="fa" href="#">&#xf082;</a></li>
-            <li class="social"><a class="fa" href="#">&#xf099;</a></li>
-            <li class="social"><a class="fa" href="#">&#xf167;</a></li>
+            <!--This portion below is to appear on the mobile menu-->
+            <li class="hide-sm donate">
+                <a class="toggle" href="javascript:void(0)">Donate</a>
+            </li>
+            <li class="hide-sm get-help">
+                <a href="#providers">Get Help</a>
+            </li>
+            <li class="hide-sm social">
+                <a class="fa" href="https://www.facebook.com/wcasa">&#xf082;</a>
+            </li>
+            <li class="hide-sm social">
+                <a class="fa" href="https://www.youtube.com/user/WCASAVPCC">&#xf167;</a>
+            </li>
+            <li class="hide-sm social">
+               <a class="fa" href="https://twitter.com/wcasa_org">&#xf099;</a>
+            </li>
         </ul>
     </nav>  
 </template>
