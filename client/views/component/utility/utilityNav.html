@@ -32,20 +32,6 @@
                         }(document,"script","twitter-wjs");
                     </script>
                 </section>
-                <!--<ul class="notification-menu twitter-notifications">
-                    <li>
-                        <a href="https://twitter.com/wcasa_org" target="_blank"><span>&#xf099;</span> WCASA on Twitter &#9658;</a>
-                    </li>
-                    <li>
-                        Film exposé on campus assaults, panel discussion set for Sept. 15: <a href="http://bit.ly/1iaPFiy">http://bit.ly/1iaPFiy</a>
-                    </li>
-                    <li>
-                        WISC-TV: sponsorship of Celebrate Peace event gives voice to sexual assault prevention <a href="http://ow.ly/2bv5dC">http://ow.ly/2bv5dC</a>
-                    </li>
-                    <li>
-                        The NSVRC is excited to partner with It's on Us to prevent sexual violence on campus. Check out this video on Consent <a href="http://www.nsvrc.org/its-on-us">http://www.nsvrc.org/its-on-us</a> 
-                    </li>
-                </ul>-->
             </li>
             <li class="get-help">
                 <a href="#providers" title="Get Help"><span>&#xf06a;</span> Get Help</a>
@@ -55,6 +41,7 @@
                     <span>&#xf004;</span> Donate</a>
                 {{> donate}}
             </li>
+            {{#if currentUser}}
             <li class="notifications fa alerts" data-count="{{count}}">
                 <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
                 <ul class="notification-menu">
@@ -65,6 +52,7 @@
                     {{/each}}
                 </ul>
             </li>
+            {{/if}}
             <li class="login">
                 {{> loginButtons}}
             </li>

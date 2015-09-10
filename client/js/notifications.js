@@ -10,7 +10,7 @@ Template.utilityNav.helpers({
     count: function () {
         var all = notifications.find({});
         // Don't return 0
-        return all.count() ? all.count() : '';
+        return all.count(); //? all.count() : '';
     },
     // Return all notifications
     notifications: function () {

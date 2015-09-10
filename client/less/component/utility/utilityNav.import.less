@@ -92,7 +92,7 @@
     }
     li.notifications{
         a{
-            padding: 0px 16px 0px 13px;
+            padding: 0px 15px;
             background-color: @teal;
             margin-right: 0px;
             position: relative;
@@ -181,7 +181,7 @@
     a#login-sign-in-link{
         text-decoration: none;
         text-transform: uppercase;
-        padding-right: 20px;
+        padding-left: 20px;
         &:after {
             //content: "\f090";
             //.fa;
@@ -193,7 +193,7 @@
 //Alerts
 .alerts{   
     position: relative;        
-    &:before{
+    &[data-count]:before{
         content: attr(data-count);
         background-color: @melon;
         height: 14px;
@@ -210,6 +210,7 @@
         margin-top: 4px;
         pointer-events: none;
     }
+    &[data-count="0"]:before { display: none; }
     ul, section {
         position: absolute;
         width: 340px;
