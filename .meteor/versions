@@ -38,6 +38,8 @@ mongo@1.1.0
 nemo64:bootstrap@3.3.5_2
 nemo64:bootstrap-data@3.3.5
 npm-bcrypt@0.7.8_2
+oauth@1.1.4
+oauth1@1.1.4
 observe-sequence@1.0.6
 ordered-dict@1.0.3
 random@1.0.3
@@ -54,6 +56,7 @@ spacebars-compiler@1.0.6
 srp@1.0.3
 templating@1.1.1
 tracker@1.0.7
+twitter@1.1.4
 ui@1.0.6
 underscore@1.0.3
 url@1.0.4

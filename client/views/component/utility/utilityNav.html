@@ -17,7 +17,22 @@
             </li>
             <li class="social alerts">
                 <a class="fa" href="javascript:void(0)">&#xf099;</a>
-                <ul class="notification-menu twitter-notifications">
+                <section class="notification-menu twitter-notifications">
+                    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/wcasa_org" 
+                        data-widget-id="641768226804793344" data-chrome="">Tweets by @wcasa_org</a>
+                    <script>
+                        !function(d,s,id){
+                            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                            if(!d.getElementById(id)){
+                                js=d.createElement(s);
+                                js.id=id;
+                                js.src=p+"://platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js,fjs);
+                            }
+                        }(document,"script","twitter-wjs");
+                    </script>
+                </section>
+                <!--<ul class="notification-menu twitter-notifications">
                     <li>
                         <a href="https://twitter.com/wcasa_org" target="_blank"><span>&#xf099;</span> WCASA on Twitter &#9658;</a>
                     </li>
@@ -30,31 +45,24 @@
                     <li>
                         The NSVRC is excited to partner with It's on Us to prevent sexual violence on campus. Check out this video on Consent <a href="http://www.nsvrc.org/its-on-us">http://www.nsvrc.org/its-on-us</a> 
                     </li>
-                </ul>
+                </ul>-->
             </li>
             <li class="get-help">
                 <a href="#providers" title="Get Help"><span>&#xf06a;</span> Get Help</a>
             </li>
             <li class="donate">
-                <a href="javascript:void(0)" title="Donate" class="toggle"><span>&#xf004;</span> Donate</a>
+                <a href="javascript:void(0)" title="Donate" class="toggle">
+                    <span>&#xf004;</span> Donate</a>
                 {{> donate}}
             </li>
-            <li class="notifications fa alerts">
+            <li class="notifications fa alerts" data-count="{{count}}">
                 <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
                 <ul class="notification-menu">
-                    <li>
-                        A user has requrested author access: JSimmons@wcasa.org.<br>
-                        <a href="#">Approve</a>
-                        <a href="#">Ignore</a>
-                    </li>
-                    <li>
-                        A user has requrested author access: RMartins@wcasa.org.<br>
-                        <a href="#">Approve</a>
-                        <a href="#">Ignore</a>
-                    </li>
-                    <li>
-                        Work &rsquo; Prevention has been updated by RTurner@wcasa.org
-                    </li>
+                    {{#each notifications}}
+                        <li>
+                            {{> Template.dynamic template=template }}
+                        </li>
+                    {{/each}}
                 </ul>
             </li>
             <li class="login">
@@ -62,4 +70,23 @@
             </li>
         </ul>
     </aside>
+</template>
+
+<template name="notificationEmpty">
+    No notifications at this time.
+</template>
+
+<template name="notificationGeneric">
+    {{text}}
+</template>
+
+<template name="notificationApproval">
+    {{text}}<br />
+    <a href="javascript:void(0)">Approve</a>
+    <a href="javascript:void(0)">Deny</a>
+</template>
+
+<template name="notificationRenewal">
+    {{text}}<br />
+    <a href="javascript:void(0)">Renew Now</a>
 </template>
