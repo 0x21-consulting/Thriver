@@ -1,3 +1,10 @@
+// Escape feature
+document.addEventListener('keydown', function (event) {
+    if (event && event.keyCode && event.keyCode === 27)
+        location.replace('https://en.wikipedia.org/wiki/Special:Random');
+});
+
+
 /* -All jQuery & JS usage for UI enhancements has been moved from templates
     to this document for review, improvements and to be moved as seen fit. */
 
@@ -63,37 +70,10 @@ Template.body.onRendered(function () {
     //Toggle visibility of the List View in Events
     $('h4.list-view').click(function(){
         $('body').addClass('calendar-list-hide');
-     });
+    });
     $('span.show-list').click(function(){
         $('body').removeClass('calendar-list-hide');
-     });
-
-    //Toggle visibility of the Alerts
-    $('.alerts').click(function(){
-        if($('.alerts').hasClass('active')){
-            $('.alerts').removeClass('active');
-        } else{
-            $('.alerts').removeClass('active');
-            $(this).addClass('active');
-        }
-     });
-
-    //Toggle visibility of Donate Tab
-    $('.donate .toggle').click(function(){
-        if($('body').hasClass('donation-active')){
-            $('body').removeClass('donation-active');
-        } else{
-            $('body').addClass('donation-active');
-        }
-     });
-
-    $('.donate .close-donate').click(function(){
-        if($('body').hasClass('donation-active')){
-            $('body').removeClass('donation-active');
-        } else{
-            //Do Nothing
-        }
-     });
+    });
 
     $('nav').click(function(){
         if ($(window).width() < 768) {
@@ -154,4 +134,65 @@ Template.body.onRendered(function () {
 });*/
 
 
-}); //End jQuery Helpers
+}); 
+
+// Utility Nav
+Template.utilityNav.onRendered(function () {
+    // Toggle visibility of the Alerts
+    var alerts = document.querySelectorAll('.alerts'),
+        i, j, blockClose, modules,
+    
+    // Class swap method
+    classSwap = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        var active = document.querySelectorAll('.utility-nav .active'),
+            i, j;
+        
+        for (i = 0, j = active.length; i < j; ++i)
+            active[i].classList.remove('active');
+        
+        this.classList.add('active');
+    };
+    
+    console.debug(alerts);
+    
+    for (i = 0, j = alerts.length; i < j; ++i)
+        alerts[i].addEventListener('mousedown', classSwap);
+    
+    // Close modules by default
+    document.body.addEventListener('mousedown', function () {
+        var active = document.querySelectorAll('.utility-nav .active'),
+            i, j;
+        
+        for (i = 0, j = active.length; i < j; ++i)
+            active[i].classList.remove('active');
+    });
+    // But not if you click in the modules
+    modules = document.querySelectorAll('.notification-menu');
+    blockClose = function (event) {
+        event.stopPropagation();
+    };
+    for (i = 0, j = modules.length; i < j; ++i)
+        modules[i].addEventListener('mousedown', blockClose);
+    
+    //Toggle visibility of Donate Tab
+    $('.donate .toggle').click(function(){
+        if($('body').hasClass('donation-active')){
+            $('body').removeClass('donation-active');
+        } else{
+            $('body').addClass('donation-active');
+        }
+    });
+
+    $('.donate .close-donate').click(function(){
+        if($('body').hasClass('donation-active')){
+            $('body').removeClass('donation-active');
+        } else{
+            //Do Nothing
+        }
+    });
+});
+
+//End jQuery Helpers

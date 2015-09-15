@@ -1,3 +1,7 @@
+// No idea why this is the case, but we need javascript URLs to prevent
+// the page from scrolling to the top as <a href="#" /> would.
+Blaze._allowJavascriptUrls();
+
 // Subscriptions
 Meteor.subscribe('sections');
 Meteor.subscribe('people');
