@@ -40,21 +40,20 @@
                 <a href="javascript:void(0)" title="Donate" class="toggle">
                     <span>&#xf004;</span> Donate</a>
                 {{> donate}}
-                <!--<section class="donate-object">
-                    {{> paypalCreditCardForm }}
-                </section>-->
             </li>
             
-            <li class="notifications fa alerts" data-count="{{count}}">
-                <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
-                <ul class="notification-menu">
-                    {{#each notifications}}
-                        <li>
-                            {{> Template.dynamic template=template }}
-                        </li>
-                    {{/each}}
-                </ul>
-            </li>
+            {{#if show}}
+                <li class="notifications fa alerts" data-count="{{count}}">
+                    <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
+                    <ul class="notification-menu">
+                        {{#each notifications}}
+                            <li>
+                                {{> Template.dynamic template=template }}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/if}}
             
             <li class="login">
                 {{> loginButtons}}

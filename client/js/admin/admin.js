@@ -1,28 +1,36 @@
-// Method to set admin properties
-// Intentionally global
-// TODO: Scope just between admin files
-isAdmin = function () {
-    var that = this; // keep in scope
-    
-    // Create Reactive Variable
-    // If a user somehow gets admin privileges revoked, admin controls
-    // would be immediately removed from the page
-    this.isAdmin = new ReactiveVar(false);
-    
-    // Call the isAdmin method defined in server/admin.js to determine
-    // whether the logged-in user is an admin or not
+// Is the user an admin?
+var isAdmin = new ReactiveVar(false),
+
+/**
+ * Check server for admin access
+ * @method
+ */
+checkAdmin = function () {
     Meteor.call('isAdmin', function (error, result) {
-        // Update the reactive variable
-        that.isAdmin.set(result);
-        Session.set('isAdmin', result);
+        // Update reactive var
+        isAdmin.set(result);
     });
+},
+
+/**
+ * Get admin ReactiveVar value
+ * @function
+ * @returns {boolean}
+ */
+getAdmin = function () {
+    return isAdmin.get();
 };
 
-// Bind isAdmin function
-Template.body.onCreated(isAdmin);
-Accounts.onLogin(isAdmin);
+// Pass admin state to templates
+Template.body     .helpers({ isAdmin: getAdmin });
+Template.callout  .helpers({ isAdmin: getAdmin });
+Template.community.helpers({ isAdmin: getAdmin });
+Template.contact  .helpers({ isAdmin: getAdmin });
+Template.providers.helpers({ isAdmin: getAdmin });
+Template.who      .helpers({ isAdmin: getAdmin });
+Template.work     .helpers({ isAdmin: getAdmin });
+Template.article  .helpers({ isAdmin: getAdmin });
 
-// Whether to show admin controls on page
-Template.registerHelper('isAdmin', function () {
-    return Session.get('isAdmin');
-});
+// Bind checkAdmin function
+Template.body.onCreated(checkAdmin);
+Accounts     .onLogin  (checkAdmin);

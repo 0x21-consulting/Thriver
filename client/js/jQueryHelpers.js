@@ -4,17 +4,11 @@ document.addEventListener('keydown', function (event) {
         location.replace('https://en.wikipedia.org/wiki/Special:Random');
 });
 
-
 /* -All jQuery & JS usage for UI enhancements has been moved from templates
     to this document for review, improvements and to be moved as seen fit. */
 
 
 Template.body.onRendered(function () {
-    //Bind the 'esc' button to close any active 'modal' states
-    //Scroll event which toggles between header states
-    //Animate elements as they load in
-
-
     // Header State Change (window.scroll)
     window.addEventListener('scroll', function (event) {
         if (!document.body.classList.contains('scrolled'))
@@ -80,61 +74,78 @@ Template.body.onRendered(function () {
            $('body').removeClass('open-nav');
         }
      });
-
-
-    //Smooth Scrolling (Unable to target)
-    /*$('nav li a').click(function(){
-        var elemID = '#' + this.id;
-        $('html, body').animate({
-            scrollTop: $(elemID).offset().top + 92
-        }, 2000);        
-    });
-
-
-//Illuminate Current Nav Item (Unable to target)
-/*$(document).ready(function(){
-    var section1Height = $('#work').height();
-    var section2Height = $('#community').height();
-    var section3Height = $('#who-we-are').height();
-    var section4Height = $('#providers').height();
-    var section5Height = $('#contact').height();
-
-    $(window).scroll(function() {
-        var winTop = $(window).scrollTop();
-        if(winTop >= section1Height && winTop <= section2Height){
-            $('a[href="#work"]').addClass("current").not().removeClass("current");
-        } 
-        else if(winTop >= section2Height && winTop <= section3Height){
-            $('a[href="#community"]').addClass("current").not().removeClass("current");
-        } 
-        else if(winTop >= section3Height && winTop <= section4Height){
-            $('a[href="#who-we-are"]').addClass("current").not().removeClass("current");
-        } 
-        else if(winTop >= section4Height && winTop <= section5Height){
-            $('a[href="#providers"]').addClass("current").not().removeClass("current");
-        } 
-        else if(winTop >= section5Height){
-            $('a[href="#contact"]').addClass("current").not().removeClass("current");
+	
+    //Illuminate Current Nav Item (Unable to target)
+    /*$(document).ready(function(){
+        var section1Height = $('#work').height();
+        var section2Height = $('#community').height();
+        var section3Height = $('#who-we-are').height();
+        var section4Height = $('#providers').height();
+        var section5Height = $('#contact').height();
+    
+        $(window).scroll(function() {
+            var winTop = $(window).scrollTop();
+            if(winTop >= section1Height && winTop <= section2Height){
+                $('a[href="#work"]').addClass("current").not().removeClass("current");
+            } 
+            else if(winTop >= section2Height && winTop <= section3Height){
+                $('a[href="#community"]').addClass("current").not().removeClass("current");
+            } 
+            else if(winTop >= section3Height && winTop <= section4Height){
+                $('a[href="#who-we-are"]').addClass("current").not().removeClass("current");
+            } 
+            else if(winTop >= section4Height && winTop <= section5Height){
+                $('a[href="#providers"]').addClass("current").not().removeClass("current");
+            } 
+            else if(winTop >= section5Height){
+                $('a[href="#contact"]').addClass("current").not().removeClass("current");
+            }
+        });
+    });*/
+    
+    //Fix the Work Section Sidebar (Cant target on production but can on local)
+    /*$(window).scroll(function () {
+        var position = $('#work').offset();
+        var threshold = position.top -93;
+        var positionBtm = $('#community').offset();
+        var btmThreshold = positionBtm.top;
+        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
+            $('.work .tabs').addClass('fixed');
+        } else{
+            $('.work .tabs').removeClass('fixed bottom');
         }
-    });
-});*/
+    });*/
+});
 
+var smoothScroll = function (event) {
+    if (!event || !event.target || !event.target.hash)
+        return;
+    
+    event.stopPropagation();
+    event.preventDefault();
+    
+    // Get target element (that the anchor links to)
+    var target = $('[id="' + event.target.hash.slice(1) +'"]'),
+    
+    // Where are we presently?
+    posY = event.pageY, offset, speed;
+    
+    // If no target, don't bother
+    if (!target.length) return;
+    
+    // Calculate target Y offset
+    offset = target.offset().top - 95;
+    
+    // We want to scroll at 750 pixels per second
+    speed = Math.abs(posY - offset);
+    
+    // Smooth scroll to target
+    $('body').animate({ scrollTop: offset }, speed);
+};
 
-//Fix the Work Section Sidebar (Cant target on production but can on local)
-/*$(window).scroll(function () {
-    var position = $('#work').offset();
-    var threshold = position.top -93;
-    var positionBtm = $('#community').offset();
-    var btmThreshold = positionBtm.top;
-    if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
-        $('.work .tabs').addClass('fixed');
-    } else{
-        $('.work .tabs').removeClass('fixed bottom');
-    }
-});*/
-
-
-}); 
+// Smooth scrolling
+// We only care about same page links (that start with a hash)
+Template.body.events({ 'mousedown a[href*=#]': smoothScroll });
 
 // Utility Nav
 Template.utilityNav.onRendered(function () {

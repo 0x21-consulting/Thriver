@@ -6,11 +6,30 @@ var notifications = new Mongo.Collection('notifications');
 
 // Notification helpers
 Template.utilityNav.helpers({
+    // Whether to show the notifications section
+    show: function () {
+        if (Meteor.user())
+            return true;
+        
+        // Reset title
+        // TODO: Is this the best place for this?
+        document.title = 'WCASA';
+        
+        return false;
+    },
     // Show notification count
     count: function () {
-        var all = notifications.find({});
-        // Don't return 0
-        return all.count(); //? all.count() : '';
+        var all   = notifications.find({}),
+            count = all.count();
+        
+        // Update title bar
+        if (count)
+            document.title = '(' + count + ') - WCASA';
+        else
+            document.title = 'WCASA';
+        
+        // Return count
+        return count;
     },
     // Return all notifications
     notifications: function () {

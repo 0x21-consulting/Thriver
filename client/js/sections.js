@@ -179,10 +179,10 @@ Template.registerHelper('markdown', function (text, options) {
 // People
 Template.who.helpers({
     staff: function () {
-        return People.find({ boardMember: false });
+        return People.find({ boardMember: false }, { sort: { name: 1 }});
     },
     board: function () {
-        return People.find({ boardMember: true });
+        return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
     }
 });
 Template.person.helpers({
