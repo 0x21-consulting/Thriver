@@ -103,18 +103,6 @@ Template.body.onRendered(function () {
         });
     });*/
     
-    //Fix the Work Section Sidebar (Cant target on production but can on local)
-    /*$(window).scroll(function () {
-        var position = $('#work').offset();
-        var threshold = position.top -93;
-        var positionBtm = $('#community').offset();
-        var btmThreshold = positionBtm.top;
-        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
-            $('.work .tabs').addClass('fixed');
-        } else{
-            $('.work .tabs').removeClass('fixed bottom');
-        }
-    });*/
 });
 
 var smoothScroll = function (event) {
@@ -206,4 +194,63 @@ Template.utilityNav.onRendered(function () {
     });
 });
 
-//End jQuery Helpers
+Template.work.onRendered(function () {
+    //Toggle work filter
+    $('button.work-filter').click(function(){
+        if($('body').hasClass('work-menu-active')){
+            $('body').removeClass('work-menu-active');
+        } else{
+            $('body').addClass('work-menu-active');
+        }
+    });
+
+    $('.work menu.tabs').click(function(){
+        if($('body').hasClass('work-menu-active')){
+            $('body').removeClass('work-menu-active');
+        } else{
+            //Do nothing. This is used to close the menu on mobile after a selection is made.
+        }
+    });
+
+    //Fix the Work Section Sidebar (Cant target on production but can on local)
+    $(window).scroll(function () {
+        var position = $('#work').offset();
+        var threshold = position.top -93;
+        var positionBtm = $('#community').offset();
+        var btmThreshold = positionBtm.top;
+        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
+            $('.work .tabs').addClass('fixed');
+        } else{
+            $('.work .tabs').removeClass('fixed bottom');
+        }
+    });
+});
+
+
+Template.who.onRendered(function () {
+    //Slide Who We Are Section
+    $(".slider-nav.prev").click(function(){
+        $('main.slider-content').animate({scrollLeft: -500}, 800);
+    }); 
+    $(".slider-nav.next").click(function(){
+        $('main.slider-content').animate({scrollLeft: 500}, 800);
+    }); 
+}); 
+
+
+Template.providers.onRendered(function () {
+    //Toggle provider search
+    $('.provider-search h2').click(function(){
+        if($('.providers .provider-search').hasClass('active')){
+            $('.providers .provider-search').removeClass('active');
+        } else{
+            $('.providers .provider-search').addClass('active');
+        }
+    });
+
+    $(function() { //shorthand document.ready function
+        $('#search').on('submit', function(e) { //use on if jQuery 1.7+
+            $('.providers .provider-search').removeClass('active');
+        });
+    });
+});

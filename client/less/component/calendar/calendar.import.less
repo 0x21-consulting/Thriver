@@ -14,11 +14,30 @@ section.th {
     .easeInOutAll;
     left: 0px;
     width: 100%;
-    margin-top: 40px;
+    //margin-top: 40px; Was this needed for something
     text-align: left;
     .calendar-view{
         width: 60%;
         float: left;
+        @media (max-width:768px){
+            .th, #weeks{
+                display: none;
+            }
+        }
+    }
+    @media (max-width:768px){
+        h4.list-view{
+            display: none;
+        }
+        h3{
+            width: 100%;
+            left: 0px;
+            position: absolute;
+            margin: 0px;
+        }
+        header{
+            top: 208px;
+        }
     }
     button{
         background: none;
@@ -80,6 +99,9 @@ section.th {
         margin-bottom: 0px;
         text-transform: uppercase;
         text-align: left;
+    }
+    h2{
+        padding: 40px 0px 40px 40px;
     }
     h3{
         padding: 0px 0px 0px 70px;

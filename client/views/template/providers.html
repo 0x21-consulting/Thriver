@@ -1,28 +1,30 @@
 <template name="providers">
-    <section class="providers drawer" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="providers left" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-   	    <h2>Locate a WCASA Service Provider Nearest to You</h2>
-        <form>
-            <label for="county">Find by County</label>
-            <span class="select">
-                <select id="county" class="county">
-                    <option>- Select a County -</option>
-                    {{#each counties}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
-            </span>
-                <label for="zip">Find by Zip Code</label>
-                <span class="float-right">
-                    <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
-                    <input id="zip" type="text" pattern="[0-9]*" 
-                        maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
-                        min="53001" max="54990" name="zip">
-                    <input class="submit" type="submit" value="Go">
+        <div class="provider-search">
+            <form id="search">
+                <label for="county">Find by County</label>
+                <span class="select">
+                    <select id="county" class="county">
+                        <option>- Select a County -</option>
+                        {{#each counties}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
                 </span>
-        </form>
+                    <label for="zip">Find by Zip Code</label>
+                    <span class="float-right">
+                        <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
+                        <input id="zip" type="text" pattern="[0-9]*" 
+                            maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
+                            min="53001" max="54990" name="zip">
+                        <input class="submit" type="submit" value="Go">
+                    </span>
+            </form>
+            <h2><span class="fa">&#xf002;</span> Locate a WCASA Service Provider Nearest to You</h2>
+        </div>
         <figure class="map">
             <div id="map-canvas"></div>
         </figure>
@@ -41,6 +43,7 @@
                     <a href="{{website}}" target="_blank" class="website icon">{{website}}</a>
                     <a href="{{facebook}}" target="_blank" class="facebook icon">
                         {{name}} on Facebook</a>
+                    <a href="#" target="_blank" class="twitter icon">twitter.com/user/</a>
                 </div>
                 <button class="cta button-aqua">Jobs &amp; More</button>
             {{/with}}

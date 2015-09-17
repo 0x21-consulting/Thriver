@@ -21,6 +21,16 @@
 
     }
 
+    a, a:link{
+        color: @teal;
+    }
+
+    a:hover{
+        color: lighten(@teal, 5%);
+    }
+    a:visited{
+        color: darken(@teal, 5%);
+    }
     //Headlines
     h1{
         text-transform: uppercase;
@@ -242,6 +252,33 @@
         color: @white;
         p{
             color: @white;
+        }
+    }
+    details {
+        margin-bottom: 10px;
+        padding-bottom: 0px;
+        summary {
+            background-color: darken(@teal, 5%);
+            line-height: 60px;
+            padding: 0px 20px;
+            color: #fff;
+            font-weight: 100;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 17px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            .easeInOutAll;
+            &:hover{
+                background-color: @teal;
+            }
+            &:active{
+                background-color: lighten(@teal, 5%);
+            }
+            &:focus{
+                background-color: darken(@teal, 10%);
+                outline: none;
+            }
         }
     }
 

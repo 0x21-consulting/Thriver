@@ -20,12 +20,13 @@
                 {{/each}}
             </ul>
         </menu>
+        <button class="work-filter">Explore Work</button>
     </section>
 </template>
 
 <template name="tab">
     <li data-id="{{id}}" data-icon="{{icon id}}" 
-        data-parent="{{../../_id}}">{{name id}}</li>
+        data-parent="{{../../_id}}">{{name id}} <span class="caret fa"></span></li>
 </template>
 
 <template name="article">

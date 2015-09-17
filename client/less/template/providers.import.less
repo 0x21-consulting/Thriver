@@ -110,6 +110,9 @@
         .website:before{
             content:"\f108";
         }
+        .twitter:before{
+            content:"\f099";
+        }
         p.county-served{
             margin-bottom: 20px;
         }
@@ -140,3 +143,142 @@
         }
    }
 }
+
+
+//New Column Layout
+.providers.left{
+    overflow: hidden;
+    .map{
+        margin-top: 23px;
+        width: 60%;
+        float: left;
+        border-top: none;
+        &:after{
+            left: inherit;
+            right: -19px !important;
+            margin-top: -31px;
+            top: 50%;
+            -ms-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        @media (max-width:767px){
+            width: 100% !important;
+            height: 300px !important;
+            margin: 0px;
+            border-top: none;
+            &:after{
+                display: none;
+            }
+            #map-canvas{
+                height: 350px;
+            }
+        }
+    }
+    @media (max-width:767px){
+        padding-top: 50px;
+    }
+    .map, #map-canvas{
+        height: 627px;
+    }
+    .details{
+        padding: 56px 40px 40px 40px;
+        height: 560px;
+        border-left: 5px solid @melon;
+        border-top: none;
+        @media (max-width:767px){
+            border-left: none;
+            height: auto;
+        }
+        .right, .left{
+            width: 100%;
+        }
+        .right{
+            padding: 20px 0px 20px 0px;
+        }
+        a.icon{
+            font-size: 13px;
+            letter-spacing: 0px;
+            line-height: 16px;
+            display: block;
+            margin-bottom: 12px;
+            white-space: nowrap;
+            &:before{
+                left: -40px;
+                top: 1px;
+                font-size: 21px;
+            }
+        }
+        button{
+            position: static;
+        }
+    }
+    .map{
+        @media (max-width:1050px){
+            width: 50%;
+        }
+    }
+    .provider-search {
+        position: absolute;
+        z-index: 2;
+        background-color: white;
+        width: 100%;
+        top: -286px;
+        padding-top: 160px;
+        cursor: pointer;
+        border-bottom: 5px solid @melon;
+        .easeInOutAll;
+        @media (max-width:767px){
+            position: static;
+            padding-top: 0px;
+        }
+        h2{
+            .easeInOutAll;
+            font-weight: 500;
+            span{
+                .easeInOutAll;
+                color: @melon;
+                font-size: 40px;
+                position: relative;
+                left: -10px;
+                top: -4px;
+            }
+            &:before{
+                display: none;
+            }
+        }
+        &:hover{
+            background-color: #eee;
+            h2{
+                //color: darken(@melon, 5%);
+                span{
+                    color: darken(@melon, 5%);
+                }
+            }
+        }
+    }
+    .provider-search.active{
+        top: -90px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
