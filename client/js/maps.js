@@ -56,6 +56,23 @@ initialize = function () {
             marker.setMap(map);
         });
         
+        // Create a WCASA map marker
+        (function () {
+            var marker = new google.maps.Marker({
+                position : new google.maps.LatLng(43.0346679, -89.4252416),
+                icon     : createPin('#00b7c5'),
+                animation: google.maps.Animation.DROP,
+                title    : 'WCASA'
+            });
+            
+            // Display Label
+            google.maps.event.addListener(marker, 'mouseover', displayLabel);
+            google.maps.event.addListener(marker, 'mouseout',  hideLabel);
+            
+            // Add to map
+            marker.setMap(map);
+        })();
+        
         // Geolocation
         if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -64,11 +81,6 @@ initialize = function () {
                 // Get the distance from current location for each provider
                 providers = Providers.find({}, { coordinates: 1 }).map(function (provider) {
                     // Calculate distance
-                    /*var distance = Math.sqrt(
-                        Math.pow(position.coords.latitude  - provider.coordinates[0], 2)  +
-                        Math.pow(position.coords.longitude - provider.coordinates[1], 2) );*/
-                        
-                    // Calculate distance in meters taking into account mercator projection
                     var distance = google.maps.geometry.spherical.computeDistanceBetween(
                         new google.maps.LatLng(position.coords.latitude,
                             position.coords.longitude),
@@ -138,8 +150,9 @@ initialize = function () {
         // Open new infowindow
         map.infowindow.open(this.get('map'), this);
         
-        // Show results
-        Session.set('currentProvider', Providers.findOne({ _id: this.id }));
+        // Show results if the result has an ID
+        if (this.id)
+            Session.set('currentProvider', Providers.findOne({ _id: this.id }));
     },
     // Hide info label on mouseout
     hideLabel = function () {

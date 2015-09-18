@@ -128,7 +128,7 @@ var smoothScroll = function (event) {
     speed = Math.abs(posY - offset);
     
     // Smooth scroll to target
-    $('body').animate({ scrollTop: offset }, speed);
+    $('body').animate({ scrollTop: offset }, speed > 2000? 2000 : speed);
 };
 
 // Smooth scrolling
@@ -214,7 +214,9 @@ Template.work.onRendered(function () {
 
     //Fix the Work Section Sidebar (Cant target on production but can on local)
     $(window).scroll(function () {
-        var position = $('#work').offset();
+        var position = $('.work').offset();
+        // Sometimes position is undefined?!
+        if (!position) return;
         var threshold = position.top -93;
         var positionBtm = $('#community').offset();
         var btmThreshold = positionBtm.top;

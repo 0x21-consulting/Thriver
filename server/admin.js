@@ -127,9 +127,32 @@ Meteor.methods({
         content = '' + content;
         
         // Update section
-        Sections.update({ '_id': id}, {
+        Sections.update({ '_id': id }, {
             $set: {
                 content: content
+            }
+        });
+    },
+    
+    /**
+     * Remove an ID from list of children
+     * @method
+     *   @param {string} id    - ID of element to modify
+     *   @param {string} child - ID of child to remove from list
+     */
+    removeChild: function (id, child) {
+        // Check Authorization
+        if (!Meteor.userId() || !Meteor.user().admin)
+            throw new Meteor.Error('not-authorized');
+        
+        // Mutual Suspicion
+        id = '' + id;
+        child = '' + child;
+        
+        // Update list to remove child
+        Sections.update({ '_id': id }, {
+            $pull: {
+                tabs: child
             }
         });
     },
@@ -178,7 +201,8 @@ Meteor.methods({
         // Mutual Suspicion
         id = '' + id;
         order = parseInt(order);
-        
+        console.log('id ' + id);
+        console.log('order ' + order);
         // Update order
         Sections.update({ '_id': id }, {
             $set: { 'order': order }
