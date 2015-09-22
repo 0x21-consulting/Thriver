@@ -26,7 +26,16 @@
 
 <template name="tab">
     <li data-id="{{id}}" data-icon="{{icon id}}" 
-        data-parent="{{../../_id}}">{{name id}} <span class="caret fa"></span></li>
+        data-parent="{{../../_id}}{{../../id}}">{{name id}}
+        {{#if hasChildren}}
+            <span class="caret fa"></span>
+            <ul>
+                {{#each tabs}}
+                    {{> tab id=this}}
+                {{/each}}
+            </ul>
+        {{/if}}
+    </li>
 </template>
 
 <template name="article">

@@ -25,7 +25,7 @@ var changeTabs = function (event) {
         active[i].classList.remove('active');
     
     // Make article with same ID as tab active
-    parent.querySelector('[data-id="' + event.target.dataset.id + '"]').
+    parent.querySelector('[data-id="' + event.currentTarget.dataset.id + '"]').
         classList.add('active');
         
     // Make tab active, too
@@ -114,6 +114,25 @@ Template.tab.helpers({
         result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
         if (result)
             return result.icon;
+    },
+    hasChildren: function (id) {
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        
+        if (result && result.tabs && result.tabs.length)
+            return true;
+            
+        return false;
+    },
+    tabs: function (id) {
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        if (result)
+            return result.tabs;
     }
 });
 

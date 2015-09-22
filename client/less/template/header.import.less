@@ -9,7 +9,7 @@
         //z-index: 101;
     }
     //Header Image
-    .brand img.main-brand {
+    img.main-brand {
         height: 42px;
         padding-top: 24px;
         padding-left: 25px;
@@ -34,17 +34,18 @@
             margin: 0px;
         }
     }
-    .brand img.scrolled-brand{
+    .scrolled-brand {
         visibility: hidden;
         float: left;
+        margin: 9px 20px 0px 31px;
         height: 44px;
-        padding: 9px 20px 0px 31px;
         opacity: 0;
         .crossFade;
         @media (max-width: 920px){
             display: none;
         }
     }
+    .scrolled-brand img { height: 44px; }
 
     //Main Menu
     nav, ul, li{
@@ -146,7 +147,7 @@ main.content-wrapper {
                 display: none;
             }
         }
-        .brand img.scrolled-brand{
+        .scrolled-brand{
             visibility: visible;
             opacity: 1;
             @media (max-width: 920px){
@@ -178,7 +179,7 @@ main.content-wrapper {
                 opacity: 1;
                 text-align: left;
             }
-            .brand img.main-brand {
+            img.main-brand {
                 display: none;
             }
             nav a:hover{

@@ -10,16 +10,34 @@ document.addEventListener('keydown', function (event) {
 
 Template.body.onRendered(function () {
     // Header State Change (window.scroll)
+    var timeout = null;
     window.addEventListener('scroll', function (event) {
-        if (!document.body.classList.contains('scrolled'))
-            if (window.scrollY > 160) 
-                document.body.classList.add('scrolled');
+        // Why we're using timers here:
+        // The scroll event will fire for every pixel (or browser/OS-specific unit)
+        // scrolled, causing major performance issues, especially when interacting
+        // with the DOM as we do here by adding and removing classes.
+        // 
+        // Instead, we use timeouts to wait for a scroll to complete before executing
+        // CPU-intensive code.  For each time the event fires, the timeout is cleared,
+        // essentially causing the code to wait until the event is fired for its
+        // last time.
         
-        if (document.body.classList.contains('scrolled'))
-            if (window.scrollY < 160) {
+        // Clear the timeout
+        clearTimeout(timeout);
+        
+        // Set a timeout to add the class after one second
+        timeout = setTimeout(function () {
+            var nav;
+            
+            if (window.scrollY > 160)
+                document.body.classList.add('scrolled');
+            else {
                 document.body.classList.remove('scrolled');
-                document.querySelector('header nav').classList.remove('active');
+                nav = document.querySelector('header nav');
+                if (nav instanceof Element)
+                    nav.classList.remove('active');
             }
+        }, 100);
     },false);
 
     // Menu Toggle Click
@@ -128,7 +146,7 @@ var smoothScroll = function (event) {
     speed = Math.abs(posY - offset);
     
     // Smooth scroll to target
-    $('body').animate({ scrollTop: offset }, speed > 2000? 2000 : speed);
+    $('body').animate({ scrollTop: offset }, speed > 3000? 3000 : speed);
 };
 
 // Smooth scrolling
