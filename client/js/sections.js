@@ -16,7 +16,10 @@ Site      = new Mongo.Collection('site');
 
 // Helper for changing tabs
 var changeTabs = function (event) {
-    var parent = event.delegateTarget.parentElement.parentElement,
+    event.stopPropagation();
+    
+    var parent = document.querySelector('section.work.tabs'),
+                 //event.delegateTarget.parentElement.parentElement,
         active = parent.querySelectorAll('.active'),
         i = 0, j = active.length;
     
@@ -25,8 +28,8 @@ var changeTabs = function (event) {
         active[i].classList.remove('active');
     
     // Make article with same ID as tab active
-    parent.querySelector('[data-id="' + event.currentTarget.dataset.id + '"]').
-        classList.add('active');
+    parent.querySelector('article[data-id="' + event.currentTarget.dataset.id 
+        + '"]').classList.add('active');
         
     // Make tab active, too
     event.target.classList.add('active');
@@ -82,7 +85,17 @@ Template.work.helpers({
         
         if (result)
             return result.template;
-    }
+    },
+    subtabs: function (id) {
+        var result;
+        id = id || this.id;
+        
+        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        
+        if (result)
+            return result.tabs;
+    },
+    test: function () { console.debug(this); }
 });
 // Tabs Top helper
 Template.tabsTop.helpers({

@@ -11,6 +11,16 @@
                         {{> Template.dynamic template=this data=../that }}
                     {{/with}}
                 {{/with}}
+                <!-- Now for any articles children articles -->
+                {{#with subtabs this}}
+                    {{#each this}}
+                        {{#with that=this}}
+                            {{#with template that}}
+                                {{> Template.dynamic template=this data=../that }}
+                            {{/with}}
+                        {{/with}}
+                    {{/each}}
+                {{/with}}
             {{/each}}
         </main>
         <menu class="tabs">
