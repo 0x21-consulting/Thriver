@@ -1,37 +1,39 @@
 // Section content editing
 // Keep ID in scope
-var edit = function (id) {
+var edit = function (id, textarea) {
     return function (event) {
         event.stopPropagation();
         event.preventDefault();
         
-        var content = toMarkdown(this.innerHTML.
+        var parent = this.parentElement,
+            content = toMarkdown(textarea.value.//innerHTML.
             replace(/\n/gm, '<br>').                    // preserve new lines
             replace(/<(\/)?(div|span).*?>/gmi,'<$1p>'). // toss div and span elements
             replace(/<script.+?<\/script>/gmi, ''));    // no scripts!
-        
+        console.debug(textarea.value);
+        console.debug(content);
         // If the content is different than prior, update section
-        if (this.dataset.content !== content) {
+        if (parent.dataset.content !== content) {
             console.info('Content is different.');
             
             // Update content in db
             Meteor.call('updateSectionContent', id, content);
             
             // Meteor is not reactive enough grr
-            this.dataset.content = content;
+            parent.dataset.content = content;
         }
         
         // Restore element
-        var text = marked(this.dataset.content);
-        this.innerHTML = text;
+        var text = marked(parent.dataset.content);
+        parent.innerHTML = text;
         
         // Should no longer be editable
-        this.contentEditable = false;
-        this.style.whiteSpace = 'inherit';
+        //this.contentEditable = false;
+        //this.style.whiteSpace = 'inherit';
         
         // removeEventListener doesn't work for some reason,
         // so just replace the element with its clone
-        this.parentElement.replaceChild(this.cloneNode(true), this);
+        parent.parentElement.replaceChild(parent.cloneNode(true), parent);
     };
 },
 
@@ -65,9 +67,31 @@ Template.sectionAdmin.events({
         var parent = event.delegateTarget,
             that   = parent.querySelector(':scope > .content'),
             those  = parent.querySelectorAll(':scope menu.tabs li'),
-            i = 0, j = those.length;
+            i = 0, j = those.length,
+            // New elements
+            textarea = document.createElement('textarea'),
+            save = document.createElement('button');
         
+        // Use a textfield method
         if (that) {
+            // Save button attributes
+            save.textContent = 'Save';
+            save.addEventListener('click', edit(parent.dataset.id, textarea) );
+            
+            // Text field attributes
+            textarea.textContent = that.dataset.content;
+            
+            // Display stuff
+            that.innerHTML = '';
+            that.appendChild(textarea);
+            that.appendChild(save);
+            
+            // Focus textfield
+            textarea.focus();            
+        }
+        
+        // Traditional content-editable method
+        /*if (that) {
             // Main content section
             that.addEventListener('blur', edit(parent.dataset.id) );
             
@@ -93,7 +117,7 @@ Template.sectionAdmin.events({
             
             // Bind edit handler
             that.addEventListener('blur', editTab(that.dataset.id) );
-        }
+        }*/
     },
     // Add or modify section name
     'change input.section-name': function (event) {

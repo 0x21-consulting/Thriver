@@ -105,6 +105,11 @@ nav.slider-nav {
 	left:0px;
 	margin:1px;
 	padding: 100px 40px;
+    
+    // This next line causes browsers to draw element in new paint layer,
+    // thereby improving scroll performance
+    transform: translateX(0);
+    
 	figure{
 		margin:0px;
 		display: inline-block;
