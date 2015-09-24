@@ -162,9 +162,9 @@ initialize = function () {
     
     // Create maps API script
     script = document.createElement('script');
-    /*script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-        '&signed_in=true&libraries=geometry&callback=initializeMap';
-    document.body.appendChild(script);*/
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+        '&libraries=geometry&callback=initializeMap';
+    document.body.appendChild(script);
     
     // Maps API will look for initialize script in global scope
     window.initializeMap = initialize;
