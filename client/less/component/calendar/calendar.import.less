@@ -8,9 +8,10 @@ section.th {
     background: #fff;
     position: relative;
     visibility: visible;
-    height: 750px;
+    height: 1000px;
     overflow: hidden;
     background-color: #f2f2f2;
+    //overflow-y: scroll;
     .easeInOutAll;
     left: 0px;
     width: 100%;
@@ -63,14 +64,16 @@ section.th {
         color: #424646;
         padding: 23px 0px;
         position: absolute;
-        margin-top: -117px;
+        margin-top: -94px;
         right: 0px;
         width: 60%;
+        padding: 0px;
+        z-index: 0;
         a{
             cursor: pointer;
             font-size: 20px;
             color: #fff;
-            padding: 20px;
+            padding: 20px 20px 21px 20px;
             background-color: #aeaeae;
             &:hover{
                 color: darken(@blueAsh, 5%);
@@ -109,6 +112,9 @@ section.th {
         text-transform: none;
         margin-bottom: 30px;
         display: inline-block;
+        z-index: 9;
+        background-color: transparent !important; //Have to find where this is being declared. This section got a little wonky.
+        pointer-events: none;
     }
     menu{
         display: inline;
@@ -210,7 +216,7 @@ section.th {
 //For hide list view
 span.show-list {
     height: 64px;
-    width: 64px;
+    width: 61px;
     display: block;
     color: #fff;
     line-height: 60px;
@@ -246,5 +252,56 @@ body.calendar-list-hide{
             width: 100%;
             .easeInOutAll;
         }
+    }
+}
+
+#calendar-list, .calendar-view, #calendar header{
+    .easeInOutAll;
+}
+
+#calendar h3.registration-headline{
+    background-color: @teal !important;
+    text-indent: 20px;
+}
+
+.carousel.events a.event-close {
+    z-index: 9 !important;
+    padding: 20px 22px 20px 25px !important;
+}
+
+#calendar button.register-for-event {
+    background-color: @melon;
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width:767px){
+    section#calendar-list, #calendar {
+        width: 100%;
+        height: auto;
+    }
+    .calendar-object {
+        display: none;
+    }
+    #calendar .calendar-view{
+        display: none;
+    }
+    .community.tabs h4.section-title{
+        width: 100%;
+    }
+    .community.tabs ul{
+        width: 100%;
+    }
+    .community.tabs li {
+        padding: 0px !important;
+        line-height: 38px !important;
+        width: 100% !important;
+    }
+    #calendar-list li .event-meta h4 {
+        line-height: 12px;
+        padding-top: 5px;
     }
 }

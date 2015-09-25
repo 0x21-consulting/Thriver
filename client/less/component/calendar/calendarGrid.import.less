@@ -9,6 +9,21 @@
         .th span{
             border-right: 2px solid lighten(@melon, 7%);
             margin: 0px;
+            @media (max-width:1300px){
+                height: 63px;
+                //position: relative;
+                span{
+                    visibility: hidden;
+                    display: block;
+                    position: absolute;
+                    margin-left: 2.3%;
+                    line-height: 63px;
+                    &:first-letter{
+                        visibility: visible;
+                        color: #fff;
+                    }
+                }
+            }
         }
     }
     h3{
@@ -19,5 +34,40 @@
         padding: 16px;
         text-align: center;
         background-color: #e9e9e9;
+    }
+}
+
+.calendar-list-hide #calendar .calendar-view{
+    .calendar-object {
+        .th span{
+            @media (max-width:1300px){
+                height: auto;
+                //position: relative;
+                span{
+                    visibility: visible;
+                    display: initial;
+                    position: static;
+                    margin-left: 0;
+                    &:first-letter{
+                        visibility: visible;
+                        color: #fff;
+                    }
+                }
+            }
+            @media (max-width:875px){
+                height: 63px;
+                //position: relative;
+                span{
+                    visibility: hidden;
+                    display: block;
+                    position: absolute;
+                    margin-left: 2.3%;
+                    &:first-letter{
+                        visibility: visible;
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 }

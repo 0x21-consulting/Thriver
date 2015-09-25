@@ -6,8 +6,16 @@
         </h4>
             <ul>
                 {{#each events}}
-                    {{> eventListItem}}
+                    {{> eventListItemTemp}}
                 {{/each}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
+                {{> eventListItemTemp}}
             </ul>
     </section>
 </template>
@@ -16,7 +24,7 @@
 <template name="eventListItem">
     <li>
         <a class="details-ref" href="javascript:void(0)">
-            <img src="/lib/img/temp-event-featured.jpg" alt="" />
+            <!--<img src="/lib/img/temp-event-featured.jpg" alt="" />-->
             <div class="event-meta">
                 <h4>{{name}}</h4>
                 <time datetime="{{start}}">
@@ -26,4 +34,23 @@
             </div>
         </a>
     </li>
+</template>
+
+<!--To be deleted. Temp for Front-End Dev styles. However please note the displays on the event list will be formatted differently than those on the event detail.-->
+<template name="eventListItemTemp">
+    <li>
+        <a class="details-ref" href="javascript:void(0)">
+            <img src="/lib/img/temp-event-featured.jpg" alt="" />
+            <div class="event-meta">
+                <h4>Event Place Thingy</h4>
+                <time datetime="{{start}}">
+                    <span class="date"><b>21</b>Aug</span>
+                    <span class="time">August 21 @ 12pm</span></time>
+                <address>George's Hall, Milwaukee, WI 543313</address>
+            </div>
+        </a>
+    </li>
+
+
+
 </template>
