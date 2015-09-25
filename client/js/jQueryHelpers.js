@@ -33,7 +33,7 @@ Template.body.onRendered(function () {
         // Clear the timeout
         clearTimeout(timeout);
         
-        // Set a timeout to add the class after one second
+        // Set a timeout to add the class after one tenth of a second
         timeout = setTimeout(function () {
             var nav;
             
