@@ -163,7 +163,7 @@ initialize = function () {
     // Create maps API script
     script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-        '&signed_in=true&libraries=geometry&callback=initializeMap';
+        '&libraries=geometry&callback=initializeMap';
     document.body.appendChild(script);
     
     // Maps API will look for initialize script in global scope
@@ -254,6 +254,9 @@ Template.providers.events({
         if (!name) throw new Error('Invalid county');
         
         moveMap(name);
+        
+        // Close search field
+        closeMapSearch();
     },
     // Clicking ZIP Code GO button
     'click #zip + .submit': function (event) {
@@ -261,10 +264,17 @@ Template.providers.events({
         event.preventDefault();
         
         getCounty(event.currentTarget.parentElement.querySelector('#zip').value);
+        
+        // Close search field
+        closeMapSearch();
     },
     // Reaching 5 digits
     'keyup #zip': function (event) {
-        if (event.currentTarget.value.length === 5)
+        if (event.currentTarget.value.length === 5) {
             getCounty(event.currentTarget.value);
+            
+            // Close search field
+            closeMapSearch();
+        }
     }
 });

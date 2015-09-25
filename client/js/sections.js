@@ -21,6 +21,7 @@ var changeTabs = function (event) {
     var parent = document.querySelector('section.work.tabs'),
                  //event.delegateTarget.parentElement.parentElement,
         active = parent.querySelectorAll('.active'),
+        submenus = parent.querySelectorAll('ul.open'), submenu,
         i = 0, j = active.length;
     
     // Remove active class from all elements under parent
@@ -33,6 +34,16 @@ var changeTabs = function (event) {
         
     // Make tab active, too
     event.target.classList.add('active');
+    
+    // If there's a sub menu, close all other sub menus and then open this one
+    submenu = event.target.querySelector('ul');
+    if (submenu) {
+        // Close existing submenus
+        for (i = 0, j = submenus.length; i < j; ++i)
+            submenus[i].classList.remove('open');
+        // Open this one
+        submenu.classList.add('open');
+    }
 };
 
 // Dynamically generate anchor name
@@ -94,8 +105,7 @@ Template.work.helpers({
         
         if (result)
             return result.tabs;
-    },
-    test: function () { console.debug(this); }
+    }
 });
 // Tabs Top helper
 Template.tabsTop.helpers({

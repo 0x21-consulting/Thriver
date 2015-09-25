@@ -51,7 +51,7 @@ Template.body.onRendered(function () {
     // Carousel Function
     $('.carousel nav li').click(function(){
         var left = parseInt($('.carousel main').css('left'));
-        var carouselWidth = $('.carousel main').outerWidth();
+        var carouselWidth = $('.carousel main').width();
         if($(this).hasClass('prev')){
             if(left == 0 ){
                 // do nothing
@@ -62,9 +62,7 @@ Template.body.onRendered(function () {
             }
         }
         if($(this).hasClass('next')){
-            var end = $('section.carousel main article').length * $('.carousel main').outerWidth();
-            var endSplit = end / 2 - $('.carousel main').outerWidth();
-            if(left == - endSplit){
+            if(left == - $('section.carousel main article').length * carouselWidth + carouselWidth){
                 // do nothing
             }
             else { 

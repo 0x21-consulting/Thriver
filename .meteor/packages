@@ -4,13 +4,24 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 less
-nemo64:bootstrap
-bootstrap3:glyphicons
 accounts-ui
 accounts-password
 reactive-var
 twitter
 mrt:paypal
 gwendall:body-events
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
