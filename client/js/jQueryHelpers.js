@@ -1,3 +1,11 @@
+// Close Map Search
+// TODO: This is currently GLOBAL!
+closeMapSearch = function (event) {
+    var search = document.querySelector('.providers .provider-search');
+    if (search instanceof Element && search.classList.contains('active'))
+        search.classList.remove('active');
+};
+
 // Escape feature
 document.addEventListener('keydown', function (event) {
     if (event && event.keyCode && event.keyCode === 27)
@@ -230,11 +238,13 @@ Template.work.onRendered(function () {
         }
     });
 
-    //Fix the Work Section Sidebar (Cant target on production but can on local)
+    // Fix-position the Work Section Sidebar
     $(window).scroll(function () {
         var position = $('.work').offset();
+        
         // Sometimes position is undefined?!
         if (!position) return;
+        
         var threshold = position.top -93;
         var positionBtm = $('#community').offset();
         var btmThreshold = positionBtm.top;
@@ -249,6 +259,7 @@ Template.work.onRendered(function () {
 
 Template.who.onRendered(function () {
     //Slide Who We Are Section
+    // TODO: This really doesn't work... - Micah
     $(".slider-nav.prev").click(function(){
         $('main.slider-content').animate({scrollLeft: -500}, 800);
     }); 
@@ -260,7 +271,8 @@ Template.who.onRendered(function () {
 
 Template.providers.onRendered(function () {
     //Toggle provider search
-    $('.provider-search h2').click(function(){
+    $('.provider-search').click(function(event){
+        event.stopPropagation();
         if($('.providers .provider-search').hasClass('active')){
             $('.providers .provider-search').removeClass('active');
         } else{
@@ -269,8 +281,9 @@ Template.providers.onRendered(function () {
     });
 
     $(function() { //shorthand document.ready function
-        $('#search').on('submit', function(e) { //use on if jQuery 1.7+
+        /*$('#search').on('submit', function(e) { //use on if jQuery 1.7+
             $('.providers .provider-search').removeClass('active');
-        });
+        });*/
+        document.addEventListener('mouseup', closeMapSearch);
     });
 });
