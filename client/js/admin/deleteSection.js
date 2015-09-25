@@ -8,6 +8,10 @@ Template.sectionAdmin.events({
         if (!event || !event.delegateTarget || !event.delegateTarget.dataset)
             return;
         
+        // Are you sure??
+        if (!confirm('Are you sure you want to delete this section?'))
+            return;
+        
         var id     = event.delegateTarget.dataset.id,
             link   = document.querySelector('menu [data-id="' + id + '"]');
         

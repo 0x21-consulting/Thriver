@@ -1,5 +1,5 @@
 <!--Add active class to article of item clicked-->
-<template name="eventDetail">
+<template name="eventDetailStatic">
     <article class="event-detail">   
         <img class="featured" src="lib/img/temp-event-featured.jpg" alt="" />     
         <h4>Survivors &amp; Allies Task Force Meeting</h4>
@@ -32,7 +32,33 @@
     </article>
 </template>
 
-
+<template name="eventDetail">
+    <article class="event-detail">   
+        <img class="featured" src="lib/img/temp-event-featured.jpg" alt="" />     
+        <h4>{{name}}</h4>
+        <address>
+            {{location}}
+        </address>  
+        <time class="date" datetime="{{start}}">
+            {{start}}
+            {{end}}
+            <span class="date"><b>21</b> Aug</span>
+            <span class="time">4:00pm to 11:00pm</span>
+        </time>
+        <ul class="share">
+            <li><a href="#" title="" class="facebook fa">&#xf09a;</a></li>
+            <li><a href="#" title="" class="twitter fa">&#xf099;</a></li>
+            <li><a href="#" title="" class="calendar fa">&#xf271;</a></li>
+            <li><a href="#" title="" class="print fa">&#xf02f;</a></li>
+        </ul>
+        <div>
+            {{markdown description}}
+        </div>
+        <button class="register-for-event">
+            Register as tomJones@gmail.com
+        </button>
+    </article>
+</template>
 
 
 
