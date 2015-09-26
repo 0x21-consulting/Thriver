@@ -191,8 +191,8 @@ Template.work.onRendered(function () {
         }
     });
 
-    // Fix-position the Work Section Sidebar
-    $(window).scroll(function () {
+    // Fix-position the Work Section Sidebar (NEW VERSION)
+    /*$(window).scroll(function () {
         // Sometimes positionPage is undefined?!
         //if (!position) return;
 
@@ -216,6 +216,23 @@ Template.work.onRendered(function () {
         if( bottom_of_window < ( bottom_of_object )  ){
             $('.work .tabs').removeClass('bottom');
             $('.work .tabs').removeClass('fixed');
+        }
+    });*/
+
+    // Fix-position the Work Section Sidebar (Temp)
+    $(window).scroll(function () {
+        var position = $('.work').offset();
+        
+        // Sometimes position is undefined?!
+        if (!position) return;
+        
+        var threshold = position.top -93;
+        var positionBtm = $('#community').offset();
+        var btmThreshold = positionBtm.top;
+        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
+            $('.work .tabs').addClass('fixed');
+        } else{
+            $('.work .tabs').removeClass('fixed bottom');
         }
     });
 
