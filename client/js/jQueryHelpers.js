@@ -203,8 +203,8 @@ Template.work.onRendered(function () {
         var bottom_of_object = $('.work .tabs').position().top + $(this).outerHeight() / 2 + workPosThreshold + 146;
         var bottom_of_window = $(window).scrollTop() + $(window).height();
         var top_of_community = communityPosition.top;
-
-        if( bottom_of_window >= ( bottom_of_object ) ){
+        var scrollPosition = $(window).scrollTop();
+        if( bottom_of_window >= ( bottom_of_object ) && (scrollPosition >= workPosThreshold)  ){
             $('.work .tabs').addClass('fixed');
         } 
         if( bottom_of_window >= ( top_of_community )  ){
