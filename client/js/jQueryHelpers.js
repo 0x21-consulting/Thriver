@@ -217,19 +217,37 @@ Template.work.onRendered(function () {
 
     // Fix-position the Work Section Sidebar
     $(window).scroll(function () {
-        var position = $('.work').offset();
-        
-        // Sometimes position is undefined?!
-        if (!position) return;
-        
-        var threshold = position.top -93;
-        var positionBtm = $('#community').offset();
-        var btmThreshold = positionBtm.top;
-        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
+        // Sometimes positionPage is undefined?!
+        //if (!position) return;
+
+        //New Method
+        var workPosition = $('.work').offset();
+        var communityPosition = $('#community').offset();
+        var workPosThreshold = workPosition.top;
+        var bottom_of_object = $('.work .tabs').position().top + $(this).outerHeight() / 2 + workPosThreshold + 146;
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        var top_of_community = communityPosition.top;
+
+        if( bottom_of_window >= ( bottom_of_object ) ){
             $('.work .tabs').addClass('fixed');
-        } else{
-            $('.work .tabs').removeClass('fixed bottom');
+        } 
+        if( bottom_of_window >= ( top_of_community )  ){
+            $('.work .tabs').addClass('bottom');
+        } 
+        if( bottom_of_window < ( top_of_community )  ){
+            $('.work .tabs').removeClass('bottom');
         }
+        if( bottom_of_window < ( bottom_of_object )  ){
+            $('.work .tabs').removeClass('bottom');
+            $('.work .tabs').removeClass('fixed');
+        }
+    });
+
+    //Scroll To Top of Div
+    $('.work .tabs li').click(function (e) {
+        $('html, body').animate({
+            scrollTop: $('.work').offset().top - 94
+        }, 'fast');
     });
 });
 

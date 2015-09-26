@@ -4,7 +4,9 @@
     //padding-bottom:160px;
     border-top: 5px solid @teal;
     margin:0px;
-    min-height: 100vh;
+    //min-height: 100vh;
+    //Please remove height declaration below if I forgot. :P
+    height: 3000px;
     button.work-filter {
         position: absolute;
         right: 0px;
@@ -81,10 +83,13 @@
 
     //Menu 
     menu{
-        float: left;
+        position: absolute;
+        right: 0px;
         width: 30%;
         background: @gray50;
-        min-height: 100vh;
+        display: table;
+        z-index: 2;
+        //min-height: 100vh;
         &:before{
             content: '';
             width: 5px;
@@ -135,6 +140,8 @@
             text-transform: uppercase;
             //.easeInOutAll;
             font-weight: 300;
+            .easeInOutAll;
+            cursor: pointer;
             &:last-child{
                 border-bottom: 0px;
             }
@@ -145,13 +152,23 @@
                 top: -2px;
 
             }
-            // Show and hide submenus
-            // TODO: Animate these?
-            ul { display: none; }
-            ul.open { display: block; }
+            ul { 
+                display: block;
+                max-height: 0px;
+                height: 0px;
+                overflow: hidden;
+                padding: 0px;
+                .easeInOutAll1000;
+            }
+            ul.open { 
+                max-height: 9999px;
+                height: auto;
+            }
 
         }
         li.active{
+            max-height: 9999px;
+            height: auto;
             span.caret:before{
                 content:"\f0d7";
             }
@@ -259,7 +276,10 @@
     menu.fixed{
         position: fixed;
         right: 0px;
-        top: 93px;
+        bottom: 0px;
+    }
+    menu.fixed.bottom{
+        position: absolute;
     }
 }
 
@@ -275,3 +295,18 @@
     }
 }
 
+
+section#work:after {
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    background-color: #222;
+    right: -5px;
+    z-index: 0;
+    border-left: 5px solid darken(@teal, 5%);
+    border-top: 5px solid darken(@teal, 5%);
+    @media (max-width:767px){
+        width: 100%;
+    }
+}
