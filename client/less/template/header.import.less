@@ -9,15 +9,19 @@
         //z-index: 101;
     }
     //Header Image
-    img.main-brand {
-        height: 42px;
+    span.brand {
+        height: 52px;
         padding-top: 24px;
         padding-left: 25px;
         display: block;
         width: auto;
         position: absolute;
         left: 16px;
-        top: 57px;
+        top: 50px;
+        img{
+            max-height: 100%;
+            max-width: 100%;
+        }
         @media (max-width: 920px){
             position: static;
             text-align: center;
@@ -32,6 +36,13 @@
             right: 0px;
             position: fixed;
             margin: 0px;
+            img {
+                max-height: 25px;
+                width: auto;
+                position: absolute;
+                left: 1px;
+                top: -3px;
+            }
         }
     }
     .scrolled-brand {
@@ -137,9 +148,22 @@ main.content-wrapper {
 }
 
 
+header.header{
+    //.easeInOutAll;
+}
+
 //Header Scrolled
 @media (min-width:768px){
-    body.scrolled{
+    body.scrolling{
+        header.header{
+            position: relative;
+            left: 700px;
+        }
+    }
+}
+
+@media (min-width:768px){
+    body.scrolled.scrolling{
         li.brand-small{
             left: 10px;
             .brandHeadlineReveal;
@@ -158,9 +182,11 @@ main.content-wrapper {
         header.header {
             position: fixed;
             top: 30px;
+            left:0px;
             height: 60px;
             background-color: #f6f7ee;
             border-bottom: 5px solid #bbb;
+            .easeInOutAll;
             nav{
                 float: left;
                 padding-left: 30px;
@@ -183,6 +209,9 @@ main.content-wrapper {
                 display: none;
             }
             nav a:hover{
+                color: @teal;
+            }
+            nav li.active a{
                 color: @teal;
             }
         }

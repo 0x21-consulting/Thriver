@@ -37,13 +37,16 @@ Template.body.onRendered(function () {
         timeout = setTimeout(function () {
             var nav;
             
-            if (window.scrollY > 160)
+            if (window.scrollY > 160){
+                document.body.classList.add('scrolling');
                 document.body.classList.add('scrolled');
-            else {
+            } else {
                 document.body.classList.remove('scrolled');
+                document.body.classList.remove('scrolling');
                 nav = document.querySelector('header nav');
-                if (nav instanceof Element)
+                if (nav instanceof Element){
                     nav.classList.remove('active');
+                }
             }
         }, 100);
     },false);
@@ -102,34 +105,6 @@ Template.body.onRendered(function () {
            $('body').removeClass('open-nav');
         }
      });
-	
-    //Illuminate Current Nav Item (Unable to target)
-    /*$(document).ready(function(){
-        var section1Height = $('#work').height();
-        var section2Height = $('#community').height();
-        var section3Height = $('#who-we-are').height();
-        var section4Height = $('#providers').height();
-        var section5Height = $('#contact').height();
-    
-        $(window).scroll(function() {
-            var winTop = $(window).scrollTop();
-            if(winTop >= section1Height && winTop <= section2Height){
-                $('a[href="#work"]').addClass("current").not().removeClass("current");
-            } 
-            else if(winTop >= section2Height && winTop <= section3Height){
-                $('a[href="#community"]').addClass("current").not().removeClass("current");
-            } 
-            else if(winTop >= section3Height && winTop <= section4Height){
-                $('a[href="#who-we-are"]').addClass("current").not().removeClass("current");
-            } 
-            else if(winTop >= section4Height && winTop <= section5Height){
-                $('a[href="#providers"]').addClass("current").not().removeClass("current");
-            } 
-            else if(winTop >= section5Height){
-                $('a[href="#contact"]').addClass("current").not().removeClass("current");
-            }
-        });
-    });*/
     
 });
 
