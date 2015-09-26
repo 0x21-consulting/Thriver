@@ -270,15 +270,20 @@ Template.work.onRendered(function () {
 
 Template.who.onRendered(function () {
     //Slide Who We Are Section
-    // TODO: This really doesn't work... - Micah
-    $(".slider-nav.prev").click(function(){
-        $('main.slider-content').animate({scrollLeft: -500}, 800);
-    }); 
-    $(".slider-nav.next").click(function(){
-        $('main.slider-content').animate({scrollLeft: 500}, 800);
-    }); 
-}); 
+    $('.slider-nav.prev').click(function () {
+        var leftPos = $('main.slider-content').scrollLeft();   
+        $("main.slider-content").animate({
+            scrollLeft: leftPos - 768
+        }, 800);
+    });
 
+    $('.slider-nav.next').click(function () {
+        var leftPos = $('main.slider-content').scrollLeft();
+        $("main.slider-content").animate({
+            scrollLeft: leftPos + 768
+        }, 800);
+    });
+});
 
 
 
