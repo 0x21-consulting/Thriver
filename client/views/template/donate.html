@@ -1,7 +1,9 @@
 <template name="donate">
     <section class="donate-object">
         <div class="donate-inner"> <!-- what's the point of this element?? -->
-            <h2><span class="fa">&#xf004;</span> Donate</h2>
+            <!--{{> donateSuccess}}
+            {{> donateFailure}}-->
+            <h2><span class="fa">&#xf004;</span> Donate to WCASA</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
@@ -9,7 +11,7 @@
                 consequat.
             </p>
             <form>
-                <h3>Amount</h3>
+                <h3>Donation Amount</h3>
                 <label><input type="radio" name="amount" value="25" />$25</label>
                 <label><input type="radio" name="amount" value="50" />$50</label>
                 <label><input type="radio" name="amount" value="100" checked />$100</label>
@@ -18,12 +20,12 @@
                     Custom: $<input type="number" name="amount" min="0" value="75" />
                 </label>
                 <h3>Payment Details</h3>
-                <label>Name on Card <input name="name" value="{{name}}" required /></label>
-                <label>Credit Card Number 
+                <label class="full">Name on Card <input name="name" value="{{name}}" required /></label>
+                <label class="full">Credit Card Number 
                     <input type="number" name="number" required pattern="\d{12,19}" />
                 </label><span class="cc-pic"></span>
                 <input type="hidden" name="type" value="mastercard" />
-                <label>Expiration 
+                <label class="full">Expiration 
                     <select name="month">
                         <option value="01">January</option>
                         <option value="02">February</option>
@@ -44,11 +46,35 @@
                         {{/each}}
                     </select>
                 </label>
-                <label>CVV2 Number <input type="number" name="cvv2" min="0" required 
+                <label class="full">CVV2 Number <input type="number" name="cvv2" min="0" required 
                     pattern="\d{3,4}" /></label>
-                <button type="submit">Donate</button>
+                <button type="submit" class="button-melon">Donate</button>
             </form>
-            <button class="close-donate fa">&#xf00d;</button>
+            <!--<button class="close-donate fa">&#xf00d;</button>-->
         </div>
     </section>
+</template>
+
+<template name="donateSuccess">
+    <div class="donate-success">
+        <h2><span class="fa">&#xf004;</span> Thank you for your donation!</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+            consequat.
+        </p>
+    </div>
+</template>
+
+<template name="donateFailure">
+    <div class="donate-failure">
+        <h2><span class="fa">&#xf004;</span> We're sorry, the donation was unsuccessful.</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+            consequat.
+        </p>
+    </div>
 </template>

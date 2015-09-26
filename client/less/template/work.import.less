@@ -4,9 +4,7 @@
     //padding-bottom:160px;
     border-top: 5px solid @teal;
     margin:0px;
-    //min-height: 100vh;
-    //Please remove height declaration below if I forgot. :P
-    height: 3000px;
+    min-height: 1000px;
     button.work-filter {
         position: absolute;
         right: 0px;
@@ -301,11 +299,15 @@ section#work:after {
     position: absolute;
     width: 30%;
     height: 100%;
+    min-height: 3000px;
     background-color: #222;
     right: -5px;
     z-index: 0;
     border-left: 5px solid darken(@teal, 5%);
     border-top: 5px solid darken(@teal, 5%);
+    @media (max-width:960px){
+       width: 35%;
+    }
     @media (max-width:767px){
         width: 100%;
     }

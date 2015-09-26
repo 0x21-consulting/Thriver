@@ -36,17 +36,30 @@ Template.body.onRendered(function () {
         // Set a timeout to add the class after one tenth of a second
         timeout = setTimeout(function () {
             var nav;
-            
-            if (window.scrollY > 160){
-                document.body.classList.add('scrolling');
-                document.body.classList.add('scrolled');
-            } else {
-                document.body.classList.remove('scrolled');
-                document.body.classList.remove('scrolling');
-                nav = document.querySelector('header nav');
-                if (nav instanceof Element){
-                    nav.classList.remove('active');
+            if ($('body').hasClass('donation-active')){
+                if (window.scrollY > 1060){
+                    document.body.classList.add('scrolling');
+                    document.body.classList.add('scrolled');
+                } else {
+                    document.body.classList.remove('scrolled');
+                    document.body.classList.remove('scrolling');
+                    nav = document.querySelector('header nav');
+                    if (nav instanceof Element){
+                        nav.classList.remove('active');
+                    }
                 }
+            } else{
+                if (window.scrollY > 160){
+                    document.body.classList.add('scrolling');
+                    document.body.classList.add('scrolled');
+                } else {
+                    document.body.classList.remove('scrolled');
+                    document.body.classList.remove('scrolling');
+                    nav = document.querySelector('header nav');
+                    if (nav instanceof Element){
+                        nav.classList.remove('active');
+                    }
+                }                
             }
         }, 100);
     },false);
@@ -185,9 +198,12 @@ Template.utilityNav.onRendered(function () {
             $('body').removeClass('donation-active');
         } else{
             $('body').addClass('donation-active');
+            $('html, body').animate({ scrollTop: 0 }, "slow");
         }
     });
+});
 
+Template.donate.onRendered(function () {
     $('.donate .close-donate').click(function(){
         if($('body').hasClass('donation-active')){
             $('body').removeClass('donation-active');
@@ -262,6 +278,8 @@ Template.who.onRendered(function () {
         $('main.slider-content').animate({scrollLeft: 500}, 800);
     }); 
 }); 
+
+
 
 
 Template.providers.onRendered(function () {
