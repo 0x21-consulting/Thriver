@@ -190,6 +190,11 @@ Template.work.onRendered(function () {
             //Do nothing. This is used to close the menu on mobile after a selection is made.
         }
     });
+    
+    // Click the first tab to cause it to open
+    var first = document.querySelector('.work .tabs ul > li:first-child');
+    if (first)
+        first.click();
 
     // Fix-position the Work Section Sidebar (NEW VERSION)
     /*$(window).scroll(function () {
@@ -231,8 +236,12 @@ Template.work.onRendered(function () {
         var btmThreshold = positionBtm.top;
         if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
             $('.work .tabs').addClass('fixed');
+            // TODO: This is a hack
+            ///document.querySelector('.work .tabs').style.top = '95px';
         } else{
             $('.work .tabs').removeClass('fixed bottom');
+            // TODO: This is a hack
+            //document.querySelector('.work .tabs').style.top = '0px';
         }
     });
 
