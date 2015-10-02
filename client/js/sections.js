@@ -5,13 +5,11 @@ Blaze._allowJavascriptUrls();
 // Subscriptions
 Meteor.subscribe('sections');
 Meteor.subscribe('people');
-Meteor.subscribe('providers');
 Meteor.subscribe('site');
 
 // Collections
 Sections  = new Mongo.Collection('sections');
 People    = new Mongo.Collection('people');
-Providers = new Mongo.Collection('providers');
 Site      = new Mongo.Collection('site');
 
 // Helper for changing tabs
@@ -239,33 +237,4 @@ Template.registerHelper('slider', function () {
         elemWidth   = this.offsetWidth;
         
     console.debug(this);
-});
-
-// Counties and other provider data
-Template.providers.helpers({
-    // All counties (for dropdown list)
-    // NOTE: We only want to display counties which have providers,
-    //       which is why we aren't using the counties collection here
-    counties: function () {
-        //return zipCodes.find({});
-        
-        // NOTE: Meteor's mongo driver still doesn't support
-        //   db.collection.distinct(), so we have to hack it
-        return _.chain(
-            Providers.find({}, { counties: 1 }).map(function (provider) {
-                return provider.counties;
-        })).
-        
-        // provider.counties is an array, so we have to flatten them all,
-        // then sort them alphabetically, then return distinct ones
-        flatten().sort().uniq().value();
-    },
-    // The current provider
-    currentProvider: function () {
-        return Session.get('currentProvider');
-    },
-    // Current provider's counties served
-    providerCounties: function () {
-        return this.counties.join(', ');
-    }
 });

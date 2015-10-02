@@ -1,11 +1,3 @@
-// Close Map Search
-// TODO: This is currently GLOBAL!
-closeMapSearch = function (event) {
-    var search = document.querySelector('.providers .provider-search');
-    if (search instanceof Element && search.classList.contains('active'))
-        search.classList.remove('active');
-};
-
 // Escape feature
 document.addEventListener('keydown', function (event) {
     if (event && event.keyCode && event.keyCode === 27)
@@ -270,28 +262,6 @@ Template.who.onRendered(function () {
         }, 800);
     });
 });
-
-
-
-Template.providers.onRendered(function () {
-    //Toggle provider search
-    $('.provider-search').click(function(event){
-        event.stopPropagation();
-        if($('.providers .provider-search').hasClass('active')){
-            $('.providers .provider-search').removeClass('active');
-        } else{
-            $('.providers .provider-search').addClass('active');
-        }
-    });
-
-    $(function() { //shorthand document.ready function
-        /*$('#search').on('submit', function(e) { //use on if jQuery 1.7+
-            $('.providers .provider-search').removeClass('active');
-        });*/
-        document.addEventListener('mouseup', closeMapSearch);
-    });
-});
-
 
 
 Template.community.onRendered(function () {
