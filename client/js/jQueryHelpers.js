@@ -245,25 +245,6 @@ Template.work.onRendered(function () {
     });
 });
 
-
-Template.who.onRendered(function () {
-    //Slide Who We Are Section
-    $('.slider-nav.prev').click(function () {
-        var leftPos = $('main.slider-content').scrollLeft();   
-        $("main.slider-content").animate({
-            scrollLeft: leftPos - 768
-        }, 800);
-    });
-
-    $('.slider-nav.next').click(function () {
-        var leftPos = $('main.slider-content').scrollLeft();
-        $("main.slider-content").animate({
-            scrollLeft: leftPos + 768
-        }, 800);
-    });
-});
-
-
 Template.community.onRendered(function () {
   // Carousel Function
     $('.carousel nav li').click(function(){

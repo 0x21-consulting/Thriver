@@ -4,12 +4,10 @@ Blaze._allowJavascriptUrls();
 
 // Subscriptions
 Meteor.subscribe('sections');
-Meteor.subscribe('people');
 Meteor.subscribe('site');
 
 // Collections
 Sections  = new Mongo.Collection('sections');
-People    = new Mongo.Collection('people');
 Site      = new Mongo.Collection('site');
 
 // Helper for changing tabs
@@ -214,27 +212,4 @@ Template.registerHelper('markdown', function (text, options) {
     
     // Remove <p> tags
     return text.trim().replace(/^<p>/i,'').replace(/<\/p>$/i,'');
-});
-
-// People
-Template.who.helpers({
-    staff: function () {
-        return People.find({ boardMember: false }, { sort: { name: 1 }});
-    },
-    board: function () {
-        return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
-    }
-});
-Template.person.helpers({
-    avatar: function () {
-        return Site.findOne({}, { avatar: 1 });
-    }
-});
-
-// Sliders
-Template.registerHelper('slider', function () {
-    var windowWidth = document.body.offsetWidth,
-        elemWidth   = this.offsetWidth;
-        
-    console.debug(this);
 });
