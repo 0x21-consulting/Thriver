@@ -74,3 +74,48 @@ Template.eventListItem.helpers({
         console.debug(start, end);
     }
 });
+
+// From jQuery Helpers file
+// TODO: Rewrite this
+Template.community.onRendered(function () {
+    // Carousel Function
+    $('.carousel nav li').click(function(){
+        var left = parseInt($('.carousel main').css('left'));
+        var carouselWidth = $('.carousel main').outerWidth();
+        if($(this).hasClass('prev')){
+            if(left == 0 ){
+                // do nothing
+            }
+            else { 
+                var prevLeft = left + carouselWidth;
+                $('section.carousel main').css({left: prevLeft});
+            }
+        }
+        if($(this).hasClass('next')){
+            var end = $('section.carousel main article').length * $('.carousel main').outerWidth();
+            var endSplit = end / 2 - $('.carousel main').outerWidth();
+            if(left == - endSplit){
+                // do nothing
+            }
+            else { 
+                var nextLeft = left - carouselWidth;
+                $('section.carousel main').css({left: nextLeft});
+            }
+        }
+    });
+    $('.details-ref').click(function(){
+        $('section.carousel').addClass('active');
+     });
+    $('.close-carousel').click(function(){
+        $('section.carousel').removeClass('active');
+     });
+
+
+    //Toggle visibility of the List View in Events
+    $('h4.list-view').click(function(){
+        $('body').addClass('calendar-list-hide');
+    });
+    $('span.show-list').click(function(){
+        $('body').removeClass('calendar-list-hide');
+    });
+});

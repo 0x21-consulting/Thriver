@@ -50,20 +50,6 @@ Template.mainNav.helpers({
     }
 }); 
 
-// Tabs Top helper
-// TODO: Modularize this. Where does it go? What uses it?
-Template.tabsTop.helpers({
-    template: function (id) {
-        var result;
-        id = id || this.id;
-        
-        result = Sections.findOne({ '_id': id }, { '_id': 0, template: 1 });
-        
-        if (result)
-            return result.template;
-    }
-});
-
 // Markdown helper
 Template.registerHelper('markdown', function (text, options) {
     // Ignore if no text

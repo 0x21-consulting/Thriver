@@ -1,3 +1,12 @@
+<template name="community">
+    <section class="community tabs tabs-bottom" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        {{> tabsTop}}
+    </section>
+</template>
+
 <template name="tabsTop">
     <h4 class="section-title">Community Involvement</h4>
     <menu class="tabs">
