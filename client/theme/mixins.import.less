@@ -1,0 +1,47 @@
+.transition (@transitionProperty, @duration, @ease, @delay) {
+    -webkit-transition: @transitionProperty @duration @ease @delay;
+    -moz-transition:    @transitionProperty @duration @ease @delay;
+    -ms-transition:     @transitionProperty @duration @ease @delay;
+    -o-transition:      @transitionProperty @duration @ease @delay;
+}
+
+
+/*.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
+    -webkit-animation: @name @duration @delay @ease;
+    -moz-animation:    @name @duration @delay @ease;
+    -ms-animation:     @name @duration @delay @ease;
+}*/
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
+
+.noanimate {
+    -webkit-animation-duration: none !important;
+            animation-duration: none !important;
+    -webkit-animation-fill-mode: none !important;
+            animation-fill-mode: none !important;
+}
+
+
+
+.translateIn{
+    -ms-transform: translate(0px,0px); /* IE 9 */
+    -webkit-transform: translate(0px,0px); /* Safari */
+    transform: translate(0px,0px);
+}
+.translateLeftOut{
+    -ms-transform: translate(-100%,0px); /* IE 9 */
+    -webkit-transform: translate(-100%,0px); /* Safari */
+    transform: translate(-100%,0px);
+}
+
+.translateTopOut{
+    -ms-transform: translate(0px, -100%); /* IE 9 */
+    -webkit-transform: translate(0px, -100%); /* Safari */
+    transform: translate(0px, -100%,0px);   
+}

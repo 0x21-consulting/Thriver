@@ -1,0 +1,528 @@
+//Main Site Header Styles
+
+//Master Styles
+header.main-header{
+    background-color: @white;
+    font-weight: 700;
+    position: fixed;
+    z-index: 11;
+    padding-top: 32px;
+    .transition(all,400ms,ease-out,0ms);
+    @media @mobile{
+        border-top: 32px solid @white;
+        background-color: @navy;
+        padding: 0px;
+        text-indent: 12px;
+        overflow-x: initial;
+        .fa{
+            display: none;
+        }
+    }
+    a:focus{
+        outline: none;
+    }
+    aside.utility{
+        background-color: @gray;
+        height: 32px;
+        line-height: 32px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 9;
+        @media @mobile{
+            height: auto;
+            background-color: transparent;
+            position: relative;
+        }
+        li a{
+            font-size: 16px;
+            height: 32px;
+            @media @mobile{
+                display: block;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: @gray;
+                font-size: 12px;
+                margin: 6px 12px 3px 12px;
+                padding: 0px;
+                letter-spacing: 1px;
+                background-color: transparent !important; //override all specific bg-color styles
+                &:active, &:focus{
+                    color:@teal;
+                }
+            }
+            a{
+                height: initial;
+                background-color: initial;
+            }
+        }
+    }
+    nav.main-nav{
+        text-align: center;
+        padding: 233px 0px 30px 0px;
+        position: relative;
+        z-index: 1;
+        @media @mobile{
+            padding: 0px;
+            position: static;
+        }
+        .transition(all,400ms,ease-out,0ms);
+        li{
+            margin-bottom: 42px;
+            @media @mobile{
+                margin-bottom: 0px;
+            }
+            a{
+                font-size: 18px;
+                letter-spacing: 2px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: @navy;
+                padding-bottom: 18px;
+                border-bottom: 3px solid @gray;
+                margin: 0px 36px 0px 36px;
+                @media @1600{
+                    margin: 0px 24px 0px 24px;
+                }
+                @media @1450{
+                    margin: 0px 12px 0px 12px;
+                }
+                @media @1300{
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                }
+                &:hover, &:focus{
+                    color: @teal;
+                    border-color:darken(@gray, 10%);
+                }
+                &:active{
+                    color:darken(@teal, 15%);
+                    border-color:darken(@teal, 15%);
+                }
+                @media @mobile{
+                    padding: 0px;
+                    border-color: transparent;
+                    font-size: 12px;
+                    margin: 6px 12px 3px 12px;
+                    color: @gray;
+                    &:hover{
+                        color: @gray;
+                        border-color:transparent;
+                    }
+                    &:active, &:focus{
+                        color:@teal;
+                        border-color:transparent;
+                    }
+                }
+            }
+        }
+    }
+    ul{
+        li{
+            //fallback for pre inline-block support
+            display:inline;
+            display: inline-block;
+            @media @mobile {
+                display: block;
+                text-align: left;
+            }
+            &.brand{
+                display: block;
+                position: absolute;
+                left: 50%;
+                margin-left: -200px;
+                top: 58px;
+                width: 400px;
+                text-indent: 0px;
+                //.transition(all,400ms,ease-out,0ms);
+                @media @mobile{
+                    top: 2px;
+                    transform: translateY(-30px);
+                    width: 85px;
+                    left: 12px;
+                    margin-left: 0px;
+                    a{
+                        padding: 0px;
+                        margin: 0px;
+                    }
+                }
+            a{
+                border: none;
+                display: block;
+                padding: 0px;
+                margin: 0px;
+                &:active, &:hover, &:focus{
+                    border: none;
+                }
+                img{
+                    //width: 400px;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+            }
+            &.social, &.get-help, &.donate, &.twitter{
+                float: right;
+                @media @mobile{
+                    float: none;
+                }
+            }
+            &.social{
+                @media @mobile{
+                    position: absolute;
+                    display: block;
+                    top: -10px;
+                    right: 0px;
+                }
+            }
+            a{
+                display: block;
+                padding: 0px 18px;
+                color: @white;
+                .transition(font,400ms,ease-out,0ms);
+                //Overrides Meteor default sign-in CSS
+                *#login-sign-in-link{
+                    padding: 0px;
+                    @media @mobile{
+                        margin: 0px;
+                        padding: 0px;
+                        text-indent: 0px;
+                    }
+                }
+            }
+            &.sign-in a, &.donate a{
+                background-color: @teal;
+                &:hover, &:focus{
+                    background-color: darken(@teal, 2.5%);
+                }
+                &:active{
+                    background-color: darken(@teal, 5%);
+                }
+            }
+            &.sign-in{
+                float: left;
+                a{
+                    span{
+                        font-size: 12px;
+                        margin-left: 2px;
+                    }
+                }
+                @media @mobile{
+                    float: none;
+                }
+            }
+            &.sign-up{
+                float: left;
+                @media @mobile{
+                    float: none;
+                }
+                a{
+                    //background-color: @twitter;
+                    color:mix(@gray, @navy, 65%);
+                    span{
+                        font-size: 12px;
+                        margin-left: 2px;
+                    }
+                    &:hover, &:focus{
+                        color: darken(mix(@gray, @navy, 65%), 5%);
+                    }
+                    &:active{
+                        color: darken(mix(@gray, @navy, 65%), 10%);
+                    }
+                    @media @mobile{
+                        color: @gray;
+                        &:hover{
+                            color: @gray;
+                            border-color:transparent;
+                        }
+                        &:active, &:focus{
+                            color:@teal;
+                            border-color:transparent;
+                        }
+                    }
+                }
+            }
+            &.sign-up, &.sign-in{
+                &.active a{
+                    //color: red !important;
+                }
+            }
+            &.get-help a{
+                background-color: @orange;
+                &:hover, &:focus{
+                    background-color: darken(@orange, 5%);
+                }
+                &:active{
+                    background-color: darken(@orange, 10%);
+                }
+            }
+            &.twitter a{
+                //background-color: @twitter;
+                background-color:mix(@gray, @navy, 65%);
+                &:hover, &:focus{
+                    background-color: darken(mix(@gray, @navy, 65%), 5%);
+                }
+                &:active{
+                    background-color: darken(mix(@gray, @navy, 65%), 10%);
+                }
+            }
+            &.social{
+                @media @mobile{
+                    &:last-child{
+                        right: 35px;
+                    }
+                }
+                a{
+                    padding: 0px 12px 0px 0px;
+                    font-weight: 100;
+                    //color: darken(@gray, 15%);
+                    font-size: 20px;
+                    color:mix(@gray, @navy, 65%);
+                    &:hover, &:focus{
+                        color: darken(mix(@gray, @navy, 65%), 5%);
+                    }
+                    &:active{
+                        color: darken(mix(@gray, @navy, 65%), 10%);
+                    }
+                }
+            }
+        }
+    }
+    .notification-menu{
+        display: none;
+    }
+}
+
+
+
+//Fixed Header on Scroll Styles
+.fixed-header header.main-header, .fixed-header.return-header header.main-header{
+    border-bottom: 3px solid #ebf2f2;
+    /*-webkit-box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);
+    -moz-box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);
+    box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);*/
+    nav.main-nav{
+        padding: 0px;
+        ul{
+            @media @1100{
+                text-align: right;
+                li:last-child{
+                    padding-right: 6px;
+                    @media @mobile{
+                        padding-right: 0px;
+                    }
+                }
+                li:nth-child(2){
+                    padding-left: 106px;
+                }
+            }
+            @media @mobile{
+                li:nth-child(2){
+                    padding-left: 0px;
+                }
+            }
+        }
+        li{
+            margin-bottom: 0px;
+            a{
+                margin: 6px 24px 3px 24px;
+                padding: 0px;
+                border-color: transparent;
+                font-size: 14px;
+                @media @1100{
+                    font-size: 12px;
+                    margin: 6px 12px 3px 12px;
+                }
+            }
+        }
+        li.brand{
+            top: 40px;
+            .logoAnimateFixed;
+            transform: translateY(-30px);
+            width: 85px;
+            left: 12px;
+            margin-left: 0px;
+            a{
+                padding: 0px;
+                margin: 0px;
+            }
+            img{
+                //width: 85px;
+            }
+            @media @mobile{
+                top: 2px;
+            }
+        }
+    }
+}
+
+//Return Header when Scroll to Top Animations
+.return-header header.main-header{
+    nav.main-nav{
+        li.brand{
+            left: 50%;
+            margin-left: -200px;
+            top: 58px;
+            width: 400px;
+            .logoAnimateReturn;
+            @media @mobile{
+                top: 2px;
+                transform: translateY(-30px);
+                width: 85px;
+                left: 12px;
+                margin-left: 0px;
+            }
+        }  
+    }
+}
+
+
+//Override Meteor Login Styles
+#login-buttons a{
+    text-decoration: none;
+}
+
+
+
+//Menu Toggle
+.menu-toggle{
+    display: none;
+    @media @mobile{
+        display: block;
+    }
+    position: absolute;
+    top: -39px;
+    right: -8px;
+    z-index: 2;
+    width: 60px;
+    height: 45px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    -ms-transform: scale(0.36,0.36); /* IE 9 */
+    -webkit-transform: scale(0.36,0.36); /* Safari */
+    transform: scale(0.36,0.36);
+    &:focus span, &:active span{
+        background-color: @teal;
+    }
+    span {
+        display: block;
+        position: absolute;
+        height: 9px;
+        width: 50%;
+        background: @navy;
+        opacity: 1;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
+        -o-transition: .25s ease-in-out;
+        transition: .25s ease-in-out;
+        &:nth-child(even) {
+            left: 50%;
+            border-radius: 0 9px 9px 0;
+        }
+        &:nth-child(odd) {
+            left:0px;
+            border-radius: 9px 0 0 9px;
+        }
+        &:nth-child(1), &:nth-child(2) {
+            top: 0px;
+        }
+        &:nth-child(3), &:nth-child(4) {
+            top: 18px;
+        }
+        &:nth-child(5), &:nth-child(6) {
+            top: 36px;
+        }
+    }
+}
+
+
+.open-nav .menu-toggle{
+    span{
+        &:nth-child(1), &:nth-child(6) {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        &:nth-child(2), &:nth-child(5) {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        &:nth-child(1) {
+            left: 5px;
+            top: 7px;
+        }
+        &:nth-child(2) {
+            left: calc(50% - 5px);
+            top: 7px;
+        }
+        &:nth-child(3) {
+            left: -50%;
+            opacity: 0;
+        }
+        &:nth-child(4) {
+            left: 100%;
+            opacity: 0;
+        }
+        &:nth-child(5) {
+            left: 5px;
+            top: 29px;
+        }
+        &:nth-child(6) {
+            left: calc(50% - 5px);
+            top: 29px;
+        }
+    }
+}
+
+
+//Toggle active states of utility items
+
+
+header.main-header .fa.close{
+    position: absolute;
+    right: 12px;
+    top: 0px;
+    opacity: 0;
+}
+
+header.main-header li.twitter .fa.close, header.main-header li.donate .fa.close, header.main-header .get-help .fa.close{
+    right: initial;
+    left: 19px;
+    top: -1px;
+}
+
+header.main-header{
+    li.active.sign-up{
+        a, a:focus{
+            color: @teal;
+            //background-color:mix(@gray, @navy, 60%);
+            span{
+                .transition(opacity,200ms,ease,0ms);
+            }
+        }
+    }
+    li.active{
+        position: relative;
+        .fa.close{
+            opacity: 1;
+        }
+        .fa.up{
+            opacity: 0;
+        }
+    }
+}

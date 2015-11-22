@@ -1,0 +1,46 @@
+section.donate {
+    width: 656px;
+    max-width: 100%;
+    top: 32px;
+    height: 100%;
+    height: ~"calc(100vh - 32px)";
+    background-color:mix(@gray, @navy, 45%);
+    text-align: center;
+    .transition(all,400ms,ease-out,0ms);
+    h4{
+        border-color: mix(@gray, @navy, 35%);
+        margin-bottom: 20px;
+        padding-top: 28px;
+    }
+    h5{
+        color: lighten(@teal, 5%);
+        letter-spacing: 2px;
+        font-size: 18px;
+        line-height: 20px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 36px 0px 24px 0px;
+
+    }
+    p {
+        padding: 0px 92px;
+        color: @white;
+        font-size: 16px;
+        line-height: 23px;
+        font-weight: bold;
+        //text-align: left;
+    }
+    form{
+        padding: 0px 48px;
+        text-align: left;
+        input.custom-amt{
+            width: 74px;
+            display: inline-block;
+            margin: 0px 0px 0px 5px;
+        }
+        button.submit{
+            margin-top: 48px;
+        }
+    }
+}
+

@@ -1,0 +1,81 @@
+<template name="donate">
+    <section class="donate">
+        <!--{{> donateSuccess}}-->
+        <!--{{> donateFailure}}-->
+        {{> donateDefault}}
+        <a href="javascript:void(0)" class="close-sign-in">Close Tab</a>
+    </section>
+</template>
+
+<template name="donateDefault">
+    <h4><span class="fa">&#xf004;</span> Donate to WCASA</h4>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+        tempor incididunt ut labore et dolore magna aliqua. 
+    </p>
+    <form>
+        <h5>Donation Amount</h5>
+        <label><input type="radio" name="amount" value="25" />$25</label>
+        <label><input type="radio" name="amount" value="50" />$50</label>
+        <label><input type="radio" name="amount" value="100" checked />$100</label>
+        <label><input type="radio" name="amount" value="200" />$200</label>
+        <label><input type="radio" name="amount" value="custom" />
+            Custom: $<input class="custom-amt" type="number" name="amount" min="0" value="75" />
+        </label>
+        <h5>Payment Details</h5>
+        <input name="name" value="{{name}}" placeholder="Name on Card" required />
+        <input type="number" name="number" placeholder="Credit Card Number" required pattern="\d{12,19}" />
+        <span class="cc-pic"></span>
+        <input type="hidden" name="type" value="mastercard" />
+        <label class="full">Expiration 
+            <select name="month">
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <select name="year">
+                {{#each year}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </label>
+        <label class="full">CVV2 Number <input class="custom-amt" type="number" name="cvv2" min="0" required 
+            pattern="\d{3,4}" /></label>
+        <button type="submit" class="submit">Donate</button>
+    </form>
+</template>
+
+
+<template name="donateSuccess">
+    <div class="donate-success">
+        <h4><span class="fa">&#xf004;</span> Thank you for your donation!</h4>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+            consequat.
+        </p>
+    </div>
+</template>
+
+<template name="donateFailure">
+    <div class="donate-failure">
+        <h4><span class="fa">&#xf004;</span> We're sorry, the donation was unsuccessful.</h4>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+            consequat.
+        </p>
+    </div>
+</template>
+

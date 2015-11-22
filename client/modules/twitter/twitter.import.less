@@ -1,0 +1,26 @@
+section.twitter-feed {
+    width: 356px;
+    top: 32px;
+    height: 100%;
+    height: ~"calc(100vh - 32px)";
+    background-color:mix(@gray, @navy, 45%);
+    text-align: center;
+    .transition(all,400ms,ease-out,0ms);
+    h4{
+        border-color: mix(@gray, @navy, 35%);
+        margin-bottom: 20px;
+        padding-top: 28px;
+        a{
+            color: @gray;
+            &:hover{
+                color: @white;
+            }
+        }
+    }
+    section.twitter-element {
+        padding: 64px 32px;
+        margin: 12px 0px;
+        background-color:mix(@gray, @navy, 35%);
+    }
+}
+
