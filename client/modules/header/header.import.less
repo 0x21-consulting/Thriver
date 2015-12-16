@@ -162,7 +162,7 @@ header.main-header{
                 }
             }
             }
-            &.social, &.get-help, &.donate, &.twitter{
+            &.social, &.get-help, &.donate, &.twitter, &.news{
                 float: right;
                 @media @mobile{
                     float: none;
@@ -191,7 +191,7 @@ header.main-header{
                     }
                 }
             }
-            &.sign-in a, &.donate a{
+            &.login a, &.donate a, &.account-details a{
                 background-color: @teal;
                 &:hover, &:focus{
                     background-color: darken(@teal, 2.5%);
@@ -200,19 +200,72 @@ header.main-header{
                     background-color: darken(@teal, 5%);
                 }
             }
-            &.sign-in{
+            &.news a{
+                background-color: @navySat;
+                &:hover, &:focus{
+                    background-color: darken(@navySat, 2.5%);
+                }
+                &:active{
+                    background-color: darken(@navySat, 5%);
+                }               
+            }
+            &.notifications a{
+                padding: 0px 12px 0px 10px;
+                background-color: darken(@teal, 2.5%);
+                &:hover, &:focus{
+                    background-color: darken(@teal, 5%);
+                }
+                &:active{
+                    background-color: darken(@teal, 7.5%);
+                }
+            }
+            &.register a{
+                &:hover, &:focus{
+                    color: darken(@teal, 25%);
+                }
+                &:active{
+                    color: darken(@teal, 30%);
+                }
+            }
+            &.active, &.active a:focus, &.active a:hover, &.active a:active{
+                background-color: darken(@teal, 25%);
+            }
+            &.register.active a{
+                color: darken(@teal, 25%) !important;
+            }
+            &.register.active, &.register.active a{
+                &:hover, &:focus, &:active{
+                    background-color: transparent !important;
+                }
+                background-color: transparent !important;
+            }
+            &.login, &.account-details, &.notifications{
                 float: left;
+                position: relative;
                 a{
                     span{
-                        font-size: 12px;
-                        margin-left: 2px;
+                        font-size: 16px;
+                        &.unread-notifications {
+                            position: absolute;
+                            margin-left: 2px;
+                            width: 16px;
+                            height: 16px;
+                            color: @yellow;
+                            text-align: center;
+                            border-radius: 50%;
+                            line-height: 17px;
+                            top: 1px;
+                            right: 1px;
+                            font-size: 100%;
+                            pointer-events: none;
+                        }
                     }
                 }
                 @media @mobile{
                     float: none;
                 }
             }
-            &.sign-up{
+            &.register, &.logout{
                 float: left;
                 @media @mobile{
                     float: none;
@@ -243,7 +296,8 @@ header.main-header{
                     }
                 }
             }
-            &.sign-up, &.sign-in{
+            &.sign-up, &.sign-in, &.account-details{
+                position: relative;
                 &.active a{
                     //color: red !important;
                 }
@@ -267,7 +321,20 @@ header.main-header{
                     background-color: darken(mix(@gray, @navy, 65%), 10%);
                 }
             }
+            &.active, &.active a:focus, &.active a:hover, &.active a:active{
+                background-color: darken(@teal, 25%);
+            }
+            &.register.active a{
+                color: darken(@teal, 25%) !important;
+            }
+            &.register.active, &.register.active a{
+                &:hover, &:focus, &:active{
+                    background-color: transparent !important;
+                }
+                background-color: transparent !important;
+            }
             &.social{
+                background-color: transparent !important;
                 @media @mobile{
                     &:last-child{
                         right: 35px;
@@ -279,11 +346,26 @@ header.main-header{
                     //color: darken(@gray, 15%);
                     font-size: 20px;
                     color:mix(@gray, @navy, 65%);
+                    background-color: transparent !important;
                     &:hover, &:focus{
                         color: darken(mix(@gray, @navy, 65%), 5%);
+                        background-color: transparent !important;
                     }
                     &:active{
                         color: darken(mix(@gray, @navy, 65%), 10%);
+                        background-color: transparent !important;
+                    }
+                }
+            }
+            &.logout{
+                background-color: transparent !important;
+                a{
+                    background-color: transparent !important;
+                    &:hover{
+                        color: darken(mix(@gray, @navy, 65%), 5%) !important;
+                    }
+                    &:active{
+                        color: darken(@teal, 25%) !important;
                     }
                 }
             }
@@ -299,9 +381,6 @@ header.main-header{
 //Fixed Header on Scroll Styles
 .fixed-header header.main-header, .fixed-header.return-header header.main-header{
     border-bottom: 3px solid #ebf2f2;
-    /*-webkit-box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);
-    -moz-box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);
-    box-shadow: 0px 7px 10px -5px rgba(0,0,0,0.27);*/
     nav.main-nav{
         padding: 0px;
         ul{
@@ -357,7 +436,7 @@ header.main-header{
     }
 }
 
-//Return Header when Scroll to Top Animations
+//Return Header when Scroll to Top Animations. Not yet sure what this is doing.
 .return-header header.main-header{
     nav.main-nav{
         li.brand{
@@ -375,12 +454,6 @@ header.main-header{
             }
         }  
     }
-}
-
-
-//Override Meteor Login Styles
-#login-buttons a{
-    text-decoration: none;
 }
 
 
@@ -500,12 +573,14 @@ header.main-header .fa.close{
     opacity: 0;
 }
 
-header.main-header li.twitter .fa.close, header.main-header li.donate .fa.close, header.main-header .get-help .fa.close{
+header.main-header li.twitter .fa.close, header.main-header li.donate .fa.close, header.main-header .news .fa.close{
     right: initial;
     left: 19px;
     top: -1px;
 }
 
+
+//Toggles "X" display on utility items
 header.main-header{
     li.active.sign-up{
         a, a:focus{
@@ -526,3 +601,4 @@ header.main-header{
         }
     }
 }
+

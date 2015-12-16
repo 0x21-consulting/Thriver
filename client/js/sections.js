@@ -44,7 +44,7 @@ Template.body.helpers({
 });
 
 // Pass to header template for menu
-Template.mainNav.helpers({
+Template.header.helpers({
     sections: function () {
         return Sections.find({ displayOnPage: true, name: { $nin: [null, ''] } });
     }

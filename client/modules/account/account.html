@@ -1,43 +1,99 @@
-<template name="openAccount">
-    <!--This currently just holds a visual space for the Meteor default login tool-->
-    <section class="open-account">
-        <div class="sign-in tab">
-            <h4>Sign In to WCASA</h4>
-            {{> signInForm}}
-        </div>
-        <div class="create-an-account tab">
-            <h4>Create an Account</h4>
-            {{> createAnAccountForm}}
+<template name="accounts">
+
+    {{#if currentUser}}
+    <!--If logged in-->
+    {{else}}
+        {{> accountDetails}}
+        {{> notifications}}
+        {{> login}}
+        {{> register}}
+    {{/if}}
+</template>
+
+
+<template name="login">
+    <section class="login left-small has-sidebar">
+            <div class="scroller">
+                <h4>Sign In to Your Account</h4>
+                <form>
+                    <input type="email" name="loginEmail" placeholder="Email">
+                    <input type="password" name="loginPassword" placeholder="Password">
+                    <input type="submit" value="Sign In">
+                </form>
+                <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+            </div>
+        </section>
+</template>
+
+<template name="register">
+    <section class="register left-small has-sidebar">
+        <div class="scroller">
+            <h4>Create a New Account</h4>
+            <form>
+                <input type="name" name="registerName" placeholder="Name">
+                <input type="text" name="registerProvider" placeholder="Provider">
+                <input type="email" name="registerEmail" placeholder="Email">
+                <input type="password" name="registerPassword" placeholder="Password">
+                <input type="submit" value="Create Account">
+            </form>
+            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
         </div>
     </section>
 </template>
 
-<template name="meteorSignIn">
-    <!--What ever the loginButtons template is outputting we need to mold it to the html above-->
-    <a href="#">{{> loginButtons}}</a>
+
+
+<template name="accountDetails">
+    <section class="account-details left-small has-sidebar">
+            <div class="scroller">
+                <h4>Account Overview</h4>
+            <form>
+                <input type="name" name="registerName" placeholder="Name">
+                <input type="text" name="registerProvider" placeholder="Provider">
+                <input type="email" name="registerEmail" placeholder="Email">
+                <input type="password" name="registerPassword" placeholder="Password">
+                <input type="submit" value="Update Account">
+            </form>
+            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+            </div>
+    </section>
+</template>
+
+<template name="notifications">
+    <section class="notifications left-small has-sidebar">
+            <div class="scroller">
+                <h4>Notifications</h4>
+                <!--{{#if show}}-->
+                    <ul class="notification-menu">
+                        {{#each notifications}}
+                            <li>
+                                {{> Template.dynamic template=template }}
+                            </li>
+                        {{/each}}
+                    </ul>
+                <!--{{/if}}-->
+                <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+            </div>
+    </section>
 </template>
 
 
-<template name="signInForm">
-    <form>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="submit" value="Sign In">
-    </form>
-    <a href="javascript:void(0)" class="close-sign-in">Close Tab</a>
+<!--Notifications Templates-->
+<template name="notificationEmpty">
+    No notifications at this time.
 </template>
 
+<template name="notificationGeneric">
+    {{text}}
+</template>
 
+<template name="notificationApproval">
+    {{text}}<br />
+    <a href="javascript:void(0)">Approve</a>
+    <a href="javascript:void(0)">Deny</a>
+</template>
 
-
-
-<template name="createAnAccountForm">
-    <form>
-        <input type="name" placeholder="Name">
-        <input type="text" placeholder="Provider">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="submit" value="Sign In">
-    </form>
-    <a href="javascript:void(0)" class="close-sign-in">Close Tab</a>
+<template name="notificationRenewal">
+    {{text}}<br />
+    <a href="javascript:void(0)">Renew Now</a>
 </template>

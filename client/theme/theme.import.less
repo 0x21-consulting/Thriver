@@ -8,7 +8,6 @@ body, html{
     background-color:mix(@gray, @navy, 70%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
     font: 12px/30px 'Raleway', sans-serif;
 }
 
@@ -26,45 +25,6 @@ body, html{
 
 
 
-//Relationsip between full-width of monitor vs max-width of content (.full / .container)
-.full{
-    width: 100%;
-}
-.container{
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.master-container{
-    padding-top: 348px;
-}
-
-.overlay{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    visibility: hidden;
-    background-color: @navy;
-    opacity: 0;
-    z-index: 3;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    .transition(all,400ms,ease-out,0ms);
-}
-.open-account, .open-twitter, .open-donate, .open-get-help{
-    overflow: hidden;
-    .overlay{
-        opacity: 0.7; 
-        visibility: visible;
-        &:hover{
-            opacity: 0.9;
-        }       
-    }
-}
-
-
 
 
 //Iconography
@@ -75,8 +35,11 @@ body, html{
 @white: #fff;
 @gray: #ebf2f2;
 @navy: #062131;
+@navySat: #2c5465;
 @teal: #00b7c5;
 @orange: #f1592a;
+@yellow: #F5D76E;
+
 
 //Brand Colors
 @twitter: #00aced;
@@ -102,112 +65,6 @@ body, html{
             height: 100vh; //Fallback
             height: ~"calc(100vh - 32px)";
         }
-    }
-}
-
-// Transitions
-.master-container{
-    .transition(all,400ms,ease-out,0ms);
-    @media @mobile{
-        padding-top: 32px !important; //Override fixed nav CSS
-    }
-}
-//section.donate, sign-up etc.
-
-
-////// Adjust the spacing from top of window as header shrinks
-.fixed-header .master-container{
-    padding-top: 74px;
-}
-
-////// Off-Canvas Animations
-//////// Left-Canvas-Small
-.left-canvas-small{
-    .master-container{
-        padding-top: 74px;
-    }
-}
-
-
-
-.canvas-center{
-    position: relative;
-    left: 0px;
-    z-index: 2;
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
-    .transition(all,400ms,ease-out,0ms);
-}
-
-section.open-account{
-    position: fixed;
-    z-index: 3;
-    left:-356px;
-    top: 32px;
-}
-
-section.twitter-feed, section.donate{
-    position: fixed;
-    z-index: 3;
-    right:-356px;
-    top: 32px;
-}
-
-section.donate{
-    right: -656px;
-}
-
-/*#login-dropdown-list {
-    position: fixed;
-    top: 100px;
-    left: -300px;
-    .transition(all,400ms,ease-out,0ms);
-}*/
-
-.open-account{
-    .canvas-center{
-        left: 356px;
-        //width: ~"calc(100vw - 356px)";
-    }
-    header.main-header{
-        //width: ~"calc(100vw - 356px)";   
-    }
-    section.open-account{
-        left: 0px;
-    }
-}
-
-.open-twitter{
-    .canvas-center{
-        left: -356px;
-
-    }
-    section.twitter-feed{
-        left: initial;
-        right: 0px;
-    }
-}
-
-.open-donate{
-    .canvas-center{
-        left: -656px;
-
-    }
-    section.donate{
-        left: initial;
-        right: 0px;
-    }
-}
-
-.open-get-help{
-    .canvas-center{
-        left: -356px;
-
-    }
-    section.twitter-feed{
-        left: initial;
-        right: 0px;
     }
 }
 

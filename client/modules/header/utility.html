@@ -1,0 +1,69 @@
+<template name="utility">
+    <aside class="utility">
+        <ul>
+            <!--Logged Out-->
+            {{#if currentUser}}
+                <!--Currently logged in-->
+            {{else}}
+                <li class="notifications left-small has-sidebar">
+                    <a href="javascript:void(0)">
+                        <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
+                        {{#if show}}
+                            <span class="unread-notifications fa">&#xf06a;</span>
+                        {{/if}}
+                    </a>
+                </li>
+                <li class="account-details left-small has-sidebar">
+                    <a href="javascript:void(0)">
+                        Eoghan Mc Inerney <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
+                    </a>
+                </li>
+                <li class="logout">
+                    <a href="javascript:void(0)" title="sign-out">
+                        Sign Out <span class="fa">&#xf0da;</span>
+                    </a>
+                </li>
+                <li class="login left-small has-sidebar">
+                    <a href="javascript:void(0)">
+                        Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
+                    </a>
+                </li>
+                <li class="register left-small has-sidebar">
+                    <a href="javascript:void(0)" title="sign-up">
+                        Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
+                    </a>
+                </li>
+            {{/if}}
+            <li class="get-help">
+                <a href="javascript:void(0)" title="Get Help">
+                    <span class="fa">&#xf06a;</span> Get Help
+                </a>
+            </li>
+            <li class="donate right-medium has-sidebar">
+                <a href="javascript:void(0)" title="Donate">
+                    <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
+                </a>
+            </li>
+            <li class="news right-large has-sidebar">
+                <a href="javascript:void(0)" title="Newsroom">
+                    <span class="fa up">&#xf1ea;</span><span class="fa close">&#xf00d;</span> Newsroom
+                </a>
+            </li>
+            <li class="twitter right-small has-sidebar">
+                <a href="javascript:void(0)">
+                    <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
+                </a>
+            </li>
+            <li class="social fa">
+                <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
+                    &#xf16a;
+                </a>
+            </li>
+            <li class="social fa">
+                <a href="https://www.facebook.com/wcasa" target="_blank">
+                    &#xf082;
+                </a>
+            </li>
+        </ul>
+    </aside>
+</template>

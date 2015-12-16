@@ -3,53 +3,27 @@
     <header class="main-header full" id="menu">
         <div class="overlay"></div>
         <div class="scrollable-m">
-            <aside class="utility">
-                <ul>
-                    <li class="sign-in"><a href="javascript:void(0)">Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span></a></li>
-                    {{#if show}}
-                        <li class="notifications fa alerts" data-count="{{count}}">
-                            <a href="javascript:void(0)" title="notifications">&#xf0f3;</a>
-                            <ul class="notification-menu">
-                                {{#each notifications}}
-                                    <li>
-                                        {{> Template.dynamic template=template }}
-                                    </li>
-                                {{/each}}
-                            </ul>
-                        </li>
-                    {{/if}}
-                    <li class="sign-up"><a href="javascript:void(0)" title="sign-up">Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span></a></li>
-                    <li class="get-help"><a href="javascript:void(0)"><span class="fa up">&#xf06a;</span><span class="fa close">&#xf00d;</span> Get Help</a></li>
-                    <li class="donate"><a href="javascript:void(0)" title="Donate" class="toggle"><span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate</a></li>
-                    <li class="twitter">
-                        <a href="javascript:void(0)"><span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed</a>
-                    </li>
-                    <li class="social fa"><a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">&#xf16a;</a></li>
-                    <li class="social fa"><a href="https://www.facebook.com/wcasa" target="_blank">&#xf082;</a></li>
-                </ul>
-            </aside>
+            {{> utility}}
             <nav class="main-nav">
                 <ul class="container">
                     <li class="brand"><a href="#"><img src="/lib/img/wisconsin-coalition-against-sexual-assault.png" alt="WCASA" /></a></li>
-                    {{#each sections}}
+                    <!--{{#each sections}}
                         {{> menuItem}}
-                    {{/each}}
+                    {{/each}}-->
+
+                    <!--Placeholder for FED-->
                     <li><a href="#">What We Do</a></li>
                     <li><a href="#">Events</a></li>
                     <li><a href="#">Who We Are</a></li>
                     <li><a href="#">Get Involved</a></li>
                     <li><a href="#providers">Service Providers</a></li>
                     <li><a href="#">Contact Us</a></li>
+                    <!--FED Placeholder End-->
                 </ul>
             </nav>
         </div>
         <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
     </header>
 </template>
@@ -60,25 +34,4 @@
     <li>
         <a href="#{{anchor name=name}}">{{name}}</a>
     </li>
-</template>
-
-
-<!--Notifications Templates-->
-<template name="notificationEmpty">
-    No notifications at this time.
-</template>
-
-<template name="notificationGeneric">
-    {{text}}
-</template>
-
-<template name="notificationApproval">
-    {{text}}<br />
-    <a href="javascript:void(0)">Approve</a>
-    <a href="javascript:void(0)">Deny</a>
-</template>
-
-<template name="notificationRenewal">
-    {{text}}<br />
-    <a href="javascript:void(0)">Renew Now</a>
 </template>

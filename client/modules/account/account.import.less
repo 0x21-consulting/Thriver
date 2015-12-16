@@ -1,59 +1,8 @@
-section.open-account {
-    width: 356px;
-    top: 32px;
-    height: 100%;
-    height: ~"calc(100vh - 32px)";
-    background-color:mix(@gray, @navy, 55%);
-    .tab{
-        opacity: 0;
-        text-align: center;
-        position: relative;
-        left: -100%;
-        .transition(all,300ms,ease,0ms);
-        z-index: 1;
-        &.active{
-            opacity: 1;
-            z-index: 2;
-            left:0px;
-        }
-        &.create-an-account{
-            position: absolute;
-            width: 100%;
-            top: 0px;
-        }
-    }
-    .transition(all,400ms,ease-out,0ms);
+section.login, section.register, section.notifications, section.account-details {
     h4{
         border-color: mix(@gray, @navy, 45%);
-        margin-bottom: 20px;
-        padding-top: 28px;
-    }
-    form {
-        padding-left: 23px !important;
-        padding-right: 26px !important;
-    }
-}
-
-//Meteor Default Moved
-#login-dropdown-list {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
-
-    
-
-
-a.close-sign-in {
-    color:@white;
-    text-align: center;
-    display: block;
-    font-weight: 600;
-    padding-top: 12px;
-    &:hover, &:focus{
-        color: darken(@gray, 5%);
-    }
-    &:active{
-        color: darken(@gray, 10%);
+        margin-bottom: 25px;
+        padding-top: 0px;
+        display: block;
     }
 }

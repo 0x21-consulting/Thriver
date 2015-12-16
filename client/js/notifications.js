@@ -5,7 +5,7 @@ Meteor.subscribe('notifications');
 var notifications = new Mongo.Collection('notifications');
 
 // Notification helpers
-Template.utilityNav.helpers({
+Template.utility.helpers({
     // Whether to show the notifications section
     show: function () {
         if (Meteor.user())

@@ -1,0 +1,160 @@
+//Relationsip between full-width of monitor vs max-width of content (.full / .container)
+.full{
+    width: 100%;
+}
+.container{
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.master-container{
+    padding-top: 348px;
+}
+
+// Transitions
+.master-container{
+    .transition(all,400ms,ease-out,0ms);
+    @media @mobile{
+        padding-top: 32px !important; //Override fixed nav CSS
+    }
+}
+
+.fixed-header{
+    .master-container{
+        padding-top: 74px;
+    }
+}
+
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    background-color: @navy;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    .transition(all,400ms,ease-out,0ms);
+}
+
+body.left-small, body.right-small, body.right-medium, body.right-large{
+    overflow: hidden;
+    .overlay{
+        opacity: 0.7; 
+        visibility: visible;
+        &:hover{
+            opacity: 0.9;
+        }       
+    }
+}
+
+.canvas-center{
+    position: relative;
+    left: 0px;
+    z-index: 2;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.15);
+    .transition(all,400ms,ease-out,0ms);
+}
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    background-color:mix(@gray, @navy, 55%);
+    top: 32px;
+    z-index: 9;
+    .transition(all,400ms,ease-out,0ms);
+    .scroller{
+        text-align: center;
+        padding: 30px;
+    }
+    section{
+        position: absolute;
+        opacity: 0;
+    }
+    &.sidebars-left{
+        width: 356px;
+        left: -356px;
+        section{
+            position: absolute;
+            left: -390px;
+            width: 356px;
+            .transition(all,400ms,ease-out,0ms);
+            &.active{
+                left: 0px;
+                opacity: 1;
+            }
+            a.close-tab {
+                color:@white;
+                text-align: center;
+                display: block;
+                font-weight: 600;
+                padding-top: 12px;
+                &:hover, &:focus{
+                    color: darken(@gray, 5%);
+                }
+                &:active{
+                    color: darken(@gray, 10%);
+                }
+            }
+        }
+    }
+    &.sidebars-right{
+        width: 356px;
+        right: -356px;
+        section{
+            right: -390px;
+            &.active{
+                right: 0px;
+                opacity: 1;
+            }
+        }
+    }
+    .scroller{
+        // it scrollable in the event of browser too short
+    }
+}
+
+
+body{
+    &.left-small{
+        .canvas-center{
+            left: 356px;
+        }
+        .sidebars-left{
+            left: 0px;
+        }
+    }
+    &.right-small{
+        .canvas-center{
+            left: -356px;
+        }
+        .sidebars-right{
+            right: 0px;
+        }
+    }
+    &.right-medium{
+        .canvas-center{
+            left: inherit;
+            left: -656px;
+        }
+        .sidebars-right{
+            width: 656px;
+            right: 0px;
+        }
+    }
+    &.right-large{
+        .canvas-center{
+            left: inherit;
+            left: -1138px;
+        }
+        .sidebars-right{
+            width: 1138px;
+            right: 0px;
+        }
+    }
+}

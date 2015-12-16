@@ -1,11 +1,12 @@
-section.twitter-feed {
+section.twitter{
     width: 356px;
-    top: 32px;
+    //top: 32px;
     height: 100%;
     height: ~"calc(100vh - 32px)";
     background-color:mix(@gray, @navy, 45%);
     text-align: center;
     .transition(all,400ms,ease-out,0ms);
+    padding-top: 0px !important;
     h4{
         border-color: mix(@gray, @navy, 35%);
         margin-bottom: 20px;
@@ -17,7 +18,7 @@ section.twitter-feed {
             }
         }
     }
-    section.twitter-element {
+    .twitter-element {
         padding: 64px 32px;
         margin: 12px 0px;
         background-color:mix(@gray, @navy, 35%);

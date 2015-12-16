@@ -12,7 +12,12 @@
             <!--All containing site content-->
         </div>
     </div>
-        {{> openAccount}}
-        {{> twitterFeed}}
+    <aside class="sidebar sidebars-left">
+        {{> accounts}}
+    </aside>
+    <aside class="sidebar sidebars-right">
+        {{> twitter}}
+        {{> news}}
         {{> donate}}
+    </aside>
 </body>
