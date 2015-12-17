@@ -1,9 +1,84 @@
 <template name="news">
     <section class="news right-large has-sidebar">
-        <h4><span class="fa">&#xf1ea;</span> Newsroom</h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-            tempor incididunt ut labore et dolore magna aliqua. 
-        </p>
+        <div class="scroller">
+            <h4><span class="fa">&#xf1ea;</span> Newsroom</h4>
+            <ul class="news-tabs">
+                <li class="active">In the News</li>
+                <li>Press Releases</li>
+                <li>Action Alerts</li>
+                <li>Press/Media Kits</li>
+            </ul>
+            <aside class="search-field-container">
+                <form>
+                    <label for="search-news" class="fa">&#xf002;</label><input id="search-news" type="search" placeholder="Search" />
+                </form>
+            </aside>
+            <ul class="news-content">
+                <li class="in-the-news active">
+                    <ul class="news-items">
+                        {{>newsItem}}
+                        {{>newsItem}}
+                        {{>newsItem}}
+                    </ul>
+                </li>
+                <li class="in-the-news">
+                    <ul class="news-items">
+                        {{>newsItem2}}
+                        {{>newsItem2}}
+                        {{>newsItem2}}
+                    </ul>
+                </li>
+                <li class="in-the-news">
+                    <ul class="news-items">
+                        {{>newsItem3}}
+                        {{>newsItem3}}
+                        {{>newsItem3}}
+                    </ul>
+                </li>
+                <li class="in-the-news">
+                    <ul class="news-items">
+                        {{>newsItem4}}
+                        {{>newsItem4}}
+                        {{>newsItem4}}
+                    </ul>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a>
+            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+        </div>
     </section>
+</template>
+
+
+<!--Duplicates for testing purposes-->
+<template name="newsItem">
+    <li>
+        <span class="date-meta">November 21, 2015</span>
+        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
+        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+    </li>
+</template>
+
+<template name="newsItem2">
+    <li>
+        <span class="date-meta">November 22, 2015</span>
+        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
+        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+    </li>
+</template>
+
+<template name="newsItem3">
+    <li>
+        <span class="date-meta">November 23, 2015</span>
+        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
+        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+    </li>
+</template>
+
+<template name="newsItem4">
+    <li>
+        <span class="date-meta">November 24, 2015</span>
+        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
+        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+    </li>
 </template>

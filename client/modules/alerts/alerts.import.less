@@ -1,0 +1,45 @@
+aside.alert{
+    position: fixed;
+    z-index: 11;
+    bottom: -32px;
+    height: 32px;
+    background-color: @orange;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    .transition(all,200ms,ease-out,0ms);
+    &.active{
+        bottom: 0px;
+        opacity: 1;
+    }
+    p{
+        color: #fff;
+        font-weight: bold;
+        white-space: nowrap;
+        //padding: 0px 76px;
+        //text-transform: uppercase;
+        font-size: 14px;
+        line-height: 32px;
+        text-transform: uppercase;
+        letter-spacing: 0.25px;
+        span.close-alert{
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+            font-weight: normal;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            color: @orange;
+            background-color: darken(@orange, 15%);
+            text-align: center;
+            line-height: 16px;
+            &:hover{
+                background-color: darken(@orange, 20%);
+            }
+        }
+    }
+}

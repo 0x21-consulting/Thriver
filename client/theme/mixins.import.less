@@ -5,6 +5,11 @@
     -o-transition:      @transitionProperty @duration @ease @delay;
 }
 
+.translate(@x, @y){
+    -ms-transform: translate(@x,@y); /* IE 9 */
+    -webkit-transform: translate(@x,@y); /* Safari */
+    transform: translate(@x,@y);
+}
 
 /*.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
     -webkit-animation: @name @duration @delay @ease;

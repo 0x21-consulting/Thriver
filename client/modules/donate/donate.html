@@ -1,9 +1,11 @@
 <template name="donate">
     <section class="donate right-medium has-sidebar">
-        <!--{{> donateSuccess}}-->
-        <!--{{> donateFailure}}-->
-        {{> donateDefault}}
-        <a href="javascript:void(0)" class="close-sign-in">Close Tab</a>
+        <div class="scroller">
+            <!--{{> donateSuccess}}-->
+            <!--{{> donateFailure}}-->
+            {{> donateDefault}}
+            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+        </div>
     </section>
 </template>
 
@@ -48,7 +50,7 @@
                 {{/each}}
             </select>
         </label>
-        <label class="full">CVV2 Number <input class="custom-amt" type="number" name="cvv2" min="0" required 
+        <label class="full"> CVV2 Number <input class="custom-amt" type="number" name="cvv2" min="0" required 
             pattern="\d{3,4}" /></label>
         <button type="submit" class="submit">Donate</button>
     </form>

@@ -1,8 +1,52 @@
-section.login, section.register, section.notifications, section.account-details {
-    h4{
-        border-color: mix(@gray, @navy, 45%);
-        margin-bottom: 25px;
-        padding-top: 0px;
-        display: block;
+
+
+
+//Notifications
+ul.notification-menu, ul.events-menu{
+    li{
+        a{
+            display: inline-block;
+            padding:6px 10px 6px 10px;
+            color: #fff;
+            background-color: @teal;
+            margin-top: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 2px;
+            &:hover{
+                background-color: darken(@teal, 5%);
+            }
+            &:active{
+                background-color: darken(@teal, 10%);
+            }
+            &.deny{
+                background-color: @orange;
+                &:hover{
+                    background-color: darken(@orange, 5%);
+                }
+                &:active{
+                    background-color: darken(@orange, 10%);
+                }
+            }
+        }
+        &.notificationEmpty, &.eventsEmpty {
+            color: mix(@gray, @navy, 35%);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.25px;
+            background-color: transparent;
+            text-align: center;
+            padding: 0px 30px;
+        }
+        &.notificationGeneric{
+
+        }
+        &.notificationApproval{
+
+        }
+        &.notificationRenewal{
+
+        }
     }
 }

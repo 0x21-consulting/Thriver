@@ -62,6 +62,24 @@ Template.utility.onRendered(function () {
     });
 
 
+    //Should be attributed to correct alert
+    $('li.logout, li.get-help').click(function(){
+        $('aside.alert').addClass('active').delay(5000).queue(function(){
+            $(this).removeClass("active").dequeue();
+        });
+    });
+
+    $('span.close-alert').click(function(){
+        $('aside.alert').removeClass("active").dequeue();
+    });
+
+
+    //Temp UX Alert Notes
+    $('.notifications li a').click(function(){
+        alert('Should we use the alerts template to show at the bottom of page in red: "johndoe@gmail.com has been approved as a provider with so-and-so... And for the "Renew" lets fire the close all panels function and open up donate with alternative text?" View past notifcations link to essentially work as a paginator. View Events on the account details page to close all open tabs and scroll to events')
+    });
+
+
 
     // Toggle visibility of the Alerts
     var alerts = document.querySelectorAll('.alerts'),

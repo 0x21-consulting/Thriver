@@ -1,26 +1,27 @@
 section.donate {
     width: 656px;
-    max-width: 100%;
-    height: 100%;
-    height: ~"calc(100vh - 32px)";
-    background-color:mix(@gray, @navy, 45%);
+    background-color:@midnightBlue;
     text-align: center;
     top: 0px;
     .transition(all,400ms,ease-out,0ms);
     h4{
-        border-color: mix(@gray, @navy, 35%);
+        border-color: @lightBlue;
         margin-bottom: 20px;
         padding-top: 28px;
+        max-width: 355px;
+        margin: 0 auto;
+        margin-bottom: 30px;
     }
-    h5{
-        color: lighten(@teal, 5%);
-        letter-spacing: 2px;
-        font-size: 18px;
-        line-height: 20px;
+    h5 {
+        color: mix(@gray, @navy, 25%);
+        font-weight: bold;
         text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 0.25px;
+        background-color: transparent;
         text-align: center;
-        margin: 36px 0px 24px 0px;
-
+        padding: 0px 30px;
+        margin-top: 20px;
     }
     p {
         padding: 0px 92px;

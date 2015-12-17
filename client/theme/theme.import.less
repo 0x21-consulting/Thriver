@@ -41,6 +41,16 @@ body, html{
 @yellow: #F5D76E;
 
 
+//Utility Colors
+//List Item Blue A,B
+@lightBlue: #566a75;
+@darkBlue: #4e606a;
+
+//News Background
+@midnightBlue: #6d7f88;
+//News Links
+@aqua: #1db7c5;
+
 //Brand Colors
 @twitter: #00aced;
 
@@ -121,10 +131,12 @@ form{
         }
     }
     label {
-        color: @white;
-        font-size: 18px;
+        font-size: 12px;
         font-weight: bold;
         letter-spacing: 1px;
+        line-height:12px;
+        font-weight: bold;
+        color: mix(@gray, @navy, 25%);
     }
     input[type="radio"] {
         display: inline-block;
@@ -132,6 +144,23 @@ form{
         margin: 0px 4px 0px 24px;
         position: relative;
         top: -1px;
+    }
+    input[type='search']{
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #fff;
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: bold;
+        line-height: 31px;
+        text-indent: 20px;
+        padding: 0px;
+        font: 12px/30px 'Raleway', sans-serif;
+        margin: 0 auto;
     }
     input[type='submit'], button.submit{
         text-indent: 0px;
