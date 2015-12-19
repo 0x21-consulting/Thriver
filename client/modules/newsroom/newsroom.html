@@ -19,6 +19,10 @@
                         {{>newsItem}}
                         {{>newsItem}}
                         {{>newsItem}}
+                        {{>newsItem}}
+                        {{>newsItem}}
+                        {{>newsItem}}
+                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
                     </ul>
                 </li>
                 <li class="in-the-news">
@@ -26,6 +30,10 @@
                         {{>newsItem2}}
                         {{>newsItem2}}
                         {{>newsItem2}}
+                        {{>newsItem2}}
+                        {{>newsItem2}}
+                        {{>newsItem2}}
+                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
                     </ul>
                 </li>
                 <li class="in-the-news">
@@ -33,17 +41,19 @@
                         {{>newsItem3}}
                         {{>newsItem3}}
                         {{>newsItem3}}
+                        {{>newsItem3}}
+                        {{>newsItem3}}
+                        {{>newsItem3}}
+                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
                     </ul>
                 </li>
                 <li class="in-the-news">
                     <ul class="news-items">
                         {{>newsItem4}}
-                        {{>newsItem4}}
-                        {{>newsItem4}}
+                        {{>newsItem5}}
                     </ul>
                 </li>
             </ul>
-            <a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a>
             <a href="javascript:void(0)" class="close-tab">Close Tab</a>
         </div>
     </section>
@@ -62,23 +72,32 @@
 <template name="newsItem2">
     <li>
         <span class="date-meta">November 22, 2015</span>
-        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
-        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+        <h5><a href="#">Ut feugiat nibh finibus eu. Nunc eu lorem neque</a></h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</p>
     </li>
 </template>
 
 <template name="newsItem3">
     <li>
         <span class="date-meta">November 23, 2015</span>
-        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
-        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+        <h5><a href="#">Nunc eu lorem neque</a></h5>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum....</p>
     </li>
 </template>
 
+<!--Duplicates for display/icon purposes-->
 <template name="newsItem4">
-    <li>
-        <span class="date-meta">November 24, 2015</span>
-        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
-        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
+    <li class="press-media-item">
+        <a href="#" class="fa icon">&#xf030;</a>
+        <span class="date-meta">January 15, 2015</span>
+        <h5><a href="#">Press Kit (2015) (PDF)</a></h5>
+    </li>
+</template>
+
+<template name="newsItem5">
+    <li class="press-media-item">
+        <a href="#" class="fa icon">&#xf1fe;</a>
+        <span class="date-meta">February 12, 2015</span>
+        <h5><a href="#">Media Kit (2015) (PDF)</a></h5>
     </li>
 </template>

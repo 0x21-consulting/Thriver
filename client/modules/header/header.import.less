@@ -297,6 +297,14 @@ header.main-header{
                     }
                 }
             }
+            &.login, &.account-details{
+                a{
+                    span{
+                        font-size: 12px;
+                        margin-left: 2px;
+                    }
+                }
+            }
             &.sign-up, &.sign-in, &.account-details{
                 position: relative;
                 &.active a{
@@ -586,6 +594,14 @@ header.main-header .fa.close{
     right: 12px;
     top: 0px;
     opacity: 0;
+}
+
+header.main-header{
+    li.account-details, li.logout, li.login{
+        .fa.close{
+            right: 14px;
+        }
+    }
 }
 
 header.main-header li.twitter .fa.close, header.main-header li.donate .fa.close, header.main-header .news .fa.close{

@@ -18,7 +18,7 @@ if (Meteor.isClient) {
             event.preventDefault();
             var emailVar = event.target.loginEmail.value;
             var passwordVar = event.target.loginPassword.value;
-            console.log("Form submitteds.");
+            console.log("Form submitted.");
         }
     });
 

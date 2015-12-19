@@ -179,6 +179,7 @@ body.left-small, body.right-small, body.right-medium, body.right-large{
     &.sidebars-right{
         width: 356px;
         right: -356px;
+        background-color: @midnightBlue;
         section{
             .transition(all,400ms,ease-out,0ms);
             right: -356px;
@@ -264,6 +265,13 @@ body{
     &:active{
         color: darken(@gray, 10%);
     }
+}
+
+.sidebar a.close-tab{
+    padding-top: 30px;
+}
+.sidebar a.load-more{
+    padding-top: 0px;
 }
 
 .sidebar a.load-more, .sidebar a.view-events{

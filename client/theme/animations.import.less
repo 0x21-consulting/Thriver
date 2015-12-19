@@ -267,3 +267,51 @@
         width: 400px;
     }
 }
+
+
+
+//Animating the Newsroom Tabs
+@keyframes slideIn {
+  0% {
+    display: none;
+    opacity: 0.25;
+    background-color: #4e606a;
+  }
+  1% {
+    display: block;
+    opacity: 0.25;
+    background-color: #4e606a;
+    //transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    //background-color: transparent;
+    background-color: #4e606a;
+    //transform: translateX(0px);
+  }
+}
+
+.animateNewsTabs{
+    -moz-animation-name: slideIn;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 250ms;
+    -moz-animation-delay: 0ms;
+
+    -webkit-animation-name: slideIn;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 250ms;
+    -webkit-animation-delay: 0ms;
+
+    animation-name: slideIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 250ms;
+    animation-delay: 0ms;
+    @media @mobile{
+        animation-duration: 0ms;
+        -webkit-animation-duration: 0ms;
+        -moz-animation-duration: 0ms;
+    }
+}

@@ -11,48 +11,64 @@
 
 <template name="donateDefault">
     <h4><span class="fa">&#xf004;</span> Donate to WCASA</h4>
+    <h5>Be a part of the movement to end sexual assault!</h5>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-        tempor incididunt ut labore et dolore magna aliqua. 
+        <b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.
     </p>
     <form>
-        <h5>Donation Amount</h5>
-        <label><input type="radio" name="amount" value="25" />$25</label>
-        <label><input type="radio" name="amount" value="50" />$50</label>
-        <label><input type="radio" name="amount" value="100" checked />$100</label>
-        <label><input type="radio" name="amount" value="200" />$200</label>
-        <label><input type="radio" name="amount" value="custom" />
-            Custom: $<input class="custom-amt" type="number" name="amount" min="0" value="75" />
-        </label>
-        <h5>Payment Details</h5>
-        <input name="name" value="{{name}}" placeholder="Name on Card" required />
-        <input type="number" name="number" placeholder="Credit Card Number" required pattern="\d{12,19}" />
-        <span class="cc-pic"></span>
-        <input type="hidden" name="type" value="mastercard" />
-        <label class="full">Expiration 
-            <select name="month">
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">August</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-            <select name="year">
-                {{#each year}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-        </label>
-        <label class="full"> CVV2 Number <input class="custom-amt" type="number" name="cvv2" min="0" required 
-            pattern="\d{3,4}" /></label>
-        <button type="submit" class="submit">Donate</button>
+        <fieldset>
+            <h6>Donation Amount</h6>
+            <input id="radio1" type="radio" name="amount" value="25" />
+            <label for="radio1" class="radio">$25</label>
+            <input id="radio2" type="radio" name="amount" value="50" />
+            <label for="radio2" class="radio">$50</label>
+            <input id="radio3" type="radio" name="amount" value="100" checked />
+            <label for="radio3" class="radio">$100</label>
+            <input id="radio4" type="radio" name="amount" value="200" />
+            <label for="radio4" class="radio">$200</label>
+            <input id="radio5" type="radio" name="amount" value="custom" />
+            <label for="radio5" class="radio">Other <span class="bill">$</span></label>
+            <input class="custom-amt" id="radio5" type="number" name="amount" min="0" value="75" />
+        </fieldset>
+        <fieldset>
+            <h6>Payment Details</h6>
+            <input name="name" value="{{name}}" placeholder="Name on Card" required />
+            <input type="number" name="number" placeholder="Credit Card Number" required pattern="\d{12,19}" />
+            <span class="cc-pic"></span>
+            <input type="hidden" name="type" value="mastercard" />
+            <div class="styled-select">
+                <label>Expiration</label>
+                <select name="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="styled-select small">
+                <select name="year">
+                    {{#each year}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="cvv2">
+                <label> CVV2 Number </label>
+                <input type="number" name="cvv2" min="0" required 
+                pattern="\d{3,4}" />
+            </div>
+         </fieldset>
+         <fieldset>
+            <button type="submit" class="submit">Donate</button>
+        </fieldset>
     </form>
 </template>
 
