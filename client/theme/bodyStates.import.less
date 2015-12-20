@@ -10,39 +10,40 @@ body{
         }
     }
     &.leftSmall{
-        .canvasCenter{
-            left: 356px;
+        .canvasCenter, .mainNav{
+           .translateX(356px);
         }
         .sidebarsLeft{
-            left: 0px;
+           .translateX(0px);
         }
     }
     &.rightSmall{
-        .canvasCenter{
-            left: -356px;
+        .canvasCenter, .mainNav{
+            .translateX(-356px);
         }
         .sidebarsRight{
             right: 0px;
+            .translateX(0px);
         }
     }
     &.rightMedium{
-        .canvasCenter{
+        .canvasCenter, .mainNav{
             left: inherit;
-            left: -656px;
+            .translateX(-656px);
         }
         .sidebarsRight{
             width: 656px;
-            right: 0px;
+            .translateX(0px);
         }
     }
     &.rightLarge{
-        .canvasCenter{
+        .canvasCenter, .mainNav{
             left: inherit;
-            left: -800px;
+            .translateX(-800px);
         }
         .sidebarsRight{
             width: 800px;
-            right: 0px;
+            .translateX(0px);
         }
     }
 }

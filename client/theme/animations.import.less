@@ -38,6 +38,12 @@
     transform: translate(@x,@y);
 }
 
+.translateX(@x){
+    -ms-transform: translateX(@x); /* IE 9 */
+    -webkit-transform: translateX(@x); /* Safari */
+    transform: translateX(@x);
+}
+
 
 .noAnimation{
     animation-duration: 0ms !important;

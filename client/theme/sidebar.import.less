@@ -4,7 +4,7 @@
     height: 100vh;
     background-color:mix(@gray, @navy, 55%);
     top: 32px;
-    z-index: 9;
+    z-index: 11;
     .transition(all,400ms,ease-out,0ms);
     .scroller{
         text-align: center;
@@ -95,41 +95,47 @@
     }
     &.sidebarsLeft{
         width: 356px;
-        left: -356px;
+        left: 0px;
+        .translate(-356px,0px);
         section{
             position: absolute;
-            left: -356px;
+            left:0px;
+            .translate(-356px,0px);
             width: 356px;
             &.active{
-                left: 0px;
+                .translate(0px,0px);
                 opacity: 1;
             }
         }
     }
     &.sidebarsRight{
         width: 356px;
-        right: -356px;
+        right: 0px;
+        .translateX(356px);
         background-color: @midnightBlue;
         h2{
             border-color: @lightBlue;
         }
         section{
-            right: -356px;
+            right: 0px;
+            .translateX(356px);
             &.active{
-                right: 0px;
+                .translateX(0px);
                 opacity: 1;
             }
             &.news{
-                right: -800px;
+                right: 0px;
+                .translateX(800px);
                 &.active{
-                    right: 0px;
+                    .translateX(0px);
                     opacity: 1;
                 }
             }
             &.donate{
-                right: -656px;
+                right: 0px;
+                .translateX(656px);
                 &.active{
-                    right: 0px;
+                    .translateX(0px);
                     opacity: 1;
                 }
             }

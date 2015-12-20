@@ -1,5 +1,7 @@
 if (Meteor.isClient) {
     Template.donate.onRendered(function () {
-        //Donate Functions
+        $('form .custom').click(function(){
+            $('.customAmt').focus();
+        });
     });
 }
