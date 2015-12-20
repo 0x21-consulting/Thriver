@@ -39,5 +39,11 @@
         <span class="text">Jerard Hall Group Meeting</span>
         <button type="button" class="viewEvent">View Event</button>
         <button type="button" class="unregister">Unregister</button>
+        <span class="response">{{> alertEventUnregister}}</span>
     </li>
+</template>
+
+<template name="alertEventUnregister">
+    You have been unregistered for event.
+    <button type="button" class="undo">Undo</button>
 </template>

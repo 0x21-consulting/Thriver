@@ -72,9 +72,30 @@ Template.utility.onRendered(function () {
     });
 
     //Temp UX Alert Notes
-    $('.notifications li a').click(function(){
-        alert('Should we use the alerts template to show at the bottom of page in red: "johndoe@gmail.com has been approved as a provider with so-and-so... And for the "Renew" lets fire the close all panels function and open up donate with alternative text?" View past notifcations link to essentially work as a paginator. View Events on the account details page to close all open tabs and scroll to events')
+    $('.notificationRenewal button').click(function(){
+        $('li.donate').click();
     });
+    $('.notificationApproval > button').click(function(){
+        $(this).parent().addClass('selected');
+    });
+    $('.notificationApproval .undo').click(function(){
+        $(this).parent().parent().removeClass('selected');
+    });
+    $('button.loadMore').click(function(){
+        alert('Load More Results');
+    });
+    $('.eventsRegistered .unregister').click(function(){
+        $(this).parent().addClass('selected');
+    });
+    $('.eventsRegistered .undo').click(function(){
+        $(this).parent().parent().removeClass('selected');
+    });
+    $('.eventsRegistered .viewEvent').click(function(){
+        removeActiveSidebars();
+        alert('scroll down to events and show the selected event');
+    });
+
+
 
     // Toggle visibility of the Alerts
     var alerts = document.querySelectorAll('.alerts'),

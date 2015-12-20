@@ -57,7 +57,7 @@
     }
     button{
         font-size: 12px;
-        &.closeTab, &.loadMore, &.unregister, &.viewEvents {
+        &.closeTab, &.loadMore, &.unregister, &.viewEvents, &.undo {
             .colorButton(@white);
             background-color: transparent;
             text-transform: none;
@@ -72,6 +72,13 @@
             &:hover, &:focus, &:active{
                 background-color: transparent;
             }
+        }
+        &.undo{
+            margin: 10px 0px 0px 0px;
+            text-align: left;
+            display: block;
+            padding: 0px;
+            clear: both;
         }
         &.unregister{
             display: block;

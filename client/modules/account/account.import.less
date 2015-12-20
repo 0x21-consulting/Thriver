@@ -26,4 +26,19 @@ ul.notificationMenu, ul.eventsMenu{
             padding: 0px 30px;
         }
     }
+    span.response{
+        display: none;
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: lighten(@teal, 5%);
+    }
+    li.selected{
+        span.response{
+            display: block;
+        }
+        button.deny, button.approve, button.viewEvent, button.unregister{
+            display: none;
+        }
+    }
 }

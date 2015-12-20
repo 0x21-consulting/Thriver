@@ -23,14 +23,16 @@
                     <li class="notificationApproval">
                         <span class="dateMeta">October 20, 2015</span>
                         <span class="text">johndoe@gmail.com is requesting access as a provider from such and such.</span>
-                        <button type="button">Approve</button>
+                        <button type="button" class="approve">Approve</button>
                         <button type="button" class="deny">Deny</button>
+                        <span class="response">{{> alertApprove}}</span>
                     </li>
                     <li class="notificationApproval">
                         <span class="dateMeta">October 10, 2015</span>
                         <span class="text">johndoe@gmail.com is requesting access as a provider from such and such.</span>
-                        <button type="button">Approve</button>
+                        <button type="button" class="approve">Approve</button>
                         <button type="button" class="deny">Deny</button>
+                        <span class="response">{{> alertApprove}}</span>
                     </li>
                 </ul>
                 {{#if show}}
@@ -65,8 +67,9 @@
     <li class="notificationApproval">
         <span class="dateMeta">November 21, 2015</span>
         <span class="text">{{text}}</span>
-        <button type="button">Approve</button>
+        <button type="button" class="approve">Approve</button>
         <button type="button" class="deny">Deny</button>
+        <span class="response">{{> alertApprove}}</span>
     </li>
 </template>
 
@@ -76,4 +79,14 @@
         <span class="text">{{text}}</span>
         <button type="button">Renew Now</button>
     </li>
+</template>
+
+<template name="alertApprove">
+    johndoe@gmail.com has been granted account registration.
+    <button type="button" class="undo">Undo</button>
+</template>
+
+<template name="alertDeny">
+    johndoe@gmail.com has been denied an account.
+    <button type="button" class="undo">Undo</button>
 </template>
