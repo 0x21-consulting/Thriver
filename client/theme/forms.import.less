@@ -1,0 +1,172 @@
+//Forms
+form{
+    input, button.submit{
+        display: block;
+        border: none;
+        padding: 16px 0px;
+        margin: 12px 0px;
+        width: 100%;
+        text-indent: 12px;
+        width: 300px;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: @navy;
+        &:focus{
+            outline: none;
+            background-color: @gray;
+        }
+    }
+    label {
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        line-height:12px;
+        font-weight: bold;
+        color: mix(@gray, @navy, 25%);
+    }
+    input[type="radio"] {
+        display: inline-block;
+        width: auto;
+        margin: 0px 4px 0px 24px;
+        position: relative;
+        top: -1px;
+    }
+    input[type='search']{
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #fff;
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: bold;
+        line-height: 31px;
+        text-indent: 20px;
+        padding: 0px;
+        font: 12px/30px 'Raleway', sans-serif;
+        margin: 0 auto;
+    }
+    input[type='submit'], button.submit{
+        text-indent: 0px;
+        .backgroundColorButton(@teal);
+        color: @white;
+    }
+    label.radio{
+        color: @white;
+        line-height: 47px;
+        cursor: pointer;
+        position: relative;
+        font-size: 13px;
+        width: 33.33333%;
+        background: @darkBlue;
+        display: block;
+        margin: 0px;
+        text-align: center;
+        font-weight: bold;
+        float: left;
+        padding: 1px 0px;
+        .transition(background-color, 100ms, ease, 0ms);
+        &:last-child{
+            margin-bottom: 30px;
+        }
+        &:hover{
+            background-color: darken(@darkBlue, 5%);
+        }
+    }
+    input[type=radio]:checked + label.radio{
+        background-color: @aqua;
+        &:before {
+            background-color: @aqua;
+        }
+    }
+    input[type='radio']{
+        display: none;
+    }
+    .styledSelect, .cvv2{
+        width: 45%;
+        margin-right: 1%;
+        height: 49px;
+        //overflow: hidden;
+        background-color: @darkBlue;
+        color: @midnightBlue;
+        font-weight: bold;
+        float: left;
+        margin-top: 30px;
+        position: relative;
+        &:focus, input:focus, &:hover{
+            background-color: darken(@darkBlue, 5%);
+        }
+        label{
+            position: absolute;
+            left: 0px;
+            top: -20px;
+        }
+        &.small{
+            width: 18%;
+            margin-right: 0px;
+        }
+        select{
+            background: transparent;
+            width: 100%;
+            display: block;
+            font-size: 16px;
+            line-height: 1;
+            border: 0;
+            border-radius: 0;
+            height: 49px;
+            -webkit-appearance: none;
+            text-indent: 15px;
+            &:focus{
+                outline: none;
+            }
+        }
+        input{
+            background-color: @darkBlue;
+            color: @midnightBlue;
+        }
+    }
+    .cvv2{
+        margin-left: 5%;
+        width: 30%;
+        &:focus{
+            background-color: transparent;
+        }
+        input{
+            width: 100%;
+            color: #fff;
+        }
+        label{
+            position: absolute;
+        }
+    }
+    ::-webkit-input-placeholder {color: mix(@gray, @navy, 55%);}
+    :-moz-placeholder {color: mix(@gray, @navy, 55%);}
+    ::-moz-placeholder {color: mix(@gray, @navy, 55%);}
+    :-ms-input-placeholder {color: mix(@gray, @navy, 55%);}
+
+    //Editable Forms
+    &.editable{
+        input{
+            background: rgba(255,255,255,0.2);
+            color: @white;
+            position: relative;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            &:focus{
+                background-color: mix(@gray, @navy, 45%);
+            }
+        }
+        label{
+            text-align: left;
+            display: block;
+        }
+        input[type='submit']{
+            .backgroundColorButton(@teal);
+            color: @white;
+        }
+    }
+}

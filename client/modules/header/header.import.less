@@ -1,7 +1,4 @@
-//Main Site Header Styles
-
-//Master Styles
-header.main-header{
+header.mainHeader{
     background-color: @white;
     font-weight: 700;
     position: fixed;
@@ -21,46 +18,9 @@ header.main-header{
     a:focus{
         outline: none;
     }
-    aside.utility{
-        background-color: @gray;
-        height: 32px;
-        line-height: 32px;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        z-index: 9;
-        @media @mobile{
-            height: auto;
-            background-color: transparent;
-            position: relative;
-        }
-        li a{
-            font-size: 16px;
-            height: 32px;
-            @media @mobile{
-                display: block;
-                font-weight: 600;
-                text-transform: uppercase;
-                color: @gray;
-                font-size: 12px;
-                margin: 6px 12px 3px 12px;
-                padding: 0px;
-                letter-spacing: 1px;
-                background-color: transparent !important; //override all specific bg-color styles
-                &:active, &:focus{
-                    color:@teal;
-                }
-            }
-            a{
-                height: initial;
-                background-color: initial;
-            }
-        }
-    }
-    nav.main-nav{
+    nav.mainNav{
         text-align: center;
-        padding: 233px 0px 30px 0px;
+        padding: 233px 0px 36px 0px;
         position: relative;
         z-index: 1;
         @media @mobile{
@@ -68,223 +28,82 @@ header.main-header{
             position: static;
         }
         .transition(all,400ms,ease-out,0ms);
-        li{
-            margin-bottom: 42px;
-            @media @mobile{
-                margin-bottom: 0px;
-            }
-            a{
-                font-size: 18px;
-                letter-spacing: 2px;
-                font-weight: 600;
-                text-transform: uppercase;
-                color: @navy;
-                padding-bottom: 18px;
-                border-bottom: 3px solid @gray;
-                margin: 0px 36px 0px 36px;
-                @media @1600{
-                    margin: 0px 24px 0px 24px;
-                }
-                @media @1450{
-                    margin: 0px 12px 0px 12px;
-                }
-                @media @1300{
-                    font-size: 16px;
-                    letter-spacing: 1px;
-                }
-                &:hover, &:focus{
-                    color: @teal;
-                    border-color:darken(@gray, 10%);
-                }
-                &:active{
-                    color:darken(@teal, 15%);
-                    border-color:darken(@teal, 15%);
-                }
-                @media @mobile{
-                    padding: 0px;
-                    border-color: transparent;
-                    font-size: 12px;
-                    margin: 6px 12px 3px 12px;
-                    color: @gray;
-                    &:hover{
-                        color: @gray;
-                        border-color:transparent;
-                    }
-                    &:active, &:focus{
-                        color:@teal;
-                        border-color:transparent;
-                    }
-                }
-            }
-        }
-    }
-    ul{
-        li{
-            //fallback for pre inline-block support
-            display:inline;
-            display: inline-block;
-            @media @mobile {
-                display: block;
-                text-align: left;
-            }
-            &.brand{
-                display: block;
-                position: absolute;
-                left: 50%;
-                margin-left: -200px;
-                top: 58px;
-                width: 400px;
-                text-indent: 0px;
-                //.transition(all,400ms,ease-out,0ms);
-                @media @mobile{
-                    top: 2px;
-                    transform: translateY(-30px);
-                    width: 85px;
-                    left: 12px;
-                    margin-left: 0px;
-                    a{
-                        padding: 0px;
-                        margin: 0px;
-                    }
-                }
-            a{
-                border: none;
-                display: block;
-                padding: 0px;
-                margin: 0px;
-                &:active, &:hover, &:focus{
-                    border: none;
-                }
-                img{
-                    //width: 400px;
-                    max-width: 100%;
-                    max-height: 100%;
-                }
-            }
-            }
-            &.social, &.get-help, &.donate, &.twitter, &.news{
-                float: right;
-                position: relative;
-                @media @mobile{
-                    float: none;
-                }
-            }
-            &.social{
-                @media @mobile{
-                    position: absolute;
+        ul{
+            li{
+                display: inline-block;
+                @media @mobile {
                     display: block;
-                    top: -10px;
-                    right: 0px;
+                    text-align: left;
                 }
-            }
-            a{
-                display: block;
-                padding: 0px 18px;
-                color: @white;
-                .transition(font,400ms,ease-out,0ms);
-                //Overrides Meteor default sign-in CSS
-                *#login-sign-in-link{
-                    padding: 0px;
+                &.brand{
+                    display: block;
+                    position: absolute;
+                    left: 50%;
+                    margin-left: -200px;
+                    top: 58px;
+                    width: 400px;
+                    text-indent: 0px;
+                    margin-bottom: 42px;
                     @media @mobile{
-                        margin: 0px;
-                        padding: 0px;
-                        text-indent: 0px;
+                        top: 2px;
+                        .translate(0px, -30px);
+                        width: 85px;
+                        left: 12px;
+                        margin-left: 0px;
+                        a{
+                            padding: 0px;
+                            margin: 0px;
+                        }
                     }
-                }
-            }
-            &.login a, &.donate a, &.account-details a{
-                background-color: @teal;
-                &:hover, &:focus{
-                    background-color: darken(@teal, 2.5%);
-                }
-                &:active{
-                    background-color: darken(@teal, 5%);
-                }
-            }
-            &.news a{
-                background-color: @navySat;
-                &:hover, &:focus{
-                    background-color: darken(@navySat, 2.5%);
-                }
-                &:active{
-                    background-color: darken(@navySat, 5%);
-                }               
-            }
-            &.notifications a{
-                padding: 0px 12px 0px 10px;
-                background-color: darken(@teal, 2.5%);
-                &:hover, &:focus{
-                    background-color: darken(@teal, 5%);
-                }
-                &:active{
-                    background-color: darken(@teal, 7.5%);
-                }
-            }
-            &.register a{
-                &:hover, &:focus{
-                    color: darken(@teal, 25%);
-                }
-                &:active{
-                    color: darken(@teal, 30%);
-                }
-            }
-            &.active, &.active a:focus, &.active a:hover, &.active a:active{
-                background-color: darken(@navySat, 7%);
-            }
-            &.register.active a{
-                color: darken(@teal, 25%) !important;
-            }
-            &.register.active, &.register.active a{
-                &:hover, &:focus, &:active{
-                    background-color: transparent !important;
-                }
-                background-color: transparent !important;
-            }
-            &.login, &.account-details, &.notifications{
-                float: left;
-                position: relative;
-                a{
-                    span{
-                        font-size: 16px;
-                        &.unread-notifications {
-                            position: absolute;
-                            margin-left: 2px;
-                            width: 16px;
-                            height: 16px;
-                            color: @yellow;
-                            text-align: center;
-                            border-radius: 50%;
-                            line-height: 17px;
-                            top: 1px;
-                            right: 1px;
-                            font-size: 100%;
-                            pointer-events: none;
+                    a{
+                        border: none;
+                        display: block;
+                        padding: 0px;
+                        margin: 0px;
+                        &:active, &:hover, &:focus{
+                            border: none;
+                        }
+                        img{
+                            //width: 400px;
+                            max-width: 100%;
+                            max-height: 100%;
                         }
                     }
                 }
                 @media @mobile{
-                    float: none;
-                }
-            }
-            &.register, &.logout{
-                float: left;
-                @media @mobile{
-                    float: none;
+                    margin-bottom: 0px;
                 }
                 a{
-                    //background-color: @twitter;
-                    color:mix(@gray, @navy, 65%);
-                    span{
-                        font-size: 12px;
-                        margin-left: 2px;
+                    display: block;
+                    font-size: 18px;
+                    letter-spacing: 2px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    color: @navy;
+                    padding-bottom: 18px;
+                    border-bottom: 3px solid @gray;
+                    margin: 0px 36px 0px 36px;
+                    @media @1600{
+                        margin: 0px 24px 0px 24px;
+                    }
+                    @media @1300{
+                        margin: 0px 12px 0px 12px;
+                        font-size: 16px;
+                        letter-spacing: 1px;
                     }
                     &:hover, &:focus{
-                        color: darken(@navySat, 7%);
+                        color: @teal;
+                        border-color:darken(@gray, 10%);
                     }
                     &:active{
-                        color: darken(@navySat, 7%);
+                        color:darken(@teal, 15%);
+                        border-color:darken(@teal, 15%);
                     }
                     @media @mobile{
+                        padding: 0px;
+                        border-color: transparent;
+                        font-size: 12px;
+                        margin: 6px 12px 3px 12px;
                         color: @gray;
                         &:hover{
                             color: @gray;
@@ -297,114 +116,14 @@ header.main-header{
                     }
                 }
             }
-            &.login, &.account-details{
-                a{
-                    span{
-                        font-size: 12px;
-                        margin-left: 2px;
-                    }
-                }
-            }
-            &.sign-up, &.sign-in, &.account-details{
-                position: relative;
-                &.active a{
-                    //color: red !important;
-                }
-            }
-            &.get-help a{
-                background-color: @orange;
-                &:hover{
-                    background-color: darken(@orange, 5%);
-                }
-                &:active{
-                    background-color: darken(@orange, 10%);
-                }
-                &:focus{
-                    background-color: @orange;
-                }
-            }
-            &.twitter a{
-                //background-color: @twitter;
-                background-color:mix(@gray, @navy, 65%);
-                &:hover, &:focus{
-                    background-color:mix(@gray, @navy, 55%);
-                }
-                &:active{
-                    background-color: darken(@navySat, 7%);
-                }
-            }
-            &.active, &.active a:focus, &.active a:hover, &.active a:active{
-                background-color: darken(@navySat, 7%);
-            }
-            &.register.active a{
-                color: darken(@navySat, 7%) !important;
-            }
-            &.register.active, &.register.active a{
-                &:hover, &:focus, &:active{
-                    background-color: transparent !important;
-                }
-                background-color: transparent !important;
-            }
-            &.social{
-                background-color: transparent !important;
-                @media @mobile{
-                    &:last-child{
-                        right: 35px;
-                    }
-                }
-                a{
-                    padding: 0px 12px 0px 0px;
-                    font-weight: 100;
-                    //color: darken(@gray, 15%);
-                    font-size: 20px;
-                    color:mix(@gray, @navy, 65%);
-                    background-color: transparent !important;
-                    &:hover{
-                        color:mix(@gray, @navy, 55%);
-                        background-color: transparent !important;
-                    }
-                    &:active{
-                        color:mix(@gray, @navy, 50%);
-                        background-color: transparent !important;
-                    }
-                    &:focus{
-                        background-color: transparent !important;
-                        color:mix(@gray, @navy, 65%);
-                    }
-                }
-            }
-            &.logout{
-                background-color: transparent !important;
-                a{
-                    background-color: transparent !important;
-                    &:hover{
-                        color: darken(@navySat, 7%) !important;
-                    }
-                    &:active{
-                        color: darken(@navySat, 7%) !important;
-                    }
-                }
-            }
-            &.logout, &.register{
-                a{
-                    &:focus{
-                        color: #9ba9ae;
-                    }
-                }
-            }
         }
-    }
-    .notification-menu{
-        display: none;
     }
 }
 
-
-
 //Fixed Header on Scroll Styles
-.fixed-header header.main-header, .fixed-header.return-header header.main-header{
+.fixedHeader header.mainHeader, .fixedHeader.returnHeader header.mainHeader{
     border-bottom: 3px solid #ebf2f2;
-    nav.main-nav{
+    nav.mainNav{
         padding: 0px;
         ul{
             @media @1100{
@@ -440,17 +159,14 @@ header.main-header{
         }
         li.brand{
             top: 40px;
-            .logoAnimateFixed;
-            transform: translateY(-30px);
+            .logoAnimatedFixed;
+            .translate(0px, -30px);
             width: 85px;
             left: 12px;
             margin-left: 0px;
             a{
                 padding: 0px;
                 margin: 0px;
-            }
-            img{
-                //width: 85px;
             }
             @media @mobile{
                 top: 2px;
@@ -459,9 +175,8 @@ header.main-header{
     }
 }
 
-//Return Header when Scroll to Top Animations. Not yet sure what this is doing.
-.return-header header.main-header{
-    nav.main-nav{
+.returnHeader header.mainHeader{
+    nav.mainNav{
         li.brand{
             left: 50%;
             margin-left: -200px;
@@ -470,7 +185,7 @@ header.main-header{
             .logoAnimateReturn;
             @media @mobile{
                 top: 2px;
-                transform: translateY(-30px);
+                .translate(0px, -30px);
                 width: 85px;
                 left: 12px;
                 margin-left: 0px;
@@ -479,10 +194,8 @@ header.main-header{
     }
 }
 
-
-
-//Menu Toggle
-.menu-toggle{
+// Moble Menu Toggle
+.menuToggle{
     display: none;
     @media @mobile{
         display: block;
@@ -543,8 +256,7 @@ header.main-header{
     }
 }
 
-
-.open-nav .menu-toggle{
+.openNav .menuToggle{
     span{
         &:nth-child(1), &:nth-child(6) {
             -webkit-transform: rotate(45deg);
@@ -584,52 +296,3 @@ header.main-header{
         }
     }
 }
-
-
-//Toggle active states of utility items
-
-
-header.main-header .fa.close{
-    position: absolute;
-    right: 12px;
-    top: 0px;
-    opacity: 0;
-}
-
-header.main-header{
-    li.account-details, li.logout, li.login{
-        .fa.close{
-            right: 14px;
-        }
-    }
-}
-
-header.main-header li.twitter .fa.close, header.main-header li.donate .fa.close, header.main-header .news .fa.close{
-    right: initial;
-    left: 19px;
-    top: -1px;
-}
-
-
-//Toggles "X" display on utility items
-header.main-header{
-    li.active.sign-up{
-        a, a:focus{
-            color: @teal;
-            //background-color:mix(@gray, @navy, 60%);
-            span{
-                .transition(opacity,200ms,ease,0ms);
-            }
-        }
-    }
-    li.active{
-        position: relative;
-        .fa.close{
-            opacity: 1;
-        }
-        .fa.up{
-            opacity: 0;
-        }
-    }
-}
-

@@ -1,5 +1,4 @@
 if (Meteor.isClient) {
-
     //Register Form
     Template.register.events({
         'submit form': function(event){
@@ -11,7 +10,6 @@ if (Meteor.isClient) {
             console.log("Form submitted.");
         }
     });
-
     //Login Form
     Template.login.events({
         'submit form': function(event) {
@@ -21,5 +19,4 @@ if (Meteor.isClient) {
             console.log("Form submitted.");
         }
     });
-
 }

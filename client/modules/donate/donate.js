@@ -1,5 +1,5 @@
-Template.donate.onRendered(function () {
-    $('.donate .close-donate').click(function(){
-        $('body').removeClass('donation-active');
+if (Meteor.isClient) {
+    Template.donate.onRendered(function () {
+        //Donate Functions
     });
-});
+}

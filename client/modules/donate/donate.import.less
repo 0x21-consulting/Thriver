@@ -1,51 +1,20 @@
 section.donate {
     width: 656px;
-    //background-color:@midnightBlue;
-    text-align: center;
-    top: 0px;
-    .transition(all,400ms,ease-out,0ms);
-    h4{
-        border-color: @lightBlue;
-        margin-bottom: 20px;
-        padding-top: 28px;
-        max-width: 355px;
+    h2{
         margin: 0 auto;
         margin-bottom: 30px;
         .fa{
             color: lighten(@orange, 10%);
         }
     }
-    h5 {
-        color: mix(@gray, @navy, 25%);
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 15px;
-        letter-spacing: 0.5px;
-        background-color: transparent;
-        text-align: left;
+    p, h3{
         padding: 0px 92px;
-        margin-top: 20px;
-        margin-bottom: 10px;
     }
-    h6{
-        color: #fff;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 16px;
-        letter-spacing: 1px;
-        margin: 0px 0px 20px 0px;
-        &:first-child{
-            margin-top: 0px;
-        }
-    }
-    p {
-        padding: 0px 92px;
-        color: @white;
-        font-size: 16px;
-        line-height: 26px;
-        text-align: left;
+    p{
         margin-bottom: 30px;
-        font-weight: 500;
+    }
+    h4{
+        text-align: center;
     }
     form{
         padding: 30px 0px;
@@ -59,136 +28,24 @@ section.donate {
                 margin-top: 30px;
             }
         }
-        label{
-            //
-            &:hover{
-                //color: @aqua;
-            }
-        }
-        label.radio{
-            color: #fff;
-            line-height: 47px;
-            display: inline-block;
-            font-weight: 100;
-            font-size: 19px;
-            margin-right: 19px;
-            display: inline-block;
-            cursor: pointer;
-            position: relative;
-            font-size: 13px;
-            position: relative;
-            color: #fff;
-            width: 33.33333%;
-            background: @darkBlue;
-            display: block;
-            margin: 0px;
-            text-align: center;
-            font-weight: bold;
-            float: left;
-            padding: 1px 0px;
-            .transition(background-color, 100ms, ease, 0ms);
-            &:last-child{
-                margin-bottom: 30px;
-            }
-            &:hover{
-                background-color: darken(@darkBlue, 5%);
-            }
-        }
-        input[type=radio]:checked + label.radio{
-            background-color: @aqua;
-            &:before {
-                //text-indent: 0px;
-                background-color: @aqua;
-                //font-size: 16px;
-                //text-indent: 0px;
-                //transform:scale(1,1);
-            }
-        }
         input{
-            //max-width: 360px;
             width: 100%;
             margin: 0 auto;
             margin-bottom: 15px;
-        }
-        input[type='radio']{
-            margin-right: 8px;
-            position: relative;
-            top: -2px;
-            width: auto;
-            display: none;
-        }
-        input.custom-amt{
-            width: 33.3333%;
-            display: block;
-            float: left;
-            background-color: @midnightBlue;
-            color: @darkBlue;
-            &:focus{
-                color: #fff;
-            }
-        }
-        input{
             background-color: @darkBlue;
-            color: #fff;
+            color: @white;
             &:focus{
                 background-color: darken(@darkBlue, 5%);
             }
-        }
-        .styled-select, .cvv2{
-            width: 45%;
-            margin-right: 1%;
-            height: 49px;
-            //overflow: hidden;
-            background-color: @darkBlue;
-            color: @midnightBlue;
-            font-weight: bold;
-            float: left;
-            margin-top: 30px;
-            position: relative;
-            &:focus, input:focus, &:hover{
-                background-color: darken(@darkBlue, 5%);
-            }
-            label{
-                position: absolute;
-                left: 0px;
-                top: -20px;
-            }
-            &.small{
-                width: 18%;
-                margin-right: 0px;
-            }
-            select{
-                background: transparent;
-                width: 100%;
+            &.customAmt{
+                width: 33.3333%;
                 display: block;
-                font-size: 16px;
-                line-height: 1;
-                border: 0;
-                border-radius: 0;
-                height: 49px;
-                -webkit-appearance: none;
-                text-indent: 15px;
+                float: left;
+                background-color: @midnightBlue;
+                color: @darkBlue;
                 &:focus{
-                    outline: none;
+                    color: @white;
                 }
-            }
-            input{
-                background-color: @darkBlue;
-                color: @midnightBlue;
-            }
-        }
-        .cvv2{
-            margin-left: 5%;
-            width: 30%;
-            &:focus{
-                background-color: transparent;
-            }
-            input{
-                width: 100%;
-                color: #fff;
-            }
-            label{
-                position: absolute;
             }
         }
         span.bill {
@@ -201,12 +58,16 @@ section.donate {
             max-width: 180px;
             width: 100%;
             margin: 0 auto;
+            height: auto;
+            padding: 0px;
+            line-height: 50px;
+            height: 50px;
         }
+        ::-webkit-input-placeholder {  color: @midnightBlue;  }
+        :-moz-placeholder {  color: @midnightBlue;  }
+        ::-moz-placeholder {  color: @midnightBlue;  }
+        :-ms-input-placeholder {  color: @midnightBlue;  }
     }
-    ::-webkit-input-placeholder {  color: @midnightBlue;  }
-    :-moz-placeholder {  color: @midnightBlue;  }
-    ::-moz-placeholder {  color: @midnightBlue;  }
-    :-ms-input-placeholder {  color: @midnightBlue;  }
 }
 
 

@@ -1,0 +1,79 @@
+<template name="notifications">
+    <section class="notifications leftSmall hasSidebar">
+            <div class="scroller">
+                <h2>Notifications</h2>
+                <ul class="notificationMenu">
+                    <li class="notificationGeneric">
+                        <span class="dateMeta">November 21, 2015</span>
+                        <span class="text">There is a new action alert availble.</span>
+                    </li>
+                    <li class="notificationGeneric">
+                        <span class="dateMeta">November 17, 2015</span>
+                        <span class="text">Lots of new Tweets on our Twitter account!</span>
+                    </li>
+                    <li class="notificationGeneric">
+                        <span class="dateMeta">November 15, 2015</span>
+                        <span class="text">There is a new action alert availble.</span>
+                    </li>
+                    <li class="notificationRenewal">
+                        <span class="dateMeta">November 12, 2015</span>
+                        <span class="text">Your Donation Renewal is about to expire.</span>
+                        <button type="button" >Renew Now</button>
+                    </li>
+                    <li class="notificationApproval">
+                        <span class="dateMeta">October 20, 2015</span>
+                        <span class="text">johndoe@gmail.com is requesting access as a provider from such and such.</span>
+                        <button type="button">Approve</button>
+                        <button type="button" class="deny">Deny</button>
+                    </li>
+                    <li class="notificationApproval">
+                        <span class="dateMeta">October 10, 2015</span>
+                        <span class="text">johndoe@gmail.com is requesting access as a provider from such and such.</span>
+                        <button type="button">Approve</button>
+                        <button type="button" class="deny">Deny</button>
+                    </li>
+                </ul>
+                {{#if show}}
+                    <ul class="notificationMenu">
+                        {{#each notifications}}
+                                {{> Template.dynamic template=template }}
+                        {{/each}}
+                    </ul>
+                {{/if}}
+                <button type="button" class="loadMore">View Past Notifications <span class="fa">&#xf0da;</span></button>
+                <button type="button" class="closeTab">Close Tab</button>
+            </div>
+    </section>
+</template>
+
+
+
+<template name="notificationEmpty">
+    <li class="notificationEmpty">
+        No notifications at this time.
+    </li>
+</template>
+
+<template name="notificationGeneric">
+    <li class="notificationGeneric">
+        <span class="dateMeta">November 21, 2015</span>
+        <span class="text">{{text}}</span>
+    </li>
+</template>
+
+<template name="notificationApproval">
+    <li class="notificationApproval">
+        <span class="dateMeta">November 21, 2015</span>
+        <span class="text">{{text}}</span>
+        <button type="button">Approve</button>
+        <button type="button" class="deny">Deny</button>
+    </li>
+</template>
+
+<template name="notificationRenewal">
+    <li class="notificationRenewal">
+        <span class="dateMeta">November 21, 2015</span>
+        <span class="text">{{text}}</span>
+        <button type="button">Renew Now</button>
+    </li>
+</template>

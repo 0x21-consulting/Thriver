@@ -1,60 +1,60 @@
 <template name="news">
-    <section class="news right-large has-sidebar">
+    <section class="news rightLarge hasSidebar">
         <div class="scroller">
-            <h4><span class="fa">&#xf1ea;</span> Newsroom</h4>
-            <ul class="news-tabs">
+            <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
+            <ul class="newsTabs">
                 <li class="active">In the News</li>
                 <li>Press Releases</li>
                 <li>Action Alerts</li>
                 <li>Press/Media Kits</li>
             </ul>
-            <aside class="search-field-container">
+            <aside class="searchFieldContainer">
                 <form>
-                    <label for="search-news" class="fa">&#xf002;</label><input id="search-news" type="search" placeholder="Search" />
+                    <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
                 </form>
             </aside>
-            <ul class="news-content">
-                <li class="in-the-news active">
-                    <ul class="news-items">
+            <ul class="newsContent">
+                <li class="active">
+                    <ul class="newsItems">
                         {{>newsItem}}
                         {{>newsItem}}
                         {{>newsItem}}
                         {{>newsItem}}
                         {{>newsItem}}
                         {{>newsItem}}
-                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
+                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
                     </ul>
                 </li>
-                <li class="in-the-news">
-                    <ul class="news-items">
+                <li>
+                    <ul class="newsItems">
                         {{>newsItem2}}
                         {{>newsItem2}}
                         {{>newsItem2}}
                         {{>newsItem2}}
                         {{>newsItem2}}
                         {{>newsItem2}}
-                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
+                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
                     </ul>
                 </li>
-                <li class="in-the-news">
-                    <ul class="news-items">
+                <li>
+                    <ul class="newsItems">
                         {{>newsItem3}}
                         {{>newsItem3}}
                         {{>newsItem3}}
                         {{>newsItem3}}
                         {{>newsItem3}}
                         {{>newsItem3}}
-                        <li><a href="javascript:void(0)" class="load-more">Load More <span class="fa">&#xf0da;</span></a></li>
+                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
                     </ul>
                 </li>
-                <li class="in-the-news">
-                    <ul class="news-items">
+                <li>
+                    <ul class="newsItems">
                         {{>newsItem4}}
                         {{>newsItem5}}
                     </ul>
                 </li>
             </ul>
-            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+            <button type="button" class="closeTab">Close Tab</button>
         </div>
     </section>
 </template>
@@ -63,41 +63,45 @@
 <!--Duplicates for testing purposes-->
 <template name="newsItem">
     <li>
-        <span class="date-meta">November 21, 2015</span>
-        <h5><a href="#">Pellentesque posuere tincidunt</a></h5>
+        <span class="dateMeta">November 21, 2015</span>
+        <h3><a href="#">Pellentesque posuere tincidunt</a></h3>
         <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
     </li>
 </template>
 
 <template name="newsItem2">
     <li>
-        <span class="date-meta">November 22, 2015</span>
-        <h5><a href="#">Ut feugiat nibh finibus eu. Nunc eu lorem neque</a></h5>
+        <span class="dateMeta">November 22, 2015</span>
+        <h3><a href="#">Ut feugiat nibh finibus eu. Nunc eu lorem neque</a></h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</p>
     </li>
 </template>
 
 <template name="newsItem3">
     <li>
-        <span class="date-meta">November 23, 2015</span>
-        <h5><a href="#">Nunc eu lorem neque</a></h5>
+        <span class="dateMeta">November 23, 2015</span>
+        <h3><a href="#">Nunc eu lorem neque</a></h3>
         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum....</p>
     </li>
 </template>
 
 <!--Duplicates for display/icon purposes-->
 <template name="newsItem4">
-    <li class="press-media-item">
-        <a href="#" class="fa icon">&#xf030;</a>
-        <span class="date-meta">January 15, 2015</span>
-        <h5><a href="#">Press Kit (2015) (PDF)</a></h5>
+    <li class="pressMediaItem">
+        <a href="#">
+            <span class="fa icon">&#xf030;</span>
+            <span class="dateMeta">January 15, 2015</span>
+            <h3>Press Kit (2015) (PDF)</h3>
+        </a>
     </li>
 </template>
 
 <template name="newsItem5">
-    <li class="press-media-item">
-        <a href="#" class="fa icon">&#xf1fe;</a>
-        <span class="date-meta">February 12, 2015</span>
-        <h5><a href="#">Media Kit (2015) (PDF)</a></h5>
+    <li class="pressMediaItem">
+        <a href="#">
+            <span class="fa icon">&#xf1fe;</span>
+            <span class="dateMeta">February 12, 2015</span>
+            <h3>Media Kit (2015) (PDF)</h3>
+        </a>
     </li>
 </template>

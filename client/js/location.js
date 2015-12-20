@@ -39,7 +39,7 @@ Template.body.onRendered(function () {
             // grow or shrink in size, of which the Work section is particularly guilty
             var coordinates = [],
                 elements = document.querySelectorAll(
-                    'main.content-wrapper > section[id]'),
+                    'main.contentWrapper > section[id]'),
                 i, j;
             
             for (i = 0, j = elements.length; i < j; ++i)

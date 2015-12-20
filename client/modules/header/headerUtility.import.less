@@ -1,0 +1,154 @@
+nav.utility{
+    background-color: @gray;
+    height: 32px;
+    line-height: 32px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 9;
+    @media @mobile{
+        height: auto;
+        background-color: transparent;
+        position: relative;
+    }
+    li{
+        button{
+            height: 32px;
+            line-height: 32px;
+            display: block;
+            padding: 0px 12px;
+            color: @white;
+            .transition(all,200ms,ease-out,0ms);
+            span.close{
+                position: absolute;
+                opacity: 0;
+            }
+            span.unreadNotifications {
+                position: absolute;
+                margin-left: 2px;
+                width: 16px;
+                height: 16px;
+                color: @yellow;
+                text-align: center;
+                border-radius: 50%;
+                line-height: 17px;
+                top: 1px;
+                right: 1px;
+                font-size: 100%;
+                pointer-events: none;
+            }
+            @media @mobile{
+                display: block;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: @gray;
+                font-size: 12px;
+                margin: 6px 12px 3px 12px;
+                padding: 0px;
+                letter-spacing: 1px;
+                background-color: transparent !important; //override all specific bg-color styles
+                &:active, &:focus{
+                    color:@teal;
+                }
+            }
+        }
+        &.social, &.getHelp, &.donate, &.twitter, &.news{
+            float: right;
+            position: relative;
+            span.close{
+                left: 14px;
+                top: -1px;
+            }
+            @media @mobile{
+                float: none;
+            }
+        }
+        &.login, &.accountDetails, &.notifications, &.register, &.logout{
+            float: left;
+            position: relative;
+            span.close{
+                right: 6px;
+                top: -1px;
+            }
+            @media @mobile{
+                float: none;
+            }
+        }
+        &.login, &.accountDetails{
+            button{
+                padding: 0px 5px 0px 12px;
+            }
+        }
+        &.login, &.accountDetails, &.donate{
+            .utilityBackgroundColorButton(@teal);
+        }
+        &.notifications{
+            .utilityBackgroundColorButton(darken(@teal, 2.5%));
+            button{
+                padding: 0px 9px;
+                span.up{
+                    position: relative;
+                    left: -1px;
+                }
+                span.close{
+                    right:11px;
+                }
+            }
+        }
+        &.twitter{
+            .utilityBackgroundColorButton(mix(@gray, @navy, 65%));
+        }
+        &.news{
+            .utilityBackgroundColorButton(@navySat);
+        }
+        &.getHelp{
+            .utilityBackgroundColorButton(@orange);
+        }
+        &.register, &.logout{
+            .utilityColorButton(@navySat);
+        }
+        &.register, &.logout, &.login, &.accountDetails{
+            button span{
+                font-size: 11px;
+                position: relative;
+                &.up{
+                    top: -1px;
+                    margin-left: 1px;
+                }
+            }
+        }
+        &.social{
+            @media @mobile{
+                position: absolute;
+                display: block;
+                top: -10px;
+                right: 0px;
+                &:last-child{
+                    right: 35px;
+                }
+            }
+            a{
+                padding: 0px 12px 0px 0px;
+                font-weight: 100;
+                font-size: 18px;
+                color: mix(@gray, @navy, 65%);
+                &:hover{
+                    color: darken(mix(@gray, @navy, 65%), 5%);
+                }
+                &:active{
+                    color: darken(mix(@gray, @navy, 65%), 10%);
+                }
+            }
+        }
+        &.active{
+            position: relative;
+            .fa.close{
+                opacity: 1;
+            }
+            .fa.up{
+                opacity: 0;
+            }
+        }
+    }
+}

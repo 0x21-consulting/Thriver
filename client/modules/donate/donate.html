@@ -1,23 +1,23 @@
 <template name="donate">
-    <section class="donate right-medium has-sidebar">
+    <section class="donate rightMedium hasSidebar">
         <div class="scroller">
             <!--{{> donateSuccess}}-->
             <!--{{> donateFailure}}-->
             {{> donateDefault}}
-            <a href="javascript:void(0)" class="close-tab">Close Tab</a>
+            <button type="button" class="closeTab">Close Tab</button>
         </div>
     </section>
 </template>
 
 <template name="donateDefault">
-    <h4><span class="fa">&#xf004;</span> Donate to WCASA</h4>
-    <h5>Be a part of the movement to end sexual assault!</h5>
+    <h2><span class="fa">&#xf004;</span> Donate to WCASA</h2>
+    <h3>Be a part of the movement to end sexual assault!</h3>
     <p>
         <b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.
     </p>
     <form>
         <fieldset>
-            <h6>Donation Amount</h6>
+            <h4>Donation Amount</h4>
             <input id="radio1" type="radio" name="amount" value="25" />
             <label for="radio1" class="radio">$25</label>
             <input id="radio2" type="radio" name="amount" value="50" />
@@ -28,15 +28,15 @@
             <label for="radio4" class="radio">$200</label>
             <input id="radio5" type="radio" name="amount" value="custom" />
             <label for="radio5" class="radio">Other <span class="bill">$</span></label>
-            <input class="custom-amt" id="radio5" type="number" name="amount" min="0" value="75" />
+            <input class="customAmt" id="radio5" type="number" name="amount" min="0" value="75" />
         </fieldset>
         <fieldset>
-            <h6>Payment Details</h6>
+            <h4>Payment Details</h4>
             <input name="name" value="{{name}}" placeholder="Name on Card" required />
             <input type="number" name="number" placeholder="Credit Card Number" required pattern="\d{12,19}" />
             <span class="cc-pic"></span>
             <input type="hidden" name="type" value="mastercard" />
-            <div class="styled-select">
+            <div class="styledSelect">
                 <label>Expiration</label>
                 <select name="month">
                     <option value="01">January</option>
@@ -53,7 +53,7 @@
                     <option value="12">December</option>
                 </select>
             </div>
-            <div class="styled-select small">
+            <div class="styledSelect small">
                 <select name="year">
                     {{#each year}}
                         <option value="{{this}}">{{this}}</option>
@@ -74,8 +74,8 @@
 
 
 <template name="donateSuccess">
-    <div class="donate-success">
-        <h4><span class="fa">&#xf004;</span> Thank you for your donation!</h4>
+    <div class="donateSuccess">
+        <h2><span class="fa">&#xf004;</span> Thank you for your donation!</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
@@ -86,8 +86,8 @@
 </template>
 
 <template name="donateFailure">
-    <div class="donate-failure">
-        <h4><span class="fa">&#xf004;</span> We're sorry, the donation was unsuccessful.</h4>
+    <div class="donateFailure">
+        <h2><span class="fa">&#xf004;</span> We're sorry, the donation was unsuccessful.</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 

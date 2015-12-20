@@ -1,58 +1,58 @@
 <template name="utility">
-    <aside class="utility">
+    <nav class="utility">
         <ul>
             <!--Logged Out-->
             {{#if currentUser}}
                 <!--Currently logged in-->
             {{else}}
-                <li class="notifications left-small has-sidebar">
-                    <a href="javascript:void(0)">
+                <li class="notifications leftSmall hasSidebar">
+                    <button type="button">
                         <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
                         {{#if show}}
-                            <span class="unread-notifications fa">&#xf06a;</span>
+                            <span class="unreadNotifications fa">&#xf06a;</span>
                         {{/if}}
-                    </a>
+                    </button>
                 </li>
-                <li class="account-details left-small has-sidebar">
-                    <a href="javascript:void(0)">
+                <li class="accountDetails leftSmall hasSidebar">
+                    <button type="button">
                         Eoghan Mc Inerney <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </a>
+                    </button>
                 </li>
                 <li class="logout">
-                    <a href="javascript:void(0)" title="sign-out">
+                    <button type="button" title="Sign Out">
                         Sign Out <span class="fa">&#xf0da;</span>
-                    </a>
+                    </button>
                 </li>
-                <li class="login left-small has-sidebar">
-                    <a href="javascript:void(0)">
+                <li class="login leftSmall hasSidebar">
+                    <button type="button">
                         Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </a>
+                    </button>
                 </li>
-                <li class="register left-small has-sidebar">
-                    <a href="javascript:void(0)" title="sign-up">
+                <li class="register leftSmall hasSidebar">
+                    <button type="button" title="Sign Up">
                         Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </a>
+                    </button>
                 </li>
             {{/if}}
-            <li class="get-help">
-                <a href="javascript:void(0)" title="Get Help">
+            <li class="getHelp">
+                <button type="button" title="Get Help">
                     <span class="fa">&#xf06a;</span> Get Help
-                </a>
+                </button>
             </li>
-            <li class="donate right-medium has-sidebar">
-                <a href="javascript:void(0)" title="Donate">
+            <li class="donate rightMedium hasSidebar">
+                <button type="button" title="Donate">
                     <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
-                </a>
+                </button>
             </li>
-            <li class="news right-large has-sidebar">
-                <a href="javascript:void(0)" title="Newsroom">
+            <li class="news rightLarge hasSidebar">
+                <button type="button" title="Newsroom">
                     <span class="fa up">&#xf1ea;</span><span class="fa close">&#xf00d;</span> Newsroom
-                </a>
+                </button>
             </li>
-            <li class="twitter right-small has-sidebar">
-                <a href="javascript:void(0)">
+            <li class="twitter rightSmall hasSidebar">
+                <button type="button">
                     <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
-                </a>
+                </button>
             </li>
             <li class="social fa">
                 <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
@@ -65,5 +65,5 @@
                 </a>
             </li>
         </ul>
-    </aside>
+    </nav>
 </template>

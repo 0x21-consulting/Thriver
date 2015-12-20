@@ -1,11 +1,10 @@
 <template name="alert">
-    <aside class="alert">
-        <p class="container">
-            {{> alertGetHelp }} 
-            <span class="close-alert fa">&#xf00d;</span>
-        </p>
-
-    </aside>
+    <figure class="alert">
+        <figcaption class="container">
+            {{> alertGetHelp }}
+            <span class="closeAlert fa">&#xf00d;</span>
+        </figcaption>
+    </figure>
 </template>
 
 
@@ -15,5 +14,20 @@
 </template>
 
 <template name="alertLogOut">
-You have been logged-out as johndoe@gmail.com.
+    You have been logged-out as johndoe@gmail.com.
+</template>
+
+<template name="alertApprove">
+    johndoe@gmail.com has been granted account registration.
+    <button type="button" class="undo">Undo</button>
+</template>
+
+<template name="alertEventUnregister">
+    You have been unregistered for event, X.
+    <button type="button" class="undo">Undo</button>
+</template>
+
+<template name="alertRegistered">
+    You have registered for the event, X. Thanks!
+    <button type="button" class="undo">Undo</button>
 </template>

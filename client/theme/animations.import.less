@@ -1,317 +1,182 @@
+//Animation Mixins & Classes
+.animation(@name, @iteration, @duration, @ease, @delay) {
+    -moz-animation-name: @name;
+    -moz-animation-iteration-count: @iteration;
+    -moz-animation-duration: @duration;
+    -moz-animation-timing-function: @ease;
+    -moz-animation-delay: @delay;
+
+    -webkit-animation-name: @name;
+    -webkit-animation-iteration-count: @iteration;
+    -webkit-animation-duration: @duration;
+    -webkit-animation-timing-function: @ease;
+    -webkit-animation-delay: @delay;
+
+    animation-name: @name;
+    animation-iteration-count: @iteration;
+    animation-duration: @duration;
+    animation-timing-function: @ease;
+    animation-delay: @delay;
+}
+
+.keyframes(@name; @arguments) {
+    @-moz-keyframes @name { @arguments(); }
+    @-webkit-keyframes @name { @arguments(); }
+    @keyframes @name { @arguments(); }
+}
+
+.transition (@transitionProperty, @duration, @ease, @delay) {
+    -webkit-transition: @transitionProperty @duration @ease @delay;
+    -moz-transition:    @transitionProperty @duration @ease @delay;
+    -ms-transition:     @transitionProperty @duration @ease @delay;
+    -o-transition:      @transitionProperty @duration @ease @delay;
+}
+
+.translate(@x, @y){
+    -ms-transform: translate(@x,@y); /* IE 9 */
+    -webkit-transform: translate(@x,@y); /* Safari */
+    transform: translate(@x,@y);
+}
+
+
+.noAnimation{
+    animation-duration: 0ms !important;
+    -webkit-animation-duration: 0ms !important;
+    -moz-animation-duration: 0ms !important;    
+}
+
+.noTransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
+
+//// Translated Element Classes
+
+.translateIn{
+    .translate(0px, 0px);
+}
+.translateLeftOut{
+    .translate(-100%, 0px);
+}
+.translateTopOut{
+    .translate(0px, -100%);
+}
+
+
+
 //Logo Animation
-.logoAnimateFixed{
-    -moz-animation-name: logoAnimate;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: ease-out;
-    -moz-animation-duration: 450ms;
-    -moz-animation-delay: 0ms;
-
-    -webkit-animation-name: logoAnimate;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-out;
-    -webkit-animation-duration: 450ms;
-    -webkit-animation-delay: 0ms;
-
-    animation-name: logoAnimate;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-out;
-    animation-duration: 450ms;
-    animation-delay: 0ms;
+.logoAnimatedFixed{
+    .animation(logoAnimatedFixed, 1, 450ms, ease-out, 0ms);
+    .keyframes(logoAnimatedFixed;{
+        0% {
+            .translate(0px, 0px);
+            left: 50%;
+            margin-left: -200px;
+            width: 400px;
+        }
+        50%{
+            .translate(0px, -180px);
+            left: 50%;
+            margin-left: -200px;
+            width:400px;
+        }
+        51%{
+            .translate(0px, -180px);
+            left: -200px;
+            margin-left: 0px;
+            width: 85px;
+        }
+        52%{
+            .translate(0px, -30px);
+            left: -200px;
+            margin-left: 0px;
+            width: 85px;
+        }
+        100% {
+            .translate(0px, -30px);
+            left: 12px;
+            margin-left: 0px;
+            width: 85px;
+        }
+    });
     @media @mobile{
-        animation-duration: 0ms;
-        -webkit-animation-duration: 0ms;
-        -moz-animation-duration: 0ms;
-    }
-}
-
-
-
-@keyframes logoAnimate {
-    0% {
-        transform: translateY(0px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    50%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width:400px;
-    }
-    51%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    52%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    100% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
-    }
-}
-@-moz-keyframes logoAnimate {
-    0% {
-        transform: translateY(0px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    50%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width:400px;
-    }
-    51%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    52%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    100% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
-    }
-}
-@-webkit-keyframes logoAnimate {
-    0% {
-        transform: translateY(0px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    50%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width:400px;
-    }
-    51%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    52%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    100% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
+        .noAnimation;
     }
 }
 
 
 //Logo Animation
 .logoAnimateReturn{
-    -moz-animation-name: logoAnimateReturn;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: ease-out;
-    -moz-animation-duration: 400ms;
-    -moz-animation-delay: 0ms;
-
-    -webkit-animation-name: logoAnimateReturn;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-out;
-    -webkit-animation-duration: 400ms;
-    -webkit-animation-delay: 0ms;
-
-    animation-name: logoAnimateReturn;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-out;
-    animation-duration: 400ms;
-    animation-delay: 0ms;
-
+    .animation(logoAnimateReturn, 1, 400ms, ease-out, 0ms);
+    .keyframes(logoAnimateReturn;{
+        0% {
+            .translate(0px, -30px);
+            left: 12px;
+            margin-left: 0px;
+            width: 85px;
+        }
+        30%{
+            .translate(0px, -30px);
+            left: -200px;
+            margin-left: 0px;
+            width: 85px;
+        }
+        31%{
+            .translate(0px, -180px);
+            left: -200px;
+            margin-left: 0px;
+            width: 85px;
+        }
+        32%{
+            .translate(0px, -180px);
+            left: 50%;
+            margin-left: -200px;
+            width: 400px;
+        }
+        55% {
+            left: 50%;
+            margin-left: -200px;
+            top: 40px;
+            width: 400px;
+        }
+        100% {
+            left: 50%;
+            margin-left: -200px;
+            top: 40px;
+            width: 400px;
+        }
+    });
     @media @mobile{
-        animation-duration: 0ms;
-        -webkit-animation-duration: 0ms;
-        -moz-animation-duration: 0ms;
-    }
-}
-
-@keyframes logoAnimateReturn {
-    0% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    30%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    31%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    32%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    55% {
-        left: 50%;
-        margin-left: -200px;
-        top: 40px;
-        width: 400px;
-    }
-    100% {
-        left: 50%;
-        margin-left: -200px;
-        top: 40px;
-        width: 400px;
-    }
-}
-
-@-moz-keyframes logoAnimate {
-    0% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    30%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    31%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    32%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    55% {
-        left: 50%;
-        margin-left: -200px;
-        top: 58px;
-        width: 400px;
-    }
-    100% {
-        left: 50%;
-        margin-left: -200px;
-        top: 58px;
-        width: 400px;
-    }
-}
-
-@-webkit-keyframes logoAnimate {
-    0% {
-        transform: translateY(-30px);
-        left: 12px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    30%{
-        transform: translateY(-30px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    31%{
-        transform: translateY(-180px);
-        left: -200px;
-        margin-left: 0px;
-        width: 85px;
-    }
-    32%{
-        transform: translateY(-180px);
-        left: 50%;
-        margin-left: -200px;
-        width: 400px;
-    }
-    55% {
-        left: 50%;
-        margin-left: -200px;
-        top: 40px;
-        width: 400px;
-    }
-    100% {
-        left: 50%;
-        margin-left: -200px;
-        top: 40px;
-        width: 400px;
+        .noAnimation;
     }
 }
 
 
 
-//Animating the Newsroom Tabs
-@keyframes slideIn {
-  0% {
-    display: none;
-    opacity: 0.25;
-    background-color: #4e606a;
-  }
-  1% {
-    display: block;
-    opacity: 0.25;
-    background-color: #4e606a;
-    //transform: translateX(20px);
-  }
-  100% {
-    opacity: 1;
-    //background-color: transparent;
-    background-color: #4e606a;
-    //transform: translateX(0px);
-  }
-}
-
+//Special Pulse Animation just for News Tab switch
 .animateNewsTabs{
-    -moz-animation-name: slideIn;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: ease-in;
-    -moz-animation-duration: 250ms;
-    -moz-animation-delay: 0ms;
-
-    -webkit-animation-name: slideIn;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
-    -webkit-animation-duration: 250ms;
-    -webkit-animation-delay: 0ms;
-
-    animation-name: slideIn;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 250ms;
-    animation-delay: 0ms;
+    .animation(slideIn, 1, 250ms, ease-in, 0ms);
+    .keyframes(slideIn;{
+        0% {
+            display: none;
+            opacity: 0.25;
+            background-color: #4e606a;
+        }
+        1% {
+            display: block;
+            opacity: 0.25;
+            background-color: #4e606a;
+        }
+        100% {
+            opacity: 1;
+            background-color: #4e606a;
+        }
+    });
     @media @mobile{
-        animation-duration: 0ms;
-        -webkit-animation-duration: 0ms;
-        -moz-animation-duration: 0ms;
+        .noAnimation;
     }
 }

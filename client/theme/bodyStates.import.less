@@ -1,0 +1,48 @@
+body{
+    &.leftSmall, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden;
+        .overlay{
+            opacity: 0.85; 
+            visibility: visible;
+            &:hover{
+                opacity: 0.95;
+            }       
+        }
+    }
+    &.leftSmall{
+        .canvasCenter{
+            left: 356px;
+        }
+        .sidebarsLeft{
+            left: 0px;
+        }
+    }
+    &.rightSmall{
+        .canvasCenter{
+            left: -356px;
+        }
+        .sidebarsRight{
+            right: 0px;
+        }
+    }
+    &.rightMedium{
+        .canvasCenter{
+            left: inherit;
+            left: -656px;
+        }
+        .sidebarsRight{
+            width: 656px;
+            right: 0px;
+        }
+    }
+    &.rightLarge{
+        .canvasCenter{
+            left: inherit;
+            left: -800px;
+        }
+        .sidebarsRight{
+            width: 800px;
+            right: 0px;
+        }
+    }
+}

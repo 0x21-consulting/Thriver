@@ -1,16 +1,14 @@
 // Utility Nav
 Template.utility.onRendered(function () {
-
     //Utility Navigation Sidebar Actions
-    $('aside.utility > ul > li.has-sidebar').click(function(){
+    $('nav.utility > ul > li.hasSidebar').click(function(){
         //Variables to find accompanied sidebar
         var thisClass = $(this).attr('class');
         var thisSidebar = $( "section[class='" + thisClass +"']" );
 
         //Clear Open Elements
-        $('aside.utility > ul > li.has-sidebar').not(this).removeClass('active');
+        $('nav.utility > ul > li.hasSidebar').not(this).removeClass('active');
         $('.sidebar section').not(thisSidebar).removeClass('active');
-
 
         //General Toggle Settings
         if ($(this).hasClass('active')){
@@ -18,68 +16,65 @@ Template.utility.onRendered(function () {
             thisSidebar.removeClass('active');
 
             //Specific Conditions
-            if ($(this).hasClass('left-small')){
-                $('body').removeClass('left-small');
+            if ($(this).hasClass('leftSmall')){
+                $('body').removeClass('leftSmall');
             }
-            else if ($(this).hasClass('right-small')){
-                $('body').removeClass('right-small');
+            else if ($(this).hasClass('rightSmall')){
+                $('body').removeClass('rightSmall');
             }
-            else if ($(this).hasClass('right-medium')){
-                $('body').removeClass('right-medium');
+            else if ($(this).hasClass('rightMedium')){
+                $('body').removeClass('rightMedium');
             }
-            else if ($(this).hasClass('right-large')){
-                $('body').removeClass('right-large');
+            else if ($(this).hasClass('rightLarge')){
+                $('body').removeClass('rightLarge');
             }
         } else{
             $(this).addClass('active');
             thisSidebar.addClass('active');
             //Alternative Specific Conditions
-            if ($(this).hasClass('left-small')){
-                $('body').removeClass('right-small right-medium right-large');
-                $('body').addClass('left-small');
+            if ($(this).hasClass('leftSmall')){
+                $('body').removeClass('rightSmall rightMedium rightLarge');
+                $('body').addClass('leftSmall');
             }
-            else if ($(this).hasClass('right-small')){
-                $('body').removeClass('left-small right-medium right-large');
-                $('body').addClass('right-small');
+            else if ($(this).hasClass('rightSmall')){
+                $('body').removeClass('leftSmall rightMedium rightLarge');
+                $('body').addClass('rightSmall');
             }
-            else if ($(this).hasClass('right-medium')){
-                $('body').removeClass('right-small left-small right-large');
-                $('body').addClass('right-medium');
+            else if ($(this).hasClass('rightMedium')){
+                $('body').removeClass('rightSmall leftSmall rightLarge');
+                $('body').addClass('rightMedium');
             }
-            else if ($(this).hasClass('right-large')){
-                $('body').removeClass('right-small right-medium left-small');
-                $('body').addClass('right-large');
+            else if ($(this).hasClass('rightLarge')){
+                $('body').removeClass('rightSmall rightMedium leftSmall');
+                $('body').addClass('rightLarge');
             }   
         }
     });
-    function removeActiveSidebars(){
-        $('body').removeClass('left-small right-small right-medium right-large');
-        $('aside.utility > ul > li.has-sidebar').removeClass('active');
-        $('aside.sidebar > section').removeClass('active');        
-    }
-    $('.overlay, .close-tab, li.logout, li.get-help').click(function(){
-        removeActiveSidebars();
-    });
-
 
     //Should be attributed to correct alert
-    $('li.logout, li.get-help').click(function(){
-        $('aside.alert').addClass('active').delay(5000).queue(function(){
+    $('li.logout, li.getHelp').click(function(){
+        $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
     });
 
-    $('span.close-alert').click(function(){
-        $('aside.alert').removeClass("active").dequeue();
+    $('span.closeAlert').click(function(){
+        $('figure.alert').removeClass("active").dequeue();
     });
 
+    function removeActiveSidebars(){
+        $('body').removeClass('leftSmall rightSmall rightMedium rightLarge');
+        $('nav.utility > ul > li.hasSidebar').removeClass('active');
+        $('aside.sidebar > section').removeClass('active');        
+    }
+    $('.overlay, .closeTab, li.logout, li.getHelp').click(function(){
+        removeActiveSidebars();
+    });
 
     //Temp UX Alert Notes
     $('.notifications li a').click(function(){
         alert('Should we use the alerts template to show at the bottom of page in red: "johndoe@gmail.com has been approved as a provider with so-and-so... And for the "Renew" lets fire the close all panels function and open up donate with alternative text?" View past notifcations link to essentially work as a paginator. View Events on the account details page to close all open tabs and scroll to events')
     });
-
-
 
     // Toggle visibility of the Alerts
     var alerts = document.querySelectorAll('.alerts'),
@@ -90,7 +85,7 @@ Template.utility.onRendered(function () {
         event.preventDefault();
         event.stopPropagation();
         
-        var active = document.querySelectorAll('.utility-nav .active'),
+        var active = document.querySelectorAll('.utilityNav .active'),
             i, j;
         
         for (i = 0, j = active.length; i < j; ++i)
@@ -106,14 +101,14 @@ Template.utility.onRendered(function () {
     
     // Close modules by default
     document.body.addEventListener('mousedown', function () {
-        var active = document.querySelectorAll('.utility-nav .active'),
+        var active = document.querySelectorAll('.utilityNav .active'),
             i, j;
         
         for (i = 0, j = active.length; i < j; ++i)
             active[i].classList.remove('active');
     });
     // But not if you click in the modules
-    modules = document.querySelectorAll('.notification-menu');
+    modules = document.querySelectorAll('.notificationMenu');
     blockClose = function (event) {
         event.stopPropagation();
     };

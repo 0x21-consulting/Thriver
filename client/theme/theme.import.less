@@ -1,180 +1,56 @@
-//Core Styles
-//Custom Resets
-a, a:link, a:visited, a:hover, a:active, a:focus{
-    text-decoration: none;
-}
-
 body, html{
     background-color:mix(@gray, @navy, 70%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font: 12px/30px 'Raleway', sans-serif;
 }
 
-
-//Media Queries
-@1600:      ~"only screen and (max-width: 1600px)";
-@1450:      ~"only screen and (max-width: 1450px)";
-@1300:      ~"only screen and (max-width: 1300px)";
-@1100:      ~"only screen and (max-width: 1100px)";
-@mobile:      ~"only screen and (max-width: 767px)";
-//@tablet:      ~"only screen and (min-width: 530px) and (max-width: 949px)";
-//@desktop:     ~"only screen and (min-width: 950px) and (max-width: 1128px)";
-//@desktop-xl:  ~"only screen and (min-width: 1129px)";
-
-
-
-
-
-
-//Iconography
-.fa{font-family: "FontAwesome";}
-
-
-//Colors
-@white: #fff;
-@gray: #ebf2f2;
-@navy: #062131;
-@navySat: #2c5465;
-@teal: #00b7c5;
-@orange: #f1592a;
-@yellow: #F5D76E;
-
-
-//Utility Colors
-//List Item Blue A,B
-@lightBlue: #566a75;
-@darkBlue: #4e606a;
-
-//News Background
-@midnightBlue: #6d7f88;
-//News Links
-@aqua: #1db7c5;
-
-//Brand Colors
-@twitter: #00aced;
-
-
-
-
-// Body Class States
-
-//Mobile Menu
-@media @mobile{
-    body header.main-header{
-        .scrollable-m{
-            .transition(all,400ms,ease-out,0ms);
-            height: 0px;
-            overflow: hidden;
-            padding: 0px;
+body{
+    .full{
+        width: 100%;
+    }
+    .masterContainer{
+        padding-top: 348px;
+        .transition(all,400ms,ease-out,0ms);
+        @media @mobile{
+            padding-top: 32px; //Was Important
         }
     }
-    .open-nav header.main-header{
-        .scrollable-m{
-            overflow-y: scroll;
-            height: 100vh; //Fallback
-            height: ~"calc(100vh - 32px)";
+    &.fixedHeader{
+        .masterContainer{
+            padding-top: 74px;
         }
     }
 }
 
-
-
-
-
-//Typography
-/*
-    @baseFontSize: 16px;
-    @baseLineHeight: 24px;
-    @baseLetterSpacing : 1px;
-    @baseFont: "Raleway", sans-serif;
-    @heroHeadlineFontSize: 5em;
-    .fa{font-family: "FontAwesome";}
-*/
-
-h4{
-    font-weight: 600;
-    color: @white;
-    text-transform: uppercase;
-    font-size: 18px;
-    letter-spacing: 2px;
-    padding-top: 20px;
-    padding-bottom: 18px;
-    border-bottom: 3px solid #ebf2f2;
-    display: inline-block;
+.container{
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
-
-//font-family: 'Old Standard TT', serif;
-//font-family: 'Raleway', sans-serif;
-
-
-
-
-//Forms
-form{
-    input, button.submit{
-        display: block;
-        border: none;
-        padding: 16px 0px;
-        margin: 12px 0px;
-        width: 100%;
-        text-indent: 12px;
-        width: 300px;
-        width: 100%;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: @navy;
-        &:focus{
-            outline: none;
-            background-color: @gray;
-        }
-    }
-    label {
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        line-height:12px;
-        font-weight: bold;
-        color: mix(@gray, @navy, 25%);
-    }
-    input[type="radio"] {
-        display: inline-block;
-        width: auto;
-        margin: 0px 4px 0px 24px;
-        position: relative;
-        top: -1px;
-    }
-    input[type='search']{
-        background: transparent;
-        border: none;
-        border-bottom: 2px solid #fff;
-        width: 100%;
-        max-width: 300px;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: #fff;
-        font-weight: bold;
-        line-height: 31px;
-        text-indent: 20px;
-        padding: 0px;
-        font: 12px/30px 'Raleway', sans-serif;
-        margin: 0 auto;
-    }
-    input[type='submit'], button.submit{
-        text-indent: 0px;
-        background-color: @teal;
-        color: @white;
-        &:hover, &:focus{
-            background-color: darken(@teal, 2.5%);
-        }
-        &:active{
-            background-color: darken(@teal, 5%);
-        }
-    }
-    ::-webkit-input-placeholder {  color: mix(@gray, @navy, 55%);  }
-    :-moz-placeholder {  color: mix(@gray, @navy, 55%);  }
-    ::-moz-placeholder {  color: mix(@gray, @navy, 55%);  }
-    :-ms-input-placeholder {  color: mix(@gray, @navy, 55%);  }
+.scroller{
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.canvasCenter{
+    position: relative;
+    left: 0px;
+    z-index: 2;
+    .transition(all,400ms,ease-out,0ms);
+}
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    background-color: @navy;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    .transition(all,400ms,ease-out,0ms);
+}
+button{
+    .transition(background-color, 200ms, ease, 0ms);
 }

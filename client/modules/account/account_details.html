@@ -1,0 +1,43 @@
+<template name="accountDetails">
+    <section class="accountDetails leftSmall hasSidebar">
+            <div class="scroller">
+                <h2>Account Details</h2>
+                <form class="editable">
+                    <label for="updateName">Name</label>
+                    <input id="updateName" type="name" name="updateName" value="John Doe" required>
+                    <label for="updateProvider">Provider</label>
+                    <input id="updateProvider" type="text" name="updateProvider" value="Milwaukee Area" required>
+                    <label for="updateEmail">Email</label>
+                    <input id="updateEmail" type="email" name="updateEmail" value="johndoe@gmail.com" required>
+                    <label for="updatePassword">Password</label>
+                    <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required>
+                    <input type="submit" value="Update Account">
+                </form>
+                <h2>Your Registered Events</h2>
+                <ul class="eventsMenu">
+                    {{>eventsRegistered}}
+                    {{>eventsRegistered}}
+                    {{>eventsRegistered}}
+                    {{>eventsRegistered}}
+                    {{>eventsRegistered}}
+                </ul>
+                <button type="button" class="viewEvents">View All Events</button>
+                <button type="button" class="closeTab">Close Tab</button>
+            </div>
+    </section>
+</template>
+
+<template name="eventsEmpty">
+    <li class="eventsEmpty">
+        You are not currently registered for any events.
+    </li>
+</template>
+
+<template name="eventsRegistered">
+    <li class="eventsRegistered">
+        <span class="dateMeta">November 21, 2015</span>
+        <span class="text">Jerard Hall Group Meeting</span>
+        <button type="button" class="viewEvent">View Event</button>
+        <button type="button" class="unregister">Unregister</button>
+    </li>
+</template>

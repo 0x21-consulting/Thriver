@@ -1,37 +1,45 @@
-<!--Main Header Template-->
 <template name="header">
-    <header class="main-header full" id="menu">
+    <header class="mainHeader full" id="menu">
+        {{> utility}}
+        {{> mainNav}}
+        {{> menuToggle}}
         <div class="overlay"></div>
-        <div class="scrollable-m">
-            {{> utility}}
-            <nav class="main-nav">
-                <ul class="container">
-                    <li class="brand"><a href="#"><img src="/lib/img/wisconsin-coalition-against-sexual-assault.png" alt="WCASA" /></a></li>
-                    <!--{{#each sections}}
-                        {{> menuItem}}
-                    {{/each}}-->
-
-                    <!--Placeholder for FED-->
-                    <li><a href="#">What We Do</a></li>
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Who We Are</a></li>
-                    <li><a href="#">Get Involved</a></li>
-                    <li><a href="#providers">Service Providers</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <!--FED Placeholder End-->
-                </ul>
-            </nav>
-        </div>
-        <div class="menu-toggle">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
     </header>
 </template>
 
+<template name="mainNav">
+    <nav class="mainNav">
+        <ul class="container">
+            <li class="brand"><a href="#"><img src="/lib/img/wisconsin-coalition-against-sexual-assault.png" alt="WCASA" /></a></li>
+            <!--{{#each sections}}
+                {{> menuItem}}
+            {{/each}}-->
 
-<!--Menu Item Template-->
+            <!--Placeholder for FED-->
+            <li><a href="#">What We Do</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Who We Are</a></li>
+            <li><a href="#">Get Involved</a></li>
+            <li><a href="#">Service Providers</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <!--FED Placeholder End-->
+        </ul>
+    </nav>
+</template>
+
 <template name="menuItem">
     <li>
         <a href="#{{anchor name=name}}">{{name}}</a>
     </li>
+</template>
+
+<template name="menuToggle">
+    <div class="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 </template>

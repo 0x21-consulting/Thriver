@@ -1,0 +1,63 @@
+body, html{
+    font: 14px/26px 'Raleway', sans-serif;
+}
+//Typopgraphy
+.fa{font-family: "FontAwesome";}
+.os{font-family: "Old Standard TT', serif";}
+.rw{font-family: 'Raleway', sans-serif;}
+
+button{
+    .rw;
+    font-weight: 800;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    letter-spacing: 0.25px;
+}
+
+a, a:link{
+    .colorButton(@teal);
+}
+
+h2{
+    font-weight: 600;
+    color: @white;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding-top: 20px;
+    padding-bottom: 18px;
+    border-bottom: 3px solid #ebf2f2;
+    display: inline-block;
+    a{
+        .colorButton(@white);
+    }
+}
+
+h3 {
+    color: mix(@gray, @navy, 25%);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    background-color: transparent;
+    text-align: left;
+    margin-bottom: 10px;
+}
+h4{
+    color: @white;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0px 0px 20px 0px;
+    &:first-child{
+        margin-top: 0px;
+    }
+}
+p {
+    color: @white;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 500;
+}

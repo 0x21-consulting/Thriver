@@ -28,25 +28,14 @@ Template.body.onRendered(function () {
         // Set a timeout to add the class after one tenth of a second
         timeout = setTimeout(function () {
             if (window.scrollY > 0){
-                document.body.classList.add('fixed-header');
+                document.body.classList.add('fixedHeader');
             } else {
-                document.body.classList.remove('fixed-header');
+                document.body.classList.remove('fixedHeader');
                 //Needed to animate unshrink of header
-                document.body.classList.add('return-header');   
+                document.body.classList.add('returnHeader');   
             }        
         }, 100);
     },false);
-
-    // Menu Toggle Click
-    /*document.querySelector('.menu-toggle').addEventListener('mouseup', function () {
-        if (document.body.classList.contains('open-nav'))
-            document.body.classList.remove('open-nav');
-        else
-            document.body.classList.add('open-nav');
-    });*/
-
-
-    
 });
 
 var smoothScroll = function (event) {
