@@ -13,7 +13,7 @@ var donateException = function (element, message) {
 }
 
 // Donate form helpers
-Template.donate.helpers({
+Template.donateDefault.helpers({
     'name': function () {
         var user = Meteor.user();
         // Just return name of logged in user
@@ -34,9 +34,9 @@ Template.donate.helpers({
 });
 
 // Donate form events
-Template.donate.events({
+Template.donateDefault.events({
     // Handle form submission
-    'submit .donate-object form': function (event) {
+    'submit form': function (event) {
         if (event && event.preventDefault)
             event.preventDefault();
         
@@ -66,6 +66,10 @@ Template.donate.events({
                 
                 error = results.error;
                 if (error && error.response) {
+                    // Hide default message and indicate error
+                    document.querySelector('.donateDefault').classList.add('hide');
+                    document.querySelector('.donateFailure').classList.remove('hide');
+                    
                     // Handle error details
                     if (error.response.details) {
                         details = error.response.details;
@@ -100,6 +104,11 @@ Template.donate.events({
                         default:
                             console.error(error.response.name);
                     }
+                } else {
+                    // Success!  Now hide the form and display success
+                    form.classList.add('hide');
+                    document.querySelector('.donateDefault').classList.add('hide');
+                    document.querySelector('.donateSuccess').classList.remove('hide');
                 }
             }
         });
@@ -107,14 +116,14 @@ Template.donate.events({
     },
     
     // Show credit card type
-    'keyup .donate-object [name="number"]': function (event) {
+    'keyup [name="number"]': function (event) {
         if (!event || !event.target)
             return;
         
         var ccImage = event.target.parentElement.parentElement.
                 querySelector('.cc-pic'),
             ccType  = event.target.parentElement.parentElement.
-                querySelector('.donate-object [name="type"]');
+                querySelector('[name="type"]');
         
         if (!ccImage || !ccType) return;
         
@@ -150,6 +159,9 @@ Template.donate.events({
                         ccImage.textContent = '\uf1f0';
                         ccType.value = 'visa';
                         break;
+                    default:
+                        ccImage.textContent = '';
+                        ccType.value = 'mastercard';
                 }
         }
     }
