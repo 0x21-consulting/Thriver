@@ -40,17 +40,27 @@ Template.donateDefault.events({
         if (event && event.preventDefault)
             event.preventDefault();
         
-        var form = event.target;
+        var form = event.target,
         
+        // Calculate total
+        total = form['amount'].value === 'custom' ? 
+            document.querySelector('#customAmt').value :
+            form['amount'].value;
+        
+        // Disable submit button to prevent accidental double-submit
+        form.querySelector('button.submit').disabled = true;
+        
+        // Initiate Purchase
+        debugger;
         Meteor.Paypal.purchase({
             name        : form['name'].value,
-            number      : form['number'].value,
+            number      : form['number'].value.replace(/ /g, ''),
             type        : form['type'].value,
             cvv2        : form['cvv2'].value,
             expire_year : form['year'].value,
             expire_month: form['month'].value
         }, {
-            total       : form['amount'].value,
+            total       : total,
             currency    : 'USD'
         }, function (error, results) {
             var i, j, details;
@@ -69,6 +79,9 @@ Template.donateDefault.events({
                     // Hide default message and indicate error
                     document.querySelector('.donateDefault').classList.add('hide');
                     document.querySelector('.donateFailure').classList.remove('hide');
+                    
+                    // Re-enable submit button
+                    form.querySelector('button.submit').disabled = false;
                     
                     // Handle error details
                     if (error.response.details) {
@@ -160,9 +173,31 @@ Template.donateDefault.events({
                         ccType.value = 'visa';
                         break;
                     default:
-                        ccImage.textContent = '';
+                        ccImage.textContent = ' ';
                         ccType.value = 'mastercard';
                 }
+        }
+        
+        // Based on credit card type, space out the numbers
+        
+        // If this is the backspace key, ignore
+        if (event.keyCode === 8) return;
+        
+        // American Express and Diners Club cards indent at 4 and 10
+        if (ccType.value === 'amex') {
+            if (event.target.value.length === 4 || event.target.value.length === 11) {
+                event.target.value = event.target.value + ' ';
+                return;
+            }
+            // Otherwise, don't indent at all
+            return;
+        }
+        
+        // All other credit cards have a space after 4, 8, and 12
+        if (event.target.value.length === 4 || event.target.value.length === 9
+            || event.target.value.length === 14) {
+            event.target.value = event.target.value + ' ';
+            return;
         }
     }
 });

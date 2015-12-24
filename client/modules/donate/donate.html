@@ -30,13 +30,13 @@
             <label for="radio4" class="radio">$200</label>
             <input id="radio5" type="radio" name="amount" value="custom" />
             <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
-            <input class="customAmt" id="radio5" type="number" name="amount" min="0" value="75" />
+            <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" />
         </fieldset>
         <fieldset>
             <h4>Payment Details</h4>
             <input name="name" value="{{name}}" placeholder="Name on Card" required />
-            <input type="text" name="number" placeholder="Credit Card Number" required pattern="\d{12,19}" />
-            <span class="cc-pic fa"></span>
+            <input type="text" name="number" placeholder="Credit Card Number" required pattern="[\d ]{12,19}" />
+            <span class="cc-pic fa"> </span>
             <input type="hidden" name="type" value="mastercard" />
             <div class="styledSelect">
                 <label>Expiration</label>

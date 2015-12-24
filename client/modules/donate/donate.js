@@ -1,7 +1,8 @@
-if (Meteor.isClient) {
-    Template.donate.onRendered(function () {
-        $('form .custom').click(function(){
-            $('.customAmt').focus();
-        });
+Template.donate.onRendered(function () {
+    $('form .custom').click(function(){
+        $('.customAmt').focus();
     });
-}
+    $('.customAmt').click(function () {
+        document.querySelector('#radio5').checked = true;
+    });
+});
