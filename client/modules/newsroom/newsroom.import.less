@@ -39,7 +39,19 @@ section.news {
     }
     button.loadMore{
         margin: 0 auto;
+        
+        // "That's everything!" text should be hidden by default
+        & + span.everything {
+            display: none;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        // When all results show, hide the "Load More" text and show the "everything" text
+        &.everything { display: none; }
+        &.everything + span.everything { display: block; }
     }
+    
     ul.newsTabs{
         height: 52px;
         li {

@@ -9,56 +9,79 @@
                 <li>Press/Media Kits</li>
             </ul>
             <aside class="searchFieldContainer">
-                <form>
+                <form autocomplete="off">
                     <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
                 </form>
             </aside>
             <ul class="newsContent">
-                <li class="active">
-                    <ul class="newsItems">
-                        {{>newsItem}}
-                        {{>newsItem}}
-                        {{>newsItem}}
-                        {{>newsItem}}
-                        {{>newsItem}}
-                        {{>newsItem}}
-                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="newsItems">
-                        {{>newsItem2}}
-                        {{>newsItem2}}
-                        {{>newsItem2}}
-                        {{>newsItem2}}
-                        {{>newsItem2}}
-                        {{>newsItem2}}
-                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="newsItems">
-                        {{>newsItem3}}
-                        {{>newsItem3}}
-                        {{>newsItem3}}
-                        {{>newsItem3}}
-                        {{>newsItem3}}
-                        {{>newsItem3}}
-                        <li><button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button></li>
-                    </ul>
-                </li>
-                <li>
-                    <ul class="newsItems">
-                        {{>newsItem4}}
-                        {{>newsItem5}}
-                    </ul>
-                </li>
+                {{> inTheNews }}
+                {{> pressReleases }}
+                {{> actionAlerts }}
+                {{> mediaKits }}
             </ul>
             <button type="button" class="closeTab">Close Tab</button>
         </div>
     </section>
 </template>
 
+<!-- Templates for the various sections -->
+<template name="inTheNews">
+    <li class="active">
+        <ul class="newsItems">
+            {{#each news}}
+                <li>
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    <span class="publisher">{{publisher}}</span>
+                </li>
+            {{/each}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
+<template name="pressReleases">
+    <li>
+        <ul class="newsItems">
+            {{#each news}}
+                <li>
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    <p class="content">{{content}}</p>
+                </li>
+            {{/each}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
+<template name="actionAlerts">
+    <li>
+        <ul class="newsItems">
+            {{#each news}}
+                <li>
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    <p class="content">{{content}}</p>
+                </li>
+            {{/each}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
+<template name="mediaKits">
+    <li>
+        <ul class="newsItems">
+            {{>newsItem4}}
+            {{>newsItem5}}
+        </ul>
+    </li>
+</template>
+<!-- Template for "Load More" results button -->
+<template name="loadMore">
+    <li>
+        <button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button>
+        <span class="everything">That's everything!</span>
+    </li>
+</template>
 
 <!--Duplicates for testing purposes-->
 <template name="newsItem">
