@@ -1,10 +1,8 @@
 <template name="utility">
     <nav class="utility">
         <ul>
-            <!--Logged Out-->
             {{#if currentUser}}
                 <!--Currently logged in-->
-            {{else}}
                 <li class="notifications leftSmall hasSidebar">
                     <button type="button">
                         <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
@@ -23,6 +21,8 @@
                         Sign Out <span class="fa">&#xf0da;</span>
                     </button>
                 </li>
+            {{else}}
+                <!--Logged Out-->
                 <li class="login leftSmall hasSidebar">
                     <button type="button">
                         Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
