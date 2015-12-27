@@ -34,8 +34,13 @@
         </fieldset>
         <fieldset>
             <h4>Payment Details</h4>
-            <input name="name" value="{{name}}" placeholder="Name on Card" required />
-            <input type="text" name="number" placeholder="Credit Card Number" required pattern="[\d ]{12,19}" />
+            <label>Name on Card
+                <input name="name" value="{{name}}" placeholder="John Doe" required />
+            </label>
+            <label>Credit Card Number
+                <input type="text" name="number" placeholder="1234 5678 9012 3456" required 
+                    pattern="[\d ]{12,19}" />
+            </label>
             <span class="cc-pic fa"> </span>
             <input type="hidden" name="type" value="mastercard" />
             <div class="styledSelect">
