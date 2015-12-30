@@ -27,8 +27,16 @@ Template.login.events({
         
         // Log in the user
         Meteor.loginWithPassword(email, password, function (error) {
+            var overlay;
+            
             // If no error, everything's fine
-            if (! (error instanceof Error) ) return;
+            if (! (error instanceof Error) ) {
+                // Hide sidebars by clicking the overlay
+                overlay = document.querySelector('.overlay');
+                if (overlay instanceof Element)
+                    overlay.click();
+                return;
+            }
             
             // Handle errors
             switch (error.error) {
