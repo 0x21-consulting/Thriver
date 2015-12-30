@@ -3,7 +3,7 @@
         <ul>
             {{#if currentUser}}
                 <!--Currently logged in-->
-                <li class="notifications leftSmall hasSidebar">
+                <li class="notifications" data-sidebar="leftSmall">
                     <button type="button">
                         <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
                         {{#if show}}
@@ -11,7 +11,7 @@
                         {{/if}}
                     </button>
                 </li>
-                <li class="accountDetails leftSmall hasSidebar">
+                <li class="accountDetails" data-sidebar="leftSmall">
                     <button type="button">
                         Eoghan Mc Inerney <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
@@ -23,12 +23,12 @@
                 </li>
             {{else}}
                 <!--Logged Out-->
-                <li class="login leftSmall hasSidebar">
+                <li class="login" data-sidebar="leftSmall">
                     <button type="button">
                         Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
                 </li>
-                <li class="register leftSmall hasSidebar">
+                <li class="register" data-sidebar="leftSmall">
                     <button type="button" title="Sign Up">
                         Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
@@ -39,17 +39,17 @@
                     <span class="fa">&#xf06a;</span> Get Help
                 </button>
             </li>
-            <li class="donate rightMedium hasSidebar">
+            <li class="donate" data-sidebar="rightMedium">
                 <button type="button" title="Donate">
                     <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
                 </button>
             </li>
-            <li class="news rightLarge hasSidebar">
+            <li class="news" data-sidebar="rightLarge">
                 <button type="button" title="Newsroom">
                     <span class="fa up">&#xf1ea;</span><span class="fa close">&#xf00d;</span> Newsroom
                 </button>
             </li>
-            <li class="twitter rightSmall hasSidebar">
+            <li class="twitter" data-sidebar="rightSmall">
                 <button type="button">
                     <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
                 </button>

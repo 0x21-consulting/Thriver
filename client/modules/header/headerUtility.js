@@ -1,58 +1,73 @@
+/**
+ * Remove all open sidebars
+ * @method
+ *   @param {$.Event} event
+ */
+var closeAsides = function (event) {
+    event.preventDefault(); event.stopPropagation();
+    
+    // Start with body changes
+    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+    
+    // Remove active components
+    document.querySelector('nav.utility li.active').classList.remove('active');
+    document.querySelector('aside.sidebar > section.active').classList.remove('active');
+},
+
+// Shortcut object for assigning Template event for aside closure
+closure = { 'click .closeTab': closeAsides };
+
+// Handle Utility Navigation events
+Template.utility.events({
+    // Handle left and right sidebars
+    // All buttons that would trigger sidebars have the .hasSidebar class
+    'click nav.utility li[data-sidebar]': function (event) {
+        event.stopPropagation();
+        
+        // Mutual suspicion
+        if (! (event instanceof $.Event) ) return;
+        
+        var that    = event.currentTarget,
+            name    = that.className.replace(/ active/, ''),
+            section = document.querySelector('section.' + name);
+        
+        // If this tab is already active, close sidebars
+        if (that.classList.contains('active')) {
+            closeAsides(event);
+            return;
+        }
+        
+        // Page body must move left or right depending on aside size
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+        document.body.classList.add(that.dataset.sidebar);
+        
+        // Activate link
+        $('li[data-sidebar]').removeClass('active');
+        that.classList.add('active');
+        
+        // Activate section
+        $('aside.sidebar section').removeClass('active');
+        section.classList.add('active');
+        section.classList.add(that.dataset.size);
+    },
+    // Close sidebars when clicking sign out or help links
+    'click li.logout' : closeAsides,
+    'click li.getHelp': closeAsides
+});
+// More sidebar closure methods... one for each template :(
+Template.body.events({ 'click .overlay' : closeAsides });
+Template.login.events          (closure);
+Template.register.events       (closure);
+Template.notifications.events  (closure);
+Template.accountDetails.events (closure);
+Template.twitter.events        (closure);
+Template.news.events           (closure);
+Template.donate.events         (closure);
+
 // Utility Nav
 Template.utility.onRendered(function () {
-    //Utility Navigation Sidebar Actions
-    $('nav.utility > ul > li.hasSidebar').click(function(){
-        //Variables to find accompanied sidebar
-        var thisClass = $(this).attr('class');
-        var thisSidebar = $( "section[class='" + thisClass +"']" );
-
-        //Clear Open Elements
-        $('nav.utility > ul > li.hasSidebar').not(this).removeClass('active');
-        $('.sidebar section').not(thisSidebar).removeClass('active');
-
-        //General Toggle Settings
-        if ($(this).hasClass('active')){
-            $(this).removeClass('active');
-            thisSidebar.removeClass('active');
-
-            //Specific Conditions
-            if ($(this).hasClass('leftSmall')){
-                $('body').removeClass('leftSmall');
-            }
-            else if ($(this).hasClass('rightSmall')){
-                $('body').removeClass('rightSmall');
-            }
-            else if ($(this).hasClass('rightMedium')){
-                $('body').removeClass('rightMedium');
-            }
-            else if ($(this).hasClass('rightLarge')){
-                $('body').removeClass('rightLarge');
-            }
-        } else{
-            $(this).addClass('active');
-            thisSidebar.addClass('active');
-            //Alternative Specific Conditions
-            if ($(this).hasClass('leftSmall')){
-                $('body').removeClass('rightSmall rightMedium rightLarge');
-                $('body').addClass('leftSmall');
-            }
-            else if ($(this).hasClass('rightSmall')){
-                $('body').removeClass('leftSmall rightMedium rightLarge');
-                $('body').addClass('rightSmall');
-            }
-            else if ($(this).hasClass('rightMedium')){
-                $('body').removeClass('rightSmall leftSmall rightLarge');
-                $('body').addClass('rightMedium');
-            }
-            else if ($(this).hasClass('rightLarge')){
-                $('body').removeClass('rightSmall rightMedium leftSmall');
-                $('body').addClass('rightLarge');
-            }   
-        }
-    });
-
     //Should be attributed to correct alert
-    $('li.logout, li.getHelp').click(function(){
+    $('li.getHelp').click(function(){
         $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
@@ -60,15 +75,6 @@ Template.utility.onRendered(function () {
 
     $('span.closeAlert').click(function(){
         $('figure.alert').removeClass("active").dequeue();
-    });
-
-    function removeActiveSidebars(){
-        $('body').removeClass('leftSmall rightSmall rightMedium rightLarge');
-        $('nav.utility > ul > li.hasSidebar').removeClass('active');
-        $('aside.sidebar > section').removeClass('active');        
-    }
-    $('.overlay, .closeTab, li.logout, li.getHelp').click(function(){
-        removeActiveSidebars();
     });
 
     //Temp UX Alert Notes
@@ -81,9 +87,6 @@ Template.utility.onRendered(function () {
     $('.notificationApproval .undo').click(function(){
         $(this).parent().parent().removeClass('selected');
     });
-    $('button.loadMore').click(function(){
-        alert('Load More Results');
-    });
     $('.eventsRegistered .unregister').click(function(){
         $(this).parent().addClass('selected');
     });
@@ -91,48 +94,7 @@ Template.utility.onRendered(function () {
         $(this).parent().parent().removeClass('selected');
     });
     $('.eventsRegistered .viewEvent').click(function(){
-        removeActiveSidebars();
+        closeAsides();
         alert('scroll down to events and show the selected event');
     });
-
-
-
-    // Toggle visibility of the Alerts
-    var alerts = document.querySelectorAll('.alerts'),
-        i, j, blockClose, modules,
-    
-    // Class swap method
-    classSwap = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        var active = document.querySelectorAll('.utilityNav .active'),
-            i, j;
-        
-        for (i = 0, j = active.length; i < j; ++i)
-            active[i].classList.remove('active');
-        
-        this.classList.add('active');
-    };
-    
-    console.debug(alerts);
-    
-    for (i = 0, j = alerts.length; i < j; ++i)
-        alerts[i].addEventListener('mousedown', classSwap);
-    
-    // Close modules by default
-    document.body.addEventListener('mousedown', function () {
-        var active = document.querySelectorAll('.utilityNav .active'),
-            i, j;
-        
-        for (i = 0, j = active.length; i < j; ++i)
-            active[i].classList.remove('active');
-    });
-    // But not if you click in the modules
-    modules = document.querySelectorAll('.notificationMenu');
-    blockClose = function (event) {
-        event.stopPropagation();
-    };
-    for (i = 0, j = modules.length; i < j; ++i)
-        modules[i].addEventListener('mousedown', blockClose);
 });
