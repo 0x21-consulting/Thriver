@@ -78,22 +78,6 @@ section.donate {
         :-moz-placeholder {  color: @midnightBlue;  }
         ::-moz-placeholder {  color: @midnightBlue;  }
         :-ms-input-placeholder {  color: @midnightBlue;  }
-        
-        /* Input field error styles */
-        .error {
-            box-shadow: 0 0 10px 0 #f33 inset;
-        }
-        // TEMPORARY ERROR MESSAGES
-        // These are hideous and don't fit the design... Eoghan to change to fit
-        [data-error]::after {
-            content: attr(data-error);
-            color: #f77;
-            background: #000;
-            padding: 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 0 auto;
-        }
     }
     /* Donation states */
     .hide { display: none; }

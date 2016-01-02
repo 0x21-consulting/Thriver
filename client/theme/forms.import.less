@@ -25,6 +25,8 @@ form{
         line-height:12px;
         font-weight: bold;
         color: mix(@gray, @navy, 25%);
+        display: block;
+        position: relative;
     }
     input[type="radio"] {
         display: inline-block;
@@ -145,6 +147,39 @@ form{
         }
         label{
             position: absolute;
+        }
+    }
+    /* Input field error styles */
+    .error {
+        box-shadow: 0 0 0px 3px @orange inset;
+        margin-bottom: 12px !important; //override specific section margins
+        margin-top: 5px !important; //override specific section margins
+    }
+    [data-error]{
+        &:after {
+            content: attr(data-error);
+            color: @white;
+            background: transparent;
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 15px;
+            font-size: 12px;
+            line-height: 15px;
+            margin-bottom: 5px;
+            background: darken(@orange, 2.5%);
+            display: block;
+            padding: 9px 14px 7px 14px;
+        }
+        &:before{
+            content: "\f0d7";
+            display: block;
+            color: #f1592a;
+            position: absolute;
+            top: 62px;
+            left: 18px;
+            font-size: 16px;
+            .fa;
         }
     }
     ::-webkit-input-placeholder {color: mix(@gray, @navy, 55%);}
