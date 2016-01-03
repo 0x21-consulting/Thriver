@@ -3,20 +3,22 @@
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-        <header>
-            <h1>What We Do</h1>
-            <p>Wisconsin Coalition Against Sexual Assult creates changes throughout various avenues.</p>
-        </header>
-        <ul class="workGrid">
-            {{> workBlock}}
-            {{> workBlock}}
-            {{> workBlock}}
-            {{> workBlock}}
-            {{> workBlock}}
-            {{> workBlock}}
-            {{> workBlock}}
-        </ul>
-        {{> workDetails}}
+        <div class="containerSmall">
+            <header>
+                <h1>What We Do</h1>
+                <p>Wisconsin Coalition Against Sexual Assult creates changes throughout various avenues.</p>
+            </header>
+            <ul class="workGrid">
+                {{> workBlock}}
+                {{> workBlock}}
+                {{> workBlock}}
+                {{> workBlock}}
+                {{> workBlock}}
+                {{> workBlock}}
+                {{> workBlock}}
+            </ul>
+            {{> workDetails}}
+        </div>
     </section>
 </template>
 
@@ -48,6 +50,7 @@
             {{> workListItem}}
         </ul>
     </menu>
+    {{> workArticle}}
 </template>
 
 <template name="workListItem">
@@ -87,39 +90,32 @@
             </ul>
         </header>
         <main>
+            <!--Need to do the following:
+                -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
+                -Set CSS .accordionContent to display:none
+                -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
+            -->
+            <h3>Intervention Programming</h3>
             <p>
                 The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
             </p>
             <p>
                 Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+            </p> 
+            <h3>Intervention Programming</h3>
+            <p>
+                The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
             </p>
-            <details>
-                <summary>Intervention Programming</summary>
-                <p>
-                    The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-                </p>
-                <p>
-                    Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-                </p> 
-            </details>  
-            <details>
-                <summary>Intervention Programming</summary>
-                <p>
-                    The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-                </p>
-                <p>
-                    Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-                </p> 
-            </details>  
-            <details>
-                <summary>Intervention Programming</summary>
-                <p>
-                    The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-                </p>
-                <p>
-                    Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-                </p> 
-            </details>      
+            <p>
+                Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+            </p> 
+            <h3>Intervention Programming</h3>
+            <p>
+                The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+            </p>
+            <p>
+                Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+            </p> 
         </main>
         <footer>
             <a href="#">Read More</a>
