@@ -5,7 +5,6 @@
  *   @param {string}  message - The message to display to user
  */
 var donateException = function (element, message) {
-    debugger;
     // Add error state to element
     if (element instanceof Element) {
         element.classList.add('error');

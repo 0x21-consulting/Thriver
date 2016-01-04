@@ -165,6 +165,7 @@ Template.work.onRendered(function () {
 
 
     // Fix-position the Work Section Sidebar (Temp)
+    /*
     $(window).scroll(function () {
         var position = $('.work').offset();
         
@@ -191,4 +192,5 @@ Template.work.onRendered(function () {
             scrollTop: $('.work').offset().top - 94
         }, 'fast');
     });
+    */
 });
