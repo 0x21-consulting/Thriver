@@ -61,3 +61,27 @@ Template.utility.events({
         })
     }
 });
+
+// Get the right information to each of the account templates
+Template.accountDetails.helpers({
+    name: function () {
+        var user = Meteor.user();
+        console.debug(user);
+        if (user && user.profile)
+            return user.profile.firstname + ' ' + user.profile.lastname;
+    },
+    email: function () {
+        var user = Meteor.user();
+        if (user && (user.emails instanceof Array) )
+            return user.emails[0].address;
+    }
+});
+Template.utility.helpers({
+    name: function () {
+        var user = Meteor.user();
+        if (user && user.profile)
+            return user.profile.firstname + ' ' + user.profile.lastname;
+        else
+            return '';
+    }
+});
