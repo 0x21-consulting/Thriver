@@ -23,8 +23,9 @@ getAdmin = function () {
 
 // Pass admin state to templates
 Template.body     .helpers({ isAdmin: getAdmin });
-Template.callout  .helpers({ isAdmin: getAdmin });
-Template.community.helpers({ isAdmin: getAdmin });
+//Template.callout  .helpers({ isAdmin: getAdmin });
+//Template.community.helpers({ isAdmin: getAdmin });
+Template.events  .helpers({ isAdmin: getAdmin });
 Template.contact  .helpers({ isAdmin: getAdmin });
 Template.providers.helpers({ isAdmin: getAdmin });
 Template.who      .helpers({ isAdmin: getAdmin });

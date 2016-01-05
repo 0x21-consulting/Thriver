@@ -164,31 +164,5 @@ Template.work.onRendered(function () {
         first.click();
 
 
-    // Fix-position the Work Section Sidebar (Temp)
-    $(window).scroll(function () {
-        var position = $('.work').offset();
-        
-        // Sometimes position is undefined?!
-        if (!position) return;
-        
-        var threshold = position.top -93;
-        var positionBtm = $('#community').offset();
-        var btmThreshold = positionBtm.top;
-        if ($(window).scrollTop() >= threshold && $(window).scrollTop() < btmThreshold){
-            $('.work .tabs').addClass('fixed');
-            // TODO: This is a hack
-            ///document.querySelector('.work .tabs').style.top = '95px';
-        } else{
-            $('.work .tabs').removeClass('fixed bottom');
-            // TODO: This is a hack
-            //document.querySelector('.work .tabs').style.top = '0px';
-        }
-    });
 
-    //Scroll To Top of Div
-    $('.work .tabs li').click(function (e) {
-        $('html, body').animate({
-            scrollTop: $('.work').offset().top - 94
-        }, 'fast');
-    });
 });
