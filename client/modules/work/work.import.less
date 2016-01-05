@@ -3,20 +3,69 @@ section.work{
     p{
         color: #222;
     }
-    .workGrid > li{
-        span.block a{
-            display: block;
-            width: 100%;
-            height: 200px;
-            color: @white;
-            background-color: #222;
-            font-size: 100px;
-            text-align: center;
-            font-weight: bold;
-            line-height: 200px;
+    .workGrid{
+        text-align: center;
+        > li{
+            width: 21%;
+            padding: 0px 2%;
+            display: inline-block;
+            margin-right: -4px;
+            margin-bottom: 48px;
+            vertical-align: top;
+            span.block {
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                height: 176px;
+                max-width: 176px;
+                color: @gray;
+                background-color: @navy;
+                font-size: 100px;
+                text-align: center;
+                font-weight: normal;
+                line-height: 176px;
+            }
+            h2{
+                border-bottom: none;
+                padding:16px 0px 0px 0px;
+                margin: 0px 0px 8px 0px;
+                white-space: nowrap;
+                color: @orange;
+                font-size: 28px;
+                line-height: 32px;
+                font-weight: 100;
+            }
+            > a{
+                &:hover{
+                    span.block{
+                        background-color: @teal;
+                        color: @white;
+                    }
+                    h2{
+                        color: @teal;
+                    }
+                }
+            }
+            ul{
+                li{
+                    display: inline;
+                    &:after{
+                        content:',';
+                    }
+                    &:last-child:after{
+                        content: '';
+                    }
+                    a{
+                        color: @navy;
+                        font-size: 12px;
+                        line-height: 19px;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
         }
-        width: 30%;
-        display: inline-block;
     }
     .workMenu{ 
         background-color: @white;
@@ -28,3 +77,4 @@ section.work{
         }
     }
 }
+

@@ -61,3 +61,55 @@ p {
     text-align: left;
     font-weight: 500;
 }
+
+
+
+
+//Main Section headings
+header{
+    text-align: center;
+    padding-top: 100px;
+    text-transform: uppercase;
+    h1{
+        color: @navy;
+        font-size: 56px;
+        line-height: 56px;
+        font-weight: normal;
+        padding-bottom: 23px;
+        border-bottom: 3px solid @gray;
+        margin-bottom: 26px;
+        display: inline-block;
+        &:before, &:after{
+            content:'';
+            height: 6px;
+            width: 6px;
+            background-color: darken(@teal, 5%);
+            border:3px solid @teal;
+            display: inline-block;
+            position: relative;
+            top: -10px;
+        }
+        &:before{
+            left:-32px;
+        }
+        &:after{
+            right: -32px;
+        }
+    }
+    p{
+        text-align: center;
+        font: normal 16px/27px Georgia, serif;
+        color: #000;
+        &:after{
+            .fa;
+            content: "\f107";
+            display: block;
+            color: @gray;
+            font-size: 50px;
+            line-height: 50px;
+            font-weight: 100;
+            margin-top: 22px;
+            margin-bottom: 36px;
+        }
+    }
+}
