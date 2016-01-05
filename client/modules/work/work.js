@@ -163,6 +163,4 @@ Template.work.onRendered(function () {
     if (first)
         first.click();
 
-
-
 });
