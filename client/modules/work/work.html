@@ -9,16 +9,22 @@
                 <p>Our work is driven by survivors’ voices. <br>
                     Survivors and all those affected by sexual violence <br> deserve compassionate services, dignity, privacy, and respect.</p>
             </header>
-            <ul class="workGrid">
-                {{> workBlock}}
-                {{> workBlock}}
-                {{> workBlock}}
-                {{> workBlock}}
-                {{> workBlock}}
-                {{> workBlock}}
-                {{> workBlock}}
-            </ul>
-            {{> workDetails}}
+        </div>
+        <div class="sliderContainer">
+            <div class="workDetails">
+                {{> workDetails}}
+            </div>
+            <div class="workGrid">
+                <ul class="containerSmall">
+                    {{> workBlock}}
+                    {{> workBlock}}
+                    {{> workBlock}}
+                    {{> workBlock}}
+                    {{> workBlock}}
+                    {{> workBlock}}
+                    {{> workBlock}}
+                </ul>
+            </div>
         </div>
     </section>
 </template>

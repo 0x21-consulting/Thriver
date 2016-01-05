@@ -141,26 +141,16 @@ Template.tab.events({
 // From jQuery Providers file
 // TODO: rewrite this
 Template.work.onRendered(function () {
-    //Toggle work filter
-    $('button.work-filter').click(function(){
-        if($('body').hasClass('work-menu-active')){
-            $('body').removeClass('work-menu-active');
+    //Opening The workDetails pane
+    $('.workGrid > ul > li > a, .backToIndex a').click(function(){
+        if($('body').hasClass('workDetails')){
+            event.preventDefault();
+            $('body').removeClass('workDetails');
         } else{
-            $('body').addClass('work-menu-active');
+            event.preventDefault();
+            $('body').addClass('workDetails');
         }
     });
 
-    $('.work menu.tabs').click(function(){
-        if($('body').hasClass('work-menu-active')){
-            $('body').removeClass('work-menu-active');
-        } else{
-            //Do nothing. This is used to close the menu on mobile after a selection is made.
-        }
-    });
-    
-    // Click the first tab to cause it to open
-    var first = document.querySelector('.work .tabs ul > li:first-child');
-    if (first)
-        first.click();
 
 });

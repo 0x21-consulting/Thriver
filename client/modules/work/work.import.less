@@ -1,9 +1,9 @@
 section.work{
     background-color: @white;
-    p{
-        color: #222;
-    }
-    .workGrid{
+    width: 100%;
+    overflow-x: hidden;
+    //Work Grid
+    .workGrid > ul{
         text-align: center;
         > li{
             width: 21%;
@@ -67,8 +67,15 @@ section.work{
             }
         }
     }
+
+    //Work Details
+    .workDetails{
+        background-color: @navy;
+    }
     .workMenu{ 
         background-color: @white;
+        //width: 30%;
+        //float: left;
         li a{
             color: #222;
         }
@@ -78,3 +85,35 @@ section.work{
     }
 }
 
+
+//Animation States
+/*body{
+    .sliderContainer{
+        width: 200%;
+        height: 80vh;
+        overflow: hidden;
+    }
+    .workGrid, .workDetails{
+        display: inline-block;
+        height: 80vh;
+        overflow: hidden;
+        width: 50%;
+        margin-left: -4px;
+    }
+    .workGrid{
+        .translateX(-100%);
+        .transition(all,400ms,ease-out,0ms);
+    }
+    .workDetails{
+        .translateX(-100%);
+        .transition(all,400ms,ease-out,0ms);
+    }
+    &.workDetails{
+        .workDetails{
+            .translateX(0%);
+        }
+        .workGrid{
+            .translateX(100%);
+        }
+    }
+}*/
