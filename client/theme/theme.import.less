@@ -10,7 +10,8 @@ body{
     }
     .masterContainer{
         padding-top: 348px;
-        .transition(all,400ms,ease-out,0ms);
+        will-change: padding;
+        .transition(padding,400ms,ease-out,0ms);
         @media @mobile{
             padding-top: 32px; //Was Important
         }
@@ -42,7 +43,7 @@ body{
     position: relative;
     left: 0px;
     z-index: 2;
-    .transition(all,400ms,ease-out,0ms);
+    //.transition(all,400ms,ease-out,0ms);
 }
 .overlay{
     position: fixed;

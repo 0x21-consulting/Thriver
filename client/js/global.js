@@ -31,10 +31,10 @@ Template.body.onRendered(function () {
                 document.body.classList.add('fixedHeader');
             } else {
                 document.body.classList.remove('fixedHeader');
-                //Needed to animate unshrink of header
+                // Needed to animate unshrink of header
                 document.body.classList.add('returnHeader');   
-            }        
-        }, 100);
+            }
+        }, 1);
     },false);
 });
 
