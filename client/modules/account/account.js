@@ -53,6 +53,7 @@ Template.login.events({
 // Logout
 Template.utility.events({
     'click li.logout button': function (event) {
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
         event.preventDefault(); event.stopPropagation();
         
         Meteor.logout(function (error) {
