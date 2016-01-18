@@ -73,6 +73,12 @@ Template.utility.onRendered(function () {
         });
     });
 
+    //Remove Unread Notification Icon on Click
+    $('li.notifications button').click(function(){
+        alert('b');
+        $('li.notifications span.unreadNotifications').addClass('hidden');
+    });
+
     $('span.closeAlert').click(function(){
         $('figure.alert').removeClass("active").dequeue();
     });

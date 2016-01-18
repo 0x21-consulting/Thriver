@@ -30,7 +30,7 @@ nav.utility{
                 margin-left: 2px;
                 width: 16px;
                 height: 16px;
-                color: @yellow;
+                color: @navySat;
                 text-align: center;
                 border-radius: 50%;
                 line-height: 17px;
@@ -38,6 +38,7 @@ nav.utility{
                 right: 1px;
                 font-size: 100%;
                 pointer-events: none;
+                .transition(opacity,200ms,ease-out,0ms);
             }
             @media @mobile{
                 display: block;
@@ -149,6 +150,11 @@ nav.utility{
             }
             .fa.up{
                 opacity: 0;
+            }
+            &.notifications{
+                .unreadNotifications{
+                    opacity: 0;
+                }
             }
         }
         //Animate Display when user signs in & out
