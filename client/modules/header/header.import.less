@@ -4,7 +4,7 @@ header.mainHeader{
     position: fixed;
     z-index: 11;
     padding-top: 32px;
-    //.transition(all,400ms,ease-out,0ms);
+    .transition(all,400ms,ease-out,0ms);
     @media @mobile{
         border-top: 32px solid @white;
         background-color: @navy;
@@ -20,16 +20,19 @@ header.mainHeader{
     }
     nav.mainNav{
         text-align: center;
-        margin: 233px 0px 36px 0px;
+        //margin: 233px 0px 36px 0px;
         //position: relative;
         z-index: 1;
         @media @mobile{
             padding: 0px;
             position: static;
         }
-        .transition(margin,400ms,ease-in-out,0ms);
-        will-change: margin;
+        .transition(all,400ms,ease-out,0ms); //Previously set to margin, changed to all for margin & transform transition
+        will-change: transform, margin; //changed to transform as above
         ul{
+            padding: 207px 0px 65px 0px;
+            .transition(all,400ms,ease-out,0ms); //padding and text-align
+            will-change: padding;
             li{
                 display: inline-block;
                 @media @mobile {
@@ -37,13 +40,15 @@ header.mainHeader{
                     text-align: left;
                 }
                 &.brand {
+                    .transition(all,400ms,ease-out,0ms);
                     will-change: translate, left, top, margin, width;
+                    //.logoAnimatedFixed;
                     z-index: 10;
                     display: block;
                     position: absolute;
                     left: 50%;
                     margin-left: -200px;
-                    top: 90px;
+                    top: 50px;
                     width: 400px;
                     text-indent: 0px;
                     margin-bottom: 42px;
@@ -126,13 +131,33 @@ header.mainHeader{
 }
 
 //Fixed Header on Scroll Styles
-.fixedHeader header.mainHeader, .fixedHeader.returnHeader header.mainHeader{
+.fixedHeader header.mainHeader{
+    nav.mainNav{
+        ul{
+            padding:0px;
+            li.brand{
+               //.logoAnimatedFixed;
+               top: 8px;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.fixedHeader header.mainHeader{
     border-bottom: 3px solid #ebf2f2;
     nav.mainNav{
         margin: 0px;
         ul{
             @media @1100{
-                text-align: right;
+                //text-align: right;
+                right: 0px;
                 li:last-child{
                     padding-right: 6px;
                     @media @mobile{
@@ -163,9 +188,9 @@ header.mainHeader{
             }
         }
         li.brand{
-            top: 70px;
-            .logoAnimatedFixed;
-            .translate(0px, -30px);
+            //top: 70px;
+            //.logoAnimatedFixed;
+            //.translate(0px, -30px);
             width: 85px;
             left: 12px;
             margin-left: 0px;
@@ -180,24 +205,9 @@ header.mainHeader{
     }
 }
 
-.returnHeader header.mainHeader{
-    nav.mainNav{
-        li.brand{
-            left: 50%;
-            margin-left: -200px;
-            top: 90px;
-            width: 400px;
-            .logoAnimateReturn;
-            @media @mobile{
-                top: 2px;
-                .translate(0px, -30px);
-                width: 85px;
-                left: 12px;
-                margin-left: 0px;
-            }
-        }  
-    }
-}
+
+
+
 
 // Moble Menu Toggle
 .menuToggle{
