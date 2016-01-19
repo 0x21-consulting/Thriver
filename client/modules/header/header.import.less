@@ -4,7 +4,7 @@ header.mainHeader{
     position: fixed;
     z-index: 11;
     padding-top: 32px;
-    .transition(all,400ms,ease-out,0ms);
+    .transition(all,375ms,ease-out,0ms);
     &:after{
         content: '';
         position: absolute;
@@ -43,11 +43,11 @@ header.mainHeader{
             padding: 0px;
             position: static;
         }
-        .transition(all,400ms,ease-out,0ms); //Previously set to margin, changed to all for margin & transform transition
+        .transition(all,375ms,ease-out,0ms); //Previously set to margin, changed to all for margin & transform transition
         will-change: transform, margin; //changed to transform as above
         ul{
             padding: 225px 0px 65px 0px;
-            .transition(all,400ms,ease-out,0ms); //padding and text-align
+            .transition(all,375ms,ease-out,0ms); //padding and text-align
             will-change: padding;
             background-color: @white;
             li{
@@ -60,8 +60,8 @@ header.mainHeader{
                     margin-bottom: 0px;
                 }
                 a {
-                    transition: font 400ms ease, color 100ms linear;
-                    -webkit-transition: font 400ms ease, color 100ms linear;
+                    transition: font 375ms ease, color 100ms linear;
+                    -webkit-transition: font 375ms ease, color 100ms linear;
                     //.transition(all, 400ms, linear, 0ms);
                     will-change: margin, padding, font-size, color;
                     display: block;
@@ -132,7 +132,7 @@ header.mainHeader{
                     }
                 }
                 &.brand {
-                    .transition(all,400ms,ease-out,0ms);
+                    .transition(all,375ms,ease-out,0ms);
                     will-change: translate, left, top, margin, width;
                     //-webkit-backface-visibility: hidden;
                     //.logoAnimatedFixed;

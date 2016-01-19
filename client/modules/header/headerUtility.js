@@ -75,7 +75,6 @@ Template.utility.onRendered(function () {
 
     //Remove Unread Notification Icon on Click
     $('li.notifications button').click(function(){
-        alert('b');
         $('li.notifications span.unreadNotifications').addClass('hidden');
     });
 
@@ -100,7 +99,7 @@ Template.utility.onRendered(function () {
         $(this).parent().parent().removeClass('selected');
     });
     $('.eventsRegistered .viewEvent').click(function(){
-        closeAsides();
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
         alert('scroll down to events and show the selected event');
     });
 });
