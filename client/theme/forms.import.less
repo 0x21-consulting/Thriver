@@ -20,6 +20,7 @@ form{
         font-weight: 600;
         letter-spacing: 1px;
         color: @navy;
+        .transition(background-color, 100ms, ease, 0ms);
         &:focus{
             outline: none;
             background-color: @gray;
@@ -78,7 +79,7 @@ form{
         font-weight: bold;
         float: left;
         padding: 1px 0px;
-        .transition(background-color, 100ms, ease, 0ms);
+        .transition(background-color, 200ms, ease, 0ms);
         &:last-child{
             margin-bottom: 30px;
         }
@@ -95,18 +96,27 @@ form{
     input[type='radio']{
         display: none;
     }
+    .styledSelect:after{
+        .fa;
+        content: "\f0d7";
+        position: absolute;
+        z-index: 2;
+        right: 12px;
+        top: 12px;
+        font-size: 12px;
+    }
     .styledSelect, .cvv2{
         width: 45%;
         margin-right: 1%;
         height: 49px;
         //overflow: hidden;
         background-color: @darkBlue;
-        color: @midnightBlue;
+        color: #fff;
         font-weight: bold;
         float: left;
         margin-top: 30px;
         position: relative;
-        &:focus, input:focus, &:hover{
+        &:focus, input:focus{
             background-color: darken(@darkBlue, 5%);
         }
         label{
@@ -122,7 +132,7 @@ form{
             background: transparent;
             width: 100%;
             display: block;
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1;
             border: 0;
             border-radius: 0;
@@ -134,7 +144,7 @@ form{
             }
         }
         select, select option {
-            color: @midnightBlue;
+            color: @white;
             font-weight: bold;
         }
         input{
@@ -156,11 +166,19 @@ form{
             position: absolute;
         }
     }
+    .styledSelect, .cvv2, input[type=text]{
+        &:hover{
+            background-color: darken(@darkBlue, 1%);
+        }
+    }
     /* Input field error styles */
     .error {
         box-shadow: 0 0 0px 3px @orange inset;
         margin-bottom: 12px !important; //override specific section margins
         margin-top: 5px !important; //override specific section margins
+        &.customAmt{
+            margin: 0px !important;
+        }
     }
     [data-error]{
         &:after {
@@ -177,6 +195,7 @@ form{
             background: darken(@orange, 2.5%);
             display: block;
             padding: 9px 14px 7px 14px;
+            clear: both;
         }
         &:before{
             content: "\f0d7";
@@ -185,8 +204,25 @@ form{
             position: absolute;
             top: 62px;
             left: 18px;
-            font-size: 16px;
+            font-size: 14px;
             .fa;
+        }
+    }
+    [data-error='Donation amount must be greater than zero']{
+        &:after{
+            margin-bottom: 12px;
+            top: 12px;
+            position: relative;
+        }
+        &:before{
+            left: inherit;
+            right: 126px;
+            z-index: 9;
+            top: inherit;
+            bottom: 28px;
+        }
+        input[type=radio]:checked + label.radio.custom{
+            background-color: @orange, 2.5%;
         }
     }
     ::-webkit-input-placeholder {color: mix(@gray, @navy, 55%);}

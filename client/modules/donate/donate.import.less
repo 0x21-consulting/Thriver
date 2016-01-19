@@ -15,17 +15,24 @@ section.donate {
     }
     p{
         margin-bottom: 30px;
+        margin-bottom: 30px;
+        padding: 0px 107px;
+        font-weight: 600;
     }
     h4{
-        text-align: center;
+        text-align: left;
+        &.paymentDetails{
+            margin-top: 20px;
+        }
     }
     form{
-        padding: 30px 0px;
+        padding: 30px 0px 40px 0px;
         background-color: @lightBlue;
         fieldset{
-            padding: 0px 92px;
+            padding: 0px 107px;
             margin: 0 auto;
             text-align: left;
+            position: relative;
             &:last-child{
                 margin-top: 30px;
             }
@@ -49,6 +56,9 @@ section.donate {
                     color: @white;
                 }
             }
+        }
+        label input{
+            margin-top: 6px;
         }
         /* Credit Card Image in number text field */
         .cc-pic {
