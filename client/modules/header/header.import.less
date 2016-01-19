@@ -82,7 +82,7 @@ header.mainHeader{
                     margin-bottom: 0px;
                 }
                 a {
-                    .transition(all, 400ms, ease-in-out, 0ms);
+                    .transition(all, 150ms, linear, 0ms);
                     will-change: margin, padding, font-size;
                     display: block;
                     font-size: 18px;
@@ -132,12 +132,34 @@ header.mainHeader{
 
 //Fixed Header on Scroll Styles
 .fixedHeader header.mainHeader{
+    &:after{
+        content: '';
+        position: absolute;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+        background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        margin-top: -50px;
+        z-index: -10 !important;
+        border-radius: 50%;
+        left: -35%;
+        height: 55px;
+        width: 170%;
+        border-radius: 50%;
+    }
     nav.mainNav{
+        background-color: @white;
         ul{
             padding:0px;
-            li.brand{
-               //.logoAnimatedFixed;
-               top: 8px;
+            li{
+                a{
+                    line-height: 46px;
+                }
+                &.brand{
+                    //.logoAnimatedFixed;
+                    top: 8px;
+                }
             }
         }
     }
@@ -151,7 +173,6 @@ header.mainHeader{
 
 
 .fixedHeader header.mainHeader{
-    border-bottom: 3px solid #ebf2f2;
     nav.mainNav{
         margin: 0px;
         ul{
@@ -181,6 +202,9 @@ header.mainHeader{
                 padding: 0px;
                 border-color: transparent;
                 font-size: 14px;
+                &:hover{
+                    border-color: transparent;
+                }
                 @media @1100{
                     font-size: 12px;
                     margin: 6px 12px 3px 12px;
