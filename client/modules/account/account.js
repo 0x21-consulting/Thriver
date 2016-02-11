@@ -53,9 +53,8 @@ Template.login.events({
 // Logout
 Template.utility.events({
     'click li.logout button': function (event) {
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
         event.preventDefault(); event.stopPropagation();
-        
         Meteor.logout(function (error) {
             if (error instanceof Error)
                 console.error(error);
@@ -77,6 +76,22 @@ Template.accountDetails.helpers({
             return user.emails[0].address;
     }
 });
+
+Template.accountDetails.events({
+    // Switch tabs
+    'click ul.accountDetailsTabs > li': function (event) {
+        var index = $(event.target).index() + 1;
+        
+        // Set the active tab
+        $('ul.accountDetailsTabs > li').removeClass('active');
+        $(event.target).addClass('active');
+        
+        // Set the active content
+        $('ul.accountDetailsContent > li').removeClass('active');
+        $('ul.accountDetailsContent > li:nth-child(' + index + ')').addClass('active');
+    }
+});
+
 Template.utility.helpers({
     name: function () {
         var user = Meteor.user();

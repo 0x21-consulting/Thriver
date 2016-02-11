@@ -5,7 +5,7 @@
                 {{#if currentUser}}
                     <button id="manageSubscriptions" class="newsroomButton"><span class="fa">&#xf0e0;</span> Manage Newsroom Subscriptions</button>
                 {{else}}
-                    <button id="subscriptionsRegister" class="newsroomButton"><span class="fa">&#xf0e0;</span> Register Account for Newsroom Subscriptions</button>
+                    <button id="subscriptionsRegister" class="newsroomButton"><span class="fa">&#xf0e0;</span> Register Account to Subscribe to the Newsroom</button>
                 {{/if}}
             <ul class="newsTabs">
                 <li class="active">In the News</li>
@@ -77,7 +77,6 @@
 <template name="newsletters">
     <li>
         <ul class="newsItems newsletters">
-            <li><button class="manageSubscriptions">Manage Subscriptions</button></li>
             {{#each news}}
                 <li>
                     <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>

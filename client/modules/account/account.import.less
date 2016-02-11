@@ -42,3 +42,90 @@ ul.notificationMenu, ul.eventsMenu{
         }
     }
 }
+
+
+
+//Acount Details
+section.accountDetails{
+    ul.accountDetailsTabs{
+        height: 52px;
+        background-color: #6d818c;
+        li {
+            display: block;
+            width: 33.3%;
+            float: left;
+            padding: 20px 0px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            line-height: 12px;
+            .fa{
+                font-size: 17px;
+                font-weight: 100;
+                position: relative;
+                top: -1px;
+                left: -2px;
+            }
+            .transition(all,200ms,ease,0ms);
+            &:first-child{
+                background-color: #5e727d;
+            }
+            &:nth-child(2){
+                background-color: #637782;
+            }
+            &:nth-child(3){
+                background-color: #6d818c;
+            }
+            &:hover{
+                background-color: darken(@lightBlue, 5%);
+            }
+            &:active{
+                color: lighten(@aqua, 10%);
+            }
+            &.active{
+                background-color: @lightBlue;
+                color: lighten(@aqua, 2.5%);
+                &:hover{
+                    background-color: @lightBlue;
+                    //color: lighten(@aqua, 5%);
+                }
+            }
+        }
+    }
+
+    ul.accountDetailsContent{
+        background-color: @lightBlue;
+        form{
+            max-width: 360px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+        h3{
+            color: @white;
+            background-color: @lightBlue;
+            text-align: center;
+            padding: 36px 0px 18px 0px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        > li{
+            padding: 0px;
+            background-color: @lightBlue;
+            display: none;
+            .animateDisplayNewsTabs;
+            .transition(all,400ms,ease-out,0ms);
+            ul{
+                li{
+                    .transition(all,400ms,ease-out,0ms);
+                }
+            }
+            &.active{
+                display: block;
+                background-color: @lightBlue;
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@ var closeAsides = function (event) {
     event.preventDefault(); event.stopPropagation();
     
     // Start with body changes
-    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
     
     // Remove active components
     document.querySelector('nav.utility li.active').classList.remove('active');
@@ -38,7 +38,7 @@ Template.utility.events({
         }
         
         // Page body must move left or right depending on aside size
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
         document.body.classList.add(that.dataset.sidebar);
         
         // Activate link
@@ -99,7 +99,7 @@ Template.utility.onRendered(function () {
         $(this).parent().parent().removeClass('selected');
     });
     $('.eventsRegistered .viewEvent').click(function(){
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
         alert('scroll down to events and show the selected event');
     });
 });

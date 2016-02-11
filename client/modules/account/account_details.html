@@ -1,32 +1,83 @@
 <template name="accountDetails">
-    <section class="accountDetails leftSmall hasSidebar">
-            <div class="scroller">
-                <h2>Account Details</h2>
-                <form class="editable">
-                    <label for="updateName">Name</label>
-                    <input id="updateName" type="name" name="updateName" value="{{name}}" required>
-                    <label for="updateProvider">Provider</label>
-                    <input id="updateProvider" type="text" name="updateProvider" value="Milwaukee Area" required>
-                    <label for="updateEmail">Email</label>
-                    <input id="updateEmail" type="email" name="updateEmail" value="{{email}}" required>
-                    <label for="updatePassword">Password</label>
-                    <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required>
-                    <input type="submit" value="Update Account">
-                </form>
-                <h2>Your Registered Events</h2>
-                <ul class="eventsMenu">
-                    {{>eventsRegistered}}
-                    {{>eventsRegistered}}
-                    {{>eventsRegistered}}
-                    {{>eventsRegistered}}
-                    {{>eventsRegistered}}
-                </ul>
-                <button type="button" class="viewEvents">View All Events</button>
-                <button type="button" class="closeTab">Close Tab</button>
-            </div>
+    <section class="accountDetails leftMedium hasSidebar">
+        <div class="scroller">
+            <h2>Account Details</h2>
+            <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
+            <ul class="newsTabs accountDetailsTabs">
+                <li class="active"><span class="fa">&#xf007;</span> Profile</li>
+                <li><span class="fa">&#xf0e0;</span> Subscriptions</li>
+                <li><span class="fa">&#xf274;</span> Events</li>
+            </ul>
+            <!--See above comment-->
+            <ul class="newsContent accountDetailsContent">
+                {{> profile }}
+                {{> subscriptions }}
+                {{> eventsRegister }}
+            </ul>
+            <button type="button" class="closeTab">Close Tab</button>
+        </div>
     </section>
 </template>
 
+<!-- Account Details Content Sections -->
+
+<template name="profile">
+    <li class="active">
+        <h3>Profile Settings</h3>
+        <form class="editable">
+            <label for="updateName">Name</label>
+            <input id="updateName" type="name" name="updateName" value="{{name}}" required>
+            <label for="updateProvider">Provider</label>
+            <input id="updateProvider" type="text" name="updateProvider" value="Milwaukee Area" required>
+            <label for="updateEmail">Email</label>
+            <input id="updateEmail" type="email" name="updateEmail" value="{{email}}" required>
+            <label for="updatePassword">Password</label>
+            <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required>
+            <input type="submit" value="Update Account">
+        </form>
+    </li>
+</template>
+
+<template name="subscriptions">
+    <li>
+        <h3>Newsroom Subscriptions</h3>
+        <form id="subscriptions">
+            <div class="toggleSwitch">
+                <label for="inTheNewsToggle">News Updates</label>
+                <input id="inTheNewsToggle" type="checkbox">
+                <label for="inTheNewsToggle"></label>
+            </div>
+            <div class="toggleSwitch">
+                <label for="pressReleasesToggle">Press Releases</label>
+                <input id="pressReleasesToggle" type="checkbox">
+                <label for="pressReleasesToggle"></label>
+            </div>
+            <div class="toggleSwitch">
+                <label for="actionAlertsToggle">Action Alerts</label>
+                <input id="actionAlertsToggle" type="checkbox">
+                <label for="actionAlertsToggle"></label>
+            </div>
+            <div class="toggleSwitch">
+                <label for="newsletterToggle">Newsletters</label>
+                <input id="newsletterToggle" type="checkbox">
+                <label for="newsletterToggle"></label>
+            </div>
+        </form>
+    </li>
+</template>
+
+<template name="eventsRegister">
+    <li>
+        <h3>Your Registered Events</h3>
+        <ul class="eventsMenu">
+            {{>eventsRegistered}}
+            {{>eventsRegistered}}
+        </ul>
+        <button type="button" class="viewEvents">View All Events</button>
+    </li>
+</template>
+
+<!--Tab Components-->
 <template name="eventsEmpty">
     <li class="eventsEmpty">
         You are not currently registered for any events.
