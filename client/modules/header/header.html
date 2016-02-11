@@ -1,8 +1,10 @@
 <template name="header">
     <header class="mainHeader full" id="menu">
+        <div class="mobileLinks">
+            {{> menuToggle}}
+        </div>
         {{> utility}}
         {{> mainNav}}
-        {{> menuToggle}}
         <div class="overlay"></div>
     </header>
 </template>
@@ -10,7 +12,7 @@
 <template name="mainNav">
     <nav class="mainNav">
         <ul class="container">
-            <li class="brand"><a href="#"><img src="/lib/img/wisconsin-coalition-against-sexual-assault.png" alt="WCASA" /></a></li>
+            <li class="brand"><a href="#" class="brandLink"><img src="/lib/img/wisconsin-coalition-against-sexual-assault.png" alt="WCASA" /></a></li>
             <!--{{#each sections}}
                 {{> menuItem}}
             {{/each}}-->

@@ -27,15 +27,20 @@ Template.body.onRendered(function () {
         
         // Set a timeout to add the class after one tenth of a second
         timeout = setTimeout(function () {
-            if (window.scrollY > 0){
+            if (window.scrollY > 0 && $(window).width() > 768){
                 document.body.classList.add('fixedHeader');
             } else {
-                document.body.classList.remove('fixedHeader');
-                // Needed to animate unshrink of header
-                document.body.classList.add('returnHeader');   
+                document.body.classList.remove('fixedHeader');  
             }
         }, 1);
     },false);
+
+    //Insert Utility Nav Items into main nav on mobile
+    //var mainNav = $('.mainNav > ul > li').detach();
+    //$('nav.utility > ul').prepend(mainNav);
+    //var brand = $('.brand > a').detach();
+    //$('.mainHeader .mobileLinks').prepend(brand);
+
 });
 
 var smoothScroll = function (event) {
@@ -67,3 +72,4 @@ var smoothScroll = function (event) {
 // Smooth scrolling
 // We only care about same page links (that start with a hash)
 Template.body.events({ 'mousedown a[href*=#]': smoothScroll });
+

@@ -61,3 +61,10 @@ body{
 button{
     .transition(background-color, 200ms, ease, 0ms);
 }
+
+
+.shadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
