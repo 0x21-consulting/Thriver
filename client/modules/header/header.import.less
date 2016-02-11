@@ -143,6 +143,7 @@ header.mainHeader{
                     width: 400px;
                     text-indent: 0px;
                     margin-bottom: 42px;
+                    height: 90px;
                     a{
                         border: none;
                         display: block;
@@ -151,10 +152,11 @@ header.mainHeader{
                         &:active, &:hover, &:focus{
                             border: none;
                         }
-                        img{
+                        svg, svg image{
                             //width: 400px;
-                            max-width: 100%;
-                            max-height: 100%;
+                            width: 100%;
+                            height: 90px;
+                            .transition(all,375ms,ease-out,0ms);
                         }
                         &:after{
                             display: none;
@@ -231,14 +233,18 @@ header.mainHeader{
                 }
             }
             &.brand{
-                top: 43px;
+                top: 47px;
                 //.logoAnimatedFixed;
                 .translate(0px, -30px);
                 .logoAnimatedFixed;
                 width: 132px;
                 left: 12px;
+                height: 36px;
                 margin-left: 0px;
                 //top: 13px;
+                svg, svg image{
+                    height: 36px;
+                }
                 a{
                     //padding: 0px;
                     //margin: 0px;
