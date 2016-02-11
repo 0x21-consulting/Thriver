@@ -2,10 +2,16 @@
     <section class="news rightLarge hasSidebar">
         <div class="scroller">
             <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
+                {{#if currentUser}}
+                    <button id="manageSubscriptions" class="newsroomButton"><span class="fa">&#xf0e0;</span> Manage Newsroom Subscriptions</button>
+                {{else}}
+                    <button id="subscriptionsRegister" class="newsroomButton"><span class="fa">&#xf0e0;</span> Register Account for Newsroom Subscriptions</button>
+                {{/if}}
             <ul class="newsTabs">
                 <li class="active">In the News</li>
                 <li>Press Releases</li>
                 <li>Action Alerts</li>
+                <li>Newsletters</li>
                 <li>Press/Media Kits</li>
             </ul>
             <aside class="searchFieldContainer">
@@ -17,6 +23,7 @@
                 {{> inTheNews }}
                 {{> pressReleases }}
                 {{> actionAlerts }}
+                {{> newsletters }}
                 {{> mediaKits }}
             </ul>
             <button type="button" class="closeTab">Close Tab</button>
@@ -24,7 +31,7 @@
     </section>
 </template>
 
-<!-- Templates for the various sections -->
+<!-- Newsletter Content Sections -->
 <template name="inTheNews">
     <li class="active">
         <ul class="newsItems inTheNews">
@@ -67,6 +74,21 @@
         </ul>
     </li>
 </template>
+<template name="newsletters">
+    <li>
+        <ul class="newsItems newsletters">
+            <li><button class="manageSubscriptions">Manage Subscriptions</button></li>
+            {{#each news}}
+                <li>
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    <p class="content">{{content}}</p>
+                </li>
+            {{/each}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
 <template name="mediaKits">
     <li>
         <ul class="newsItems">
@@ -75,7 +97,9 @@
         </ul>
     </li>
 </template>
-<!-- Template for "Load More" results button -->
+
+
+<!-- "Load More" Results Button -->
 <template name="loadMore">
     <li>
         <button type="button" class="loadMore">Load More <span class="fa">&#xf0da;</span></button>
@@ -83,32 +107,15 @@
     </li>
 </template>
 
-<!--Duplicates for testing purposes-->
-<template name="newsItem">
-    <li>
-        <span class="dateMeta">November 21, 2015</span>
-        <h3><a href="#">Pellentesque posuere tincidunt</a></h3>
-        <p>Pellentesque posuere tincidunt lectus, ut feugiat nibh finibus eu. Nunc eu lorem neque...</p>
-    </li>
-</template>
 
-<template name="newsItem2">
-    <li>
-        <span class="dateMeta">November 22, 2015</span>
-        <h3><a href="#">Ut feugiat nibh finibus eu. Nunc eu lorem neque</a></h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</p>
-    </li>
-</template>
 
-<template name="newsItem3">
-    <li>
-        <span class="dateMeta">November 23, 2015</span>
-        <h3><a href="#">Nunc eu lorem neque</a></h3>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum....</p>
-    </li>
-</template>
 
-<!--Duplicates for display/icon purposes-->
+
+
+<!--
+    //Should be updated with meteor tags
+    //Duplicates for display/icon purposes // Currently being used by MediaKits
+-->
 <template name="newsItem4">
     <li class="pressMediaItem">
         <a href="#">

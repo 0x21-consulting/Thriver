@@ -1,12 +1,25 @@
 section.news {
-    width: 800px;
+    width: 900px;
     height: ~"calc(100vh - 32px)";
     text-align: center;
     top: 0px;
     .transition(all,400ms,ease-out,0ms);
     h2{
         margin: 0 auto;
+        //margin-bottom: 30px;
+    }
+    button.newsroomButton{
         margin-bottom: 30px;
+        color: #fff;
+        opacity: 0.7;
+        line-height: 37px;
+        margin-top: 21px;
+        padding: 0px;
+        font-size: 14px;
+        .transition(opacity,200ms,ease,0ms);
+        &:hover{
+            opacity: 1;
+        }
     }
     h3{
         a{
@@ -60,7 +73,7 @@ section.news {
         height: 52px;
         li {
             display: block;
-            width: 25%;
+            width: 20%;
             float: left;
             padding: 20px 0px;
             cursor: pointer;
@@ -82,6 +95,9 @@ section.news {
             }
             &:nth-child(4){
                 background-color: #748893;
+            }
+            &:nth-child(5){
+                background-color: #7f929c;
             }
             &:hover{
                 background-color: darken(@lightBlue, 5%);
