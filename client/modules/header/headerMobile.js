@@ -28,8 +28,13 @@ Template.headerMobile.events({
             $('body').removeClass('menuOpen');
         }
     },
+
+    //LI events
     'click .myAccountLink': function (event) {
         $('body').removeClass('menuOpen');
         $('body').addClass('accountOpen');
+    },
+    'click .mobileMenu .donate': function (event) {
+        $('body').addClass('sidebarLeftMobile donateMobile');
     }
 });

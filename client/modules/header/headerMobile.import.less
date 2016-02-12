@@ -1,4 +1,18 @@
 header.mobileHeader{
+    display: none;
+    @media @mobile{
+        display: block;
+    }
+}
+
+header.mainHeader{
+    display: block;
+    @media @mobile{
+        display: none;
+    }
+}
+
+header.mobileHeader{
     background-color: @white;
     position: fixed;
     width: 100%;
@@ -42,8 +56,8 @@ header.mobileHeader{
         .transition(all,375ms,ease-out,0ms);
         top: 0px;
         height: 100vh;
-        position: absolute;
-        > ul{
+        position: fixed;
+        div > ul{
             > li{
                 a{
                     display: block;
@@ -54,10 +68,16 @@ header.mobileHeader{
                     padding: 0px 20px;
                     font-weight: 600;
                     letter-spacing: 0.5px;
+                    &:active{
+                        background-color: darken(@lightBlue, 5%);
+                    }
                 }
                 &:nth-child(even){
                     a{
                         background-color: @darkBlue;
+                        &:active{
+                            background-color: darken(@darkBlue, 5%);
+                        }
                     }
                 }
                 &.menuTitle a{
@@ -79,9 +99,9 @@ header.mobileHeader{
     }
     section.mobileMenu{
         left: 0px;
-        .translateX(-190px);
+        .translateX(-100%);
         background-color:mix(@gray, @navy, 55%);
-        width: 190px;
+        width: 85%;
     }
 
     section.mobileMenuAccount{
@@ -111,6 +131,7 @@ header.mobileHeader{
         ul{
             > li{
                 text-indent: 40px;
+                position: relative;
                 span.fa{
                     font-size: 23px;
                     font-weight: 100;
@@ -165,6 +186,9 @@ header.mobileHeader{
     margin-top: 20px;
     font-size: 12px;
 }
+.closeTabMobile{
+    margin-bottom: 20px;
+}
 .mobileOverlay{
     position: fixed;
     top: 0px;
@@ -178,6 +202,8 @@ header.mobileHeader{
     height: 100%;
     .transition(all,375ms,ease-out,0ms);
 }
+
+
 
 
 //Consistent Openings
@@ -200,7 +226,7 @@ body.menuOpen, body.accountOpen{
 //Menu Open
 body.menuOpen{
     .canvasCenter, header.mobileHeader{
-       .translateX(190px);
+       .translateX(85%);
     }
     .section.mobileMenu{
        .translateX(0px);
@@ -248,8 +274,42 @@ body.accountOpen{
 
 
 
+@media @mobile{
+    //Needs to be in media query for desktop to work
+    .sidebar.sidebarsRight, .sidebar .sidebarsLeft {
+        right: inherit;
+        left: 0px;
+        transform: translateX(-100%);
+        width: 85%;
+        top: 45px;
+        z-index: 20;
+        pointer-events: none;
+        //display: none;
+        .transition(all,375ms,ease-out,0ms);
+        section{
+            .transition(all,375ms,ease-out,0ms);
+        }
+    }
+}
 
 
+//3rd tier
+body.menuOpen.sidebarLeftMobile{
+    .canvasCenter, header.mobileHeader{
+       .translateX(85%);
+    }
+    header.mobileHeader section.mobileMenu{
+        width: 85%;
+       .translateX(-100%);
+    }
+    .sidebar.sidebarsRight{
+        transform: translateX(0%);
+        pointer-events: all;
+        section{
+            transform: translateX(0%);
+        }
+    }
+}
 
 
 

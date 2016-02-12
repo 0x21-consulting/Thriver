@@ -36,39 +36,43 @@
 
 <template name="mobileMenu">
     <section class="mobileMenu">
-        <ul class="scrollable">
-            <li class="menuTitle"><a href="#">Menu</a></li>
-            <li class="getHelpMobile"><a href="#"><span class="fa">&#xf06a;</span> Get Help</a></li>
-            <li><a href="#">What we do</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Who We Are</a></li>
-            <li><a href="#">Get Involved</a></li>
-            <li><a href="#">Service Providers</a></li>
-            <li class="sidebarRig"><a href="#">Donate</a></li>
-            <li class="sidebarRig"><a href="#">Newsroom</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li class="sidebarRig myAccountLink"><a href="#">My account</a></li>
-        </ul>
-        <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+        <div class="scroller">
+            <ul>
+                <li class="menuTitle"><a href="#">Menu</a></li>
+                <li class="getHelpMobile"><a href="#"><span class="fa">&#xf06a;</span> Get Help</a></li>
+                <li><a href="#">What we do</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Who We Are</a></li>
+                <li><a href="#">Get Involved</a></li>
+                <li><a href="#">Service Providers</a></li>
+                <li class="sidebarRig donate"><a href="#">Donate</a></li>
+                <li class="sidebarRig"><a href="#">Newsroom</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li class="sidebarRig myAccountLink"><a href="#">My account</a></li>
+            </ul>
+            <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+        </div>
     </section>
 </template>
 
 <template name="mobileMenuAccount">
     <section class="mobileMenuAccount">
-        <header class="profileOverview">
-            <p>
-                <span>Eoghan McInerney</span>
-                eoghan.tadhg@gmail.com<br>
-                WCASA Madison
-            </p>
-        </header>
-        <ul>
-            <li class="sidebarRig"><a href="#"><span class="fa">&#xf274;</span> Registered Events</a></li>
-            <li class="sidebarRig"><a href="#"><span class="fa">&#xf0e0;</span> Subscriptions</a></li>
-            <li class="sidebarRig notifications"><a href="#"><span class="fa">&#xf06a;</span>Notifications</a></li>
-            <li class="sidebarRig"><a href="#"><span class="fa">&#xf013;</span> Profile Settings</a></li>
-        </ul>
-        <button type="button" class="signOutMobile">Sign Out <span class="fa">&#xf0da;</span></button>  
-        <button type="button" class="closeTab closeTabMobile">Close Tab</button>     
+        <div class="scroller">
+            <header class="profileOverview">
+                <p>
+                    <span>Eoghan McInerney</span>
+                    eoghan.tadhg@gmail.com<br>
+                    WCASA Madison
+                </p>
+            </header>
+            <ul>
+                <li class="sidebarRig"><a href="#"><span class="fa">&#xf274;</span> Registered Events</a></li>
+                <li class="sidebarRig"><a href="#"><span class="fa">&#xf0e0;</span> Subscriptions</a></li>
+                <li class="sidebarRig notifications"><a href="#"><span class="fa">&#xf06a;</span>Notifications</a></li>
+                <li class="sidebarRig"><a href="#"><span class="fa">&#xf013;</span> Profile Settings</a></li>
+            </ul>
+            <button type="button" class="signOutMobile">Sign Out <span class="fa">&#xf0da;</span></button>  
+            <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+        </div>     
     </section>
 </template>
