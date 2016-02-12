@@ -1,0 +1,186 @@
+header.mobileHeader{
+    background-color: @white;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 16;
+    height: 45px;
+    .shadow(0px,0px,5px,5px,0.3);
+    .transition(all,375ms,ease-out,0ms);
+    section.fixedBar{
+        a.brandLink {
+            display: inline-block;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            margin-left: -62px;
+        }
+        .accountToggle{
+            float: right;
+        }
+        button{
+            font-size: 20px;
+            position: relative;
+            top: 6px;
+            padding: 0px 14px;
+            color: @navy;
+            span{
+                opacity: 1;
+                .transition(all,400ms,ease,300ms);
+                &:nth-child(2){
+                    position: absolute;
+                    top: 0px;
+                    margin-left: -10px;
+                    opacity: 0;
+                    color: lighten(@navy, 2.5%);
+                }
+            }
+        }
+    }
+    section.mobileMenuAccount, section.mobileMenu{
+        .transition(all,375ms,ease-out,0ms);
+        top: 0px;
+        height: 100vh;
+        position: absolute;
+    }
+    section.mobileMenu{
+        left: 0px;
+        .translateX(-190px);
+        background-color:mix(@gray, @navy, 55%);
+        width: 190px;
+    }
+
+    section.mobileMenuAccount{
+        right: 0px;
+        background-color:mix(@gray, @navy, 55%);
+        width: 85%;
+        .translateX(100%);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Presets
+.mobileOverlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    background-color: @navy;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    .transition(all,375ms,ease-out,0ms);
+}
+
+
+//Consistent Openings
+body.menuOpen, body.accountOpen{
+    overflow: hidden;
+    .transition(all,375ms,ease-out,0ms);
+    top: 0px;
+    height: 100vh;
+    position: absolute;
+    .mobileOverlay{
+        opacity: 0.85; 
+        visibility: visible;
+        &:hover{
+            //opacity: 0.95;
+        }       
+    }
+}
+
+
+//Menu Open
+body.menuOpen{
+    .canvasCenter, header.mobileHeader{
+       .translateX(190px);
+    }
+    .section.mobileMenu{
+       .translateX(0px);
+    }
+    header.mobileHeader{
+        section.fixedBar{
+            button.menuToggle{
+                span{
+                    &:first-child{
+                        opacity: 0;
+                    }
+                    &:nth-child(2){
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Account Open
+body.accountOpen{
+    .canvasCenter, header.mobileHeader{
+        .translateX(-85%);
+    }
+    section.mobileMenuAccount{
+       .translateX(100%);
+    }
+    header.mobileHeader{
+        section.fixedBar{
+            button.accountToggle{
+                span{
+                    &:first-child{
+                        opacity: 0;
+                    }
+                    &:nth-child(2){
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//To be removed, for desktop testing purposes
+body{
+    .full{
+        width: 100%;
+    }
+    .masterContainer{
+        padding-top: 0px;
+    }
+    &.fixedHeader{
+        .masterContainer{
+            padding-top: 0px;
+        }
+    }
+}

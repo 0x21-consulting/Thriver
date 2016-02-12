@@ -13,12 +13,15 @@ body{
         will-change: padding;
         .transition(padding,375ms,ease-out,0ms);
         @media @mobile{
-            padding-top: 32px; //Was Important
+            padding-top: 0px;
         }
     }
     &.fixedHeader{
         .masterContainer{
             padding-top: 74px;
+            @media @mobile{
+                padding-top: 0px;
+            }
         }
     }
 }

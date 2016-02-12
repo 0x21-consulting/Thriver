@@ -21,14 +21,6 @@ header.mainHeader{
         width: 170%;
         border-radius: 50%;
     }
-    @media @mobile{
-        padding: 0px;
-        overflow-x: initial;
-        background-color: transparent;
-        .fa{
-            display: none;
-        }
-    }
     a:focus{
         outline: none;
     }
@@ -37,10 +29,6 @@ header.mainHeader{
         //margin: 233px 0px 36px 0px;
         //position: relative;
         z-index: 1;
-        @media @mobile{
-            padding: 0px;
-            position: static;
-        }
         .transition(all,375ms,ease-out,0ms); //Previously set to margin, changed to all for margin & transform transition
         will-change: transform, margin; //changed to transform as above
         ul{
@@ -50,13 +38,6 @@ header.mainHeader{
             background-color: @white;
             li{
                 display: inline-block;
-                @media @mobile {
-                    display: block;
-                    text-align: left;
-                }
-                @media @mobile{
-                    margin-bottom: 0px;
-                }
                 a {
                     transition: font 375ms ease, color 100ms linear;
                     -webkit-transition: font 375ms ease, color 100ms linear;
@@ -105,29 +86,6 @@ header.mainHeader{
                             background-color: @teal;
                         }
                     }
-                    @media @1600{
-                        margin: 0px 24px 0px 24px;
-                    }
-                    @media @1300{
-                        margin: 0px 12px 0px 12px;
-                        font-size: 16px;
-                        letter-spacing: 1px;
-                    }
-                    @media @mobile{
-                        padding: 0px;
-                        border-color: transparent;
-                        font-size: 12px;
-                        margin: 6px 12px 3px 12px;
-                        color: @gray;
-                        &:hover{
-                            color: @gray;
-                            border-color:transparent;
-                        }
-                        &:active, &:focus{
-                            color:@teal;
-                            border-color:transparent;
-                        }
-                    }
                 }
                 &.brand {
                     .transition(all,375ms,ease-out,0ms);
@@ -163,17 +121,6 @@ header.mainHeader{
                             display: none;
                         }
                     }
-                    @media @mobile{
-                        top: 2px;
-                        .translate(0px, -30px);
-                        width: 85px;
-                        left: 12px;
-                        margin-left: 0px;
-                        a{
-                            padding: 0px;
-                            margin: 0px;
-                        }
-                    }
                 }
             }
         }
@@ -190,24 +137,6 @@ header.mainHeader{
         margin: 0px;
         ul{
             padding:0px;
-            @media @1100{
-                //text-align: right;
-                right: 0px;
-                li:last-child{
-                    padding-right: 6px;
-                    @media @mobile{
-                        padding-right: 0px;
-                    }
-                }
-                li:nth-child(2){
-                    padding-left: 106px;
-                }
-            }
-            @media @mobile{
-                li:nth-child(2){
-                    padding-left: 0px;
-                }
-            }
         }
         li{
             margin-bottom: 0px;
@@ -228,10 +157,6 @@ header.mainHeader{
                 &:focus{
                     //color: darken(@teal, 5%);
                 }
-                @media @1100{
-                    font-size: 12px;
-                    margin: 6px 12px 3px 12px;
-                }
             }
             &.brand{
                 top: 47px;
@@ -249,9 +174,6 @@ header.mainHeader{
                 a{
                     //padding: 0px;
                     //margin: 0px;
-                }
-                @media @mobile{
-                    top: 2px;
                 }
             }
         }

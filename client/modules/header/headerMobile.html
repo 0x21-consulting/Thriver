@@ -1,0 +1,51 @@
+<template name="headerMobile">
+    <header class="mobileHeader">
+        <section class="fixedBar">
+            {{> menuToggle}}
+            {{> brandMobile}}
+            {{> accountToggle}}
+        </section>
+        {{> mobileMenu}}
+        {{> mobileMenuAccount}}
+    </header>
+    <div class="mobileOverlay"></div>
+</template>
+
+
+
+
+
+
+<template name="menuToggle">
+    <button class="menuToggle fa">
+        <span>&#xf0c9;</span>
+        <span>&#xf061;</span>
+    </button>
+</template>
+
+<template name="accountToggle">
+    <button class="accountToggle fa">
+        <span>&#xf013;</span>
+        <span>&#xf060;</span>
+    </button>
+</template>
+
+<template name="brandMobile">
+    <a href="#" class="brandLink">
+        <svg width="124" height="28">
+            <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="124" height="28" />
+        </svg>
+    </a>
+</template>
+
+<template name="mobileMenu">
+    <section class="mobileMenu">
+        Menu
+    </section>
+</template>
+
+<template name="mobileMenuAccount">
+    <section class="mobileMenuAccount">
+        Account
+    </section>
+</template>

@@ -1,8 +1,5 @@
 <template name="header">
     <header class="mainHeader full" id="menu">
-        <div class="mobileLinks">
-            {{> menuToggle}}
-        </div>
         {{> utility}}
         {{> mainNav}}
         <div class="overlay"></div>
@@ -39,15 +36,4 @@
     <li>
         <a href="#{{anchor name=name}}">{{name}}</a>
     </li>
-</template>
-
-<template name="menuToggle">
-    <div class="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
 </template>

@@ -110,14 +110,19 @@ Template.news.events({
         quantity.set(5);
         $('button.loadMore.everything').removeClass('everything');
     },
-    
-    // "Load More" Results buttons
+
     'click button.loadMore': function (event) {
         quantity.set(0); // get all results
         
         // Hide "Load More Results" button
         if (event && event.target && event.target.classList)
             event.target.classList.add('everything');
+    },
+    
+    // "Load More" Results buttons
+    'click button.newsroomButton': function (event) {
+        $('li.accountDetails').click();
+        $('.accountDetailsTabs li:nth-child(2)').click();
     },
     
     // Search field

@@ -8,11 +8,6 @@ nav.utility{
     width: 100%;
     z-index: 9;
     //.transition(all,400ms,ease-out,0ms);
-    @media @mobile{
-        height: auto;
-        background-color: transparent;
-        position: relative;
-    }
     li{
         button{
             height: 36px;
@@ -48,9 +43,6 @@ nav.utility{
                 left: 14px;
                 top: -1px;
             }
-            @media @mobile{
-                float: none;
-            }
         }
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
@@ -58,9 +50,6 @@ nav.utility{
             span.close{
                 right: 6px;
                 top: -1px;
-            }
-            @media @mobile{
-                float: none;
             }
         }
         &.login, &.accountDetails{
@@ -140,85 +129,3 @@ nav.utility{
         }
     }
 }
-
-
-//Mobile Menu
-/*header.mainHeader{
-    background-color: transparent;
-    .overlay{
-        z-index: -1;
-        visibility: visible;
-        opacity: 0.5;
-    }
-    &:after, nav.mainNav, nav.utility .brand{
-        display: none;
-    }
-    .mobileLinks{
-        text-align: center;
-        background-color: @white;
-        .shadow(0px,0px,10px,0px,0.5);
-        position: relative;
-        z-index: 11;
-        left: ~'calc(100vw - 54px)';
-        .menuToggle{
-            background: navy;
-            height: 54px;
-            width: 54px;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
-        a.brandLink{
-            width: 122px;
-            display: inline-block;
-            top: 0px;
-            left: 0px;
-            vertical-align: middle;
-            padding: 10px 0px 7px 0px;
-            img{
-                width: 100%;
-            }
-    }
-    }
-    nav.utility{
-        background-color: @white;
-        width: ~'calc(100vw - 54px)';
-        height: 100vh;
-        overflow:auto;
-        .shadow(0px,4px,10px,0px,0.5);
-        top: -54px;
-        z-index: 15;
-        ul{
-            text-align: left;
-            li, li.register, li.logout, li.login, li.accountDetails, li.social, li.getHelp, li.donate, li.twitter, li.news{
-                text-align: left;
-                display: block;
-                padding: 0px;
-                width: 100%;
-                height: auto;
-                text-indent: 0px;
-                margin: 0px;
-                a, button{
-                    background-color: transparent;
-                    color: @navy;
-                    text-transform: none;
-                    line-height: 46px;
-                    display: block;
-                    vertical-align: middle;
-                    height: auto;
-                    padding: 0px 30px;
-                    margin: 0px;
-
-                }
-            }
-            li.social{
-                display: inline-block;
-                width: 30px;
-                text-align: left;
-                a{
-                    display: inline-block;
-                }
-            }
-        }
-    }
-}*/
