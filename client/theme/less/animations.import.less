@@ -191,6 +191,9 @@
     }
 }
 
+
+//These are buggy. Probably better to add opacity via script
+/*
 //Special Pulse Animation just for News Tab switch
 .animateDisplayNewsTabs{
     .animation(slideIn, 1, 250ms, ease-in, 0ms);
@@ -214,3 +217,27 @@
         .noAnimation;
     }
 }
+
+//Special Pulse Animation just for Accounts Tab Switch
+.animateDisplayAccountDetailsTabs{
+    .animation(slideIn, 1, 250ms, ease-in, 0ms);
+    .keyframes(slideIn;{
+        0% {
+            display: none;
+            opacity: 0.25;
+            background-color: lighten(@lightBlue, 10%);
+        }
+        1% {
+            display: block;
+            opacity: 0.25;
+            background-color: lighten(@lightBlue, 10%);
+        }
+        100% {
+            opacity: 1;
+            background-color: lighten(@lightBlue, 10%);
+        }
+    });
+    @media @mobile{
+        .noAnimation;
+    }
+}*/

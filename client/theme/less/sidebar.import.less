@@ -54,6 +54,14 @@
                 display: block;
             }
         }
+        &.eventsMenu{
+            li{
+                background-color: @darkBlue;
+                &:nth-child(even){
+                    background-color: @lightBlue;
+                }
+            }
+        }
     }
     button{
         font-size: 12px;
@@ -72,6 +80,12 @@
             &:hover, &:focus, &:active{
                 background-color: transparent;
             }
+        }
+        &.viewEvents{
+            padding: 0px;
+            margin: 0 auto;
+            text-align: center;
+            display: block;
         }
         &.undo{
             margin: 10px 0px 0px 0px;

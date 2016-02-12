@@ -9,7 +9,7 @@
                 <li><span class="fa">&#xf274;</span> Events</li>
             </ul>
             <!--See above comment-->
-            <ul class="newsContent accountDetailsContent">
+            <ul class="accountDetailsContent">
                 {{> profile }}
                 {{> subscriptions }}
                 {{> eventsRegister }}
@@ -72,15 +72,17 @@
         <ul class="eventsMenu">
             {{>eventsRegistered}}
             {{>eventsRegistered}}
+            <li>        
+                <button type="button" class="viewEvents">View All Events <span class="fa inline">&#xf0da;</span></button>
+            </li>
         </ul>
-        <button type="button" class="viewEvents">View All Events</button>
     </li>
 </template>
 
 <!--Tab Components-->
 <template name="eventsEmpty">
     <li class="eventsEmpty">
-        You are not currently registered for any events.
+        <span>You are not currently registered for any events.</span>
     </li>
 </template>
 
@@ -88,13 +90,13 @@
     <li class="eventsRegistered">
         <span class="dateMeta">November 21, 2015</span>
         <span class="text">Jerard Hall Group Meeting</span>
-        <button type="button" class="viewEvent">View Event</button>
-        <button type="button" class="unregister">Unregister</button>
+        <span><button type="button" class="viewEvent">View Event</button></span>
+        <span><button type="button" class="unregister">Unregister</button></span>
         <span class="response">{{> alertEventUnregister}}</span>
     </li>
 </template>
 
 <template name="alertEventUnregister">
-    You have been unregistered for event.
-    <button type="button" class="undo">Undo</button>
+    <span>You have been unregistered for event.
+    <button type="button" class="undo">Undo</button></span>
 </template>

@@ -92,10 +92,10 @@ Template.accountDetails.events({
     },
     //Temp UX Events
     'click .eventsRegistered .unregister': function (event) {
-        $(event.target).parent().addClass('selected');
+        $(event.target).parent().parent().addClass('selected');
     },
     'click .eventsRegistered .undo': function (event) {
-        $(event.target).parent().parent().removeClass('selected');
+        $(event.target).parent().parent().parent().removeClass('selected');
     },
     'click .eventsRegistered .viewEvent': function (event) {
         $('.overlay').click();

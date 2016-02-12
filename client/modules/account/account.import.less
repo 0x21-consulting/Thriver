@@ -49,10 +49,10 @@ ul.notificationMenu, ul.eventsMenu{
 section.accountDetails{
     ul.accountDetailsTabs{
         height: 52px;
-        background-color: #6d818c;
+        background-color: @lightBlue;
         li {
             display: block;
-            width: 33.3%;
+            width: 33.3333333%;
             float: left;
             padding: 20px 0px;
             cursor: pointer;
@@ -115,16 +115,30 @@ section.accountDetails{
             padding: 0px;
             background-color: @lightBlue;
             display: none;
-            .animateDisplayNewsTabs;
+            //.animateDisplayAccountDetailsTabs;
             .transition(all,400ms,ease-out,0ms);
             ul{
                 li{
                     .transition(all,400ms,ease-out,0ms);
+                    span{
+                        max-width: 360px;
+                        margin: 0 auto;
+                        display: block;
+                        &.response{
+                            display: none;
+                            padding: 23px 0px 10px 0px;
+                        }
+                    }
+                    &.selected{
+                        span.response{
+                            display: block;
+                        }
+                    }
                 }
             }
             &.active{
                 display: block;
-                background-color: @lightBlue;
+                //background-color: @lightBlue;
             }
         }
     }
