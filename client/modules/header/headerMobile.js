@@ -27,5 +27,9 @@ Template.headerMobile.events({
             $('body').removeClass('accountOpen');
             $('body').removeClass('menuOpen');
         }
+    },
+    'click .myAccountLink': function (event) {
+        $('body').removeClass('menuOpen');
+        $('body').addClass('accountOpen');
     }
 });
