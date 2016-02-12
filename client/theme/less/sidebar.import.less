@@ -16,7 +16,6 @@
         text-align: center;
         top: 0px;
         .transition(all,375ms,ease-out,0ms);
-        .shadowInset(0px,23px,5px,-20px,0.1);
     }
     h2{
         border-color: mix(@gray, @navy, 45%);
@@ -98,7 +97,6 @@
         width: 356px;
         left: 0px;
         .translate(-356px,0px);
-        .shadow(6px,-1px,8px,-5px,0.2);
         section{
             position: absolute;
             left:0px;
@@ -108,18 +106,6 @@
                 .translate(0px,0px);
                 opacity: 1;
             }
-            &.accountDetails{
-                h2{
-                    max-width: none;
-                }
-                width: 570px;
-                left: 0px;
-                .translateX(-570px);
-                &.active{
-                    .translateX(0px);
-                    opacity: 1;
-                }
-            }
         }
     }
     &.sidebarsRight{
@@ -127,7 +113,6 @@
         right: 0px;
         .translateX(356px);
         background-color: @midnightBlue;
-        .shadow(-6px,-1px,8px,-5px,0.2);
         h2{
             border-color: @lightBlue;
         }

@@ -1,10 +1,9 @@
 body{
-    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+    &.leftSmall, &.rightSmall, &.rightMedium, &.rightLarge{
         overflow: hidden;
         .overlay{
             opacity: 0.85; 
             visibility: visible;
-            .shadowInset(6px,46px,8px,-5px,0.3);
             &:hover{
                 opacity: 0.95;
             }       
@@ -16,16 +15,6 @@ body{
         }
         .sidebarsLeft{
            .translateX(0px);
-        }
-    }
-    &.leftMedium{
-        .canvasCenter, .mainNav{
-            left: inherit;
-            .translateX(570px);
-        }
-        .sidebarsLeft{
-            width: 570px;
-            .translateX(0px);
         }
     }
     &.rightSmall{

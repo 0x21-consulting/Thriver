@@ -89,6 +89,17 @@ Template.accountDetails.events({
         // Set the active content
         $('ul.accountDetailsContent > li').removeClass('active');
         $('ul.accountDetailsContent > li:nth-child(' + index + ')').addClass('active');
+    },
+    //Temp UX Events
+    'click .eventsRegistered .unregister': function (event) {
+        $(event.target).parent().addClass('selected');
+    },
+    'click .eventsRegistered .undo': function (event) {
+        $(event.target).parent().parent().removeClass('selected');
+    },
+    'click .eventsRegistered .viewEvent': function (event) {
+        $('.overlay').click();
+        alert('scroll down to events and show the selected event');
     }
 });
 
@@ -101,3 +112,19 @@ Template.utility.helpers({
             return '';
     }
 });
+
+Template.notifications.events({
+    //Temp UX Alert Notes
+    'click .notificationRenewal button': function (event) {
+        $('li.donate').click();
+    },
+    'click .notificationApproval > button': function (event) {
+        $(event.target).parent().addClass('selected');
+    },
+    'click .notificationApproval .undo': function (event) {
+        $(event.target).parent().parent().removeClass('selected');
+    }
+});
+
+
+

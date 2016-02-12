@@ -7,7 +7,7 @@ var closeAsides = function (event) {
     event.preventDefault(); event.stopPropagation();
     
     // Start with body changes
-    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
+    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
     
     // Remove active components
     document.querySelector('nav.utility li.active').classList.remove('active');
@@ -38,7 +38,7 @@ Template.utility.events({
         }
         
         // Page body must move left or right depending on aside size
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
         document.body.classList.add(that.dataset.sidebar);
         
         // Activate link
@@ -64,42 +64,18 @@ Template.twitter.events        (closure);
 Template.news.events           (closure);
 Template.donate.events         (closure);
 
+
 // Utility Nav
 Template.utility.onRendered(function () {
-    //Should be attributed to correct alert
+    //Should be attributed to correct alert (Figured alerts would be managed via a meteor variable)
     $('li.getHelp').click(function(){
+        alert('Scroll to Providers. Note error onClick as there are no "active" li or sidebars.');
         $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
     });
-
     //Remove Unread Notification Icon on Click
     $('li.notifications button').click(function(){
         $('li.notifications span.unreadNotifications').addClass('hidden');
-    });
-
-    $('span.closeAlert').click(function(){
-        $('figure.alert').removeClass("active").dequeue();
-    });
-
-    //Temp UX Alert Notes
-    $('.notificationRenewal button').click(function(){
-        $('li.donate').click();
-    });
-    $('.notificationApproval > button').click(function(){
-        $(this).parent().addClass('selected');
-    });
-    $('.notificationApproval .undo').click(function(){
-        $(this).parent().parent().removeClass('selected');
-    });
-    $('.eventsRegistered .unregister').click(function(){
-        $(this).parent().addClass('selected');
-    });
-    $('.eventsRegistered .undo').click(function(){
-        $(this).parent().parent().removeClass('selected');
-    });
-    $('.eventsRegistered .viewEvent').click(function(){
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
-        alert('scroll down to events and show the selected event');
     });
 });
