@@ -7,7 +7,7 @@ var closeAsides = function (event) {
     event.preventDefault(); event.stopPropagation();
     
     // Start with body changes
-    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+    document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
     
     // Remove active components
     document.querySelector('nav.utility li.active').classList.remove('active');
@@ -38,7 +38,7 @@ Template.utility.events({
         }
         
         // Page body must move left or right depending on aside size
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall');
+        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
         document.body.classList.add(that.dataset.sidebar);
         
         // Activate link
