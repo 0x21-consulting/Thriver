@@ -1,7 +1,7 @@
 <template name="accountDetails">
     <section class="accountDetails leftMedium hasSidebar">
         <div class="scroller">
-            <h2>Account Details</h2>
+            <h2>Account Overview</h2>
             <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
             <ul class="newsTabs accountDetailsTabs">
                 <li class="active"><span class="fa">&#xf007;</span> Profile</li>
@@ -23,7 +23,7 @@
 
 <template name="profile">
     <li class="active">
-        <h3>Profile Settings</h3>
+        <h3>Account Settings</h3>
         <form class="editable">
             <label for="updateName">Name</label>
             <input id="updateName" type="name" name="updateName" value="{{name}}" required>
@@ -42,34 +42,47 @@
     <li>
         <h3>Newsroom Subscriptions</h3>
         <form id="subscriptions">
-            <div class="toggleSwitch">
-                <label for="inTheNewsToggle">News Updates</label>
-                <input id="inTheNewsToggle" type="checkbox">
-                <label for="inTheNewsToggle"></label>
-            </div>
-            <div class="toggleSwitch">
-                <label for="pressReleasesToggle">Press Releases</label>
-                <input id="pressReleasesToggle" type="checkbox">
-                <label for="pressReleasesToggle"></label>
-            </div>
-            <div class="toggleSwitch">
-                <label for="actionAlertsToggle">Action Alerts</label>
-                <input id="actionAlertsToggle" type="checkbox">
-                <label for="actionAlertsToggle"></label>
-            </div>
-            <div class="toggleSwitch">
-                <label for="newsletterToggle">Newsletters</label>
-                <input id="newsletterToggle" type="checkbox">
-                <label for="newsletterToggle"></label>
-            </div>
+            <ul class="toggleSwitches">
+                <li>
+                    <label for="inTheNewsToggle" class="toggleSwitchLabel">News Updates</label>
+                    <div class="toggleSwitch">
+                        <!--Checked="true" is temp. for display purposes-->
+                        <input id="inTheNewsToggle" type="checkbox" checked="true">
+                        <label for="inTheNewsToggle"></label>
+                    </div>
+                </li>
+                <li>
+                    <label for="pressReleasesToggle" class="toggleSwitchLabel">Press Releases</label>
+                    <div class="toggleSwitch">
+                        <input id="pressReleasesToggle" type="checkbox">
+                        <label for="pressReleasesToggle"></label>
+                    </div>
+                </li>
+                <li>
+                    <label for="actionAlertsToggle" class="toggleSwitchLabel">Action Alerts</label>
+                    <div class="toggleSwitch">
+                        <input id="actionAlertsToggle" type="checkbox">
+                        <label for="actionAlertsToggle"></label>
+                    </div>
+                </li>
+                <li>
+                    <label for="newsletterToggle" class="toggleSwitchLabel">Newsletters</label>
+                    <div class="toggleSwitch">
+                        <input id="newsletterToggle" type="checkbox">
+                        <label for="newsletterToggle"></label>
+                    </div>
+                </li>
+            </ul>
         </form>
     </li>
 </template>
 
 <template name="eventsRegister">
     <li>
-        <h3>Your Registered Events</h3>
+        <h3>Registered Events</h3>
         <ul class="eventsMenu">
+            {{>eventsRegistered}}
+            {{>eventsRegistered}}
             {{>eventsRegistered}}
             {{>eventsRegistered}}
             <li>        

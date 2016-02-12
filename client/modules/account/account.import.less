@@ -47,6 +47,14 @@ ul.notificationMenu, ul.eventsMenu{
 
 //Acount Details
 section.accountDetails{
+    form{
+        .row {
+            text-align: right;
+            max-width: 177px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
     ul.accountDetailsTabs{
         height: 52px;
         background-color: @lightBlue;
@@ -102,6 +110,13 @@ section.accountDetails{
             max-width: 360px;
             margin: 0 auto;
             padding-bottom: 20px;
+            &#subscriptions {
+                max-width: none;
+                padding: 0px;
+                li{
+                    position: relative;
+                }
+            }
         }
         h3{
             color: @white;
