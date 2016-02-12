@@ -21,5 +21,11 @@ Template.headerMobile.events({
             $('body').removeClass('accountOpen');
             $('body').removeClass('menuOpen');
         }
+    },
+    'click .closeTabMobile': function (event) {
+        if($('body').hasClass('accountOpen') || $('body').hasClass('menuOpen')){
+            $('body').removeClass('accountOpen');
+            $('body').removeClass('menuOpen');
+        }
     }
 });
