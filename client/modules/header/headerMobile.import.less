@@ -84,6 +84,15 @@ header.mobileHeader{
                     background-color:mix(@gray, @navy, 55%);
                     text-transform: uppercase;
                     font-weight: 800;
+                    .transition(all,250ms,ease-in,0ms);
+                    &:before{
+                        opacity: 0;
+                        content: '';
+                        font-size: 12px;
+                        position: relative;
+                        top: -1px;
+                        .transition(all,250ms,ease-out,0ms);
+                    }
                 }
                 &.getHelpMobile a{
                     background-color:@orange;
@@ -274,7 +283,7 @@ body.accountOpen{
 
 
 
-@media @mobile{
+//@media @mobile{
     //Needs to be in media query for desktop to work
     .sidebar.sidebarsRight, .sidebar .sidebarsLeft {
         right: inherit;
@@ -290,7 +299,7 @@ body.accountOpen{
             .transition(all,375ms,ease-out,0ms);
         }
     }
-}
+//}
 
 
 //3rd tier
@@ -301,6 +310,12 @@ body.menuOpen.sidebarLeftMobile{
     header.mobileHeader section.mobileMenu{
         width: 85%;
        .translateX(-100%);
+        li.menuTitle a:before {
+            .fa;
+            content: "\f0d9";
+            margin-right: 4px;
+            opacity: 1;
+        }
     }
     .sidebar.sidebarsRight{
         transform: translateX(0%);

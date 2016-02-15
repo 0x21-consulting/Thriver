@@ -1,40 +1,49 @@
 // Events
 Template.headerMobile.events({
+
+    //Menu Actions
     'click button.menuToggle': function (event) {
-        if($('body').hasClass('menuOpen')){
-            $('body').removeClass('menuOpen');
-            } else{
-            $('body').removeClass('accountOpen');
-            $('body').addClass('menuOpen');
+        if(document.body.classList.contains('menuOpen')){
+            document.body.classList.remove('menuOpen');
+        } else{
+            document.body.classList.remove('accountOpen');
+            document.body.classList.add('menuOpen');
         }
     },
     'click button.accountToggle': function (event) {
-        if($('body').hasClass('accountOpen')){
-            $('body').removeClass('accountOpen');
+        if(document.body.classList.contains('accountOpen')){
+            document.body.classList.remove('accountOpen');
         } else{
-            $('body').removeClass('menuOpen');
-            $('body').addClass('accountOpen');
+            document.body.classList.remove('menuOpen');
+            document.body.classList.add('accountOpen');
         }
     },
     'click .mobileOverlay': function (event) {
-        if($('body').hasClass('accountOpen') || $('body').hasClass('menuOpen')){
-            $('body').removeClass('accountOpen');
-            $('body').removeClass('menuOpen');
+        if(document.body.classList.contains('menuOpen') || document.body.classList.contains('accountOpen')){
+            document.body.classList.remove('accountOpen');
+            document.body.classList.remove('menuOpen');
         }
     },
     'click .closeTabMobile': function (event) {
-        if($('body').hasClass('accountOpen') || $('body').hasClass('menuOpen')){
-            $('body').removeClass('accountOpen');
-            $('body').removeClass('menuOpen');
+        if(document.body.classList.contains('menuOpen') || document.body.classList.contains('accountOpen')){
+            document.body.classList.remove('accountOpen');
+            document.body.classList.remove('menuOpen');
         }
     },
 
     //LI events
     'click .myAccountLink': function (event) {
-        $('body').removeClass('menuOpen');
-        $('body').addClass('accountOpen');
+        document.body.classList.remove('menuOpen');
+        document.body.classList.add('accountOpen');
     },
     'click .mobileMenu .donate': function (event) {
-        $('body').addClass('sidebarLeftMobile donateMobile');
+        document.body.classList.add('sidebarLeftMobile','donateM');
+    },
+    'click .mobileMenu .menuTitle a': function (event) {
+        if(document.body.classList.contains('donateM', 'sidebarLeftMobile')){
+            document.body.classList.remove('donateM', 'sidebarLeftMobile');
+        }
     }
+
+
 });
