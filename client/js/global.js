@@ -9,6 +9,19 @@ document.addEventListener('keydown', function (event) {
 
 
 Template.body.onRendered(function () {
+    //Window resize events
+    //Vars
+    var resizeTimer;
+    window.onresize = function(event) {
+        
+        //Hide CSS Animation on Resize
+        document.body.classList.add('noTransition');
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            document.body.classList.remove('noTransition');
+        }, 250);
+    };
+
     // Header State Change (window.scroll)
     var timeout = null;
     window.addEventListener('scroll', function (event) {
@@ -72,4 +85,6 @@ var smoothScroll = function (event) {
 // Smooth scrolling
 // We only care about same page links (that start with a hash)
 Template.body.events({ 'mousedown a[href*=#]': smoothScroll });
+
+
 
