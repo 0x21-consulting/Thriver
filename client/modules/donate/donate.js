@@ -211,6 +211,7 @@ Template.donateDefault.events({
             return;
         }
     }
+
 });
 
 Template.donate.onRendered(function () {
@@ -219,5 +220,8 @@ Template.donate.onRendered(function () {
     });
     $('.customAmt').click(function () {
         document.querySelector('#radio5').checked = true;
+    });
+    $('.sidebar h2').click(function () {
+        document.body.classList.remove('sidebarLeftMobile','donateM');
     });
 });

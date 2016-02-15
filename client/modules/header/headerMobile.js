@@ -36,14 +36,18 @@ Template.headerMobile.events({
         document.body.classList.remove('menuOpen');
         document.body.classList.add('accountOpen');
     },
-    'click .mobileMenu .donate': function (event) {
-        document.body.classList.add('sidebarLeftMobile','donateM');
-    },
     'click .mobileMenu .menuTitle a': function (event) {
         if(document.body.classList.contains('donateM', 'sidebarLeftMobile')){
             document.body.classList.remove('donateM', 'sidebarLeftMobile');
+        } else{
+            document.body.classList.remove('menuOpen');
         }
+    },
+    'click .mobileMenu .donate': function (event) {
+        document.body.classList.add('sidebarLeftMobile','donateM');
+        document.querySelector('.scroller').scrollTop = 0;
     }
+
 
 
 });

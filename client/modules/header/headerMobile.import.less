@@ -70,6 +70,8 @@ header.mobileHeader{
                     letter-spacing: 0.5px;
                     &:active{
                         background-color: darken(@lightBlue, 5%);
+                            .transition(all,100ms,ease,0ms);
+                            font-size: 98%;
                     }
                 }
                 &:nth-child(even){
@@ -77,11 +79,12 @@ header.mobileHeader{
                         background-color: @darkBlue;
                         &:active{
                             background-color: darken(@darkBlue, 5%);
+
                         }
                     }
                 }
                 &.menuTitle a{
-                    background-color:mix(@gray, @navy, 55%);
+                    background-color:mix(@gray, @navy, 45%);
                     text-transform: uppercase;
                     font-weight: 800;
                     .transition(all,250ms,ease-in,0ms);
@@ -93,9 +96,17 @@ header.mobileHeader{
                         top: -1px;
                         .transition(all,250ms,ease-out,0ms);
                     }
+                    &:active{
+                        font-size: 98%;
+                        background-color:mix(@gray, @navy, 40%);
+                        .transition(all,100ms,ease,0ms);
+                    }
                 }
                 &.getHelpMobile a{
                     background-color:@orange;
+                    &:active{
+                        background-color: darken(@orange, 5%);
+                    }
                 }
                 &.sidebarRig a:after{
                     .fa;
@@ -111,6 +122,21 @@ header.mobileHeader{
         .translateX(-100%);
         background-color:mix(@gray, @navy, 55%);
         width: 85%;
+        ul.mobSocial{
+            text-align: center;
+            margin-top: 20px;
+            li, li a{
+                display: inline;
+                background: transparent !important; //override social class
+                padding: 0px 5px 0px 0px;
+                font-size: 24px;
+            }
+            li a{
+                &:active{
+                    color: @teal;
+                }
+            }
+        }
     }
 
     section.mobileMenuAccount{
@@ -285,6 +311,7 @@ body.accountOpen{
 
 //@media @mobile{
     //Needs to be in media query for desktop to work
+    //Convert to sidebarLESS
     .sidebar.sidebarsRight, .sidebar .sidebarsLeft {
         right: inherit;
         left: 0px;
@@ -296,7 +323,52 @@ body.accountOpen{
         //display: none;
         .transition(all,375ms,ease-out,0ms);
         section{
+            h2{
+                text-align: left;
+                cursor: pointer;
+                .transition(all,100ms,ease,0ms);
+                max-width: 999px;
+                span{
+                    display: none;
+                }
+                &:before{
+                    .fa;
+                    display: inline;
+                    content:"\f0d9";
+                }
+                &:active{
+                    font-size: 98%;
+                    background-color: #4e606a;
+                    //.transition(all,100ms,ease,0ms);
+                }
+            }
+            .closeTab{
+                display: none;
+            }
             .transition(all,375ms,ease-out,0ms);
+            background-color: #566a75;
+            width: 100% !important; //override desktop
+            transform: translateX(0%) !important; //Override desktop
+            .scroller{
+                padding: 0px 20px;
+            }
+            h2{
+                font-size: 14px;
+                margin: 0px 0px 20px 0px;
+                padding: 20px 0px;
+                font-weight: 800;
+                border-bottom: 2px solid #4e606a;
+            }
+            button.closeTab{
+                margin-bottom: 60px;
+                margin-top: 0px;
+            }
+            h3, h4{
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
         }
     }
 //}
@@ -305,11 +377,11 @@ body.accountOpen{
 //3rd tier
 body.menuOpen.sidebarLeftMobile{
     .canvasCenter, header.mobileHeader{
-       .translateX(85%);
+       //.translateX(85%);
     }
     header.mobileHeader section.mobileMenu{
-        width: 85%;
-       .translateX(-100%);
+        //width: 85%;
+       //.translateX(-100%);
         li.menuTitle a:before {
             .fa;
             content: "\f0d9";
@@ -322,6 +394,20 @@ body.menuOpen.sidebarLeftMobile{
         pointer-events: all;
         section{
             transform: translateX(0%);
+            right: inherit;
+            left: 0px;
+        }
+    }
+
+    //Section fade-ins
+    &.donateM{
+        section.donate{
+            opacity: 1;
+        }
+        header.mobileHeader{
+            .scroller{
+                overflow: hidden;
+            }
         }
     }
 }
