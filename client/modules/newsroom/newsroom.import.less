@@ -20,7 +20,18 @@ section.news {
         &:hover{
             opacity: 1;
         }
+        &#manageSubscriptions{
+            @media @mobile{
+                position: absolute;
+                width: 100%;
+                margin: 0px;
+                left: 0px;
+                top: 387px;
+            }
+        }
     }
+
+
     h3{
         a{
             .colorButton(lighten(@aqua, 2.5%));
@@ -117,19 +128,50 @@ section.news {
     }
     ul.newsContent{
         background-color: @darkBlue;
+        @media @mobile{
+            position: fixed;
+            top: 0px;
+            left: -100%;
+            width: 100%;
+        }
         > li{
             padding: 0px;
             background-color: transparent;
             display: none;
+            @media @mobile{
+                //position: fixed;
+                top: 0px;
+                left: 0px;
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+                overflow-y: auto;
+                height: ~'calc(100vh - 24px)';
+                .transition(all,400ms,ease-out,0ms);
+                .translateX(0%);
+            }
+            &.active{
+                @media @mobile{
+                    .translateX(100%)
+                }
+            }
             //.animateDisplayNewsTabs;
             .transition(all,400ms,ease-out,0ms);
             ul{
                 li{
                     background-color: @darkBlue;
                     padding: 30px 140px 30px 140px;
+                    @media @mobile{
+                        padding: 20px;
+                    }
                     .transition(all,400ms,ease-out,0ms);
                     &:nth-child(even){
                         background-color: @lightBlue;
+                    }
+                    &:last-child{
+                        @media @mobile{
+                            padding-bottom: 50px;
+                        }
                     }
                     &.pressMediaItem{
                         text-align: center;
@@ -148,7 +190,32 @@ section.news {
                 display: block;
             }
         }
+
         ul.newsItems.inTheNews{
+            li.menuTitle{
+                background-color:mix(@gray, @navy, 55%);
+                a{
+                    text-transform: uppercase;
+                    color: @white;
+                    font-weight: 800;
+                    .transition(all,250ms,ease-in,0ms);
+                    &:before{
+                        font-size: 12px;
+                        position: relative;
+                        top: -1px;
+                        .transition(all,250ms,ease-out,0ms);
+                        .fa;
+                        content: "\f0d9";
+                        margin-right: 4px;
+                        opacity: 1;
+                    }
+                    &:active{
+                        font-size: 98%;
+                        background-color:mix(@gray, @navy, 40%);
+                        .transition(all,100ms,ease,0ms);
+                    }
+                }
+            }
             h3{
                 margin-bottom: 0px;
             }
@@ -157,6 +224,9 @@ section.news {
     aside.searchFieldContainer{
         padding: 35px 30px 40px 30px;
         background-color: @lightBlue;
+        @media @mobile{
+            display: none;
+        }
         form{
             max-width: 300px;
             margin: 0 auto;
@@ -178,5 +248,60 @@ section.news {
     :-moz-placeholder {  color: @white; font-weight: bold;  }
     ::-moz-placeholder {  color: @white; font-weight: bold;  }
     :-ms-input-placeholder {  color: @white; font-weight: bold;  }
+}
+
+
+
+
+@media @mobile{
+    section.news {
+        button#subscriptionsRegister {
+            margin: 0px;
+            padding: 0px 20px 0px 0px;
+            position: static;
+            line-height: 16px;
+            text-align: left;
+            font-size: 13px;
+        }
+        ul.newsTabs{
+            height: auto;
+            li {
+                width: 100%;
+                display: block;
+                padding: 20px;
+                background-color: @lightBlue !important;
+                color: #ffffff;
+                text-align: left;
+                font-size: 14px;
+                line-height: 19px;
+                margin-left: -20px;
+                float: none;
+                display: block;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                &:active{
+                    background-color: darken(@lightBlue, 5%);
+                    .transition(all,100ms,ease,0ms);
+                    font-size: 98%;
+                }
+                &:nth-child(even){
+                    background-color: @darkBlue !important;
+                    &:active{
+                        color: @white !important;
+                        background-color: darken(@lightBlue, 5%) !important;
+                    }
+                }
+                &.active{
+                    color:@white !important;
+                }
+                &:after{
+                    .fa;
+                    content:"\f061";
+                    color: #455056;
+                    float: right;
+                }
+            }
+        }
+    }
 }
 

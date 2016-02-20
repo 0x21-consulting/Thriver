@@ -35,6 +35,8 @@
 <template name="inTheNews">
     <li class="active">
         <ul class="newsItems inTheNews">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>In the News</h2></li>
             {{#each news}}
                 <li>
                     <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
@@ -49,6 +51,8 @@
 <template name="pressReleases">
     <li>
         <ul class="newsItems">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>Press Releases</h2></li>
             {{#each news}}
                 <li>
                     <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
@@ -63,6 +67,8 @@
 <template name="actionAlerts">
     <li>
         <ul class="newsItems">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>Action Alerts</h2></li>
             {{#each news}}
                 <li>
                     <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
@@ -77,6 +83,8 @@
 <template name="newsletters">
     <li>
         <ul class="newsItems newsletters">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>Newsletters</h2></li>
             {{#each news}}
                 <li>
                     <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
@@ -91,6 +99,8 @@
 <template name="mediaKits">
     <li>
         <ul class="newsItems">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>Media Kits</h2></li>
             {{>newsItem4}}
             {{>newsItem5}}
         </ul>
@@ -108,6 +118,9 @@
 
 
 
+<template name="backToNewsMobile">
+    <li class="menuTitle newsTabMenu dtHide"><a href="#">Newsroom</a></li>
+</template>
 
 
 
@@ -134,3 +147,4 @@
         </a>
     </li>
 </template>
+

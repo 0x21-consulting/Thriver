@@ -134,3 +134,14 @@ Template.news.events({
         event.preventDefault(); event.stopPropagation();
     }
 });
+
+
+Template.news.onRendered(function () {
+    function removeActiveClass(selector){
+        document.querySelector(selector).classList.remove('active');
+    }
+    removeActiveClass('.newsContent li');
+    removeActiveClass('.newsTabs li');
+
+
+});

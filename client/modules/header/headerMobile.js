@@ -37,14 +37,20 @@ Template.headerMobile.events({
         document.body.classList.add('accountOpen');
     },
     'click .mobileMenu .menuTitle a': function (event) {
-        if(document.body.classList.contains('donateM', 'sidebarLeftMobile')){
+        if(document.body.classList.contains('donateM', 'sidebarLeftMobile', 'newsroomM')){
             document.body.classList.remove('donateM', 'sidebarLeftMobile');
+        } else if(document.body.classList.contains('newsroomM', 'sidebarLeftMobile')){
+            document.body.classList.remove('newsroomM', 'sidebarLeftMobile');
         } else{
             document.body.classList.remove('menuOpen');
         }
     },
     'click .mobileMenu .donate': function (event) {
         document.body.classList.add('sidebarLeftMobile','donateM');
+        document.querySelector('.scroller').scrollTop = 0;
+    },
+    'click .mobileMenu .newsroom': function (event) {
+        document.body.classList.add('sidebarLeftMobile','newsroomM');
         document.querySelector('.scroller').scrollTop = 0;
     }
 
