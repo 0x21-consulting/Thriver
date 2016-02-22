@@ -22,7 +22,7 @@
 <!-- Account Details Content Sections -->
 
 <template name="profile">
-    <li class="active">
+    <li class="active accountSettings">
         <h3>Account Settings</h3>
         <form class="editable">
             <label for="updateName">Name</label>
@@ -39,7 +39,7 @@
 </template>
 
 <template name="subscriptions">
-    <li>
+    <li class="subscriptions">
         <h3>Newsroom Subscriptions</h3>
         <form id="subscriptions">
             <ul class="toggleSwitches">
@@ -78,7 +78,7 @@
 </template>
 
 <template name="eventsRegister">
-    <li>
+    <li class="registeredEvents">
         <h3>Registered Events</h3>
         <ul class="eventsMenu">
             {{>eventsRegistered}}

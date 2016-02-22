@@ -1,3 +1,7 @@
+function removeActiveClass(){
+    $('.accountDetailsContent > li').removeClass('active');
+}
+
 //Register Form
 Template.register.events({
     'submit form': function(event){
@@ -76,6 +80,13 @@ Template.accountDetails.helpers({
             return user.emails[0].address;
     }
 });
+
+Template.accountDetails.onRendered(function () {
+    if (window.innerWidth < 768) {
+        removeActiveClass();
+    }
+});
+
 
 Template.accountDetails.events({
     // Switch tabs

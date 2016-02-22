@@ -1,6 +1,11 @@
 function removeActiveClass(){
     $('.newsContent li').removeClass('active');
     $('.newsTabs li').removeClass('active');
+    $('.accountDetailsContent > li').removeClass('active');
+}
+
+function removeOpenAccounts(){
+    document.body.classList.remove('registeredEventsM', 'subscriptionsManagerM', 'notificationsM', 'profileSettingsM');
 }
 
 // Events
@@ -72,7 +77,31 @@ Template.headerMobile.events({
     'click .mobileMenu .newsroom': function (event) {
         document.body.classList.add('sidebarLeftMobile','newsroomM');
         document.querySelector('.scroller').scrollTop = 0;
+    },
+
+
+    //Accounts Side
+    'click .mobileMenuAccount .registeredEventsMob': function (event) {
+        removeOpenAccounts();
+        document.body.classList.add('sidebarLeftMobile','registeredEventsM');
+        document.querySelector('.scroller').scrollTop = 0;
+    },
+    'click .mobileMenuAccount .subscriptionsManagerMob': function (event) {
+        removeOpenAccounts();
+        document.body.classList.add('sidebarLeftMobile','subscriptionsManagerM');
+        document.querySelector('.scroller').scrollTop = 0;
+    },
+    'click .mobileMenuAccount .notificationsMob': function (event) {
+        removeOpenAccounts();
+        document.body.classList.add('sidebarLeftMobile','notificationsM');
+        document.querySelector('.scroller').scrollTop = 0;
+    },
+    'click .mobileMenuAccount .profileSettingsMob': function (event) {
+        removeOpenAccounts();
+        document.body.classList.add('sidebarLeftMobile','profileSettingsM');
+        document.querySelector('.scroller').scrollTop = 0;
     }
+
 
 
 

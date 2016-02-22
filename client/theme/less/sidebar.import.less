@@ -172,7 +172,6 @@
 }
 
 
-
 @media @mobile{
     .sidebar.sidebarsRight, .sidebar .sidebarsLeft {
         right: inherit;
@@ -246,4 +245,121 @@
             }
         }
     }
+}
+
+
+//Accounts Side
+@media @mobile{
+    .sidebar.sidebarsLeft{
+        left: initial;
+        right: 0px;
+        width: ~'calc(85% - 60px)';
+        .translate(100%,0px);
+        z-index: 20;
+        top: 113px;
+        section, section.accountDetails{
+            width: 100%;
+            opacity: 0;
+            z-index: 8;
+            .translateX(0px);
+            h2, ul.accountDetailsTabs{
+                display: none;
+            }
+        }
+    }
+
+    .registeredEventsM{
+        .sidebar.sidebarsLeft{
+            .translate(0px,0px);
+            section.notifications{
+                .translate(100%,0px);
+            }
+            section.accountDetails{
+                .translate(0px,0px);
+                opacity: 1;
+                ul.accountDetailsContent > li{
+                    .translate(100%,0px);
+                    &.registeredEvents{
+                        display: block;
+                        .translate(0px,0px);
+                        opacity: 1;
+                        z-index: 9;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .subscriptionsManagerM{
+        .sidebar.sidebarsLeft{
+            .translate(0px,0px);
+            section.notifications{
+                .translate(100%,0px);
+            }
+            section.accountDetails{
+                .translate(0px,0px);
+                opacity: 1;
+                ul.accountDetailsContent > li{
+                    .translate(100%,0px);
+                    &.subscriptions{
+                        display: block;
+                        .translate(0px,0px);
+                        opacity: 1;
+                        z-index: 9;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .notificationsM{
+        .sidebar.sidebarsLeft{
+            .translate(0px,0px);
+            section.accountDetails{
+                .translate(100%,0px);
+            }
+            section.notifications{
+                .translate(0px,0px);
+                opacity: 1;
+                ul.accountDetailsContent > li{
+                    .translate(100%,0px);
+                    &.notifications{
+                        display: block;
+                        .translate(0px,0px);
+                        opacity: 1;
+                        z-index: 9;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .profileSettingsM{
+        .sidebar.sidebarsLeft{
+            .translate(0px,0px);
+            section.notifications{
+                .translate(100%,0px);
+            }
+            section.accountDetails{
+                .translate(0px,0px);
+                opacity: 1;
+                ul.accountDetailsContent > li{
+                    .translate(100%,0px);
+                    &.accountSettings{
+                        display: block;
+                        .translate(0px,0px);
+                        opacity: 1;
+                        z-index: 9;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 }
