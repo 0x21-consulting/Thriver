@@ -33,7 +33,7 @@
         li{
             display: block;
             padding: 30px;
-            background-color: @lightBlue;
+            background-color: @lightBlue;2
             color: @white;
             text-align: left;
             font-size: 14px;
@@ -184,21 +184,27 @@
         pointer-events: none;
         //display: none;
         .transition(all,375ms,ease-out,0ms);
+        .scroller > div > h2, .scroller > h2 {
+            background: @aqua;
+            margin-left: -20px;
+            width: 100%;
+            padding-right: 40px;
+        }
         section{
             h2{
+                color: @white;
                 text-align: left;
-                //cursor: pointer;
                 font-size: 14px;
-                margin: 0px;
-                padding: 0px;
-                font-weight: 100;
-                line-height: 60px;
-                color: @aqua;
-                font-size: 24px;
-                height: 60px;
-                border: none;
+                line-height: 19px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-indent: 20px;
                 .transition(all,100ms,ease,0ms);
                 max-width: 999px;
+                border: none;
+                padding: 0px;
+                line-height: 60px;
+                height: 60px;
                 span{
                     display: none;
                 }
@@ -233,6 +239,10 @@
                 line-height: 20px;
                 font-weight: 600;
                 letter-spacing: 1px;
+            }
+            li.mainTitle{
+                padding: 0px;
+                background-color: @aqua !important; //Override pseudoselector
             }
         }
     }

@@ -40,6 +40,11 @@ friendlyDate = function () {
         months[date.getMonth()] + ' ' + date.getFullYear();
 };
 
+function removeActiveClass(){
+    $('.newsContent li').removeClass('active');
+    $('.newsTabs li').removeClass('active');
+}
+
 // Subscriptions
 Meteor.subscribe('inTheNews');
 Meteor.subscribe('pressReleases');
@@ -95,7 +100,7 @@ Template.actionAlerts.helpers({
 // Events
 Template.news.events({
     // Switch tabs
-    'click ul.newsTabs > li': function (event) {
+    'click ul.newsTabs > li:not(:last-child)': function (event) {
         var index = $(event.target).index() + 1;
         
         // Set the active tab
@@ -132,16 +137,24 @@ Template.news.events({
     // Don't allow search to submit form on enter; it doesn't go anywhere
     'submit aside.searchFieldContainer.form': function (event) {
         event.preventDefault(); event.stopPropagation();
+    },
+
+    // "Load More" Results buttons
+    'click li.newsTabMenu': function (event) {
+        removeActiveClass();
+    },
+
+    //Mobile subscription management
+    'click .subscriptionsMob button': function (event) {
+        //Not sure where this is being called
+        event.preventDefault();
+        $('.mobileOverlay').click();
+        $('button.accountToggle').click();
+        $('li.subscriptionsManagerMob').click();
     }
 });
 
 
 Template.news.onRendered(function () {
-    function removeActiveClass(selector){
-        document.querySelector(selector).classList.remove('active');
-    }
-    removeActiveClass('.newsContent li');
-    removeActiveClass('.newsTabs li');
-
-
+    removeActiveClass();
 });

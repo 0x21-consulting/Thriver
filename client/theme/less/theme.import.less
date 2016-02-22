@@ -79,6 +79,20 @@ button{
     display: inline !important;
 }
 
+.dtHide{
+    display: none;
+    @media @mobile{
+        display: block;
+    }
+}
+
+.mobHide{
+    display: block;
+    @media @mobile{
+        display: none;
+    }
+}
+
 @media @mobile{
     .fullBlockMob{
         width: 100% !important;

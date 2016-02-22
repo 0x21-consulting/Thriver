@@ -1,3 +1,8 @@
+function removeActiveClass(){
+    $('.newsContent li').removeClass('active');
+    $('.newsTabs li').removeClass('active');
+}
+
 // Events
 Template.headerMobile.events({
 
@@ -5,6 +10,9 @@ Template.headerMobile.events({
     'click button.menuToggle': function (event) {
         if(document.body.classList.contains('menuOpen')){
             document.body.classList.remove('menuOpen');
+            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
+            //Newsroom Function
+            removeActiveClass();
         } else{
             document.body.classList.remove('accountOpen');
             document.body.classList.add('menuOpen');
@@ -13,6 +21,9 @@ Template.headerMobile.events({
     'click button.accountToggle': function (event) {
         if(document.body.classList.contains('accountOpen')){
             document.body.classList.remove('accountOpen');
+            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
+            //Newsroom Function
+            removeActiveClass();
         } else{
             document.body.classList.remove('menuOpen');
             document.body.classList.add('accountOpen');
@@ -22,6 +33,9 @@ Template.headerMobile.events({
         if(document.body.classList.contains('menuOpen') || document.body.classList.contains('accountOpen')){
             document.body.classList.remove('accountOpen');
             document.body.classList.remove('menuOpen');
+            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
+            //Newsroom Function
+            removeActiveClass();
         }
     },
     'click .closeTabMobile': function (event) {
@@ -39,12 +53,18 @@ Template.headerMobile.events({
     'click .mobileMenu .menuTitle a': function (event) {
         if(document.body.classList.contains('donateM', 'sidebarLeftMobile', 'newsroomM')){
             document.body.classList.remove('donateM', 'sidebarLeftMobile');
+            //Newsroom Function
+            removeActiveClass();
         } else if(document.body.classList.contains('newsroomM', 'sidebarLeftMobile')){
             document.body.classList.remove('newsroomM', 'sidebarLeftMobile');
+            //Newsroom Function
+            removeActiveClass();
         } else{
             document.body.classList.remove('menuOpen');
         }
     },
+
+    //Sends previous nav back to top
     'click .mobileMenu .donate': function (event) {
         document.body.classList.add('sidebarLeftMobile','donateM');
         document.querySelector('.scroller').scrollTop = 0;

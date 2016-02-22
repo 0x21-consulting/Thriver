@@ -3,9 +3,9 @@
         <div class="scroller">
             <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
                 {{#if currentUser}}
-                    <button id="manageSubscriptions" class="newsroomButton"><span class="fa">&#xf0e0;</span> Manage Newsroom Subscriptions</button>
+                    <button id="manageSubscriptions" class="newsroomButton mobHide"><span class="fa">&#xf0e0;</span> Manage Newsroom Subscriptions</button>
                 {{else}}
-                    <button id="subscriptionsRegister" class="newsroomButton"><span class="fa">&#xf0e0;</span> Register Account to Subscribe to the Newsroom</button>
+                    <button id="subscriptionsRegister" class="newsroomButton mobHide"><span class="fa">&#xf0e0;</span> Register Account to Subscribe to the Newsroom</button>
                 {{/if}}
             <ul class="newsTabs">
                 <li class="active">In the News</li>
@@ -13,6 +13,14 @@
                 <li>Action Alerts</li>
                 <li>Newsletters</li>
                 <li>Press/Media Kits</li>
+                <!--Mobile Button-->
+                <li class="dtHide subscriptionsMob">
+                    {{#if currentUser}}
+                        <button id="manageSubscriptionsMob"><span class="fa">&#xf0e0;</span> Manage Subscriptions</button>
+                    {{else}}
+                        <button id="subscriptionsRegisterMob"><span class="fa">&#xf0e0;</span> Subscribe to Newsroom</button>
+                    {{/if}}
+                </li>
             </ul>
             <aside class="searchFieldContainer">
                 <form autocomplete="off">

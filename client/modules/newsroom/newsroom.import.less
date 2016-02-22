@@ -20,15 +20,6 @@ section.news {
         &:hover{
             opacity: 1;
         }
-        &#manageSubscriptions{
-            @media @mobile{
-                position: absolute;
-                width: 100%;
-                margin: 0px;
-                left: 0px;
-                top: 387px;
-            }
-        }
     }
 
 
@@ -38,6 +29,12 @@ section.news {
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            @media @mobile{
+                color:@white;
+                &:hover{
+                    color: @white;
+                }
+            }
         }
     }
     a{
@@ -124,6 +121,27 @@ section.news {
                     //color: lighten(@aqua, 5%);
                 }
             }
+            &.subscriptionsMob{
+                padding: 0px 40px 0px 0px;
+                position: relative;
+                button{
+                    margin: 0px;
+                    padding: 0px;
+                    height: 60px;
+                    line-height: 60px;
+                    opacity: 1;
+                    text-indent: 20px;
+                    font-weight: 600;
+                    color: #fff;
+                    font-size: 14px;
+                    letter-spacing: 0.5px;
+                }
+                &:after{
+                    position: absolute;
+                    right: 20px;
+                    top: 20px;
+                }
+            }
         }
     }
     ul.newsContent{
@@ -139,7 +157,9 @@ section.news {
             background-color: transparent;
             display: none;
             @media @mobile{
-                //position: fixed;
+                display: block;
+                background-color: #566a75;
+                position: fixed;
                 top: 0px;
                 left: 0px;
                 padding: 0px;
@@ -148,11 +168,11 @@ section.news {
                 overflow-y: auto;
                 height: ~'calc(100vh - 24px)';
                 .transition(all,400ms,ease-out,0ms);
-                .translateX(0%);
+                .translateX(-100%);
             }
             &.active{
                 @media @mobile{
-                    .translateX(100%)
+                    .translateX(0%);
                 }
             }
             //.animateDisplayNewsTabs;
@@ -163,14 +183,25 @@ section.news {
                     padding: 30px 140px 30px 140px;
                     @media @mobile{
                         padding: 20px;
+                        color: @white;
+                        &:active{
+                            background-color: darken(@darkBlue, 20%);
+                        }
+                        a{
+                            color: @white !important;
+                        }
                     }
                     .transition(all,400ms,ease-out,0ms);
                     &:nth-child(even){
                         background-color: @lightBlue;
+                        &:active{
+                            background-color: darken(@lightBlue, 20%);
+                        }
                     }
                     &:last-child{
                         @media @mobile{
                             padding-bottom: 50px;
+                            background-color: transparent;
                         }
                     }
                     &.pressMediaItem{
@@ -184,6 +215,37 @@ section.news {
                             }
                         }
                     }
+                    &.menuTitle{
+                        background-color:mix(@gray, @navy, 55%);
+                        .transition(all,100ms,ease,0ms);
+                        cursor: pointer;
+                        &:active{
+                            background-color: mix(@gray, @navy, 50%);
+                            a{
+                                font-size: 98%;
+                            }
+                        }
+                        a{
+                            text-transform: uppercase;
+                            color: @white;
+                            font-weight: 800;
+                            .transition(all,250ms,ease-in,0ms);
+                            &:before{
+                                font-size: 12px;
+                                position: relative;
+                                top: -1px;
+                                .transition(all,250ms,ease-out,0ms);
+                                .fa;
+                                content: "\f0d9";
+                                margin-right: 4px;
+                                opacity: 1;
+                            }
+                            &:active{
+                                //font-size: 98%;
+                                //background-color:mix(@gray, @navy, 40%);
+                            }
+                        }
+                    }
                 }
             }
             &.active{
@@ -192,30 +254,6 @@ section.news {
         }
 
         ul.newsItems.inTheNews{
-            li.menuTitle{
-                background-color:mix(@gray, @navy, 55%);
-                a{
-                    text-transform: uppercase;
-                    color: @white;
-                    font-weight: 800;
-                    .transition(all,250ms,ease-in,0ms);
-                    &:before{
-                        font-size: 12px;
-                        position: relative;
-                        top: -1px;
-                        .transition(all,250ms,ease-out,0ms);
-                        .fa;
-                        content: "\f0d9";
-                        margin-right: 4px;
-                        opacity: 1;
-                    }
-                    &:active{
-                        font-size: 98%;
-                        background-color:mix(@gray, @navy, 40%);
-                        .transition(all,100ms,ease,0ms);
-                    }
-                }
-            }
             h3{
                 margin-bottom: 0px;
             }
@@ -279,10 +317,12 @@ section.news {
                 display: block;
                 font-weight: 600;
                 letter-spacing: 0.5px;
+                text-transform: none;
                 &:active{
                     background-color: darken(@lightBlue, 5%);
                     .transition(all,100ms,ease,0ms);
                     font-size: 98%;
+                    color: @white;
                 }
                 &:nth-child(even){
                     background-color: @darkBlue !important;
