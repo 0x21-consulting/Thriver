@@ -156,5 +156,7 @@ Template.news.events({
 
 
 Template.news.onRendered(function () {
-    removeActiveClass();
+    if (window.innerWidth < 768) {
+        removeActiveClass();
+    }
 });
