@@ -9,11 +9,32 @@ document.addEventListener('keydown', function (event) {
 
 
 Template.body.onRendered(function () {
+
+    function mobileStatesReset(){
+        if (document.body.classList.contains('fixedHeader')){
+            document.body.className = "fixedHeader";
+        } else{
+            document.body.className = "";
+        }
+        var activeItems = document.getElementsByTagName('li');
+        for (var i = 0; i < activeItems.length; i++) {
+            if (activeItems[i].classList.contains('active')){
+                activeItems[i].classList.remove('active');
+            }
+        }
+    }
+
     //Window resize events
     //Vars
     var resizeTimer;
+    var windowWidth = $(window).width();
     window.onresize = function(event) {
-        
+        if (windowWidth > 768 && $(window).width() < 768) {
+            mobileStatesReset();
+        }
+        else if (windowWidth < 768 && $(window).width() > 768) {
+            mobileStatesReset();
+        }
         //Hide CSS Animation on Resize
         document.body.classList.add('noTransition');
         clearTimeout(resizeTimer);
