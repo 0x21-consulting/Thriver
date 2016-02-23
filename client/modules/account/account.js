@@ -156,7 +156,15 @@ Template.utility.helpers({
 Template.notifications.events({
     //Temp UX Alert Notes
     'click .notificationRenewal button': function (event) {
-        $('li.donate').click();
+        if (window.innerWidth >= 768) {
+            $('.overlay').click();
+            $('li.donate').click();
+        } else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+            $('.menuToggle').click();
+            $('.mobileMenu li.donate').click();
+        }
     },
     'click .notificationApproval > button': function (event) {
         $(event.target).parent().addClass('selected');

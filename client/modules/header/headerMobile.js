@@ -4,6 +4,13 @@ function removeActiveClass(){
     $('.accountDetailsContent > li').removeClass('active');
 }
 
+function scrollerResets(){
+    var allScrollers = document.getElementsByClassName('scroller');
+    for (var i = 0; i < allScrollers.length; i++) {
+        allScrollers[i].scrollTop = 0;
+    }
+}
+
 function removeOpenAccounts(){
     document.body.classList.remove('registeredEventsM', 'subscriptionsManagerM', 'notificationsM', 'profileSettingsM');
 }
@@ -70,15 +77,18 @@ Template.headerMobile.events({
             document.body.classList.remove('menuOpen');
         }
     },
-
+    'click .mobileMenu li.getHelpMobile': function (event) {
+        $('.mobileOverlay').click();
+        alert('Scroll to Providers.');
+    },
     //Sends previous nav back to top
     'click .mobileMenu .donate': function (event) {
         document.body.classList.add('sidebarLeftMobile','donateM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     },
     'click .mobileMenu .newsroom': function (event) {
         document.body.classList.add('sidebarLeftMobile','newsroomM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     },
 
 
@@ -86,22 +96,22 @@ Template.headerMobile.events({
     'click .mobileMenuAccount .registeredEventsMob': function (event) {
         removeOpenAccounts();
         document.body.classList.add('sidebarLeftMobile','registeredEventsM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     },
     'click .mobileMenuAccount .subscriptionsManagerMob': function (event) {
         removeOpenAccounts();
         document.body.classList.add('sidebarLeftMobile','subscriptionsManagerM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     },
     'click .mobileMenuAccount .notificationsMob': function (event) {
         removeOpenAccounts();
         document.body.classList.add('sidebarLeftMobile','notificationsM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     },
     'click .mobileMenuAccount .profileSettingsMob': function (event) {
         removeOpenAccounts();
         document.body.classList.add('sidebarLeftMobile','profileSettingsM');
-        document.querySelector('.scroller').scrollTop = 0;
+        scrollerResets();
     }
 
 

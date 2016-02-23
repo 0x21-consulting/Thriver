@@ -306,8 +306,14 @@
                 background-color: transparent;
                 padding: 10px 20px;
             }
+            button.loadMore {
+                padding-bottom: 30px;
+            }
         }
         section, section.accountDetails{
+            .scroller{
+                height: ~'calc(100vh - 113px)';
+            }
             width: 100%;
             opacity: 0;
             z-index: 8;
@@ -331,6 +337,10 @@
             }
             form.editable label{
                 color: @white;
+            }
+            form.editable{
+                padding-top: 20px;
+                max-width: none;
             }
             li.eventsRegistered {
                 padding: 10px 20px;
