@@ -3,6 +3,9 @@ section.news {
     height: ~"calc(100vh - 32px)";
     text-align: center;
     top: 0px;
+    @media @1024{
+        width: 700px;
+    }
     .transition(all,400ms,ease-out,0ms);
     h2{
         margin: 0 auto;
@@ -145,6 +148,10 @@ section.news {
                     right: 20px;
                     top: 20px;
                 }
+            }
+            @media @1024{
+                letter-spacing: 0.25px;
+                line-height: 12px;
             }
         }
     }

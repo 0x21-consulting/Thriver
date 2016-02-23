@@ -39,6 +39,10 @@ header.mainHeader{
             background-color: @white;
             li{
                 display: inline-block;
+                margin: 10px 0px 10px 0px;
+                &:first-child{
+                    margin: 0px;
+                }
                 a {
                     transition: font 375ms ease, color 100ms linear;
                     -webkit-transition: font 375ms ease, color 100ms linear;
@@ -86,6 +90,10 @@ header.mainHeader{
                             opacity: 0;
                             background-color: @teal;
                         }
+                    }
+                    @media @1450{
+                        margin: 0px 15px 0px 15px;
+                        font-size: 16px;
                     }
                 }
                 &.brand {
@@ -138,9 +146,18 @@ header.mainHeader{
         margin: 0px;
         ul{
             padding:0px;
+            @media @1450{
+                text-align: right;
+                padding-right: 20px;
+            }
+            @media @1024{
+                text-align: center;
+                padding-top: 50px;
+            }
         }
         li{
             margin-bottom: 0px;
+            margin-top: 0px;
             a{
                 margin: 6px 24px 3px 24px;
                 padding: 0px;
@@ -157,6 +174,14 @@ header.mainHeader{
                 }
                 &:focus{
                     //color: darken(@teal, 5%);
+                }
+                @media @1450{
+                    margin: 6px 6px 3px 6px;
+                }
+                @media @1024{
+                    margin: 30px 6px 30px 6px;
+                    line-height: 20px;
+                    font-size: 12px;
                 }
             }
             &.brand{
@@ -175,6 +200,16 @@ header.mainHeader{
                 a{
                     //padding: 0px;
                     //margin: 0px;
+                }
+                @media @1024{
+                    left: 50%;
+                    margin-left: -67px;
+                    .noAnimation;
+                }
+            }
+            @media @1450{
+                &:last-child{
+                    padding-right: 20px;
                 }
             }
         }

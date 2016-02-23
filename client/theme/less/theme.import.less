@@ -83,6 +83,20 @@ button{
     box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
 }
 
+.flex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flexNoWrap{
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
 
 //Overrides
 .inline{
