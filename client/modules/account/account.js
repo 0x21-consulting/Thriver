@@ -2,6 +2,11 @@ function removeActiveClass(){
     $('.accountDetailsContent > li').removeClass('active');
 }
 
+function removeOpenAccounts(){
+    document.body.classList.remove('registeredEventsM', 'subscriptionsManagerM', 'notificationsM', 'profileSettingsM');
+}
+
+
 //Register Form
 Template.register.events({
     'submit form': function(event){
@@ -11,6 +16,9 @@ Template.register.events({
         var emailVar = event.target.registerEmail.value;
         var passwordVar = event.target.registerPassword.value;
         console.log("Form submitted.");
+    },
+    'click section.register .showLogin': function (event) {
+        document.body.classList.remove('registerMob');
     }
 });
 //Login Form
@@ -52,6 +60,9 @@ Template.login.events({
                     handleError('An unknown error has occurred.');
             }
         });
+    },
+    'click section.login .showRegister': function (event) {
+        document.body.classList.add('registerMob');
     }
 });
 // Logout
@@ -109,9 +120,27 @@ Template.accountDetails.events({
         $(event.target).parent().parent().parent().removeClass('selected');
     },
     'click .eventsRegistered .viewEvent': function (event) {
-        $('.overlay').click();
+        if (window.innerWidth >= 768) {
+            $('.overlay').click();
+        } else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+        }
         alert('scroll down to events and show the selected event');
+    },
+    'click .eventsMenu .viewEvents': function (event) {
+        if (window.innerWidth >= 768) {
+            $('.overlay').click();
+        } else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+        }
+        alert('scroll down to events and show the selected event');
+    },
+    'click section.accountDetails h3': function (event) {
+        removeOpenAccounts();
     }
+
 });
 
 Template.utility.helpers({
@@ -134,6 +163,9 @@ Template.notifications.events({
     },
     'click .notificationApproval .undo': function (event) {
         $(event.target).parent().parent().removeClass('selected');
+    },
+    'click section.notifications h2': function (event) {
+        removeOpenAccounts();
     }
 });
 

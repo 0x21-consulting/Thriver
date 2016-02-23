@@ -252,11 +252,55 @@
 @media @mobile{
     .sidebar.sidebarsLeft{
         left: initial;
-        right: 0px;
+        right: 1px;
         width: ~'calc(85% - 60px)';
         .translate(100%,0px);
         z-index: 20;
         top: 113px;
+        background-color: darken(@darkBlue, 5%);
+        form {
+            p#login-error {
+                margin-top: 10px;
+            }
+        }
+        .loginToggle{
+            color: #fff;
+            margin: 0 auto;
+            margin-top: 17px;
+        }
+        section.login, section.register{
+            opacity: 1;
+            display: block;
+            right: 0px;
+            left: inherit;
+            top: -113px;
+            width: 100%;
+            position: fixed;
+            z-index: 99;
+            padding-bottom: 113px;
+            background-color:mix(@gray, @navy, 55%);
+            left: -30px;
+            .translate(120%,0px);
+            .transition(all, 375ms, ease-out, 0ms) !important;
+            .scroller{
+                width: 116%;
+                margin-left: -8%;
+            }
+            form{
+                margin-top: 23px;
+            }
+            h2{
+                display: block;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                font-weight: 700;
+                padding: 0px;
+                line-height: 60px;
+                white-space: nowrap;
+                margin-bottom: 0px;
+                max-width: none;
+            }
+        }
         section.notifications{
             ul > li{
                 background-color: transparent;
@@ -268,13 +312,19 @@
             opacity: 0;
             z-index: 8;
             background-color: darken(@darkBlue, 5%);
+            button.closeTab{
+                display: none;
+            }
             .noTransition;
             .translateX(0px);
             form label.toggleSwitchLabel{
-                float: right;
+                //float: right;
                 text-align: left;
                 white-space: nowrap;
-                left: -6px;
+                left: 90px;
+            }
+            form .toggleSwitches .toggleSwitch{
+                left: 20px;
             }
             form#subscriptions li {
                 padding: 30px 20px 30px 20px;
@@ -310,6 +360,10 @@
                     padding-right: 5px;
                     .fa;
                 }
+                &:active{
+                    background-color: darken(@darkBlue, 6%);
+                    font-size: 90%;
+                }
             }
             ul.accountDetailsContent {
                 background-color: transparent;
@@ -323,6 +377,23 @@
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .accountOpen{
+        .sidebar.sidebarsLeft section.login{
+            .translate(-100%,0px);
+        }
+    }
+
+    .accountOpen.registerMob{
+        .sidebar.sidebarsLeft{
+            section.login{
+                .translate(120%,0px);
+            }
+            section.register{
+                .translate(-100%,0px);
             }
         }
     }

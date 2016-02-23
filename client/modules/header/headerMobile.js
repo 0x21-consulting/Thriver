@@ -29,6 +29,7 @@ Template.headerMobile.events({
             document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
             //Newsroom Function
             removeActiveClass();
+            removeOpenAccounts();
         } else{
             document.body.classList.remove('menuOpen');
             document.body.classList.add('accountOpen');
@@ -41,6 +42,7 @@ Template.headerMobile.events({
             document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
             //Newsroom Function
             removeActiveClass();
+            removeOpenAccounts();
         }
     },
     'click .closeTabMobile': function (event) {
@@ -101,7 +103,6 @@ Template.headerMobile.events({
         document.body.classList.add('sidebarLeftMobile','profileSettingsM');
         document.querySelector('.scroller').scrollTop = 0;
     }
-
 
 
 

@@ -75,21 +75,25 @@
 <template name="mobileMenuAccount">
     <section class="mobileMenuAccount">
         <div class="scroller">
-            <header class="profileOverview">
-                <p>
-                    <span>Eoghan McInerney</span>
-                    eoghan.tadhg@gmail.com<br>
-                    WCASA Madison
-                </p>
-            </header>
-            <ul>
-                <li class="sidebarRig registeredEventsMob"><a href="#"><span class="fa">&#xf274;</span> Registered Events</a></li>
-                <li class="sidebarRig subscriptionsManagerMob"><a href="#"><span class="fa">&#xf0e0;</span> Subscriptions</a></li>
-                <li class="sidebarRig notifications notificationsMob"><a href="#"><span class="fa">&#xf06a;</span>Notifications</a></li>
-                <li class="sidebarRig profileSettingsMob"><a href="#"><span class="fa">&#xf013;</span> Profile Settings</a></li>
-            </ul>
-            <button type="button" class="signOutMobile">Sign Out <span class="fa">&#xf0da;</span></button>  
-            <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+            {{#if currentUser}}
+                <header class="profileOverview">
+                    <p>
+                        <span>Eoghan McInerney</span>
+                        eoghan.tadhg@gmail.com<br>
+                        WCASA Madison
+                    </p>
+                </header>
+                <ul>
+                    <li class="sidebarRig registeredEventsMob"><a href="#"><span class="fa">&#xf274;</span> Registered Events</a></li>
+                    <li class="sidebarRig subscriptionsManagerMob"><a href="#"><span class="fa">&#xf0e0;</span> Subscriptions</a></li>
+                    <li class="sidebarRig notifications notificationsMob"><a href="#"><span class="fa">&#xf06a;</span>Notifications</a></li>
+                    <li class="sidebarRig profileSettingsMob"><a href="#"><span class="fa">&#xf013;</span> Profile Settings</a></li>
+                </ul>
+                <button type="button" class="signOutMobile">Sign Out <span class="fa">&#xf0da;</span></button>  
+                <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+            {{else}}
+            <!--Is empty, however the login form is positioned in this section-->
+            {{/if}}     
         </div>     
     </section>
 </template>
