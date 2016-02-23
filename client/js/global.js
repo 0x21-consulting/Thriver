@@ -16,11 +16,6 @@ Template.body.onRendered(function () {
         
         //Hide CSS Animation on Resize
         document.body.classList.add('noTransition');
-
-        //Remove any sidebar settings when passing between desktop and mobile
-        if (window.innerWidth == 767 || window.innerWidth == 768) {
-            document.body.classList('');
-        }
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
             document.body.classList.remove('noTransition');
