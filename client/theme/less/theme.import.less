@@ -5,14 +5,6 @@ body, html{
 }
 
 
-//Temporary for menu testing
-.canvasCenter{
-    background-color: @gray !important;
-    height: 4000px !important;
-    *{
-        display: none !important;
-    }
-}
 
 body{
     max-width: 100%;
@@ -20,16 +12,17 @@ body{
         width: 100%;
     }
     .masterContainer{
-        padding-top: 348px;
-        will-change: padding;
-        .transition(padding,375ms,ease-out,0ms);
+        //padding-top: 376px;
+        //will-change: padding;
+        //.transition(padding,375ms,ease-out,0ms);
+        background-color: @white;
         @media @mobile{
             padding-top: 0px;
         }
     }
     &.fixedHeader{
         .masterContainer{
-            padding-top: 74px;
+            //padding-top: 74px;
             @media @mobile{
                 padding-top: 0px;
             }
@@ -46,7 +39,7 @@ body{
 .containerSmall{
     max-width: 960px;
     margin: 0 auto;
-    padding: 30px;
+    //padding: 30px;
 }
 .scroller{
     height: 100%;
@@ -58,6 +51,7 @@ body{
     left: 0px;
     z-index: 2;
     .transition(all,375ms,ease-out,0ms); //Was previously commented out for performance?
+    //padding-top: 376px;
 }
 .overlay{
     position: fixed;
@@ -121,5 +115,21 @@ button{
     .fullBlockMob{
         width: 100% !important;
         display: block !important;
+    }
+}
+
+
+
+//Make first section under masthead animate into place
+.masterContainer > section:nth-child(2){
+    .transition(all, 375ms, ease-out,0ms);
+    opacity: 0;
+    //.translate(0px,-30px);
+}
+.fixedHeader{
+    .masterContainer > section:nth-child(2){
+        opacity: 1;
+        .transition(all, 375ms, ease-out,100ms);
+        //.translate(0px,0px);
     }
 }

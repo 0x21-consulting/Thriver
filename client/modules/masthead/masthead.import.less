@@ -1,6 +1,8 @@
 section.masthead{
     overflow: hidden;
-    height: 100vh;
+    height: ~'calc(100vh - 278px)';
+    padding-top: 147px;
+    .translate(0px, 131px);
     width: 100%;
     background-color: @gray;
     display: table;
@@ -8,16 +10,19 @@ section.masthead{
     background-size: cover;
     color: @white;
     position: relative;
+    .transition(all,375ms,ease-out,0ms);
+    z-index: 2;
     div{
         display: table-cell;
         vertical-align: middle;
         &:after{
             content: '';
             width: 100%;
-            height: 100vh;
+            height: ~'calc(100vh - 278px)';
             background-color: #062131;
             opacity: 0.6;
             top: 0px;
+            padding-top: 147px;
             left: 0px;
             position: absolute;
         }
@@ -93,5 +98,11 @@ section.masthead{
                 }
             }
         }
+    }
+}
+
+.fixedHeader{
+    section.masthead{
+        .translate(0px, 0px);
     }
 }
