@@ -14,6 +14,14 @@ section.masthead{
     z-index: 2;
     opacity: 1;
     min-height: 500px;
+    @media @mobile{
+        opacity: 1 !important; //override hover attribution
+        height: auto;
+        min-height: 0px;
+        display: block;
+        padding-top: 0px;
+        .translate(0px,0px);
+    }
     &:after{
         .fa;
         content: "\f107";
@@ -35,6 +43,10 @@ section.masthead{
     div{
         display: table-cell;
         vertical-align: middle;
+        @media @mobile{
+            display: block;
+            padding-bottom: 30px;
+        }
         &:after, &:before{
             content: '';
             width: 100%;
@@ -47,6 +59,9 @@ section.masthead{
             position: absolute;
             pointer-events: none;
             min-height: 500px;
+            @media @mobile{
+                opacity: 0.75 !important; //override hover attribution
+            }
         }
         &:before{
             z-index: 4;
@@ -59,7 +74,7 @@ section.masthead{
             position: relative;
             z-index: 2;
         }
-        a{
+        a.cta{
             display: inline-block;
             padding: 24px;
             font-size: 28px;
@@ -76,6 +91,17 @@ section.masthead{
             }
             &:active{
                 background-color: darken(@orange, 5%);
+            }
+            @media @1024{
+                margin-top: 0px;
+                .scale(0.8,0.8);
+            }
+            @media @mobile{
+                margin-top: 20px;
+                .scale(1,1);
+                padding: 12px;
+                font-size: 16px;
+                letter-spacing: 1px;
             }
         }
         &.center{
@@ -97,6 +123,18 @@ section.masthead{
                 text-transform: uppercase;
                 margin:0 auto;
                 margin-top: -64px;
+                @media @1024{
+                    .scale(0.8,0.8);
+                    padding-top: 50px;
+                }
+                @media @mobile{
+                    .scale(1,1);
+                    font-size: 27px;
+                    letter-spacing: 1px;
+                    line-height: 32px;
+                    padding-top: 0px;
+                    margin-top: 90px;
+                }
                 span.small{
                     font-family: 'Old Standard TT', serif;
                     display: block;
@@ -104,6 +142,10 @@ section.masthead{
                     font-size: 36px;
                     font-weight: 100;
                     position: relative;
+                    @media @mobile{
+                        font-size: 21px;
+                        letter-spacing: 1px;
+                    }
                     &:nth-child(3){
                         &:after, &:before{
                             content:'';
@@ -112,6 +154,9 @@ section.masthead{
                             background-color: @white;
                             position: absolute;
                             margin-top: 42px;
+                            @media @mobile{
+                                display: none;
+                            }
                         }
                         &:before{
                             margin-left: -240px;
