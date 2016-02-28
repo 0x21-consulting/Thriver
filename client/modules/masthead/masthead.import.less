@@ -1,8 +1,8 @@
 section.masthead{
     overflow: hidden;
     height: ~'calc(100vh - 278px)';
-    padding-top: 147px;
-    .translate(0px, 131px);
+    padding-top: 177px;
+    .translate(0px, 102px);
     width: 100%;
     background-color: @gray;
     display: table;
@@ -12,19 +12,48 @@ section.masthead{
     position: relative;
     .transition(all,375ms,ease-out,0ms);
     z-index: 2;
+    opacity: 1;
+    min-height: 500px;
+    &:after{
+        .fa;
+        content: "\f107";
+        display: block;
+        color: #ebf2f2;
+        font-size: 50px;
+        line-height: 50px;
+        font-weight: 100;
+        margin-top: 22px;
+        margin-bottom: 36px;
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -25px;
+        .transition(opacity,375ms,ease-out,0ms);
+        opacity: 1;
+        .translate(0px,0px);
+    }
     div{
         display: table-cell;
         vertical-align: middle;
-        &:after{
+        &:after, &:before{
             content: '';
             width: 100%;
             height: ~'calc(100vh - 278px)';
             background-color: #062131;
-            opacity: 0.6;
+            opacity: 0.7;
             top: 0px;
-            padding-top: 147px;
+            padding-top: 177px;
             left: 0px;
             position: absolute;
+            pointer-events: none;
+            min-height: 500px;
+        }
+        &:before{
+            z-index: 4;
+            opacity: 0;
+            .transition(opacity,375ms,ease-out,0ms);
+            //.mastheadGradient;
+            display: none;
         }
         h1{
             position: relative;
@@ -60,13 +89,14 @@ section.masthead{
         }
         &.impact{
             h1{
-                font-size: 112px;
+                font-size: 77px;
                 font-weight: 600;
                 letter-spacing: 3px;
-                line-height: 84px;
+                line-height: 77px;
                 max-width: 1200px;
                 text-transform: uppercase;
                 margin:0 auto;
+                margin-top: -64px;
                 span.small{
                     font-family: 'Old Standard TT', serif;
                     display: block;
@@ -93,7 +123,7 @@ section.masthead{
                 }
                 span.large{
                     &:last-child{
-                        font-size: 96px;
+                        //font-size: 96px;
                     }
                 }
             }
@@ -104,5 +134,25 @@ section.masthead{
 .fixedHeader{
     section.masthead{
         .translate(0px, 0px);
+        &:after{
+            opacity: 0;
+            .translate(0px,-20px);
+        }
+        div:before{
+            //opacity: 1;
+        }
+    }
+}
+
+
+//masthead opacity controls
+section.masthead{
+    opacity: 0.8;
+}
+
+header.mainHeader:hover + header + .canvasCenter section.masthead, section.masthead:hover{
+    opacity: 1;
+    div:after{
+        opacity: 0.75;
     }
 }
