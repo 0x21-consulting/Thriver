@@ -10,60 +10,34 @@
                     Survivors and all those affected by sexual violence <br> deserve compassionate services, dignity, privacy, and respect.</p>
             </header>
         </div>
-        <div class="sliderContainer">
-            <div class="workDetails">
-                {{> workDetails}}
-            </div>
-            <div class="workGrid">
-                <ul class="containerSmall">
-                    {{> workBlock}}
-                    {{> workBlock}}
-                    {{> workBlock}}
-                    {{> workBlock}}
-                    {{> workBlock}}
-                    {{> workBlock}}
-                    {{> workBlock}}
-                </ul>
-            </div>
-        </div>
+        <main>
+            {{>workNav}}
+            {{>workContent}}
+        </main>
     </section>
 </template>
 
 
-<template name="workBlock">
-    <li>
-        <a href="#">
-            <span class="fa block">&#xf0f4;</span>
-            <h2>Advocacy</h2>
-        </a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinatd Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
 
-<template name="workDetails">
-    <menu class="workMenu">
+
+<!--Nav-->
+<template name="workNav">
+    <menu class="workNav">
         <ul>
-            <li class="backToIndex"><a href="#">Back to Index</a></li>
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
-            {{> workListItem}}
+            {{> workListItemA}}
+            {{> workListItemB}}
+            {{> workListItemC}}
+            {{> workListItemD}}
+            {{> workListItemE}}
+            {{> workListItemF}}
+            {{> workListItemG}}
         </ul>
     </menu>
-    {{> workArticle}}
 </template>
 
 <template name="workListItem">
     <li>
+        <i class="icon fa"><a href="#">&#xf013;</a></i>
         <a class="toggle" href="#">Advocacy</a>
         <ul>
             <li><a href="#">Regional Technical Assistance</a></li>
@@ -73,68 +47,161 @@
     </li>
 </template>
 
+<!--Temp for FED-->
+<template name="workListItemA">
+    <li>
+        <i class="icon fa"><a href="#">&#xf27a;</a></i>
+        <a class="toggle" href="#">Advocacy</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemB">
+    <li>
+        <i class="icon fa"><a href="#">&#xf056;</a></i>
+        <a class="toggle" href="#">Prevention</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemC">
+    <li>
+        <i class="icon fa"><a href="#">&#xf0c0;</a></i>
+        <a class="toggle" href="#">*All</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemD">
+    <li>
+        <i class="icon fa"><a href="#">&#xf017;</a></i>
+        <a class="toggle" href="#">Evaluation</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemE">
+    <li>
+        <i class="icon fa"><a href="#">&#xf0f6;</a></i>
+        <a class="toggle" href="#">Policy &amp; Law</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemF">
+    <li>
+        <i class="icon fa"><a href="#">&#xf013;</a></i>
+        <a class="toggle" href="#">Systems</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
+<template name="workListItemG">
+    <li>
+        <i class="icon fa"><a href="#">&#xf005;</a></i>
+        <a class="toggle" href="#">SATF</a>
+        <ul>
+            <li><a href="#">Regional Technical Assistance</a></li>
+            <li><a href="#">Coordinated Community Response</a></li>
+            <li><a href="#">Human Trafficking</a></li>
+        </ul>
+    </li>
+</template>
 
-<template name="workArticle">
-    <article>
-        <header>
-            <span class="fa block"><a href="#">&amp;</a></span>
-            <h2>Advocacy</h2>
-            <button class="print">&amp;</button>
-            <button class="share">&amp;</button>
-            <ul>
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-                {{> workSubListItem}}
-            </ul>
-        </header>
-        <main>
-            <!--Need to do the following:
-                -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
-                -Set CSS .accordionContent to display:none
-                -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
-            -->
-            <h3>Intervention Programming</h3>
-            <p>
-                The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-            </p>
-            <p>
-                Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-            </p> 
-            <h3>Intervention Programming</h3>
-            <p>
-                The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-            </p>
-            <p>
-                Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-            </p> 
-            <h3>Intervention Programming</h3>
-            <p>
-                The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-            </p>
-            <p>
-                Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-            </p> 
-        </main>
-        <footer>
-            <a href="#">Read More</a>
-        </footer>
-    </article>
+
+
+<!--Content-->
+
+<template name="workContent">
+    <section class="workContent">
+        <article>
+            <header>
+                <h2>Advocacy</h2>
+                <button class="print">&amp;</button>
+                <button class="share">&amp;</button>
+                <ul>
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                    {{> workSubListItem}}
+                </ul>
+            </header>
+            <main>
+                {{>workContentBlock}}
+            </main>
+            <footer class="truncate">
+                <a href="#">Read More</a>
+            </footer>
+        </article>
+    </section>
 </template>
 
 <template name="workSubListItem">
     <li><a href="#">State Resources</a></li>
 </template>
+
+<template name="workContentBlock">
+    <!--Need to do the following:
+    -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
+    -Set CSS .accordionContent to display:none
+    -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
+    -->
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+</template>
+
+
+
+
+
+
 
 
 

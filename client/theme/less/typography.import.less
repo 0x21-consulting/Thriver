@@ -69,16 +69,27 @@ p {
 .masterContainer header{
     text-align: center;
     padding-top: 100px;
+    margin-bottom: 70px;
     text-transform: uppercase;
+    @media @mobile{
+        padding-top: 40px;
+        margin-bottom: 20px;
+    }
     h1{
-        color: @navy;
-        font-size: 56px;
-        line-height: 56px;
+        color: @black;
+        font-size: 50px;
+        line-height: 50px;
         font-weight: normal;
         padding-bottom: 23px;
         border-bottom: 3px solid @gray;
         margin-bottom: 26px;
         display: inline-block;
+        @media @mobile{
+            font-size: 25px;
+            line-height: 25px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
         &:before, &:after{
             content:'';
             height: 6px;
@@ -88,6 +99,9 @@ p {
             display: inline-block;
             position: relative;
             top: -10px;
+            @media @mobile{
+                display: none;
+            }
         }
         &:before{
             left:-32px;
@@ -99,11 +113,20 @@ p {
     p{
         text-align: center;
         font: normal 16px/27px Georgia, serif;
-        color: #000;
+        .os;
+        color: @navy;
+        @media @mobile{
+            font-size: 12px;
+            line-height: 20px;
+            padding: 0px 20px;
+            br{
+                display: none;
+            }
+        }
         &:after{
             .fa;
             content: "\f107";
-            display: block;
+            display: none;
             color: @gray;
             font-size: 50px;
             line-height: 50px;
