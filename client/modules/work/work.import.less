@@ -1,16 +1,33 @@
-.workContent{display:none !important;}
-
-
 section.work{
     background-color: #fafafa;
     width: 100%;
     overflow-x: hidden;
     padding-bottom: 65px;
-    //Work Grid
+    > main{
+        .transition(all, 500ms, ease-out, 0ms);
+        .shadow(0px,0px,0px,-3px,0.0);
+        display: table;
+        margin: 0 auto;
+        background-color: transparent;
+        .workTextContainer{
+            max-width: 820px;
+        }
+    }
     @media @mobile{
         opacity: 1 !important; //override animation styles
     }
+    .workContent, .workNav{
+        display: table-cell;
+        vertical-align: top;
+    }
+    .workContent{
+        display: none;
+        main{
+            padding: 40px;
+        }
+    }
     .workNav {
+        background-color: transparent;
         @media @mobile{
             margin-top: -30px;
         }
@@ -26,6 +43,9 @@ section.work{
                 margin-bottom: 48px;
                 vertical-align: top;
                 opacity: 0;
+                &.backToIndexWork{
+                    display: none;
+                }
                 @media @1024{
                     width: 28%;
                 }
@@ -142,6 +162,53 @@ section.work{
                 .translate(0px,0px);
                 opacity: 1;
             }
+        }
+    }
+}
+
+
+
+//Active Work Object
+body.workActive{
+    section.work{
+        > main{
+            .shadow(0px,0px,25px,-3px,0.15);
+            background-color: @white;
+            margin-bottom: 30px;
+        }
+        .workNav{
+            background-color: @navy;
+            > ul{
+                width: 300px;
+                margin: 0px;
+                > li{
+                    width: 100%;
+                    text-align: left;
+                    margin-bottom: 0px;
+                    &.backToIndexWork{
+                        display: block;
+                    }
+                    .icon, > a{
+                        display: inline-block;
+                        font-size: 22px;
+                        color: @white;
+                        line-height: 22px;
+                        height: auto;
+                        width: auto;
+                    }
+                    .icon{
+                        margin-right: 5px;
+                    }
+                    > ul{
+                        height: 0px;
+                        overflow: hidden;
+                    }
+                }
+            }
+
+        }
+        .workContent, li.backToIndexWork{
+            display: block;
         }
     }
 }

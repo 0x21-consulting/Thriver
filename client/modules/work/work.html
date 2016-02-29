@@ -24,6 +24,9 @@
 <template name="workNav">
     <menu class="workNav">
         <ul>
+            <li class="backToIndexWork">
+                <a href="#"><span class="fa">&#xf0d9;</span> Back to Index</a>
+            </li>
             {{> workListItemA}}
             {{> workListItemB}}
             {{> workListItemC}}
@@ -134,10 +137,11 @@
     <section class="workContent">
         <article>
             <header>
+                <i class="icon fa"><a href="#">&#xf013;</a></i>
                 <h2>Advocacy</h2>
                 <button class="print">&amp;</button>
                 <button class="share">&amp;</button>
-                <ul>
+                <!--<ul>
                     {{> workSubListItem}}
                     {{> workSubListItem}}
                     {{> workSubListItem}}
@@ -152,10 +156,12 @@
                     {{> workSubListItem}}
                     {{> workSubListItem}}
                     {{> workSubListItem}}
-                </ul>
+                </ul>-->
             </header>
-            <main>
-                {{>workContentBlock}}
+            <main class="textBody">
+                <div class="workTextContainer">
+                    {{>workContentBlock}}
+                </div>
             </main>
             <footer class="truncate">
                 <a href="#">Read More</a>

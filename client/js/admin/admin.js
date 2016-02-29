@@ -30,7 +30,7 @@ Template.contact  .helpers({ isAdmin: getAdmin });
 Template.providers.helpers({ isAdmin: getAdmin });
 Template.who      .helpers({ isAdmin: getAdmin });
 Template.work     .helpers({ isAdmin: getAdmin });
-Template.article  .helpers({ isAdmin: getAdmin });
+//Template.article  .helpers({ isAdmin: getAdmin });
 
 // Bind checkAdmin function
 Template.body.onCreated(checkAdmin);
