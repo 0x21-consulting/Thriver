@@ -1,0 +1,62 @@
+section.outreach{
+    background-color: @navy;
+    padding-bottom: 80px;
+    ul.outreachTabs{
+        text-align: center;
+        > li{
+            display: inline-block;
+            background-color: darken(@orange, 8%);
+            color: #fff;
+            cursor: pointer;
+            padding: 20px;
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-right: 10px;
+            .scale(1,1);
+            .transition(all, 200ms, ease-out, 0ms);
+            &:nth-child(2){
+                background-color: darken(@orange, 4%);
+            }
+            &:nth-child(3){
+                background-color: darken(@orange, 1.5%);
+            }
+            &:hover, &:nth-child(2):hover, &:nth-child(3):hover{
+                .scale(0.95,0.95);
+                background-color: darken(@orange, 12%);
+            }
+            &.active{
+                .scale(0.95,0.95);
+                background-color: @teal;
+                &:hover, &:nth-child(2):hover, &:nth-child(3):hover{
+                    background-color: @teal;
+                }
+                &:active{
+                    background-color: darken(@teal, 2.5%);
+                }
+            }
+        }
+    }
+    ul.outreachContent{
+        .transition(all, 200ms, ease-out, 0ms);
+        height: 0px;
+        overflow: hidden;
+        border-top: 0px solid transparent;
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: @white;
+        margin-top: 20px;
+        &.active{
+            height: 600px;
+            overflow: auto;
+            border-top: 5px solid @teal;
+        }
+        li{
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+    }
+}

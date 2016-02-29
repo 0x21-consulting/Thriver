@@ -157,6 +157,23 @@ p {
     margin-bottom: 20px;
 }
 
+.masterContainer section.mainSection.outreach > div > header{
+    h1, p{
+        color: @white;
+    }
+    h1{
+        &:before, &:after{
+            content:'';
+            height: 6px;
+            width: 6px;
+            background-color: @gray;
+            border:3px solid @white;
+        }
+    }
+}
+
+
+
 
 //Text Body content
 .textBody{

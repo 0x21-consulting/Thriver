@@ -1,0 +1,53 @@
+<template name="outreach">
+    <section class="outreach mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="containerSmall">
+            <header>
+                <h1>Get Involved</h1>
+                <p>
+                    We believe that everyone<br>
+                    has a role and a responsibility<br>
+                    in this work.
+                </p>
+            </header>
+        </div>
+        <main>
+            <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
+            <ul class="newsTabs outreachTabs">
+                <li>Volunteer</li>
+                <li>Join the Board</li>
+                <li>WCASA Jobs</li>
+            </ul>
+            <!--See above comment-->
+            <ul class="outreachContent">
+                {{> volunteer }}
+                {{> joinTheBoard }}
+                {{> wcasaJobs }}
+            </ul>
+        </main>
+    </section>
+</template>
+
+
+
+
+<template name="volunteer">
+    <!--<li class="active volunteer">-->
+    <li class="volunteer">
+        <h3>Volunteer</h3>
+    </li>
+</template>
+
+<template name="joinTheBoard">
+    <li class="joinTheBoard">
+        <h3>Join The Board</h3>
+    </li>
+</template>
+
+<template name="wcasaJobs">
+    <li class="wcasaJobs">
+        <h3>WCASA Jobs</h3>
+    </li>
+</template>
