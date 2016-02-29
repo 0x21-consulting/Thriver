@@ -1,5 +1,6 @@
 Template.utility.onRendered(function () {
-    //Should be attributed to correct alert (Figured alerts would be managed via a meteor variable)
+    //Need to find a way to open associated content tab based on active navigation selection
+    //There are remains of a method in the legacy files
     $('.workNav > ul > li > a, .workNav > ul > li > .icon > a').click(function(){
         event.preventDefault();
         $('.workNav >ul > li').removeClass('active');
@@ -11,6 +12,9 @@ Template.utility.onRendered(function () {
 
     $('.workNav ul > li > ul > li > a').click(function(){
         event.preventDefault();
+        if(!$('body').hasClass('workActive')){
+            $('body').addClass('workActive');
+        }
         $('.workNav ul > li > ul > li').removeClass('active');
         $(this).parent().addClass('active');
         $(this).parent().parent().parent().addClass('active');

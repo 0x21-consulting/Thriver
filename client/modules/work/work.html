@@ -1,5 +1,5 @@
 <template name="work">
-    <section class="work" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="mainSection work" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
@@ -16,8 +16,6 @@
         </main>
     </section>
 </template>
-
-
 
 
 <!--Nav-->
@@ -49,6 +47,93 @@
         </ul>
     </li>
 </template>
+
+
+
+<!--Content-->
+
+<template name="workContent">
+    <section class="workContent">
+        <article>
+            <header>
+                <i class="icon fa">&#xf013;</i>
+                <h2>Advocacy</h2>
+                <button class="print fa">&#xf02f;</button>
+            </header>
+            <main class="textBody workInner">
+                <div class="workTextContainer">
+                    {{>workContentBlock}}
+                </div>
+                {{>workTertiary}}
+            </main>
+            <footer class="truncate">
+                <a href="#">Read More <span class="fa">&#xf0d7;</span></a>
+            </footer>
+        </article>
+    </section>
+</template>
+
+
+<!--Tertiary Nav-->
+<template name="workTertiary">
+    <aside class="workTertiary">
+        <ul>
+            <li class="title">Advocacy Index</li>
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+            {{> workSubListItem}}
+        </ul>
+    </aside>
+</template>
+
+<template name="workSubListItem">
+    <li><a href="#">State Resources</a></li>
+</template>
+
+
+
+<!--Filler Content Below-->
+
+<template name="workContentBlock">
+    <!--Need to do the following:
+    -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
+    -Set CSS .accordionContent to display:none
+    -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
+    -->
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+    <h3>Intervention Programming</h3>
+    <p>
+        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
+    </p>
+    <p>
+        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
+    </p> 
+</template>
+
 
 <!--Temp for FED-->
 <template name="workListItemA">
@@ -127,78 +212,4 @@
             <li><a href="#">Human Trafficking</a></li>
         </ul>
     </li>
-</template>
-
-
-
-<!--Content-->
-
-<template name="workContent">
-    <section class="workContent">
-        <article>
-            <header>
-                <i class="icon fa"><a href="#">&#xf013;</a></i>
-                <h2>Advocacy</h2>
-                <button class="print">&amp;</button>
-                <button class="share">&amp;</button>
-                <!--<ul>
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                    {{> workSubListItem}}
-                </ul>-->
-            </header>
-            <main class="textBody">
-                <div class="workTextContainer">
-                    {{>workContentBlock}}
-                </div>
-            </main>
-            <footer class="truncate">
-                <a href="#">Read More</a>
-            </footer>
-        </article>
-    </section>
-</template>
-
-<template name="workSubListItem">
-    <li><a href="#">State Resources</a></li>
-</template>
-
-<template name="workContentBlock">
-    <!--Need to do the following:
-    -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
-    -Set CSS .accordionContent to display:none
-    -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
-    -->
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p> 
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p> 
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p> 
 </template>

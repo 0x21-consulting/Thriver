@@ -10,23 +10,98 @@ section.work{
         margin: 0 auto;
         background-color: transparent;
         .workTextContainer{
-            max-width: 820px;
+            max-width: 620px;
         }
     }
     @media @mobile{
         opacity: 1 !important; //override animation styles
     }
-    .workContent, .workNav{
+    .workContent, .workNav, .workTertiary{
         display: table-cell;
         vertical-align: top;
     }
     .workContent{
         display: none;
         position: relative;
-        .shadow(-3px,1px,7px,-1px,0.0);
+        .shadow(-9px,1px,7px,-6px,0.0);
         .transition(all, 500ms, ease-out, 0ms);
+        header{
+            padding: 40px 40px;
+            border-bottom: 3px solid #ebf2f2;
+            h2{
+                border: none;
+                color: @teal;
+                font-size: 39px;
+                font-weight: 100;
+                letter-spacing: 1px;
+            }
+            i{
+                font-size: 54px;
+                font-style: normal;
+                margin-right: 16px;
+                position: relative;
+                top: 5px;
+                color:@black;
+            }
+            .print{
+                position: absolute;
+                right: 40px;
+                font-size: 19px;
+                opacity: 0.5;
+                margin-top: 28px;
+            }
+        }
         main{
             padding: 40px;
+            .workInner{
+                display: table;
+            }
+            .workInner, .workTextContainer{
+                display: table-cell;
+            }
+            .workTextContainer{
+                padding-right: 40px;
+            }
+            .workTertiary{
+                padding: 40px;
+                background-color: #f9f9f9;
+                width: 160px;
+                ul{
+                    li{
+                        &.title{
+                            font-size: 20px;
+                            border-bottom: 2px solid @lightBlue;
+                            padding: 0px 0px 5px 0px;
+                            text-align: left;
+                            color: @darkBlue;
+                            text-transform: uppercase;
+                            margin-bottom: 15px;
+                            display: inline-block;
+                        }
+                        a{
+                            padding: 2px 0px 2px 0px;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        footer{
+            background: @orange;
+            text-align: center;
+            &:hover{
+                background-color: darken(@orange, 5%);
+            }
+            a{
+                color: @white;
+                display: block;
+                font-weight: 600;
+                font-size: 16px;
+                padding: 10px 0px;
+                span{
+                    font-size: 12px;
+                }
+            }
         }
     }
     .workNav {
@@ -151,7 +226,7 @@ section.work{
                             .transition(color,100ms,ease,0ms);
                             &:hover{
                                 text-decoration: underline;
-                                color: @teal;
+                                //color: @teal;
                             }
                         }
                     }
@@ -308,10 +383,13 @@ body.workActive{
             }
         }
         .workContent{
-            .shadow(-4px,1px,5px,0px,0.3);
+            .shadow(-9px,1px,7px,-6px,0.0);
         }
         .workContent, li.backToIndexWork{
             display: block;
+        }
+        .workTertiary{
+            display: table-cell;
         }
     }
 }
