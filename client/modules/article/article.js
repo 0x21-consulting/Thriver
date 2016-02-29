@@ -12,3 +12,9 @@ UI.registerHelper('facebookShareLink', function() {
 UI.registerHelper('googlePlusShareLink', function() {
     return 'https://plus.google.com/share?url=' + window.location.href;
 });
+
+Template.articleNews.events({
+    'click .articleNews .socialShare ul > li.print a': function (event) {
+        window.print();
+    }
+});
