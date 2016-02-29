@@ -22,6 +22,9 @@ section.work{
     }
     .workContent{
         display: none;
+        position: relative;
+        .shadow(-3px,1px,7px,-1px,0.0);
+        .transition(all, 500ms, ease-out, 0ms);
         main{
             padding: 40px;
         }
@@ -80,6 +83,7 @@ section.work{
                     line-height: 176px;
                     font-style: normal;
                     .scale(1,1);
+                    .translate(0px,0px);
                     .transition(all,175ms,ease-out,0ms);
                     a{
                         color: @white;
@@ -106,6 +110,7 @@ section.work{
                 > a{
                     border-bottom: none;
                     .scale(1,1);
+                    .translate(0px,0px);
                     display: block;
                     padding:16px 0px 0px 0px;
                     margin: 0px 0px 8px 0px;
@@ -177,7 +182,7 @@ body.workActive{
             margin-bottom: 30px;
         }
         .workNav{
-            background-color: @navy;
+            background-color: lighten(@navy, 1.5%);
             > ul{
                 width: 300px;
                 margin: 0px;
@@ -185,27 +190,123 @@ body.workActive{
                     width: 100%;
                     text-align: left;
                     margin-bottom: 0px;
+                    padding: 0px;
+                    margin-right: 0px;
+                    &:hover{
+                        > a{
+                            .translate(5px,0px);
+                            //color: @teal;
+                        }
+                    }
+                    &:active{
+                        background-color: darken(@navy, 1.5%);
+                        .transition(all,50ms,ease,0ms);
+                    }
                     &.backToIndexWork{
                         display: block;
+                        > a{
+                            padding-left: 20px;
+                            background-color: @lightBlue;
+                            display: block;
+                            &:hover{
+                                background-color: @teal;
+                                color: @white;
+                                .translate(0px,0px);
+                            }
+                            &:after{
+                                display: none;
+                            }
+                        }
+                    }
+                    > a{
+                        text-transform: uppercase;
+                        padding:16px 0px 16px 0px;
+                        margin-bottom: 0px;
+                        &:after{
+                            content:"\f0da";
+                            .fa;
+                            font-size: 14px;
+                            position: relative;
+                            top: -2px;
+                            margin-left: 5px;
+                        }
                     }
                     .icon, > a{
                         display: inline-block;
-                        font-size: 22px;
+                        background-color: transparent;
+                        font-size: 20px;
                         color: @white;
-                        line-height: 22px;
+                        line-height: 20px;
                         height: auto;
                         width: auto;
                     }
                     .icon{
                         margin-right: 5px;
+                        margin-left: 20px;
                     }
                     > ul{
-                        height: 0px;
+                        max-height: 0px;
                         overflow: hidden;
+                        background-color: darken(@navy, 3%);
+                        //.transition(all,400ms,ease-in,0ms);
+                        padding: 0px;
+                        >li{
+                            display: block;
+                            &:after{
+                                display: none;
+                            }
+                            > a{
+                                font-size: 14px;
+                                padding: 6px 20px 6px 20px;
+                                display: block;
+                                letter-spacing: 0.5px;
+                                &:hover{
+                                    background-color: darken(@navy,7%);
+                                    text-decoration: none;
+                                    .transition(all,50ms,ease,0ms);
+                                }
+                                &:active{
+                                    background-color: darken(@teal, 2.5%);
+                                    .transition(all,50ms,ease,0ms);
+                                }
+                                &:first-child{
+                                    padding-top: 12px;
+                                }
+                                &:last-child{
+                                    padding-bottom: 12px;
+                                }
+                            }
+                            &.active{
+                                > a{
+                                    background-color: darken(@teal, 2.5%);
+                                    &:hover, &:active{
+                                        background-color: darken(@teal, 2.5%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //Active List Item
+                    &.active{
+                        background-color: darken(@navy, 1%);
+                        > a{
+                            .translate(5px,0px);
+                            color: @white;
+                        }
+                        > ul{
+                            max-height: 9999px;
+                            > li{
+                                > a{
+                                    color: @white;
+                                }
+                            }
+                        }
                     }
                 }
             }
-
+        }
+        .workContent{
+            .shadow(-4px,1px,5px,0px,0.3);
         }
         .workContent, li.backToIndexWork{
             display: block;
