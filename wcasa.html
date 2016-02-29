@@ -2,7 +2,16 @@
     <meta charset="utf-8" />
     <title>WCASA | Wisconsin Coalition Against Sexual Assault</title>
     <link rel="icon" href="/lib/img/favicon.png" type="image/x-icon" />
-    <meta name="viewport" content="content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--These should be variable meta properties for each URL. This is used for the facebook share. Currently seen on: article pages.-->
+    <meta name="keywords" content="sexual assault, wisconsin, Wisconsin Coalition Against Sexual Assault, WCASA, coalition, violence prevention, " />
+    <meta name="description" content="For almost 30 years, WCASA has worked on behalf of member programs and sexual assault service providers across Wisconsin to lobby for legislation, increase survivors' access to services, raise awareness, and promote the prevention of sexual violence." />
+    <!--Facebook variable-->
+    <meta property="og:url" content="http://www.wcasa.org" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Welcome to the Wisconsin Coalition Against Sexual Assault" />
+    <meta property="og:description" content="For almost 30 years, WCASA has worked on behalf of member programs and sexual assault service providers across Wisconsin to lobby for legislation, increase survivors' access to services, raise awareness, and promote the prevention of sexual violence." />
 </head>
 
 <body>
@@ -23,4 +32,5 @@
         {{> donate}}
     </aside>
     {{> alert}} <!--For FED Purposes-->
+    {{> articleNews}} <!--For FED Purposes-->
 </body>
