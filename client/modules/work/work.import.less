@@ -9,6 +9,12 @@ section.work{
         display: table;
         margin: 0 auto;
         background-color: transparent;
+        @media @1024{
+            margin: 30px;
+        }
+        @media @mobile{
+            margin: 0px;
+        }
         .workTextContainer{
             max-width: 620px;
         }
@@ -28,12 +34,19 @@ section.work{
         header{
             padding: 40px 40px;
             border-bottom: 3px solid #ebf2f2;
+            @media @mobile{
+                padding: 20px;
+            }
             h2{
                 border: none;
                 color: @teal;
                 font-size: 39px;
                 font-weight: 100;
                 letter-spacing: 1px;
+                @media @mobile{
+                    font-size: 24px;
+                    line-height: 24px;
+                }
             }
             i{
                 font-size: 54px;
@@ -42,6 +55,11 @@ section.work{
                 position: relative;
                 top: 5px;
                 color:@black;
+                @media @mobile{
+                    font-size: 24px;
+                    line-height: 24px;
+                    top: 0px;
+                }
             }
             .print{
                 position: absolute;
@@ -49,10 +67,16 @@ section.work{
                 font-size: 19px;
                 opacity: 0.5;
                 margin-top: 28px;
+                @media @mobile{
+                    display: none;
+                }
             }
         }
         main{
             padding: 40px;
+            @media @mobile{
+                padding: 20px;
+            }
             .workInner{
                 display: table;
             }
@@ -61,6 +85,9 @@ section.work{
             }
             .workTextContainer{
                 padding-right: 40px;
+                @media @mobile{
+                    padding-right: 0px;
+                }
             }
             .workTertiary{
                 padding: 40px;
@@ -105,7 +132,12 @@ section.work{
         }
     }
     .workNav {
+        //.transition(all,375ms,ease-out,0ms);
+        //.workMainAnimationNav;
+        .translate(0px,0px);
+        //.transition(all, 1000ms, ease-out, 0ms);
         background-color: transparent;
+        opacity: 1;
         @media @mobile{
             margin-top: -30px;
         }
@@ -121,6 +153,7 @@ section.work{
                 margin-bottom: 40px;
                 vertical-align: top;
                 opacity: 0;
+                //.transition(all,50ms,ease,0ms);
                 &.backToIndexWork{
                     display: none;
                 }
@@ -134,7 +167,7 @@ section.work{
                 }
                 //intro animations
                 .translate(0px,20px);
-                &:first-child{.transition(all,375ms,ease-out,150ms);}
+                /*&:first-child{.transition(all,375ms,ease-out,150ms);}
                 &:nth-child(2){.transition(all,375ms,ease-out,200ms);}
                 &:nth-child(3){.transition(all,375ms,ease-out,250ms);}
                 &:nth-child(4){.transition(all,375ms,ease-out,300ms);}
@@ -143,7 +176,7 @@ section.work{
                 &:nth-child(7){.transition(all,375ms,ease-out,450ms);}
                 &:nth-child(8){.transition(all,375ms,ease-out,500ms);}
                 &:nth-child(9){.transition(all,375ms,ease-out,550ms);}
-                &:nth-child(10){.transition(all,375ms,ease-out,600ms);}
+                &:nth-child(10){.transition(all,375ms,ease-out,600ms);}*/
                 .icon {
                     display: block;
                     margin: 0 auto;
@@ -159,7 +192,7 @@ section.work{
                     font-style: normal;
                     .scale(1,1);
                     .translate(0px,0px);
-                    .transition(all,175ms,ease-out,0ms);
+                    //.transition(all,175ms,ease-out,0ms);
                     border-radius: 50%;
                     -webkit-border-radius: 50%;
                     a{
@@ -260,9 +293,17 @@ body.workActive{
         }
         .workNav{
             background-color: lighten(@navy, 1.5%);
+            .translate(0px,0px);
+            opacity: 1;
+            @media @mobile{
+                display: none !important; //temp for mobile UX flow
+            }
             > ul{
                 width: 300px;
                 margin: 0px;
+                @media @1024{
+                    width:220px; 
+                }
                 > li{
                     width: 100%;
                     text-align: left;
@@ -316,6 +357,10 @@ body.workActive{
                         line-height: 20px;
                         height: auto;
                         width: auto;
+                        @media @1024{
+                            font-size: 16px;
+                            line-height: 16px;
+                        }
                     }
                     .icon{
                         margin-right: 5px;
@@ -390,6 +435,9 @@ body.workActive{
         }
         .workTertiary{
             display: table-cell;
+            @media @1024{
+                display: none;
+            }
         }
     }
 }

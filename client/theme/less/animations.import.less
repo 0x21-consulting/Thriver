@@ -152,55 +152,39 @@
 }
 
 
-//These are buggy. Probably better to add opacity via script
-/*
-//Special Pulse Animation just for News Tab switch
-.animateDisplayNewsTabs{
-    .animation(slideIn, 1, 250ms, ease-in, 0ms);
-    .keyframes(slideIn;{
+//Work Main Animation
+.workMainAnimationNav{
+    .animation(workMainAnimationNav, 1, 1000ms, ease-out, 0ms);
+    .keyframes(workMainAnimationNav;{
         0% {
+            background-color: transparent;
+            .translate(-100px,0px);
+            opacity: 0;
             display: none;
-            opacity: 0.25;
-            background-color: #4e606a;
         }
-        1% {
-            display: block;
-            opacity: 0.25;
-            background-color: #4e606a;
+        25%{
+            background-color: transparent;
+            .translate(-100px,0px);
+            opacity: 0;
+            display: none;
+        }
+        90%{
+            .translate(-100px,0px);
+            background-color: transparent;
+            opacity: 1;
+            display: none;
         }
         100% {
+            background-color: lighten(@navy, 1.5%);
+            .translate(0px,0px);
             opacity: 1;
-            background-color: #4e606a;
+            display: table-cell;
         }
     });
     @media @mobile{
         .noAnimation;
     }
 }
-
-//Special Pulse Animation just for Accounts Tab Switch
-.animateDisplayAccountDetailsTabs{
-    .animation(slideIn, 1, 250ms, ease-in, 0ms);
-    .keyframes(slideIn;{
-        0% {
-            display: none;
-            opacity: 0.25;
-            background-color: lighten(@lightBlue, 10%);
-        }
-        1% {
-            display: block;
-            opacity: 0.25;
-            background-color: lighten(@lightBlue, 10%);
-        }
-        100% {
-            opacity: 1;
-            background-color: lighten(@lightBlue, 10%);
-        }
-    });
-    @media @mobile{
-        .noAnimation;
-    }
-}*/
 
 
 //Disable all CSS transitions
