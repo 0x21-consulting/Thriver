@@ -1,5 +1,5 @@
 <template name="articleNews">
-    <section class="article">
+    <section class="articleNews">
         <article class="articleActionAlert">
             <header class="single">
                 <a href="#" class="brandLinkSingle">
@@ -8,25 +8,27 @@
                     </svg>
                 </a>
                 <a href="#" class="associatedBrandLinkSingle">
-                    <image src="edaw.png" />
+                    <image src="/lib/img/edaw.png" />
                 </a>
-                <div class="shareTool">
-                    <!-- Load Facebook SDK for JavaScript -->
-                    <div id="fb-root"></div>
-                    <script>(function(d, s, id) {
-                      var js, fjs = d.getElementsByTagName(s)[0];
-                      if (d.getElementById(id)) return;
-                      js = d.createElement(s); js.id = id;
-                      js.src = "//connect.facebook.net/en_US/all.js";
-                      fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));</script>
-
-                    <!-- Your share button code -->
-                    <div class="fb-share-button" 
-                        data-href="http://www.wcasa.org" 
-                        data-layout="button_count">
-                    </div>
-                </div>
+                <!--H3 should represent the sending article, 'action alert' or 'press release'-->
+                <h3>Share this action alert:</h3>
+                <ul class="socialShare">
+                    <li class="social fa twitter">
+                        <a href="{{twitterShareLink}}" target="_blank">
+                            &#xf099;
+                        </a>
+                    </li>
+                    <li class="social fa facebook">
+                        <a href="{{facebookShareLink}}" target="_blank">
+                            &#xf082;
+                        </a>
+                    </li>
+                    <li class="social fa youtube">
+                        <a href="{{googlePlusShareLink}}" target="_blank">
+                            &#xf0d5;
+                        </a>
+                    </li>
+                </ul>
             </header>
             <div class="title">
                 <p>Action Alert</p>
@@ -69,19 +71,19 @@
                         The Wisconsin Coalition Against Sexual Assault (WCASA, www.wcasa.org) is a membership agency comprised of organizations and individuals working to end sexual violence in Wisconsin. Among these are the 51 sexual assault service provider agencies throughout the state that offer support, advocacy and information to survivors of sexual assault and their families. WCASA works to ensure that every survivor in Wisconsin gets the support and care they need. WCASA also works to create the social change necessary to ensure a future where no child, woman or man is ever sexually violated again.
                     </p>
                     <ul class="social">
-                        <li class="social fa">
+                        <li class="social fa twitter">
                             <a href="https://twitter.com/wcasa_org" target="_blank">
                                 &#xf099;
                             </a>
                         </li>
-                        <li class="social fa">
-                            <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
-                                &#xf16a;
-                            </a>
-                        </li>
-                        <li class="social fa">
+                        <li class="social fa facebook">
                             <a href="https://www.facebook.com/wcasa" target="_blank">
                                 &#xf082;
+                            </a>
+                        </li>
+                        <li class="social fa youtube">
+                            <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
+                                &#xf16a;
                             </a>
                         </li>
                     </ul>
