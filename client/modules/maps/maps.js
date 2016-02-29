@@ -241,9 +241,9 @@ getCounty = function (zip) {
 };
 
 // On proper initialization (meteor sucks at handling race conditions)
-Template.body.onRendered(function () {
+//Template.body.onRendered(function () {
     Template.providers.onRendered(initialize);
-});
+//});
 
 Template.providers.events({
     // County drop-down list
