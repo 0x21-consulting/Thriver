@@ -1,44 +1,49 @@
 <template name="masthead">
-    <section class="masthead" id="masthead">
-        <!--{{> mastheadMessageExtended}}-->
-        <!--{{> mastheadMessage}}-->
-        {{> mastheadImpact}}
+    <!--{{> mastheadArticle}}-->
+    {{> mastheadAlert}}
+    <!--{{> mastheadImpact}}-->
+</template>
+<!--Note background images are currently being managed via CSS-->
+
+<template name="mastheadImpact">
+    <section class="masthead mastheadImpact" id="masthead">
+        <div>
+            <h1>
+                <span class="small">Creating the</span>
+                <span class="large">Social Change</span>
+                <span class="small">Necessary to</span>
+                <span class="large">End Sexual Violence</span>
+            </h1>
+            <a class="cta providers" href="#">Get Help Now</a>
+        </div>
     </section>
 </template>
 
 
-<template name="mastheadImpact">
-    <div class="center impact">
-        <h1>
-            <span class="small">Creating the</span>
-            <span class="large">Social Change</span>
-            <span class="small">Necessary to</span>
-            <span class="large">End Sexual Violence</span>
-        </h1>
-        <a class="cta providers" href="#">Get Help Now</a>
-    </div>
+<template name="mastheadAlert">
+    <section class="masthead mastheadAlert" id="masthead">
+        <div>
+            <h1>Action Alert</h1>
+            <p class="date">November 15th, 2015</p>
+            <p class="excerpt">
+                Some Wisconsin Legislators are attempting to <strong>take away the federally protected rights of transgender students</strong> to use the bathroom and changing facility that aligns with their gender.
+            </p>
+            <a class="cta" href="#">Act Now</a>
+        </div>
+    </section>
 </template>
 
-
-<template name="mastheadMessage">
-    <div class="left message">
-        <h1>Creating the Social Change Necessary to End Sexual Violence</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.
-        </p>
-        <a href="#">Read More</a>
-    </div>
-</template>
-
-<template name="mastheadMessageExtended">
-    <div class="right message-extended">
-        <h1>Creating the Social Change Necessary to End Sexual Violence</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        </p>
-        <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        <a href="#">Learn More</a>
-    </div>
+<template name="mastheadArticle">
+    <section class="masthead mastheadArticle" id="masthead">
+        <div>
+            <h1>Victim advocacy bill introduced in Assembly</h1>
+            <p>
+                On Tuesday, as part of a larger crime reform package, I introduced a victim advocacy bill that will be of great benefit to victims of sexual assault, human trafficking, and child abuse.
+            </p>
+            <p>
+                Specifically, the bill gives victims of those crimes the right of accompaniment by a victim advocate throughout all stages from health treatment and law enforcement proceedings to recovery.
+            </p>
+            <a class="cta" target="_blank" href="http://chippewa.com/dunnconnect/news/opinion/columnists/victim-advocacy-bill-introduced-in-assembly/article_e1ddf0ba-a785-59b4-b219-fab7b2877411.html">Read the article</a>
+        </div>
+    </section>
 </template>
