@@ -1,52 +1,98 @@
 <template name="providers">
-    <section class="providers left" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="providers mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-        <div class="provider-search">
+        <div class="containerSmall">
+            <header>
+                <h1>Service Providers</h1>
+                <p>
+                    We believe that diversity and safe,<br>
+                    accessible services are fundamental<br>
+                    to social change
+                </p>
+            </header>
+        </div>
+        <div class="providerSearch">
             <form id="search">
-                <label for="county">Find by County</label>
-                <span class="select">
+                <div class="styledSelect fullBlockMob">
+                    <label for="county">Find by County</label>
                     <select id="county" class="county">
                         <option>- Select a County -</option>
                         {{#each counties}}
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
                     </select>
-                </span>
+                </div>
+                <div class="findByZip">
                     <label for="zip">Find by Zip Code</label>
-                    <span class="float-right">
-                        <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
-                        <input id="zip" type="text" pattern="[0-9]*" 
-                            maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
-                            min="53001" max="54990" name="zip">
-                        <input class="submit" type="submit" value="Go">
-                    </span>
+                    <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
+                    <input id="zip" type="text" pattern="[0-9]*" 
+                        maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
+                        min="53001" max="54990" name="zip">
+                    <input class="submit" type="submit" value="Go">
+                </div>
             </form>
-            <h2><span class="fa">&#xf002;</span> Search for a WCASA Sexual Assault Service Provider</h2>
         </div>
-        <figure class="map">
-            <div id="map-canvas"></div>
-        </figure>
-        <article class="location-details details">
-            <!--{{> provider}}-->
-            {{#with currentProvider}}
-                <h2>{{name}}</h2>
-                <p class="county-served">Counties Served: {{providerCounties}}</p>
-                <div class="left">
-                    <address>{{address}}</address>
-                    <p class="phone">Phone: <b>{{phone}}</b></p>
-                    <p class="phone crisis">Crisis: <b>{{crisis}}</b></p>
+        <main class="mapTool">
+            <figure class="map">
+                <div id="mapCanvas">
                 </div>
-                <div class="right">
-                    <a href="mailto:{{email}}" class="email icon">{{email}}</a>
-                    <a href="{{website}}" target="_blank" class="website icon">{{website}}</a>
-                    <a href="{{facebook}}" target="_blank" class="facebook icon">
-                        {{name}} on Facebook</a>
-                    <a href="#" target="_blank" class="twitter icon">twitter.com/user/</a>
-                </div>
-                <button class="cta button-aqua">Jobs &amp; More</button>
-            {{/with}}
-        </article>
+            </figure>
+            <article class="locationDetails details">
+                <header>
+                    <h2>Turning Point for Victims of DV &amp; SV</h2>
+                    <p class="county-served">Counties Served: Pierce, St. Croix</p>
+                </header>
+                <main>
+                    <address>PO Box 304, River Falls, WI 54022</address>
+                    <ul class="phones">
+                        <li><strong>Phone:</strong> (715)425-6751 ext. 104</li>
+                        <li><strong>Crisis:</strong> (800) 345-5104</li>
+                    </ul>
+                    <ul class="outreach">
+                        <li class="email">
+                            <a href="mailto:katier@turningpoint-wi.org">katier@turningpoint-wi.org</a>
+                        </li>
+                        <li class="website">
+                            <a href="http://www.turningpoint-wi.org/" target="_blank">http://www.turningpoint-wi.org/</a>
+                        </li>
+                        <li class="facebook">
+                            <a href="#" target="_blank" class="facebook icon">Turning point for Victims of DV & SV on Facebook</a>
+                        </li>
+                        <li class="twitter">
+                            <a href="#" target="_blank" class="twitter icon">twitter.com/user/45o3055/</a>
+                        </li>
+                    </ul>
+                    <button class="cta">Jobs &amp; More</button>
+                </main>
+            </article>
+        </main>
     </section>
+</template>
+
+
+
+<!--Legacy Meteor Data for Provider Data-->
+<template name="legacyProvider">
+    <article class="locationDetails details">
+        <!--{{> provider}}-->
+        {{#with currentProvider}}
+            <h2>{{name}}</h2>
+            <p class="county-served">Counties Served: {{providerCounties}}</p>
+            <div class="left">
+                <address>{{address}}</address>
+                <p class="phone">Phone: <b>{{phone}}</b></p>
+                <p class="phone crisis">Crisis: <b>{{crisis}}</b></p>
+            </div>
+            <div class="right">
+                <a href="mailto:{{email}}" class="email icon">{{email}}</a>
+                <a href="{{website}}" target="_blank" class="website icon">{{website}}</a>
+                <a href="{{facebook}}" target="_blank" class="facebook icon">
+                    {{name}} on Facebook</a>
+                <a href="#" target="_blank" class="twitter icon">twitter.com/user/</a>
+            </div>
+            <button class="cta button-aqua">Jobs &amp; More</button>
+        {{/with}}
+    </article>
 </template>

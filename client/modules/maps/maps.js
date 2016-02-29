@@ -11,7 +11,7 @@ map = {},
 initialize = function () {
     // Map Initialization function
     var initialize = function () {
-        var mapElement = document.querySelector('#map-canvas'),
+        var mapElement = document.querySelector('#mapCanvas'),
         
         // Map options
         options = {

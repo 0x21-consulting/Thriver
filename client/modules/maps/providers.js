@@ -36,12 +36,12 @@ Template.providers.helpers({
 // TODO: Rewrite
 Template.providers.onRendered(function () {
     //Toggle provider search
-    $('.provider-search').click(function(event){
+    $('.providerSearch').click(function(event){
         event.stopPropagation();
-        if($('.providers .provider-search').hasClass('active')){
-            $('.providers .provider-search').removeClass('active');
+        if($('.providers .providerSearch').hasClass('active')){
+            $('.providers .providerSearch').removeClass('active');
         } else{
-            $('.providers .provider-search').addClass('active');
+            $('.providers .providerSearch').addClass('active');
         }
     });
 
@@ -56,7 +56,7 @@ Template.providers.onRendered(function () {
 // Close Map Search
 // TODO: This is currently GLOBAL!
 closeMapSearch = function (event) {
-    var search = document.querySelector('.providers .provider-search');
+    var search = document.querySelector('.providers .providerSearch');
     if (search instanceof Element && search.classList.contains('active'))
         search.classList.remove('active');
 };
