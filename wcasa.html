@@ -13,10 +13,13 @@
     <div class="canvasCenter">
         <div class="masterContainer">
             {{> masthead}}
-            {{> work}}
+            <!--{{> work}}
             {{> outreach}}
             {{> providers}}
-            {{> contact}}
+            {{> contact}}-->
+            {{#each sections}}
+                {{> Template.dynamic template=template}}
+            {{/each}}
         </div>
     </div>
     <aside class="sidebar sidebarsLeft">
