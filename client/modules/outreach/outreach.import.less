@@ -1,6 +1,9 @@
 section.outreach{
     background-color: @navy;
     padding-bottom: 80px;
+    @media @mobile{
+        padding-bottom: 0px;
+    }
     ul.outreachTabs{
         text-align: center;
         > li{
@@ -15,7 +18,7 @@ section.outreach{
             letter-spacing: 2px;
             margin-right: 10px;
             .scale(1,1);
-            .transition(all, 200ms, ease-out, 0ms);
+            .transition(all, 500ms, ease-out, 0ms);
             &:nth-child(2){
                 background-color: darken(@orange, 4%);
             }
@@ -36,26 +39,89 @@ section.outreach{
                     background-color: darken(@teal, 2.5%);
                 }
             }
+            @media @mobile{
+                padding: 20px 0px;
+                width: 100%;
+                .scale(1,1) !important; //no hovers
+            }
         }
     }
     ul.outreachContent{
-        .transition(all, 200ms, ease-out, 0ms);
-        height: 0px;
+        .transition(all, 500ms, ease-out, 0ms);
+        max-height: 0px;
         overflow: hidden;
         border-top: 0px solid transparent;
+        border-bottom: 0px solid transparent;
         max-width: 800px;
         margin: 0 auto;
         background-color: @white;
         margin-top: 20px;
+        @media @1024{
+            margin: 40px 40px 0px 40px;
+        }
+        @media @mobile{
+            margin: 0px;
+        }
+        h3{
+            font-size: 31px;
+            font-weight: 100;
+            margin-bottom: 20px;
+            line-height: 32px;
+        }
+        button.cta{
+            background-color: @orange;
+            color: @white;
+            font-size: 14px;
+            line-height: 14px;
+            padding: 12px;
+            text-transform: uppercase;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            &:hover{
+                background-color: darken(@orange, 4%);
+            }
+            &:active{
+                background-color: darken(@orange, 8%);
+            }
+        }
         &.active{
-            height: 600px;
+            max-height: 2000px;
             overflow: auto;
             border-top: 5px solid @teal;
+            border-bottom: 5px solid @teal;
+            @media @mobile{
+                border-top: none;
+                border-bottom: none;
+            }
         }
-        li{
+        > li{
             display: none;
             &.active{
                 display: block;
+            }
+            ul > li{
+                background-color: @white;
+                padding: 40px;
+                @media @mobile{
+                    padding: 20px;
+                }
+                &:nth-child(even){
+                    background-color: @gray;
+                }
+                p{
+                    color: @black;
+                    margin-bottom: 20px;
+                }
+            }
+            &.joinTheBoard{
+                padding: 40px;
+                @media @mobile{
+                    padding: 20px;
+                }
+                p{
+                    color: @black;
+                }
             }
         }
     }
