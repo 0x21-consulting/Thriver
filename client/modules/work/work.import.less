@@ -31,6 +31,11 @@ section.work{
         position: relative;
         .shadow(-9px,1px,7px,-6px,0.0);
         .transition(all, 500ms, ease-out, 0ms);
+        
+        // Only show active content articles
+        article { display: none; }
+        article.active { display: initial; }
+        
         header{
             padding: 40px 40px;
             border-bottom: 3px solid #ebf2f2;

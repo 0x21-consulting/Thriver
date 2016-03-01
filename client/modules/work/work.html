@@ -12,7 +12,7 @@
         </div>
         <main>
             {{>workNav}}
-            {{>workContent}}
+            {{>workContentContainer}}
         </main>
     </section>
 </template>
@@ -25,60 +25,67 @@
             <li class="backToIndexWork">
                 <a href="#"><span class="fa">&#xf0d9;</span> See All Work</a>
             </li>
-            {{> workListItemA}}
-            {{> workListItemB}}
-            {{> workListItemC}}
-            {{> workListItemD}}
-            {{> workListItemE}}
-            {{> workListItemF}}
-            {{> workListItemG}}
+            {{#each tabs}}
+                {{> workListItem id=this}}
+            {{/each}}
         </ul>
     </menu>
 </template>
 
 <template name="workListItem">
-    <li>
-        <i class="icon fa"><a href="#">&#xf013;</a></i>
-        <a class="toggle" href="#">Advocacy</a>
+    <li data-id="{{this.id}}">
+        <i class="icon fa"><a href="#">{{icon}}</a></i>
+        <a class="toggle" href="#">{{name}}</a>
         <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
+            {{#each tabs}}
+                <li data-id="{{this}}"><a href="#">{{tabName this}}</a></li>
+            {{/each}}
         </ul>
     </li>
 </template>
 
 
 
-<!--Content-->
-
-<template name="workContent">
+<!--Content Container-->
+<template name="workContentContainer">
     <section class="workContent">
-        <article>
-            <header>
-                <i class="icon fa">&#xf013;</i>
-                <h2>Advocacy</h2>
-                <button class="print fa">&#xf02f;</button>
-            </header>
-            <main class="textBody workInner">
-                <div class="workTextContainer">
-                    {{>workContentBlock}}
-                </div>
-                {{>workTertiary}}
-            </main>
-            <footer class="truncate">
-                <a href="#">Read More <span class="fa">&#xf0d7;</span></a>
-            </footer>
-        </article>
+        {{#each tabs}}
+            {{> workContent id=this}}
+            <!-- Subtabs -->
+            {{#with subtabs this}}
+                {{#each this}}
+                    {{> workContent id=this}}
+                {{/each}}
+            {{/with}}
+        {{/each}}
     </section>
 </template>
-
+<!-- Content template -->
+<template name="workContent">
+    <article data-id="{{id}}">
+        <header>
+            <i class="icon fa">{{icon id}}</i>
+            <h2>{{name id}}</h2>
+            <button class="print fa">&#xf02f;</button>
+        </header>
+        <main class="textBody workInner">
+            <div class="workTextContainer">
+                <!--{{>workContentBlock}}-->
+                {{{markdown content}}}
+            </div>
+            {{>workTertiary}}
+        </main>
+        <footer class="truncate">
+            <a href="#">Read More <span class="fa">&#xf0d7;</span></a>
+        </footer>
+    </article>
+</template>
 
 <!--Tertiary Nav-->
 <template name="workTertiary">
     <aside class="workTertiary">
         <ul>
-            <li class="title">Advocacy Index</li>
+            <li class="title">Table of Contents</li>
             {{> workSubListItem}}
             {{> workSubListItem}}
             {{> workSubListItem}}
@@ -132,84 +139,4 @@
     <p>
         Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
     </p> 
-</template>
-
-
-<!--Temp for FED-->
-<template name="workListItemA">
-    <li>
-        <i class="icon fa"><a href="#">&#xf27a;</a></i>
-        <a class="toggle" href="#">Advocacy</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemB">
-    <li>
-        <i class="icon fa"><a href="#">&#xf056;</a></i>
-        <a class="toggle" href="#">Prevention</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemC">
-    <li>
-        <i class="icon fa"><a href="#">&#xf0c0;</a></i>
-        <a class="toggle" href="#">*All</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemD">
-    <li>
-        <i class="icon fa"><a href="#">&#xf017;</a></i>
-        <a class="toggle" href="#">Evaluation</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemE">
-    <li>
-        <i class="icon fa"><a href="#">&#xf0f6;</a></i>
-        <a class="toggle" href="#">Policy &amp; Law</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemF">
-    <li>
-        <i class="icon fa"><a href="#">&#xf013;</a></i>
-        <a class="toggle" href="#">Systems</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
-</template>
-<template name="workListItemG">
-    <li>
-        <i class="icon fa"><a href="#">&#xf005;</a></i>
-        <a class="toggle" href="#">SATF</a>
-        <ul>
-            <li><a href="#">Regional Technical Assistance</a></li>
-            <li><a href="#">Coordinated Community Response</a></li>
-            <li><a href="#">Human Trafficking</a></li>
-        </ul>
-    </li>
 </template>
