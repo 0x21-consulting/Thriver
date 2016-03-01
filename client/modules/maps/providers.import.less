@@ -26,6 +26,9 @@ section.providers{
         //background: url('/lib/img/map-temp.png') no-repeat;
         //background-size: cover;
         //width: 70%;
+        #mapCanvas{
+            height: 100%;
+        }
         @media @mobile{
             height: 200px;
             width: 100%;
@@ -36,6 +39,7 @@ section.providers{
         width: 700px;
         background: @navy;
         position: relative;
+        vertical-align: top;
         .shadow(-10px,0px,8px,-9px, 0.3);
         &:before{
             content:"\f0d9";
