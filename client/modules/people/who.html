@@ -1,64 +1,101 @@
 <template name="who">
-    <section class="who-we-are tabs tabs-top" id="{{anchor name=name}}" data-id="{{_id}}">
+    <section class="who mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
-        <menu class="tabs set-toggle">
+        <div class="containerSmall">
+            <header>
+                <h1>Who We Are</h1>
+                <p>
+                    The Wisconsin Coalition Against Sexual Assault<br>
+                    Creates the social change necessary<br>
+                    to end sexual violence.
+                </p>
+            </header>
+        </div>
+        <aside class="philosophies">
+        <h2>WCASA Philosophies</h2>
             <ul>
-                <li class="active">WCASA Staff</li>
-                <li>Board of Directors</li>
+                <li>We believe it is a basic human right to live free of sexual violence.</li>
+                <li>We believe that everyone has a role and responsibility in this work.</li>
+                <li>We do not do this work in isolation. We believe in the importance of collaborations and alliance building.</li>
+                <li>Our work is driven by survivors' voices. Survivors and all those affected by sexual violence deserve compassionate services, dignity, privacy and respect.</li>
+                <li>We believe that this work is based in a feminist perspective that sexual violence is rooted in oppressive power relations</li>
+                <li>We believe that sexual violence is any unwanted sexual contact (verbal and/or physical), including rape, incest, child sexual assault, ritual abuse, acquaintance rape/assault, intimate partner or marital rape, sexual harassment, exposure and voyeurism. Sexual violence refers to acts of violence where sex is used as the weapon.</li>
+                <li>We believe that diversity and safe, accessible services are fundamental to social change.</li>
+                <li>We believe in the power of advocacy, education, prevention and driving public policy as agents of social change.</li>
             </ul>
-        </menu>
+        </aside>
+
         <main class="members">
-            <article class="active">
-                {{> slider people=staff }}
-            </article>
-            <article>
-                {{> slider people=board }}
-            </article>
+            <section class="staff">
+                <ul>
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                    {{> personStaff}}
+                </ul>
+            </section>
+            <section class="board">
+                <ul>
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                    {{> personBoard}}
+                </ul>
+            </section>
         </main>
+
+        <aside class="annualReports">
+            <h2>Annual Reports</h2>
+            <ul>
+                <li><a href="#">WCASA Annual Report 2013</a></li>
+                <li><a href="#">WCASA Annual Report 2012</a></li>
+                <li><a href="#">WCASA Annual Report 2011</a></li>
+                <li><a href="#">WCASA Annual Report 2010</a></li>
+                <li><a href="#">WCASA Annual Report 2009</a></li>
+                <li><a href="#">WCASA Annual Report 2008</a></li>
+            </ul>
+        </aside>
     </section>
-    <script>
-        // TODO: move to sections.js
-        $('.tabs.who-we-are menu li').click(function(){
-            var x = $(this).index() + 1;
-            $('.tabs.who-we-are menu li').removeClass("active");
-            $('.tabs.who-we-are article').removeClass("active");
-            $(this).addClass("active");
-            $(this).parent().parent().siblings().find( "article:nth-child(" + x + ")" ).addClass("active");
-        });
-    </script>
 </template>
 
-<!--Slider template-->
-<template name="slider">
-    <section class="slider contacts">
-        <main class="slider-content">
-                {{#each people}}
-                    {{> person}}
-                {{/each}}
-        </main>
-    </section>
-    <nav class="slider-nav">
-        <ul>
-            <li class="prev slider-nav fa">&#xf0d9;</li>
-            <li class="next slider-nav fa">&#xf0da;</li>
-        </ul>
-    </nav>
+
+
+
+
+<!--Profile Figure Template-->
+<template name="personStaff">
+    <li>
+        <img src="/lib/img/avatar.png" alt="{{name}}" />
+        <div class="details">
+            <h4>Leo Decap</h4>
+            <h5>Award Winner</h5>
+            <a href="mailto:leo@gmail.com">leo@gmail.com</a>
+        </div>
+    </li>
 </template>
 
 <!--Profile Figure Template-->
-<template name="person">
-    <figure>
-        {{#if picture}}
-            <img src="{{picture}}" alt="{{name}}" />
-        {{else}}
-            <img src="{{avatar.avatar}}" alt="{{name}}" />
-        {{/if}}
+<template name="personBoard">
+    <li>
         <div class="details">
-            <h4>{{name}}</h4>
-            <h5>{{title}}</h5>
-            <a href="mailto:{{email}}">{{email}}</a>
+            <h4>Leo Decap</h4>
+            <h5>Award Winner</h5>
+            <a href="mailto:leo@gmail.com">leo@gmail.com</a>
         </div>
-    </figure>
+    </li>
 </template>
