@@ -2,9 +2,35 @@ section.who{
     padding-bottom: 80px;
     .philosophies, .annualReports {
         background-color: @gray;
-        padding: 40px;
+        padding: 40px 80px;
+        @media @mobile{
+            padding: 20px;
+        }
         max-width: 700px;
         margin: 0 auto;
+        text-align: center;
+        ul{
+            text-align: left;
+            li{
+                margin: 20px 0px;
+                display: block;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                font-size: 14px;
+                padding-left: 35px;
+                &:before{
+                    content:'';
+                    height: 6px;
+                    width: 6px;
+                    background-color: darken(@teal, 5%);
+                    border:3px solid @teal;
+                    display: block;
+                    margin-top: 6px;
+                    margin-left: -25px;
+                    position: absolute;
+                }
+            }
+        }
         h2{
             border-bottom: 2px solid darken(@gray, 5%);
             color: @teal;
@@ -14,6 +40,42 @@ section.who{
             font-weight: 100;
             padding: 10px;
 
+        }
+    }
+    section.pGrid{
+        max-width: 960px;
+        margin: 0 auto;
+        margin-top: 40px;
+        h2{
+            color: @black;
+            border-bottom: 2px solid @gray;
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        ul{
+            margin: 0 auto;
+            text-align: center;
+            > li{
+                width: 23%;
+                display: inline-block;
+                margin:10px 5% 10px 5%; 
+                img{
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    float: left;
+                }
+                .details{
+                    float: left;
+                    margin-left: 20px;
+                    h4{
+                        margin: 0px;
+                        color: @navy;
+                    }
+                }
+            }
         }
     }
 }
