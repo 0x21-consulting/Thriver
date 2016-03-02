@@ -3,12 +3,28 @@ section.who{
     .philosophies, .annualReports {
         background-color: @gray;
         padding: 40px 80px;
+        @media @1024{
+            margin: 0px 40px 0px 40px;
+        }
         @media @mobile{
             padding: 20px;
+            margin: 0px 20px 0px 20px;
         }
         max-width: 700px;
         margin: 0 auto;
         text-align: center;
+        h2{
+            border-bottom: 2px solid darken(@gray, 5%);
+            color: @teal;
+            font-size: 28px;
+            line-height: 32px;
+            text-align: center;
+            font-weight: 100;
+            padding: 10px;
+
+        }
+    }
+    .philosophies{
         ul{
             text-align: left;
             li{
@@ -31,15 +47,49 @@ section.who{
                 }
             }
         }
-        h2{
-            border-bottom: 2px solid darken(@gray, 5%);
-            color: @teal;
-            font-size: 28px;
-            line-height: 32px;
-            text-align: center;
-            font-weight: 100;
-            padding: 10px;
-
+    }
+    .annualReports{
+        ul{
+            margin: 20px 0px 20px 0px;
+            li{
+                width: 47%;
+                float: left;
+                margin: 10px 1.5%;
+                @media @mobile{
+                    width: 100%;
+                    margin: 10px 0px;
+                }
+                a{
+                    color: @white;
+                    background-color: @orange;
+                    display: block;
+                    padding: 20px;
+                    margin: 0 auto;
+                    font-weight: 700;
+                    span{
+                        font-size: 20px;
+                        position: relative;
+                        top: 2px;
+                        font-weight: 100;
+                        margin-left: 5px;
+                    }
+                    &:hover{
+                        background-color: darken(@orange, 5%);
+                    }
+                    &:active{
+                        background-color: darken(@orange, 10%);
+                    }
+                }
+            }
+        }
+    }
+    main.members{
+        padding-bottom: 40px;
+        @media @1024{
+            margin: 0px 40px 0px 40px;
+        }
+        @media @mobile{
+            margin: 0px 20px 0px 20px;
         }
     }
     section.pGrid{
@@ -53,6 +103,7 @@ section.who{
             text-align: center;
             margin-bottom: 40px;
             font-size: 28px;
+            font-weight: 100;
         }
         ul{
             margin: 0 auto;
@@ -60,19 +111,62 @@ section.who{
             > li{
                 width: 23%;
                 display: inline-block;
-                margin:10px 5% 10px 5%; 
+                margin:10px 5% 10px 5%;
+                .flex;
+                float: left;
+                @media @1024{
+                    width: 40%;
+                }
+                @media @mobile{
+                    width: 100%;
+                    margin: 10px 0px 10px 0px;
+                }
                 img{
                     width: 100px;
                     height: 100px;
                     border-radius: 50%;
-                    float: left;
                 }
                 .details{
                     float: left;
                     margin-left: 20px;
+                    position: relative;
+                    top: 13px;
                     h4{
                         margin: 0px;
-                        color: @navy;
+                        color: @blackAlt;
+                        line-height: 24px;
+                        text-transform: none;
+                    }
+                    h5{
+                        font-weight: 100;
+                        margin: 0px 0px 5px 0px;
+                        line-height: 12px;
+                        font-size: 14px;
+                    }
+                    a{
+                        position: relative;
+                        left: 4px;
+                        color: @orange;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+        &.board{
+            margin-bottom: 40px;
+            ul{
+                > li{
+                    width: 16%;
+                    margin: 10px 0px 10px 8.5%;
+                    @media @1024{
+                        width: 23%;
+                    }
+                    @media @mobile{
+                        width: 100%;
+                        margin: 10px 0px 10px 0px;
+                    }
+                    .details{
+                        margin-left: 0px;
                     }
                 }
             }
