@@ -9,35 +9,38 @@
                 </p>
             </header>
         </div>
-        <div class="sidebarEvents">
-            {{> calendarNew}}
-            {{> eventsRegisteredNew}}
-        </div>
-        <div class="eventsList">
-            <header class="eventsHeader">
-                <ul>
-                    <li class="scrollPrevMonth"><span class="fa">&#xf053;</span> November 2015</li>
-                    <li class="scrollNextMonth">December 2015 <span class="fa">&#xf054;</span></li>
-                    <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
-                </ul>
-            </header>
-            <div class="eventsContainer">
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> newMonthTitle}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> newMonthTitle}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> eventNew}}
-                {{> eventNew}}
+        <div class="flex eventsObject">
+            <div class="sidebarEvents">
+                {{> calendarNew}}
+                {{> eventsRegisteredNew}}
             </div>
-            <span class="hoverScroll hoverUp fa">&#xf077;</span>
-            <span class="hoverScroll hoverDown fa">&#xf078;</span>
+            <div class="eventsList clearfix">
+                <header class="eventsHeader">
+                    <ul>
+                        <li class="scrollPrevMonth"><span class="fa">&#xf053;</span> November 2015</li>
+                        <li class="scrollNextMonth">December 2015 <span class="fa">&#xf054;</span></li>
+                        <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
+                    </ul>
+                </header>
+                <div class="eventsContainer">
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    <!--{{> newMonthTitle}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> newMonthTitle}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> eventNew}}
+                    {{> eventNew}}-->
+                </div>
+                <div class="clearfix"></div>
+                <span class="hoverScroll hoverUp fa">&#xf077;</span>
+                <span class="hoverScroll hoverDown fa">&#xf078;</span>
+            </div>
         </div>
     </section>
 </template>

@@ -1,21 +1,30 @@
 section.events{
-    padding-bottom: 80px;
+    padding: 40px 220px 80px 220px;
     summary::-webkit-details-marker {
         display: none;
     }
+    .eventsObject{
+        .shadow(0px,1px,23px,-10px,0.3);
+        background-color: @gray;
+        padding: 60px;
+        position: relative;
+    }
     .sidebarEvents, p.illustrationDate {
         background:#00b7c5;
-        min-width: 342px;
-        display: table-cell;
+        //min-width: 342px;
+        //display: table-cell;
     }
    .eventsList, .mainContent {
-        display: table-cell;
-        width: 100%;
+        //display: table-cell;
+        //width: 100%;
     }
 
     .sidebarEvents{
         width: 300px;
+        //margin-left: 10%;
+        //width: 40%;
         vertical-align: top;
+        .shadow(-9px,1px,23px,-10px,0.2);
         h2 {
             color: #fff;
             text-transform: uppercase;
@@ -25,6 +34,7 @@ section.events{
             padding: 0px;
             font-weight: 600;
             margin-bottom: 10px;
+            width: 100%;
         }
         .currentRegistrations{
             h2 {
@@ -35,6 +45,8 @@ section.events{
                 text-align: left;
                 line-height: 20px;
                 margin: 60px 40px 0px 40px;
+                margin: 0px;
+                width: auto;
             }
             li {
                 list-style: none;
@@ -68,8 +80,15 @@ section.events{
         }
     }
     .eventsList{
-        height: 300px;
+        //height: 300px;
         position: relative;
+        background-color: @white;
+        width: 100%;
+        .shadow(0px,0px,10px,-3px,0.4);
+        min-height: 700px;
+        height: 100vh;
+        height: ~'calc(100vh - 407px)';
+        overflow: hidden;
         header.eventsHeader{
             width: 100%;
             background-color: #fff;
@@ -135,15 +154,15 @@ section.events{
         }
         .eventsContainer{
             min-height: 600px;
-            height:90vh;
-            height: ~'calc(100vh - 180px)'; 
+            //height:90vh;
+            //height: ~'calc(100vh - 180px)'; 
             overflow: hidden;
             position: relative;
             padding-top: 42px;
             padding-bottom: 42px;
             width: 100%;
             article.event { 
-                display: table;
+                //display: table;
                 padding: 40px 0px;
                 width: 100%;
                 p.illustrationDate{
@@ -273,6 +292,7 @@ section.events{
             cursor: move;
             font-size: 20px;
             padding: 12px 20px 20px 20px;
+            left: 0px;
             &:hover{
                 background-color: rgba(255,255,255,1);
                 color: rgba(0,0,0,0.5);
@@ -373,3 +393,9 @@ section.events{
         }   
     }
 } //section.events end
+
+
+
+
+
+
