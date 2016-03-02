@@ -100,7 +100,7 @@ var smoothScroll = function (event) {
     speed = Math.abs(posY - offset);
     
     // Smooth scroll to target
-    $('body').animate({ scrollTop: offset }, speed > 3000? 3000 : speed);
+    $('body').animate({ scrollTop: offset }, speed > 1500? 1500 : speed);
 };
 
 // Smooth scrolling

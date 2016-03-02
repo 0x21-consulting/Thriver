@@ -23,14 +23,12 @@ getAdmin = function () {
 
 // Pass admin state to templates
 Template.body     .helpers({ isAdmin: getAdmin });
-//Template.callout  .helpers({ isAdmin: getAdmin });
-//Template.community.helpers({ isAdmin: getAdmin });
-Template.events  .helpers({ isAdmin: getAdmin });
+Template.events   .helpers({ isAdmin: getAdmin });
 Template.contact  .helpers({ isAdmin: getAdmin });
 Template.providers.helpers({ isAdmin: getAdmin });
 Template.who      .helpers({ isAdmin: getAdmin });
 Template.work     .helpers({ isAdmin: getAdmin });
-//Template.article  .helpers({ isAdmin: getAdmin });
+Template.outreach .helpers({ isAdmin: getAdmin });
 
 // Bind checkAdmin function
 Template.body.onCreated(checkAdmin);

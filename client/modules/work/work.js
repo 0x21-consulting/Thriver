@@ -61,7 +61,7 @@ Template.workNav.helpers({
         id = id || this._id;
         
         result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
-        console.info(this, id, result);
+        
         if (result)
             return result.tabs;
     }

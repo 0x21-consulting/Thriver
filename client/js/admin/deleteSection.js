@@ -20,7 +20,6 @@ Template.sectionAdmin.events({
             Meteor.call('deleteSection', id);
         
         // And update parent to remove from child list
-        debugger;
         if (link && link.dataset.parent)
             Meteor.call('removeChild', link.dataset.parent, id);
     }

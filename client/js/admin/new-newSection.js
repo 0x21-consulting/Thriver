@@ -98,8 +98,10 @@ Section = function (parent) {
     placeholder.addEventListener('dragleave', function (event) {
         var stalePlaceholder = document.querySelector('.placeholder');
         
-        if (stalePlaceholder instanceof Element)
-            stalePlaceholder.remove();
+        // Remove stale placeholder, but only if other sections exist
+        if (document.querySelector('.masterContainer > section'))
+            if (stalePlaceholder instanceof Element)
+                stalePlaceholder.remove();
     });
     
     // Create template menu on drop
@@ -182,7 +184,7 @@ setTemplate = function (event) {
     }
     
     // no parent defined
-    elements = elements || document.querySelectorAll('main > section');
+    elements = elements || document.querySelectorAll('.masterContainer > section');
     
     // Determine index of placeholder among its parent
     for (i = 0, j = elements.length; i < j; ++i)
@@ -212,11 +214,11 @@ setTemplate = function (event) {
 // Bind Drag-and-drop events for adding new sections
 Template.body.events({
     // These are elements before and after which a placeholder element can exist
-    'dragenter main > section[data-id]': placeholder,
-    'dragenter menu.tabs li'           : placeholder,
+    'dragenter .masterContainer > section[data-id]': placeholder,
+    //'dragenter menu.tabs li'           : placeholder,
     
     // When no sections exist
-    'dragenter main': function (event) {
+    'dragenter .masterContainer': function (event) {
         // Mutual Suspicion
         if (!event || !(event instanceof $.Event))
             throw new Error('No event passed');
@@ -224,10 +226,10 @@ Template.body.events({
         event.stopPropagation(); // no bubbling
         
         // If there are no sections on the page, add section, otherwise ignore
-        if (!document.querySelector('main > section'))
-            document.querySelector('main').appendChild(new Section());
+        if (!document.querySelector('.masterContainer > section'))
+            document.querySelector('.masterContainer').appendChild(new Section());
     },
-    'dragenter menu.tabs': function (event) {
+    /*'dragenter menu.tabs': function (event) {
         // Mutual Suspicion
         if (!event || !(event instanceof $.Event))
             throw new Error('No event passed');
@@ -241,5 +243,5 @@ Template.body.events({
             // TODO: This technically breaks HTML standards!!!
             target.querySelector('ul').appendChild(
                 new Section(target.parentElement.dataset.id));
-    }
+    }*/
 });

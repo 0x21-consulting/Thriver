@@ -12,8 +12,8 @@
     {{> headerMobile}}
     <div class="canvasCenter">
         <div class="masterContainer">
-            {{> masthead}}
-            <!--{{> work}}
+            <!--{{> masthead}}
+            {{> work}}
             {{> outreach}}
             {{> providers}}
             {{> contact}}-->
@@ -31,4 +31,8 @@
         {{> donate}}
     </aside>
     {{> alert}} <!--For FED Purposes-->
+    <!-- Admin controls -->
+    {{#if isAdmin}}
+        {{> admin}}
+    {{/if}}
 </body>
