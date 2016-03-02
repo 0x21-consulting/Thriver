@@ -54,6 +54,7 @@ initialize = function () {
             
             // Add to map
             marker.setMap(map);
+            console.info(marker);
         });
         
         // Create a WCASA map marker
@@ -156,8 +157,8 @@ initialize = function () {
     },
     // Hide info label on mouseout
     hideLabel = function () {
-        if (map.infowindow)
-            map.infowindow.close();
+        //if (map.infowindow)
+        //    map.infowindow.close();
     },
     
     // Create maps API script

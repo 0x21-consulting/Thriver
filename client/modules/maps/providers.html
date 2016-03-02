@@ -39,34 +39,7 @@
                 <div id="mapCanvas">
                 </div>
             </figure>
-            <article class="locationDetails details">
-                <header>
-                    <h2>Turning Point for Victims of DV &amp; SV</h2>
-                    <p class="county-served">Counties Served: Pierce, St. Croix</p>
-                </header>
-                <main>
-                    <address>PO Box 304, River Falls, WI 54022</address>
-                    <ul class="phones">
-                        <li><strong>Phone:</strong> (715)425-6751 ext. 104</li>
-                        <li><strong>Crisis:</strong> (800) 345-5104</li>
-                    </ul>
-                    <ul class="outreach">
-                        <li class="email">
-                            <a href="mailto:katier@turningpoint-wi.org">katier@turningpoint-wi.org</a>
-                        </li>
-                        <li class="website">
-                            <a href="http://www.turningpoint-wi.org/" target="_blank">http://www.turningpoint-wi.org/</a>
-                        </li>
-                        <li class="facebook">
-                            <a href="#" target="_blank" class="facebook icon">Turning point for Victims of DV & SV on Facebook</a>
-                        </li>
-                        <li class="twitter">
-                            <a href="#" target="_blank" class="twitter icon">twitter.com/user/45o3055/</a>
-                        </li>
-                    </ul>
-                    <button class="cta">Jobs &amp; More</button>
-                </main>
-            </article>
+            {{> provider}}
         </main>
     </section>
 </template>
@@ -74,25 +47,37 @@
 
 
 <!--Legacy Meteor Data for Provider Data-->
-<template name="legacyProvider">
+<template name="provider">
     <article class="locationDetails details">
         <!--{{> provider}}-->
         {{#with currentProvider}}
-            <h2>{{name}}</h2>
-            <p class="county-served">Counties Served: {{providerCounties}}</p>
-            <div class="left">
+            <header>
+                <h2>{{name}}</h2>
+                <p class="county-served">Counties Served: {{providerCounties}}</p>
+            </header>
+            <main>
                 <address>{{address}}</address>
-                <p class="phone">Phone: <b>{{phone}}</b></p>
-                <p class="phone crisis">Crisis: <b>{{crisis}}</b></p>
-            </div>
-            <div class="right">
-                <a href="mailto:{{email}}" class="email icon">{{email}}</a>
-                <a href="{{website}}" target="_blank" class="website icon">{{website}}</a>
-                <a href="{{facebook}}" target="_blank" class="facebook icon">
-                    {{name}} on Facebook</a>
-                <a href="#" target="_blank" class="twitter icon">twitter.com/user/</a>
-            </div>
-            <button class="cta button-aqua">Jobs &amp; More</button>
+                <ul class="phones">
+                    <li><strong>Phone:</strong> {{phone}}</li>
+                    <li class="crisis"><strong>Crisis:</strong> {{crisis}}</li>
+                </ul>
+                <ul class="outreach">
+                    {{#if email}}
+                        <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
+                    {{/if}}
+                    {{#if website}}
+                        <li class="website"><a href="{{website}}" target="_blank">{{website}}</a></li>
+                    {{/if}}
+                    {{#if facebook}}
+                        <li class="facebook"><a href="{{facebook}}" target="_blank">
+                            {{name}} on Facebook</a></li>
+                    {{/if}}
+                    {{#if twitter}}
+                        <li class="twitter"><a href="#" target="_blank">{{twitter}}</a></li>
+                    {{/if}}
+                </ul>
+                <button class="cta button-aqua">Jobs &amp; More</button>
+            </main>
         {{/with}}
     </article>
 </template>

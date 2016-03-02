@@ -21,7 +21,9 @@ Template.providers.helpers({
         // provider.counties is an array, so we have to flatten them all,
         // then sort them alphabetically, then return distinct ones
         flatten().sort().uniq().value();
-    },
+    }
+});
+Template.provider.helpers({
     // The current provider
     currentProvider: function () {
         return Session.get('currentProvider');
