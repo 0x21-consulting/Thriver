@@ -51,7 +51,7 @@ body{
     position: relative;
     left: 0px;
     z-index: 2;
-    .transition(all,375ms,ease-out,0ms); //Was previously commented out for performance?
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
     //padding-top: 376px;
 }
 .overlay{

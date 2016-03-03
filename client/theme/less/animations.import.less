@@ -32,6 +32,20 @@
     -o-transition:      @transitionProperty @duration @ease @delay;
 }
 
+.transition2 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2) {
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+}
+
+.transition3 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2, @transitionProperty3, @duration3, @ease3, @delay3) {
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+}
+
 .translate(@x, @y){
     -ms-transform: translate(@x,@y); /* IE 9 */
     -webkit-transform: translate(@x,@y); /* Safari */
@@ -195,3 +209,14 @@
   -ms-transition: none !important; 
   transition: none !important; 
 } 
+
+
+
+//Animation Variables
+//Canvas relationships, sidebars, main canvas
+@canvasDuration: 500ms;
+@canvasEase : cubic-bezier(0.465, 0.183, 0.153, 0.946);
+@canvasDelay : 0ms;
+
+
+

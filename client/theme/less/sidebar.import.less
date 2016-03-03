@@ -4,8 +4,13 @@
     height: 100vh;
     background-color:mix(@gray, @navy, 55%);
     top: 36px;
+    .shadow(7px,2px,15px,-5px,0.2);
+    &.sidebarsRight{
+        .shadow(-7px,2px,15px,-5px,0.2);
+    }
     z-index: 11;
-    .transition(all,375ms,ease-out,0ms);
+    will-change: transform, width;
+    .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay,width,@canvasDuration, @canvasEase, @canvasDelay);
     .scroller{
         text-align: center;
         height: ~'calc(100vh - 24px)';
@@ -15,7 +20,10 @@
         opacity: 0;
         text-align: center;
         top: 0px;
-        .transition(all,375ms,ease-out,0ms);
+        //max-width: 100%;
+        will-change: transform, opacity;
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 0ms);
+
     }
     h2{
         border-color: mix(@gray, @navy, 45%);
@@ -182,7 +190,7 @@
         z-index: 20;
         pointer-events: none;
         //display: none;
-        .transition(all,375ms,ease-out,0ms);
+        //.transition(all,375ms,ease-out,0ms);
         .scroller > div > h2, .scroller > h2 {
             background: @aqua;
             margin-left: -20px;
@@ -198,7 +206,7 @@
                 font-weight: 700;
                 letter-spacing: 1px;
                 text-indent: 20px;
-                .transition(all,100ms,ease,0ms);
+                //.transition(all,100ms,ease,0ms);
                 max-width: 999px;
                 border: none;
                 padding: 0px;
@@ -222,7 +230,7 @@
             .closeTab{
                 display: none;
             }
-            .transition(all,375ms,ease-out,0ms);
+            //.transition(all,375ms,ease-out,0ms);
             background-color: #566a75;
             width: 100% !important; //override desktop
             transform: translateX(0%) !important; //Override desktop
@@ -281,7 +289,7 @@
             background-color:mix(@gray, @navy, 55%);
             left: -30px;
             .translate(120%,0px);
-            .transition(all, 375ms, ease-out, 0ms) !important;
+            //.transition(all, 375ms, ease-out, 0ms) !important;
             .scroller{
                 width: 116%;
                 margin-left: -8%;

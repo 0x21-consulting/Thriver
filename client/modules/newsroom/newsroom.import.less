@@ -6,7 +6,7 @@ section.news {
     @media @1024{
         width: 700px;
     }
-    .transition(all,400ms,ease-out,0ms);
+    //.transition(all,400ms,ease-out,0ms);
     h2{
         margin: 0 auto;
         //margin-bottom: 30px;
@@ -19,7 +19,7 @@ section.news {
         margin-top: 21px;
         padding: 0px;
         font-size: 14px;
-        .transition(opacity,200ms,ease,0ms);
+        //.transition(opacity,200ms,ease,0ms);
         &:hover{
             opacity: 1;
         }
@@ -98,7 +98,7 @@ section.news {
             letter-spacing: 2px;
             font-size: 12px;
             line-height: 12px;
-            .transition(all,200ms,ease,0ms);
+            //.transition(all,200ms,ease,0ms);
             &:first-child{
                 background-color: #5e727d;
             }
@@ -178,7 +178,7 @@ section.news {
                 width: 100%;
                 overflow-y: auto;
                 height: ~'calc(100vh - 24px)';
-                .transition(all,400ms,ease-out,0ms);
+                //.transition(all,400ms,ease-out,0ms);
                 .translateX(-100%);
             }
             &.active{
@@ -187,7 +187,7 @@ section.news {
                 }
             }
             //.animateDisplayNewsTabs;
-            .transition(all,400ms,ease-out,0ms);
+            //.transition(all,400ms,ease-out,0ms);
             ul{
                 li{
                     background-color: @darkBlue;
@@ -202,7 +202,7 @@ section.news {
                             color: @white !important;
                         }
                     }
-                    .transition(all,400ms,ease-out,0ms);
+                    //.transition(all,400ms,ease-out,0ms);
                     &:nth-child(even){
                         background-color: @lightBlue;
                         &:active{
@@ -228,7 +228,7 @@ section.news {
                     }
                     &.menuTitle{
                         background-color:mix(@gray, @navy, 55%);
-                        .transition(all,100ms,ease,0ms);
+                       //.transition(all,100ms,ease,0ms);
                         cursor: pointer;
                         &:active{
                             background-color: mix(@gray, @navy, 50%);
@@ -240,12 +240,12 @@ section.news {
                             text-transform: uppercase;
                             color: @white;
                             font-weight: 800;
-                            .transition(all,250ms,ease-in,0ms);
+                            //.transition(all,250ms,ease-in,0ms);
                             &:before{
                                 font-size: 12px;
                                 position: relative;
                                 top: -1px;
-                                .transition(all,250ms,ease-out,0ms);
+                                //.transition(all,250ms,ease-out,0ms);
                                 .fa;
                                 content: "\f0d9";
                                 margin-right: 4px;
@@ -339,7 +339,7 @@ section.news{
                 text-transform: none;
                 &:active{
                     background-color: darken(@lightBlue, 5%);
-                    .transition(all,100ms,ease,0ms);
+                    //.transition(all,100ms,ease,0ms);
                     font-size: 98%;
                     color: @white;
                 }

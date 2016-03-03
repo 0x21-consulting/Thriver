@@ -69,7 +69,7 @@ Template.donate.events         (closure);
 Template.utility.onRendered(function () {
     //Should be attributed to correct alert (Figured alerts would be managed via a meteor variable)
     $('li.getHelp').click(function(){
-        alert('Scroll to Providers. Note error onClick as there are no "active" li or sidebars.');
+        location.href='/#service-providers';
         $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
