@@ -82,6 +82,29 @@
     }
 }
 
+.utilityNotificationBorder(@x){
+    button{
+        .unreadNotifications{
+            border-color: @x;
+        }
+        &:hover{
+            .unreadNotifications{
+                border-color: darken(@x, 5%);
+            }
+        }
+        &:active{
+            .unreadNotifications{
+                border-color: darken(@x, 10%);
+            }
+        }
+        &:focus{
+            .unreadNotifications{
+                border-color: @x;
+            }
+        }
+    }  
+}
+
 //Special Condition for utility text links
 .utilityColorButton(@x){
     button{

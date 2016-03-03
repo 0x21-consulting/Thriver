@@ -22,17 +22,21 @@ nav.utility{
             }
             span.unreadNotifications {
                 position: absolute;
+                display: block;
                 margin-left: 2px;
-                width: 16px;
-                height: 16px;
-                color: @navySat;
+                width: 12px;
+                font-size: 14px;
+                height: 12px;
+                color: @yellow;
+                border: 2px solid darken(@teal, 2.5%);
                 text-align: center;
                 border-radius: 50%;
-                line-height: 17px;
+                line-height: 12px;
                 top: 2px;
-                right: 6px;
+                right: 5px;
                 font-size: 100%;
                 pointer-events: none;
+                letter-spacing: 8px;
                 .transition(opacity,200ms,ease-out,0ms);
             }
         }
@@ -62,6 +66,7 @@ nav.utility{
         }
         &.notifications{
             .utilityBackgroundColorButton(darken(@teal, 2.5%));
+            .utilityNotificationBorder(darken(@teal, 2.5%));
             button{
                 padding: 0px 12px;
                 span.up{
@@ -71,6 +76,15 @@ nav.utility{
                 span.close{
                     right:14px;
                 }
+            }
+        }
+        &.accountDetails{
+            .userIcon{
+                font-size: 18px;
+                font-weight: 100;
+                margin-right: 4px;
+                position: relative;
+                top: 1px;
             }
         }
         &.twitter{
