@@ -8,7 +8,7 @@ section.masthead{
     display: table;
     color: @white;
     position: relative;
-    .transition(all,375ms,ease-out,0ms);
+    //.transition(all,375ms,ease-out,0ms);
     z-index: 2;
     opacity: 1;
     min-height: 500px;
@@ -35,7 +35,7 @@ section.masthead{
         bottom: 0px;
         left: 50%;
         margin-left: -25px;
-        .transition(opacity,375ms,ease-out,0ms);
+        //.transition(opacity,375ms,ease-out,0ms);
         opacity: 1;
         .translate(0px,0px);
     }
@@ -51,7 +51,7 @@ section.masthead{
             display: block;
             padding-bottom: 30px;
         }
-        &:after, &:before{
+        &:after{
             content: '';
             width: 100%;
             z-index: -1;
@@ -67,13 +67,6 @@ section.masthead{
             @media @mobile{
                 opacity: 0.75 !important; //override hover attribution
             }
-        }
-        &:before{
-            z-index: 4;
-            opacity: 0;
-            .transition(opacity,375ms,ease-out,0ms);
-            //.mastheadGradient;
-            display: none;
         }
         h1{
             position: relative;
@@ -290,10 +283,11 @@ section.masthead{
 
 //masthead opacity controls
 section.masthead{
-    opacity: 0.9;
+    opacity: 1;
 }
 
-header.mainHeader:hover + header + .canvasCenter section.masthead, section.masthead:hover{
+//header.mainHeader:hover + header + .canvasCenter section.masthead, section.masthead:hover{
+header.mainHeader + header + .canvasCenter section.masthead, section.masthead{
     opacity: 1;
     div:after{
         opacity: 0.75;
