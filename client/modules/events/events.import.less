@@ -1,12 +1,15 @@
 section.events{
-    padding: 40px 220px 80px 220px;
+    //padding: 40px 220px 80px 220px; this one works for 1920
+    padding: 40px 40px 80px 40px;
+    background-color: @gray;
     summary::-webkit-details-marker {
         display: none;
     }
     .eventsObject{
-        .shadow(0px,1px,23px,-10px,0.3);
+        //.shadow(0px,1px,23px,-10px,0.3);
         background-color: @gray;
-        padding: 60px;
+        //padding: 60px; this works for 1920
+        //padding: 20px;
         position: relative;
     }
     .sidebarEvents, p.illustrationDate {
@@ -21,6 +24,7 @@ section.events{
 
     .sidebarEvents{
         width: 300px;
+        padding: 40px;
         //margin-left: 10%;
         //width: 40%;
         vertical-align: top;
@@ -311,12 +315,14 @@ section.events{
         clear: left;
     }
     .calendar{
-        padding-top: 40px; 
+        //padding-top: 40px; 
         width: 17em;
-        margin-left: 2.7em;
+        //margin-left: 2.7em;
+        margin-bottom: 40px;
         span{
             float: left; 
-            width: 2.25em; 
+            //width: 2.25em; 
+            width: 2.42em;
             padding: 0; 
             text-align: center;
             color: #fff;
