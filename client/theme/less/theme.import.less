@@ -139,14 +139,14 @@ button{
 
 //Make first section under masthead animate into place
 .masterContainer > section:nth-child(2){
-    //.transition(all, 375ms, ease-out,0ms);
-    //opacity: 0;
-    //.translate(0px,-30px);
+    will-change:opacity,transition;
+    .transition2(transform,250ms,@canvasEase, 100ms, opacity,250ms,@canvasEase, 100ms);
+    opacity: 0;
+    .translate(0px,-35px);
 }
 .fixedHeader{
     .masterContainer > section:nth-child(2){
-        //opacity: 1;
-        //.transition(all, 375ms, ease-out,100ms);
-        //.translate(0px,0px);
+        opacity: 1;
+        .translate(0px,0px);
     }
 }
