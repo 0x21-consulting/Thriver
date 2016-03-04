@@ -1,8 +1,8 @@
 section.masthead{
     overflow: hidden;
-    height: ~'calc(100vh - 278px)';
-    padding-top: 177px;
-    .translate(0px, 102px);
+    height: ~'calc(100vh - 279px)';
+    padding-top: 279px;
+    //.translate(0px, 102px);
     width: 100%;
     background-color: @gray;
     display: table;
@@ -55,11 +55,11 @@ section.masthead{
             content: '';
             width: 100%;
             z-index: -1;
-            height: ~'calc(100vh - 278px)';
+            height: ~'calc(100vh - 279px)';
             background-color: #062131;
             opacity: 0.7;
             top: 0px;
-            padding-top: 177px;
+            padding-top: 279px;
             left: 0px;
             position: absolute;
             pointer-events: none;
@@ -269,10 +269,10 @@ section.masthead{
 
 .fixedHeader{
     section.masthead{
-        .translate(0px, 0px);
+        //.translate(0px, 0px);
         &:after{
-            opacity: 0;
-            .translate(0px,-20px);
+            //opacity: 0;
+            //.translate(0px,-20px);
         }
         div:before{
             //opacity: 1;

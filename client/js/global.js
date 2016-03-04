@@ -61,10 +61,14 @@ Template.body.onRendered(function () {
         
         // Set a timeout to add the class after one tenth of a second
         timeout = setTimeout(function () {
-            if (window.scrollY > 0 && $(window).width() > 768){
+            if (window.scrollY > 0 && $(window).width() > 767){
+                document.body.classList.remove('fixedHeaderReturn');
                 document.body.classList.add('fixedHeader');
             } else {
-                document.body.classList.remove('fixedHeader');  
+                if (document.body.classList.contains('fixedHeader')){
+                    document.body.classList.remove('fixedHeader');
+                    document.body.classList.add('fixedHeaderReturn');
+                } 
             }
         }, 1);
     },false);
