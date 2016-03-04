@@ -205,7 +205,7 @@ Template.work.onRendered(function () {
     // Handle adding and removing the Body 'workActive' class
     $('.workNav > ul > li > a:not(.backToIndexWorkA), .workNav > ul > li > .icon, .workNav ul > li > ul > li > a').click(function () {
         event.preventDefault();
-        $("body").addClass("workFadeOut").delay(600).queue(function(){
+        $("body").addClass("workFadeOut").delay(250).queue(function(){
             $(this).removeClass("workFadeOut").dequeue();
             $(this).addClass("workActive").dequeue();
         });
