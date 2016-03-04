@@ -1,6 +1,28 @@
 section.outreach{
     background-color: @navy;
+    background: url('/lib/img/mastheadImpact.jpg') no-repeat center;
+    background-size: cover;
     padding-bottom: 80px;
+    position: relative;
+    > main, > div{
+        position: relative;
+        z-index: 2;
+    }
+    &:after{
+        content: '';
+        width: 100%;
+        z-index: 1;
+        height: 100%;
+        background-color: #062131;
+        opacity: 0.85;
+        top: 0px;
+        left: 0px;
+        position: absolute;
+        pointer-events: none;
+        @media @mobile{
+            opacity: 0.75 !important; //override hover attribution
+        }
+    }
     @media @mobile{
         padding-bottom: 0px;
     }
