@@ -12,17 +12,9 @@
     {{> headerMobile}}
     <div class="canvasCenter">
         <div class="masterContainer">
-            <!--{{> masthead}}
-            {{> work}}
-            {{> eventsNew}}
-            {{> who}}
-            {{> outreach}}
-            {{> providers}}
-            {{> contact}}-->
             {{#each sections}}
                 {{> Template.dynamic template=template}}
             {{/each}}
-            {{> eventsNew}}
         </div>
     </div>
     <aside class="sidebar sidebarsLeft">
@@ -33,8 +25,6 @@
         {{> news}}
         {{> donate}}
     </aside>
-    {{> alert}} <!--For FED Purposes-->
-    <!-- Admin controls -->
     {{#if isAdmin}}
         {{> admin}}
     {{/if}}

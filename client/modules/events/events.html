@@ -1,5 +1,8 @@
-<template name="eventsNew">
+<template name="events">
     <section class="events mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
         <div class="containerSmall">
             <header>
                 <h1>Events</h1>
@@ -43,10 +46,6 @@
             </div>
         </div>
     </section>
-</template>
-
-<template name="events">
-    <!--Just exists as an initializer and should house 'eventsNew' once complete-->
 </template>
 
 <template name="eventsRegisteredNew">
