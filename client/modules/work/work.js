@@ -203,9 +203,13 @@ Template.workNav.events({
 // Eoghan's stuff
 Template.work.onRendered(function () {
     // Handle adding and removing the Body 'workActive' class
-    $('.workNav > ul > li > a, .workNav > ul > li > .icon, .workNav ul > li > ul > li > a').click(function () {
+    $('.workNav > ul > li > a:not(.backToIndexWorkA), .workNav > ul > li > .icon, .workNav ul > li > ul > li > a').click(function () {
         event.preventDefault();
-        $('body').addClass('workActive');
+        $("body").addClass("workFadeOut").delay(600).queue(function(){
+            $(this).removeClass("workFadeOut").dequeue();
+            $(this).addClass("workActive").dequeue();
+        });
+        $('body').addClass('workFadeOut');
     });
 
     $('.workNav li.backToIndexWork a').click(function(){

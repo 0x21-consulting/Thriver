@@ -1,7 +1,7 @@
 section.work{
     background-color: #fafafa;
     width: 100%;
-    overflow-x: hidden;
+    //overflow-x: hidden;
     padding-bottom: 65px;
     > main{
         //.transition(all, 500ms, ease-out, 0ms);
@@ -29,7 +29,8 @@ section.work{
     }
     .workContent{
         //display: none;
-        position: relative;
+        position: absolute; //forFadeOutAnimation
+        display: none;
         .shadow(-9px,1px,7px,-6px,0.0);
         //.transition(all, 500ms, ease-out, 0ms);
         
@@ -291,6 +292,41 @@ section.work{
     }
 }
 
+.icon{
+     //transform-origin: 20% 40%;
+ }
+
+//Fade Out Work
+body.workFadeOut{
+    section.work .workNav > ul > li{
+        opacity: 0;
+        will-change:opacity;
+        .transition2(opacity,250ms,ease-out,0ms, transform, 250ms,ease-out,150ms);
+        transform-origin:50% 25%;
+        &.active{
+            opacity: 1;
+            .scale(3,3);
+            .icon{
+                will-change:background-color;
+                .transition2(background-color,100ms,ease-out,0ms, opacity,100ms,ease-out,150ms);
+                background-color: @teal;
+                //.translate(-500px,0px);
+                opacity: 0;
+            }
+            > ul{
+                opacity: 0;
+                will-change:opacity;
+                .transition(opacity,150ms,ease-out,0ms);
+            }
+            a.toggle{
+                opacity: 0;
+                will-change:opacity;
+                .transition(opacity,150ms,ease-out,0ms);
+            }
+        }
+    }
+}
+
 
 
 //Active Work Object
@@ -376,7 +412,7 @@ body.workActive{
                     }
                     > ul{
                         max-height: 0px;
-                        overflow: hidden;
+                        //overflow: hidden;
                         background-color: darken(@navy, 3%);
                         //.transition(all,400ms,ease-in,0ms);
                         padding: 0px;
@@ -437,6 +473,7 @@ body.workActive{
         }
         .workContent{
             .shadow(-9px,1px,7px,-6px,0.0);
+            position: relative;
         }
         .workContent, li.backToIndexWork{
             display: block;
@@ -458,7 +495,7 @@ body.workActive{
 //Animations and Transitions
 body section.work{
     > main{
-        overflow: hidden;
+        //overflow: hidden;
         max-width: 900px;
     }
 }
@@ -469,7 +506,7 @@ body.workActive section.work{
         ul, li, a, .icon{
             //animation: workcontent 700ms 0ms 1 ease-out alternate;
         }
-        //animation: worknav 400ms 0ms 1 ease-out alternate;
+        animation: worknav 400ms 0ms 1 ease-out alternate;
         .translate(0px,0px);
         //display: none;
         > ul{
@@ -484,9 +521,9 @@ body.workActive section.work{
         max-width: 1200px;
         //animation: workmain 400ms 0ms 1 ease-out alternate;
         .workContent{
-            //animation: workcontent 400ms 0ms 1 ease-out alternate;
+            animation: workcontent 400ms 0ms 1 ease-out alternate;
             .workTertiary{
-                //animation: worktertiary 700ms 0ms 1 ease-out alternate;
+                animation: worktertiary 700ms 0ms 1 ease-out alternate;
             }
         }
     }

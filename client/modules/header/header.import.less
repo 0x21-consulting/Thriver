@@ -50,7 +50,7 @@ header.mainHeader{
                     //.transition(all, 400ms, linear, 0ms);
                     //will-change: margin, padding, font-size, color;
                     display: block;
-                    .transition(font,375ms,ease,0ms);
+                    .transition(all,375ms,ease,0ms);
                     will-change:font;
                     font-size: 18px;
                     letter-spacing: 2px;
@@ -73,10 +73,10 @@ header.mainHeader{
                         background: darken(@gray, 5%);
                         content: '';
                         opacity: 0;
-                        //possible problems
-                        //-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-                        //-moz-transition: opacity 0.3s, -moz-transform 0.3s;
-                        //transition: opacity 0.3s, transform 0.3s;
+                        possible problems
+                        -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                        -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+                        transition: opacity 0.3s, transform 0.3s;
                         -webkit-transform: translateY(10px);
                         -moz-transform: translateY(10px);
                         transform: translateY(10px);
