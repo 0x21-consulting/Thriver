@@ -1,14 +1,15 @@
 section.masthead{
     overflow: hidden;
-    height: ~'calc(100vh - 279px)';
-    padding-top: 279px;
-    //.translate(0px, 102px);
+    height: ~'calc(100vh - 270px)';
+    padding-top: 199px;
+    .translate(0px, 71px);
     width: 100%;
     background-color: @gray;
     display: table;
     color: @white;
     position: relative;
-    //.transition(all,375ms,ease-out,0ms);
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
     z-index: 2;
     opacity: 1;
     min-height: 500px;
@@ -55,11 +56,11 @@ section.masthead{
             content: '';
             width: 100%;
             z-index: -1;
-            height: ~'calc(100vh - 279px)';
+            height: ~'calc(100vh - 270px)';
             background-color: #062131;
             opacity: 0.7;
             top: 0px;
-            padding-top: 279px;
+            padding-top: 199px;
             left: 0px;
             position: absolute;
             pointer-events: none;
@@ -267,12 +268,19 @@ section.masthead{
     }
 }
 
+section.masthead:after{
+    will-change:transform,opacity;
+    .transition2(transform,250ms,@canvasEase, 0ms, opacity,250ms,@canvasEase, 0ms);
+    opacity: 1;
+    .translate(0px, 0px);
+}
+
 .fixedHeader{
     section.masthead{
-        //.translate(0px, 0px);
+        .translate(0px, 0px);
         &:after{
-            //opacity: 0;
-            //.translate(0px,-20px);
+            opacity: 0;
+            .translate(0px,-20px);
         }
         div:before{
             //opacity: 1;
