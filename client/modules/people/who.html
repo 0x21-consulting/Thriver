@@ -31,32 +31,17 @@
             <section class="staff pGrid">
                 <h2>Staff</h2>
                 <ul class="clearfix">
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
-                    {{> personStaff}}
+                    {{#each staff}}
+                        {{> personStaff}}
+                    {{/each}}
                 </ul>
             </section>
             <section class="board pGrid">
                 <h2>Board of Directors</h2>
                 <ul class="clearfix">
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
-                    {{> personBoard}}
+                    {{#each board}}
+                        {{> personBoard}}
+                    {{/each}}
                 </ul>
             </section>
         </main>
@@ -82,11 +67,15 @@
 <!--Profile Figure Template-->
 <template name="personStaff">
     <li>
-        <img src="/lib/img/avatar.png" alt="{{name}}" />
+        {{#if picture}}
+            <img src="{{picture}}" alt="{{name}}" />
+        {{else}}
+            <img src="{{avatar.avatar}}" alt="{{name}}" />
+        {{/if}}
         <div class="details">
-            <h4>Leo Decap</h4>
-            <h5>Award Winner</h5>
-            <a href="mailto:leo@gmail.com">leo@gmail.com</a>
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
         </div>
     </li>
 </template>
@@ -95,9 +84,9 @@
 <template name="personBoard">
     <li>
         <div class="details">
-            <h4>Leo Decap</h4>
-            <h5>Award Winner</h5>
-            <a href="mailto:leo@gmail.com">leo@gmail.com</a>
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
         </div>
     </li>
 </template>
