@@ -81,6 +81,11 @@ Template.body.onRendered(function () {
 
 });
 
+/**
+ * Smooth scroll to a linked section
+ * @method
+ *   @param {Event} event - Event triggered by <a> element click
+ */
 var smoothScroll = function (event) {
     if (!event || !event.currentTarget || !event.currentTarget.hash)
         return;

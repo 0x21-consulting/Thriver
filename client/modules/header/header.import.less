@@ -73,7 +73,7 @@ header.mainHeader{
                         background: darken(@gray, 5%);
                         content: '';
                         opacity: 0;
-                        possible problems
+                        // possible problems
                         -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
                         -moz-transition: opacity 0.3s, -moz-transform 0.3s;
                         transition: opacity 0.3s, transform 0.3s;
@@ -81,7 +81,7 @@ header.mainHeader{
                         -moz-transform: translateY(10px);
                         transform: translateY(10px);
                     }
-                    &:hover{
+                    &:hover {
                         &:after {
                             opacity: 1;
                             -webkit-transform: translateY(0px);
@@ -89,7 +89,7 @@ header.mainHeader{
                             transform: translateY(0px);
                         }
                     }
-                    &:focus{
+                    &:focus {
                         &:after{
                             opacity: 0;
                             background-color: @teal;
@@ -175,7 +175,7 @@ header.mainHeader{
                 &:after{
                     display: none;
                 }
-                &:hover{
+                &:hover, &.active {
                     border-color: transparent;
                     color: darken(@teal, 2.5%);
                 }

@@ -40,7 +40,7 @@ Template.body.onRendered(function () {
             var coordinates = [],
                 elements = document.querySelectorAll(
                     'div.masterContainer > section.mainSection'),
-                i, j;
+                i, j, k, l, links = document.querySelectorAll('nav.mainNav a'), link;
             
             // For masthead and everything before first main section
             coordinates.push({ id: '', y: 0 });
@@ -59,11 +59,23 @@ Template.body.onRendered(function () {
                     if (window.scrollY > coordinates[i].y - 100)
                         if (window.scrollY > coordinates[i + 1].y - 100)
                             continue;
-                            
+                
+                // Update URL/location bar
                 window.history.replaceState({}, undefined, '#' + coordinates[i].id);
+                
+                // Remove active class from all main nav items
+                for (k = 0, l = links.length; k < l; ++k)
+                    links[k].classList.remove('active');
+                
+                // Add active class to associated menu item
+                link = document.querySelector('nav.mainNav a[href="#' + 
+                    coordinates[i].id + '"]');
+                if (link instanceof Element)
+                    link.classList.add('active');
+                
                 break;
             }
-        }, 500);
+        }, 100);
     });
     
     // Wait a couple seconds for the page to render before navigating to the proper link
