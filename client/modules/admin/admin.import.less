@@ -78,15 +78,31 @@ section.placeholder {
     color: #fff;
 }
 
+// Add action alert
+aside.adminAside {
+    position: fixed;
+    z-index: 3;
+    top: 50%; left: 45%;
+    transform: translateY(-50%); // perfect vertical centering
+    
+    background: #fff;
+    box-shadow: 0 0 30px -2px;
+    border-radius: 8px;
+    padding: 20px;
+    
+    label, textarea, input { display: block; }
+    textarea { height: 100px; }
+}
+
 // For drag and drop to work without any existing sections,
 // <main> needs to have some rendered size
-main { min-height: 100px; }
+//main { min-height: 100px; }
 // Same goes for any section's tabs
-menu.tabs { min-height: 50px; }
+//menu.tabs { min-height: 50px; }
 
 // To ensure proper placement of admin controls (which are positioned
 // absolutely) we need to relatively position all main sections
-main.content-wrapper > section { position: relative; }
+//main.content-wrapper > section { position: relative; }
 
 // For editing content in work section
-section textarea { width: 100%; height: 500px; }
+//section textarea { width: 100%; height: 500px; }

@@ -1,3 +1,21 @@
+// Global on purpose
+lastLogin = new ReactiveVar(new Date());
+
+/**
+ * Determine last login and set to Reactive var
+ * @method
+ */
+var getLastLogin = function () {
+    Meteor.call('lastLogin', function (error, result) {
+        // Update reactive var
+        lastLogin.set(result);
+    });
+};
+
+// Bind to login and on load
+Template.body.onCreated(getLastLogin);
+Accounts.onLogin       (getLastLogin);
+
 function removeActiveClass(){
     $('.accountDetailsContent > li').removeClass('active');
 }

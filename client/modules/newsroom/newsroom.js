@@ -1,5 +1,5 @@
 // Newsroom sections
-var Newsroom = new Mongo.Collection('newsroom'),
+Newsroom = new Mongo.Collection('newsroom'),
 
 // How many list items to load
 quantity = new ReactiveVar(5),

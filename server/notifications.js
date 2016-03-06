@@ -5,7 +5,8 @@ var notifications = new Mongo.Collection('notifications');
 //   _id         {string}      auto_incr
 //   template    {string}
 //   text        {string}
-//   userId      {string}
+//   href        {string}
+//   datetime    {Date}
 
 // @values template
 //   templateGeneric        generic
@@ -27,26 +28,27 @@ Meteor.methods({
     /** 
      * Add a notification for a given user
      * @method
-     *   @param {string} userId   - the ID of the user to whom to push the notifcation
+     *   @param {string} href     - the link to which the notification should reference
      *   @param {int}    template - the type of notification to display
      *   @param {string} text     - the message to display in the notification
      */
-    addNotification: function (userId, template, text) {
+    addNotification: function (href, template, text) {
         // Check Authorization
         // (user must be logged in)
         if (!Meteor.userId())
             throw new Meteor.Error('not-authorized');
             
         // Mutual Suspicion
-        userId    = '' + userId;
+        href      = '' + href;
         template  = '' + template;
         text      = '' + text;
         
         // Add notification
         notifications.insert({
-            userId  : userId,
             template: template,
-            text    : text
+            text    : text,
+            href    : href,
+            datetime: new Date()
         });
     }
 });

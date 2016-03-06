@@ -1,5 +1,5 @@
 // Newsroom sections
-var Newsroom = new Mongo.Collection('newsroom');
+Newsroom = new Mongo.Collection('newsroom');
 
 // Structure
 //   _id           {string}   auto_incr
