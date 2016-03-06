@@ -12,6 +12,7 @@
                 <li>Press Releases</li>
                 <li>Action Alerts</li>
                 <li>Newsletters</li>
+                <li>Annual Reports</li>
                 <li>Press/Media Kits</li>
                 <!--Mobile Button-->
                 <li class="dtHide subscriptionsMob">
@@ -32,6 +33,7 @@
                 {{> pressReleases }}
                 {{> actionAlerts }}
                 {{> newsletters }}
+                {{> annualReports}}
                 {{> mediaKits }}
             </ul>
             <button type="button" class="closeTab">Close Tab</button>
@@ -104,6 +106,22 @@
         </ul>
     </li>
 </template>
+
+
+<template name="annualReports">
+    <li>
+        <ul class="newsItems inTheNews">
+            {{>backToNewsMobile}}
+            <li class="mainTitle dtHide"><h2>Annual Reports</h2></li>
+            {{>annualReportSingle}}
+            {{>annualReportSingle}}
+            {{>annualReportSingle}}
+            {{>annualReportSingle}}
+            {{>annualReportSingle}}
+        </ul>
+    </li>
+</template>
+
 <template name="mediaKits">
     <li>
         <ul class="newsItems">
@@ -139,7 +157,7 @@
 <template name="newsItem4">
     <li class="pressMediaItem">
         <a href="#">
-            <span class="fa icon">&#xf030;</span>
+            <span class="fa icon">&#xf0a1;</span>
             <span class="dateMeta">January 15, 2015</span>
             <h3>Press Kit (2015) (PDF)</h3>
         </a>
@@ -149,10 +167,19 @@
 <template name="newsItem5">
     <li class="pressMediaItem">
         <a href="#">
-            <span class="fa icon">&#xf1fe;</span>
+            <span class="fa icon">&#xf030;</span>
             <span class="dateMeta">February 12, 2015</span>
             <h3>Media Kit (2015) (PDF)</h3>
         </a>
     </li>
 </template>
 
+<template name="annualReportSingle">
+    <li class="pressMediaItem">
+        <a href="#">
+            <span class="fa icon">&#xf1fe;</span>
+            <span class="dateMeta">January 15, 2015</span>
+            <h3>Annual Report (2015) (PDF)</h3>
+        </a>
+    </li>
+</template>
