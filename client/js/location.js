@@ -3,8 +3,8 @@
 // additional URI parameters to the appropraitely registered function.
 
 Template.body.onRendered(function () {
-    // The current URI
-    var uri = document.location.hash,
+    // The current URI hash
+    var hash = document.location.hash, a,
     
     // TODO: Make this registry dynamic when NoSLB is reorganized to be modular
     registry = {},
@@ -39,9 +39,13 @@ Template.body.onRendered(function () {
             // grow or shrink in size, of which the Work section is particularly guilty
             var coordinates = [],
                 elements = document.querySelectorAll(
-                    'main.contentWrapper > section[id]'),
+                    'div.masterContainer > section.mainSection'),
                 i, j;
             
+            // For masthead and everything before first main section
+            coordinates.push({ id: '', y: 0 });
+            
+            // For each main section, get its Y coordinate
             for (i = 0, j = elements.length; i < j; ++i)
                 coordinates.push({
                     id : elements[i].id,
@@ -61,4 +65,24 @@ Template.body.onRendered(function () {
             }
         }, 500);
     });
+    
+    // Wait a couple seconds for the page to render before navigating to the proper link
+    setTimeout(function () {
+        // Check to see if there is a hashed location in the URI bar.  If there is, navigate
+        // to it.  The browser can't do it on its own because the Meteor site is dynamically
+        // generated, so the section with the proper ID doesn't actually exist, yet.
+        if (hash) {
+            // To accomplish this, create a link and click it for the user
+            a = document.createElement('a');
+            a.href = hash;
+            a.classList.add('hide'); // don't show the link
+            document.body.appendChild(a);
+            
+            // Click the link
+            a.click();
+            
+            // Then remove the link
+            a.parentElement.removeChild(a);
+        }
+    }, 3000);
 });

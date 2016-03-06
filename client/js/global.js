@@ -82,14 +82,14 @@ Template.body.onRendered(function () {
 });
 
 var smoothScroll = function (event) {
-    if (!event || !event.target || !event.target.hash)
+    if (!event || !event.currentTarget || !event.currentTarget.hash)
         return;
     
     event.stopPropagation();
     event.preventDefault();
     
     // Get target element (that the anchor links to)
-    var target = $('[id="' + event.target.hash.slice(1) +'"]'),
+    var target = $('[id="' + event.currentTarget.hash.slice(1) +'"]'),
     
     // Where are we presently?
     posY = event.pageY, offset, speed;
@@ -109,7 +109,7 @@ var smoothScroll = function (event) {
 
 // Smooth scrolling
 // We only care about same page links (that start with a hash)
-Template.body.events({ 'mousedown a[href*=#]': smoothScroll });
+Template.body.events({ 'click a[href*=#]': smoothScroll });
 
 
 
