@@ -49,11 +49,21 @@ body{
     &.rightLarge{
         .canvasCenter, .mainNav{
             left: inherit;
-            .translateX(-900px);
+            .translateX(-1100px);
         }
         .sidebarsRight{
-            width: 900px;
+            width: 1100px;
             .translateX(0px);
+        }
+        @media @1250{
+            .canvasCenter, .mainNav{
+                left: inherit;
+                .translateX(-900px);
+            }
+            .sidebarsRight{
+                width: 900px;
+                .translateX(0px);
+            }            
         }
         @media @1024{
             .canvasCenter, .mainNav{
