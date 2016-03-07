@@ -21,3 +21,33 @@ Template.personBoard.helpers({
         return Site.findOne({}, { avatar: 1 });
     }
 });
+
+
+//Can this be merged into a simpler function in coorelation with: account details & newsroom tabs
+Template.who.events({
+    // Switch tabs
+    'click ul.infoTabs > li': function (event) {
+        var index = $(event.target).index() + 1;
+        
+        // Set the active tab
+        $('ul.infoTabs > li').removeClass('active');
+        $(event.target).addClass('active');
+        
+        // Set the active content
+        $('ul.infoTabsContent > li').removeClass('active');
+        $('ul.infoTabsContent > li:nth-child(' + index + ')').addClass('active');
+    },
+    // Switch tabs
+    'click ul.membersTabs > li': function (event) {
+        var index = $(event.target).index() + 1;
+        
+        // Set the active tab
+        $('ul.membersTabs > li').removeClass('active');
+        $(event.target).addClass('active');
+        
+        // Set the active content
+        $('ul.membersTabsContent > li').removeClass('active');
+        $('ul.membersTabsContent > li:nth-child(' + index + ')').addClass('active');
+    },
+
+});

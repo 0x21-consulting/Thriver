@@ -46,6 +46,13 @@
     -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
 }
 
+.transition4 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2, @transitionProperty3, @duration3, @ease3, @delay3, @transitionProperty4, @duration4, @ease4, @delay4) {
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+}
+
 .translate(@x, @y){
     -ms-transform: translate(@x,@y); /* IE 9 */
     -webkit-transform: translate(@x,@y); /* Safari */
