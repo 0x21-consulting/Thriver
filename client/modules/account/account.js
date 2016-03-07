@@ -22,6 +22,47 @@ getOrganization = function () {
         // Update reactive var
         organization.set(result);
     });
+},
+
+/**
+ * Handle ListServ Subscriptions
+ * @method
+ *   @param {string}  url       - The ListServ URL
+ *   @param {string}  email     - The email address to subscribe
+ *   @param {boolean} subscribe - True to subscribe, false to unsubscribe
+ */
+listServSubscribe = function (url, email, subscribe) {
+    // Mutual suspicion
+    url = '' + url;
+    email = '' + email;
+    if (!url || !email) return;
+    
+    // Prepare request
+    var xhr  = new XMLHttpRequest(),
+        form = new FormData();
+    
+    // Form details
+    if (subscribe) {
+        form.append('email', email);
+        form.append('pw', 'password');
+        form.append('pw-conf', 'password');
+    } else {
+        form.append('unsub', 'Unsubscribe');
+        form.append('unsubconfirm', 1);
+    }
+    
+    // This doesn't work anyway until proper XSS channels are in place
+    /*xhr.addEventListener('load', function () {
+        console.log(this);
+    });*/
+    
+    // Use proper subscribe/unsubscribe URL
+    if (subscribe)
+        xhr.open('POST', 'http://lists.wcasa-blog.org/subscribe.cgi/' + url);
+    else
+        xhr.open('POST', 'http://lists.wcasa-blog.org/options.cgi/' + url + '/' + email);
+    
+    xhr.send(form);
 };
 
 // Bind to login and on load
@@ -383,6 +424,46 @@ Template.subscriptions.helpers({
         if (Meteor.user() && Meteor.user().profile)
             return Meteor.user().profile.subscriptions.newsletter;
         return false;
+    },
+    /**
+     * Expert Witness Listserv Subscription
+     */
+    expertWitness: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.expertWitness;
+        return false;
+    },
+    /**
+     * SA Prevention Listserv Subscription
+     */
+    saPrevention: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.saPrevention;
+        return false;
+    },
+    /**
+     * Survivors & Allies Task Force Listserv Subscription
+     */
+    saTaskForce: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.saTaskForce;
+        return false;
+    },
+    /**
+     * Sexual Assault Advocates Listserv Subscription
+     */
+    saAdvocates: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.saAdvocates;
+        return false;
+    },
+    /**
+     * Campus Sexual Assault Listserv Subscription
+     */
+    campusSA: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.campusSA;
+        return false;
     }
 });
 Template.subscriptions.events({
@@ -396,7 +477,7 @@ Template.subscriptions.events({
             return;
         
         // Get checkbox info
-        var checked = event.target.checked, query;
+        var checked = event.target.checked, query, xhr;
         
         switch (event.target.id) {
             case 'pressReleasesToggle':
@@ -405,6 +486,47 @@ Template.subscriptions.events({
                 query = { 'profile.subscriptions.actionAlerts':  checked? true : false }; break;
             case 'newsletterToggle':
                 query = { 'profile.subscriptions.newsletter':    checked? true : false }; break;
+            case 'expertWitnessToggle':
+                query = { 'profile.subscriptions.expertWitness': checked? true : false };
+                
+                // Initial ListServ subscription
+                listServSubscribe('expert-witness-wcasa-blog.org', 
+                    Meteor.user().emails[0].address, checked? true : false);
+                    
+                break;
+            case 'saPreventionToggle':
+                query = { 'profile.subscriptions.saPrevention': checked? true : false };
+                
+                // Initial ListServ subscription
+                listServSubscribe('wi-sa-prevention-wcasa-blog.org', 
+                    Meteor.user().emails[0].address, checked? true : false);
+                    
+                break;
+            case 'saTaskForceToggle':
+                query = { 'profile.subscriptions.saTaskForce': checked? true : false };
+                
+                // Initial ListServ subscription
+                listServSubscribe('wi-satf-wcasa-blog.org', 
+                    Meteor.user().emails[0].address, checked? true : false);
+                    
+                break;
+            case 'saAdvocatesToggle':
+                query = { 'profile.subscriptions.saAdvocates': checked? true : false };
+                
+                // Initial ListServ subscription
+                listServSubscribe('wi-sa-advocates-wcasa-blog.org', 
+                    Meteor.user().emails[0].address, checked? true : false);
+                    
+                break;
+            case 'campusSAToggle':
+                query = { 'profile.subscriptions.campusSA': checked? true : false };
+                
+                // Initial ListServ subscription
+                listServSubscribe('campussa-wcasa-blog.org', 
+                    Meteor.user().emails[0].address, checked? true : false);
+                    
+                break;
+            
         }
         
         // Now make the change
