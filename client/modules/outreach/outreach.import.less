@@ -14,7 +14,7 @@ section.outreach{
         left: 0px;
         opacity: 0;
         will-change:opacity;
-        .transition(opacity,100ms,@canvasEase,300ms);
+        .transition(opacity,500ms,@canvasEase,300ms);
     }
     > main, > div{
         position: relative;
@@ -90,6 +90,11 @@ section.outreach{
         margin: 0 auto;
         background-color: @white;
         margin-top: 20px;
+        .transition2(transform,500ms,@canvasEase,0ms,opacity,400ms,@canvasEase,100ms);
+        opacity: 0;
+        .scale(0.9,0.9);
+        .accelerate;
+        //transform-origin:
         @media @1024{
             margin: 40px 40px 0px 40px;
         }
@@ -124,6 +129,8 @@ section.outreach{
             overflow: auto;
             border-top: 5px solid @teal;
             border-bottom: 5px solid @teal;
+            opacity: 1;
+            .scale(1,1);
             @media @mobile{
                 border-top: none;
                 border-bottom: none;
@@ -134,8 +141,10 @@ section.outreach{
             overflow: hidden;
             max-height: 0px;
             opacity: 0;
-            .translate(0px,0px);
-            .transition2(transform,500ms,ease,0ms,opacity,250ms,ease,0ms);
+            .scale(1,1);
+            .accelerate;
+            transform-origin:50% 0%;
+            .transition3(transform,500ms,ease,0ms,opacity,250ms,ease,0ms,max-height,0ms,@canvasEase,0ms);
             &.active{
                 visibility: visible;
                 max-height: 9999px;
@@ -157,9 +166,12 @@ section.outreach{
                 }
             }
             &.joinTheBoard{
-                padding: 40px;
-                @media @mobile{
-                    padding: 20px;
+                //padding: 40px;
+                .boardContainer{
+                    padding: 40px;
+                    @media @mobile{
+                        padding: 20px;
+                    }
                 }
                 p{
                     color: @black;
@@ -171,14 +183,14 @@ section.outreach{
 
 body.outreachTransition{
     section.outreach:before{
-        .transition(opacity,100ms,@canvasEase,0ms);
+        .transition(opacity,300ms,@canvasEase,0ms);
         opacity: 1;
     }
     .outreachContent{
         > li{
             .transition2(transform,200ms,ease,0ms,opacity,100ms,ease,0ms);
-            .translate(-100%,0px) !important;
-            opacity: 0;
+            .scale(0.95,0.95) !important;
+            opacity: 0 !important;
         }
     }
 }
