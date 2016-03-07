@@ -1,174 +1,223 @@
 section.who{
-    padding-bottom: 80px;
-    .philosophies, .annualReports {
-        background-color: @gray;
-        padding: 40px 80px;
-        @media @1024{
-            margin: 0px 40px 0px 40px;
-        }
-        @media @mobile{
-            padding: 20px;
-            margin: 0px 20px 0px 20px;
-        }
-        max-width: 700px;
-        margin: 0 auto;
-        text-align: center;
-        h2{
-            border-bottom: 2px solid darken(@gray, 5%);
-            color: @teal;
-            font-size: 28px;
-            line-height: 32px;
-            text-align: center;
-            font-weight: 100;
-            padding: 10px;
-
-        }
-    }
-    .philosophies{
-        ul{
-            text-align: left;
-            li{
-                margin: 20px 0px;
-                display: block;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                font-size: 14px;
-                padding-left: 35px;
-                &:before{
-                    content:'';
-                    height: 6px;
-                    width: 6px;
-                    background-color: darken(@teal, 5%);
-                    border:3px solid @teal;
-                    display: block;
-                    margin-top: 6px;
-                    margin-left: -25px;
-                    position: absolute;
-                }
-            }
-        }
-    }
-    .annualReports{
-        ul{
-            margin: 20px 0px 20px 0px;
-            li{
-                width: 47%;
-                float: left;
-                margin: 10px 1.5%;
-                @media @mobile{
-                    width: 100%;
-                    margin: 10px 0px;
-                }
-                a{
-                    color: @white;
-                    background-color: @orange;
-                    display: block;
-                    padding: 20px;
-                    margin: 0 auto;
-                    font-weight: 700;
-                    span{
-                        font-size: 20px;
-                        position: relative;
-                        top: 2px;
-                        font-weight: 100;
-                        margin-left: 5px;
-                    }
-                    &:hover{
-                        background-color: darken(@orange, 5%);
-                    }
-                    &:active{
-                        background-color: darken(@orange, 10%);
-                    }
-                }
-            }
-        }
-    }
-    main.members{
-        padding-bottom: 40px;
-        @media @1024{
-            margin: 0px 40px 0px 40px;
-        }
-        @media @mobile{
-            margin: 0px 20px 0px 20px;
-        }
-    }
-    section.pGrid{
-        max-width: 960px;
-        margin: 0 auto;
-        margin-top: 40px;
-        h2{
-            color: @black;
-            border-bottom: 2px solid @gray;
-            display: block;
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 28px;
-            font-weight: 100;
-        }
-        ul{
+    //Added
+    .infoTabsContainer, .membersTabsContainer{
+        ul.tabsTitle{
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             > li{
-                width: 23%;
+                color: @teal;
+                .scale(0.9,0.9);
+                text-transform: uppercase;
+                transform-origin:50% 100%;
+                .transition2(transform,175ms,@canvasEase,0ms,border-color,375ms,@canvasEase,0ms);
+                background-color: lighten(@gray, 6%);
+                //background-color: lighten(@gray,2.5%);
+                border: 2px solid darken(@gray, 5%);
                 display: inline-block;
-                margin:10px 5% 10px 5%;
-                .flex;
-                float: left;
-                @media @1024{
-                    width: 40%;
+                font-size: 26px;
+                font-weight: 100;
+                padding: 40px;
+                cursor: pointer;
+                position: relative;
+                top: 2px;
+                &:hover{
+                    color: darken(@teal, 5%);
                 }
-                @media @mobile{
-                    width: 100%;
-                    margin: 10px 0px 10px 0px;
+                &:active{
+                    color: darken(@teal, 10%);
                 }
-                img{
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 50%;
+                &.active{
+                    border-color: darken(@gray, 5%);
+                    border-bottom:2px solid lighten(@gray, 6%);
+                    .scale(1,1);
+                    color: darken(@teal, 5%);
                 }
-                .details{
-                    float: left;
-                    margin-left: 20px;
+            }
+        }
+        ul.infoTabsContent, ul.membersTabsContent {
+            padding: 60px 0px 60px 0px;
+            background-color: lighten(@gray, 6%);
+            border-top: 2px solid darken(@gray, 5%);
+            max-width: 1000px;
+            margin: 0 auto;
+            > li{
+                max-height: 0px;
+                overflow: hidden;
+                visibility: hidden;
+                opacity: 0;
+                .scale(0.95,0.95);
+                transform-origin:50% 25%;
+                margin-top: 0px;
+                .transition4(transform,375ms,@canvasEase,0ms,opacity,375ms,@canvasEase,0ms,visibility,0ms,linear,375ms,height,0ms,linear,375ms);
+                &.active{
+                    .transition3(transform,375ms,@canvasEase,0ms,opacity,375ms,@canvasEase,0ms,visibility,0ms,linear,0ms);
+                    max-height: 9999px;
+                    visibility: visible;
+                    opacity: 1;
+                    .scale(1,1);
+                    &.philosophies{
+                        margin-top:-18px;
+                    }
+                }
+                p{
+                    color: @black;
+                }
+            }
+        }
+        ul.membersTabsContent{
+             max-width: 1600px;
+             padding: 60px 50px 60px 50px;
+             //min-height: 470px;
+            > li{
+                max-width: 1500px;
+                margin: 0 auto;
+                &.staff{
                     position: relative;
-                    top: 13px;
-                    h4{
-                        margin: 0px;
-                        color: @blackAlt;
-                        line-height: 24px;
-                        text-transform: none;
+                    left: 50px;
+                    @media @1250{
+                        left: 0px;
                     }
-                    h5{
-                        font-weight: 100;
-                        margin: 0px 0px 5px 0px;
-                        line-height: 12px;
-                        font-size: 14px;
+                }
+                ul{
+                    margin: 0 auto;
+                    text-align: center;
+                    > li{
+                        width: 30%;
+                        display: inline-block;
+                        margin:20px 1.5% 20px 1.5%;
+                        .flex;
+                        float: left;
+                        @media @1250{
+                            width: 40%;
+                        }
+                        @media @mobile{
+                            width: 100%;
+                            margin: 10px 0px 10px 0px;
+                        }
+                        img{
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                        }
+                        .details{
+                            float: left;
+                            text-align: left;
+                            margin-left: 20px;
+                            position: relative;
+                            top: 13px;
+                            h4{
+                                margin: 0px;
+                                color: @blackAlt;
+                                line-height: 24px;
+                                text-transform: none;
+                            }
+                            h5{
+                                font-weight: 100;
+                                margin: 0px 0px 5px 0px;
+                                line-height: 12px;
+                                font-size: 14px;
+                            }
+                            a{
+                                position: relative;
+                                left: 4px;
+                                color: @orange;
+                                font-weight: 700;
+                            }
+                        }
                     }
-                    a{
-                        position: relative;
-                        left: 4px;
-                        color: @orange;
-                        font-weight: 700;
+                }
+            }
+            > li.board{
+                margin-bottom: 40px;
+                max-width: 800px;
+                position: relative;
+                left: 80px;
+                ul{
+                    > li{
+                        //width: 30%;
+                        //margin: 10px 0px 10px 5%;
+                        @media @1250{
+                            left: 0px;
+                        }
+                        @media @mobile{
+                            width: 100%;
+                            margin: 10px 0px 10px 0px;
+                        }
+                        .details{
+                            margin-left: 0px;
+                        }
                     }
                 }
             }
         }
-        &.board{
-            margin-bottom: 40px;
+    }
+    .membersTabsContainer{
+        padding-bottom: 40px;
+        ul.membersTabs{
+            > li{
+                color: @orange;
+                &:hover{
+                    color: darken(@orange, 5%);
+                }
+                &:active{
+                    color: darken(@orange, 10%);
+                }
+                &.active{
+                    color: darken(@orange, 5%);
+                }
+            }
+        }
+    }
+    ul.infoTabsContent{
+        > li.philosophies, > li.mission{
+            max-width: 631px;
+            margin: 0 auto;
+            text-align: center;
+            h2{
+                border-bottom: 2px solid darken(@gray, 5%);
+                color: @teal;
+                font-size: 28px;
+                line-height: 32px;
+                text-align: center;
+                font-weight: 100;
+                padding: 10px;
+            }
+            p{
+                line-height: 26px;
+                margin-bottom: 14px;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 0.35px;
+            }
             ul{
-                > li{
-                    width: 16%;
-                    margin: 10px 0px 10px 8.5%;
-                    @media @1024{
-                        width: 23%;
-                    }
-                    @media @mobile{
-                        width: 100%;
-                        margin: 10px 0px 10px 0px;
-                    }
-                    .details{
-                        margin-left: 0px;
+                text-align: left;
+                li{
+                    margin: 20px 0px;
+                    display: block;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                    font-size: 14px;
+                    padding-left: 35px;
+                    &:before{
+                        content:'';
+                        height: 6px;
+                        width: 6px;
+                        background-color: darken(@teal, 5%);
+                        border:3px solid @teal;
+                        display: block;
+                        margin-top: 6px;
+                        margin-left: -25px;
+                        position: absolute;
                     }
                 }
+            }
+            @media @1024{
+                margin: 0px 40px 0px 40px;
+            }
+            @media @mobile{
+                padding: 20px;
+                margin: 0px 20px 0px 20px;
             }
         }
     }
