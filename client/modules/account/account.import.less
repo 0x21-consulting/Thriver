@@ -158,3 +158,18 @@ section.accountDetails{
         }
     }
 }
+
+// Registration form
+.register {
+    form {
+        text-align: left;
+        // Invalid repeat password
+        .noMatch::after {
+            content: '\f06a';
+            font: 22px fontawesome;
+            position: absolute;
+            top: 37px; right: 10px;
+            color: #c44;
+        }
+    }
+}
