@@ -179,8 +179,16 @@ Template.workContent.helpers({
 
 // Helper for changing tabs
 Template.workNav.events({
-    'click li': changeTabs
+    'click li': changeTabs,
 });
+
+Template.workContent.events({
+    'click footer.truncate button': function (event) {
+        event.preventDefault;
+        document.body.classList.add('workReading');
+    }
+});
+
 
 // From jQuery Providers file
 // TODO: rewrite this
@@ -216,6 +224,7 @@ Template.work.onRendered(function () {
     $('.workNav li.backToIndexWork a').click(function(){
         event.preventDefault();
         $('body').removeClass('workActive');
+        $('body').removeClass('workReading');
         $('body').addClass("workBack").dequeue();
         $("body").addClass("workFadeIn").delay(250).queue(function(){
             $(this).removeClass("workFadeIn").dequeue();
