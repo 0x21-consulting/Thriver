@@ -45,7 +45,14 @@ Accounts.onEmailVerificationLink(function (token, done) {
         }
         
         // Assign organization
-        Meteor.call('assignOrganization', Meteor.userId(), done);
+        Meteor.call('assignOrganization', Meteor.userId(), function () {
+            // Update reactive vars
+            getLastLogin();
+            getOrganization();
+            
+            // Complete
+            done();
+        });
     });
 });
 
@@ -76,6 +83,7 @@ Template.register.events({
         var name     = event.target.name.value,
             email    = event.target.email.value,
             password = event.target.password.value,
+            i, j,
         
         // Handle login errors    
         handleError = function (message) {
@@ -96,8 +104,16 @@ Template.register.events({
             email: email,
             password: password,
             profile: {
+                // Name
                 firstname: name.replace(/^(.+)\s.+/, '$1'),
-                lastname : name.replace(/^.+\s(.+)/, '$1')
+                lastname : name.replace(/^.+\s(.+)/, '$1'),
+                
+                // Email subscriptions by default
+                subscriptions: {
+                    pressReleases: true,
+                    actionAlerts : true,
+                    newsletter   : true
+                }
             }
         },
         /**
@@ -339,6 +355,60 @@ Template.profile.events({
             }});
         }
         
+    }
+});
+
+// Subscriptions tab
+Template.subscriptions.helpers({
+    /**
+     * Email Subscription to Press Releases
+     */
+    pressReleases: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.pressReleases;
+        return false;
+    },
+    /**
+     * Email Subscription to Action Alerts
+     */
+    actionAlerts: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.actionAlerts;
+        return false;
+    },
+    /**
+     * Email Subscription to the Newsletter
+     */
+    newsletter: function () {
+        if (Meteor.user() && Meteor.user().profile)
+            return Meteor.user().profile.subscriptions.newsletter;
+        return false;
+    }
+});
+Template.subscriptions.events({
+    /**
+     * Subscribe to something
+     * @method
+     *   @param {$.Event} event - Checked event
+     */
+    'change #subscriptions input[type="checkbox"]': function (event) {
+        if (! (event instanceof $.Event) )
+            return;
+        
+        // Get checkbox info
+        var checked = event.target.checked, query;
+        
+        switch (event.target.id) {
+            case 'pressReleasesToggle':
+                query = { 'profile.subscriptions.pressReleases': checked? true : false }; break;
+            case 'actionAlertsToggle':
+                query = { 'profile.subscriptions.actionAlerts':  checked? true : false }; break;
+            case 'newsletterToggle':
+                query = { 'profile.subscriptions.newsletter':    checked? true : false }; break;
+        }
+        
+        // Now make the change
+        Meteor.users.update({ _id: Meteor.userId() }, { $set: query });
     }
 });
 
