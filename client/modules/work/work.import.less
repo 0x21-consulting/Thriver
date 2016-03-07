@@ -5,6 +5,7 @@ section.work{
     padding-bottom: 65px;
     > main{
         //.transition(all, 500ms, ease-out, 0ms);
+        .accelerate;
         .flex;
         margin: 0 auto;
         background-color: transparent;
@@ -20,6 +21,7 @@ section.work{
             width: 620px;
             max-height: 588px;
             overflow: hidden;
+            .accelerate;
             &:after{
                 content: '';
                 width: 100%;
@@ -451,6 +453,9 @@ body.workActive{
                         line-height: 20px;
                         height: auto;
                         width: auto;
+                        opacity: 1;
+                        .scale(1,1);
+                        .accelerate;
                         @media @1024{
                             font-size: 16px;
                             line-height: 16px;
