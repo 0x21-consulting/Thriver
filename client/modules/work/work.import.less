@@ -233,6 +233,7 @@ section.work{
                     //.transition(all,175ms,ease-out,0ms);
                     border-radius: 50%;
                     -webkit-border-radius: 50%;
+                    .transition(transform,100ms,@canvasEase,0ms);
                     a{
                         color: @white;
                     }
@@ -324,21 +325,17 @@ section.work{
  }
 
 
-
-
-//Work Back Out
-body.workBack{
+//Icon Clicks
+body{
     section.work .workNav > ul > li{
-        opacity: 0;
-        will-change:opacity;
-        .transition2(opacity,300ms,ease-out,150ms, transform, 250ms,ease-out,150ms);
-        transform-origin:50% 25%;
         &.active{
+            will-change:opacity;
             opacity: 1;
-            .scale(3,3);
             .icon{
-                will-change:background-color;
-                .transition2(background-color,100ms,ease-out,0ms, opacity,100ms,ease-out,150ms);
+                .scale(3,3);
+                transform-origin:50% 50%;
+                will-change:background-color,opacity,transform;
+                .transition3(background-color,100ms,@canvasEase,0ms, opacity,175ms,@canvasEase,0ms,transform,300ms,@canvasEase,0ms);
                 background-color: @teal;
                 //.translate(-500px,0px);
                 opacity: 0;
@@ -354,6 +351,29 @@ body.workBack{
                 .transition(opacity,150ms,ease-out,0ms);
             }
         }
+    }
+}
+
+body.workActive{
+    section.work .workNav > ul > li{
+        .scale(1,1);
+        > ul{
+            opacity: 1;
+        }
+        a.toggle{
+            opacity: 1;
+        }
+    }
+}
+
+
+//Work Back Out
+body.workBack{
+    section.work .workNav > ul > li{
+        opacity: 0;
+        will-change:opacity;
+        .transition2(opacity,300ms,ease-out,150ms, transform, 250ms,ease-out,150ms);
+        transform-origin:50% 25%;
     }
 }
 
@@ -569,7 +589,7 @@ body.workActive section.work{
 body.workFadeIn section.work{
     > main{
         //overflow-x: hidden;
-        max-width: 1200px;
+        //max-width: 1200px;
         animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
     }
 }
