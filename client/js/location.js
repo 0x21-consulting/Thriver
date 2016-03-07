@@ -75,7 +75,7 @@ Template.body.onRendered(function () {
                 
                 break;
             }
-        }, 100);
+        }, 200);
     });
     
     // Wait a couple seconds for the page to render before navigating to the proper link

@@ -26,13 +26,13 @@
         <h3>Account Settings</h3>
         <form class="editable">
             <label for="updateName">Name</label>
-            <input id="updateName" type="name" name="updateName" value="{{name}}" required>
-            <label for="updateProvider">Provider</label>
-            <input id="updateProvider" type="text" name="updateProvider" value="Milwaukee Area" required>
+            <input id="updateName" type="name" name="updateName" value="{{name}}" required />
+            <label for="updateProvider">Associated Organization</label>
+            <input id="updateProvider" type="text" value="{{organization}}" disabled />
             <label for="updateEmail">Email</label>
-            <input id="updateEmail" type="email" name="updateEmail" value="{{email}}" required>
+            <input id="updateEmail" type="email" name="updateEmail" value="{{email}}" required />
             <label for="updatePassword">Password</label>
-            <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required>
+            <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required />
             <input type="submit" value="Update Account">
         </form>
     </li>
@@ -40,35 +40,27 @@
 
 <template name="subscriptions">
     <li class="subscriptions">
-        <h3>Newsroom Subscriptions</h3>
+        <h3>Email Subscriptions</h3>
         <form id="subscriptions">
             <ul class="toggleSwitches">
                 <li>
-                    <label for="inTheNewsToggle" class="toggleSwitchLabel">News Updates</label>
-                    <div class="toggleSwitch">
-                        <!--Checked="true" is temp. for display purposes-->
-                        <input id="inTheNewsToggle" type="checkbox" checked="true">
-                        <label for="inTheNewsToggle"></label>
-                    </div>
-                </li>
-                <li>
                     <label for="pressReleasesToggle" class="toggleSwitchLabel">Press Releases</label>
                     <div class="toggleSwitch">
-                        <input id="pressReleasesToggle" type="checkbox">
+                        <input id="pressReleasesToggle" type="checkbox" checked="{{pressReleases}}">
                         <label for="pressReleasesToggle"></label>
                     </div>
                 </li>
                 <li>
                     <label for="actionAlertsToggle" class="toggleSwitchLabel">Action Alerts</label>
                     <div class="toggleSwitch">
-                        <input id="actionAlertsToggle" type="checkbox">
+                        <input id="actionAlertsToggle" type="checkbox" checked="{{actionAlerts}}">
                         <label for="actionAlertsToggle"></label>
                     </div>
                 </li>
                 <li>
-                    <label for="newsletterToggle" class="toggleSwitchLabel">Newsletters</label>
+                    <label for="newsletterToggle" class="toggleSwitchLabel">Newsletter</label>
                     <div class="toggleSwitch">
-                        <input id="newsletterToggle" type="checkbox">
+                        <input id="newsletterToggle" type="checkbox" checked="{{newsletter}}">
                         <label for="newsletterToggle"></label>
                     </div>
                 </li>
