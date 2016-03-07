@@ -1,9 +1,21 @@
 section.outreach{
     background-color: @navy;
-    background: url('/lib/img/mastheadImpact.jpg') no-repeat center;
+    background: url('/lib/img/outreach_bg.jpg') no-repeat center;
     background-size: cover;
     padding-bottom: 80px;
     position: relative;
+    &:before{
+        content:'';
+        background-color: @navy;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        opacity: 0;
+        will-change:opacity;
+        .transition(opacity,100ms,@canvasEase,300ms);
+    }
     > main, > div{
         position: relative;
         z-index: 2;
@@ -118,9 +130,17 @@ section.outreach{
             }
         }
         > li{
-            display: none;
+            visibility: hidden;
+            overflow: hidden;
+            max-height: 0px;
+            opacity: 0;
+            .translate(0px,0px);
+            .transition2(transform,500ms,ease,0ms,opacity,250ms,ease,0ms);
             &.active{
-                display: block;
+                visibility: visible;
+                max-height: 9999px;
+                opacity: 1;
+                //.translate(0px,0px);
             }
             ul > li{
                 background-color: @white;
@@ -145,6 +165,20 @@ section.outreach{
                     color: @black;
                 }
             }
+        }
+    }
+}
+
+body.outreachTransition{
+    section.outreach:before{
+        .transition(opacity,100ms,@canvasEase,0ms);
+        opacity: 1;
+    }
+    .outreachContent{
+        > li{
+            .transition2(transform,200ms,ease,0ms,opacity,100ms,ease,0ms);
+            .translate(-100%,0px) !important;
+            opacity: 0;
         }
     }
 }
