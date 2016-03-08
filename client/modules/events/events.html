@@ -16,7 +16,10 @@
         </div>
         <div class="eventsContainer">
             <aside class="eventsSidebar">
+                <h1>Events Calendar</h1>
                 {{>calendar}}
+                <h1>Upcoming Events</h1>
+                {{>upcomingEvents}}
             </aside>
             <main class="eventsMain">
                 <header class="eventsHeader">
@@ -70,6 +73,23 @@
 </template>
 
 
+
+<template name="upcomingEvents">
+        <ul class="upcomingEvents scroller">
+            {{>upcomingEventListItem}}
+            {{>upcomingEventListItem}}
+            {{>upcomingEventListItem}}
+            {{>upcomingEventListItem}}
+        </ul>
+</template>
+
+<template name="upcomingEventListItem">
+    <li>
+        Batman Begins <br>
+        <span>Nov 26</span>
+        <a href="#">unregister</a>
+    </li>
+</template>
 
 
 <template name="calendar">
