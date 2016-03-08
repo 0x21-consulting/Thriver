@@ -12,6 +12,18 @@ section.events{
         width: 300px;
         min-height: 600px;
         background-color: @teal;
+        h2{
+            display: block;
+            //margin: 0px 32px 23px 32px;
+            text-align: center;
+            background-color: @gray;
+            color: @teal;
+            border-bottom: none;
+            padding: 5px 0px;
+            font-size: 14px;
+            line-height: 14px;
+            white-space: nowrap;
+        }   
     }
     .eventsMain{
         background-color: lighten(@gray, 5%);
@@ -39,7 +51,7 @@ section.events{
                 color: @gray;
                 padding: 0px 10px;
                 z-index: 3;
-                .shadow(0px,0px,20px,-3px,0.15);
+                .shadow(0px,0px,12px,-3px,0.15);
                 &.sliderNext{
                     right: 0px;
                 }
@@ -69,6 +81,97 @@ section.events{
         }
     }
 }
+
+
+
+
+
+//Calendar
+.calendar, .sun {
+    clear: left;
+}
+.calendar{
+    width: 17em;
+    margin: 32px 0px 32px 2.25em;
+    //background-color: darken(@teal, 1%);
+    background-color: @teal;
+    .shadow(0px,0px,27px,0px,0.17);
+    span{
+        float: left; 
+        //width: 2.25em; 
+        width: 2.42em;
+        padding: 0; 
+        text-align: center;
+        color: #fff;
+        font-weight: 800;
+        line-height: 2em;
+        position: relative;
+        z-index: 2;
+        &.notCurrent{
+            color: #3cc4cf;
+        }
+        &.weekday{
+            background-color: #23cfdc;
+        }   
+        &.currentWeekStart{
+            &:before {
+                content: '';
+                width: 700%;
+                height: 2em;
+                background: #69d5dd;
+                position: absolute;
+                z-index: -1;
+                border-radius: 5px;
+                margin-left: -10px;
+            }  
+        }
+        &.today{
+            &:before {
+                border-radius: 50%;
+                background: #51b2b9;
+                width: 2em !important;
+                content: '';
+                position: absolute;
+                height: 2em;
+                z-index: -1;
+                margin-left: -7px;
+                margin-top: 0px;
+            }
+        }
+        &.hasEvent{
+            button.eventDate {
+                height: auto;
+                padding: 0px;
+                margin: 0px;
+                line-height: 17px;
+                color: @yellow;
+                border-bottom: 3px solid @yellow;
+            }
+            &.past{
+                color: #b3e9ed;
+                &:hover{
+                    color: #b3e9ed;
+                    cursor: text;                        
+                }
+                &:after{
+                    background-color: #b3e9ed;
+                }
+            }
+        }
+        &.monthPaginate{
+            float: none;
+            cursor: pointer;
+            &:hover{
+                color: #ffee2f;
+            }
+        }
+    }   
+}
+
+
+
+
+
 
 
 
