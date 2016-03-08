@@ -1,6 +1,10 @@
+//currentSlide = 0;
 nextPosition = 1;
 prevPosition = -1;
-slideTotal = 3; //Total Slides, Should be -1 and 0 is a slide. Will need to update on li.eventSlide count change.
+slideTotal = 3;
+
+
+
 
 Template.events.events({
     'click .sliderPrev': function (event) {
@@ -9,6 +13,8 @@ Template.events.events({
             prevPosition = prevPosition - 1;
             nextPosition = nextPosition - 1;
         }
+        console.log('prevP:' + prevPosition);
+        console.log('nextP:' + nextPosition);
     },
     'click .sliderNext': function (event) {
         if (nextPosition < slideTotal){
@@ -16,5 +22,14 @@ Template.events.events({
             prevPosition = prevPosition + 1;
             nextPosition = nextPosition + 1;
         }
+        console.log('prevP:' + prevPosition);
+        console.log('nextP:' + nextPosition);
+    },
+    'click button.eventDate': function (event) {
+        document.querySelector('.slides').style.webkitTransform = "translate(-" + event.target.value + "00% ,0px)";
+        nextPosition = Number(event.target.value) + 1;
+        prevPosition = Number(event.target.value) - 1;
+        console.log('prevP:' + prevPosition);
+        console.log('nextP:' + nextPosition);
     }
 });

@@ -1,3 +1,5 @@
+<!--Note that li.eventSlide requires a value=# which matches that of it's cooresponding calendar listing: '.eventDate'. values should start at 0-->
+
 <template name="events">
     <section class="events mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#if isAdmin}}
@@ -14,6 +16,7 @@
         </div>
         <div class="eventsContainer">
             <aside class="eventsSidebar">
+                <button value="0" class="eventDate">event</button>
             </aside>
             <main class="eventsMain">
                 <header class="monthNavSearch">
@@ -21,10 +24,10 @@
                 <div class="eventsSlider">
                     <button class="sliderPrev">&laquo;</button>
                     <div class="slideScroller">
-                        <ul class="slides">
-                            <li class="eventSlide">1</li>
-                            <li class="eventSlide">2</li>
-                            <li class="eventSlide">3</li>
+                        <ul class="slides" id="slidesList">
+                            <li value="0" class="eventSlide">1</li>
+                            <li value="1" class="eventSlide">2</li>
+                            <li value="2" class="eventSlide">3</li>
                         </ul>
                     </div>
                     <button class="sliderNext">&raquo;</button>
