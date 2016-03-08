@@ -172,6 +172,71 @@ section.events{
 
 
 
+//Header
+header.eventsHeader{
+    width: 100%;
+    background-color: #fff;
+    height: 100px;
+    border-bottom: 1px solid #dddfe1;
+    ul{
+        margin: 0px;
+        padding: 0px;
+        color: #7d9698;
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 300;
+        li{
+            display: inline-block;
+            list-style:none;
+            cursor: pointer;
+            line-height: 100px;
+            margin: 0px;
+            padding: 0px 30px 0px 60px;
+            position: relative;
+            span.fa{
+                opacity: 0.5;
+                position: relative;
+                top: 2px;
+                left: -5px;                
+            }
+            &:first-child{
+                &:after{
+                    position: absolute;
+                    content: '';
+                    width: 1px;
+                    height: 100%;
+                    background-color: #dddfe1;
+                    margin-left: 30px;
+                }
+            }
+            &:nth-child(2), &:nth-child(3){
+                padding: 0px 60px 0px 30px;
+            }
+            &:nth-child(2) span.fa{
+                left: 5px;
+            }
+            &.search{
+                float: right;
+            }
+            &:hover{
+                color: #4e8084;
+            }
+        }
+    }
+    input[type="search"] {
+        border: none;
+        border-bottom: 2px solid #ddd;
+        width: 200px;
+        position: relative;
+        color: #4e8084;
+        font-weight: 500;
+        font-size: 15px;
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
 
 
 
