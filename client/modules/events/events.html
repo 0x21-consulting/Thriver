@@ -126,6 +126,13 @@
     <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
 </template>
 
+<template name="eventSummary">
+    <span class="eventSummary">
+        <ul>
+            <li>Teen Summit on Dating &amp; Sexual Violence</li>
+        </ul>
+    </span>
+</template>
 
 
 <template name="calendar">
@@ -184,7 +191,10 @@
         <span>24</span>
         <span>25</span>
         <!--If has event on date, add anchor with id-->
-        <span class="hasEvent" value="2"><button value="1" class="eventDate">26</button></span>
+        <span class="hasEvent" value="2">
+            <button value="1" class="eventDate">26</button>
+            {{>eventSummary}}
+        </span>
         <span>27</span>
         <span>28</span>
         <span>29</span>

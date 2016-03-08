@@ -152,7 +152,56 @@ section.events{
                 margin: 0px;
                 line-height: 17px;
                 color: @yellow;
-                border-bottom: 3px solid @yellow;
+               //border-bottom: 3px solid @yellow;
+                border-radius: 50%;
+            }
+            span.eventSummary{
+                position: absolute;
+                background: @white;
+                .shadow(0px,0px,5px,0px,0.25);
+                width: 250px;
+                z-index: 9;
+                height: auto;
+                color: @black;
+                text-align: left;
+                font-size: 12px;
+                padding: 10px;
+                left: -207px;
+                bottom:33px;
+                pointer-events: none;
+                visibility: hidden;
+                opacity: 0;
+                .accelerate;
+                .transition3(opacity,250ms,@canvasEase,1ms,transform,250ms,@canvasEase,1ms,visibility,0ms,linear,250ms);
+                transform-origin:80% 100%;
+                .scale(0,0);
+                &:after{
+                    content:"\f0d7";
+                    .fa;
+                    position: absolute;
+                    bottom: -12px;
+                    right: 40px;
+                    font-size: 22px;
+                    color: @white;
+                }
+            }
+            &:hover{
+                button.eventDate{
+                    background-color: lighten(@aqua, 10%);
+                    color:@white;
+                }
+                span.eventSummary{
+                    .transition3(opacity,250ms,@canvasEase,1ms,transform,250ms,@canvasEase,1ms,visibility,0ms,linear,0ms);
+                    opacity: 1;
+                    .scale(1,1);
+                    visibility: visible;
+                }
+            }
+            &:active{
+                button.eventDate{
+                    color:lighten(@aqua, 5%);
+                    border-color:lighten(@aqua, 5%);
+                }
             }
             &.past{
                 color: #b3e9ed;
