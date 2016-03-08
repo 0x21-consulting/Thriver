@@ -1,69 +1,20 @@
-/*jQuery(document).ready(function($) {
+nextPosition = 1;
+prevPosition = -1;
+slideTotal = 3; //Total Slides, Should be -1 and 0 is a slide. Will need to update on li.eventSlide count change.
 
-
-//Scroll Function
-var amount = '';
-function scroll() {
-    $('.events-container').animate({
-        scrollTop: amount
-    }, 100, 'linear',function() {
-        if (amount != '') {
-            scroll();
+Template.events.events({
+    'click .sliderPrev': function (event) {
+        if (prevPosition >= 0){
+            document.querySelector('.slides').style.webkitTransform = "translate(-" + prevPosition + "00% ,0px)";
+            prevPosition = prevPosition - 1;
+            nextPosition = nextPosition - 1;
         }
-    });
-}
-$('.hover-up').hover(function() {
-    amount = '-=78';
-    scroll();
-}, function() {
-    amount = '';
+    },
+    'click .sliderNext': function (event) {
+        if (nextPosition < slideTotal){
+            document.querySelector('.slides').style.webkitTransform = "translate(-" + nextPosition + "00% ,0px)";
+            prevPosition = prevPosition + 1;
+            nextPosition = nextPosition + 1;
+        }
+    }
 });
-$('.hover-down').hover(function() {
-    amount = '+=78';
-    scroll();
-}, function() {
-    amount = '';
-});
-
-
-//Click to Scroll Function
-//For some reason it is toggling between scrolling to top and scrolling to this element
-$('.has-event a').click(function(e){
-    e.preventDefault();
-    var id = $(this).attr('href');
-    $('.events-container').animate({scrollTop:$(id).position().top - 42}, 'slow');
-    $(id + ' summary').click();
-});
-
-
-//Temp Actions of viewing previous/next months in calendar
-$('.prev-month').click(function(e){
-    e.preventDefault();
-    alert('Navigate to October only on mini-calendar.');
-});
-
-$('.next-month').click(function(e){
-    e.preventDefault();
-    alert('Navigate to December only on mini-calendar.');
-});
-
-
-$('.scroll-prev-month').click(function(e){
-    e.preventDefault();
-    alert('Navigate to begining of November Only on events-scroller. Then replace the word "November 2015" with "October 2015"');
-});
-
-$('.scroll-next-month').click(function(e){
-    e.preventDefault();
-    alert('Navigate to begining of December Only on events-scroller. Then replace the word "December 2015" with "January 2016"');
-});
-
-$('input[type=search]').click(function(e){
-    e.preventDefault();
-    alert('Maybe this could populate the events list below via ajax as letters are typed and resets the list when all letters are removed."');
-});
-
-
-
-
-});*/

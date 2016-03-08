@@ -12,161 +12,24 @@
                 </p>
             </header>
         </div>
-        <div class="flex eventsObject">
-            <div class="sidebarEvents">
-                {{> calendarNew}}
-                {{> eventsRegisteredNew}}
-            </div>
-            <div class="eventsList clearfix">
-                <header class="eventsHeader">
-                    <ul>
-                        <li class="scrollPrevMonth"><span class="fa">&#xf053;</span> November 2015</li>
-                        <li class="scrollNextMonth">December 2015 <span class="fa">&#xf054;</span></li>
-                        <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
-                    </ul>
+        <div class="eventsContainer">
+            <aside class="eventsSidebar">
+            </aside>
+            <main class="eventsMain">
+                <header class="monthNavSearch">
                 </header>
-                <div class="eventsContainer">
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    <!--{{> newMonthTitle}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> newMonthTitle}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> eventNew}}
-                    {{> eventNew}}-->
+                <div class="eventsSlider">
+                    <button class="sliderPrev">&laquo;</button>
+                    <div class="slideScroller">
+                        <ul class="slides">
+                            <li class="eventSlide">1</li>
+                            <li class="eventSlide">2</li>
+                            <li class="eventSlide">3</li>
+                        </ul>
+                    </div>
+                    <button class="sliderNext">&raquo;</button>
                 </div>
-                <div class="clearfix"></div>
-                <span class="hoverScroll hoverUp fa">&#xf077;</span>
-                <span class="hoverScroll hoverDown fa">&#xf078;</span>
-            </div>
+            </main>
         </div>
     </section>
-</template>
-
-<template name="eventsRegisteredNew">
-    <div class="currentRegistrations">
-        <h2>You are Currently Registered for:</h2>
-        <ul>
-            <li>WCASA’S 30-year anniversary <br><span>Nov 7</span><a href="#">unregister</a></li>
-            <li>Batman Begins <br><span>Nov 26</span><a href="#">unregister</a></li>
-        </ul>
-    </div>
-</template>
-
-<template name="eventNew">
-    <article class="event">
-        <p class="illustrationDate">
-            <span class="circle">
-                7
-                <span class="day">Tue</span>
-            </span>
-        </p>
-        <section class="mainContent">
-            <p class="date">November 7, 2015</p>
-            <details>
-                <summary>
-                    <h2>30 Year Anniversary (Past)</h2>
-                    <p class="meta">10 AM - 2 PM at the Phister Hotel</p>
-                </summary>
-                <div class="content">
-                    <p>
-                        WCASA’s 30-year anniversary of supporting survivors of sexual assault. WCASA is honored to have Loretta Ross deliver the keynote address. Ross is a renowned leader of women of color in the Reproductive Justice Movement and a nationally recognized expert on human rights, violence against women, and racism.
-                    </p>
-                    <p><strong>Featured Sessions:  Healing thru Art, Boundaries, Survivor Stories</strong></p>
-                    <p>
-                        Event Center<br>
-                        123 Fake Street<br>
-                        Milwaukee, WI 53211
-                    </p>
-                    <button>Register as tomJones@gmail.com</button>
-                </div>
-            </details>
-        </section>
-    </article>
-</template>
-
-<template name="newMonthTitle">
-    <aside class="month">
-        <h3>December 2015</h3>
-    </aside>
-</template>
-
-<template name="calendarNew">
-    <div id="calendar" class="calendar">
-        <h2>
-            <span class="fa prevMonth monthPaginate">&#xf0d9;</span>
-            November 2015
-            <span class="fa nextMonth monthPaginate">&#xf0da;</span>
-        </h2>
-
-        <!--Days-->
-        <span class="weekday">S</span>
-        <span class="weekday">M</span>
-        <span class="weekday">T</span>
-        <span class="weekday">W</span>
-        <span class="weekday">T</span>
-        <span class="weekday">F</span>
-        <span class="weekday">S</span>
-        <!--Days End-->
-
-        <!--Last Month-->
-        <span class="notCurrent">26</span>
-        <span class="notCurrent">27</span>
-        <span class="notCurrent">28</span>
-        <span class="notCurrent">29</span>
-        <span class="notCurrent">30</span>
-        <span class="notCurrent">31</span>
-        <!--Last Month End-->
-
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span class="hasEvent past">7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-
-        <!--Current Week-->
-        <span class="currentWeekStart">16</span>  
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span class="today">21</span>
-        <span>22</span>
-        <!--Current Week End-->
-
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
-        <!--If has event on date, add anchor with id-->
-        <span class="hasEvent"><a href="#e102615">26</a></span>
-        <span>27</span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-        <span>31</span>  
-
-        <!--Next Month-->
-        <span class="notCurrent">1</span>
-        <span class="notCurrent">2</span>
-        <span class="notCurrent">3</span>
-        <span class="notCurrent">4</span>
-        <span class="notCurrent">5</span>
-        <!--Next Month End-->
-        <div style="clear:both;"></div>
-    </div>
 </template>
