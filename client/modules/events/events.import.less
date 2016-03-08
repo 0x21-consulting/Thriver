@@ -250,38 +250,69 @@ header.eventsHeader{
 
 //Upcoming Events
 ul.upcomingEvents{
-    padding: 0px 24px 0px 24px;
+    //padding: 0px 24px 0px 24px;
     height: 326px;
-    background: darken(@teal, 5%);
-    border-radius: 10px;
+    background: darken(@teal, 2.5%);
+    border-radius: 5px;
     margin: 0px 26px 0px 26px;
-    li {
-        list-style: none;
-        color: #fff;
-        font-weight: 500;
-        font-size: 16px;
-        border-bottom: 2px solid #01aebb;
-        margin: 20px 40px 20px 0px;
-        padding: 0px 0px 20px 0px;
-        a{
-            color: #fff;
-            text-decoration: underline;
-            font-size: 12px;
-            &:hover{
-                color: #ffee2f;
-            }
+    .shadowInset(0px,0px,10px,0px,0.5);
+    > li{
+        padding: 24px 24px;
+        background: darken(@teal, 5.5%);
+        &:nth-child(even){
+            background: darken(@teal, 7%);
         }
-        span {
-            display: inline-block;
-            padding: 10px;
-            background: #01aebb;
-            margin-right: 10px;
-            margin-top: 4px;
-            text-transform: uppercase;
-            font-size: 12px;
+        &:first-child{
+            padding-top: 24px;
         }
         &:last-child{
-            border: none;
+            padding-bottom: 24px;
+        }
+    }
+    h3{
+        line-height: 15px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .actions a, h3 a{
+        color: @white;
+            &:hover{
+                color: @yellow;
+                border-color: @yellow;
+            }
+            &:active{
+                color: darken(@yellow, 10%);
+                border-color:darken(@yellow, 10%);
+            }
+    }
+    .actions{
+        li{
+            a{
+                color: @white;
+                font-weight: 700;
+                border-bottom: 2px solid @white;
+            }
+            &.info {
+                font-weight: 700;
+                color: lighten(@aqua,10%);
+                font-size: 14px;
+                line-height: 16px;
+                margin-bottom: 7px;
+                &.noRegistered{
+                    //color: @navy;
+                }
+            }
+            &.action{
+                display: inline-block;
+                margin-right: 10px;
+            }
+            &.notAccount{
+                color: @white;
+                a{
+                    color: @yellow;
+                    border-bottom: none;
+                }
+            }
         }
     }
 }

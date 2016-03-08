@@ -24,8 +24,8 @@
             <main class="eventsMain">
                 <header class="eventsHeader">
                     <ul>
-                        <li class="scroll-prev-month"><span class="fa">&#xf053;</span> November 2015</li>
-                        <li class="scroll-next-month">December 2015 <span class="fa">&#xf054;</span></li>
+                        <li class="scroll-prev-month"><span class="fa">&#xf053;</span> February 2016</li>
+                        <li class="scroll-next-month">April 2016 <span class="fa">&#xf054;</span></li>
                         <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
                     </ul>
                 </header>
@@ -49,7 +49,7 @@
 <template name="eventSlide">
     <li value="0" class="eventSlide">
         <div class="eventContainer">
-            <h2>Teen Summit on Dating &amp; Sexual Violence</h2>
+            <h2>Survivors &amp; Allies / 5th Annual Wrap Around the Capitol</h2>
         </div>
     </li>
 </template>
@@ -67,7 +67,7 @@
 <template name="eventSlideMulti">
     <li value="2" class="eventSlide">
         <div class="eventContainer">
-            <h2>Survivors &amp; Allies / 5th Annual Wrap Around the Capitol</h2>
+            <h2>Teen Summit on Dating &amp; Sexual Violence</h2>
         </div>
     </li>
 </template>
@@ -85,18 +85,54 @@
 
 <template name="upcomingEventListItem">
     <li>
-        Batman Begins <br>
-        <span>Nov 26</span>
-        <a href="#">unregister</a>
+        <h3>
+            <a class="eventDate" href="#" data-value="2">
+             Nov 26 &mdash; Teen Summit on Dating &amp; Sexual Violence
+            </a>
+        </h3>
+        <ul class="actions">
+            <!--{{>actionRegisterPrompt}}-->
+            <!--{{>actionUnregisterPrompt}}-->
+            <!--{{>actionRegistered}}-->
+            <!--{{>actionNotRegistered}}-->
+            {{>actionNotLoggedIn}}
+        </ul>
     </li>
 </template>
+
+<template name="actionRegistered">
+    <li class="registered info">You are currently registered for this event.</li>
+    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+    <li class="unregister action"><a href="#">Unregister</a></li>
+</template>
+
+<template name="actionNotRegistered">
+    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+    <li class="register action"><a href="#">Register</a></li>
+</template>
+
+<template name="actionUnregisterPrompt">
+    <li class="noRegistered info">You have been unregistered for this event.</li>
+</template>
+
+<template name="actionRegisterPrompt">
+    <li class="justRegistered info">You are now registered for this event.</li>
+</template>
+
+<template name="actionNotLoggedIn">
+    <li class="notAccount info">
+        <a href="#" class="login">Login</a> or <a href="#" class="create">Create an Account</a> to register for this event.
+    </li>
+    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+</template>
+
 
 
 <template name="calendar">
     <div id="calendar" class="calendar">
        <h2>
             <span class="fa prevMonth monthPaginate">&#xf0d9;</span>
-            November 2015
+            March 2016
             <span class="fa nextMonth monthPaginate">&#xf0da;</span>
         </h2>
         <!--Days-->
