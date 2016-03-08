@@ -16,23 +16,57 @@
         </div>
         <div class="eventsContainer">
             <aside class="eventsSidebar">
-                <button value="0" class="eventDate">event</button>
+                <button value="1" class="eventDate">event</button>
             </aside>
             <main class="eventsMain">
                 <header class="monthNavSearch">
+                    <ul class="monthScroller">
+                        <li>March 2016</li>
+                        <li>April 2016</li>
+                    </ul>
+                    <form>
+                        <input type="search" placeholder="search" />
+                    </form>
                 </header>
                 <div class="eventsSlider">
-                    <button class="sliderPrev">&laquo;</button>
+                    <button class="sliderPrev fa">&#xf053;</button>
                     <div class="slideScroller">
                         <ul class="slides" id="slidesList">
-                            <li value="0" class="eventSlide">1</li>
-                            <li value="1" class="eventSlide">2</li>
-                            <li value="2" class="eventSlide">3</li>
+                            {{>eventSlide}}
+                            {{>eventSlide2}}
+                            {{>eventSlideMulti}}
                         </ul>
                     </div>
-                    <button class="sliderNext">&raquo;</button>
+                    <button class="sliderNext fa">&#xf054;</button>
                 </div>
             </main>
         </div>
     </section>
+</template>
+
+
+<template name="eventSlide">
+    <li value="0" class="eventSlide">
+        <div class="eventContainer">
+            <h2>Teen Summit on Dating &amp; Sexual Violence</h2>
+        </div>
+    </li>
+</template>
+
+
+<template name="eventSlide2">
+    <li value="1" class="eventSlide">
+        <div class="eventContainer">
+            <h2>Spring Directors Meeting</h2>
+        </div>
+    </li>
+</template>
+
+
+<template name="eventSlideMulti">
+    <li value="2" class="eventSlide">
+        <div class="eventContainer">
+            <h2>Survivors &amp; Allies / 5th Annual Wrap Around the Capitol</h2>
+        </div>
+    </li>
 </template>

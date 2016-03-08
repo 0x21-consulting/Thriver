@@ -13,8 +13,6 @@ Template.events.events({
             prevPosition = prevPosition - 1;
             nextPosition = nextPosition - 1;
         }
-        console.log('prevP:' + prevPosition);
-        console.log('nextP:' + nextPosition);
     },
     'click .sliderNext': function (event) {
         if (nextPosition < slideTotal){
@@ -22,14 +20,10 @@ Template.events.events({
             prevPosition = prevPosition + 1;
             nextPosition = nextPosition + 1;
         }
-        console.log('prevP:' + prevPosition);
-        console.log('nextP:' + nextPosition);
     },
     'click button.eventDate': function (event) {
         document.querySelector('.slides').style.webkitTransform = "translate(-" + event.target.value + "00% ,0px)";
         nextPosition = Number(event.target.value) + 1;
         prevPosition = Number(event.target.value) - 1;
-        console.log('prevP:' + prevPosition);
-        console.log('nextP:' + nextPosition);
     }
 });
