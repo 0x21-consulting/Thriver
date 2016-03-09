@@ -48,6 +48,9 @@ Template.events.events({
         document.body.classList.add('leftSmall');
         $('nav.utility li.register').addClass('active');
         $('aside.sidebar section.register').addClass('active');
+    },
+    'click span.truncated': function (event) {
+        $(event.currentTarget).parent().parent().parent().parent().addClass('extendedContent');
     }
 });
 
