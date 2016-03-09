@@ -51,6 +51,9 @@ Template.events.events({
     },
     'click span.truncated': function (event) {
         $(event.currentTarget).parent().parent().parent().parent().addClass('extendedContent');
+    },
+    'click .eventSlide .actions .details': function (event) {
+        $(event.currentTarget).parent().parent().parent().parent().addClass('extendedContent');
     }
 });
 
