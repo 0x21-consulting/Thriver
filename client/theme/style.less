@@ -1,19 +1,23 @@
-// Theme
-@import "less/reset.import.less";
+//Configuration
 @import "less/fonts.import.less";
-@import "less/animations.import.less";
-@import "less/mediaQueries.import.less";
-@import "less/colors.import.less";
-@import "less/typography.import.less";
-@import "less/theme.import.less";
-@import "less/content.import.less";
-@import "less/sidebar.import.less";
-@import "less/forms.import.less";
+@import "less/reset.import.less"; // Replace with modern reset
+@import "less/mixins.import.less"; // Shadows, Animations, etc.
+@import "less/config.import.less"; // Variables & Setup
 
-//Admin
-@import "../modules/admin/login.import.less";
-@import "../modules/admin/admin.import.less";
-@import "../modules/masthead/masthead.import.less";
+//Global
+@import "less/context.import.less"; // Core Block Elements
+@import "less/type.import.less";
+@import "less/icon.import.less";
+
+//Interfaces
+@import "less/slider.import.less";
+@import "less/tabs.import.less";
+
+//Elements
+@import "less/section.import.less"; //Global section rules
+@import "less/form.import.less";
+@import "less/button.import.less";
+
 
 // Modules
 @import "../modules/header/headerUtility.import.less";
@@ -32,5 +36,7 @@
 @import "../modules/contact/contact.import.less";
 @import "../modules/article/article.import.less";
 
-//Body States
-@import "less/bodyStates.import.less";
+//Admin
+@import "../modules/admin/login.import.less";
+@import "../modules/admin/admin.import.less";
+@import "../modules/masthead/masthead.import.less";

@@ -1,3 +1,178 @@
+body, html{
+    background-color:mix(@gray, @navy, 70%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+body{
+    max-width: 100%;
+    .full{
+        width: 100%;
+    }
+    .masterContainer{
+        //padding-top: 376px;
+        //will-change: padding;
+        //.transition(padding,375ms,ease-out,0ms);
+        background-color: @white;
+        @media @mobile{
+            padding-top: 0px;
+        }
+        min-height: 300px; // just for allowing a new section to be added via admin controls
+    }
+    &.fixedHeader{
+        .masterContainer{
+            //padding-top: 74px;
+            @media @mobile{
+                padding-top: 0px;
+            }
+        }
+    }
+}
+
+.container{
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.containerSmall{
+    max-width: 960px;
+    margin: 0 auto;
+    //padding: 30px;
+}
+.scroller{
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.canvasCenter{
+    position: relative;
+    left: 0px;
+    z-index: 2;
+    will-change: transform;
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
+    //padding-top: 376px;
+}
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    background-color: @navy;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    .transition(all,375ms,ease-out,0ms);
+}
+button{
+    .transition(background-color, 200ms, ease, 0ms);
+}
+
+
+.shadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+.shadowInset(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+
+.flex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flexNoWrap{
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+
+//Overrides
+.inline{
+    display: inline !important;
+}
+
+.dtHide{
+    display: none !important;
+    @media @mobile{
+        display: inherit !important;
+    }
+}
+
+.mobHide{
+    display: inherit !important;
+    @media @mobile{
+        display: none !important;
+    }
+}
+
+@media @mobile{
+    .fullBlockMob{
+        width: 100% !important;
+        display: block !important;
+    }
+}
+
+
+
+//Make first section under masthead animate into place
+.masterContainer > section:nth-child(2){
+    will-change:opacity,transition;
+    .transition2(transform,500ms,@canvasEase, 100ms, opacity,500ms,@canvasEase, 100ms);
+    opacity: 0;
+    .translate(0px,-35px);
+}
+.fixedHeader{
+    .masterContainer > section:nth-child(2){
+        opacity: 1;
+        .translate(0px,0px);
+    }
+}
+
+.accelerate{
+    backface-visibility: hidden;
+    //transform: translateZ(0);
+}
+
+// Generic hide property
+.hide, .hidden { display: none; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sidebar{
     position: fixed;
     height: 100%;
@@ -522,4 +697,113 @@
 
 
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+    overflow-x: hidden;
+    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden;
+        .overlay{
+            opacity: 0.85; 
+            visibility: visible;
+            &:hover{
+                opacity: 0.95;
+            }       
+        }
+    }
+    &.leftSmall{
+        .canvasCenter, .mainNav{
+           .translateX(356px);
+        }
+        .sidebarsLeft{
+           .translateX(0px);
+        }
+    }
+    &.leftMedium{
+        .canvasCenter, .mainNav{
+           .translateX(570px);
+        }
+        .sidebarsLeft{
+            width: 570px;
+           .translateX(0px);
+        }
+    }
+    &.rightSmall{
+        .canvasCenter, .mainNav{
+            .translateX(-356px);
+        }
+        .sidebarsRight{
+            right: 0px;
+            .translateX(0px);
+        }
+    }
+    &.rightMedium{
+        .canvasCenter, .mainNav{
+            left: inherit;
+            .translateX(-656px);
+        }
+        .sidebarsRight{
+            width: 656px;
+            .translateX(0px);
+        }
+    }
+    &.rightLarge{
+        .canvasCenter, .mainNav{
+            left: inherit;
+            .translateX(-1100px);
+        }
+        .sidebarsRight{
+            width: 1100px;
+            .translateX(0px);
+        }
+        @media @1250{
+            .canvasCenter, .mainNav{
+                left: inherit;
+                .translateX(-900px);
+            }
+            .sidebarsRight{
+                width: 900px;
+                .translateX(0px);
+            }            
+        }
+        @media @1024{
+            .canvasCenter, .mainNav{
+                left: inherit;
+                .translateX(-700px);
+            }
+            .sidebarsRight{
+                width: 700px;
+                .translateX(0px);
+            }            
+        }
+    }
 }
