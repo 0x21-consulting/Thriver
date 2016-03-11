@@ -1,0 +1,42 @@
+//Mixins
+.boxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+.insetBoxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+
+//Definitions
+.shadow(@type){
+    & when (@type = far){
+        .boxShadow(0px,0px,20px,-3px,0.2);
+    }
+    & when (@type = closeInset){
+        .insetBoxShadow(0px,0px,10px,0px,0.5);
+    }
+    & when (@type = close){
+        .boxShadow(0px,0px,6px,-3px,0.2);
+    }
+    & when (@type = closeLeft){
+        .boxShadow(-5px,0px,6px,-3px,0.2);
+    }
+    & when (@type = closeRight){
+        .boxShadow(5px,0px,6px,-3px,0.2);
+    }
+}
+
+//Exception Shadow
+.hardShadow(@type){
+
+}
+
+//Deactivate Shadow
+.shadowNone{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
