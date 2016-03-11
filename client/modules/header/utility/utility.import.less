@@ -1,6 +1,7 @@
 //Variables
 @utilityHeight: 36px;
 @utilityButtonPadding: 0px 12px;
+@socialButtonPadding: 0px 6px;
 
 // Constants
 nav.utility{
@@ -34,6 +35,13 @@ nav.utility{
         }
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
+        }
+        &.login > button span.close, &.register > button span.close{
+            left: inherit;
+            right: 7px;
+        }
+        &.social a{
+            padding: @socialButtonPadding;
         }
         //Button Colors
         &.login > button, &.accountDetails > button, &.donate > button{
