@@ -1,20 +1,17 @@
 
 input[type=submit], .button, button{
     display: block;
+    .font(1.4,2.2,0.05,@bold,normal);
     .color(color,@white,none);
     .shadow(far);
     span{
-        font-size: 11px;
+        .font(1.6,2.2,0.05,@light,normal);
         position: relative;
-        &.up{
-            top: -1px;
-            margin-left: 1px;
-        }
         &.close{
             position: absolute;
             .opacity(0);
             left: 14px;
-            top: -1px;
+            top: 5px;
         }
         &.notificationsAlert{
             position: absolute;
