@@ -1,10 +1,39 @@
-body, html{
-    font: 14px/26px 'Raleway', sans-serif;
-}
-//Typopgraphy
+//Fonts
 .fa{font-family: "FontAwesome";}
 .os{font-family: "Old Standard TT', serif";}
 .rw{font-family: 'Raleway', sans-serif;}
+
+//Weights
+@light: 400;
+@normal: 500;
+@bold: 700;
+
+//Base font-size,line-height,letter-spacing
+@baseFS: 1.4;
+@baseLH: 2.2;
+@baseLS: 0.025;
+
+.font(@fontSize,@lineHeight,@letterSpacing,@fontWeight,@fontStyle){
+    font-size: @fontSize*10px;
+    font-size: @fontSize*1rem;
+    line-height: @lineHeight*10px;
+    line-height: @lineHeight*1rem;
+    letter-spacing: @letterSpacing*10px;
+    letter-spacing: @letterSpacing*1rem;
+    font-weight: @fontWeight;
+    font-style: @fontStyle;
+}
+
+//Initialize rems
+html{
+    font-size: 62.5%;
+}
+body{
+    .rw;
+    .font(@baseFS,@baseLH,@baseLS,@light,uppercase);
+}
+
+
 
 button{
     .rw;
