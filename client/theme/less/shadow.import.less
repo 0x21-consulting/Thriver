@@ -29,9 +29,23 @@
     }
 }
 
-//Exception Shadow
-.hardShadow(@type){
-
+//Hard Shadow
+.hardShadow(@width,@height,@left,@marginTop){
+    &:after{
+        z-index: -1;
+        .borderRadius(50%);
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%);
+        background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%);
+        background: radial-gradient(ellipse at center,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+        margin-top: @marginTop;
+        left: @left;
+        height: @height;
+        width: @width;
+    }
 }
 
 //Deactivate Shadow

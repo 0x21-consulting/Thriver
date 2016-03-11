@@ -120,7 +120,7 @@ header.mobileHeader{
     }
     section.mobileMenu{
         left: 0px;
-        .translateX(-100%);
+        .translate(-100%,0px);
         background-color:mix(@gray, @navy, 55%);
         width: 85%;
         ul.mobSocial{
@@ -144,7 +144,7 @@ header.mobileHeader{
         right: 0px;
         background-color:mix(@gray, @navy, 55%);
         width: 85%;
-        .translateX(100%);
+        .translate(100%,0px);
         header.profileOverview{
             padding: 20px;
             p{
@@ -263,10 +263,10 @@ body.menuOpen, body.accountOpen{
 //Menu Open
 body.menuOpen{
     .canvasCenter, header.mobileHeader{
-       .translateX(85%);
+       .translate(85%,0px);
     }
     .section.mobileMenu{
-       .translateX(0px);
+       .translate(0px,0px);
     }
     header.mobileHeader{
         section.fixedBar{
@@ -287,10 +287,10 @@ body.menuOpen{
 //Account Open
 body.accountOpen{
     .canvasCenter, header.mobileHeader{
-        .translateX(-85%);
+        .translate(-85%,0px);
     }
     section.mobileMenuAccount{
-       .translateX(100%);
+       .translate(100%,0px);
     }
     header.mobileHeader{
         section.fixedBar{
@@ -313,11 +313,8 @@ body.accountOpen{
 //3rd tier
 body.menuOpen.sidebarLeftMobile{
     .canvasCenter, header.mobileHeader{
-       //.translateX(85%);
     }
     header.mobileHeader section.mobileMenu{
-        //width: 85%;
-       //.translateX(-100%);
         li.menuTitle a:before {
             .fa;
             content: "\f0d9";
@@ -326,10 +323,10 @@ body.menuOpen.sidebarLeftMobile{
         }
     }
     .sidebar.sidebarsRight{
-        transform: translateX(0%);
+        .translate(0%,0px);
         pointer-events: all;
         section{
-            transform: translateX(0%);
+            .translate(0%,0px);
             right: inherit;
             left: 0px;
         }

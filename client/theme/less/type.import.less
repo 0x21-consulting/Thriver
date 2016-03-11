@@ -5,7 +5,7 @@
 
 //Weights
 @light: 400;
-@normal: 500;
+@normal: 600;
 @bold: 700;
 
 //Base font-size,line-height,letter-spacing
@@ -21,7 +21,7 @@
     letter-spacing: @letterSpacing*10px;
     letter-spacing: @letterSpacing*1rem;
     font-weight: @fontWeight;
-    font-style: @fontStyle;
+    text-transform: @fontStyle;
 }
 
 //Initialize rems
@@ -30,7 +30,7 @@ html{
 }
 body{
     .rw;
-    .font(@baseFS,@baseLH,@baseLS,@light,uppercase);
+    .font(@baseFS,@baseLH,@baseLS,@light,none);
 }
 
 

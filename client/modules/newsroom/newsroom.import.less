@@ -194,11 +194,11 @@ section.news {
                 overflow-y: auto;
                 height: ~'calc(100vh - 24px)';
                 //.transition(all,400ms,ease-out,0ms);
-                .translateX(-100%);
+                .translate(-100%,0px);
             }
             &.active{
                 @media @mobile{
-                    .translateX(0%);
+                    .translate(0%,0px);
                 }
             }
             //.animateDisplayNewsTabs;
