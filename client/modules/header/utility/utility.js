@@ -52,7 +52,13 @@ Template.utility.events({
     },
     // Close sidebars when clicking sign out or help links
     'click li.logout' : closeAsides,
-    'click li.getHelp': closeAsides
+    'click li.getHelp': closeAsides,
+    'click li.getHelp': function (event) {
+        location.href='/#service-providers';
+        $('figure.alert').addClass('active').delay(5000).queue(function(){
+            $(this).removeClass("active").dequeue();
+        });
+    }
 });
 // More sidebar closure methods... one for each template :(
 Template.body.events({ 'click .overlay' : closeAsides });
@@ -63,19 +69,3 @@ Template.accountDetails.events (closure);
 Template.twitter.events        (closure);
 Template.news.events           (closure);
 Template.donate.events         (closure);
-
-
-// Utility Nav
-Template.utility.onRendered(function () {
-    //Should be attributed to correct alert (Figured alerts would be managed via a meteor variable)
-    $('li.getHelp').click(function(){
-        location.href='/#service-providers';
-        $('figure.alert').addClass('active').delay(5000).queue(function(){
-            $(this).removeClass("active").dequeue();
-        });
-    });
-    //Remove Unread Notification Icon on Click
-    $('li.notifications button').click(function(){
-        $('li.notifications span.unreadNotifications').addClass('hidden');
-    });
-});
