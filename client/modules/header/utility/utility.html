@@ -2,12 +2,11 @@
     <nav class="utility">
         <ul>
             {{#if currentUser}}
-                <!--Currently logged in-->
                 <li class="notifications" data-sidebar="leftSmall">
                     <button type="button">
                         <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
                         {{#if show}}
-                            <span class="unreadNotifications fa">&#xf06a;</span>
+                            <span class="notificationsAlert fa">&#xf06a;</span>
                         {{/if}}
                     </button>
                 </li>
@@ -22,7 +21,6 @@
                     </button>
                 </li>
             {{else}}
-                <!--Logged Out-->
                 <li class="login" data-sidebar="leftSmall">
                     <button type="button">
                         Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>

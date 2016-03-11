@@ -1,11 +1,13 @@
-// Media Queries
+//Media Queries
 @1450: ~"only screen and (max-width: 1450px)";
 @1250: ~"only screen and (max-width: 1250px)";
 @1024: ~"only screen and (max-width: 1024px)";
 @mobile: ~"only screen and (max-width: 768px)";
 
-//// Colors
-// Color Variables
+
+////Colors
+
+//Color Variables
 @white: #ffffff;
 @black: #062031;
 @gray: #ebf2f2;
@@ -18,7 +20,8 @@
 @lightBlue: #566a75; //Flat
 @darkBlue: #4e606a; //Flat
 @midnightBlue: #6d7f88; //Flat
-// Color Classes
+
+//Color Classes
 .color (@property, @color, @style) {
     & when (@style = light) {
         @{property}: lighten(@color, 2.5%);
@@ -43,8 +46,10 @@
     }
 }
 
-//// Shadows
-// Mixins
+
+////Shadows
+
+//Mixins
 .boxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
     -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
     -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
@@ -55,9 +60,9 @@
     -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
     box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
 }
-// Definitions
-.shadow(@type){
 
+//Definitions
+.shadow(@type){
     & when (@type = far){
         .boxShadow(0px,0px,20px,-3px,0.2);
     }
@@ -74,17 +79,33 @@
         .boxShadow(5px,0px,6px,-3px,0.2);
     }
 }
-// Exception Shadow
-.hardShadow(@x,@y){
+
+//Exception Shadow
+.hardShadow(@type){
 
 }
 
+//Deactivate Shadow
+.shadowNone{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+
+//Opacity
+.opacity(@amt){
+    zoom: 1;
+    filter: ~'alpha(opacity='100*@amt~')';
+    opacity: @amt;
+}
 
 //Opacity
 //Flex
 //Animations
 //Transitions
 //Border Radius
+//Padding/Margina
 //Text Shadow?
 
 

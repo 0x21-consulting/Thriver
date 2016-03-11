@@ -1,167 +1,58 @@
+//Variables
+@utilityHeight: 36px;
+@utilityButtonPadding: 0px 12px;
+
+// Constants
 nav.utility{
-    background-color: @gray;
-    height: 36px;
-    line-height: 36px;
     position: fixed;
     top: 0px;
     left: 0px;
-    width: 100%;
     z-index: 9;
-    //.transition(all,400ms,ease-out,0ms);
-    &:after{
-        content: '';
-        position: absolute;
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
-        background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-        background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: radial-gradient(ellipse at center,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-        margin-top: -50px;
-        z-index: -10 !important;
-        border-radius: 50%;
-        left: -35%;
-        height: 55px;
-        width: 170%;
-        border-radius: 50%;
-        display: none;
-    }
+    width: 100%;
+    height: @utilityHeight;
+    line-height: @utilityHeight;
     > ul{
-        background-color: @gray;
-        height: 36px;
+        .color(background-color,@gray,none);
+        height: @utilityHeight;
         width: 100%;
     }
+    button{
+        height: @utilityHeight;
+        line-height: @utilityHeight;
+        padding: @utilityButtonPadding;
+        .shadowNone;
+    }
+}
+
+//Button Specifics
+nav.utility{
     li{
-        button{
-            height: 36px;
-            line-height: 36px;
-            display: block;
-            padding: 0px 12px;
-            color: @white;
-            //.transition(all,200ms,ease-out,0ms);
-            span.close{
-                position: absolute;
-                opacity: 0;
-            }
-            span.unreadNotifications {
-                position: absolute;
-                display: block;
-                margin-left: 2px;
-                width: 12px;
-                font-size: 14px;
-                height: 12px;
-                color: @yellow;
-                border: 2px solid darken(@teal, 2.5%);
-                text-align: center;
-                border-radius: 50%;
-                line-height: 12px;
-                top: 2px;
-                right: 5px;
-                font-size: 100%;
-                pointer-events: none;
-                letter-spacing: 8px;
-                //.transition(opacity,200ms,ease-out,0ms);
-            }
-        }
+        //Button & Span Positioning
+        position: relative;
         &.social, &.getHelp, &.donate, &.twitter, &.news{
             float: right;
-            position: relative;
-            span.close{
-                left: 14px;
-                top: -1px;
-            }
         }
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
-            position: relative;
-            span.close{
-                right: 6px;
-                top: -1px;
-            }
         }
-        &.login, &.accountDetails{
-            button{
-                padding: 0px 5px 0px 12px;
-            }
+        //Button Colors
+        &.login > button, &.accountDetails > button, &.donate > button{
+            .buttonColor(@teal);
         }
-        &.login, &.accountDetails, &.donate{
-            .utilityBackgroundColorButton(@teal);
+        &.twitter > button{
+            .buttonColor(@midnightBlue);
         }
-        &.notifications{
-            .utilityBackgroundColorButton(darken(@teal, 2.5%));
-            .utilityNotificationBorder(darken(@teal, 2.5%));
-            button{
-                padding: 0px 12px;
-                span.up{
-                    position: relative;
-                    left: -1px;
-                }
-                span.close{
-                    right:14px;
-                }
-            }
+        &.news > button, &.register > button, &.logout > button{
+            .buttonColor(@blue); 
         }
-        &.accountDetails{
-            .userIcon{
-                font-size: 18px;
-                font-weight: 100;
-                margin-right: 4px;
-                position: relative;
-                top: 1px;
-            }
+        &.getHelp > button{
+            .buttonColor(@orange);
         }
-        &.twitter{
-            .utilityBackgroundColorButton(mix(@gray, @navy, 60%));
+        &.notifications > button{
+            .buttonColor(darken(@teal, 2.5%));
         }
-        &.news{
-            .utilityBackgroundColorButton(@blue);
-        }
-        &.getHelp{
-            .utilityBackgroundColorButton(@orange);
-        }
-        &.register, &.logout{
-            .utilityColorButton(@blue);
-        }
-        &.register, &.logout, &.login, &.accountDetails{
-            button span{
-                font-size: 11px;
-                position: relative;
-                &.up{
-                    top: -1px;
-                    margin-left: 1px;
-                }
-            }
-        }
-        &.social{
-            a{
-                padding: 0px 12px 0px 0px;
-                font-weight: 100;
-                font-size: 18px;
-                color: mix(@gray, @navy, 65%);
-                &:hover{
-                    color: darken(mix(@gray, @navy, 65%), 5%);
-                }
-                &:active{
-                    color: darken(mix(@gray, @navy, 65%), 10%);
-                }
-            }
-        }
-        &.active{
-            position: relative;
-            .fa.close{
-                opacity: 1;
-            }
-            .fa.up{
-                opacity: 0;
-            }
-            &.notifications{
-                .unreadNotifications{
-                    opacity: 0;
-                }
-            }
-        }
-        //Animate Display when user signs in & out
-        &.notifications, &.accountDetails, &.logout, &.login{
-            .animateDisplay;
+        &.social a{
+            .textButtonColor(@midnightBlue);
         }
     }
 }

@@ -1,10 +1,80 @@
-/*input[type=submit], .button, button{
+
+input[type=submit], .button, button{
+    display: block;
     .color(color,@white,none);
-    .shadow(close)
-    &.orange{
-        .color(background-color,@orange,none);
+    .shadow(far);
+    span{
+        font-size: 11px;
+        position: relative;
+        &.up{
+            top: -1px;
+            margin-left: 1px;
+        }
+        &.close{
+            position: absolute;
+            .opacity(0);
+            left: 14px;
+            top: -1px;
+        }
+        &.notificationsAlert{
+            position: absolute;
+            display: block;
+            margin-left: 2px;
+            width: 12px;
+            font-size: 14px;
+            height: 12px;
+            color: @yellow;
+            border: 2px solid darken(@teal, 2.5%);
+            text-align: center;
+            border-radius: 50%;
+            line-height: 12px;
+            top: 2px;
+            right: 5px;
+            font-size: 100%;
+            pointer-events: none;
+            letter-spacing: 8px;            
+        }
     }
-    &.teal{
-        .color(background-color,)
+}
+
+
+//Active Buttons
+li.active > button:first-child, button.active{
+    .color(background-color,@navy,none) !important;
+    .fa.close{
+        .opacity(1);
     }
-}*/
+    .fa.up{
+        .opacity(0);
+    }
+    &.notifications{
+        .notificationAlert{
+            .opacity(0);
+        }
+    }
+}
+
+
+//Button Colors
+.buttonColor(@color){
+    .color(background-color,@color,none);
+    &:hover{
+        .color(background-color,@color,dark);
+    }
+    &:active{
+        .color(background-color,@color,darker);
+    }
+}
+
+
+//Text Button Colors
+.textButtonColor(@color){
+    .color(color,@color,none);
+    &:hover{
+        .color(color,@color,dark);
+    }
+    &:active{
+        .color(color,@color,darker);
+    }
+}
+
