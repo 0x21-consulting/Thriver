@@ -1,35 +1,97 @@
-//Media Queries
+// Media Queries
 @1450: ~"only screen and (max-width: 1450px)";
 @1250: ~"only screen and (max-width: 1250px)";
 @1024: ~"only screen and (max-width: 1024px)";
 @mobile: ~"only screen and (max-width: 768px)";
 
-
-//Colors
-@white: #fff;
+//// Colors
+// Color Variables
+@white: #ffffff;
+@black: #062031;
 @gray: #ebf2f2;
 @navy: #062131;
-@navySat: #2c5465;
+@blue: #2c5465; //Only used in Utility nav twice?
 @teal: #00b7c5;
+@aqua: #1db7c5;
 @orange: #f1592a;
 @yellow: #F5D76E;
-@black: #060606;
-@blackAlt: #062031;
+@lightBlue: #566a75; //Flat
+@darkBlue: #4e606a; //Flat
+@midnightBlue: #6d7f88; //Flat
+// Color Classes
+.color (@property, @color, @style) {
+    & when (@style = light) {
+        @{property}: lighten(@color, 2.5%);
+    }
+    & when (@style = lighter) {
+        @{property}: lighten(@color, 5%);
+    }
+    & when (@style = lightest) {
+        @{property}: lighten(@color, 7.5%);
+    }
+    & when (@style = dark) {
+        @{property}: darken(@color, 2.5%);
+    }
+    & when (@style = darker) {
+        @{property}: darken(@color, 5%);
+    }
+    & when (@style = darkest) {
+        @{property}: darken(@color, 7.5%);
+    }
+    & when (@style = none) {
+        @{property}: @color;
+    }
+}
 
-//Utility Colors
-//List Item Blue A,B
-@lightBlue: #566a75;
-@darkBlue: #4e606a;
+//// Shadows
+// Mixins
+.boxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+.insetBoxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
+    -webkit-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+    box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
+}
+// Definitions
+.shadow(@type){
 
-//News Background
-@midnightBlue: #6d7f88;
-//News Links
-@aqua: #1db7c5;
+    & when (@type = far){
+        .boxShadow(0px,0px,20px,-3px,0.2);
+    }
+    & when (@type = closeInset){
+        .insetBoxShadow(0px,0px,10px,0px,0.5);
+    }
+    & when (@type = close){
+        .boxShadow(0px,0px,6px,-3px,0.2);
+    }
+    & when (@type = closeLeft){
+        .boxShadow(-5px,0px,6px,-3px,0.2);
+    }
+    & when (@type = closeRight){
+        .boxShadow(5px,0px,6px,-3px,0.2);
+    }
+}
+// Exception Shadow
+.hardShadow(@x,@y){
 
-//Brand Colors
-@twitter: #00aced;
+}
 
 
+//Opacity
+//Flex
+//Animations
+//Transitions
+//Border Radius
+//Text Shadow?
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

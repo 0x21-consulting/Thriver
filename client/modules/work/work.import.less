@@ -51,7 +51,7 @@ section.work{
         position: absolute; //forFadeOutAnimation
         display: none;
         background-color: @white;
-        .shadow(-9px,1px,7px,-6px,0.0);
+        .shadow(closeLeft);
         opacity: 0;
         //.transition(all, 500ms, ease-out, 0ms);
         
@@ -386,7 +386,7 @@ body.workBack{
 body.workActive{
     section.work{
         > main{
-            .shadow(0px,0px,20px,-3px,0.15);
+            .shadow(closeLeft);
             background-color: @white;
             margin-bottom: 30px;
         }
@@ -529,7 +529,7 @@ body.workActive{
             }
         }
         .workContent{
-            .shadow(-9px,1px,7px,-6px,0.0);
+            .shadow(closeLeft);
             position: relative;
             //.transition(opacity,500ms,@canvasEase,0ms);
             .translate(0px,0px);
@@ -613,7 +613,7 @@ body.workBack section.work{
 @keyframes workmain {
     0%  {
         background-color: transparent;
-        .shadow(0px,0px,5px,-3px,0.0);
+        //.shadow(0px,0px,5px,-3px,0.0);
         .scale(0.93,0.93);
         //max-width: 900px;
         opacity: 0;
@@ -621,7 +621,7 @@ body.workBack section.work{
     100%  {
         background-color: @white;
         .scale(1,1);
-        .shadow(0px,0px,20px,-3px,0.15);
+        //.shadow(0px,0px,20px,-3px,0.15);
         opacity: 1;
     }
 }
@@ -630,12 +630,12 @@ body.workBack section.work{
     0%  {
         background-color: @white;
         .scale(1,1);
-        .shadow(0px,0px,20px,-3px,0.15);
+        //.shadow(0px,0px,20px,-3px,0.15);
         opacity: 1;
     }
     100%  {
         background-color: transparent;
-        .shadow(0px,0px,5px,-3px,0.0);
+        //.shadow(0px,0px,5px,-3px,0.0);
         .scale(0.93,0.93);
         //max-width: 900px;
         opacity: 0;

@@ -73,17 +73,6 @@ button{
 }
 
 
-.shadow(@horizontal, @vertical, @blur, @spread, @opacity){
-    -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-    -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-    box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-}
-.shadowInset(@horizontal, @vertical, @blur, @spread, @opacity){
-    -webkit-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-    -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-    box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
-}
-
 .flex{
     display: -webkit-box;
     display: -moz-box;
@@ -179,9 +168,9 @@ button{
     height: 100vh;
     background-color:mix(@gray, @navy, 55%);
     top: 36px;
-    .shadow(7px,2px,15px,-5px,0.2);
+    .shadow(closeRight);
     &.sidebarsRight{
-        .shadow(-7px,2px,15px,-5px,0.2);
+        .shadow(closeLeft);
     }
     z-index: 11;
     will-change: transform, width;
