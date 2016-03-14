@@ -1,13 +1,16 @@
 header.mainHeader{
     position: fixed;
-    z-index: 11;
+    z-index: @headerZ;
     .hardShadow(170%,55px,-35%,-50px);
+    height: 260px;
+    width: 100%;
     nav.mainNav{
         text-align: center;
         background-color: @white;
         z-index: 1;
         ul{
-            padding: 185px 0px 31px 0px;
+            padding: 205px 0px 31px 0px;
+            height: 24px;
         }
         li{
             display: inline-block;
@@ -48,7 +51,7 @@ header.mainHeader{
             }
         }
         li.brand {
-            z-index: 10;
+            z-index: 2;
             display: block;
             position: absolute;
             left: 50%;
@@ -81,9 +84,12 @@ header.mainHeader{
 
 //Fixed Header Styles
 .fixedHeader header.mainHeader{
+    height: auto;
     nav.mainNav{
+        height: auto;
         ul{
             padding:45px 0px 0px 0px;
+            height: auto;
             @media @1250{
                 text-align: right;
             }
