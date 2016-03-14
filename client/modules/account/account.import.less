@@ -17,8 +17,6 @@ ul.notificationMenu, ul.eventsMenu{
     }
     span.response{
         display: none;
-        margin-top: 10px;
-        font-size: 14px;
     }
     li.selected{
         span.response{
@@ -32,38 +30,15 @@ ul.notificationMenu, ul.eventsMenu{
 
 //Acount Details
 section.accountDetails{
-    form{
-        .row {
-            text-align: right;
-            max-width: 177px;
-            margin: 0 auto;
-            margin-bottom: 20px;
-        }
-    }
-    //Tabs
-    ul.accountDetailsTabs{
-        height: 52px;
-        background-color: @lightBlue;
-        > li {
-            display: block;
-            width: 33.3333333%;
-            float: left;
-            padding: 20px 0px;
-            cursor: pointer;
-            text-align: center;
-            .font(1.2,1.2,0.2,@bold,uppercase);
-            .fa{
-                font-size: 17px;
-                font-weight: 100;
-                position: relative;
-                top: -1px;
-                left: -2px;
-            }
-        }
+    .tabStyle(@midnightBlue,33.333333%,52px,true);
+    form .row{
+        text-align: right;
+        max-width: 177px;
+        margin: 0 auto;
+        margin-bottom: 20px;
     }
     //Content
     ul.accountDetailsContent{
-        background-color: @lightBlue;
         form{
             max-width: 360px;
             margin: 0 auto;
@@ -76,33 +51,19 @@ section.accountDetails{
                 }
             }
         }
-        h3{
-            padding: 36px 0px 18px 0px;
-            color: @white;
-            background-color: @lightBlue;
-            text-align: center;
-            .font(1.6,1.6,0.1,@bold,none);
-        }
         > li{
-            padding: 0px;
-            background-color: @lightBlue;
-            display: none;
             ul > li > span{
-                max-width: 360px;
                 margin: 0 auto;
                 display: block;
+                max-width: 360px;
                 &.response{
                     display: none;
-                    padding: 23px 0px 10px 0px;
                 }
             }
             &.selected{
                 span.response{
                     display: block;
                 }
-            }
-            &.active{
-                display: block;
             }
         }
     }
@@ -112,7 +73,7 @@ section.accountDetails{
 .register form {
     text-align: left;
     // Invalid repeat password
-    .noMatch::after {
+    .noMatch:after {
         content: '\f06a';
         position: absolute;
         top: 37px; 
