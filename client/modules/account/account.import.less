@@ -1,37 +1,24 @@
 //Notifications & Events Lists
 ul.notificationMenu, ul.eventsMenu{
-    li{
-        button{
-            display: inline-block;
-            padding:6px 10px 6px 10px;
-            color: #fff;
-            margin-top: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-right: 2px;
-            line-height: 22px;
-            .buttonColor(@teal);
-            &.deny{
-                .buttonColor(@orange);
-            }
-        }
-        &.notificationEmpty, &.eventsEmpty {
-            color: mix(@gray, @navy, 35%);
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.25px;
-            background-color: transparent;
-            text-align: center;
-            padding: 0px 30px;
+    li.notificationEmpty, li.eventsEmpty{
+        text-align: center;
+        color: @navy;
+        padding: 0px 30px;
+        .font(1.4,2.2,0.25,@light,uppercase);
+    }
+    button{
+        .font(1.4,2.2,0.25,@bold,uppercase);
+        display: inline-block;
+        margin: 10px 2px 0px 0px;
+        .buttonColor(@teal);
+        &.deny{
+            .buttonColor(@orange);
         }
     }
     span.response{
         display: none;
         margin-top: 10px;
         font-size: 14px;
-        font-weight: bold;
-        color: lighten(@teal, 5%);
     }
     li.selected{
         span.response{
@@ -43,8 +30,6 @@ ul.notificationMenu, ul.eventsMenu{
     }
 }
 
-
-
 //Acount Details
 section.accountDetails{
     form{
@@ -55,21 +40,18 @@ section.accountDetails{
             margin-bottom: 20px;
         }
     }
+    //Tabs
     ul.accountDetailsTabs{
         height: 52px;
         background-color: @lightBlue;
-        li {
+        > li {
             display: block;
             width: 33.3333333%;
             float: left;
             padding: 20px 0px;
             cursor: pointer;
             text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-            line-height: 12px;
+            .font(1.2,1.2,0.2,@bold,uppercase);
             .fa{
                 font-size: 17px;
                 font-weight: 100;
@@ -77,33 +59,9 @@ section.accountDetails{
                 top: -1px;
                 left: -2px;
             }
-            //.transition(all,200ms,ease,0ms);
-            &:first-child{
-                background-color: #5e727d;
-            }
-            &:nth-child(2){
-                background-color: #637782;
-            }
-            &:nth-child(3){
-                background-color: #6d818c;
-            }
-            &:hover{
-                background-color: darken(@lightBlue, 5%);
-            }
-            &:active{
-                color: lighten(@aqua, 10%);
-            }
-            &.active{
-                background-color: @lightBlue;
-                color: lighten(@aqua, 2.5%);
-                &:hover{
-                    background-color: @lightBlue;
-                    //color: lighten(@aqua, 5%);
-                }
-            }
         }
     }
-
+    //Content
     ul.accountDetailsContent{
         background-color: @lightBlue;
         form{
@@ -119,57 +77,47 @@ section.accountDetails{
             }
         }
         h3{
+            padding: 36px 0px 18px 0px;
             color: @white;
             background-color: @lightBlue;
             text-align: center;
-            padding: 36px 0px 18px 0px;
-            font-size: 16px;
-            letter-spacing: 1px;
+            .font(1.6,1.6,0.1,@bold,none);
         }
         > li{
             padding: 0px;
             background-color: @lightBlue;
             display: none;
-            //.animateDisplayAccountDetailsTabs;
-            //.transition(all,400ms,ease-out,0ms);
-            ul{
-                li{
-                    //.transition(all,400ms,ease-out,0ms);
-                    span{
-                        max-width: 360px;
-                        margin: 0 auto;
-                        display: block;
-                        &.response{
-                            display: none;
-                            padding: 23px 0px 10px 0px;
-                        }
-                    }
-                    &.selected{
-                        span.response{
-                            display: block;
-                        }
-                    }
+            ul > li > span{
+                max-width: 360px;
+                margin: 0 auto;
+                display: block;
+                &.response{
+                    display: none;
+                    padding: 23px 0px 10px 0px;
+                }
+            }
+            &.selected{
+                span.response{
+                    display: block;
                 }
             }
             &.active{
                 display: block;
-                //background-color: @lightBlue;
             }
         }
     }
 }
 
 // Registration form
-.register {
-    form {
-        text-align: left;
-        // Invalid repeat password
-        .noMatch::after {
-            content: '\f06a';
-            font: 22px fontawesome;
-            position: absolute;
-            top: 37px; right: 10px;
-            color: #c44;
-        }
+.register form {
+    text-align: left;
+    // Invalid repeat password
+    .noMatch::after {
+        content: '\f06a';
+        position: absolute;
+        top: 37px; 
+        right: 10px;
+        font-size: 22px;
+        .fa;
     }
 }
