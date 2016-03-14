@@ -1,83 +1,74 @@
 header.mainHeader{
     position: fixed;
     z-index: @headerZ;
-    .hardShadow(170%,55px,-35%,-50px);
     height: 260px;
     width: 100%;
+    .hardShadow(170%,55px,-35%,-50px);
     nav.mainNav{
         text-align: center;
         background-color: @white;
-        z-index: 1;
         ul{
             padding: 205px 0px 31px 0px;
             height: 24px;
         }
         li{
             display: inline-block;
-            margin: 10px 0px 10px 0px;
-            &:first-child{
-                margin: 0px;
-            }
         }
-        a {
-            display: block;
-            .font(1.8,1.8,0.2,@normal,uppercase);
-            .color(color,@navy,light);
-            padding:0px 0px 8px 0px;
-            margin: 0px 36px 0px 36px;
-            position: relative;
-            &:after {
-                content: '';
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                height: 3px;
-                .color(background-color,@gray,darker);
-                .opacity(0);
-                .translate(0px,10px);
-            }
-            &:hover {
-                &:after {
-                    opacity: 1;
-                    .translate(0px,0px);
-                }
-            }
-            &:focus {
-            }
-            @media @1450{
-                margin: 0px 15px 0px 15px;
-                .font(1.6,1.6,0.2,@normal,uppercase);
-            }
+    }
+}
+
+
+//Logo
+header.mainHeader nav.mainNav li.brand {
+    display: block;
+    position: absolute;
+    top: 74px;
+    height: 70px;
+    width: 311px;
+    left: 50%;
+    margin-left: -155px;
+    a, a:active, a:hover, a:focus{
+        border: none;
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        &:after{
+            display: none;
         }
-        li.brand {
-            z-index: 2;
-            display: block;
-            position: absolute;
-            left: 50%;
-            margin-left: -200px;
-            top: 74px;
-            width: 400px;
-            text-indent: 0px;
-            margin-bottom: 42px;
-            height: 70px;
-            a{
-                border: none;
-                display: block;
-                padding: 0px;
-                margin: 0px;
-                &:active, &:hover, &:focus{
-                    border: none;
-                }
-                svg, svg image{
-                    width: 100%;
-                    height: 70px;
-                }
-                &:after{
-                    display: none;
-                }
-            }
+    }
+}
+
+
+// Link Styles
+header.mainHeader nav.mainNav li a{
+    display: block;
+    position: relative;
+    padding:0px 0px 8px 0px;
+    margin: 0px 36px 0px 36px;
+    .font(1.8,1.8,0.2,@normal,uppercase);
+    .color(color,@navy,light);
+    &:after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        .color(background-color,@gray,darker);
+        .opacity(0);
+        .translate(0px,10px);
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+            .translate(0px,0px);
         }
+    }
+    &:focus {
+    }
+    @media @1450{
+        margin: 0px 15px 0px 15px;
+        .font(1.6,1.6,0.2,@normal,uppercase);
     }
 }
 
@@ -85,11 +76,14 @@ header.mainHeader{
 //Fixed Header Styles
 .fixedHeader header.mainHeader{
     height: auto;
+    nav.mainNav, nav.mainNav ul{
+    height: auto;
+    }
+}
+.fixedHeader header.mainHeader{
     nav.mainNav{
-        height: auto;
         ul{
             padding:45px 0px 0px 0px;
-            height: auto;
             @media @1250{
                 text-align: right;
             }
@@ -98,29 +92,28 @@ header.mainHeader{
             }
         }
         a{
+            .font(1.4,8.0,0.2,@normal,uppercase);
+            .color(color,lighten(@navy, 2.5%),none);
             border-color: transparent;
-            font-size: 14px;
-            color: lighten(@navy, 2.5%);
             &:after{
                 display: none;
             }
             &:hover, &.active {
                 border-color: transparent;
-                color: darken(@teal, 2.5%);
             }
             @media @1024{
-                line-height: 20px;
-                font-size: 12px;
+                .font(1.2,2.0,0.2,@normal,uppercase);
             }
         }
         li.brand{
-            top: 47px;
             width: 132px;
-            left: 12px;
             height: 36px;
+            top: 53px;
+            left: 12px;
             margin-left: 0px;
-            svg, svg image{
+            svg, svg image, a{
                 height: 36px;
+                width: 166px;
             }
             @media @1024{
                 left: 50%;
