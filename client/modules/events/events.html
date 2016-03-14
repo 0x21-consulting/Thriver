@@ -24,8 +24,8 @@
             <main class="eventsMain">
                 <header class="eventsHeader">
                     <ul>
-                        <li class="scroll-prev-month"><span class="fa">&#xf053;</span> February 2016</li>
-                        <li class="scroll-next-month">April 2016 <span class="fa">&#xf054;</span></li>
+                        <li class="scroll-prev-month preventSelect"><span class="fa">&#xf053;</span> {{lastMonth}}</li>
+                        <li class="scroll-next-month preventSelect">{{nextMonth}} <span class="fa">&#xf054;</span></li>
                         <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
                     </ul>
                 </header>
@@ -149,9 +149,9 @@
 
 <template name="calendar">
     <div id="calendar" class="calendar">
-       <h2>
+        <h2>
             <span class="fa prevMonth monthPaginate">&#xf0d9;</span>
-            March 2016
+            {{getMonth}} {{getYear}}
             <span class="fa nextMonth monthPaginate">&#xf0da;</span>
         </h2>
         <!--Days-->
@@ -163,78 +163,23 @@
         <span class="weekday">F</span>
         <span class="weekday">S</span>
         <!--Days End-->
-
-        <!--Last Month-->
-        <span class="notCurrent">26</span>
-        <span class="notCurrent">27</span>
-        <span class="notCurrent">28</span>
-        <span class="notCurrent">29</span>
-        <span class="notCurrent">30</span>
-        <span class="notCurrent">31</span>
-        <!--Last Month End-->
-
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
+        
+        {{#each week}}
+            {{#each this}}
+                <span class="{{notCurrent}} {{currentWeekStart}} {{today}}">{{date}}</span>
+            {{/each}}
+        {{/each}}
+        
         <span class="hasEvent past">7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-
-        <!--Current Week-->
-        <span class="currentWeekStart">16</span>  
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span class="today">21</span>
-        <span>22</span>
-        <!--Current Week End-->
-
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
         <!--If has event on date, add anchor with id-->
         <span class="hasEvent" value="2">
             <button value="1" class="eventDate">26</button>
             {{>eventSummary}}
         </span>
-        <span>27</span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-        <span>31</span>  
-
-        <!--Next Month-->
-        <span class="notCurrent">1</span>
-        <span class="notCurrent">2</span>
-        <span class="notCurrent">3</span>
-        <span class="notCurrent">4</span>
-        <span class="notCurrent">5</span>
         <!--Next Month End-->
         <div style="clear:both;"></div>
     </div>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--Duplicate for Demo Purposes-->
