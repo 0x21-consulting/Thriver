@@ -7,12 +7,11 @@
         > li{
             display: block;
             float: left;
-            padding: 20px 0px;
             cursor: pointer;
             text-align: center;
             width: @tabWidth;
             height: @tabHeight;
-            .font(1.2,1.2,0.2,@bold,uppercase);
+            .font(1.2,@tabHeight,0.2,@bold,uppercase);
             .fa{
                 .font(1.7,1.7,0,@light,none);
                 position: relative;
@@ -21,12 +20,12 @@
             }
             background-color: lighten(@background, 5%);
             & when (@gradation = true){
-                &:first-child{background-color: lighten(@background, 5%);}
-                &:nth-child(2){background-color: lighten(@background, 6%);}
-                &:nth-child(3){background-color: lighten(@background, 7%);}
-                &:nth-child(4){background-color: lighten(@background, 8%);}
-                &:nth-child(5){background-color: lighten(@background, 9%);}
-                &:nth-child(6){background-color: lighten(@background, 10%);}
+                &:first-child{background-color: lighten(@background, 0.75%);}
+                &:nth-child(2){background-color: lighten(@background, 1.5%);}
+                &:nth-child(3){background-color: lighten(@background, 2.25%);}
+                &:nth-child(4){background-color: lighten(@background, 3%);}
+                &:nth-child(5){background-color: lighten(@background, 3.75%);}
+                &:nth-child(6){background-color: lighten(@background, 4.5%);}
             }
             &:hover{
                 background-color: lighten(@background, 2%);
