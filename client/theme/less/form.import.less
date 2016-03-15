@@ -1,121 +1,86 @@
-//Forms
-form{
+//Form Setup
+.formColors(@baseColor,@buttonColor,@labelColor,@radioColor,@radioSelect,@placeholderColor){
+    .placeholderColor(@placeholderColor);
+    label{
+        .textButtonColor(@labelColor);
+    }
+    label.radio{
+        background-color: @radioColor;
+        &:hover{
+            background-color: darken(@radioColor, 5%);
+        }
+    }
+    input, textarea{
+        background-color: @baseColor;
+        &:focus{
+            background-color: darken(@baseColor, 3%);
+        }
+        &::-webkit-autofill {
+            //Chrome Autocomplete
+            -webkit-box-shadow: 0 0 0px 1000px lighten(@baseColor, 5%) inset;
+        }
+    }
+    input[type=radio]:checked + label.radio{
+        background-color: @radioSelect;
+        &:before {
+            background-color: @radioSelect;
+        }
+    }
+    .styledSelect, .cvv2, input[type=text]{        
+        background-color: @baseColor;
+        &:hover{
+            background-color: darken(@baseColor, 2.5%);
+        }
+        &:focus, input:focus{
+            background-color: darken(@baseColor, 5%);
+        }
+    }
+    .styledSelect, .cvv2, input[type=text]{
+        &:hover{
+            background-color: darken(@darkBlue, 1%);
+        }
+    }
+    button.submit, input[type=submit]{
+        .buttonColor(@buttonColor);
+    }
+}
 
-    //On Off Switches
-    label.toggleSwitchLabel{
-        color: @white;
-        cursor: pointer;
-        display: inline-block;
-        width: 50%;
+//Form Defaults
+form{
+    label{
+        display: block;
         position: relative;
-        left: -15px;
-        margin-right: 15px;
-        text-align: right;
-        font-size: 14px;
-        opacity: 0.8;
+        .font(1.2,1.2,0.01,@bold,none);
     }
-    .toggleSwitch {
-        display: inline-block;
-        position: absolute;
-        top: 22px;
-        width: 60px;
-        -webkit-user-select:none; 
-        -moz-user-select:none; 
-        -ms-user-select: none;
-        label:first-child{
-            color: @white;
-            cursor: pointer;
-        }
-        input{
-            display: none;
-            + label{
-                display: block; 
-                overflow: hidden; 
-                cursor: pointer;
-                height: 36px; 
-                padding: 0; 
-                line-height: 36px;
-                //border: 2px solid #CCCCCC; 
-                //border-radius: 36px;
-                background-color: rgba(255, 255, 255, 0.2);
-                transition: background-color 200ms ease-in;
-                &:before{
-                    content: "";
-                    display: block; 
-                    width: 30px; 
-                    margin: 0px;
-                    background: #FFFFFF;
-                    position: absolute; 
-                    top: 0; 
-                    bottom: 0;
-                    right: 30px;
-                    //border: 2px solid #CCCCCC; 
-                    //border-radius: 36px;
-                    transition: all 200ms ease-in 0s; 
-                    opacity: 0.6;
-                }
-                &:hover{
-                    &:before{
-                        opacity: 1;
-                    }
-                }
-            }
-            &:checked{
-                +label{
-                    background-color: @aqua;
-                }
-                +label, +label:before{
-                    border-color: @aqua;
-                    opacity: 1;
-                }
-                +label:before{
-                    right: 0px; 
-                }
-            }
-        }
-    }
-    p#login-error {
-        font-weight: bold;
+    label.radio{
+        line-height: 47px;
+        padding: 1px 0px;
+        cursor: pointer;
+        display: block;
+        position: relative;
+        float: left;
         text-align: center;
-        border-bottom: 3px solid @orange;
-        padding: 0px 0px 14px 0px;
-        margin-bottom: 37px;
+        width: 33.33333%;
+        margin: 0px;
+        .transition(background-color, 200ms, ease, 0ms);
     }
     input, button.submit{
         display: block;
-        border: none;
-        padding: 16px 0px;
-        margin: 12px 0px;
         width: 100%;
         text-indent: 12px;
-        width: 300px;
-        width: 100%;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: @navy;
+        padding: 16px 0px;
+        margin: 12px 0px;
+        .font(1.4,1.7,0.01,@bold,none);
         .transition(background-color, 100ms, ease, 0ms);
         &:focus{
             outline: none;
-            background-color: @gray;
-        }
-        &:-webkit-autofill {
-            //Chrome Autocomplete color
-            -webkit-box-shadow: 0 0 0px 1000px #adc5c9 inset;
         }
     }
-    label {
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        line-height:12px;
-        font-weight: bold;
-        color: mix(@gray, @navy, 25%);
-        display: block;
-        position: relative;
+    button.submit{
+        text-indent: 0px;
     }
     input[type="radio"] {
-        display: inline-block;
+        display: none;
         width: auto;
         margin: 0px 4px 0px 24px;
         position: relative;
@@ -124,81 +89,38 @@ form{
     input[type='search']{
         background: transparent;
         border: none;
-        border-bottom: 2px solid #fff;
         width: 100%;
         max-width: 300px;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: #fff;
-        font-weight: bold;
-        line-height: 31px;
-        text-indent: 20px;
         padding: 0px;
-        font: 12px/30px 'Raleway', sans-serif;
         margin: 0 auto;
-    }
-    input[type='submit'], button.submit{
-        text-indent: 0px;
-        .buttonColor(@teal);
-        //.backgroundColorButton(@teal);
+        text-indent: 20px;
+        border-bottom: 2px solid @white;
+        .font(1.2,3.0,0.01,@bold,uppercase);
         color: @white;
     }
-    label.radio{
-        color: @white;
-        line-height: 47px;
-        cursor: pointer;
-        position: relative;
-        font-size: 13px;
-        width: 33.33333%;
-        background: @darkBlue;
-        display: block;
-        margin: 0px;
-        text-align: center;
-        font-weight: bold;
-        float: left;
-        padding: 1px 0px;
-        .transition(background-color, 200ms, ease, 0ms);
-        &:last-child{
-            margin-bottom: 30px;
-        }
-        &:hover{
-            background-color: darken(@darkBlue, 5%);
-        }
-    }
-    input[type=radio]:checked + label.radio{
-        background-color: @aqua;
-        &:before {
-            background-color: @aqua;
-        }
-    }
-    input[type='radio']{
-        display: none;
-    }
+}
+
+
+//Styled Selects & cvv2
+form{
     .styledSelect:after{
         .fa;
         content: "\f0d7";
         position: absolute;
-        z-index: 2;
         right: 12px;
         top: 12px;
+        z-index: 2;
         font-size: 12px;
-        pointer-events: none; // Allow click to pass through to select element
+        pointer-events: none;
     }
     .styledSelect, .cvv2{
-        width: 45%;
-        margin-right: 1%;
-        height: 49px;
-        //overflow: hidden;
-        background-color: @darkBlue;
-        color: #fff;
-        font-weight: bold;
-        float: left;
-        margin-top: 30px;
         position: relative;
-        &:focus, input:focus{
-            background-color: darken(@darkBlue, 5%);
-        }
+        float: left;
+        width: 45%;
+        margin: 30px 1% 0px 0px;
+        height: 49px;
+        color: @white;
+        font-weight: bold;
         label{
             position: absolute;
             left: 0px;
@@ -209,16 +131,15 @@ form{
             margin-right: 0px;
         }
         select{
+            display: block;
             background: transparent;
             width: 100%;
-            display: block;
-            font-size: 14px;
-            line-height: 1;
-            border: 0;
-            border-radius: 0;
             height: 49px;
-            -webkit-appearance: none;
+            border: 0;
             text-indent: 15px;
+            -webkit-appearance: none;
+            .font(1.4,1.4,0.025,@light,none);
+            .borderRadius(none);
             &:focus{
                 outline: none;
             }
@@ -240,7 +161,7 @@ form{
         }
         input{
             width: 100%;
-            color: #fff;
+            color: @white;
         }
         label{
             position: absolute;
@@ -251,85 +172,141 @@ form{
             background-color: darken(@darkBlue, 1%);
         }
     }
-    /* Input field error styles */
+}
+
+
+
+
+//Toggle Switches
+form{
+    //On Off Switches
+    label.toggleSwitchLabel{
+        color: @white;
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        left: -15px;
+        margin-right: 15px;
+        cursor: pointer;
+        text-align: right;
+        .opacity(0.8);
+        .font(1.4,1.4,0.025,@normal,none);
+    }
+    .toggleSwitch {
+        display: inline-block;
+        position: absolute;
+        top: 22px;
+        width: 60px;
+        .userSelect(none);
+        label:first-child{
+            color: @white;
+            cursor: pointer;
+        }
+        input{
+            display: none;
+            + label{
+                display: block; 
+                overflow: hidden; 
+                cursor: pointer;
+                height: 36px; 
+                line-height: 36px;
+                padding: 0; 
+                background-color: rgba(255, 255, 255, 0.2);
+                .transition(background-color,200ms,ease,0ms);
+                &:before{
+                    content: "";
+                    display: block; 
+                    position: absolute; 
+                    top: 0; 
+                    bottom: 0;
+                    right: 30px;
+                    width: 30px; 
+                    margin: 0px;
+                    background: @white;
+                    .opacity(0.6);
+                    .transition(all,200ms,ease,0ms);
+                }
+                &:hover{
+                    &:before{
+                        opacity: 1;
+                    }
+                }
+            }
+            &:checked{
+                +label{
+                    background-color: @aqua;
+                }
+                +label, +label:before{
+                    border-color: @aqua;
+                    .opacity(1);
+                }
+                +label:before{
+                    right: 0px; 
+                }
+            }
+        }
+    }
+}
+
+
+//Errors & Messages
+
+form{
+    p#login-error {
+        padding: 0px 0px 14px 0px;
+        margin-bottom: 37px;
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 3px solid @orange;
+    }
     .error {
-        box-shadow: 0 0 0px 3px @orange inset;
-        margin-bottom: 12px !important; //override specific section margins
-        margin-top: 5px !important; //override specific section margins
+        margin-bottom: 12px;
+        margin-top: 5px;
+        -webkit-box-shadow: inset 0 0 0px 3px @orange;
+        -moz-box-shadow: inset 0 0 0px 3px @orange;
+        box-shadow: inset 0 0 0px 3px @orange;
         &.customAmt{
-            margin: 0px !important;
+            margin: 0px;
         }
     }
     [data-error]{
         &:after {
             content: attr(data-error);
-            color: @white;
-            background: transparent;
             display: block;
-            font-weight: bold;
-            font-size: 12px;
-            line-height: 15px;
-            font-size: 12px;
-            line-height: 15px;
-            margin-bottom: 5px;
-            background: darken(@orange, 2.5%);
-            display: block;
-            padding: 9px 14px 7px 14px;
             clear: both;
+            padding: 9px 14px 7px 14px;
+            margin-bottom: 5px;
+            color: @white;
+            background: darken(@orange, 2.5%);
+            .font(1.2,1.5,0.025,@bold,none);
         }
         &:before{
             content: "\f0d7";
             display: block;
-            color: #f1592a;
             position: absolute;
             top: 62px;
             left: 18px;
+            color: #f1592a; //Searching purpose
             font-size: 14px;
             .fa;
         }
     }
     [data-error='Donation amount must be greater than zero']{
         &:after{
+            position: relative;
             margin-bottom: 12px;
             top: 12px;
-            position: relative;
         }
         &:before{
             left: inherit;
             right: 126px;
-            z-index: 9;
             top: inherit;
             bottom: 28px;
+            z-index: 9;
         }
         input[type=radio]:checked + label.radio.custom{
             background-color: @orange, 2.5%;
         }
     }
-    ::-webkit-input-placeholder {color: mix(@gray, @navy, 55%);}
-    :-moz-placeholder {color: mix(@gray, @navy, 55%);}
-    ::-moz-placeholder {color: mix(@gray, @navy, 55%);}
-    :-ms-input-placeholder {color: mix(@gray, @navy, 55%);}
-
-    //Editable Forms
-    &.editable{
-        input{
-            background: rgba(255,255,255,0.2);
-            color: @white;
-            position: relative;
-            margin-bottom: 20px;
-            margin-top: 5px;
-            &:focus{
-                background-color: mix(@gray, @navy, 45%);
-            }
-        }
-        label{
-            text-align: left;
-            display: block;
-        }
-        input[type='submit']{
-            .buttonColor(@teal);
-            color: @white;
-        }
-    }
-
 }
+

@@ -20,6 +20,19 @@
   border-radius: @amt;
 }
 
+.userSelect(@value){
+    -webkit-user-select:@value;
+    -moz-user-select:@value;
+    -ms-user-select: @value;
+}
+
+.placeholderColor(@color){
+    ::-webkit-input-placeholder {color:@color;}
+    :-moz-placeholder {color:@color;}
+    ::-moz-placeholder {color:@color;}
+    :-ms-input-placeholder {color:@color;}
+}
+
 //Opacity
 //Flex
 //Animations
