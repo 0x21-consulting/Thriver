@@ -31,11 +31,14 @@ ul.notificationMenu, ul.eventsMenu{
 //Acount Details
 section.accountDetails{
     .tabStyle(@blueGray,33.333333%,65px,true);
-    form .row{
-        text-align: right;
-        max-width: 177px;
-        margin: 0 auto;
-        margin-bottom: 20px;
+    form{
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
+        .row{
+            text-align: right;
+            max-width: 177px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
     }
     //Content
     ul.accountDetailsContent{

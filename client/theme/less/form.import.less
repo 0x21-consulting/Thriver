@@ -1,5 +1,5 @@
 //Form Setup
-.formColors(@baseColor,@buttonColor,@labelColor,@radioColor,@radioSelect,@placeholderColor){
+.formColors(@baseColor,@inputColor,@buttonColor,@labelColor,@radioColor,@radioSelect,@placeholderColor, @autofillColor){
     .placeholderColor(@placeholderColor);
     label{
         .textButtonColor(@labelColor);
@@ -12,12 +12,17 @@
     }
     input, textarea{
         background-color: @baseColor;
+        color: @inputColor;
         &:focus{
             background-color: darken(@baseColor, 3%);
         }
-        &::-webkit-autofill {
+        &:-webkit-autofill {
             //Chrome Autocomplete
-            -webkit-box-shadow: 0 0 0px 1000px lighten(@baseColor, 5%) inset;
+            -webkit-box-shadow: 0 0 0px 1000px @autofillColor inset !important;
+            -webkit-text-fill-color: @white;
+            &:focus{
+                -webkit-text-fill-color: @white;
+            }
         }
     }
     input[type=radio]:checked + label.radio{
@@ -37,7 +42,7 @@
     }
     .styledSelect, .cvv2, input[type=text]{
         &:hover{
-            background-color: darken(@darkBlue, 1%);
+            //background-color: darken(@baseColor, 1%);
         }
     }
     button.submit, input[type=submit]{
@@ -64,12 +69,13 @@ form{
         margin: 0px;
         .transition(background-color, 200ms, ease, 0ms);
     }
-    input, button.submit{
+    input{
         display: block;
         width: 100%;
         text-indent: 12px;
         padding: 16px 0px;
         margin: 12px 0px;
+        border: none;
         .font(1.4,1.7,0.01,@bold,none);
         .transition(background-color, 100ms, ease, 0ms);
         &:focus{
