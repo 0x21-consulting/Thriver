@@ -27,6 +27,15 @@
     & when (@type = closeRight){
         .boxShadow(5px,0px,6px,-3px,0.2);
     }
+    & when (@type = closeDown){
+        .boxShadow(0px,1px,3px,0px,0.3);
+    }
+    & when (@type = closeUp){
+        .boxShadow(0px,-1px,3px,0px,0.3);
+    }
+    & when (@type = middleUp){
+        .boxShadow(0px,-4px,5px,1px,0.3);
+    }
 }
 
 //Hard Shadow

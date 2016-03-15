@@ -1,5 +1,5 @@
 .sidebar{
-    background-color:lighten(@blueGray, 7%);
+    background-color:@blueGrayLight;
     .shadow(closeRight);
     &.sidebarsRight{
         .shadow(closeLeft);
@@ -14,6 +14,8 @@
         display: block;
         padding: 36px 0px 34px 0px;
         text-align: center;
+        color: @white;
+        .font(1.8,1.8,0.1,@normal,uppercase);
     }
     ul{
         li{

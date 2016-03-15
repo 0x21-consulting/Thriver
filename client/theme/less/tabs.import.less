@@ -4,6 +4,7 @@
     ul.tabs{
         width: 100%;
         height: @tabHeight;
+        .shadow(closeUp);
         > li{
             display: block;
             float: left;
@@ -20,12 +21,12 @@
             }
             background-color: lighten(@background, 5%);
             & when (@gradation = true){
-                &:first-child{background-color: lighten(@background, 0.75%);}
-                &:nth-child(2){background-color: lighten(@background, 1.5%);}
-                &:nth-child(3){background-color: lighten(@background, 2.25%);}
-                &:nth-child(4){background-color: lighten(@background, 3%);}
-                &:nth-child(5){background-color: lighten(@background, 3.75%);}
-                &:nth-child(6){background-color: lighten(@background, 4.5%);}
+                &:first-child{background-color: lighten(@background, 3%);}
+                &:nth-child(2){background-color: lighten(@background, 5%);}
+                &:nth-child(3){background-color: lighten(@background, 7%);}
+                &:nth-child(4){background-color: lighten(@background, 9%);}
+                &:nth-child(5){background-color: lighten(@background, 11%);}
+                &:nth-child(6){background-color: lighten(@background, 13%);}
             }
             &:hover{
                 background-color: lighten(@background, 2%);
@@ -41,8 +42,10 @@
     ul.tabsContent{
         width: 100%;
         background-color: @background;
+        .shadow(closeDown);
         > li{
             position: relative;
+            //.shadow(middleUp);
             display: none;
             padding: 0px;
             &.active{
