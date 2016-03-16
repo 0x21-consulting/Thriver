@@ -197,7 +197,7 @@ form{
         margin-right: 15px;
         cursor: pointer;
         text-align: right;
-        .opacity(0.8);
+        .opacity(1);
         .font(1.4,1.4,0.025,@normal,none);
     }
     .toggleSwitch {
@@ -206,6 +206,17 @@ form{
         top: -4px;
         width: 60px;
         .userSelect(none);
+        &:before{
+            .fa;
+            content:"\f00c";
+            position: absolute;
+            text-indent: 7px;
+            font-size: 16px;
+            font-weight: 100;
+            z-index: 4;
+            margin-top: 3px;
+            .opacity(1);
+        }
         label:first-child{
             color: @white;
             cursor: pointer;
@@ -230,8 +241,9 @@ form{
                     right: 30px;
                     width: 30px; 
                     margin: 0px;
-                    background: @white;
-                    .opacity(0.6);
+                    background: @gray;
+                    z-index: 4;
+                    .opacity(1);
                     .transition(all,200ms,ease,0ms);
                 }
                 &:hover{
@@ -250,6 +262,7 @@ form{
                 }
                 +label:before{
                     right: 0px; 
+                    background-color: @white;
                 }
             }
         }
