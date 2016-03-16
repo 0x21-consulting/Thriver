@@ -1,10 +1,30 @@
 //Notifications & Events Lists
+ul.notificationMenu{
+    background-color: @blueGray;
+}
+ul.eventsMenu, ul.notificationMenu{
+    > li{
+        padding: 36px;
+        .dateMeta{
+            .font(1.2,1.7,0.025,@bold,normal);
+            color: lighten(@lightBlue, 30%);
+        }
+        .text{
+            display: block;
+            .font(1.4,1.7,0.025,@bold,none);
+            a{
+                .textButtonColor(@teal);
+                color: @white;
+            }
+        }
+    }
+}
 ul.notificationMenu, ul.eventsMenu{
     li.notificationEmpty, li.eventsEmpty{
         text-align: center;
-        color: @navy;
-        padding: 0px 30px;
-        .font(1.4,2.2,0.25,@light,uppercase);
+        color: @white;
+        .font(1.4,2.2,0.025,@normal,none);
+        padding: 36px;
     }
     button{
         display: inline-block;
@@ -26,6 +46,16 @@ ul.notificationMenu, ul.eventsMenu{
     }
     span.response{
         display: none;
+        .font(1.2,1.4,0.025,@normal,none);
+        color: @teal;
+        margin: 5px 0px 0px 0px;
+        .undo{
+            .asideLink;
+            clear: both;
+            display: block;
+            background-color: transparent;
+            margin: 5px 0px 0px 0px;
+        }
     }
     li.selected{
         span.response{
@@ -102,23 +132,6 @@ section.accountDetails{
             }
             &.subscriptions, &.registeredEvents{
                 padding: 0px;
-            }
-        }
-    }
-    ul.eventsMenu{
-        > li{
-            padding: 20px 0px;
-            .dateMeta{
-                .font(1.2,1.7,0.025,@bold,normal);
-                color: lighten(@lightBlue, 30%);
-            }
-            .text{
-                display: block;
-                .font(1.4,1.7,0.025,@bold,none);
-                a{
-                    .textButtonColor(@teal);
-                    color: @white;
-                }
             }
         }
     }
