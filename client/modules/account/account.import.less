@@ -50,9 +50,15 @@ section.accountDetails{
                 .opacity(0.8);
                 margin: 16px 0px 4px 0px;
                 cursor: pointer;
+                &:hover{
+                    .opacity(1);
+                }
                 &:first-child{
                     margin: 0px 0px 4px 0px;
                 }
+            }
+            label.toggleSwitchLabel:first-child{
+                margin-bottom: 0px; //Override Form Default
             }
             input[type=submit]{
                 margin: 16px 0px 0px 0px;
@@ -78,6 +84,12 @@ section.accountDetails{
                 span.response{
                     display: block;
                 }
+            }
+            &.accountSettings{
+                padding: 0px 0px 80px 0px;
+            }
+            &.subscriptions, &.registeredEvents{
+                padding: 0px;
             }
         }
     }
