@@ -40,6 +40,11 @@ nav.utility{
             left: inherit;
             right: 7px;
         }
+        &.notifications.active{
+            span.notificationsAlert{
+                .opacity(0);
+            }
+        }
         &.social a{
             padding: @socialButtonPadding;
             .font(1.6,1.6,@baseLS,@light,normal);
