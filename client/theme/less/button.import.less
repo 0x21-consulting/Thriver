@@ -1,6 +1,7 @@
 
 input[type=submit], .button, button{
-    display: block;
+    display: inline-block;
+    cursor: pointer;
     .font(1.4,2.2,0.05,@bold,normal);
     .color(color,@white,none);
     .shadow(far);
@@ -55,7 +56,7 @@ li.active > button:first-child, button.active{
 //Button Colors
 .buttonColor(@color){
     .color(background-color,@color,none);
-    &:hover{
+    &:hover, &:focus{
         .color(background-color,@color,dark);
     }
     &:active{
@@ -66,7 +67,7 @@ li.active > button:first-child, button.active{
 //Text Button Colors
 .textButtonColor(@color){
     .color(color,@color,none);
-    &:hover{
+    &:hover, &:focus{
         .color(color,@color,dark);
     }
     &:active{
