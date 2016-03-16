@@ -100,18 +100,18 @@
 
 //Special Pulse Animation just for News Tab switch
 .animateDisplay{
-    .animation(slideIn, 1, 150ms, ease-in, 0ms);
+    .animation(slideIn, 1, 500ms, @canvasEase, 0ms);
     .keyframes(slideIn;{
         0% {
             display: none;
-            opacity: 0;
+            .opacity(0);
         }
         1% {
             display: block;
-            opacity: 0;
+            .opacity(0);
         }
         100% {
-            opacity: 1;
+            .opacity(1);
         }
     });
     @media @mobile{

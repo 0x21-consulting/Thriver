@@ -47,8 +47,13 @@
             position: relative;
             //.shadow(middleUp);
             display: none;
+            will-change:opacity,transform;
+            //Changed progromatically for animation of block property
+            .opacity(0);
+            .animateDisplay;
             &.active{
                 display: block;
+                .opacity(1);
             }
         }
     }
