@@ -314,7 +314,16 @@ Template.accountDetails.events({
         }
         alert('scroll down to events and show the selected event');
     },
-    'click .eventsMenu .viewEvents': function (event) {
+    'click .eventsRegistered .viewEvent': function (event) {
+        if (window.innerWidth >= 768) {
+            $('.overlay').click();
+        } else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+        }
+        alert('scroll down to events and show the selected event');
+    },
+    'click .eventsMenu .text a': function (event) {
         if (window.innerWidth >= 768) {
             $('.overlay').click();
         } else{

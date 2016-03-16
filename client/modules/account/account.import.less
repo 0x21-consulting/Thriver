@@ -7,12 +7,21 @@ ul.notificationMenu, ul.eventsMenu{
         .font(1.4,2.2,0.25,@light,uppercase);
     }
     button{
-        .font(1.4,2.2,0.25,@bold,uppercase);
         display: inline-block;
-        margin: 10px 2px 0px 0px;
+        margin-top: 10px;
         .buttonColor(@teal);
         &.deny{
             .buttonColor(@orange);
+        }
+        &.unregister{
+             .asideLink;
+             margin: 10px 0px 0px 0px;
+             background-color: transparent;
+        }
+        &.viewEvents{
+            display: block;
+            margin: 0 auto;
+            .buttonColor(@lightBlue);
         }
     }
     span.response{
@@ -93,6 +102,23 @@ section.accountDetails{
             }
             &.subscriptions, &.registeredEvents{
                 padding: 0px;
+            }
+        }
+    }
+    ul.eventsMenu{
+        > li{
+            padding: 20px 0px;
+            .dateMeta{
+                .font(1.2,1.7,0.025,@bold,uppercase);
+                color: lighten(@lightBlue, 30%);
+            }
+            .text{
+                display: block;
+                .font(1.4,1.7,0.025,@bold,none);
+                a{
+                    .textButtonColor(@teal);
+                    color: @white;
+                }
             }
         }
     }
