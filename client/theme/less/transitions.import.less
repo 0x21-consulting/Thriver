@@ -49,27 +49,3 @@
     -ms-transition: none;
     transition: none;
 }
-
-
-
-
-//Header Transitions
-header.mainHeader nav.mainNav{
-    will-change:transform;
-    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
-    ul{
-        will-change:padding;
-        .transition(padding,@headerDuration,@headerEase,@headerDelay);
-    }
-    li a {
-        .transition(all,375ms,ease,0ms);
-        will-change:font;
-        &:after {
-            .transition2(opacity,250ms,@canvasEase,0ms,transform,250ms,@canvasEase,0ms);
-        }
-    }
-    li.brand svg, li.brand svg image{
-        will-change:width,height;
-        .transition2(width,0ms,ease-out,@headerSVGdelay,height,0ms,ease-out,@headerSVGdelay);
-    }
-}

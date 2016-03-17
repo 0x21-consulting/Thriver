@@ -1,7 +1,7 @@
 header.mainHeader{
     position: fixed;
     z-index: @headerZ;
-    height: 260px;
+    height: 269px;
     width: 100%;
     .hardShadow(170%,55px,-35%,-50px);
     nav.mainNav{
@@ -83,7 +83,7 @@ header.mainHeader nav.mainNav li a{
 .fixedHeader header.mainHeader{
     nav.mainNav{
         ul{
-            padding:45px 0px 0px 0px;
+            padding:63px 0px 23px 0px;
             @media @1250{
                 text-align: right;
             }
@@ -92,7 +92,7 @@ header.mainHeader nav.mainNav li a{
             }
         }
         a{
-            .font(1.4,8.0,0.2,@normal,uppercase);
+            .font(1.4,1.4,0.2,@normal,uppercase);
             .color(color,lighten(@navy, 2.5%),none);
             border-color: transparent;
             &:after{
@@ -125,6 +125,48 @@ header.mainHeader nav.mainNav li a{
                 padding-right: 20px;
             }
         }
+    }
+}
+
+//Header Animations/ Transitions
+.fixedHeader header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimate @headerDuration @headerDelay 1 @headerFirstEase alternate;
+}
+
+.fixedHeaderReturn header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimatereturn @headerDuration @headerDelay 1 @headerEase alternate;
+}
+@media @mobile{
+    header.mainHeader .brand{
+        .noAnimation;
+    }
+}
+
+header.mainHeader nav.mainNav{
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
+    ul{
+        will-change:padding;
+        .transition(padding,300ms,@headerEase,@headerDelay);
+    }
+    li a {
+        .transition(font,300ms,@headerEase,@headerDelay);
+        will-change:font;
+        &:after {
+            .transition2(opacity,250ms,@canvasEase,0ms,transform,250ms,@canvasEase,0ms);
+        }
+    }
+    li.brand svg, li.brand svg image{
+        will-change:width,height;
+        .transition2(width,0ms,ease-out,@headerSVGdelay,height,0ms,ease-out,@headerSVGdelay);
+    }
+}
+.fixedHeaderReturn header.mainHeader nav.mainNav{
+    ul{
+        //will-change:padding;
+        //.transition(padding,@headerDuration,@headerEase,100ms);
     }
 }
 
