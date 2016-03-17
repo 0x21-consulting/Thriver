@@ -13,7 +13,7 @@ nav.utility{
     height: @utilityHeight;
     line-height: @utilityHeight;
     > ul{
-        background-color: @gray;
+        background-color: lighten(@blueGray,59%);
         height: @utilityHeight;
         width: 100%;
     }
@@ -36,9 +36,14 @@ nav.utility{
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
         }
-        &.login > button span.close, &.register > button span.close{
+        &.login > button span.close, &.register > button span.close, &.accountDetails > button span.close{
             left: inherit;
-            right: 7px;
+            right: 9px;
+            font-size: 13px;
+            top: 7px;
+        }
+        &.login > button span.up, &.register > button span.up, &.logout > button span.up{
+            top: 1px;
         }
         &.notifications.active{
             span.notificationsAlert{
@@ -47,17 +52,25 @@ nav.utility{
         }
         &.social a{
             padding: @socialButtonPadding;
-            .font(1.6,1.6,@baseLS,@light,normal);
+            .font(1.8,1.8,@baseLS,@light,normal);
+            .textButtonColor(lighten(@blueGray,5%));
         }
         //Button Colors
         &.login > button, &.accountDetails > button, &.donate > button{
             .buttonColor(@teal);
         }
         &.twitter > button{
-            .buttonColor(@midnightBlue);
+            .buttonColor(lighten(@blueGray,5%));
         }
-        &.news > button, &.register > button, &.logout > button{
+        &.news > button{
             .buttonColor(@blue); 
+        }
+        &.register > button, &.logout > button{
+            background-color: transparent;
+            .textButtonColor(@blue);
+        }
+        &.register.active button{
+            color: @white;
         }
         &.getHelp > button{
             .buttonColor(@orange);
@@ -65,8 +78,20 @@ nav.utility{
         &.notifications > button{
             .buttonColor(darken(@teal, 2.5%));
         }
-        &.social a{
-            .textButtonColor(@midnightBlue);
+    }
+    //Active Button
+    li.active > button:first-child, button.active{
+        .color(background-color,lighten(@navy,0%),none);
+        .fa.close{
+            .opacity(1);
+        }
+        .fa.up{
+            .opacity(0);
+        }
+        &.notifications{
+            .notificationAlert{
+                .opacity(0);
+            }
         }
     }
 }
