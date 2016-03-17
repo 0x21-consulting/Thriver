@@ -59,6 +59,16 @@ form{
         display: block;
         position: relative;
         .font(1.2,1.2,0.01,@bold,none);
+        color: @white;
+        .opacity(0.8);
+        margin: 16px 0px 4px 0px;
+        cursor: pointer;
+        &:hover{
+            .opacity(1);
+        }
+        &:first-child{
+            margin: 0px 0px 4px 0px;
+        }
     }
     label.radio{
         line-height: 47px;
@@ -79,7 +89,6 @@ form{
         padding: 16px 0px;
         border: none;
         .font(1.4,1.7,0.01,@bold,none);
-        .transition(background-color, 100ms, ease, 0ms);
         &:focus{
             outline: none;
         }

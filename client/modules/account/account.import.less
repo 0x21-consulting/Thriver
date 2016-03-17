@@ -84,18 +84,6 @@ section.accountDetails{
         form{
             max-width: 360px;
             margin: 0 auto;
-            label{
-                color: @white;
-                .opacity(0.8);
-                margin: 16px 0px 4px 0px;
-                cursor: pointer;
-                &:hover{
-                    .opacity(1);
-                }
-                &:first-child{
-                    margin: 0px 0px 4px 0px;
-                }
-            }
             .toggleSwitch label{
                 .opacity(1);
                 &:first-child{
@@ -138,15 +126,29 @@ section.accountDetails{
 }
 
 // Registration form
-.register form {
-    text-align: left;
-    // Invalid repeat password
-    .noMatch:after {
-        content: '\f06a';
-        position: absolute;
-        top: 37px; 
-        right: 10px;
-        font-size: 22px;
-        .fa;
+section.register, section.login{
+    form {
+        padding: 0px 40px;
+        text-align: left;
+//        background-color: @blueGray;
+//        .shadow(close);
+        .formColors(darken(@blueGrayLight, 8%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
+        label{
+            display: none;
+        }
+        input{
+            margin-bottom: 15px;
+            &[type=submit]{
+                margin-bottom: 0px;
+            }
+        }
+        .noMatch:after {
+            content: '\f06a';
+            position: absolute;
+            top: 37px; 
+            right: 10px;
+            font-size: 22px;
+            .fa;
+        }
     }
 }

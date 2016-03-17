@@ -3,23 +3,19 @@
         <div class="scroller">
             <h2>Create a New Account</h2>
             <form>
-                <p id="register-error"></p>
-                <label>Name
-                    <input type="name" name="name" required />
-                </label>
-                <label>Email Address
-                    <input type="email" name="email" required />
-                </label>
-                <label>Password
-                    <input type="password" name="password" required />
-                </label>
-                <label>Repeat Password
-                    <input type="password" name="repeat" required />
-                </label>
+                <!--<p id="register-error" style="display:none;"></p>-->
+                <label for="nameReg">Name</label>
+                <input id="nameReg" type="name" name="name" placeholder="Name" required />
+                <label for="emailReg">Email Address</label>
+                <input id="emailReg" type="email" name="email" placeholder="Email" required />
+                <label for="passwordReg">Password</label>
+                <input id="passwordReg" type="password" name="password" placeholder="Password" required />
+                <label for="repeatPasswordReg">Repeat Password</label>
+                    <input id="repeatPasswordReg" type="password" name="repeat" placeholder="Repeat Password" required />
                 <input type="submit" name="submitButton" value="Create Account" disabled />
             </form>
             <p class="hide">Registration successful!  Please check your email to verify your account.</p>
-            <button type="button" class="closeTab">Close Tab</button>
+            <button type="button" class="closeTab">Close</button>
         </div>
     </section>
 </template>
