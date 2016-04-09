@@ -24,124 +24,93 @@
     text-transform: @fontStyle;
 }
 
-
 //Initialize rems
-html{
-    font-size: 62.5%;
-}
+html{font-size: 62.5%;}
 body{
     .rw;
     .font(@baseFS,@baseLH,@baseLS,@light,none);
 }
-
-
-.asideLink{
-    margin: 36px auto 45px auto;
-    padding: 0px;
-    color: @gray;
-    border-bottom: 2px solid @gray;
-    .shadowNone;
-    .font(1.2,1.5,0.025,@normal,none);
+//Text Globals
+h1,h2,h3,h4,h5,p{
+    margin: 17px 0px 17px 0px;
+    color: @black;
 }
-
-
-
-h4{
-    color: @white;
-    text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 1px;
-    margin: 0px 0px 20px 0px;
-    &:first-child{
-        margin-top: 0px;
-    }
+h1{ //Should rarely be used as most content areas are children of predefined H1s
+    .font(3.8,3.8,0.025,@normal,uppercase);
+    color: @navy;
 }
-p {
-    color: @white;
-    font-size: 14px;
-    line-height: 22px;
-    text-align: left;
-    font-weight: 500;
-}
-
+h2{.font(2.4,2.8,0.025,@bold,none);}
+h3{.font(2.0,2.4,0.08,@normal,uppercase);}
+h4{.font(1.6,1.6,0.1,@normal,uppercase);}
+h5{.font(1.6,1.6,0,@bold,none);}
+p { .font(1.6,2.6,0,@light,none);}
 a{
     .textButtonColor(@teal);
+    font-weight: @bold;
 }
-
-
+//Text Body content
+/*.textBody{
+    //textBody Specific Styles
+}*/
 
 
 //Main Section headings
-.masterContainer section.mainSection > div > header{
+section.mainSection > div > header{
     text-align: center;
     padding-top: 100px;
     margin-bottom: 70px;
-    text-transform: uppercase;
     @media @mobile{
         padding-top: 40px;
         margin-bottom: 20px;
     }
     h1{
-        color: @black;
-        font-size: 50px;
-        line-height: 50px;
-        font-weight: normal;
-        padding-bottom: 23px;
-        border-bottom: 3px solid @gray;
-        margin-bottom: 26px;
         display: inline-block;
+        padding-bottom: 23px;
+        margin-bottom: 26px;
+        border-bottom: 3px solid @gray;
+        color: @black;
+        .font(5.0,5.0,0.025,@normal,uppercase);
         @media @mobile{
-            font-size: 25px;
-            line-height: 25px;
+            .font(2.5,2.5,0.025,@normal,uppercase);
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
         &:before, &:after{
             content:'';
-            height: 6px;
-            width: 6px;
-            background-color: darken(@teal, 5%);
-            border:3px solid @teal;
             display: inline-block;
             position: relative;
+            height: 6px;
+            width: 6px;
             top: -10px;
-            @media @mobile{
-                display: none;
-            }
+            background-color: darken(@teal, 5%);
+            border:3px solid @teal;
+            @media @mobile{display: none;}
         }
-        &:before{
-            left:-32px;
-        }
-        &:after{
-            right: -32px;
-        }
+        &:before{left:-32px;}
+        &:after{right: -32px;}
     }
     p{
-        text-align: center;
-        font: normal 16px/27px Georgia, serif;
-        .os;
         color: @navy;
+        text-align: center;
+        .os;
         @media @mobile{
-            font-size: 12px;
-            line-height: 20px;
             padding: 0px 20px;
-            br{
-                display: none;
-            }
+            .font(1.2,2.0,0.025,@normal,none);
+            br{display: none;}
         }
         &:after{
             .fa;
             content: "\f107";
             display: none;
-            color: @gray;
-            font-size: 50px;
-            line-height: 50px;
-            font-weight: 100;
             margin-top: 22px;
             margin-bottom: 36px;
+            color: @gray;
+            .font(5.0,5.0,0.025,@light,none);
         }
     }
 }
+
+
 
 
 //Contact
@@ -158,15 +127,11 @@ a{
         margin-bottom: 36px;
     }
 }
-
-.masterContainer section.mainSection.providers > div > header{
-    margin-bottom: 20px;
-}
-
+//Providers
+.masterContainer section.mainSection.providers > div > header{margin-bottom: 20px;}
+//Outreach
 .masterContainer section.mainSection.outreach > div > header{
-    h1, p{
-        color: @white;
-    }
+    h1, p{color: @white;}
     h1{
         &:before, &:after{
             content:'';
@@ -178,19 +143,3 @@ a{
     }
 }
 
-
-
-
-//Text Body content
-.textBody{
-    p{
-        color: @black;
-        margin: 10px 0px 10px 0px;
-        &:first-child{
-            margin: 0px 0px 10px 0px;
-        }
-        &:last-child{
-            margin: 10px 0px 0px 0px;
-        }
-    }
-}
