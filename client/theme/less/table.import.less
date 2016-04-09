@@ -1,0 +1,21 @@
+.tableColor(@baseColor, @headerBgColor, @headerTextColor){
+    th{
+        background-color: @headerBgColor;
+        color: @headerTextColor;
+    }
+    tr{
+        background-color: @baseColor;
+        &:nth-child(even){background-color: darken(@baseColor, 2.5%);}
+    }
+
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    .tableColor(@gray,@orange,@white);
+    .shadow(far);
+    th, td{
+        padding: 15px;
+    }
+}

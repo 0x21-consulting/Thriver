@@ -50,48 +50,79 @@
     }
 }
 
+//Default Form Colors
+form{.formColors(@lightBlue,@white,@teal,@black,@lightBlue,@teal,@white, @teal);}
+
 //Form Defaults
 form{
     input, textarea, select{
         font-family:inherit;
     }
+    input[type=checkbox], input[type=checkbox] + label{
+        display: inline-block;
+        width: auto;
+    }
+    input[type=checkbox] + label{
+        margin-right: 20px;
+    }
     label{
         display: block;
         position: relative;
-        .font(1.2,1.2,0.01,@bold,none);
-        color: @white;
-        .opacity(0.8);
+        .font(1.4,1.4,0.01,@bold,none);
+        //color: @white;
+        //.opacity(0.8);
         margin: 16px 0px 4px 0px;
         cursor: pointer;
-        &:hover{
+        /*&:hover{
             .opacity(1);
-        }
+        }*/
         &:first-child{
             margin: 0px 0px 4px 0px;
         }
     }
     label.radio{
         line-height: 47px;
-        padding: 1px 0px;
+        color: @white;
         cursor: pointer;
-        display: block;
+        display: inline-block;
         position: relative;
-        float: left;
+        float: none;
         text-align: center;
-        width: 33.33333%;
+        width: auto;
+        padding: 0px 20px;
         margin: 0px;
         .transition(background-color, 200ms, ease, 0ms);
     }
-    input{
+    input, textarea{
         display: block;
         width: 100%;
         text-indent: 12px;
         padding: 16px 0px;
         border: none;
-        .font(1.4,1.7,0.01,@bold,none);
+        .font(1.6,1.7,0.01,@bold,none);
         &:focus{
             outline: none;
         }
+    }
+    textarea{
+        text-indent: 0px;
+        width: ~'calc(100% - 32px)';
+        padding: 16px;
+        min-height: 200px;
+        resize: none;
+    }
+    select{
+        .font(1.6,1.7,0.01,@bold,none);
+    }
+    input[type=file]{
+        background-color: transparent;
+        color: @orange;
+        text-indent: 0px;
+    }
+    input.button {
+        width: auto;
+        text-indent: 0px;
+        margin: 20px 0px 20px 0px;
     }
     button.submit{
         text-indent: 0px;

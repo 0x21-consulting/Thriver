@@ -1,0 +1,85 @@
+//Main Section headings
+section.mainSection > div > header{
+    text-align: center;
+    padding-top: 100px;
+    margin-bottom: 70px;
+    @media @mobile{
+        padding-top: 40px;
+        margin-bottom: 20px;
+    }
+    h1{
+        display: inline-block;
+        padding-bottom: 23px;
+        margin-bottom: 26px;
+        border-bottom: 3px solid @gray;
+        color: @black;
+        .font(5.0,5.0,0.025,@normal,uppercase);
+        @media @mobile{
+            .font(2.5,2.5,0.025,@normal,uppercase);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        &:before, &:after{
+            content:'';
+            display: inline-block;
+            position: relative;
+            height: 6px;
+            width: 6px;
+            top: -10px;
+            background-color: darken(@teal, 5%);
+            border:3px solid @teal;
+            @media @mobile{display: none;}
+        }
+        &:before{left:-32px;}
+        &:after{right: -32px;}
+    }
+    p{
+        color: @navy;
+        text-align: center;
+        .os;
+        @media @mobile{
+            padding: 0px 20px;
+            .font(1.2,2.0,0.025,@normal,none);
+            br{display: none;}
+        }
+        &:after{
+            .fa;
+            content: "\f107";
+            display: none;
+            margin-top: 22px;
+            margin-bottom: 36px;
+            color: @gray;
+            .font(5.0,5.0,0.025,@light,none);
+        }
+    }
+}
+
+//Contact
+.masterContainer section.mainSection.contact > div > header{
+    margin-bottom: 0px;
+    &:after{
+        .fa;
+        content: "\f107";
+        display: block;
+        color: @gray;
+        font-size: 50px;
+        line-height: 50px;
+        font-weight: 100;
+        margin-bottom: 36px;
+    }
+}
+//Providers
+.masterContainer section.mainSection.providers > div > header{margin-bottom: 20px;}
+//Outreach
+.masterContainer section.mainSection.outreach > div > header{
+    h1, p{color: @white;}
+    h1{
+        &:before, &:after{
+            content:'';
+            height: 6px;
+            width: 6px;
+            background-color: @gray;
+            border:3px solid @white;
+        }
+    }
+}
