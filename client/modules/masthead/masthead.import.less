@@ -4,7 +4,7 @@ section.masthead{
     position: relative;
     overflow: hidden;
     width: 100%;
-    min-height: 600px;
+    //min-height: 600px;
     height: ~'calc(100vh - 268px)';
     padding: 199px 0px 0px 0px;
     text-align: center;
@@ -36,10 +36,12 @@ section.masthead{
         max-width: 1200px;
         margin: 0 auto;
         text-align: center;
+        color: @white;
     }
-    .cta{
+    a.cta{
         display: inline-block;
         .buttonColor(@orange);
+        margin-top: 20px;
     }
 }
 
@@ -69,7 +71,7 @@ section.masthead:after{
     position: absolute;
     bottom: 0px;
     left: 50%;
-    margin-left: -25px;
+    margin-left: -15px;
     content: "\f107";
     color: @white;
     will-change:transform,opacity;
