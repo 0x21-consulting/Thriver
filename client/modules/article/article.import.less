@@ -30,13 +30,13 @@ section.articleNews{
         }
     }
     //social
-    div.socialShare{
+    div.articleUtility{
         background: @gray;
         padding: 7px 40px;
-        text-align: right;
         position: relative;
         z-index: 2;
         .shadow(closeRight);
+        .clearfix;
         @media @mobile{text-align: center;}
         h3, ul, ul li{
             display: inline-block;
@@ -49,6 +49,12 @@ section.articleNews{
             position: relative;
             top: 2px;
         }
+        .left a{
+            color: @black;
+            .font(1.4,1.4,0.025,bold,none);
+        }
+        .left{float: left;}
+        .right{float: right;}
     }
     //article title
     div.title{
