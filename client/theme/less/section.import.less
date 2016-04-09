@@ -10,10 +10,10 @@ section.mainSection > div > header{
     h1{
         display: inline-block;
         padding-bottom: 23px;
-        margin-bottom: 26px;
-        border-bottom: 3px solid @gray;
+        margin-bottom: 10px;
+        border-bottom: 3px solid darken(@gray, 5%);
         color: @black;
-        .font(5.0,5.0,0.025,@normal,uppercase);
+        .font(5.0,5.0,0.025,@light,uppercase);
         @media @mobile{
             .font(2.5,2.5,0.025,@normal,uppercase);
             padding-bottom: 10px;
@@ -36,6 +36,7 @@ section.mainSection > div > header{
     p{
         color: @navy;
         text-align: center;
+        .font(1.4,2.0,0.1,500,uppercase);
         .os;
         @media @mobile{
             padding: 0px 20px;
