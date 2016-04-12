@@ -1,10 +1,9 @@
 section.events{
     background-color: @white;
-    padding-bottom: 100px;
     .eventsContainer{
+        margin: 0 auto;
         max-width: 1200px;
         .shadow(far);
-        margin: 0 auto;
         .flex;
     }
     aside.eventsSidebar{
@@ -12,23 +11,11 @@ section.events{
         width: 300px;
         height: 750px;
         background-color: darken(@teal,0.5%);
-        h1{
-            color: #fff;
-            text-align: center;
-            padding: 20px 0px 20px 0px;
-            margin: 0px;
-        }
         h2{
             display: block;
-            //margin: 0px 32px 23px 32px;
             text-align: center;
-            //background-color: @gray;
-            //color: @teal;
-            border-bottom: none;
             padding: 0px 0px 7px 0px;
-            font-size: 14px;
-            line-height: 14px;
-            white-space: nowrap;
+            .font(1.4,1.4,0.025,@light,none);
         }   
     }
     .eventsMain{

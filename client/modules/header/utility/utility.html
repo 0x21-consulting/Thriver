@@ -1,6 +1,11 @@
 <template name="utility">
     <nav class="utility">
         <ul>
+            <li class="languageSelect" data-sidebar="leftSmall">
+                <button type="button" title="languageSelect">
+                    <span class="fa up">&#xf1ab;</span><span class="fa close">&#xf00d;</span>
+                </button>
+            </li>
             {{#if currentUser}}
                 <li class="notifications" data-sidebar="leftSmall">
                     <button type="button">
@@ -40,6 +45,11 @@
             <li class="donate" data-sidebar="rightMedium">
                 <button type="button" title="Donate">
                     <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
+                </button>
+            </li>
+            <li class="library" data-sidebar="rightSmall">
+                <button type="button">
+                    <span class="fa up">&#xf02d;</span><span class="fa close">&#xf00d;</span>  Library
                 </button>
             </li>
             <li class="news" data-sidebar="rightLarge">

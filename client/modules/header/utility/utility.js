@@ -62,10 +62,12 @@ Template.utility.events({
 });
 // More sidebar closure methods... one for each template :(
 Template.body.events({ 'click .overlay' : closeAsides });
+Template.languageSelect.events (closure);
 Template.login.events          (closure);
 Template.register.events       (closure);
 Template.notifications.events  (closure);
 Template.accountDetails.events (closure);
 Template.twitter.events        (closure);
+Template.library.events        (closure);
 Template.news.events           (closure);
 Template.donate.events         (closure);
