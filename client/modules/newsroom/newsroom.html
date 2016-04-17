@@ -2,6 +2,11 @@
     <section class="news rightLarge hasSidebar">
         <div class="scroller">
             <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
+            {{#if currentUser}}
+                <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button>
+            {{else}}
+                <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Register Account to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button>
+            {{/if}}
             <ul class="newsTabs tabs">
                 <li class="active">In the News</li>
                 <li>Press Releases</li>
@@ -22,11 +27,6 @@
                 <form autocomplete="off">
                     <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
                 </form>
-                {{#if currentUser}}
-                    <button id="manageSubscriptions" class="newsroomButton manageSubscriptions"><span class="fa">&#xf0e0;</span> Manage Newsroom Subscriptions</button>
-                {{else}}
-                    <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister"><span class="fa">&#xf0e0;</span> Register Account to Subscribe to the Newsroom</button>
-                {{/if}}
             </aside>
             <ul class="newsContent tabsContent">
                 {{> inTheNews }}

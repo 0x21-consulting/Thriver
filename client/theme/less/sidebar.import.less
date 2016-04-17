@@ -34,6 +34,30 @@
     a{
         .transition(color,100ms,ease,0ms);
     }
+    aside.toolBar{
+        .clearfix;
+        padding: 40px 100px;
+        background-color: @blueGray;
+        form{
+            margin: 0 auto;
+            width: 300px;
+            position: relative;
+            .placeholderColor(@white);
+            label{
+                position: absolute;
+                color: @white;
+                font-size: 16px;
+                top: 6px;
+                font-weight: normal;
+            }
+            input{
+                font-weight: bold;
+            }
+        }
+        @media @mobile{
+            display: none;
+        }
+    }
     ul{
         margin: 0px;
         li{
