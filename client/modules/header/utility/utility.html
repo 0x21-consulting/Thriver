@@ -1,11 +1,6 @@
 <template name="utility">
     <nav class="utility">
         <ul>
-            <li class="languageSelect" data-sidebar="leftSmall">
-                <button type="button" title="languageSelect">
-                    <span class="fa up">&#xf1ab;</span><span class="fa close">&#xf00d;</span>
-                </button>
-            </li>
             {{#if currentUser}}
                 <li class="notifications" data-sidebar="leftSmall">
                     <button type="button">
@@ -37,6 +32,21 @@
                     </button>
                 </li>
             {{/if}}
+            <li class="social fa youtube">
+                <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
+                    &#xf167;
+                </a>
+            </li>
+            <li class="social fa facebook">
+                <a href="https://www.facebook.com/wcasa" target="_blank">
+                    &#xf082;
+                </a>
+            </li>
+            <li class="languageSelect" data-sidebar="rightSmall">
+                <button type="button" title="languageSelect">
+                    <span class="fa up">&#xf0ac;</span><span class="fa close">&#xf00d;</span>
+                </button>
+            </li>
             <li class="getHelp">
                 <button type="button" title="Get Help">
                     <span class="fa">&#xf06a;</span> Get Help
@@ -61,16 +71,6 @@
                 <button type="button">
                     <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
                 </button>
-            </li>
-            <li class="social fa youtube">
-                <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
-                    &#xf167;
-                </a>
-            </li>
-            <li class="social fa facebook">
-                <a href="https://www.facebook.com/wcasa" target="_blank">
-                    &#xf082;
-                </a>
             </li>
         </ul>
     </nav>

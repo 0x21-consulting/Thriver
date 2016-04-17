@@ -314,7 +314,7 @@ body{
         text-align: center;
         will-change: transform, opacity;
         .opacity(0);
-        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,100ms, @canvasEase, 0ms);
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,250ms, @canvasEase, 0ms);
     }
 }
 
@@ -356,7 +356,7 @@ body{
             .translate(0px,0px);
             opacity: 1;
         }
-        &.news{
+        &.news, &.learningCenter{
             right: 0px;
             .translate(1100px,0px);
             &.active{
