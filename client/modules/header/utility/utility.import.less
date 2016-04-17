@@ -1,7 +1,7 @@
 //Variables
 @utilityHeight: 36px;
 @utilityButtonPadding: 0px 12px;
-@socialButtonPadding: 0px 11px 0px 0px;
+@socialButtonPadding: 0px 11px 0px 11px;
 
 // Constants
 nav.utility{
@@ -32,7 +32,7 @@ nav.utility{
     li{
         //Button & Span Positioning
         position: relative;
-        &.social, &.getHelp, &.donate, &.twitter, &.news, &.library{
+        &.social, &.getHelp, &.donate, &.twitter, &.news, &.learningCenter{
             float: right;
         }
         &.login, &.accountDetails, &.notifications, &.register, &.logout, &.languageSelect{
@@ -53,12 +53,16 @@ nav.utility{
             }
         }
         &.social a{
+            display: inline-block;
+            height: @utilityHeight;
             padding: @socialButtonPadding;
-            .font(1.8,1.8,@baseLS,@light,normal);
+            .font(2.2,3.6,@baseLS,@light,normal);
             .textButtonColor(lighten(@blueGray,5%));
+            background-color: darken(@gray, 7%);
         }
-        .social.facebook a{
-            padding: 0px 12px 0px 6px;
+        &.social.facebook a{
+            //padding: 0px 12px 0px 6px;
+            background-color: darken(@gray, 5%);
         }
         //Button Colors
         &.login > button, &.accountDetails > button, &.donate > button{
@@ -67,8 +71,8 @@ nav.utility{
         &.twitter > button{
             .buttonColor(lighten(@blueGray,5%));
         }
-        &.library > button{
-            .buttonColor(lighten(@blueGray,5%));
+        &.learningCenter > button{
+            .buttonColor(saturate(@blue, 30%));
         }
         &.news > button{
             .buttonColor(@blue); 
@@ -87,7 +91,7 @@ nav.utility{
             .buttonColor(darken(@teal, 2.5%));
         }
         &.languageSelect > button{
-            .buttonColor(darken(@teal, 7.5%));
+            .buttonColor(darken(@teal, 5%));
         }
     }
     //Active Button

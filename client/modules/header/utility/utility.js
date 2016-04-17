@@ -68,6 +68,6 @@ Template.register.events       (closure);
 Template.notifications.events  (closure);
 Template.accountDetails.events (closure);
 Template.twitter.events        (closure);
-Template.library.events        (closure);
+Template.resources.events        (closure);
 Template.news.events           (closure);
 Template.donate.events         (closure);

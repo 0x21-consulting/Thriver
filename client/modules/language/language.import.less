@@ -1,0 +1,23 @@
+section.languageSelect{
+    .languageList {
+        .shadow(close);
+        h2 .fa{font-weight: @light;}
+        ul li{
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            cursor: pointer;
+            font-weight: @normal;
+            &:hover{
+                background-color: @blue;
+            }
+            &.active{
+                background-color: @teal;
+                .shadow(closeDown);
+                &:hover, &:nth-child(even):hover{
+                    background-color: @teal;
+                }
+            }
+        }
+    }
+}

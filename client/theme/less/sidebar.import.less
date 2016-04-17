@@ -49,6 +49,14 @@
                     background-color: darken(@sidebarContentBgColor, 4%);
                 }
             }
+            &.hoverLi{
+                li:hover{
+                    background-color: darken(@sidebarContentBgColor, 7.5%);
+                    &:nth-child(even){
+                        background-color: darken(@sidebarContentBgColor, 6.5%);
+                    }
+                }
+            }
         }
     }
     .closeTab{
