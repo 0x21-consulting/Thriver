@@ -23,6 +23,7 @@ input[type=submit], .button, button{
             top: 5px;
         }
         &.notificationsAlert{
+            border:2px solid @white;
             position: absolute;
             display: block;
             margin-left: 2px;
@@ -30,7 +31,6 @@ input[type=submit], .button, button{
             font-size: 14px;
             height: 12px;
             color: @yellow;
-            border: 2px solid darken(@teal, 2.5%);
             text-align: center;
             border-radius: 50%;
             line-height: 12px;
@@ -48,14 +48,26 @@ input[type=submit], .button, button{
 //Button Colors
 .buttonColor(@color){
     .color(background-color,@color,none);
+    span.notificationsAlert{
+        .color(border-color,@color,none);
+    }
     &:hover{
         .color(background-color,@color,light);
+        span.notificationsAlert{
+            .color(border-color,@color,light);
+        }
     }
     &:focus{
         .color(background-color,@color,lighter);
+        span.notificationsAlert{
+            .color(border-color,@color,lighter);
+        }
     }
     &:active{
         .color(background-color,@color,dark);
+        span.notificationsAlert{
+            .color(border-color,@color,dark);
+        }
     }
 }
 
