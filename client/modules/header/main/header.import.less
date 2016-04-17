@@ -4,6 +4,13 @@ header.mainHeader{
     height: 269px;
     width: 100%;
     .hardShadow(170%,55px,-35%,-50px);
+    &:after {
+        //Hard Shadow Move
+        .translate(0px,0px);
+        will-change:transform;
+        .transition(transform,325ms,@canvasEase,@canvasDelay);
+
+    }
     nav.mainNav{
         text-align: center;
         background-color: @white;
@@ -64,8 +71,6 @@ header.mainHeader nav.mainNav li a{
             .translate(0px,0px);
         }
     }
-    &:focus {
-    }
     @media @1450{
         margin: 0px 0px 0px 0px;
         .font(1.6,1.6,0.2,@normal,uppercase);
@@ -74,13 +79,7 @@ header.mainHeader nav.mainNav li a{
 
 
 //Fixed Header Styles
-.fixedHeader header.mainHeader{
-    height: auto;
-    nav.mainNav, nav.mainNav ul{
-    height: auto;
-    }
-}
-.fixedHeader header.mainHeader{
+/*.fixedHeader header.mainHeader{
     nav.mainNav{
         ul{
             padding:54px 0px 18px 0px;
@@ -93,10 +92,10 @@ header.mainHeader nav.mainNav li a{
             }
         }
         a{
-            will-change:background-color,color;
-            .font(1.4,1.4,0.2,@normal,uppercase);
-            .color(color,lighten(@navy, 2.5%),none);
-            .transition2(background-color,200ms,@canvasEase,0ms,color,200ms,@canvasEase,0ms);
+            //will-change:background-color,color;
+            //.font(1.4,1.4,0.2,@normal,uppercase);
+            //.color(color,lighten(@navy, 2.5%),none);
+            //.transition2(background-color,200ms,@canvasEase,0ms,color,200ms,@canvasEase,0ms);
             &:after{
                 top: 83%;
                 left: 16px;
@@ -143,6 +142,33 @@ header.mainHeader nav.mainNav li a{
             }
         }
     }
+}*/
+
+.fixedHeader header.mainHeader{
+    height: 136px;
+    &:after{
+        //Hard Shadow Move
+        .translate(0px,-137px);
+    }
+    nav.mainNav{
+        .translate(0px,-137px);
+        a{.font(1.4,1.4,0.2,@normal,uppercase);}
+        li.brand{
+            width: 132px;
+            height: 36px;
+            top: 198px;
+            left: 12px;
+            margin-left: 0px;
+            svg, svg image, a{
+                height: 36px;
+                width: 166px;
+            }
+            @media @1024{
+                left: 50%;
+                margin-left: -67px;
+            }
+        }
+    }
 }
 
 //Header Animations/ Transitions
@@ -163,16 +189,12 @@ header.mainHeader nav.mainNav li a{
 
 header.mainHeader nav.mainNav{
     will-change:transform;
-    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
-    ul{
-        will-change:padding;
-        .transition(padding,@headerDuration,@headerEase,@headerDelay);
-    }
+    .transition(transform,325ms,@canvasEase,@canvasDelay);
     li a {
-        .transition(font,@headerDuration,@headerEase,@headerDelay);
         will-change:font;
+        .transition(font,325ms,@headerEase,@headerDelay);
         &:after {
-            .transition2(opacity,250ms,@canvasEase,0ms,transform,250ms,@canvasEase,0ms);
+            //.transition2(opacity,250ms,@canvasEase,0ms,transform,250ms,@canvasEase,0ms);
         }
     }
     li.brand svg, li.brand svg image{
