@@ -48,8 +48,11 @@ input[type=submit], .button, button{
 //Button Colors
 .buttonColor(@color){
     .color(background-color,@color,none);
-    &:hover, &:focus{
+    &:hover{
         .color(background-color,@color,light);
+    }
+    &:focus{
+        .color(background-color,@color,lighter);
     }
     &:active{
         .color(background-color,@color,dark);

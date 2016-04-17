@@ -57,7 +57,7 @@ nav.utility{
             height: @utilityHeight;
             padding: @socialButtonPadding;
             .font(2.2,3.6,@baseLS,@light,normal);
-            .textButtonColor(lighten(@blueGray,5%));
+            .textButtonColor(@blueGray);
             background-color: darken(@gray, 7%);
         }
         &.social.facebook a{
@@ -98,9 +98,11 @@ nav.utility{
     li.active > button:first-child, button.active{
         .color(background-color,lighten(@navy,0%),none);
         .fa.close{
+            pointer-events: none;
             .opacity(1);
         }
         .fa.up{
+            pointer-events: none;
             .opacity(0);
         }
         &.notifications{

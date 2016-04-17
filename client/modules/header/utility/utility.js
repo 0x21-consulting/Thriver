@@ -34,6 +34,7 @@ Template.utility.events({
         // If this tab is already active, close sidebars
         if (that.classList.contains('active')) {
             closeAsides(event);
+            $(event.target).blur();
             return;
         }
         
