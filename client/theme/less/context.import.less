@@ -171,7 +171,7 @@ body{
 
 
 
-
+@fixedHeaderTranslate: -137px;
 
 
 body{
@@ -187,74 +187,46 @@ body{
         }
     }
     &.leftSmall{
-        .canvasCenter, .mainNav{
-           .translate(356px,0px);
-        }
-        .sidebarsLeft{
-           .translate(0px,0px);
-        }
+        .canvasCenter, .mainNav{.translate(356px,0px);}
+        .sidebarsLeft{.translate(0px,0px);}
     }
     &.leftMedium{
-        .canvasCenter, .mainNav{
-           .translate(570px,0px);
-        }
-        .sidebarsLeft{
-            width: 570px;
-           .translate(0px,0px);
-        }
+        .canvasCenter, .mainNav{.translate(570px,0px);}
+        .sidebarsLeft{width: 570px;.translate(0px,0px);}
     }
     &.rightSmall{
-        .canvasCenter, .mainNav{
-            .translate(-356px,0px);
-        }
-        .sidebarsRight{
-            right: 0px;
-            .translate(0px,0px);
-        }
+        .canvasCenter, .mainNav{.translate(-356px,0px);}
+        .sidebarsRight{right: 0px;.translate(0px,0px);}
     }
     &.rightMedium{
-        .canvasCenter, .mainNav{
-            left: inherit;
-            .translate(-656px,0px);
-        }
-        .sidebarsRight{
-            width: 656px;
-            .translate(0px,0px);
-        }
+        .canvasCenter, .mainNav{left: inherit;.translate(-656px,0px);}
+        .sidebarsRight{width: 656px;.translate(0px,0px);}
     }
     &.rightLarge{
-        .canvasCenter, .mainNav{
-            left: inherit;
-            .translate(-1100px,0px);
-        }
-        .sidebarsRight{
-            width: 1100px;
-            .translate(0px,0px);
-        }
+        .canvasCenter, .mainNav{left: inherit;.translate(-1100px,0px);}
+        .sidebarsRight{width: 1100px;.translate(0px,0px);}
         @media @1250{
-            .canvasCenter, .mainNav{
-                left: inherit;
-                .translate(-900px,0px);
-            }
-            .sidebarsRight{
-                width: 900px;
-                .translate(0px,0px);
-            }            
+            .canvasCenter, .mainNav{left: inherit;.translate(-900px,0px);}
+            .sidebarsRight{width: 900px;.translate(0px,0px);}            
         }
         @media @1024{
-            .canvasCenter, .mainNav{
-                left: inherit;
-                .translate(-700px,0px);
-            }
-            .sidebarsRight{
-                width: 700px;
-                .translate(0px,0px);
-            }            
+            .canvasCenter, .mainNav{left: inherit;.translate(-700px,0px);}
+            .sidebarsRight{width: 700px;.translate(0px,0px);}            
         }
     }
 }
 
-
+body.fixedHeader{
+    &.leftSmall{header.mainHeader nav.mainNav{.translate(356px,@fixedHeaderTranslate);}}
+    &.leftMedium{header.mainHeader nav.mainNav{.translate(570px,@fixedHeaderTranslate);}}
+    &.rightSmall{header.mainHeader nav.mainNav{.translate(-356px,@fixedHeaderTranslate);}}
+    &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-656px,@fixedHeaderTranslate);}}
+    &.rightLarge{
+        header.mainHeader nav.mainNav{left: inherit;.translate(-1100px,@fixedHeaderTranslate);}
+        @media @1250{header.mainHeader nav.mainNav{left: inherit;.translate(-900px,@fixedHeaderTranslate);}}
+        @media @1024{header.mainHeader nav.mainNav{left: inherit;.translate(-700px,@fixedHeaderTranslate);}}
+    }
+}
 
 
 
