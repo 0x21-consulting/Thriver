@@ -3,7 +3,7 @@
     <section class="learningCenter rightLarge hasSidebar">
         <div class="scroller">
             <h2><span class="fa">&#xf19c;</span> Learning Center</h2>
-            <ul class="newsTabs tabs">
+            <ul class="resourcesTabs tabs">
                 <li class="active">Library</li>
                 <li>Infosheets</li>
                 <li>Data &amp; Statistics</li>
@@ -11,10 +11,10 @@
             </ul>
             <aside class="toolBar">
                 <form autocomplete="off">
-                    <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
+                    <label for="searchResources" class="fa">&#xf002;</label><input id="searchResources" type="search" placeholder="Search" />
                 </form>
             </aside>
-            <ul class="newsContent tabsContent">
+            <ul class="resourcesContent tabsContent">
                 {{> library }}
                 {{> infosheets }}
                 {{> dataStatistics }}
@@ -25,12 +25,11 @@
     </section>
 </template>
 
-<!-- Newsletter Content Sections -->
 <template name="library">
     <li class="active">
-        <ul class="newsItems inTheNews stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>In the News</h2></li>
+        <ul class="resourcesItems library stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Library</h2></li>
             {{#each news}}
                 <li>
                     <div class="inner">
@@ -47,9 +46,9 @@
 
 <template name="infosheets">
     <li>
-        <ul class="newsItems stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Press Releases</h2></li>
+        <ul class="resourcesItems infosheets stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Infosheets</h2></li>
             {{#each news}}
                 <li>
                     <div class="inner">
@@ -68,9 +67,9 @@
 
 <template name="dataStatistics">
     <li>
-        <ul class="newsItems stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Action Alerts</h2></li>
+        <ul class="resourcesItems dataStatistics stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Data &amp; Statistics</h2></li>
             {{#each news}}
                 <li>
                     <div class="inner">
@@ -89,9 +88,9 @@
 
 <template name="webinarArchive">
     <li>
-        <ul class="newsItems newsletters stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Newsletters</h2></li>
+        <ul class="resourcesItems webinarArchive stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Webinar Archive</h2></li>
             {{#each news}}
                 <li>
                     <div class="inner">
@@ -109,3 +108,6 @@
 </template>
 
 
+<template name="backToResourcesMobile">
+    <li class="menuTitle resourcesTabMenu dtHide"><a href="#">Learning Center</a></li>
+</template>
