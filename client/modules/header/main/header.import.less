@@ -174,12 +174,12 @@ header.mainHeader nav.mainNav li a{
 //Header Animations/ Transitions
 .fixedHeader header.mainHeader .brand{
     will-change:transform;
-    animation: brandanimate @headerDuration @headerDelay 1 @headerFirstEase alternate;
+    animation: brandanimate 470ms @headerDelay 1 @headerFirstEase alternate;
 }
 
 .fixedHeaderReturn header.mainHeader .brand{
     will-change:transform;
-    animation: brandanimatereturn @headerDuration @headerDelay 1 @headerEase alternate;
+    animation: brandanimatereturn 470ms @headerDelay 1 @headerEase alternate;
 }
 @media @mobile{
     header.mainHeader .brand{
@@ -189,10 +189,10 @@ header.mainHeader nav.mainNav li a{
 
 header.mainHeader nav.mainNav{
     will-change:transform;
-    .transition(transform,325ms,@canvasEase,@canvasDelay);
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
     li a {
         will-change:font;
-        .transition(font,325ms,@headerEase,@headerDelay);
+        .transition(font,@canvasDuration,@headerEase,@headerDelay);
         &:after {
             //.transition2(opacity,250ms,@canvasEase,0ms,transform,250ms,@canvasEase,0ms);
         }
