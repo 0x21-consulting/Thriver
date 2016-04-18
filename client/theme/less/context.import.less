@@ -201,6 +201,7 @@ body{
 
 
 .sidebar{width:4000px !important;}
+.sidebar section{position: absolute;}
 aside.sidebar.sidebarsRight {
     left: 100% !important;
     section{
@@ -268,12 +269,7 @@ aside.sidebar.sidebarsLeft {
 }
 
 .sidebar.sidebarsLeft{
-    left: 0px;
-    .translate(-356px,0px);
     section{
-        position: absolute;
-        left:0px;
-        .translate(-356px,0px);
         width: 356px;
         &.active{
             .translate(0px,0px);
@@ -294,8 +290,6 @@ aside.sidebar.sidebarsLeft {
 
 
 .sidebar.sidebarsRight{
-    right: 0px;
-    .translate(356px,0px);
     section{
         right: 0px;
         .translate(356px,0px);
