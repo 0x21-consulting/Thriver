@@ -8,6 +8,7 @@ body, html{
 
 body{
     max-width: 100%;
+    overflow-x: hidden; //Can we get rid of this?
     .full{
         width: 100%;
     }
@@ -159,79 +160,6 @@ body{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-@fixedHeaderTranslate: -137px;
-
-
-body{
-    overflow-x: hidden;
-    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
-        overflow: hidden;
-        .overlay{
-            .opacity(0.85);
-            visibility: visible;
-            &:hover{
-                .opacity(0.95);
-            }       
-        }
-    }
-    &.leftSmall{
-        .canvasCenter, .mainNav{.translate(356px,0px);}
-        .sidebarsLeft{.translate(0px,0px);}
-    }
-    &.leftMedium{
-        .canvasCenter, .mainNav{.translate(570px,0px);}
-        .sidebarsLeft{width: 570px;.translate(0px,0px);}
-    }
-    &.rightSmall{
-        .canvasCenter, .mainNav{.translate(-356px,0px);}
-        .sidebarsRight{right: 0px;.translate(0px,0px);}
-    }
-    &.rightMedium{
-        .canvasCenter, .mainNav{left: inherit;.translate(-656px,0px);}
-        .sidebarsRight{width: 656px;.translate(0px,0px);}
-    }
-    &.rightLarge{
-        .canvasCenter, .mainNav{left: inherit;.translate(-1100px,0px);}
-        .sidebarsRight{width: 1100px;.translate(0px,0px);}
-        @media @1250{
-            .canvasCenter, .mainNav{left: inherit;.translate(-900px,0px);}
-            .sidebarsRight{width: 900px;.translate(0px,0px);}            
-        }
-        @media @1024{
-            .canvasCenter, .mainNav{left: inherit;.translate(-700px,0px);}
-            .sidebarsRight{width: 700px;.translate(0px,0px);}            
-        }
-    }
-}
-
-body.fixedHeader{
-    &.leftSmall{header.mainHeader nav.mainNav{.translate(356px,@fixedHeaderTranslate);}}
-    &.leftMedium{header.mainHeader nav.mainNav{.translate(570px,@fixedHeaderTranslate);}}
-    &.rightSmall{header.mainHeader nav.mainNav{.translate(-356px,@fixedHeaderTranslate);}}
-    &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-656px,@fixedHeaderTranslate);}}
-    &.rightLarge{
-        header.mainHeader nav.mainNav{left: inherit;.translate(-1100px,@fixedHeaderTranslate);}
-        @media @1250{header.mainHeader nav.mainNav{left: inherit;.translate(-900px,@fixedHeaderTranslate);}}
-        @media @1024{header.mainHeader nav.mainNav{left: inherit;.translate(-700px,@fixedHeaderTranslate);}}
-    }
-}
-
-
-
-
-
 //// Translated Element Classes
 
 .translateIn{
@@ -243,8 +171,6 @@ body.fixedHeader{
 .translateTopOut{
     .translate(0px, -100%);
 }
-
-
 
 
 .canvasCenter{
@@ -261,13 +187,60 @@ body.fixedHeader{
 
 
 
-//Should be m
-/*> li{
-    :nth-child(even){background-color: darken(@background, 2%);
-}*/
 
 
-//Transfered from sidebar.import.less
+
+
+
+
+
+//Below Sidebar Section Cleaned Up
+
+@fixedHeaderTranslate: -137px;
+
+
+
+.sidebar{width:4000px !important;}
+aside.sidebar.sidebarsRight {
+    left: 100% !important;
+    section{
+        right: inherit !important;
+        left: 0px !important;
+        &.rightSmall{
+            .translate(356px,0px);
+        }
+        &.rightMedium{
+            .translate(656px,0px);
+        }
+        &.rightLarge{
+            .translate(1100px,0px);
+        }
+        &.active{
+            .translate(0px,0px) !important;
+        }
+    }
+}
+
+aside.sidebar.sidebarsLeft {
+    right: 100% !important;
+    left: inherit !important;
+    section{
+        right: 0px !important;
+        left: inherit !important;
+        &.leftSmall{
+            .translate(-356px,0px);
+        }
+        &.leftMedium{
+            .translate(-570px,0px);
+        }
+        &.active{
+            .translate(0px,0px);
+        }
+    }
+}
+
+
+
 
 .sidebar{
     position: fixed;
@@ -295,7 +268,6 @@ body.fixedHeader{
 }
 
 .sidebar.sidebarsLeft{
-    width: 356px;
     left: 0px;
     .translate(-356px,0px);
     section{
@@ -322,7 +294,6 @@ body.fixedHeader{
 
 
 .sidebar.sidebarsRight{
-    width: 356px;
     right: 0px;
     .translate(356px,0px);
     section{
@@ -331,6 +302,9 @@ body.fixedHeader{
         &.active{
             .translate(0px,0px);
             .opacity(1);
+        }
+        &.twitter{
+            width: 356px; //Why just Twitter requiring this?
         }
         &.news, &.learningCenter{
             right: 0px;
@@ -348,6 +322,59 @@ body.fixedHeader{
                 .opacity(1);
             }
         }
+    }
+}
+
+body{
+    .sidebarsLeft{.translate(0px,0px);}
+    .sidebarsRight{.translate(0px,0px);}
+    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden;
+        .overlay{
+            .opacity(0.85);
+            visibility: visible;
+            &:hover{
+                .opacity(0.95);
+            }       
+        }
+    }
+    &.leftSmall{
+        .canvasCenter, .mainNav, .sidebarsLeft{.translate(356px,0px);}
+    }
+    &.leftMedium{
+        .canvasCenter, .mainNav, .sidebarsLeft{.translate(570px,0px);}
+        .sidebarsLeft{width: 570px;} //maybe declare this somewhere else
+    }
+    &.rightSmall{
+        .canvasCenter, .mainNav, .sidebarsRight{.translate(-356px,0px);}
+    }
+    &.rightMedium{
+        .canvasCenter, .mainNav, .sidebarsRight{.translate(-656px,0px);}
+        .sidebarsRight{width: 656px;} // maybe declare this somewhere else
+    }
+    &.rightLarge{
+        .canvasCenter, .mainNav, .sidebarsRight{.translate(-1100px,0px);}
+        .sidebarsRight{width: 1100px;} //maybe declare this somewhere else
+        @media @1250{
+            .canvasCenter, .mainNav, .sidebarsRight{.translate(-900px,0px);}
+            .sidebarsRight{width: 900px;} //maybe declare this somewhere else            
+        }
+        @media @1024{
+            .canvasCenter, .mainNav, .sidebarsRight{.translate(-700px,0px);}
+            .sidebarsRight{width: 700px;} //maybe declare this somewhere else            
+        }
+    }
+}
+
+body.fixedHeader{
+    &.leftSmall{header.mainHeader nav.mainNav{.translate(356px,@fixedHeaderTranslate);}}
+    &.leftMedium{header.mainHeader nav.mainNav{.translate(570px,@fixedHeaderTranslate);}}
+    &.rightSmall{header.mainHeader nav.mainNav{.translate(-356px,@fixedHeaderTranslate);}}
+    &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-656px,@fixedHeaderTranslate);}}
+    &.rightLarge{
+        header.mainHeader nav.mainNav{left: inherit;.translate(-1100px,@fixedHeaderTranslate);}
+        @media @1250{header.mainHeader nav.mainNav{left: inherit;.translate(-900px,@fixedHeaderTranslate);}}
+        @media @1024{header.mainHeader nav.mainNav{left: inherit;.translate(-700px,@fixedHeaderTranslate);}}
     }
 }
 
