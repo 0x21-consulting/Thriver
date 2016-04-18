@@ -200,24 +200,27 @@ body{
 
 
 
-.sidebar{width:4000px !important;}
+.sidebar.sidebarsRight{width: 1100px;}
 .sidebar section{position: absolute;}
 aside.sidebar.sidebarsRight {
     left: 100% !important;
     section{
-        right: inherit !important;
-        left: 0px !important;
+        left: inherit !important;
+        right: 0px !important;
         &.rightSmall{
-            .translate(356px,0px);
+            .translate(1100px,0px);
         }
         &.rightMedium{
-            .translate(656px,0px);
+            .translate(1100px,0px);
         }
         &.rightLarge{
             .translate(1100px,0px);
         }
         &.active{
-            .translate(0px,0px) !important;
+            .translate(-1100px,0px) !important;
+        }
+        &.active.rightMedium{
+            .translate(-656px,0px) !important;
         }
     }
 }
@@ -260,12 +263,12 @@ aside.sidebar.sidebarsLeft {
         text-align: center;
         will-change: transform, opacity;
         .opacity(0);
-        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,350ms, @canvasEase, 0ms);
+        .transition2(transform,500ms,@canvasEase,0ms, opacity,250ms, @canvasEase, 0ms);
     }
 }
 
 .sidebar.sidebarsLeft section.active, .sidebar.sidebarsRight section.active{
-    .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 0ms);
+    .transition2(transform,300ms,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 50ms);
 }
 
 .sidebar.sidebarsLeft{
