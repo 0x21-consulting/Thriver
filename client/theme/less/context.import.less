@@ -71,7 +71,7 @@ body{
     left: 0px;
     visibility: hidden;
     background-color: @navy;
-    opacity: 0;
+    .opacity(0);
     z-index: 3;
     cursor: pointer;
     width: 100%;
@@ -129,12 +129,12 @@ body{
 .masterContainer > section:nth-child(2){
     will-change:opacity,transition;
     .transition2(transform,500ms,@canvasEase, 100ms, opacity,500ms,@canvasEase, 100ms);
-    opacity: 0;
+    .opacity(0);
     .translate(0px,-35px);
 }
 .fixedHeader{
     .masterContainer > section:nth-child(2){
-        opacity: 1;
+        .opacity(1);
         .translate(0px,0px);
     }
 }
@@ -179,10 +179,10 @@ body{
     &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
         overflow: hidden;
         .overlay{
-            opacity: 0.85; 
+            .opacity(0.85);
             visibility: visible;
             &:hover{
-                opacity: 0.95;
+                .opacity(0.95);
             }       
         }
     }
@@ -286,8 +286,12 @@ body.fixedHeader{
         text-align: center;
         will-change: transform, opacity;
         .opacity(0);
-        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,250ms, @canvasEase, 0ms);
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,350ms, @canvasEase, 0ms);
     }
+}
+
+.sidebar.sidebarsLeft section.active, .sidebar.sidebarsRight section.active{
+    .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 0ms);
 }
 
 .sidebar.sidebarsLeft{
@@ -301,7 +305,7 @@ body.fixedHeader{
         width: 356px;
         &.active{
             .translate(0px,0px);
-            opacity: 1;
+            .opacity(1);
         }
         &.accountDetails{
             width: 570px;
@@ -309,7 +313,7 @@ body.fixedHeader{
             .translate(-570px,0px);
             &.active{
                 .translate(0px,0px);
-                opacity: 1;
+                .opacity(1);
             }
         }
     }
@@ -326,14 +330,14 @@ body.fixedHeader{
         .translate(356px,0px);
         &.active{
             .translate(0px,0px);
-            opacity: 1;
+            .opacity(1);
         }
         &.news, &.learningCenter{
             right: 0px;
             .translate(1100px,0px);
             &.active{
                 .translate(0px,0px);
-                opacity: 1;
+                .opacity(1);
             }
         }
         &.donate{
@@ -341,7 +345,7 @@ body.fixedHeader{
             .translate(656px,0px);
             &.active{
                 .translate(0px,0px);
-                opacity: 1;
+                .opacity(1);
             }
         }
     }
