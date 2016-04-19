@@ -334,6 +334,15 @@ Template.accountDetails.events({
     },
     'click section.accountDetails h3': function (event) {
         removeOpenAccounts();
+    },
+    'click .libraryMenu .viewLibrary': function (event) {
+        alert('Open up the catalogue pane');
+    },
+    'click .libraryMenu .viewDetails': function (event) {
+        alert('Open up the details of the associated catalogue item in catalogue');
+    },
+    'click .libraryMenu .text a': function (event) {
+        alert('Open up the details of the associated catalogue item in catalogue');
     }
 
 });
