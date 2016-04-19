@@ -222,16 +222,16 @@ aside.sidebar{
         text-align: center;
         will-change: transform, opacity;
         .opacity(0);
-        .transition2(transform,500ms,@canvasEase,0ms, opacity,250ms, @canvasEase, 0ms);
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,300ms, @canvasEase,0ms);
         //Sidebar Section Default Off-canvas translate and width
-        &.leftSmall{.translate(-(@leftSmallWidth),0px); width: @leftSmallWidth;}
+        &.leftSmall{.translate(-(@leftMediumWidth),0px); width: @leftSmallWidth;}
         &.leftMedium{.translate(-(@leftMediumWidth),0px); width: @leftMediumWidth;}
-        &.rightSmall{.translate(@rightSmallWidth,0px); width: @rightSmallWidth;}
-        &.rightMedium{.translate(@rightMediumWidth,0px); width: @rightMediumWidth;}
+        &.rightSmall{.translate(@rightLargeWidth,0px); width: @rightSmallWidth;}
+        &.rightMedium{.translate(@rightLargeWidth,0px); width: @rightMediumWidth;}
         &.rightLarge{.translate(@rightLargeWidth,0px); width: @rightLargeWidth;}
         //Active Sidebar Section
         &.active{
-            .transition2(transform,300ms,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 50ms);
+            .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 100ms);
             .translate(0px,0px);
             .opacity(1); 
         }
