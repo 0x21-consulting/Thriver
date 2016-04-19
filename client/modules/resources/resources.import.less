@@ -38,6 +38,21 @@ section.learningCenter{
         .textButtonColor(lighten(@teal, 2.5%));
         .font(1.4,1.4,0.01,@normal,none);
     }
+    form{
+        .styledSelect{
+            width:100%;
+            margin: 10px 1% 0px 0px;
+        }
+        input[type=submit]{
+            margin-top: 10px;
+            text-indent: 0px;
+            margin-bottom: 6px;
+        }
+        button.viewAll{
+            .textButtonColor(@gray);
+            .shadowNone;
+        }
+    }
     ul.newsContent{
         @media @mobile{
             position: fixed;
