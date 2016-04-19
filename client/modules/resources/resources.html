@@ -1,17 +1,39 @@
 <!--Load More template needs to be globalized, currently in newsroom-->
 <template name="resources">
-    <section class="learningCenter rightLarge hasSidebar">
+    <section class="learningCenter rightMedium hasSidebar">
         <div class="scroller">
             <h2><span class="fa">&#xf19c;</span> Learning Center</h2>
             <ul class="resourcesTabs tabs">
                 <li class="active">Library</li>
                 <li>Infosheets</li>
-                <li>Data &amp; Statistics</li>
-                <li>Webinar Archive</li>
+                <li>Stats &amp; Data</li>
+                <li>Webinars</li>
             </ul>
             <aside class="toolBar">
                 <form autocomplete="off">
-                    <label for="searchResources" class="fa">&#xf002;</label><input id="searchResources" type="search" placeholder="Search" />
+                    <label for="searchResources" class="fa">&#xf002;</label>
+                    <input id="searchResources" type="search" placeholder="Search" />
+                    <fieldset class="filter">
+                        <div class="styledSelect fullBlockMob">
+                            <label for="material">Material</label>
+                            <select id="material" name="material">
+                                <option value="0">Select Material Type</option>
+                                <option value="01">Book</option>
+                                <option value="02">CD</option>
+                                <option value="03">eBook</option>
+                            </select>
+                        </div>
+                        <div class="styledSelect fullBlockMob">
+                            <label for="category">Category</label>
+                            <select id="category" name="category">
+                                <option value="0">Select Category</option>
+                                <option value="01">Survivors</option>
+                                <option value="02">Providers</option>
+                                <option value="03">Resources</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Filter Results" />
+                    </fieldset>
                 </form>
             </aside>
             <ul class="resourcesContent tabsContent">
