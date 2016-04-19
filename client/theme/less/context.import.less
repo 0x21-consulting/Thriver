@@ -194,59 +194,20 @@ body{
 
 
 
-//Below Sidebar Section Cleaned Up
+//Sidebar / Main Canvas Interaction and Animation Controls
+@fixedHeaderTranslate: -137px; //Vertical Lift of Header on Fixed Navigation
+//Sidebar Widths
+@leftSmallWidth: 356px;
+@leftMediumWidth: 570px;
+@rightSmallWidth: 356px;
+@rightMediumWidth: 656px;
+@rightLargeWidth: 1100px;
+//Page Take Over Opacities
+@overlayOpacity: 0.85;
+@overlayOpacityHover: 0.95;
 
-@fixedHeaderTranslate: -137px;
-
-
-
-.sidebar.sidebarsRight{width: 1100px;}
-.sidebar section{position: absolute;}
-aside.sidebar.sidebarsRight {
-    left: 100% !important;
-    section{
-        left: inherit !important;
-        right: 0px !important;
-        &.rightSmall{
-            .translate(1100px,0px);
-        }
-        &.rightMedium{
-            .translate(1100px,0px);
-        }
-        &.rightLarge{
-            .translate(1100px,0px);
-        }
-        &.active{
-            .translate(-1100px,0px) !important;
-        }
-        &.active.rightMedium{
-            .translate(-656px,0px) !important;
-        }
-    }
-}
-
-aside.sidebar.sidebarsLeft {
-    right: 100% !important;
-    left: inherit !important;
-    section{
-        right: 0px !important;
-        left: inherit !important;
-        &.leftSmall{
-            .translate(-356px,0px);
-        }
-        &.leftMedium{
-            .translate(-570px,0px);
-        }
-        &.active{
-            .translate(0px,0px);
-        }
-    }
-}
-
-
-
-
-.sidebar{
+//Context
+aside.sidebar{
     position: fixed;
     height: 100%;
     height: 100vh;
@@ -254,126 +215,70 @@ aside.sidebar.sidebarsLeft {
     z-index: @sidebarZ;
     will-change: transform, width;
     .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay,width,@canvasDuration, @canvasEase, @canvasDelay);
-    .scroller{
-        height: ~'calc(100vh - 24px)';
-    }
-    section{
+    .scroller{height: ~'calc(100vh - 24px)';}
+    > section{
         position: absolute;
-        top: 0px;
+        left: 0px;
         text-align: center;
         will-change: transform, opacity;
         .opacity(0);
         .transition2(transform,500ms,@canvasEase,0ms, opacity,250ms, @canvasEase, 0ms);
-    }
-}
-
-.sidebar.sidebarsLeft section.active, .sidebar.sidebarsRight section.active{
-    .transition2(transform,300ms,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 50ms);
-}
-
-.sidebar.sidebarsLeft{
-    section{
-        width: 356px;
+        //Sidebar Section Default Off-canvas translate and width
+        &.leftSmall{.translate(-(@leftSmallWidth),0px); width: @leftSmallWidth;}
+        &.leftMedium{.translate(-(@leftMediumWidth),0px); width: @leftMediumWidth;}
+        &.rightSmall{.translate(@rightSmallWidth,0px); width: @rightSmallWidth;}
+        &.rightMedium{.translate(@rightMediumWidth,0px); width: @rightMediumWidth;}
+        &.rightLarge{.translate(@rightLargeWidth,0px); width: @rightLargeWidth;}
+        //Active Sidebar Section
         &.active{
+            .transition2(transform,300ms,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 50ms);
             .translate(0px,0px);
-            .opacity(1);
+            .opacity(1); 
         }
-        &.accountDetails{
-            width: 570px;
-            left: 0px;
-            .translate(-570px,0px);
-            &.active{
-                .translate(0px,0px);
-                .opacity(1);
-            }
+    }
+    &.sidebarsLeft{
+        right: 100%;
+        width: @leftMediumWidth; //Should be widest sidebar on given side
+        section{
+            left: inherit;
+            right: 0px;
+            &.active{.translate(0px,0px);}
         }
+    }
+    &.sidebarsRight{
+        width: @rightLargeWidth; //Should be widest sidebar on given side
+        left: 100%;
     }
 }
 
-
-
-.sidebar.sidebarsRight{
-    section{
-        right: 0px;
-        .translate(356px,0px);
-        &.active{
-            .translate(0px,0px);
-            .opacity(1);
-        }
-        &.twitter{
-            width: 356px; //Why just Twitter requiring this?
-        }
-        &.news, &.learningCenter{
-            right: 0px;
-            .translate(1100px,0px);
-            &.active{
-                .translate(0px,0px);
-                .opacity(1);
-            }
-        }
-        &.donate{
-            right: 0px;
-            .translate(656px,0px);
-            &.active{
-                .translate(0px,0px);
-                .opacity(1);
-            }
-        }
-    }
-}
-
+//Canvas Translate
 body{
-    .sidebarsLeft{.translate(0px,0px);}
-    .sidebarsRight{.translate(0px,0px);}
+    &.leftSmall{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftSmallWidth,0px);}}
+    &.leftMedium{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftMediumWidth,0px);}}
+    &.rightSmall{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightSmallWidth),0px);}}
+    &.rightMedium{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightMediumWidth),0px);}}
+    &.rightLarge{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightLargeWidth),0px);}}
+    //Fixed Header Requires X Transform Accomodation
+    &.fixedHeader{
+        &.leftSmall{header.mainHeader nav.mainNav{.translate(@leftSmallWidth,@fixedHeaderTranslate);}}
+        &.leftMedium{header.mainHeader nav.mainNav{.translate(@leftMediumWidth,@fixedHeaderTranslate);}}
+        &.rightSmall{header.mainHeader nav.mainNav{.translate(-(@rightSmallWidth),@fixedHeaderTranslate);}}
+        &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightMediumWidth),@fixedHeaderTranslate);}}
+        &.rightLarge{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightLargeWidth),@fixedHeaderTranslate);}}
+    }
+}
+
+//Overlay for Sidebars
+body{
     &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
-        overflow: hidden;
         .overlay{
-            .opacity(0.85);
+            .opacity(@overlayOpacity);
             visibility: visible;
-            &:hover{
-                .opacity(0.95);
-            }       
-        }
-    }
-    &.leftSmall{
-        .canvasCenter, .mainNav, .sidebarsLeft{.translate(356px,0px);}
-    }
-    &.leftMedium{
-        .canvasCenter, .mainNav, .sidebarsLeft{.translate(570px,0px);}
-        .sidebarsLeft{width: 570px;} //maybe declare this somewhere else
-    }
-    &.rightSmall{
-        .canvasCenter, .mainNav, .sidebarsRight{.translate(-356px,0px);}
-    }
-    &.rightMedium{
-        .canvasCenter, .mainNav, .sidebarsRight{.translate(-656px,0px);}
-        .sidebarsRight{width: 656px;} // maybe declare this somewhere else
-    }
-    &.rightLarge{
-        .canvasCenter, .mainNav, .sidebarsRight{.translate(-1100px,0px);}
-        .sidebarsRight{width: 1100px;} //maybe declare this somewhere else
-        @media @1250{
-            .canvasCenter, .mainNav, .sidebarsRight{.translate(-900px,0px);}
-            .sidebarsRight{width: 900px;} //maybe declare this somewhere else            
-        }
-        @media @1024{
-            .canvasCenter, .mainNav, .sidebarsRight{.translate(-700px,0px);}
-            .sidebarsRight{width: 700px;} //maybe declare this somewhere else            
+            &:hover{.opacity(@overlayOpacityHover);}       
         }
     }
 }
 
-body.fixedHeader{
-    &.leftSmall{header.mainHeader nav.mainNav{.translate(356px,@fixedHeaderTranslate);}}
-    &.leftMedium{header.mainHeader nav.mainNav{.translate(570px,@fixedHeaderTranslate);}}
-    &.rightSmall{header.mainHeader nav.mainNav{.translate(-356px,@fixedHeaderTranslate);}}
-    &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-656px,@fixedHeaderTranslate);}}
-    &.rightLarge{
-        header.mainHeader nav.mainNav{left: inherit;.translate(-1100px,@fixedHeaderTranslate);}
-        @media @1250{header.mainHeader nav.mainNav{left: inherit;.translate(-900px,@fixedHeaderTranslate);}}
-        @media @1024{header.mainHeader nav.mainNav{left: inherit;.translate(-700px,@fixedHeaderTranslate);}}
-    }
-}
 
 
 
