@@ -1,18 +1,20 @@
 <template name="accountDetails">
     <section class="accountDetails leftMedium hasSidebar">
         <div class="scroller">
-            <h2><span class="fa">&#xf007;</span> Account Settings</h2>
+            <h2><span class="fa">&#xf007;</span> Account Details</h2>
             <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
             <ul class="accountDetailsTabs tabs">
                 <li class="active"><span class="fa">&#xf007;</span> Profile</li>
                 <li><span class="fa">&#xf0e0;</span> Subscriptions</li>
                 <li><span class="fa">&#xf274;</span> Events</li>
+                <li><span class="fa">&#xf02d;</span> Catalogue</li>
             </ul>
             <!--See above comment-->
             <ul class="accountDetailsContent tabsContent">
                 {{> profile }}
                 {{> subscriptions }}
                 {{> eventsRegister }}
+                {{> libraryActivity}}
             </ul>
             <button type="button" class="closeTab">Close</button>
         </div>
@@ -20,7 +22,6 @@
 </template>
 
 <!-- Account Details Content Sections -->
-
 <template name="profile">
     <li class="active accountSettings">
         <h3>Account Settings</h3>
@@ -116,7 +117,7 @@
             {{>eventsRegistered}}
             {{>eventsRegistered}}
             <li>        
-                <button type="button" class="viewEvents">View All Events <span class="fa inline">&#xf0da;</span></button>
+                <button type="button" class="viewEvents redirectButton">View All Events <span class="fa inline">&#xf0da;</span></button>
             </li>
         </ul>
     </li>
@@ -143,3 +144,42 @@
     <span>You have been unregistered for event.
     <button type="button" class="undo">Undo</button></span>
 </template>
+
+
+<template name="libraryActivity">
+    <li class="registeredEvents">
+        <h3>Catalogue Activity</h3>
+        <ul class="libraryMenu stripes">
+            {{>libraryActivtyItem}}
+            {{>libraryActivtyItem}}
+            <li>        
+                <button type="button" class="viewLibrary redirectButton">View Catalogue <span class="fa inline">&#xf0da;</span></button>
+            </li>
+        </ul>
+    </li>
+</template>
+
+<template name="libraryActivtyItem">
+    <li class="libraryActivityItem">
+        <span class="text"><a href="#">"There is diversity Within Diversity": Community Leaders' Views on increasing diversity in youth serving organizations.</a></span>
+        <span class="byLine">Sumru Erkut, et al., Center for Research on Women, 1993</span>
+        <dl class="status">
+          <dt>Status</dt>
+          {{>statusDeliver}}
+        </dl>
+        <span><button type="button" class="viewDetails">Item Details</button></span>
+    </li>
+</template>
+
+
+
+<template name="noLibraryActivity">
+    <li class="notificationEmpty">
+        No activity at this time.
+    </li>
+</template>
+
+<template name="statusPending"><dd class="statusPending">Pending Response from WCASA</dd></template>
+<template name="statusOccupy"><dd class="statusOccupy">You are Currently Occupying this Item</dd></template>
+<template name="statusDeliver"><dd class="statusDelivery">Scheduled to be Delivered</dd></template>
+<template name="statusPendingAvailability"><dd class="statusPendingAvailability">Pending Availability</dd></template>

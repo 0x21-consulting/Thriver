@@ -2,10 +2,10 @@
 ul.notificationMenu{
     background-color: @blueGray;
 }
-ul.eventsMenu, ul.notificationMenu{
+ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
     > li{
         padding: 36px;
-        .dateMeta{
+        .dateMeta, .byLine{
             .font(1.2,1.7,0.025,@bold,normal);
             color: lighten(@lightBlue, 30%);
         }
@@ -19,7 +19,7 @@ ul.eventsMenu, ul.notificationMenu{
         }
     }
 }
-ul.notificationMenu, ul.eventsMenu{
+ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
     li.notificationEmpty, li.eventsEmpty{
         text-align: center;
         color: @white;
@@ -39,7 +39,7 @@ ul.notificationMenu, ul.eventsMenu{
              margin: 10px 0px 0px 0px;
              background-color: transparent;
         }
-        &.viewEvents{
+        &.redirectButton{
             display: block;
             margin: 0px auto;
             .buttonColor(darken(@lightBlue, 2.5%));
@@ -68,9 +68,22 @@ ul.notificationMenu, ul.eventsMenu{
     }
 }
 
+ul.libraryMenu{
+    li{
+        button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
+        dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
+        &:nth-child(even){
+            button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+            dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
+        }
+    }
+    span.byLine{
+        margin-top: 5px !important; //this cascade needs adjusting
+    }
+}
 //Acount Details
 section.accountDetails{
-    .tabStyle(@blueGray,33.333333%,65px,true);
+    .tabStyle(@blueGray,25%,65px,true);
     form{
         .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
         .row{
@@ -103,12 +116,31 @@ section.accountDetails{
             }
         }
         > li{
-            ul > li > span{
+            ul > li > span, dl{
                 margin: 0 auto;
                 display: block;
                 max-width: 360px;
                 &.response{
                     display: none;
+                }
+            }
+            dl{
+                padding: 10px;
+                max-width: 340px;
+                margin-top: 10px;
+                dt{
+                    display: inline;
+                    color: @white;
+                    &:after{content:": ";}
+                }
+                dd{
+                    display: inline;
+                    font-weight: @bold;
+                    color: @white;
+                    &.statusPending{color: @teal;}
+                    &.statusOccupy{color: @teal;}
+                    &.statusDelivery{color: @yellow;}
+                    &.statusPendingAvailability{color: @gray;}
                 }
             }
             &.selected{
