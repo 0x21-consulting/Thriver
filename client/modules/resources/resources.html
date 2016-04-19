@@ -48,24 +48,6 @@
     </section>
 </template>
 
-<template name="library">
-    <li class="active">
-        <ul class="resourcesItems library stripes">
-            {{>backToResourcesMobile}}
-            <li class="mainTitle dtHide"><h2>Library</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        <span class="publisher">{{publisher}}</span>
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
-</template>
 
 <template name="infosheets">
     <li>
@@ -134,3 +116,128 @@
 <template name="backToResourcesMobile">
     <li class="menuTitle resourcesTabMenu dtHide"><a href="#">Learning Center</a></li>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template name="library">
+    <li class="active">
+        <ul class="resourcesItems library stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Library</h2></li>
+            <!--{{#each libraryItem}}-->
+                <!--Library Item Loop Template-->
+            <!--{{/each}}-->
+            {{> libraryItem }}
+            {{> libraryItem }}
+            {{> libraryItem }}
+            {{> libraryItem }}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
+
+<template name="libraryItem">
+    <li>
+        <details>
+            <summary>
+                <h5>
+                    "There is diversity Within Diversity": Community Leaders' Views on increasing diversity in youth serving organizations.
+                </h5>
+                <p class="meta">Sumru Erkut, et al., Center for Research on Women, 1993</p>
+            </summary>
+            {{> libraryItemDetails}}
+        </details>
+        {{> libraryItemTools}}
+    </li>
+</template>
+
+
+
+
+<template name="libraryItemDetails">
+    <dl>
+      <dt>Call Number</dt>
+      <dd>6504S</dd>
+      <dt>Copies</dt>
+      <dd>1</dd>
+      <dt>Subject Headings</dt>
+      <dd>Ethnology -- United States. Minority teenagers -- United States -- Societies and clubs.</dd>
+      <dt>Classification Type</dt>
+      <dd>Organizational</dd>
+      <dt>Category Type</dt>
+      <dd>Organizational</dd>
+      <dt>Material Type</dt>
+      <dd>Book or Booklet</dd>
+    </dl>
+</template>
+
+<template name="libraryItemTools">
+    <!--Each should only be rendered on the page if applicable-->
+    {{#if currentUser}}
+        <div class="availability">
+            {{> requestButton}}
+            {{> loginToRequest}}
+            {{> requestNotAvailable}}
+        </div>
+        <div class="requestResults">
+            {{> requestSuccess}}
+            {{> requestFailed}}
+        </div>
+    {{else}}
+        <div class="availability">
+            {{> loginToRequest}}
+        </div>
+    {{/if}}
+</template>
+
+<!--Library Item Variables-->
+<template name="requestButton">
+    <button class="requestLibraryItem">Request Copy</button>
+</template>
+
+<template name="loginToRequest">
+    <button class="loginToRequest">Login to Request Copy</button>
+</template>                
+
+<template name="requestNotAvailable">
+    <p class="requestNotAvailable">
+        <span class="fa">&#xf05e; </span>
+        This item is not currently available.
+    </p>
+</template>
+
+<template name="requestSuccess">
+    <p class="requestSuccess requestResult">
+        <span class="fa">&#xf058; </span>
+        This item has been requested. Someone at the library will be in touch soon.
+        <button class="undoRequest">Undo</button>
+    </p>
+</template>
+
+<template name="requestFailed">
+    <p class="requestFailed requestResult">
+        <span class="fa">&#xf057; </span>
+        This item could not be requested at this time. Please try again later.
+    </p>
+</template>
+
+
