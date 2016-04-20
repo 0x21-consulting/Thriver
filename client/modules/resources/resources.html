@@ -15,12 +15,12 @@
                     <input id="searchResources" type="search" placeholder="Search" />
                     <fieldset class="filter">
                         <div class="styledSelect fullBlockMob">
-                            <label class="dtHide">Material</label>
-                            <select id="material" name="material">
-                                <option value="0">Select Material Type</option>
-                                <option value="01">Book</option>
-                                <option value="02">CD</option>
-                                <option value="03">eBook</option>
+                            <label class="dtHide">Classification</label>
+                            <select id="category" name="category">
+                                <option value="0">Select Classification</option>
+                                <option value="01">Survivors</option>
+                                <option value="02">Providers</option>
+                                <option value="03">Resources</option>
                             </select>
                         </div>
                         <div class="styledSelect fullBlockMob">
@@ -30,6 +30,15 @@
                                 <option value="01">Survivors</option>
                                 <option value="02">Providers</option>
                                 <option value="03">Resources</option>
+                            </select>
+                        </div>
+                        <div class="styledSelect fullBlockMob">
+                            <label class="dtHide">Material</label>
+                            <select id="material" name="material">
+                                <option value="0">Select Material Type</option>
+                                <option value="01">Book</option>
+                                <option value="02">CD</option>
+                                <option value="03">eBook</option>
                             </select>
                         </div>
                         <input type="submit" value="Search Library" />
@@ -140,6 +149,7 @@
 
 <template name="library">
     <li class="active">
+        {{> librarySearchHeader}}
         <ul class="resourcesItems library stripes">
             {{>backToResourcesMobile}}
             <li class="mainTitle dtHide"><h2>Library</h2></li>
@@ -153,6 +163,25 @@
             {{> loadMore }}
         </ul>
     </li>
+</template>
+
+<template name="librarySearchHeader">
+    <header class="librarySearchHeader">
+        <h2>Catalogue Results</h2>
+        <dl class="breadcrumb">
+            <!--These List Items should only show based on user's filter selection-->
+            <dt class="fa" title="search terms">&#xf002;</dt>
+            <dd>"Survivor Stories"</dd>
+            <dt class="fa" title="classification">&#xf0b1;</dt> 
+            <dd>Providers</dd>
+            <dt class="fa" title="category">&#xf07c;</dt>
+            <dd>Resources</dd>
+            <dt class="fa" title="material">&#xf02d;</dt>
+            <dd>Book or Booklet</dd>
+            <dt class="count"></dt>
+            <dd class="count">24 results</dd>
+        </dl>
+    </header>
 </template>
 
 <template name="libraryItem">
