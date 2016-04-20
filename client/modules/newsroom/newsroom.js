@@ -151,6 +151,11 @@ Template.news.events({
         $('.mobileOverlay').click();
         $('button.accountToggle').click();
         $('li.subscriptionsManagerMob').click();
+    },
+    'click .subscriptionsRegister': function (event) {
+        //Not sure where this is being called
+        event.preventDefault();
+        $('li.login').click();
     }
 });
 
