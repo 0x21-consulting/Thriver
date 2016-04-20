@@ -39,6 +39,7 @@
         padding: 40px 100px;
         background-color: @blueGray;
         form{
+            .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
             margin: 0 auto;
             width: 300px;
             position: relative;
@@ -52,6 +53,9 @@
             }
             input{
                 font-weight: bold;
+                &[type=search]{
+                    background-color: transparent;
+                }
             }
         }
         @media @mobile{
