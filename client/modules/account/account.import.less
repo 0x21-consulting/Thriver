@@ -135,7 +135,10 @@ section.accountDetails{
             &.subscriptions, &.registeredEvents{
                 padding: 0px;
             }
-            button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
+            button{
+                .buttonColor(darken(@sidebarContentBgColor, 3%));
+                &.viewEvent{.buttonColor(@teal);}
+            }
             dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
             &:nth-child(even){
                 button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
