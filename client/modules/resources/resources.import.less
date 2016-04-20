@@ -6,9 +6,9 @@ section.learningCenter {
     top: 0px;
     .tabStyle(@blueGray,25%,65px,true);
     ul.resourcesItems > li .inner {
-        max-width: 600px;
-        padding: 30px;
+        padding: 0px;
         margin: 0 auto;
+        .clearfix;
     }
     .closeTab{
         display: block;
@@ -78,8 +78,78 @@ section.learningCenter{
 
 
 //Library
-.library > li p{
-    margin:0px;
+.library > li{
+    details{background-color: darken(@sidebarContentBgColor, 3%);}
+    &:nth-child(even) details{background-color: darken(@sidebarContentBgColor, 1%);}
+    p{margin:0px;}
+    details{
+        width: 429px;
+        float: left;
+        margin: 30px;
+        .shadow(far);
+        summary{
+            padding: 30px;
+            h5{
+                .font(1.4,2.0,0.025,@normal,none);
+                color: @gray;
+                margin: 0px;
+            }
+            p{
+                .font(1.2,1.2,0.025,@normal,none);
+                color: @teal;
+                margin: 10px 0px 0px 0px;
+            }
+            &:hover{
+                h5{
+                    color: @white;
+                }
+                p{
+                    color: lighten(@teal, 5%);
+                }
+            }
+        }
+    }
+    dl{
+        .dlColors(@black,@white,@white);
+        margin:0px 0px 10px 0px;
+        display: block;
+        //white-space: nowrap;
+        dd{
+            &.statusStockAvailable{color: @teal;}
+            &.statusStockOutOfStock{color: @yellow;}
+            &.statusStockUnavailable{color: @gray;}
+        }
+    }
+    dl dt, dl dd, button{.font(1.2,1.6,0.025,@normal,none)};
+    button.requestLibraryItem{display: block;width: 100%;}
+    dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
+    button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
+    //summary{background-color: darken(@sidebarContentBgColor, 8.5%);}
+    &:nth-child(even){
+        dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
+        button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+        //summary{background-color: darken(@sidebarContentBgColor, 6.5%);}
+    }
+    dl.material dt{display: none;}
+    aside.info{
+        width: 137px;
+        padding: 30px 30px 30px 0px;
+        float: left;
+    }
+    details dl{
+        .dlColors(darken(@sidebarContentBgColor, 8.5%),@gray,@yellow);
+        margin: 0px 20px 20px 20px;
+        padding: 20px;
+        dt{font-weight: @normal;}
+        dd,dt{
+            //padding: 10px 0px 10px;
+            .font(1.2,2.0,0.025,@normal,none);
+        }
+        dd{
+            font-weight: bold;
+            .clearfix;
+        }
+    }
 }
 
 

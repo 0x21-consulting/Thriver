@@ -167,12 +167,29 @@
                 </summary>
                 {{> libraryItemDetails}}
             </details>
-            {{> libraryItemTools}}
+            <aside class="info">
+                <dl class="material">
+                    <dt>Material</dt>
+                    {{>materialType}}
+                </dl>
+                <dl class="status">
+                    <dt>Status</dt>
+                    {{>statusStockAvailable}}
+                </dl>
+                {{> libraryItemTools}}
+            </aside>
         </div>
     </li>
 </template>
 
 
+<template name="statusStockAvailable"><dd class="statusStockAvailable">Available</dd></template>
+<template name="statusStockOutOfStock"><dd class="statusStockOutOfStock">Out of Stock</dd></template>
+<template name="statusStockUnavailable"><dd class="statusStockUnavailable">Unavailable</dd></template>
+
+<template name="materialType">
+    <dd>Book or Booklet</dd>
+</template>
 
 
 <template name="libraryItemDetails">
@@ -197,17 +214,17 @@
     {{#if currentUser}}
         <div class="availability">
             {{> requestButton}}
-            {{> loginToRequest}}
-            {{> requestNotAvailable}}
+            <!--{{> loginToRequest}}
+            {{> requestNotAvailable}}-->
         </div>
-        <div class="requestResults">
+        <!--<div class="requestResults">
             {{> requestSuccess}}
             {{> requestFailed}}
-        </div>
+        </div>-->
     {{else}}
-        <div class="availability">
+       <!-- <div class="availability">
             {{> loginToRequest}}
-        </div>
+        </div>-->
     {{/if}}
 </template>
 
