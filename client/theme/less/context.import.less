@@ -5,7 +5,6 @@ body, html{
 }
 
 
-
 body{
     max-width: 100%;
     overflow-x: hidden; //Can we get rid of this?
@@ -57,6 +56,7 @@ body{
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    isolation: isolate; //Prevents child elements from covering up scrollbar in chrome
 }
 .canvasCenter{
     position: relative;
@@ -189,8 +189,8 @@ body{
 
 
 
-::selection {background: @yellow;}
-::-moz-selection {background: @yellow;}
+::selection {background: @teal;}
+::-moz-selection {background: @teal;}
 
 
 
@@ -272,6 +272,7 @@ body{
 //Overlay for Sidebars
 body{
     &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden; //Suspect scroll from main body
         .overlay{
             .opacity(@overlayOpacity);
             visibility: visible;
@@ -279,6 +280,8 @@ body{
         }
     }
 }
+
+
 
 
 
