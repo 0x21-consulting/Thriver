@@ -157,16 +157,18 @@
 
 <template name="libraryItem">
     <li>
-        <details>
-            <summary>
-                <h5>
-                    "There is diversity Within Diversity": Community Leaders' Views on increasing diversity in youth serving organizations.
-                </h5>
-                <p class="meta">Sumru Erkut, et al., Center for Research on Women, 1993</p>
-            </summary>
-            {{> libraryItemDetails}}
-        </details>
-        {{> libraryItemTools}}
+        <div class="inner">
+            <details>
+                <summary>
+                    <h5>
+                        "There is diversity Within Diversity": Community Leaders' Views on increasing diversity in youth serving organizations.
+                    </h5>
+                    <p class="meta">Sumru Erkut, et al., Center for Research on Women, 1993</p>
+                </summary>
+                {{> libraryItemDetails}}
+            </details>
+            {{> libraryItemTools}}
+        </div>
     </li>
 </template>
 

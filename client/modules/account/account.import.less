@@ -69,19 +69,6 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
     }
 }
 
-ul.libraryMenu{
-    li{
-        button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
-        dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
-        &:nth-child(even){
-            button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
-            dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
-        }
-    }
-    span.byLine{
-        margin-top: 5px !important; //this cascade needs adjusting
-    }
-}
 //Acount Details
 section.accountDetails{
     .tabStyle(@blueGray,25%,65px,true);
@@ -126,18 +113,11 @@ section.accountDetails{
                 }
             }
             dl{
-                padding: 10px;
+                .dlColors(@black,@white,@white);
                 max-width: 340px;
-                margin-top: 10px;
-                dt{
-                    display: inline;
-                    color: @white;
-                    &:after{content:": ";}
-                }
+                margin: 10px auto 0px auto;
+
                 dd{
-                    display: inline;
-                    font-weight: @bold;
-                    color: @white;
                     &.statusPending{color: @yellow;}
                     &.statusOccupy{color: @teal;}
                     &.statusDelivery{color: @yellow;}
@@ -155,9 +135,19 @@ section.accountDetails{
             &.subscriptions, &.registeredEvents{
                 padding: 0px;
             }
+            button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
+            dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
+            &:nth-child(even){
+                button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+                dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
+            }
+            span.byLine{
+                margin-top: 5px !important; //this cascade needs adjusting
+            }
         }
     }
 }
+
 
 // Registration form
 section.register, section.login{

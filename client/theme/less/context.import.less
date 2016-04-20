@@ -285,5 +285,24 @@ body{
 
 
 
+//Definition Lists
+dl{
+    padding: 10px;
+    margin: 20px 0px 20px 0px;
+    dt{
+        display: inline;
+        &:after{content:": ";}
+    }
+    dd{
+        display: inline;
+        font-weight: @bold;
+    }
+}
+
+.dlColors(@x,@y,@z){
+    background-color: @x;
+    dt{color: @y;}
+    dd{color:@z;}
+}
 
 

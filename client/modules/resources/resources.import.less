@@ -5,6 +5,11 @@ section.learningCenter {
     text-align: left;
     top: 0px;
     .tabStyle(@blueGray,25%,65px,true);
+    ul.resourcesItems > li .inner {
+        max-width: 600px;
+        padding: 30px;
+        margin: 0 auto;
+    }
     .closeTab{
         display: block;
     }
@@ -51,39 +56,6 @@ section.learningCenter{
         button.viewAll{
             .textButtonColor(@gray);
             .shadowNone;
-        }
-    }
-    ul.newsContent{
-        @media @mobile{
-            position: fixed;
-            top: 0px;
-            left: -100%;
-            width: 100%;
-        }
-        > li ul li{
-            .dateMeta{
-                .font(1.2,1.7,0.025,@bold,none);
-                color: lighten(@lightBlue, 30%);
-            }
-            .text{
-                display: block;
-                .font(1.4,1.7,0.025,@bold,none);
-                a{
-                    .textButtonColor(@teal);
-                    color: @white;
-                }
-            }
-        }
-        > li ul li.pressMediaItem{
-            text-align: center;
-            a{
-                display: block;
-                .icon{
-                    font-size: 22px;
-                    display: block;
-                    margin-bottom: 10px;
-                }
-            }            
         }
     }
     li.loadMore{
