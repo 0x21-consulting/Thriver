@@ -577,4 +577,18 @@ Template.notifications.events({
 });
 
 
+Template.login.events({
+    'click form .showRegisterBtn': function (event) {
+        if (window.innerWidth >= 768) {
+            $('li.register').click();
+        } 
+        /*else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+            $('.menuToggle').click();
+            $('.mobileMenu li.donate').click();
+        }*/
+    }
+});
+
 

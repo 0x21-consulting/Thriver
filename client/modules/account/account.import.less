@@ -155,11 +155,11 @@ section.accountDetails{
 // Registration form
 section.register, section.login{
     form {
-        padding: 0px 40px;
+        padding: 40px;
         text-align: left;
-//        background-color: @blueGray;
-//        .shadow(close);
-        .formColors(darken(@blueGrayLight, 8%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
+        background-color: @blueGray;
+       .shadow(close);
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
         label{
             display: none;
         }
@@ -176,6 +176,16 @@ section.register, section.login{
             right: 10px;
             font-size: 22px;
             .fa;
+        }
+        .showRegisterBtn{
+            cursor: pointer;
+            .textButtonColor(@white);
+            .font(1.4,1.4,0.025,@normal,none);
+            margin: 30px auto 0px auto;
+            padding: 0px;
+            display: block;
+            text-align: center;
+            padding: 0px;
         }
     }
 }

@@ -1,12 +1,13 @@
 <template name="login">
     <section class="login leftSmall hasSidebar">
             <div class="scroller">
-                <h2>Sign In to Your Account</h2>
+                <h2>Account Sign In</h2>
                 <form>
-                    <p id="login-error" class="hide"></p>
                     <input type="email" name="email" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <input type="submit" value="Sign In">
+                    <p id="login-error" class="hide"></p>
+                    <p class="showRegisterBtn">Create an account <span class="fa">&#xf0da;</span></p>
                 </form>
                 <button class="showRegister loginToggle dtHide">Create an Account <span class="fa">&#xf0da;</span></button>
                 <button type="button" class="closeTab">Close</button>
