@@ -116,8 +116,7 @@ section.learningCenter{
         //white-space: nowrap;
         dd{
             &.statusStockAvailable{color: @teal;}
-            &.statusStockOutOfStock{color: @yellow;}
-            &.statusStockUnavailable{color: @gray;}
+            &.statusStockUnavailable{color: @yellow;}
         }
     }
     dl dt, dl dd, button{.font(1.2,1.6,0.025,@normal,none)};
@@ -150,7 +149,42 @@ section.learningCenter{
             .clearfix;
         }
     }
+
+    span.loginToRequest{
+        .font(1.2,2.0,0.025,@normal,none);
+        white-space: nowrap;
+        position: relative;
+        left: 3px;
+        top: 6px;
+        button{
+            .shadowNone;
+            background-color:transparent !important;
+            white-space: nowrap;
+            margin-left: -9px;
+            padding: 0px;
+            margin: 0px;
+            .textButtonColor(@yellow);
+        }
+    }
 }
 
 
+
+.requestResults{
+    p{
+        color: @white;
+        .font(1.2,2.0,0.025,@normal,none);
+        .fa{.font(1.8,2.0,0.025,@light,none);}
+        button{
+            .textButtonColor(@teal);
+            background-color: transparent !important;
+            .shadowNone;
+            margin: 0px;
+            padding: 0px;
+            display: block;
+        }
+    }
+    p.requestSuccess{.fa{color: @teal;}}
+    p.requestFailed{.fa{color:@orange;}}
+}
 

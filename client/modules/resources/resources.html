@@ -184,7 +184,6 @@
 
 
 <template name="statusStockAvailable"><dd class="statusStockAvailable">Available</dd></template>
-<template name="statusStockOutOfStock"><dd class="statusStockOutOfStock">Out of Stock</dd></template>
 <template name="statusStockUnavailable"><dd class="statusStockUnavailable">Unavailable</dd></template>
 
 <template name="materialType">
@@ -214,35 +213,34 @@
     {{#if currentUser}}
         <div class="availability">
             {{> requestButton}}
-            <!--{{> loginToRequest}}
-            {{> requestNotAvailable}}-->
+            <!--Display no 'requestButton' if item unavailable-->
+            <!--{{> requestResults}}-->
+            <!--'requestResults' template to replace 'requestButton' on button submit-->
+
         </div>
-        <!--<div class="requestResults">
-            {{> requestSuccess}}
-            {{> requestFailed}}
-        </div>-->
     {{else}}
-       <!-- <div class="availability">
+        <div class="availability">
             {{> loginToRequest}}
-        </div>-->
+        </div>
     {{/if}}
 </template>
 
 <!--Library Item Variables-->
+<template name="requestResults">
+    <div class="requestResults">
+        {{> requestSuccess}}
+        {{> requestFailed}}
+    </div>
+</template>
+
 <template name="requestButton">
     <button class="requestLibraryItem">Request Copy</button>
 </template>
 
 <template name="loginToRequest">
-    <button class="loginToRequest">Login to Request Copy</button>
+    <span class="loginToRequest"><button>Login</button> to Request Copy</span>
 </template>                
 
-<template name="requestNotAvailable">
-    <p class="requestNotAvailable">
-        <span class="fa">&#xf05e; </span>
-        This item is not currently available.
-    </p>
-</template>
 
 <template name="requestSuccess">
     <p class="requestSuccess requestResult">
