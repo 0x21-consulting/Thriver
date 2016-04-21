@@ -56,7 +56,7 @@ Template.utility.events({
     'click li.getHelp': closeAsides,
     'click li.getHelp': function (event) {
         offset = $('[id="service-providers"]').offset().top - 95;
-        $('body').animate({ scrollTop: offset }, 750);
+        $('body').animate({ scrollTop: offset }, 1500);
         $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
