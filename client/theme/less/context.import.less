@@ -273,18 +273,19 @@ body{
 body{
     &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
         overflow: hidden; //Suspect scroll from main body
+        cursor: pointer;
         .overlay{
             .opacity(@overlayOpacity);
             visibility: visible;
             &:hover{.opacity(@overlayOpacityHover);}       
         }
     }
-    &.leftSmall, &.leftMedium{
+    /*&.leftSmall, &.leftMedium{
         .overlay{cursor: e-resize;}
     }
     &.rightSmall, &.rightMedium, &.rightLarge{
         .overlay{cursor: w-resize;}
-    }
+    }*/
 }
 
 
