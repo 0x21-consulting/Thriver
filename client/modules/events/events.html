@@ -141,7 +141,9 @@
 <template name="eventSummary">
     <span class="eventSummary">
         <ul>
-            <li>Teen Summit on Dating &amp; Sexual Violence</li>
+            {{#each this}}
+                <li>{{name}}</li>
+            {{/each}}
         </ul>
     </span>
 </template>
@@ -166,17 +168,19 @@
         
         {{#each week}}
             {{#each this}}
-                <span class="{{notCurrent}} {{currentWeekStart}} {{today}}">{{date}}</span>
+                <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}}">
+                    {{#if hasEvent}}
+                        <button data-id="{{href}}" class="eventDate">
+                            {{date}}
+                            {{> eventSummary currentEvents}}
+                        </button>
+                    {{else}}
+                        {{date}}
+                    {{/if}}
+                </span>
             {{/each}}
         {{/each}}
         
-        <span class="hasEvent past">7</span>
-        <!--If has event on date, add anchor with id-->
-        <span class="hasEvent" value="2">
-            <button value="1" class="eventDate">26</button>
-            {{>eventSummary}}
-        </span>
-        <!--Next Month End-->
         <div style="clear:both;"></div>
     </div>
 </template>

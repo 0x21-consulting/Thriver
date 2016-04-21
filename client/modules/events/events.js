@@ -108,7 +108,7 @@ Template.calendar.helpers({
         var firstDay = new Date(year.get(), month.get()).getDay(),
             total    = lastDate(),
             weeks    = [], 
-            week, day, i, count = 0,
+            week, day, i, j, count = 0,
             
             // Last day of last month
             lastMonth = lastDate( getLastMonth() ),
@@ -117,15 +117,39 @@ Template.calendar.helpers({
             today = new Date(), thisWeek, thisDay,
             
             // All events this month
-            events = Events.find({
-                start: { $gt: new Date( year.get(), month.get() ) },
-                end  : { $lt: new Date( year.get(), month.get(), total ) }
-            });
+            currentEvents = {};
+        
+        // Get all events and organize them in an easily-accessible way
+        Events.find({
+            start: { $gt: new Date( year.get(), month.get() ) },
+            end  : { $lt: new Date( year.get(), month.get(), total ) }
+        }).forEach(function (event) {
+            // If there's no start date, do nothing
+            if (! (event.start instanceof Date)) return;
+            
+            var start = event.start.getDate(),
+                total = 1, i;
+            
+            // If there's an end date, calculate total number of days
+            if (event.end instanceof Date)
+                total = event.end.getDate() - start + 1;
+            
+            // For each day, add event info
+            for (i = 0; i < total; ++i) {
+                // If the date doesn't already exist, add it
+                if (! currentEvents[ start + i ])
+                    currentEvents[ start + i ] = [];
+                // Add event details
+                currentEvents[ start + i ].push(event);
+            }
+        });
+            
         console.debug('Events\n',
             'Greater than', new Date( year.get(), month.get() ), '\n',
             'Less than', new Date( year.get(), month.get(), total ), '\n',
-            events.fetch()
+            currentEvents
         );
+        
         // If today is in the current month and year
         if (today.getMonth() === month.get() && 
             today.getFullYear() === year.get()) {
@@ -169,6 +193,23 @@ Template.calendar.helpers({
                     day.currentWeekStart = 'currentWeekStart';
                 if (day.date === thisDay)
                     day.today = 'today';
+                
+                // If there are events this day
+                if (currentEvents[count] instanceof Array) {
+                    day.hasEvent = 'hasEvent';
+                    
+                    // If the day is in the past
+                    if (count < thisDay)
+                        day.past = 'past';
+                    
+                    // Hyperlink first event
+                    day.href = currentEvents[count][0]._id;
+                    
+                    // Add event details
+                    // (and convert to array)
+                    day.currentEvents = currentEvents[count];
+                    console.info('Day', count, day); //debug
+                }
                 
                 // Add day
                 week.push(day);
