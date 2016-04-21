@@ -1,7 +1,8 @@
-<template name="alert">
-    <figure class="alert important" id="alert">
+<!--Note that the class 'important' should be swapped with 'notification' if the alert is not urgent: such as logging in and out-->
+<template name="alerts">
+    <figure class="alert notification" id="alert">
         <figcaption class="container">
-            {{> alertGetHelp }}
+            {{> alertLogOut }}
             <span class="closeAlert fa">&#xf00d;</span>
         </figcaption>
     </figure>
@@ -10,9 +11,15 @@
 
 <!--These are temp. and should be attributed to actual alert content fields in DB-->
 <template name="alertGetHelp">
-    If this is an emergency, please dial 911. etc etc. Lorem Ipusm.
+    If this is an emergency, please dial 911 or use our Service Provider Locator Tool to get help right away.
 </template>
 
+<!--To be applied on Logout-->
 <template name="alertLogOut">
-    You have been logged-out as johndoe@gmail.com.
+    You have been logged-out as john.doe@gmail.com. See you later John!
+</template>
+
+<!--To be applied on Login-->
+<template name="alertLogIn">
+    Welcome John! You are now logged in as john.doe@gmail.com.
 </template>
