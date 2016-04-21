@@ -336,13 +336,16 @@ Template.accountDetails.events({
         removeOpenAccounts();
     },
     'click .libraryMenu .viewLibrary': function (event) {
-        alert('Open up the catalogue pane');
+        $('.utility li.learningCenter button').click();
+        $('section.learningCenter ul.tabs li.library').click();
     },
     'click .libraryMenu .viewDetails': function (event) {
-        alert('Open up the details of the associated catalogue item in catalogue');
+        $('.utility li.learningCenter button').click();
+        $('section.learningCenter ul.tabs li.library').click();
     },
     'click .libraryMenu .text a': function (event) {
-        alert('Open up the details of the associated catalogue item in catalogue');
+        $('.utility li.learningCenter button').click();
+        $('section.learningCenter ul.tabs li.library').click();
     }
 
 });
