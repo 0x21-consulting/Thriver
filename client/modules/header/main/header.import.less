@@ -18,9 +18,9 @@ header.mainHeader{
         ul{
             height: 58px; //prevents UI height dispairity on load
             padding: 202px 0px 35px 0px;
-            //.translate(0px,0px);
-            will-change:padding;
-            .transition(padding,350ms,@canvasEase,@canvasDelay);
+            .translate(0px,0px);
+            will-change:transform;
+            .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
         }
         li{display: inline-block;}
     }
@@ -35,6 +35,8 @@ header.mainHeader nav.mainNav li.brand {
     width: 311px;
     left: 50%;
     margin-left: -155px;
+    .translate(0px,0px);
+    will-change:transform;
     a, a:active, a:hover, a:focus{
         border: none;
         display: block;
@@ -52,8 +54,11 @@ header.mainHeader nav.mainNav li a{
     position: relative;
     padding:16px;
     margin: 0px 12px 0px 12px;
-    .font(1.6,1.6,0.2,@normal,uppercase);
+    .font(1.5,1.6,0.2,@normal,uppercase);
     .color(color,lighten(@navy, 2.5%),none);
+    //.accelerate;
+    //will-change:font;
+    //.transition(font,@canvasDuration,@canvasEase,0ms);
     &:after {
         content: '';
         position: absolute;
@@ -96,17 +101,21 @@ header.mainHeader nav.mainNav li a{
     height: 136px;
     &:after{
         //Hard Shadow Move
-        .translate(0px,-137px);
+        .translate(0px,-160px);
     }
     nav.mainNav{
-        .translate(0px,-137px);
+        .translate(0px,-160px);
         //ul{.translate(0px,22px);}
-        ul{padding: 202px 0px 19px 0px;}
+        //ul{padding: 202px 0px 19px 0px;}
+        ul{
+            .translate(0px,21px);
+        }
         li a{
             //&:after{background-color: @blue;}
-            .font(1.4,1.4,0.2,@normal,uppercase);
+            //.font(1.4,1.6,0.2,@normal,uppercase);
         }
         li.brand{
+            .translate(0px,0px);
             width: 132px;
             height: 36px;
             top: 203px;
@@ -124,16 +133,6 @@ header.mainHeader nav.mainNav li a{
     }
 }
 
-//Header Animations/ Transitions
-.fixedHeader header.mainHeader .brand{
-    will-change:transform;
-    animation: brandanimate 350ms @headerDelay 1 @headerFirstEase alternate;
-}
-
-.fixedHeaderReturn header.mainHeader .brand{
-    will-change:transform;
-    animation: brandanimatereturn 350ms @headerDelay 1 @headerEase alternate;
-}
 
 header.mainHeader nav.mainNav{
     will-change:transform;
@@ -142,13 +141,29 @@ header.mainHeader nav.mainNav{
         will-change:font;
         .transition(font,@canvasDuration,@headerEase,@headerDelay);
         &:after {
-            .transition2(opacity,350ms,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+            .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
         }
     }
     li.brand svg, li.brand svg image{
         will-change:width,height;
-        .transition2(width,0ms,ease-out,@headerSVGdelay,height,0ms,ease-out,@headerSVGdelay);
+        .transition2(width,0ms,linear,@headerSVGdelay,height,0ms,linear,@headerSVGdelay);
     }
+}
+
+//Header Animations/ Transitions
+.fixedHeader header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimate @canvasDuration @headerDelay 1 @headerFirstEase alternate;
+}
+
+.fixedHeaderReturn header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimatereturn @canvasDuration @headerDelay 1 @headerEase alternate;
+}
+.fixedHeaderReturn header.mainHeader nav.mainNav{
+    li.brand svg, li.brand svg image{
+        .transition2(width,0ms,linear,@headerSVGdelay2,height,0ms,linear,@headerSVGdelay2);
+    }    
 }
 
 //Stop Animation on Mobile
