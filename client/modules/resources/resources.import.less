@@ -259,7 +259,10 @@ li.itemCategory{
             line-height: 30px;
             background-color: darken(@sidebarContentBgColor, 8.5%) !important;
             .font(1.2,2.6,0.025,@normal,none);
-            a{color: @yellow;}
+            a{
+                color: @yellow;
+                &:hover{color: @teal;}
+            }
             &:first-child{
                 padding-top: 20px;
             }
