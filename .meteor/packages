@@ -11,7 +11,6 @@ reactive-var
 twitter
 mrt:paypal
 gwendall:body-events
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -26,3 +25,5 @@ ejson
 spacebars
 check
 mizzao:user-status
+standard-minifier-css
+standard-minifier-js
