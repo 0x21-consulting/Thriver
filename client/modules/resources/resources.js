@@ -15,6 +15,12 @@ Template.resources.events({
         // Set the active content
         $('ul.resourcesContent > li').removeClass('active');
         $('ul.resourcesContent > li:nth-child(' + index + ')').addClass('active');
+        if ($(event.target).hasClass('library')){
+            $('.sidebar .learningCenter aside.toolBar').addClass('filter');
+        } 
+        else{
+            $('.sidebar .learningCenter aside.toolBar').removeClass('filter');
+        }
     },
     'click .loginToRequest > button': function (event) {
         if (window.innerWidth >= 768) {
