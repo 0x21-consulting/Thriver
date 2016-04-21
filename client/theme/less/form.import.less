@@ -146,12 +146,15 @@ form{
         .font(1.2,3.0,0.01,@bold,uppercase);
         color: @white;
     }
+    fieldset{
+        position: relative;
+    }
 }
 
 
 //Styled Selects & cvv2
 form{
-    .styledSelect:after{
+    .styledSelect:before{
         .fa;
         content: "\f0d7";
         position: absolute;
@@ -325,13 +328,7 @@ form{
         padding: 10px;
     }
     .error {
-        margin-bottom: 12px;
-        margin-top: 5px;
-        -webkit-box-shadow: inset 0 0 0px 3px @orange;
-        -moz-box-shadow: inset 0 0 0px 3px @orange;
-        box-shadow: inset 0 0 0px 3px @orange;
         &.customAmt{
-            margin: 0px;
         }
     }
     [data-error]{
@@ -339,13 +336,13 @@ form{
             content: attr(data-error);
             display: block;
             clear: both;
-            padding: 9px 14px 7px 14px;
             margin-bottom: 5px;
-            color: @white;
-            background: darken(@orange, 2.5%);
-            .font(1.2,1.5,0.025,@bold,none);
+            .font(1.2,1.8,0.025,@normal,none);
+            color: @yellow;
+            background-color: darken(@sidebarContentBgColor, 8.5%);
+            padding: 10px;
         }
-        &:before{
+        /*&:before{
             content: "\f0d7";
             display: block;
             position: absolute;
@@ -354,9 +351,13 @@ form{
             color: #f1592a; //Searching purpose
             font-size: 14px;
             .fa;
-        }
+        }*/
     }
-    [data-error='Donation amount must be greater than zero']{
+    .styledSelect[data-error]:after {
+        width: 200%;
+        margin-top: 20px;
+    }
+    /*[data-error='Donation amount must be greater than zero']{
         &:after{
             position: relative;
             margin-bottom: 12px;
@@ -372,6 +373,6 @@ form{
         input[type=radio]:checked + label.radio.custom{
             background-color: @orange, 2.5%;
         }
-    }
+    }*/
 }
 
