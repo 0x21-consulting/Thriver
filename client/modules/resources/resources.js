@@ -33,6 +33,12 @@ Template.resources.events({
             $('.menuToggle').click();
             $('.mobileMenu li.donate').click();
         }*/
+    },
+    //This is to illustrate the display of library filtered content
+    'click aside.toolBar form input[type=submit]': function (event) {
+        event.stopPropagation(); //Temp
+        event.preventDefault(); //Temp
+        $('.learningCenter ul.resourcesContent li.library').addClass('filtered');
     }
 });
 

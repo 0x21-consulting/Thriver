@@ -217,6 +217,23 @@ section.learningCenter{
     }
 }
 
+
+
+/*.learningCenter ul.resourcesContent li.library{
+    height: 0px;
+    overflow: hidden;
+    .opacity(0);
+    .translate(0px,100px);
+}
+
+.learningCenter ul.resourcesContent li.library.filtered{
+    height: auto;
+    .opacity(1);
+    .translate(0px,0px);
+    will-change:transform,opacity;
+    animation: catalogueupdate @canvasDuration @headerDelay 1 @headerFirstEase alternate;
+}*/
+
 .learningCenter .toolBar fieldset.filter{
     display: block;
     height: 0px;
@@ -229,3 +246,4 @@ section.learningCenter{
     height: 277px;
     .transition2(height,500ms, ease,300ms, opacity,300ms, ease,500ms);
 }
+
