@@ -4,9 +4,11 @@ section.masthead{
     position: relative;
     overflow: hidden;
     width: 100%;
+    top: 135px;
+    margin-bottom: 135px;
     //min-height: 600px;
-    height: ~'calc(100vh - 268px)';
-    padding: 199px 0px 0px 0px;
+    min-height: ~'calc(100vh - 295px)';
+    padding: 160px 0px 0px 0px;
     text-align: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -15,7 +17,7 @@ section.masthead{
     will-change:transform;
     .transition(transform,@canvasDuration,@canvasEase,0ms);
     .opacity(1);
-    .translate(0px, 70px);
+    //.translate(0px, 135px);
     @media @mobile{
         display: block;
         height: auto;
@@ -38,10 +40,14 @@ section.masthead{
         text-align: center;
         color: @white;
     }
+    h1{
+        margin-top: 80px;
+    }
     a.cta{
         display: inline-block;
         .buttonColor(@orange);
         margin-top: 20px;
+        margin-bottom: 80px;
     }
 }
 
@@ -83,7 +89,7 @@ section.masthead:after{
 }
 
 .fixedHeader section.masthead{
-    .translate(0px, 0px);
+    //.translate(0px, 160px);
     &:after{
         .opacity(0);
         .translate(0px,-20px);
