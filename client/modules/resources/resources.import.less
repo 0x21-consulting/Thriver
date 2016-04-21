@@ -247,3 +247,78 @@ section.learningCenter{
     .transition2(height,500ms, ease,300ms, opacity,300ms, ease,500ms);
 }
 
+
+
+
+
+li.itemCategory{
+    .inner ul{
+        padding: 0px 30px 30px 30px;
+        > li{
+            padding: 0px 20px;
+            line-height: 30px;
+            background-color: darken(@sidebarContentBgColor, 8.5%) !important;
+            .font(1.2,2.6,0.025,@normal,none);
+            a{color: @yellow;}
+            &:first-child{
+                padding-top: 20px;
+            }
+            &:last-child{
+                padding-bottom: 20px;
+            }
+        }
+    }
+    details, .inner ul{background-color: darken(@sidebarContentBgColor, 3%);}
+    details{
+        summary{
+            padding: 30px;
+            background-color: transparent;
+            .transition(background-color,250ms,ease,0ms);
+            h5{
+                .font(1.4,2.0,0.025,@normal,none);
+                color: @gray;
+                margin: 0px;
+            }
+            &:hover{
+                background-color: darken(@sidebarContentBgColor, 8%);
+                h5{
+                    color: @teal;
+                }
+                p{
+                    color: lighten(@teal, 5%);
+                }
+            }
+        }
+    }
+    &:nth-child(even){
+        details, .inner ul{
+        background-color: darken(@sidebarContentBgColor, 1%);
+        summary:hover{
+            background-color: darken(@sidebarContentBgColor, 6%);
+        }
+        }
+    }
+}
+
+
+.itemCategory{
+    details{
+        h5{
+            &:after{
+                .fa;
+                margin-left: 10px;
+                content:'\f0d7';
+            }
+        }
+    }
+}
+.itemCategory details[open]{
+    h5{
+        &:after{
+            content:"\f0d7";
+        }
+    }
+    summary:hover{
+        background-color: transparent !important;
+    }
+}

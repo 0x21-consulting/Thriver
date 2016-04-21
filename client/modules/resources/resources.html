@@ -49,76 +49,15 @@
             <ul class="resourcesContent tabsContent">
                 {{> library }}
                 {{> infosheets }}
-                {{> dataStatistics }}
-                {{> webinarArchive }}
+                {{> infosheets }}
+                {{> infosheets }}
+                <!--Infosheets reused to mimick data/stats and webinars since they should use same template-->
+                <!--{{> dataStatistics }}
+                {{> webinarArchive }}-->
             </ul>
             <button type="button" class="closeTab">Close</button>
         </div>
     </section>
-</template>
-
-
-<template name="infosheets">
-    <li>
-        <ul class="resourcesItems infosheets stripes">
-            {{>backToResourcesMobile}}
-            <li class="mainTitle dtHide"><h2>Infosheets</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
-</template>
-
-<template name="dataStatistics">
-    <li>
-        <ul class="resourcesItems dataStatistics stripes">
-            {{>backToResourcesMobile}}
-            <li class="mainTitle dtHide"><h2>Data &amp; Statistics</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
-</template>
-
-<template name="webinarArchive">
-    <li>
-        <ul class="resourcesItems webinarArchive stripes">
-            {{>backToResourcesMobile}}
-            <li class="mainTitle dtHide"><h2>Webinar Archive</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
 </template>
 
 
@@ -130,18 +69,59 @@
 
 
 
+<template name="dataStatistics">
+    <!--Duplicate of infoSheets-->
+</template>
+
+<template name="webinarArchive">
+    <!--Duplicate of infoSheets-->
+</template>
 
 
 
 
+<!--Infosheets-->
+<template name="infosheets">
+    <li>
+        <ul class="resourcesItems infosheets stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Infosheets</h2></li>
+            <!--{{#each itemCategory}}-->
+                    <!--Category of Items Loop Here-->
+            <!--{{/each}}-->
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>
+
+<template name="itemCategory">
+    <li class="itemCategory">
+        <div class="inner">
+            <details>
+                <summary>
+                    <h5>Prevention Services</h5>
+                </summary>
+                <ul>
+                    {{>itemResources}}
+                    {{>itemResources}}
+                    {{>itemResources}}
+                    {{>itemResources}}
+                    {{>itemResources}}
+                </ul>
+            </details>
+        </div>
+    </li>
+</template>
 
 
-
-
-
-
-
-
+<template name="itemResources">
+    <li><a href="#">Doucment for Download</a></li>
+</template>
 
 
 
