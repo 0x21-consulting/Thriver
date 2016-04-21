@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <!--{{> articleNews}} //This template is used for standalone article pages-->
     {{> header}}
     {{> headerMobile}}
     <div class="canvasCenter">
@@ -22,8 +23,10 @@
     </aside>
     <aside class="sidebar sidebarsRight">
         {{> twitter}}
+        {{> resources}}
         {{> news}}
         {{> donate}}
+        {{> languageSelect}}
     </aside>
     {{#if isAdmin}}
         {{> admin}}

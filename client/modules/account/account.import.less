@@ -1,37 +1,63 @@
 //Notifications & Events Lists
-ul.notificationMenu, ul.eventsMenu{
-    li{
-        button{
-            display: inline-block;
-            padding:6px 10px 6px 10px;
-            color: #fff;
-            margin-top: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-right: 2px;
-            line-height: 22px;
-            .backgroundColorButton(@teal);
-            &.deny{
-                .backgroundColorButton(@orange);
+ul.notificationMenu{
+    background-color: @blueGray;
+}
+ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
+    > li{
+        padding: 36px;
+        .dateMeta, .byLine{
+            .font(1.2,1.7,0.025,@bold,normal);
+            color: lighten(@lightBlue, 30%);
+        }
+        .text{
+            display: block;
+            .font(1.4,1.7,0.025,@bold,none);
+            a{
+                .textButtonColor(@teal);
+                color: @white;
             }
         }
-        &.notificationEmpty, &.eventsEmpty {
-            color: mix(@gray, @navy, 35%);
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.25px;
-            background-color: transparent;
-            text-align: center;
-            padding: 0px 30px;
+    }
+}
+ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
+    li.notificationEmpty, li.eventsEmpty{
+        text-align: center;
+        color: @white;
+        .font(1.4,2.2,0.025,@normal,none);
+        padding: 36px;
+        .shadow(close);
+    }
+    button{
+        display: inline-block;
+        margin-top: 10px;
+        text-indent: 0px;
+        .buttonColor(@teal);
+        &.deny{
+            .buttonColor(@orange);
+        }
+        &.unregister{
+             .asideLink;
+             margin: 10px 0px 0px 0px;
+             background-color: transparent;
+        }
+        &.redirectButton{
+            display: block;
+            margin: 0px auto;
+            .buttonColor(darken(@lightBlue, 2.5%));
         }
     }
     span.response{
         display: none;
-        margin-top: 10px;
-        font-size: 14px;
-        font-weight: bold;
-        color: lighten(@teal, 5%);
+        .font(1.2,1.4,0.025,@normal,none);
+        color: @teal;
+        margin: 5px 0px 0px 0px;
+        .undo{
+            .asideLink;
+            clear: both;
+            display: block;
+            background-color: transparent;
+            margin: 5px 0px 0px 0px;
+        }
     }
     li.selected{
         span.response{
@@ -43,73 +69,32 @@ ul.notificationMenu, ul.eventsMenu{
     }
 }
 
-
-
 //Acount Details
 section.accountDetails{
+    .tabStyle(@blueGray,25%,65px,true);
     form{
-        .row {
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
+        .row{
             text-align: right;
             max-width: 177px;
             margin: 0 auto;
             margin-bottom: 20px;
         }
     }
-    ul.accountDetailsTabs{
-        height: 52px;
-        background-color: @lightBlue;
-        li {
-            display: block;
-            width: 33.3333333%;
-            float: left;
-            padding: 20px 0px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-            line-height: 12px;
-            .fa{
-                font-size: 17px;
-                font-weight: 100;
-                position: relative;
-                top: -1px;
-                left: -2px;
-            }
-            //.transition(all,200ms,ease,0ms);
-            &:first-child{
-                background-color: #5e727d;
-            }
-            &:nth-child(2){
-                background-color: #637782;
-            }
-            &:nth-child(3){
-                background-color: #6d818c;
-            }
-            &:hover{
-                background-color: darken(@lightBlue, 5%);
-            }
-            &:active{
-                color: lighten(@aqua, 10%);
-            }
-            &.active{
-                background-color: @lightBlue;
-                color: lighten(@aqua, 2.5%);
-                &:hover{
-                    background-color: @lightBlue;
-                    //color: lighten(@aqua, 5%);
-                }
-            }
-        }
-    }
-
+    //Content
     ul.accountDetailsContent{
-        background-color: @lightBlue;
         form{
             max-width: 360px;
             margin: 0 auto;
-            padding-bottom: 20px;
+            .toggleSwitch label{
+                .opacity(1);
+                &:first-child{
+                    margin-bottom: 0px; //Override Form Default
+                }
+            }
+            input[type=submit]{
+                margin: 16px 0px 0px 0px;
+            }
             &#subscriptions {
                 max-width: none;
                 padding: 0px;
@@ -118,58 +103,89 @@ section.accountDetails{
                 }
             }
         }
-        h3{
-            color: @white;
-            background-color: @lightBlue;
-            text-align: center;
-            padding: 36px 0px 18px 0px;
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
         > li{
-            padding: 0px;
-            background-color: @lightBlue;
-            display: none;
-            //.animateDisplayAccountDetailsTabs;
-            //.transition(all,400ms,ease-out,0ms);
-            ul{
-                li{
-                    //.transition(all,400ms,ease-out,0ms);
-                    span{
-                        max-width: 360px;
-                        margin: 0 auto;
-                        display: block;
-                        &.response{
-                            display: none;
-                            padding: 23px 0px 10px 0px;
-                        }
-                    }
-                    &.selected{
-                        span.response{
-                            display: block;
-                        }
-                    }
+            ul > li > span, dl{
+                margin: 0 auto;
+                display: block;
+                max-width: 360px;
+                &.response{
+                    display: none;
                 }
             }
-            &.active{
-                display: block;
-                //background-color: @lightBlue;
+            dl{
+                .dlColors(@black,@white,@white);
+                max-width: 340px;
+                margin: 10px auto 0px auto;
+
+                dd{
+                    &.statusPending{color: @yellow;}
+                    &.statusOccupy{color: @teal;}
+                    &.statusDelivery{color: @yellow;}
+                    &.statusPendingAvailability{color: @gray;}
+                }
+            }
+            &.selected{
+                span.response{
+                    display: block;
+                }
+            }
+            &.accountSettings{
+                padding: 0px 0px 80px 0px;
+            }
+            &.subscriptions, &.registeredEvents{
+                padding: 0px;
+            }
+            button{
+                .buttonColor(darken(@sidebarContentBgColor, 3%));
+                &.viewEvent{.buttonColor(@teal);}
+            }
+            dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
+            &:nth-child(even){
+                button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+                dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
+            }
+            span.byLine{
+                margin-top: 5px !important; //this cascade needs adjusting
             }
         }
     }
 }
 
+
 // Registration form
-.register {
+section.register, section.login{
     form {
+        padding: 40px;
         text-align: left;
-        // Invalid repeat password
-        .noMatch::after {
+        background-color: @blueGray;
+       .shadow(close);
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
+        label{
+            display: none;
+        }
+        input{
+            margin-bottom: 15px;
+            &[type=submit]{
+                margin-bottom: 0px;
+            }
+        }
+        .noMatch:after {
             content: '\f06a';
-            font: 22px fontawesome;
             position: absolute;
-            top: 37px; right: 10px;
-            color: #c44;
+            top: 37px; 
+            right: 10px;
+            font-size: 22px;
+            .fa;
+        }
+        .showRegisterBtn{
+            cursor: pointer;
+            .textButtonColor(@white);
+            .font(1.4,1.4,0.025,@normal,none);
+            margin: 30px auto 0px auto;
+            padding: 0px;
+            display: block;
+            text-align: center;
+            padding: 0px;
         }
     }
 }

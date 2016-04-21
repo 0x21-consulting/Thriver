@@ -1,26 +1,27 @@
 <template name="accountDetails">
     <section class="accountDetails leftMedium hasSidebar">
         <div class="scroller">
-            <h2>Account Overview</h2>
+            <h2><span class="fa">&#xf007;</span> Account Details</h2>
             <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
-            <ul class="newsTabs accountDetailsTabs">
+            <ul class="accountDetailsTabs tabs">
                 <li class="active"><span class="fa">&#xf007;</span> Profile</li>
                 <li><span class="fa">&#xf0e0;</span> Subscriptions</li>
                 <li><span class="fa">&#xf274;</span> Events</li>
+                <li><span class="fa">&#xf02d;</span> Catalogue</li>
             </ul>
             <!--See above comment-->
-            <ul class="accountDetailsContent">
+            <ul class="accountDetailsContent tabsContent">
                 {{> profile }}
                 {{> subscriptions }}
                 {{> eventsRegister }}
+                {{> libraryActivity}}
             </ul>
-            <button type="button" class="closeTab">Close Tab</button>
+            <button type="button" class="closeTab">Close</button>
         </div>
     </section>
 </template>
 
 <!-- Account Details Content Sections -->
-
 <template name="profile">
     <li class="active accountSettings">
         <h3>Account Settings</h3>
@@ -42,7 +43,7 @@
     <li class="subscriptions">
         <form id="subscriptions">
             <h3>Email Subscriptions</h3>
-            <ul class="toggleSwitches">
+            <ul class="toggleSwitches stripes">
                 <li>
                     <label for="pressReleasesToggle" class="toggleSwitchLabel">Press Releases</label>
                     <div class="toggleSwitch">
@@ -66,7 +67,7 @@
                 </li>
             </ul>
             <h3>Mailing Lists (Listservs)</h3>
-            <ul class="toggleSwitches">
+            <ul class="toggleSwitches stripes">
                 <li>
                     <label for="expertWitnessToggle" class="toggleSwitchLabel">Expert Witness</label>
                     <div class="toggleSwitch">
@@ -110,13 +111,11 @@
 <template name="eventsRegister">
     <li class="registeredEvents">
         <h3>Registered Events</h3>
-        <ul class="eventsMenu">
-            {{>eventsRegistered}}
-            {{>eventsRegistered}}
+        <ul class="eventsMenu stripes">
             {{>eventsRegistered}}
             {{>eventsRegistered}}
             <li>        
-                <button type="button" class="viewEvents">View All Events <span class="fa inline">&#xf0da;</span></button>
+                <button type="button" class="viewEvents redirectButton">View All Events <span class="fa inline">&#xf0da;</span></button>
             </li>
         </ul>
     </li>
@@ -132,7 +131,7 @@
 <template name="eventsRegistered">
     <li class="eventsRegistered">
         <span class="dateMeta">November 21, 2015</span>
-        <span class="text">Jerard Hall Group Meeting</span>
+        <span class="text"><a href="#">Jerard Hall Group Meeting</a></span>
         <span><button type="button" class="viewEvent">View Event</button></span>
         <span><button type="button" class="unregister">Unregister</button></span>
         <span class="response">{{> alertEventUnregister}}</span>
@@ -143,3 +142,40 @@
     <span>You have been unregistered for event.
     <button type="button" class="undo">Undo</button></span>
 </template>
+
+
+<template name="libraryActivity">
+    <li class="registeredEvents">
+        <h3>Catalogue Activity</h3>
+        <ul class="libraryMenu stripes">
+            {{>libraryActivtyItem}}
+            {{>libraryActivtyItem}}
+            <li>        
+                <button type="button" class="viewLibrary redirectButton">View Catalogue <span class="fa inline">&#xf0da;</span></button>
+            </li>
+        </ul>
+    </li>
+</template>
+
+<template name="libraryActivtyItem">
+    <li class="libraryActivityItem">
+        <span class="text"><a href="#">"There is diversity Within Diversity": Community Leaders' Views on increasing diversity in youth serving organizations.</a></span>
+        <span class="byLine">Sumru Erkut, et al., Center for Research on Women, 1993</span>
+        <dl class="status">
+          <dt>Status</dt>
+          {{>statusDeliver}}
+        </dl>
+        <span><button type="button" class="viewDetails">Item Details</button></span>
+    </li>
+</template>
+
+<template name="noLibraryActivity">
+    <li class="notificationEmpty">
+        No activity at this time.
+    </li>
+</template>
+
+<template name="statusPending"><dd class="statusPending">Pending Response from WCASA</dd></template>
+<template name="statusOccupy"><dd class="statusOccupy">You are Currently Occupying this Item</dd></template>
+<template name="statusDeliver"><dd class="statusDelivery">Scheduled to be Delivered</dd></template>
+<template name="statusPendingAvailability"><dd class="statusPendingAvailability">Pending Availability</dd></template>

@@ -1,5 +1,5 @@
 <template name="header">
-    <header class="mainHeader full" id="menu">
+    <header class="mainHeader" id="menu">
         {{> utility}}
         {{> mainNav}}
         <div class="overlay"></div>
@@ -11,23 +11,14 @@
         <ul class="container">
             <li class="brand">
                 <a href="#masthead" class="brandLink">
-                    <svg width="400" height="90">
-                        <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="400" height="90" />
+                    <svg width="311" height="70">
+                        <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="311" height="70" />
                     </svg>
                 </a>
             </li>
             {{#each sections}}
                 {{> menuItem}}
             {{/each}}
-
-            <!--Placeholder for FED-->
-            <!--<li><a href="#">What We Do</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Who We Are</a></li>
-            <li><a href="#">Get Involved</a></li>
-            <li><a href="#">Service Providers</a></li>
-            <li><a href="#">Contact Us</a></li>-->
-            <!--FED Placeholder End-->
         </ul>
     </nav>
 </template>

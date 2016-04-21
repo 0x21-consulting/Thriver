@@ -1,9 +1,18 @@
 
 input[type=submit], .button, button{
-    display: block;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 15px;
+    will-change:background-color;
+    .accelerate;
+    .scale(1,1);
     .font(1.4,2.2,0.05,@bold,normal);
     .color(color,@white,none);
     .shadow(far);
+    .transition(background-color, 200ms, ease, 0ms);
+    &:active{
+        .transition(background-color, 100ms, ease, 0ms);
+    }
     span{
         .font(1.6,2.2,0.05,@light,normal);
         position: relative;
@@ -14,14 +23,14 @@ input[type=submit], .button, button{
             top: 5px;
         }
         &.notificationsAlert{
+            border:2px solid @white;
             position: absolute;
             display: block;
             margin-left: 2px;
             width: 12px;
             font-size: 14px;
             height: 12px;
-            color: @yellow;
-            border: 2px solid darken(@teal, 2.5%);
+            color: lighten(@yellow, 5%);
             text-align: center;
             border-radius: 50%;
             line-height: 12px;
@@ -35,37 +44,37 @@ input[type=submit], .button, button{
 }
 
 
-//Active Buttons
-li.active > button:first-child, button.active{
-    .color(background-color,@navy,none) !important;
-    .fa.close{
-        .opacity(1);
-    }
-    .fa.up{
-        .opacity(0);
-    }
-    &.notifications{
-        .notificationAlert{
-            .opacity(0);
-        }
-    }
-}
 
 //Button Colors
 .buttonColor(@color){
     .color(background-color,@color,none);
+    span.notificationsAlert{
+        .color(border-color,@color,none);
+    }
     &:hover{
-        .color(background-color,@color,dark);
+        .color(background-color,@color,light);
+        span.notificationsAlert{
+            .color(border-color,@color,light);
+        }
+    }
+    &:focus{
+        .color(background-color,@color,lighter);
+        span.notificationsAlert{
+            .color(border-color,@color,lighter);
+        }
     }
     &:active{
-        .color(background-color,@color,darker);
+        .color(background-color,@color,dark);
+        span.notificationsAlert{
+            .color(border-color,@color,dark);
+        }
     }
 }
 
 //Text Button Colors
 .textButtonColor(@color){
     .color(color,@color,none);
-    &:hover{
+    &:hover, &:focus{
         .color(color,@color,dark);
     }
     &:active{

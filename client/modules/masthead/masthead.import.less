@@ -1,303 +1,91 @@
 section.masthead{
-    overflow: hidden;
-    height: ~'calc(100vh - 270px)';
-    padding-top: 199px;
-    .translate(0px, 71px);
-    width: 100%;
-    background-color: @gray;
+    z-index: @mastheadZ;
     display: table;
-    color: @white;
     position: relative;
+    overflow: hidden;
+    width: 100%;
+    //min-height: 600px;
+    height: ~'calc(100vh - 268px)';
+    padding: 199px 0px 0px 0px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color:@white;
     will-change:transform;
     .transition(transform,@canvasDuration,@canvasEase,0ms);
-    z-index: 2;
-    opacity: 1;
-    min-height: 600px;
-    text-align: center;
+    .opacity(1);
+    .translate(0px, 70px);
     @media @mobile{
-        opacity: 1 !important; //override hover attribution
+        display: block;
         height: auto;
         min-height: 0px;
-        display: block;
         padding-top: 0px;
+        .opacity(1);
         .translate(0px,0px);
     }
-    &:after{
-        .fa;
-        content: "\f107";
-        display: block;
-        color: #ebf2f2;
-        font-size: 50px;
-        line-height: 50px;
-        font-weight: 100;
-        margin-top: 22px;
-        margin-bottom: 36px;
-        position: absolute;
-        bottom: 0px;
-        left: 50%;
-        margin-left: -25px;
-        //.transition(opacity,375ms,ease-out,0ms);
-        opacity: 1;
-        .translate(0px,0px);
-    }
-    div{
+    > div{
         display: table-cell;
         vertical-align: middle;
-        h1,p, a.cta{
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
         @media @mobile{
             display: block;
             padding-bottom: 30px;
         }
-        &:after{
-            content: '';
-            width: 100%;
-            z-index: -1;
-            height: ~'calc(100vh - 270px)';
-            background-color: #062131;
-            opacity: 0.7;
-            top: 0px;
-            padding-top: 199px;
-            left: 0px;
-            position: absolute;
-            pointer-events: none;
-            min-height:600px;
-            @media @mobile{
-                opacity: 0.75 !important; //override hover attribution
-            }
-        }
-        h1{
-            position: relative;
-            z-index: 2;
-        }
-        a.cta{
-            display: inline-block;
-            padding: 17px 24px;
-            font-size: 24px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-            background-color: @orange;
-            color: @white;
-            position: relative;
-            z-index: 2;
-            margin-top: 40px;
-            &:hover, &:focus{
-                background-color: darken(@orange, 2.5%);
-            }
-            &:active{
-                background-color: darken(@orange, 5%);
-            }
-            @media @1024{
-                margin-top: 0px;
-                .scale(0.8,0.8);
-            }
-            @media @mobile{
-                margin-top: 20px;
-                .scale(1,1);
-                padding: 12px;
-                font-size: 16px;
-                letter-spacing: 1px;
-            }
-        }
     }
-    &.mastheadAlert{
-        background: url('/lib/img/mastheadAlert.jpg') no-repeat center;
-        background-size: cover;
-        h1{
-            .os;
-            font-size: 29px;
-            letter-spacing: 2px;
-            font-weight: 100;
-            position: relative;
-            text-transform: uppercase;
-            @media @mobile{
-                padding-top: 87px;
-            }
-            &:after, &:before{
-                content: '';
-                width: 70px;
-                height: 2px;
-                background-color: @orange;
-                position: relative;
-                top: -8px;
-                display: inline-block;
-                margin-left: 10px;
-                margin-right: 10px;
-                @media @mobile{
-                    display: none;
-                }
-            }
-        }
-        p{
-            &.date{
-                //.os;
-                font-size: 14px;
-                letter-spacing: 1px;
-                margin-top: 5px;
-                margin-bottom: 5px;
-            }
-            &.excerpt{
-                text-transform: uppercase;
-                font-size: 26px;
-                line-height: 42px;
-                letter-spacing: 0.5px;
-                max-width: 871px;
-                margin-top: 35px;
-                padding: 0px 50px;
-                @media @1024{
-                    .scale(0.8,0.8);
-                    margin-top: 0px;
-                }
-                @media @mobile{
-                    .scale(1,1);
-                    margin-top: 20px;
-                    font-size: 20px;
-                    line-height: 27px;
-                    text-transform: none;
-                    letter-spacing: 0px;
-                }
-            }
-        }
+    h1,p, a.cta{
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        color: @white;
     }
-    &.mastheadArticle{
-        background: url('/lib/img/mastheadArticle.jpg') no-repeat center;
-        background-size: cover;
-        h1{
-            font-size: 36px;
-            text-transform: uppercase;
-            font-weight: 300;
-            margin-bottom: 30px;
-            line-height: 40px;
-            letter-spacing: 1px;
-            text-align: left;
-        }
-        div{
-            h1,p, a.cta{
-                max-width: 700px;
-                text-align: left;
-            }
-            h1{
-                @media @mobile{
-                    padding: 79px 20px 0px 20px;
-                    font-size: 26px;
-                    line-height: 30px;
-                }
-            }
-            p{
-                font-size: 18px;
-                letter-spacing: 0.5px;
-                padding-bottom: 20px;
-                line-height: 29px;
-                font-weight: 500;
-                @media @mobile{
-                    font-size: 16px;
-                    line-height: 22px;
-                    padding: 0px 20px 20px 20px;
-                }
-            }
-            a.cta{
-                margin-top: 20px;
-            }
-        }
-    }
-    &.mastheadImpact{
-        background: url('/lib/img/mastheadImpact.jpg') no-repeat center;
-        background-size: cover;
-        h1{
-            font-size: 77px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            line-height: 77px;
-            max-width: 1200px;
-            text-transform: uppercase;
-            margin:0 auto;
-            margin-top: -64px;
-            @media @1024{
-                .scale(0.8,0.8);
-                padding-top: 50px;
-            }
-            @media @mobile{
-                .scale(1,1);
-                font-size: 27px;
-                letter-spacing: 1px;
-                line-height: 32px;
-                padding-top: 0px;
-                margin-top: 90px;
-            }
-            span.small{
-                .os;
-                display: block;
-                clear: both;
-                font-size: 36px;
-                font-weight: 100;
-                position: relative;
-                @media @mobile{
-                    font-size: 21px;
-                    letter-spacing: 1px;
-                }
-                &:nth-child(3){
-                    &:after, &:before{
-                        content:'';
-                        width: 200px;
-                        height: 3px;
-                        background-color: @white;
-                        position: absolute;
-                        margin-top: 42px;
-                        @media @mobile{
-                            display: none;
-                        }
-                    }
-                    &:before{
-                        margin-left: -240px;
-                    }
-                    &:after{
-                        margin-left: 40px;
-                    }
-                }
-            }
-            span.large{
-                &:last-child{
-                    //font-size: 96px;
-                }
-            }
-        }
+    a.cta{
+        display: inline-block;
+        .buttonColor(@orange);
+        margin-top: 20px;
     }
 }
 
+
+//Overlay Color
+section.masthead > div:after{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    min-height:600px;
+    height: ~'calc(100vh - 268px)';
+    padding-top: 199px;
+    z-index: -1;
+    pointer-events: none;
+    background-color: @navy;
+    .opacity(0.8);
+    @media @mobile{
+        .opacity(0.75);
+    }
+}
+
+//Indicator Arrow
 section.masthead:after{
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -15px;
+    content: "\f107";
+    color: @white;
     will-change:transform,opacity;
+    .fa;
+    .font(5.0,5.0,0.0,@light,none);
+    .opacity(1);
+    .translate(0px,0px);
     .transition2(transform,250ms,@canvasEase, 0ms, opacity,250ms,@canvasEase, 0ms);
-    opacity: 1;
+}
+
+.fixedHeader section.masthead{
     .translate(0px, 0px);
-}
-
-.fixedHeader{
-    section.masthead{
-        .translate(0px, 0px);
-        &:after{
-            opacity: 0;
-            .translate(0px,-20px);
-        }
-        div:before{
-            //opacity: 1;
-        }
-    }
-}
-
-
-//masthead opacity controls
-section.masthead{
-    opacity: 1;
-}
-
-//header.mainHeader:hover + header + .canvasCenter section.masthead, section.masthead:hover{
-header.mainHeader + header + .canvasCenter section.masthead, section.masthead{
-    opacity: 1;
-    div:after{
-        opacity: 0.75;
+    &:after{
+        .opacity(0);
+        .translate(0px,-20px);
     }
 }

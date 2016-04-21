@@ -5,9 +5,9 @@ body, html{
 }
 
 
-
 body{
     max-width: 100%;
+    overflow-x: hidden; //Can we get rid of this?
     .full{
         width: 100%;
     }
@@ -31,6 +31,16 @@ body{
     }
 }
 
+//This needs home
+.asideLink{
+    margin: 36px auto 45px auto;
+    padding: 0px;
+    color: @gray;
+    border-bottom: 2px solid @gray;
+    .shadowNone;
+    .font(1.2,1.5,0.025,@normal,none);
+}
+
 .container{
     width: 100%;
     max-width: 1600px;
@@ -46,6 +56,7 @@ body{
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    isolation: isolate; //Prevents child elements from covering up scrollbar in chrome
 }
 .canvasCenter{
     position: relative;
@@ -60,16 +71,13 @@ body{
     top: 0px;
     left: 0px;
     visibility: hidden;
-    background-color: @navy;
-    opacity: 0;
+    background-color: #10202a;
+    .opacity(0);
     z-index: 3;
     cursor: pointer;
     width: 100%;
     height: 100%;
     .transition(all,375ms,ease-out,0ms);
-}
-button{
-    .transition(background-color, 200ms, ease, 0ms);
 }
 
 
@@ -88,14 +96,6 @@ button{
 }
 
 
-.clearfix:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-}
 
 
 //Overrides
@@ -130,12 +130,12 @@ button{
 .masterContainer > section:nth-child(2){
     will-change:opacity,transition;
     .transition2(transform,500ms,@canvasEase, 100ms, opacity,500ms,@canvasEase, 100ms);
-    opacity: 0;
+    .opacity(0);
     .translate(0px,-35px);
 }
 .fixedHeader{
     .masterContainer > section:nth-child(2){
-        opacity: 1;
+        .opacity(1);
         .translate(0px,0px);
     }
 }
@@ -159,636 +159,6 @@ button{
 }
 
 
-.sidebar{
-    position: fixed;
-    height: 100%;
-    height: 100vh;
-    background-color:mix(@gray, @navy, 55%);
-    top: 36px;
-    .shadow(closeRight);
-    &.sidebarsRight{
-        .shadow(closeLeft);
-    }
-    z-index: 11;
-    will-change: transform, width;
-    .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay,width,@canvasDuration, @canvasEase, @canvasDelay);
-    .scroller{
-        text-align: center;
-        height: ~'calc(100vh - 24px)';
-    }
-    section{
-        position: absolute;
-        opacity: 0;
-        text-align: center;
-        top: 0px;
-        //max-width: 100%;
-        will-change: transform, opacity;
-        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,100ms, @canvasEase, 0ms);
-
-    }
-    h2{
-        border-color: mix(@gray, @navy, 45%);
-        padding: 27px 0px 18px 0px;
-        margin: 0px 30px 30px 30px;
-        display: block;
-        margin-top: 30px;
-        text-align: center;
-        max-width: 355px;
-        &:first-child{
-            margin-top: 0px;
-        }
-    }
-    ul{
-        li{
-            display: block;
-            padding: 30px;
-            background-color: @lightBlue;
-            color: @white;
-            text-align: left;
-            font-size: 14px;
-            line-height: 19px;
-            &:nth-child(even){
-                background-color: @darkBlue;
-            }
-            .dateMeta{
-                text-transform: uppercase;
-                font-size: 12px;
-                font-weight: bold;
-                color: lighten(@lightBlue, 30%);
-            }
-            .text{
-                font-weight: bold;
-                letter-spacing: 0.25px;
-                font-size: 14px;
-                display: block;
-            }
-        }
-        &.eventsMenu, &.toggleSwitches{
-            li{
-                background-color: @darkBlue;
-                &:nth-child(even){
-                    background-color: @lightBlue;
-                }
-            }
-        }
-    }
-    button{
-        font-size: 12px;
-        &.closeTab, &.loadMore, &.unregister, &.viewEvents, &.undo {
-            .colorButton(@white);
-            background-color: transparent;
-            text-transform: none;
-            text-align: center;
-            display: block;
-            font-weight: 600;
-            margin: 0 auto;
-            line-height: 12px;
-            //font-size: 12px;
-            height: auto;
-            margin-top: 36px;
-            &:hover, &:focus, &:active{
-                background-color: transparent;
-            }
-        }
-        &.viewEvents{
-            padding: 0px;
-            margin: 0 auto;
-            text-align: center;
-            display: block;
-        }
-        &.undo{
-            margin: 10px 0px 0px 0px;
-            text-align: left;
-            display: block;
-            padding: 0px;
-            clear: both;
-        }
-        &.unregister{
-            display: block;
-            text-align: left;
-            margin: 10px 0px;
-            padding: 0px;
-        }
-        &.closeTab{
-            margin-bottom: 36px;
-        }
-    }
-    form{
-        padding: 0px 30px 0px 30px;
-    }
-    &.sidebarsLeft{
-        width: 356px;
-        left: 0px;
-        .translate(-356px,0px);
-        section{
-            position: absolute;
-            left:0px;
-            .translate(-356px,0px);
-            width: 356px;
-            &.active{
-                .translate(0px,0px);
-                opacity: 1;
-            }
-            &.accountDetails{
-                width: 570px;
-                left: 0px;
-                .translate(-570px,0px);
-                &.active{
-                    .translate(0px,0px);
-                    opacity: 1;
-                }
-                h2{
-                    max-width: 360px;
-                    margin: 0 auto;
-                    margin-bottom: 30px;
-                }
-            }
-        }
-    }
-    &.sidebarsRight{
-        width: 356px;
-        right: 0px;
-        .translate(356px,0px);
-        background-color: @midnightBlue;
-        h2{
-            border-color: @lightBlue;
-        }
-        section{
-            right: 0px;
-            .translate(356px,0px);
-            &.active{
-                .translate(0px,0px);
-                opacity: 1;
-            }
-            &.news{
-                right: 0px;
-                .translate(800px,0px);
-                &.active{
-                    .translate(0px,0px);
-                    opacity: 1;
-                }
-            }
-            &.donate{
-                right: 0px;
-                .translate(656px,0px);
-                &.active{
-                    .translate(0px,0px);
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}
-
-
-@media @mobile{
-    .sidebar.sidebarsRight, .sidebar .sidebarsLeft {
-        right: inherit;
-        left: 0px;
-        .translate(-100%,0px);
-        width: 85%;
-        top: 60px;
-        z-index: 20;
-        pointer-events: none;
-        .scroller > div > h2, .scroller > h2 {
-            background: @aqua;
-            margin-left: -20px;
-            width: 100%;
-            padding-right: 40px;
-        }
-        section{
-            h2{
-                color: @white;
-                text-align: left;
-                font-size: 14px;
-                line-height: 19px;
-                font-weight: 700;
-                letter-spacing: 1px;
-                text-indent: 20px;
-                max-width: 999px;
-                border: none;
-                padding: 0px;
-                line-height: 60px;
-                height: 60px;
-                span{
-                    display: none;
-                }
-                &:before{
-                    .fa;
-                    display: none;
-                    content:"\f0d9";
-                }
-            }
-            .closeTab{
-                display: none;
-            }
-            background-color: #566a75;
-            width: 100% !important; //override desktop
-            .translate(0%,0px) !important; //Override desktop
-            .scroller{
-                padding: 0px 20px;
-            }
-            button.closeTab{
-                margin-bottom: 60px;
-                margin-top: 0px;
-            }
-            h3, h4{
-                font-size: 14px;
-                line-height: 20px;
-                font-weight: 600;
-                letter-spacing: 1px;
-            }
-            li.mainTitle{
-                padding: 0px;
-                background-color: @aqua !important; //Override pseudoselector
-            }
-        }
-    }
-}
-
-
-//Accounts Side
-@media @mobile{
-    .sidebar.sidebarsLeft{
-        left: initial;
-        right: 1px;
-        width: ~'calc(85% - 60px)';
-        .translate(101%,0px);
-        z-index: 20;
-        top: 113px;
-        background-color: darken(@darkBlue, 5%);
-        form {
-            p#login-error {
-                margin-top: 10px;
-            }
-        }
-        .loginToggle{
-            color: #fff;
-            margin: 0 auto;
-            margin-top: 17px;
-        }
-        section.login, section.register{
-            opacity: 1;
-            display: block;
-            right: 0px;
-            left: inherit;
-            top: -113px;
-            width: 100%;
-            position: fixed;
-            z-index: 99;
-            padding-bottom: 113px;
-            background-color:mix(@gray, @navy, 55%);
-            left: -30px;
-            .translate(120%,0px);
-            //.transition(all, 375ms, ease-out, 0ms) !important;
-            .scroller{
-                width: 116%;
-                margin-left: -8%;
-            }
-            form{
-                margin-top: 23px;
-            }
-            h2{
-                display: block;
-                font-size: 14px;
-                letter-spacing: 0.5px;
-                font-weight: 700;
-                padding: 0px;
-                line-height: 60px;
-                white-space: nowrap;
-                margin-bottom: 0px;
-                max-width: none;
-            }
-        }
-        section.notifications{
-            ul > li{
-                background-color: transparent;
-                padding: 10px 20px;
-            }
-            button.loadMore {
-                padding-bottom: 30px;
-            }
-        }
-        section, section.accountDetails{
-            .scroller{
-                height: ~'calc(100vh - 113px)';
-            }
-            width: 100%;
-            opacity: 0;
-            z-index: 8;
-            background-color: darken(@darkBlue, 5%);
-            button.closeTab{
-                display: none;
-            }
-            .noTransition;
-            .translate(0px,0px);
-            form label.toggleSwitchLabel{
-                //float: right;
-                text-align: left;
-                white-space: nowrap;
-                left: 90px;
-            }
-            form .toggleSwitches .toggleSwitch{
-                left: 20px;
-            }
-            form#subscriptions li {
-                padding: 30px 20px 30px 20px;
-            }
-            form.editable label{
-                color: @white;
-            }
-            form.editable{
-                padding-top: 20px;
-                max-width: none;
-            }
-            li.eventsRegistered {
-                padding: 10px 20px;
-            }
-            h2, ul.accountDetailsTabs{
-                display: none;
-            }
-            h3, h2.notificationsHeading{
-                background: transparent;
-                padding: 0px;
-                margin: 0px 20px 5px 20px;
-                line-height: 58px;
-                height: 58px;
-                text-align: left;
-                cursor: pointer;
-                border-bottom: 2px solid darken(@darkBlue, 10%);
-                font-size: 13px;
-                white-space: nowrap;
-                letter-spacing: 0.5px;
-                font-weight: 700;
-                display: block;
-                &:before{
-                    content: "\f0d9";
-                    font-size: 12px;
-                    position: relative;
-                    top: -2px;
-                    padding-right: 5px;
-                    .fa;
-                }
-                &:active{
-                    background-color: darken(@darkBlue, 6%);
-                    font-size: 90%;
-                }
-            }
-            ul.accountDetailsContent {
-                background-color: transparent;
-                > li{
-                    background-color: transparent;
-                    .noTransition;
-                    ul li, ul li:nth-child(even) {
-                        background-color: transparent;
-                        span {
-                            max-width: none;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .accountOpen{
-        .sidebar.sidebarsLeft section.login{
-            .translate(-100%,0px);
-        }
-    }
-
-    .accountOpen.registerMob{
-        .sidebar.sidebarsLeft{
-            section.login{
-                .translate(120%,0px);
-            }
-            section.register{
-                .translate(-100%,0px);
-            }
-        }
-    }
-
-    .registeredEventsM{
-        header.mobileHeader section.mobileMenuAccount div > ul > li.registeredEventsMob a{
-            background-color: darken(@darkBlue, 5%);
-        }
-        .sidebar.sidebarsLeft{
-            .translate(0px,0px);
-            section.notifications{
-                .translate(100%,0px);
-            }
-            section.accountDetails{
-                .translate(0px,0px);
-                opacity: 1;
-                ul.accountDetailsContent > li{
-                    .translate(100%,0px);
-                    &.registeredEvents{
-                        display: block;
-                        .translate(0px,0px);
-                        opacity: 1;
-                        z-index: 9;
-                    }
-                }
-            }
-        }
-    }
-
-
-    .subscriptionsManagerM{
-        header.mobileHeader section.mobileMenuAccount div > ul > li.subscriptionsManagerMob a{
-            background-color: darken(@darkBlue, 5%);
-        }
-        .sidebar.sidebarsLeft{
-            .translate(0px,0px);
-            section.notifications{
-                .translate(100%,0px);
-            }
-            section.accountDetails{
-                .translate(0px,0px);
-                opacity: 1;
-                ul.accountDetailsContent > li{
-                    .translate(100%,0px);
-                    &.subscriptions{
-                        display: block;
-                        .translate(0px,0px);
-                        opacity: 1;
-                        z-index: 9;
-                    }
-                }
-            }
-        }
-    }
-
-
-    .notificationsM{
-        header.mobileHeader section.mobileMenuAccount div > ul > li.notificationsMob a{
-            background-color: darken(@darkBlue, 5%);
-        }
-        .sidebar.sidebarsLeft{
-            .translate(0px,0px);
-            section.accountDetails{
-                .translate(100%,0px);
-            }
-            section.notifications{
-                .translate(0px,0px);
-                opacity: 1;
-                ul.accountDetailsContent > li{
-                    .translate(100%,0px);
-                    &.notifications{
-                        display: block;
-                        .translate(0px,0px);
-                        opacity: 1;
-                        z-index: 9;
-                    }
-                }
-            }
-        }
-    }
-
-
-    .profileSettingsM{
-        header.mobileHeader section.mobileMenuAccount div > ul > li.profileSettingsMob a{
-            background-color: darken(@darkBlue, 5%);
-        }
-        .sidebar.sidebarsLeft{
-            .translate(0px,0px);
-            section.notifications{
-                .translate(100%,0px);
-            }
-            section.accountDetails{
-                .translate(0px,0px);
-                opacity: 1;
-                ul.accountDetailsContent > li{
-                    .translate(100%,0px);
-                    &.accountSettings{
-                        display: block;
-                        .translate(0px,0px);
-                        opacity: 1;
-                        z-index: 9;
-                    }
-                }
-            }
-        }
-    }
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-body{
-    overflow-x: hidden;
-    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
-        overflow: hidden;
-        .overlay{
-            opacity: 0.85; 
-            visibility: visible;
-            &:hover{
-                opacity: 0.95;
-            }       
-        }
-    }
-    &.leftSmall{
-        .canvasCenter, .mainNav{
-           .translate(356px,0px);
-        }
-        .sidebarsLeft{
-           .translate(0px,0px);
-        }
-    }
-    &.leftMedium{
-        .canvasCenter, .mainNav{
-           .translate(570px,0px);
-        }
-        .sidebarsLeft{
-            width: 570px;
-           .translate(0px,0px);
-        }
-    }
-    &.rightSmall{
-        .canvasCenter, .mainNav{
-            .translate(-356px,0px);
-        }
-        .sidebarsRight{
-            right: 0px;
-            .translate(0px,0px);
-        }
-    }
-    &.rightMedium{
-        .canvasCenter, .mainNav{
-            left: inherit;
-            .translate(-656px,0px);
-        }
-        .sidebarsRight{
-            width: 656px;
-            .translate(0px,0px);
-        }
-    }
-    &.rightLarge{
-        .canvasCenter, .mainNav{
-            left: inherit;
-            .translate(-1100px,0px);
-        }
-        .sidebarsRight{
-            width: 1100px;
-            .translate(0px,0px);
-        }
-        @media @1250{
-            .canvasCenter, .mainNav{
-                left: inherit;
-                .translate(-900px,0px);
-            }
-            .sidebarsRight{
-                width: 900px;
-                .translate(0px,0px);
-            }            
-        }
-        @media @1024{
-            .canvasCenter, .mainNav{
-                left: inherit;
-                .translate(-700px,0px);
-            }
-            .sidebarsRight{
-                width: 700px;
-                .translate(0px,0px);
-            }            
-        }
-    }
-}
-
-
-
-
-
-
 
 //// Translated Element Classes
 
@@ -801,3 +171,144 @@ body{
 .translateTopOut{
     .translate(0px, -100%);
 }
+
+
+.canvasCenter{
+    min-height: 1500px;
+    min-height: 100vh;
+    //background-color: @gray;
+    .masterContainer{
+        min-height: 1500px;
+        min-height: 100vh;
+    }
+    //This prevents strange page loading loading behavior
+}
+
+
+
+
+
+
+::selection {background: @teal;}
+::-moz-selection {background: @teal;}
+
+
+
+
+//Sidebar / Main Canvas Interaction and Animation Controls
+@fixedHeaderTranslate: -137px; //Vertical Lift of Header on Fixed Navigation
+//Sidebar Widths
+@leftSmallWidth: 356px;
+@leftMediumWidth: 700px;
+@rightSmallWidth: 356px;
+@rightMediumWidth: 656px;
+@rightLargeWidth: 1100px;
+//Page Take Over Opacities
+@overlayOpacity: 0.9;
+@overlayOpacityHover: 0.83;
+
+//Context
+aside.sidebar{
+    position: fixed;
+    height: 100%;
+    height: 100vh;
+    top: 36px;
+    z-index: @sidebarZ;
+    will-change: transform, width;
+    .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay,width,@canvasDuration, @canvasEase, @canvasDelay);
+    .scroller{height: ~'calc(100vh - 24px)';}
+    > section{
+        position: absolute;
+        left: 0px;
+        text-align: center;
+        will-change: transform, opacity;
+        .opacity(0);
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,300ms, @canvasEase,0ms);
+        //Sidebar Section Default Off-canvas translate and width
+        &.leftSmall{.translate(-(@leftMediumWidth),0px); width: @leftSmallWidth;}
+        &.leftMedium{.translate(-(@leftMediumWidth),0px); width: @leftMediumWidth;}
+        &.rightSmall{.translate(@rightLargeWidth,0px); width: @rightSmallWidth;}
+        &.rightMedium{.translate(@rightLargeWidth,0px); width: @rightMediumWidth;}
+        &.rightLarge{.translate(@rightLargeWidth,0px); width: @rightLargeWidth;}
+        //Active Sidebar Section
+        &.active{
+            .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 100ms);
+            .translate(0px,0px);
+            .opacity(1); 
+        }
+    }
+    &.sidebarsLeft{
+        right: 100%;
+        width: @leftMediumWidth; //Should be widest sidebar on given side
+        section{
+            left: inherit;
+            right: 0px;
+            &.active{.translate(0px,0px);}
+        }
+    }
+    &.sidebarsRight{
+        width: @rightLargeWidth; //Should be widest sidebar on given side
+        left: 100%;
+    }
+}
+
+//Canvas Translate
+body{
+    &.leftSmall{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftSmallWidth,0px);}}
+    &.leftMedium{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftMediumWidth,0px);}}
+    &.rightSmall{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightSmallWidth),0px);}}
+    &.rightMedium{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightMediumWidth),0px);}}
+    &.rightLarge{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightLargeWidth),0px);}}
+    //Fixed Header Requires X Transform Accomodation
+    &.fixedHeader{
+        &.leftSmall{header.mainHeader nav.mainNav{.translate(@leftSmallWidth,@fixedHeaderTranslate);}}
+        &.leftMedium{header.mainHeader nav.mainNav{.translate(@leftMediumWidth,@fixedHeaderTranslate);}}
+        &.rightSmall{header.mainHeader nav.mainNav{.translate(-(@rightSmallWidth),@fixedHeaderTranslate);}}
+        &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightMediumWidth),@fixedHeaderTranslate);}}
+        &.rightLarge{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightLargeWidth),@fixedHeaderTranslate);}}
+    }
+}
+
+//Overlay for Sidebars
+body{
+    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden; //Suspect scroll from main body
+        .overlay{
+            .opacity(@overlayOpacity);
+            visibility: visible;
+            &:hover{.opacity(@overlayOpacityHover);}       
+        }
+    }
+    &.leftSmall, &.leftMedium{
+        .overlay{cursor: e-resize;}
+    }
+    &.rightSmall, &.rightMedium, &.rightLarge{
+        .overlay{cursor: w-resize;}
+    }
+}
+
+
+
+
+
+//Definition Lists
+dl{
+    padding: 10px;
+    margin: 20px 0px 20px 0px;
+    dt{
+        display: inline;
+        &:after{content:": ";}
+    }
+    dd{
+        display: inline;
+        font-weight: @bold;
+    }
+}
+
+.dlColors(@x,@y,@z){
+    background-color: @x;
+    dt{color: @y;}
+    dd{color:@z;}
+}
+
+

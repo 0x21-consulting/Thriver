@@ -1,42 +1,43 @@
 figure.alert{
     position: fixed;
-    z-index: 11;
-    bottom: -32px;
-    height: 32px;
-    background-color: @orange;
     width: 100%;
+    bottom: -72px;
+    height: 72px;
+    z-index: @alertZ;
+    background-color: @orange;
     text-align: center;
-    opacity: 0;
-    //.transition(transform,200ms,ease-out,500ms);
+    .transition(transform,275ms,@canvasEase,0ms);
+    .opacity(0);
+    &.notification{
+        background-color: @teal;
+    }
+    &.important{
+        background-color: @orange;
+    }
     &.active{
-        .translate(0px, -32px);
-        opacity: 1;
+        .translate(0px, -72px);
+        .opacity(1);
     }
     figcaption{
-        color: #fff;
-        font-weight: bold;
+        color: @white;
+        .font(1.4,3.2,0.025,@bold,none);
+        padding: 20px;
         white-space: nowrap;
-        font-size: 14px;
-        line-height: 32px;
-        text-transform: uppercase;
-        letter-spacing: 0.25px;
         span.closeAlert{
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 20px;
+            right: 10px;
             cursor: pointer;
-            width: 16px;
-            height: 16px;
-            font-size: 12px;
-            font-weight: normal;
-            border-radius: 50%;
-            -webkit-border-radius: 50%;
-            color: @orange;
-            background-color: darken(@orange, 15%);
+            width: 32px;
+            height: 32px;
+            color: @white;
+            background-color: @black;
+            background-color: rgba(0,0,0,0.1);
             text-align: center;
-            line-height: 16px;
+            .font(2.0,3.2,0,@light,none);
+            .borderRadius(50%);
             &:hover{
-                background-color: darken(@orange, 20%);
+                background-color: rgba(0,0,0,0.3);
             }
         }
     }

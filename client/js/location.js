@@ -72,7 +72,8 @@ Template.body.onRendered(function () {
                     coordinates[i].id + '"]');
                 if (link instanceof Element)
                     link.classList.add('active');
-                
+                    //This allows the UI to remove unwanted :focus class to last selection
+                    $("header.mainHeader nav.mainNav li a").blur(); 
                 break;
             }
         }, 200);

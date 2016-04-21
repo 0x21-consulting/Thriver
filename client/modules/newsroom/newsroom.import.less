@@ -1,177 +1,126 @@
+//Structure
 section.news {
     width: 1100px;
     height: ~"calc(100vh - 32px)";
-    text-align: center;
+    text-align: left;
     top: 0px;
+    .tabStyle(@blueGray,16.66666%,65px,true);
+    button.manageSubscriptions, button.subscriptionsRegister{
+        .shadowNone;
+        margin: 0 auto;
+        display: block;
+        padding-bottom: 22px;
+        .textButtonColor(@gray);
+        .font(1.2,1.2,0.025,@normal,none);
+        .fa{
+            position: relative;
+            top: 1px;
+        }
+    }
+    h2{
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    .closeTab{
+        display: block;
+    }
+    ul.newsItems > li .inner{
+        max-width: 600px;
+        padding: 30px;
+        margin: 0 auto;
+    }
     @media @1250{
         width: 900px;
     }
     @media @1024{
         width: 700px;
     }
-    //.transition(all,400ms,ease-out,0ms);
-    h2{
-        margin: 0 auto;
-        //margin-bottom: 30px;
-    }
-    button.newsroomButton{
-        margin-bottom: 30px;
-        color: #fff;
-        opacity: 0.7;
-        line-height: 37px;
-        margin-top: 21px;
-        padding: 0px;
-        font-size: 14px;
-        //.transition(opacity,200ms,ease,0ms);
-        &:hover{
-            opacity: 1;
-        }
-        display: inline;
-        @media @mobile{
-            display: none;
-        }
-    }
+}
 
-
+//Element Styles
+section.news{
     h3{
-        a{
-            .colorButton(lighten(@aqua, 2.5%));
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            @media @mobile{
-                color:@white;
-                &:hover{
+        padding: 0px;
+        text-align: left;
+    }
+    h3 a{
+        .font(1.4,1.4,0.01,@normal,none);
+        .textButtonColor(lighten(@teal, 5%));
+    }
+    a h3, a .icon{
+        margin-top: 0px;
+        padding-top: 0px;
+        text-align: center;
+        .textButtonColor(lighten(@teal, 2.5%));
+        .font(1.4,1.4,0.01,@normal,none);
+    }
+    ul.newsContent{
+        @media @mobile{
+            position: fixed;
+            top: 0px;
+            left: -100%;
+            width: 100%;
+        }
+        > li ul li{
+            .dateMeta{
+                .font(1.2,1.7,0.025,@bold,none);
+                color: lighten(@lightBlue, 30%);
+            }
+            .text{
+                display: block;
+                .font(1.4,1.7,0.025,@bold,none);
+                a{
+                    .textButtonColor(@teal);
                     color: @white;
                 }
             }
         }
-    }
-    a{
-        h3, .icon{
-            color: lighten(@aqua, 2.5%);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        > li ul li.pressMediaItem{
             text-align: center;
-            margin-top: 0px;
-            padding-top: 0px;
-        }
-        &:hover h3, &:hover .icon{
-        color: lighten(@aqua, 5%);
-        }
-        &:active h3, &:hover .icon{
-        color: lighten(@aqua, 10%);
+            a{
+                display: block;
+                .icon{
+                    font-size: 22px;
+                    display: block;
+                    margin-bottom: 10px;
+                }
+            }            
         }
     }
-
-    p{
-        letter-spacing: 1px;
-    }
-    button.loadMore{
-        margin: 0 auto;
-        
-        // "That's everything!" text should be hidden by default
-        & + span.everything {
-            display: none;
+    li.loadMore{
+        text-align: center;
+        padding: 30px 0px;
+        button{
+            .buttonColor(@blueGray);
             margin: 0 auto;
-            text-align: center;
-            font-size: 12px;
-            line-height: 17px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            & + span.everything {
+                display: none;
+                margin: 0 auto;
+            }
         }
-        
-        // When all results show, hide the "Load More" text and show the "everything" text
         &.everything { display: none; }
         &.everything + span.everything { display: block; }
     }
-    
-    ul.newsTabs{
-        height: 52px;
-        li {
-            display: block;
-            //width: 20%;
-            width: 16.667%;
-            float: left;
-            padding: 20px 0px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-            line-height: 12px;
-            //.transition(all,200ms,ease,0ms);
-            &:first-child{
-                background-color: #5e727d;
-            }
-            &:nth-child(2){
-                background-color: #637782;
-            }
-            &:nth-child(3){
-                background-color: #6d818c;
-            }
-            &:nth-child(4){
-                background-color: #748893;
-            }
-            &:nth-child(5){
-                background-color: #7f929c;
-            }
-            &:nth-child(6){
-                background-color: #8599a4;
-            }
-            &:hover{
-                background-color: darken(@lightBlue, 5%);
-            }
-            &:active{
-                color: lighten(@aqua, 10%);
-            }
-            &.active{
-                background-color: @lightBlue;
-                color: lighten(@aqua, 2.5%);
-                &:hover{
-                    background-color: @lightBlue;
-                    //color: lighten(@aqua, 5%);
-                }
-            }
-            &.subscriptionsMob{
-                padding: 0px 40px 0px 0px;
-                position: relative;
-                button{
-                    margin: 0px;
-                    padding: 0px;
-                    height: 60px;
-                    line-height: 60px;
-                    opacity: 1;
-                    text-indent: 20px;
-                    font-weight: 600;
-                    color: #fff;
-                    font-size: 14px;
-                    letter-spacing: 0.5px;
-                }
-                &:after{
-                    position: absolute;
-                    right: 20px;
-                    top: 20px;
-                }
-            }
-            @media @1250{
-                letter-spacing: 0.75px;
-            }
-            @media @1024{
-                letter-spacing: 1px;
-                line-height: 14px;
-                height: 27px;
-                text-align: left;
-                width: 13.667%;
-                padding-left: 1.5%;
-                padding-right: 1.5%;
-            }
-        }
-    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////// To be Optimized
+
+section.news{
     ul.newsContent{
-        background-color: @darkBlue;
         @media @mobile{
             position: fixed;
             top: 0px;
@@ -179,9 +128,6 @@ section.news {
             width: 100%;
         }
         > li{
-            padding: 0px;
-            background-color: transparent;
-            display: none;
             @media @mobile{
                 display: block;
                 background-color: #566a75;
@@ -193,7 +139,6 @@ section.news {
                 width: 100%;
                 overflow-y: auto;
                 height: ~'calc(100vh - 24px)';
-                //.transition(all,400ms,ease-out,0ms);
                 .translate(-100%,0px);
             }
             &.active{
@@ -201,27 +146,38 @@ section.news {
                     .translate(0%,0px);
                 }
             }
-            //.animateDisplayNewsTabs;
-            //.transition(all,400ms,ease-out,0ms);
+        }
+    }
+}
+section.news{    
+    ul.newsContent{
+        @media @mobile{
+            position: fixed;
+            top: 0px;
+            left: -100%;
+            width: 100%;
+        }
+        > li{
+            @media @mobile{
+                display: block;
+                background-color: #566a75;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+                overflow-y: auto;
+                height: ~'calc(100vh - 24px)';
+                .translate(-100%,0px);
+            }
             ul{
                 li{
-                    background-color: @darkBlue;
-                    padding: 30px 140px 30px 140px;
                     @media @mobile{
                         padding: 20px;
                         color: @white;
-                        &:active{
-                            background-color: darken(@darkBlue, 20%);
-                        }
                         a{
                             color: @white !important;
-                        }
-                    }
-                    //.transition(all,400ms,ease-out,0ms);
-                    &:nth-child(even){
-                        background-color: @lightBlue;
-                        &:active{
-                            background-color: darken(@lightBlue, 20%);
                         }
                     }
                     &:last-child{
@@ -230,19 +186,8 @@ section.news {
                             background-color: transparent;
                         }
                     }
-                    &.pressMediaItem{
-                        text-align: center;
-                        a{
-                            display: block;
-                            .icon{
-                                font-size: 22px;
-                                display: block;
-                                margin-bottom: 10px;
-                            }
-                        }
-                    }
                     &.menuTitle{
-                        background-color:mix(@gray, @navy, 55%);
+                        /*background-color:mix(@gray, @navy, 55%);
                        //.transition(all,100ms,ease,0ms);
                         cursor: pointer;
                         &:active{
@@ -270,71 +215,15 @@ section.news {
                                 //font-size: 98%;
                                 //background-color:mix(@gray, @navy, 40%);
                             }
-                        }
+                        }*/
                     }
                 }
             }
-            &.active{
-                display: block;
-            }
-        }
-
-        ul.newsItems.inTheNews{
-            h3{
-                margin-bottom: 0px;
-            }
-        }
-    }
-    aside.searchFieldContainer{
-        padding: 35px 30px 40px 30px;
-        background-color: @lightBlue;
-        @media @mobile{
-            display: none;
-        }
-        form{
-            max-width: 300px;
-            margin: 0 auto;
-            position: relative;
-            label{
-                position: absolute;
-                left: 31px;
-                color: @white;
-                font-size: 16px;
-                top: 6px;
-                font-weight: normal;
-            }
-            input{
-                font-weight: bold;
-            }
-        }
-    }
-    ::-webkit-input-placeholder {  color: @white; font-weight: bold;  }
-    :-moz-placeholder {  color: @white; font-weight: bold;  }
-    ::-moz-placeholder {  color: @white; font-weight: bold;  }
-    :-ms-input-placeholder {  color: @white; font-weight: bold;  }
-}
-
-
-section.news{
-    button#subscriptionsRegister.newsroomButton{
-        display: inline-block !important;
-        @media @mobile{
-            display: none !important;
         }
     }
 }
-
-
 @media @mobile{
     section.news {
-        button#subscriptionsRegister {
-            margin: 0px;
-            padding: 0px 20px 0px 0px;
-            position: static;
-            line-height: 16px;
-            text-align: left;
-            font-size: 13px;
-        }
         ul.newsTabs{
             height: auto;
             li {

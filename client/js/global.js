@@ -109,6 +109,7 @@ var smoothScroll = function (event) {
     speed = Math.abs(posY - offset);
     
     // Smooth scroll to target
+    $("header.mainHeader nav.mainNav li a").removeClass('active');
     $('body').animate({ scrollTop: offset }, speed > 750? 750 : speed);
 };
 
