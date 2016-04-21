@@ -53,12 +53,6 @@ Template.utility.events({
     },
     // Close sidebars when clicking sign out or help links
     'click li.logout' : closeAsides,
-    'click li': function (event) {
-        $('figure.alert').addClass('active').delay(5000).queue(function(){
-            $(this).removeClass("active").dequeue();
-        });
-        closeAsides;
-    },
     'click li.getHelp': closeAsides,
     'click li.getHelp': function (event) {
         offset = $('[id="service-providers"]').offset().top - 95;
