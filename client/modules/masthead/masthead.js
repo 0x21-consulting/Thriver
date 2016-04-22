@@ -13,5 +13,13 @@ Template.masthead.events({
     'click section.masthead .arrow': function (event) {
         offset = $('[id="what-we-do"]').offset().top - 95;
         $('body').animate({ scrollTop: offset }, 500);
+    },
+    'click section.masthead .jobsOpen': function (event) {
+        offset = $('[id="get-involved"]').offset().top - 95;
+        $('body').animate({ scrollTop: offset }, 1500);
+    },
+    'click section.masthead .eventsOpen': function (event) {
+        offset = $('[id="events"]').offset().top - 95;
+        $('body').animate({ scrollTop: offset }, 1500);
     }
 });

@@ -38,6 +38,10 @@ section.masthead{
     p{
     .font(1.6,3.0,0.025,@normal,none);
     }
+    ul{margin-left: 0px;}
+    li{
+        list-style: none;
+    }
 }
 
 
@@ -225,13 +229,13 @@ section.masthead{
         > li.gray{}
         > li.navy{}
         //Temp Image Declarations
-        > li.mastheadArticle{
+        > li:first-child{
             background-image: url('/lib/img/mastheadArticle.gif');
         }
-        > li.mastheadAlert{
+        > li:nth-child(2){
             background-image: url('/lib/img/mastheadAlert.jpg');
         }
-        > li.mastheadImpact{
+        > li:nth-child(3){
             background-image: url('/lib/img/mastheadImpact.jpg');
         }
     }
