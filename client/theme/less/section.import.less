@@ -1,7 +1,7 @@
 //Main Section headings
 section.mainSection > div > header{
     text-align: center;
-    padding-top: 75px;
+    padding-top: 60px;
     margin-bottom: 70px;
     @media @mobile{
         padding-top: 40px;
@@ -9,12 +9,13 @@ section.mainSection > div > header{
     }
     h1{
         display: inline-block;
-        padding-bottom: 23px;
+        padding-bottom: 15px;
         margin: 0px;
         //margin-bottom: 10px;
-        border-bottom: 3px solid darken(@gray, 5%);
+        //border-bottom: 2px solid darken(@gray, 5%);
+        border-bottom: 2px solid lighten(@lightBlue, 39%);
         color: @black;
-        .font(5.0,5.0,0.025,@light,uppercase);
+        .font(4.6,4.6,0.025,@light,uppercase);
         @media @mobile{
             .font(2.5,2.5,0.025,@normal,uppercase);
             padding-bottom: 10px;
@@ -30,6 +31,7 @@ section.mainSection > div > header{
             background-color: darken(@teal, 5%);
             border:3px solid @teal;
             @media @mobile{display: none;}
+            display: none; //Hiding for now
         }
         &:before{left:-32px;}
         &:after{right: -32px;}
@@ -37,8 +39,10 @@ section.mainSection > div > header{
     p{
         color: @navy;
         text-align: center;
-        .font(1.4,2.0,0.1,500,uppercase);
-        .os;
+        //.font(1.4,2.0,0.1,500,uppercase);
+        //.os;
+        margin: 16px 0px 20px 0px;
+        .font(1.6,2.7,0.025,@normal,none);
         @media @mobile{
             padding: 0px 20px;
             .font(1.2,2.0,0.025,@normal,none);

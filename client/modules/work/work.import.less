@@ -2,7 +2,8 @@
 section.work{
     width: 100%;
     padding-bottom: 65px;
-    background-color: @altWhite;
+    //background-color: darken(@white, 4%);
+    background-color: lighten(@lightBlue, 59%);
     > main{
         width: 100%;
         max-width: 1200px;
@@ -406,7 +407,7 @@ body.workBack section.work > main{
 section.work{
     header details{
         summary{
-            .buttonColor(lighten(@navy, 5%));
+            .buttonColor(@blue);
             display: inline-block;
             color: @white;
             .down{display: none;position: static;}
@@ -436,7 +437,7 @@ section.work{
                 //color: @white;
                 border-bottom: 2px solid darken(@white, 10%);
                 padding: 0px 0px 10px 0px;
-                color: lighten(@navy, 5%);
+                color: @blue;
             }
         }
         &[open]{
@@ -446,7 +447,7 @@ section.work{
                 &:after{
                     .fa;
                     content:"\f0d7";
-                    color: lighten(@navy, 5%);
+                    color:@blue;
                     position: absolute;
                     bottom: -29px;
                     left: 50%;
