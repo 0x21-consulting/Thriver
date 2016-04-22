@@ -399,3 +399,61 @@ body.workBack section.work > main{
     .workContent footer.truncate button{display: none;}
 }
 
+
+
+
+/////////// April 22nd Work ////////////////
+section.work{
+    header details{
+        summary{
+            .buttonColor(lighten(@navy, 5%));
+            display: inline-block;
+            color: @white;
+            .down{display: none;position: static;}
+        }
+        >div{
+            //.insetBoxShadow(0px,0px,10px,0px,0.1);
+            .shadow(far);
+            margin: 40px 0px;
+            padding: 15px 40px 15px 40px;
+            //width: 100%;
+            background-color: darken(@white, 1%);
+            text-align: left;
+            .clearfix;
+            .column{
+                width: 30.5%;
+                padding: 0px 2% 0px 2%;
+                float: left;
+                &:first-child{padding: 0px 2% 0px 0px;}
+                &:last-child{padding: 0px 0px 0px 2%;}
+            }
+            p{
+                .rw;
+                .font(1.4,1.8,0,@normal,none);
+                text-align: left;
+            }
+            h2{
+                //color: @white;
+                border-bottom: 2px solid darken(@white, 10%);
+                padding: 0px 0px 10px 0px;
+                color: lighten(@navy, 5%);
+            }
+        }
+        &[open]{
+            summary{
+                .down{display: inline-block;}
+                .up{display: none;}
+                &:after{
+                    .fa;
+                    content:"\f0d7";
+                    color: lighten(@navy, 5%);
+                    position: absolute;
+                    bottom: -29px;
+                    left: 50%;
+                    margin-left: -8px;
+                    .font(2.4,2.4,0,@light,none);
+                }
+            }
+        }
+    }
+}

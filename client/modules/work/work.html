@@ -6,8 +6,13 @@
         <div class="containerSmall">
             <header>
                 <h1>What We Do</h1>
-                <p>Our work is driven by survivors’ voices. <br>
-                    Survivors and all those affected by sexual violence <br> deserve compassionate services, dignity, privacy, and respect.</p>
+                <p>
+                    We are a statewide organization dedicated to support<br>
+                    and complement the work of Wisconsin’s community-based<br>
+                    sexual assault service provider programs and other organizations<br>
+                    working to end sexual violence.
+                </p>
+                {{>aboutSA}}
             </header>
         </div>
         <main>
@@ -140,3 +145,35 @@
         Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
     </p> 
 </template>
+
+
+
+<template name="aboutSA">
+    <details class="aboutSA">
+        <summary class="button">
+            <span class="fa up">&#xf05a; </span>
+            <span class="fa down">&#xf00d; </span>
+            About Sexual Violence</summary>
+        <div>
+            <div class="column">
+                <h2>Etiam Vitae</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pharetra risus eget sem lacinia viverra. Etiam vitae libero eu nibh porta scelerisque. Proin porttitor libero et mauris laoreet accumsan. Integer aliquet sit amet odio in varius. Nunc sed neque et mi porttitor rhoncus non id odio.
+                </p>
+            </div>
+            <div class="column">
+                <h2>Morbi porttitor</h2>
+                <p>
+                    Pellentesque lobortis risus at tellus semper aliquet. Morbi porttitor, leo eget aliquam fringilla, elit augue faucibus augue, non finibus turpis nulla at nisl. Cras et justo tempor, sollicitudin tortor sed, lobortis arcu. Nulla fringilla, nulla dapibus accumsan dapibus, nisi mi rutrum tellus, a pharetra magna urna id turpis. Ut lobortis mauris sit amet auctor blandit. Aliquam erat volutpat.
+                </p>
+            </div>
+            <div class="column">
+                <h2>Commodo Risus</h2>
+                <p>
+                    Curabitur ornare dolor ac massa eleifend facilisis. Quisque gravida consequat velit vel malesuada. Nunc ex justo, commodo ut hendrerit vel, luctus at nibh. Nunc in augue eros. Cras euismod nulla nec enim tristique tempor eu ac nisi. Etiam vehicula ultrices odio, et commodo risus mollis vel.
+                </p>
+            </div>
+        </div>
+    </details>
+</template>
+
