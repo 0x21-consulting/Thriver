@@ -5,7 +5,7 @@ section.masthead{
     overflow: hidden;
     width: 100%;
     top: 135px;
-    margin-bottom: 135px;
+    //margin-bottom: 135px;
     //min-height: 600px;
     min-height: ~'calc(100vh - 295px)';
     padding: 160px 0px 0px 0px;
@@ -89,7 +89,7 @@ section.masthead:after{
 }
 
 .fixedHeader section.masthead{
-    //.translate(0px, 160px);
+    .translate(0px, -135px);
     &:after{
         .opacity(0);
         .translate(0px,-20px);
