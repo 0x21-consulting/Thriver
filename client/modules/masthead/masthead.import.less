@@ -211,12 +211,6 @@ section.masthead{
                 }
             }
         }
-    }
-}
-
-//Background Styles, Colors & Images (Which will need to be dynamically loaded)
-section.masthead{
-    ul.mastheadContent{
         > li:after{
             content: '';
             position: absolute;
@@ -234,21 +228,45 @@ section.masthead{
                 .opacity(0.75);
             }
         }
+    }
+}
+
+/* Specifications for styling a Masthead slide
+    -The ul.mastheadContent > li should have specific classes applied for desired style results
+        -'img' if the slide has an image background
+        -'<color>' to specifiy the slide theme
+*/
+//Background Styles, Colors, Constants & Images (Which will need to be dynamically loaded)
+/*section.masthead{
+    ul.mastheadContent{
+        > li:after{
+             background-color: @navy;
+        }
         > li.blue{}
         > li.yellow{}
         > li.red{}
         > li.teal{}
         > li.gray{}
         > li.navy{}
-        //Temp Image Declarations
-        > li:first-child{
-            background-image: url('/lib/img/mastheadArticle.gif');
-        }
-        > li:nth-child(2){
-            background-image: url('/lib/img/mastheadAlert.jpg');
-        }
-        > li:nth-child(3){
-            background-image: url('/lib/img/mastheadImpact.jpg');
-        }
+    }
+}
+*/
+
+
+
+
+//Temp Image Declarations
+section.masthead ul.mastheadContent{
+    > li.img:first-child{
+        background-image: url('/lib/img/mastheadArticle.gif');
+        &:after{}
+    }
+    > li.img:nth-child(2){
+        background-image: url('/lib/img/mastheadAlert.jpg');
+        &:after{background-color: darken(@yellow, 80%);}
+    }
+    > li.img:nth-child(3){
+        background-image: url('/lib/img/mastheadImpact.jpeg');
+        &:after{background-color: darken(@teal, 34%);}
     }
 }
