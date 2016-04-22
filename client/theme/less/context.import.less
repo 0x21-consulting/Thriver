@@ -129,12 +129,13 @@ body{
 //Make first section under masthead animate into place
 .masterContainer > section:nth-child(2){
     will-change:opacity,transition;
-    .transition2(transform,@canvasDuration,@canvasEase, @headerDelay, opacity,250ms,@canvasEase, 100ms);
+    .transition2(transform,0ms,@canvasEase, 350ms, opacity,250ms,@canvasEase, 0ms);
     .opacity(0);
     .translate(0px,-35px);
 }
 .fixedHeader{
     .masterContainer > section:nth-child(2){
+        .transition2(transform,@canvasDuration,@canvasEase, @headerDelay, opacity,250ms,@canvasEase, 100ms);
         .opacity(1);
         .translate(0px,0px);
     }
