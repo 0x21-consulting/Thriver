@@ -4,3 +4,4 @@ db.coffee
 .DS_Store
 db.tar.bz2
 dump
+settings.json

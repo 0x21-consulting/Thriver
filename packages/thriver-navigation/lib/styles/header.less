@@ -1,0 +1,179 @@
+// Import from thriver:core-styles package
+@import "{thriver:core-styles}/lib/index.less";
+
+//Context
+header.mainHeader{
+    position: fixed;
+    z-index: @headerZ;
+    height: 269px;
+    width: 100%;
+    .hardShadow(170%,55px,-35%,-50px);
+    &:after {
+        //Hard Shadow Move
+        will-change:transform, background-color;
+        .translate(0px,0px);
+        .transition2(transform,350ms,@canvasEase,@canvasDelay, background-color,350ms,@canvasEase,@canvasDelay);
+
+    }
+    nav.mainNav{
+        text-align: center;
+        background-color: @white;
+        ul{
+            height: 58px; //prevents UI height dispairity on load
+            max-width: none; //Overrides default container behavior
+            padding: 202px 0px 35px 0px;
+            .translate(0px,0px);
+            will-change:transform;
+            .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
+        }
+        li{display: inline-block;}
+    }
+}
+
+//Logo
+header.mainHeader nav.mainNav li.brand {
+    display: block;
+    position: absolute;
+    top: 85px;
+    height: 70px;
+    width: 311px;
+    left: 50%;
+    margin-left: -155px;
+    .translate(0px,0px);
+    will-change:transform;
+    a, a:active, a:hover, a:focus{
+        border: none;
+        display: block;
+        padding: 0px;
+        margin: 0px;
+        &:after{
+            display: none;
+        }
+    }
+}
+
+// Link Styles
+header.mainHeader nav.mainNav li a{
+    display: block;
+    position: relative;
+    padding:16px;
+    margin: 0px 12px 0px 12px;
+    .font(1.5,1.6,0.2,@normal,uppercase);
+    .color(color,lighten(@navy, 2.5%),none);
+    //.accelerate;
+    //will-change:font;
+    //.transition(font,@canvasDuration,@canvasEase,0ms);
+    &:after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: @lightBlue;
+        top: 83%;
+        left: 16px;
+        width: ~'calc(100% - 32px)';
+        .opacity(0);
+        .translate(0px,10px);
+    }
+    &:hover {
+        &:after {
+            .opacity(1);
+            .translate(0px,0px);
+        }
+    }
+    &.active{
+        &:after{
+            .opacity(1);
+            .translate(0px,0px);
+            background-color: @teal;
+        }
+    }
+    //&:active{background-color: @gray;}
+    &:focus{
+        &:after{
+            .opacity(1);
+            .translate(0px,0px);
+            background-color: @teal;
+        }
+    }
+}
+
+//Fixed Header
+.fixedHeader header.mainHeader{
+    height: 136px;
+    &:after{
+        //Hard Shadow Move
+        .translate(0px,-160px);
+    }
+    nav.mainNav{
+        .translate(0px,-160px);
+        //ul{.translate(0px,22px);}
+        //ul{padding: 202px 0px 19px 0px;}
+        ul{
+            .translate(0px,21px);
+        }
+        li a{
+            //&:after{background-color: @blue;}
+            //.font(1.4,1.6,0.2,@normal,uppercase);
+        }
+        li.brand{
+            .translate(0px,0px);
+            width: 132px;
+            height: 36px;
+            top: 203px;
+            left: 12px;
+            margin-left: 0px;
+            svg, svg image, a{
+                height: 36px;
+                width: 166px;
+            }
+            @media @1024{
+                left: 50%;
+                margin-left: -67px;
+            }
+        }
+    }
+}
+
+
+header.mainHeader nav.mainNav{
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
+    li a {
+        will-change:font;
+        .transition(font,@canvasDuration,@headerEase,@headerDelay);
+        &:after {
+            .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+        }
+    }
+    li.brand svg, li.brand svg image{
+        will-change:width,height;
+        .transition2(width,0ms,linear,@headerSVGdelay,height,0ms,linear,@headerSVGdelay);
+    }
+}
+
+//Header Animations/ Transitions
+.fixedHeader header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimate @canvasDuration @headerDelay 1 @headerFirstEase alternate;
+}
+
+.fixedHeaderReturn header.mainHeader .brand{
+    will-change:transform;
+    animation: brandanimatereturn @canvasDuration @headerDelay 1 @headerEase alternate;
+}
+.fixedHeaderReturn header.mainHeader nav.mainNav{
+    li.brand svg, li.brand svg image{
+        .transition2(width,0ms,linear,@headerSVGdelay2,height,0ms,linear,@headerSVGdelay2);
+    }    
+}
+
+//Stop Animation on Mobile
+@media @mobile{
+    header.mainHeader .brand{
+        .noAnimation;
+    }
+}
+

@@ -33,6 +33,9 @@
             {{#each tabs}}
                 {{> workListItem id=this}}
             {{/each}}
+            {{#if isAdmin}}
+                <li class="admin-work-newSection">Add new section</li>
+            {{/if}}
         </ul>
     </menu>
 </template>
@@ -45,6 +48,9 @@
             {{#each tabs}}
                 <li data-id="{{this}}"><a href="#">{{tabName this}}</a></li>
             {{/each}}
+            {{#if isAdmin}}
+                <li class="admin-work-newSection">Add new section</li>
+            {{/if}}
         </ul>
     </li>
 </template>

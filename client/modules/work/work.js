@@ -163,20 +163,6 @@ Template.workContent.helpers({
     }
 });
 
-// Set the first tab as active
-/*Template.tab.onRendered(function () {
-    var parent;
-    
-    try {
-        // TODO:  How robust is this?!
-        parent = this.firstNode.parentElement.parentElement.parentElement;
-        
-        // Set the very first result as active.  Should be the first in the DOM.
-        parent.querySelector('main > article').classList.add('active');
-        parent.querySelector('menu li').classList.add('active');
-    } catch (error) { }
-});*/
-
 // Helper for changing tabs
 Template.workNav.events({
     'click li': changeTabs,
@@ -188,25 +174,6 @@ Template.workContent.events({
         document.body.classList.add('workReading');
     }
 });
-
-
-// From jQuery Providers file
-// TODO: rewrite this
-/*Template.work.onRendered(function () {
-    //Opening The workDetails pane
-    $('.workGrid > ul > li > a, .backToIndex a').click(function(){
-        if($('body').hasClass('workDetails')){
-            event.preventDefault();
-            $('body').removeClass('workDetails');
-        } else{
-            event.preventDefault();
-            $('body').addClass('workDetails');
-        }
-    });
-
-
-});*/
-
 
 // Eoghan's stuff
 Template.work.onRendered(function () {

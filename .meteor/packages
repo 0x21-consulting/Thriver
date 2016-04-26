@@ -4,17 +4,12 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-less
-accounts-ui
 accounts-password
 reactive-var
 twitter
 mrt:paypal
-gwendall:body-events
 meteor-base
 mobile-experience
-mongo
-blaze-html-templates
 session
 jquery
 tracker
@@ -22,8 +17,13 @@ logging
 reload
 random
 ejson
-spacebars
-check
 mizzao:user-status
 standard-minifier-css
 standard-minifier-js
+tinytest
+thriver:core
+thriver:escape
+thriver:sections
+thriver:navigation
+thriver:core-styles
+thriver:masthead

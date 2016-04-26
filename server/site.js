@@ -7,3 +7,7 @@ var Site = new Mongo.Collection('site');
 Meteor.publish('site', function () {
     return Site.find({});
 });
+
+Meteor.startup(function () {
+    console.log('Thriver:', Thriver);
+});
