@@ -6,31 +6,29 @@
     <meta name="keywords" content="sexual assault, wisconsin, Wisconsin Coalition Against Sexual Assault, WCASA, coalition, violence prevention, " />
     <meta name="description" content="For almost 30 years, WCASA has worked on behalf of member programs and sexual assault service providers across Wisconsin to lobby for legislation, increase survivors' access to services, raise awareness, and promote the prevention of sexual violence." />
 </head>
-
 <body>
-    <!--{{> articleNews}} //This template is used for standalone article pages-->
-    {{> header}}
-    {{> headerMobile}}
-    <div class="canvasCenter">
-        <div class="masterContainer">
+    <div class="canvas">
+        {{>header}}
+        <main>
             {{#each sections}}
                 {{> Template.dynamic template=template}}
             {{/each}}
-        </div>
+        </main>
+        <aside class="sections">
+            {{> accounts}}
+        </aside>
+        <aside class="sections">
+            {{>twitter}}
+            {{>resources}}
+            {{>news}}
+            {{>donate}}
+            {{>languageSelect}}
+        </aside>
+        <!--{{> articleNews}} //Article Page Template -->
+        {{>help}}
+        {{>alerts}}
     </div>
-    <aside class="sidebar sidebarsLeft">
-        {{> accounts}}
-    </aside>
-    <aside class="sidebar sidebarsRight">
-        {{> twitter}}
-        {{> resources}}
-        {{> news}}
-        {{> donate}}
-        {{> languageSelect}}
-    </aside>
-    {{>help}}
-    {{> alerts}}
     {{#if isAdmin}}
-        {{> admin}}
+        {{>admin}}
     {{/if}}
 </body>

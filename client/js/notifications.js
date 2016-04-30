@@ -82,7 +82,7 @@ Template.notifications.helpers({
             return all;
     }
 });
-Template.utility.helpers({
+Template.utilityNav.helpers({
     // Show notifications on bell icon
     show: function () {
         if (Meteor.user())

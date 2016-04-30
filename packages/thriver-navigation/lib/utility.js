@@ -18,7 +18,7 @@ var closeAsides = function (event) {
 closure = { 'click .closeTab': closeAsides };
 
 // Handle Utility Navigation events
-Template.utility.events({
+Template.utilityNav.events({
     // Handle left and right sidebars
     // All buttons that would trigger sidebars have the .hasSidebar class
     'click nav.utility li[data-sidebar]': function (event) {
@@ -71,7 +71,7 @@ Template.utility.events({
 
 });
 // More sidebar closure methods... one for each template :(
-Template.body.events({ 'click .overlay' : closeAsides });
+/*Template.body.events({ 'click .overlay' : closeAsides });
 Template.languageSelect.events (closure);
 Template.login.events          (closure);
 Template.register.events       (closure);
@@ -80,4 +80,4 @@ Template.accountDetails.events (closure);
 Template.twitter.events        (closure);
 Template.resources.events        (closure);
 Template.news.events           (closure);
-Template.donate.events         (closure);
+Template.donate.events         (closure);*/

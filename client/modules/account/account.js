@@ -252,7 +252,7 @@ Template.login.events({
     }
 });
 // Logout
-Template.utility.events({
+Template.utilityNav.events({
     'click li.logout button': function (event) {
         document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
         event.preventDefault(); event.stopPropagation();
@@ -351,7 +351,7 @@ Template.accountDetails.events({
 });
 
 // Full name in Utility bar
-Template.utility.helpers({
+Template.utilityNav.helpers({
     name: function () {
         var user = Meteor.user();
         if (user && user.profile)
