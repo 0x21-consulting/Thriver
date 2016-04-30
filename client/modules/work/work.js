@@ -163,6 +163,20 @@ Template.workContent.helpers({
     }
 });
 
+// Set the first tab as active
+/*Template.tab.onRendered(function () {
+    var parent;
+    
+    try {
+        // TODO:  How robust is this?!
+        parent = this.firstNode.parentElement.parentElement.parentElement;
+        
+        // Set the very first result as active.  Should be the first in the DOM.
+        parent.querySelector('main > article').classList.add('active');
+        parent.querySelector('menu li').classList.add('active');
+    } catch (error) { }
+});*/
+
 // Helper for changing tabs
 Template.workNav.events({
     'click li': changeTabs,
@@ -171,30 +185,68 @@ Template.workNav.events({
 Template.workContent.events({
     'click footer.truncate button': function (event) {
         event.preventDefault;
-        document.body.classList.add('workReading');
+        $("body").addClass("workReadingAnimate").delay(2000).queue(function(){
+            $("body").removeClass("workReadingAnimate").dequeue();
+            $("body").addClass("workReading").dequeue();
+        });
+    },
+    'click button.backToTopWork': function (event) {
+        offset = $('[id="what-we-do"]').offset().top + 228;
+        $('body').animate({ scrollTop: offset }, 750);
+    },
+    'click .workTertiary > ul > li > a': function (event) {
+        event.stopPropagation(); event.preventDefault();
+        alert('This will scroll down to the appropriate subsection content.')
     }
 });
+
+
+// From jQuery Providers file
+// TODO: rewrite this
+/*Template.work.onRendered(function () {
+    //Opening The workDetails pane
+    $('.workGrid > ul > li > a, .backToIndex a').click(function(){
+        if($('body').hasClass('workDetails')){
+            event.preventDefault();
+            $('body').removeClass('workDetails');
+        } else{
+            event.preventDefault();
+            $('body').addClass('workDetails');
+        }
+    });
+
+
+});*/
+
 
 // Eoghan's stuff
 Template.work.onRendered(function () {
     // Handle adding and removing the Body 'workActive' class
-    $('.workNav > ul > li > a:not(.backToIndexWorkA), .workNav > ul > li > .icon, .workNav ul > li > ul > li > a').click(function () {
+    $('.workNav > ul > li > h2 > a:not(.backToIndexWorkA), .workNav ul > li > ul > li > a').click(function () {
         event.preventDefault();
-        $("body").removeClass("workBack");
-        $("body").addClass("workFadeOut").delay(250).queue(function(){
-            $(this).removeClass("workFadeOut").dequeue();
-            $(this).addClass("workActive").dequeue();
-        });
-        $('body').addClass('workFadeOut');
+        if($("body").hasClass('openNavItem')){
+            $("body").removeClass('openNavItem');
+        }
+        if(!$("body").hasClass('workActive')){
+            $("body").removeClass("workBack");
+            $("body").addClass('openNavItem');
+            $("body").addClass("workFadeIn").delay(250).queue(function(){
+                $(this).removeClass("workFadeIn").dequeue();
+                $(this).addClass("workActive").dequeue();
+            });
+            //$('body').addClass('workFadeOut');
+        }
     });
 
-    $('.workNav li.backToIndexWork a').click(function(){
+
+    $('.workNav li.backToIndexWork').click(function(){
         event.preventDefault();
+        $("body").addClass("workFadeOut").delay(175).queue(function(){
         $('body').removeClass('workActive');
         $('body').removeClass('workReading');
-        $('body').addClass("workBack").dequeue();
-        $("body").addClass("workFadeIn").delay(250).queue(function(){
-            $(this).removeClass("workFadeIn").dequeue();
+        $(this).removeClass("workFadeOut").dequeue();
         });
+        //offset = $('[id="what-we-do"]').offset().top - 125;
+        //$('body').animate({ scrollTop: offset }, 350);
     });
 });

@@ -7,9 +7,9 @@
             <header>
                 <h1>Service Providers</h1>
                 <p>
-                    We believe that diversity and safe,<br>
-                    accessible services are fundamental<br>
-                    to social change.
+                    We believe that diversity and safe, accessible services are fundamental <br>
+                    to social change. WCASA supports service providers agencies <br>
+                    all over the state of Wisconsin.
                 </p>
             </header>
         </div>
@@ -30,10 +30,14 @@
                     <input id="zip" type="text" pattern="[0-9]*" 
                         maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
                         min="53001" max="54990" name="zip">
-                    <input class="submit" type="submit" value="Go">
+                    <!--<input class="submit" type="submit" value="Go">-->
                 </div>
+                <button class="seeAllProviders button">View All Providers <span class="fa">&#xf138;</span></button>
             </form>
+            <a href="#"><span class="fa">&#xf1c1;</span> Download Provider List PDF</a>
         </div>
+
+
         <main class="mapTool">
             <figure class="map">
                 <div id="mapCanvas">
@@ -50,34 +54,86 @@
 <template name="provider">
     <article class="locationDetails details">
         <!--{{> provider}}-->
+        {{>providersList}}
         {{#with currentProvider}}
-            <header>
-                <h2>{{name}}</h2>
-                <p class="county-served">Counties Served: {{providerCounties}}</p>
-            </header>
-            <main>
-                <address>{{address}}</address>
-                <ul class="phones">
-                    <li><strong>Phone:</strong> {{phone}}</li>
-                    <li class="crisis"><strong>Crisis:</strong> {{crisis}}</li>
-                </ul>
-                <ul class="outreach">
-                    {{#if email}}
-                        <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
-                    {{/if}}
-                    {{#if website}}
-                        <li class="website"><a href="{{website}}" target="_blank">{{website}}</a></li>
-                    {{/if}}
-                    {{#if facebook}}
-                        <li class="facebook"><a href="{{facebook}}" target="_blank">
-                            {{name}} on Facebook</a></li>
-                    {{/if}}
-                    {{#if twitter}}
-                        <li class="twitter"><a href="#" target="_blank">{{twitter}}</a></li>
-                    {{/if}}
-                </ul>
-                <button class="cta button-aqua">Jobs &amp; More</button>
-            </main>
+            <div class="inner">
+                <header>
+                    <h2>{{name}}</h2>
+                    <p class="county-served">Counties Served: {{providerCounties}}</p>
+                </header>
+                <main>
+                    <address>{{address}}</address>
+                    <ul class="phones">
+                        <li><strong>Phone:</strong> {{phone}}</li>
+                        <li class="crisis"><strong>Crisis:</strong> {{crisis}}</li>
+                    </ul>
+                    <ul class="outreach">
+                        {{#if email}}
+                            <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
+                        {{/if}}
+                        {{#if website}}
+                            <li class="website"><a href="{{website}}" target="_blank">{{website}}</a></li>
+                        {{/if}}
+                        {{#if facebook}}
+                            <li class="facebook"><a href="{{facebook}}" target="_blank">
+                                {{name}} on Facebook</a></li>
+                        {{/if}}
+                        {{#if twitter}}
+                            <li class="twitter"><a href="#" target="_blank">{{twitter}}</a></li>
+                        {{/if}}
+                    </ul>
+                    <!--<button class="cta button-aqua">Jobs &amp; More</button>-->
+                </main>
+            </div>
         {{/with}}
     </article>
+</template>
+
+
+<template name="providersList">
+    <div class="providersList">
+        <h1>Wisconsin Service Provider Agencies</h1>
+        <ul>
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+            {{>providerListViewItem}}
+
+        </ul>
+        <button class="closeProvider mapView">Back to Map View <span class="fa">&#xf278;</span></button>
+    </div>
+</template>
+
+<template name="providerListViewItem">
+    <li>
+        <div class="pad">
+            <b>Sexual Assault Center</b><br>
+            <span>Counties servied:</span> Madison, Milwaukee
+        </div>
+    </li>
 </template>

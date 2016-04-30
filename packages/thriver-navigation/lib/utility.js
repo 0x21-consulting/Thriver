@@ -60,7 +60,15 @@ Template.utility.events({
         $('figure.alert').addClass('active').delay(5000).queue(function(){
             $(this).removeClass("active").dequeue();
         });
+    },
+    'mouseenter li.getHelp': function (event) {
+        //alert('hover');
+        $('figure.help').addClass('active');
+    },
+    'mouseout li.getHelp': function (event) {
+        $('figure.help').removeClass('active');
     }
+
 });
 // More sidebar closure methods... one for each template :(
 Template.body.events({ 'click .overlay' : closeAsides });

@@ -5,14 +5,14 @@
 header.mainHeader{
     position: fixed;
     z-index: @headerZ;
-    height: 269px;
+    //height: 269px;
     width: 100%;
-    .hardShadow(170%,55px,-35%,-50px);
+    .hardShadow(170%,55px,-35%,-49px);
     &:after {
         //Hard Shadow Move
         will-change:transform, background-color;
         .translate(0px,0px);
-        .transition2(transform,350ms,@canvasEase,@canvasDelay, background-color,350ms,@canvasEase,@canvasDelay);
+        .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay, background-color,350ms,@canvasEase,@canvasDelay);
 
     }
     nav.mainNav{
@@ -58,6 +58,7 @@ header.mainHeader nav.mainNav li a{
     position: relative;
     padding:16px;
     margin: 0px 12px 0px 12px;
+    @media @1450{margin: 0px;}
     .font(1.5,1.6,0.2,@normal,uppercase);
     .color(color,lighten(@navy, 2.5%),none);
     //.accelerate;
@@ -175,5 +176,18 @@ header.mainHeader nav.mainNav{
     header.mainHeader .brand{
         .noAnimation;
     }
+}
+
+
+@media (max-width:1288px){
+    .fixedHeader header.mainHeader nav.mainNav ul{
+        text-align: right;
+    }
+}
+
+@media (max-width:1125px){
+header.mainHeader nav.mainNav li a{padding: 16px 9px;}
+.utility .fa{display: none !important;}
+.utility .social.fa, .utility .accountDetails .fa, .utility .notifications .fa{display: inherit !important;}
 }
 

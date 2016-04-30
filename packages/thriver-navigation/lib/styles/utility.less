@@ -27,6 +27,7 @@ nav.utility{
         line-height: @utilityHeight;
         padding: @utilityButtonPadding;
         .shadowNone;
+        .scale(1,1) !important;
     }
 }
 
@@ -38,6 +39,7 @@ nav.utility{
         &.social, &.getHelp, &.donate, &.twitter, &.news, &.learningCenter, &.languageSelect{
             float: right;
         }
+        &.languageSelect{display: none;} //Not released in v.1
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
         }

@@ -8,24 +8,24 @@
         <div class="containerSmall">
             <header>
                 <h1>Events</h1>
-                <p>We do not do this work in isolation.<br>
-                    We believe in the importance of collaborations<br>
-                    and alliance building.
+                <p>WCASA caters its events towards the needs of its membership <br>
+                    and the service providers of the state as a whole. <br>
+                    Check back often to find events year-round.
                 </p>
             </header>
         </div>
         <div class="eventsContainer">
             <aside class="eventsSidebar">
-                <h2>Events Calendar</h2>
+                <h2 class="sidebarHeader">Events Calendar</h2>
                 {{>calendar}}
-                <h2>Upcoming Events</h2>
+                <h2 class="sidebarHeader">Upcoming Events</h2>
                 {{>upcomingEvents}}
             </aside>
             <main class="eventsMain">
                 <header class="eventsHeader">
                     <ul>
-                        <li class="scroll-prev-month preventSelect"><span class="fa">&#xf053;</span> {{lastMonth}}</li>
-                        <li class="scroll-next-month preventSelect">{{nextMonth}} <span class="fa">&#xf054;</span></li>
+                        <li class="scroll-prev-month preventSelect"><span class="fa">&#xf137;</span> {{lastMonth}}</li>
+                        <li class="scroll-next-month preventSelect">{{nextMonth}} <span class="fa">&#xf138;</span></li>
                         <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
                     </ul>
                 </header>
@@ -50,30 +50,37 @@
     <li value="0" class="eventSlide">
         <div class="eventContainer">
             <div class="inner">
-                <p class="eventDate">June 9th, 2016</p>
-                <aside class="otherEvents">
-                There are 2 other events on this date:
-                    <ul>
-                        <li><a href="#">Spring Directors Meeting</a></li>
-                        <li><a href="#">Teen Summit on Dating &amp; Sexual Violence</a></li>
-                    </ul>
+                <header>
+                    <p class="eventDate">June 9th, 2016</p>
+                    <aside class="otherEvents">
+                    There are 2 other events on this date:
+                        <ul>
+                            <li><a href="#">Spring Directors Meeting</a></li>
+                            <li><a href="#">Teen Summit on Dating &amp; Sexual Violence</a></li>
+                        </ul>
                 </aside>
-                <h2>Survivors &amp; Allies / 5th Annual Wrap Around the Capitol</h2>
-                <p class="excerpt">
-                    2:00pm: Inside the Capitol Rotunda<br>
-                    Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
-                    <span class="truncated fa">&#xf141;</span>
-                </p>
-                <div class="extended">
-                    <p>
-                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, allies, advocates, and other community members carrying strips of denim around the capitol until the two ends meet each other. This act symbolizes a statewide (and international, per below) effort to end sexual violence in solidarity with survivors and their allies.
+                </header>
+                <main>
+                    <h2>Survivors &amp; Allies / 5th Annual Wrap Around the Capitol</h2>
+                    <p class="excerpt">
+                        <b>2:00pm: Inside the Capitol Rotunda</b><br>
+                        Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
                     </p>
                     <p>
-                        Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, allies, advocates, and other community members carrying strips of denim around the capitol.
+                        <span class="truncated fa">&#xf141;</span>
                     </p>
-                    <p>For more information on Denim Day, see our Denim Day page.</p>
-                    <p>See what is going on in 2016 for Sexual Assault Awareness Month (SAAM) in Wisconsin.</p>
-                </div>
+                    <p>
+                        This act symbolizes a statewide (and international, per below) effort to end sexual violence in solidarity with survivors and their allies.
+                    </p>
+                    <div class="extended">
+                        <p>
+                            Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        </p>
+                        <p>For more information on Denim Day, see our Denim Day page.</p>
+                        <p>See what is going on in 2016 for Sexual Assault Awareness Month (SAAM) in Wisconsin.</p>
+                    </div>
+                </main>
                 <ul class="actions">
                     <li class="register">Register</li>
                     <li class="details">Read More <span class="fa">&#xf0da;</span></li>
@@ -87,12 +94,13 @@
 
 
 <template name="upcomingEvents">
-        <ul class="upcomingEvents scroller">
+        <ul class="upcomingEvents">
             {{>upcomingEventListItem}}
             {{>upcomingEventListItem}}
             {{>upcomingEventListItem}}
-            {{>upcomingEventListItem}}
+            <!--{{>actionNotLoggedIn}}-->
         </ul>
+        <!--<button class="seeAllEvents">See All Upcoming <span class="fa">&#xf13a;</span></button>-->
 </template>
 
 <template name="upcomingEventListItem">
@@ -107,7 +115,7 @@
             <!--{{>actionUnregisterPrompt}}-->
             <!--{{>actionRegistered}}-->
             <!--{{>actionNotRegistered}}-->
-            {{>actionNotLoggedIn}}
+            <!--{{>actionNotLoggedIn}}-->
         </ul>
     </li>
 </template>
@@ -191,30 +199,36 @@
     <li value="1" class="eventSlide">
         <div class="eventContainer">
             <div class="inner">
+                <header>
                 <p class="eventDate">June 9th-12th, 2016</p>
-                <aside class="otherEvents">
-                There are 2 other events on this date:
-                    <ul>
-                        <li><a href="#">Allies / 5th Annual Wrap Around the Capitol</a></li>
-                        <li><a href="#">Teen Summit on Dating &amp; Sexual Violence</a></li>
-                    </ul>
-                </aside>
-                <h2>Spring Directors Meeting</h2>
-                <p class="excerpt">
-                    2:00pm: Inside the Capitol Rotunda<br>
-                    Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
-                    <span class="truncated fa">&#xf141;</span>
-                </p>
-                <div class="extended">
-                    <p>
-                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, allies, advocates, and other community members carrying strips of denim around the capitol until the two ends meet each other. This act symbolizes a statewide (and international, per below) effort to end sexual violence in solidarity with survivors and their allies.
+                    <aside class="otherEvents">
+                    There is one other events on this date:
+                        <ul>
+                            <li><a href="#">Allies / 5th Annual Wrap Around the Capitol</a></li>
+                        </ul>
+                    </aside>
+                </header>
+                <main>
+                    <h2>Spring Directors Meeting</h2>
+                    <p class="excerpt">
+                        <b>2:00pm: Inside the Capitol Rotunda</b><br>
+                        Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
                     </p>
                     <p>
-                        Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, 
+                        <span class="truncated fa">&#xf141;</span>
                     </p>
-                    <p>For more information on Denim Day, see our Denim Day page.</p>
-                    <p>See what is going on in 2016 for Sexual Assault Awareness Month (SAAM) in Wisconsin.</p>
-                </div>
+                    <p>
+                        allies, advocates, and other community members carrying strips of denim around the capitol until the two ends meet each other. This act symbolizes a statewide (and international, per below) effort to end sexual violence in solidarity with survivors and their allies.
+                    </p>
+                    <div class="extended">
+                        <p>
+                            Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        </p>
+                        <p>For more information on Denim Day, see our Denim Day page.</p>
+                        <p>See what is going on in 2016 for Sexual Assault Awareness Month (SAAM) in Wisconsin.</p>
+                    </div>
+                </main>
                 <ul class="actions">
                     <li class="register">Register</li>
                     <li class="details">Read More <span class="fa">&#xf0da;</span></li>
@@ -229,23 +243,32 @@
     <li value="2" class="eventSlide">
         <div class="eventContainer">
             <div class="inner">
-                <p class="eventDate">June 9th, 2016</p>
-                <h2>Teen Summit on Dating &amp; Sexual Violence</h2>
-                <p class="excerpt">
-                    2:00pm: Inside the Capitol Rotunda<br>
-                    Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
-                    <span class="truncated fa">&#xf141;</span>
-                </p>
-                <div class="extended">
-                    <p>
-                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, allies, advocates, and other community members carrying strips of denim around the capitol until the two ends meet each other. This act symbolizes a statewide (and international, per below) effort to end sexual violence in solidarity with survivors and their allies.
+                <header>
+                    <p class="eventDate">June 9th, 2016</p>
+                    <aside class="otherEvents">
+                    There is one other events on this date:
+                        <ul>
+                            <li><a href="#">Allies / 5th Annual Wrap Around the Capitol</a></li>
+                        </ul>
+                    </aside>
+                </header>
+                <main>
+                    <h2>Teen Summit on Dating &amp; Sexual Violence</h2>
+                    <p class="excerpt">
+                        <b>2:00pm: Inside the Capitol Rotunda</b><br>
+                        Wrap Around the Capitol follows the Survivors & Allies Task Force Gathering on on April 9th, 2016. Download a flier to distribute in your community!
                     </p>
                     <p>
-                        Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        What is “Wrap Around the Capitol?” For the past 4 years, the Wisconsin Coalition Against Sexual Assault has organized this event as part of Sexual Assault Awareness Month. The event involves a rally outside the capitol, and survivors of sexual violence, allies, advocates, and other community members carrying strips of denim around the capitol until the two ends meet each other. This act symbolizes a statewide (and international, per below).
+                    <span class="truncated fa">&#xf141;</span>
                     </p>
                     <p>For more information on Denim Day, see our Denim Day page.</p>
-                    <p>See what is going on in 2016 for Sexual Assault Awareness Month (SAAM) in Wisconsin.</p>
-                </div>
+                    <div class="extended">
+                        <p>
+                            Why denim? Because of an international outrage. In the 1990s, an 18 year-old woman was raped by a 45 year-old driving instructor in Italy. The perpetrator was arrested, prosecuted, convicted of rape, and sentenced to jail. However, the Supreme Court overturned the rape conviction. The judges believed that the victim must have consented to sexual contact since, in their opinion, her jeans were so tight the perpetrator could not have gotten them off without her assistance. Outraged, the Italian Parliament protested by wearing jeans to work. Thus was born Denim Day, which is observed in the U.S. on April 29.
+                        </p>
+                    </div>
+                </main>
                 <ul class="actions">
                     <li class="register">Register</li>
                     <li class="details">Read More <span class="fa">&#xf0da;</span></li>

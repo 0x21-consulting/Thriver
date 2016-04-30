@@ -8,10 +8,15 @@ input[type=submit], .button, button{
     .scale(1,1);
     .font(1.4,2.2,0.05,@bold,normal);
     .color(color,@white,none);
-    .shadow(far);
-    .transition(background-color, 200ms, ease, 0ms);
+    //.shadow(far);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
+    will-change:background-color,transform;
+    .transition2(background-color, 200ms, @canvasEase, 0ms,transform, 50ms, @canvasEase, 0ms);
     &:active{
-        .transition(background-color, 100ms, ease, 0ms);
+        .scale(0.98,0.98);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1), 2px 2px 3px 1px rgba(0,0,0,0.05);
+        -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.1), 2px 2px 3px 1px rgba(0,0,0,0.05);
     }
     span{
         .font(1.6,2.2,0.05,@light,normal);
@@ -52,9 +57,10 @@ input[type=submit], .button, button{
         .color(border-color,@color,none);
     }
     &:hover{
-        .color(background-color,@color,light);
+        background-color:lighten(saturate(@color, 10%),2%);
+        //.color(background-color,@color,light);
         span.notificationsAlert{
-            .color(border-color,@color,light);
+            border-color:lighten(saturate(@color, 10%),2%);
         }
     }
     &:focus{
@@ -82,3 +88,10 @@ input[type=submit], .button, button{
     }
 }
 
+.canvasCenter{
+    input[type=submit], .button, button{
+        .borderRadius(2px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -webkit-box-shadow:  0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+}

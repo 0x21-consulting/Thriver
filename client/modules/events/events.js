@@ -78,17 +78,6 @@ Template.events.helpers({
         return months[ nextMonth % 12 ] + ' ' +
             (          nextMonth > 11 ?
             (year.get() + 1) : year.get() );
-    },
-    /**
-     * Pass event details to slides
-     * @function
-     * @returns {Event[]}
-     */
-    getEvents: function () {
-        /**
-         * 
-         */
-        
     }
 });
 

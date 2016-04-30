@@ -4,7 +4,7 @@
         <div class="scroller">
             <h2><span class="fa">&#xf19c;</span> Learning Center</h2>
             <ul class="resourcesTabs tabs">
-                <li class="active library">Catalogue</li>
+                <li class="active library">Library</li>
                 <li>Infosheets</li>
                 <li>Stats &amp; Data</li>
                 <li>Webinars</li>
@@ -41,7 +41,7 @@
                                 <option value="03">eBook</option>
                             </select>
                         </div>
-                        <input type="submit" value="Search Catalogue" />
+                        <input type="submit" value="Search Library" />
                         <button class="viewAll">View All Alphabetically <span class="fa">&#xf0da;</span></button>
                     </fieldset>
                 </form>
@@ -104,7 +104,7 @@
         <div class="inner">
             <details>
                 <summary>
-                    <h5>Prevention Services</h5>
+                    <h5>Learning Center Section Category</h5>
                 </summary>
                 <ul>
                     {{>itemResources}}
@@ -132,7 +132,7 @@
         {{> librarySearchHeader}}
         <ul class="resourcesItems library stripes">
             {{>backToResourcesMobile}}
-            <li class="mainTitle dtHide"><h2>Catalogue</h2></li>
+            <li class="mainTitle dtHide"><h2>Library</h2></li>
             <!--{{#each libraryItem}}-->
                 <!--Library Item Loop Template-->
             <!--{{/each}}-->
@@ -148,7 +148,7 @@
 
 <template name="librarySearchHeader">
     <header class="librarySearchHeader">
-        <h2>Catalogue Results</h2>
+        <h2>Library Results</h2>
         <dl class="breadcrumb">
             <!--These List Items should only show based on user's filter selection-->
             <dt class="fa" title="search terms">&#xf002;</dt>

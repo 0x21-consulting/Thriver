@@ -3,24 +3,24 @@
 
 section.masthead{
     z-index: @mastheadZ;
-    position: relative;
+    //position: relative;
     overflow: hidden;
     width: 100%;
     background-color: @navy;
-    top: 135px;
+    //top: 135px;
     //margin-bottom: 135px;
     //min-height: 600px;
     min-height: ~'calc(100vh - 295px)';
-    padding: 160px 0px 0px 0px;
+    //padding: 160px 0px 0px 0px;
     text-align: center;
     color:@white;
     will-change:transform;
     .transition(transform,@canvasDuration,@canvasEase,0ms);
     .opacity(1);
     //.translate(0px, 135px);
-    margin-bottom: -23px;
-    .shadow(closeDown);
-    .boxShadow(0px,3px,7px,0px,0.3);
+    //margin-bottom: -23px;
+    //.shadow(closeDown);
+    //.boxShadow(0px,3px,7px,0px,0.3);
     @media @mobile{
         display: block;
         height: auto;
@@ -77,7 +77,7 @@ section.masthead .arrow{
 
 //Animate move on fixedHeader class added to body
 .fixedHeader section.masthead{
-    .translate(0px, -156px);
+    //.translate(0px, -156px);
     .arrow{
         .opacity(0);
         .translate(0px,-20px);
@@ -119,7 +119,7 @@ section.masthead{
                 margin: 0px;
                 .textButtonColor(@gray);
                 cursor: pointer;
-                .opacity(0.5);
+                .opacity(0.7);
                 border-bottom: 2px solid transparent;
                 padding:15px 20px 15px 20px;
                 .transition(opacity,@canvasDuration,@canvasEase,0ms);
@@ -151,7 +151,7 @@ section.masthead{
                     .translate(0px,10px);
                 }
                 &:hover {
-                    .opacity(0.7);
+                    .opacity(0.9);
                     &:after {
                         .opacity(0.1);
                         .translate(0px,0px);
@@ -159,7 +159,7 @@ section.masthead{
                 }
                 &.active{
                     &:after{
-                        .opacity(0.15);
+                        .opacity(0.3);
                         .translate(0px,0px);
                         //background-color: @teal;
                     }
@@ -229,7 +229,7 @@ section.masthead{
             z-index: -1;
             pointer-events: none;
             background-color: @navy;
-            .opacity(0.85);
+            .opacity(0.95);
             @media @mobile{
                 .opacity(0.75);
             }
@@ -265,33 +265,92 @@ section.masthead{
 section.masthead ul.mastheadContent{
     > li.img:first-child{
         background-image: url('/lib/img/mastheadArticle.gif');
-        &:after{}
+        &:after{
+            background: #00c6ff; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #00c6ff , #0072ff); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #00c6ff , #0072ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
     }
     > li.img:nth-child(2){
         background-image: url('/lib/img/mastheadAlert.jpg');
-        &:after{background-color: darken(@yellow, 65%);}
+        &:after{
+            background: #FF4E50; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #FF4E50 , #F9D423); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #FF4E50 , #F9D423); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
     }
     > li.img:nth-child(3){
         background-image: url('/lib/img/mastheadImpact.jpeg');
-        &:after{background-color: darken(@darkBlue, 30%);}
+        &:after{
+            background: #ddd6f3; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #ddd6f3 , #faaca8); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #ddd6f3 , #faaca8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
     }
 }
 
 
-/*//Color Variables
-@white: #ffffff;
-@altWhite: #fafafa;
-@altWhite2: #f9f9f9;
-@black: #062031;
-@gray: #ebf2f2;
-@navy: #062131;
-@blue: #2c5465; //Only used in Utility nav twice?
-@teal: #00b7c5;
-@aqua: #1db7c5;
-@orange: #f1592a;
-@yellow: #F5D76E;
-@gold: #f2af47;
-@lightBlue: #566a75; //Flat
-@darkBlue: #4e606a; //Flat
-@midnightBlue: #6d7f88; //Flat*/
 
+//Temp Image Declarations
+section.masthead ul.mastheadContent{
+    > li.img:first-child{
+        background-image: url('/lib/img/mastheadArticle.gif');
+        a{.textButtonColor(@yellow) !important;}
+        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+
+        &:after{
+            background: rgba(34,119,180,1);
+            background: -moz-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(34,119,180,1)), color-stop(100%, rgba(0,165,168,1)));
+            background: -webkit-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -o-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -ms-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: linear-gradient(to right, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2277b4', endColorstr='#00a5a8', GradientType=1 );
+        }
+    }
+    > li.img:nth-child(2){
+        a{.textButtonColor(lighten(@yellow,15%)) !important;}
+        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+        background-image: url('/lib/img/mastheadAlert.jpg');
+        &:after{
+            background: #4b6cb7; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #4b6cb7 , #182848); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #4b6cb7 , #182848); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+    }
+    > li.img:nth-child(3){
+        a{.textButtonColor(@yellow) !important;}
+        a.button{.buttonColor(#f46b45) !important; color:@white !important;}
+        background-image: url('/lib/img/mastheadImpact.jpeg');
+        &:after{
+            background: #f46b45; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #f46b45 , #eea849); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #f46b45 , #eea849); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */      
+        }
+    }
+}
+
+
+
+
+@media @air{
+    section.masthead, section.masthead ul.mastheadContent, section.masthead ul.mastheadContent > li{
+        min-height: ~'calc(100vh - 120px)';
+    }
+    section.masthead nav.mastheadNav{min-height: ~'calc(100vh - 160px)';}
+    section.masthead ul.mastheadContent > li > div{
+        min-height: 363px;
+    }
+}
+
+
+@media (max-width:1125px){
+    section.masthead ul.mastheadContent > li > div{
+        width: 600px;
+        padding-left: 50px;
+    }
+    section.masthead nav.mastheadNav{
+        right:~'calc(50% - 544px)' !important;
+    }
+}

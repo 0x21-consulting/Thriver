@@ -10,7 +10,7 @@
 
 //Base font-size,line-height,letter-spacing
 @baseFS: 1.6;
-@baseLH: 2.6;
+@baseLH: 2.2;
 @baseLS: 0.025;
 
 .font(@fontSize,@lineHeight,@letterSpacing,@fontWeight,@fontStyle){
@@ -31,9 +31,12 @@ body{
     .font(@baseFS,@baseLH,0,@light,none);
 }
 
+p,body{
+    .font(1.4,2.3,0.035,@light,none);
+}
 //Text Globals: Defaults
 h1,h2,h3,h4,h5,p{
-    margin: 20px 0px 20px 0px;
+    margin: 10px 0px 10px 0px;
     color: @black;
     clear: both;
 }
@@ -43,23 +46,23 @@ h1{ //Should rarely be used as most content areas are children of predefined H1s
     color: @navy;
 }
 h2{.font(2.4,2.8,0.025,@bold,none);}
-h3{.font(2.0,2.4,0.08,@normal,uppercase);}
-h4{.font(1.6,1.6,0.1,@normal,uppercase);}
+h3{.font(1.8,2.4,0.08,@normal,none);}
+h4{.font(1.6,1.6,0.1,@normal,none);}
 h5{.font(1.6,1.6,0,@bold,none);}
 //Text Globals: Basic Elements
 a{
-    .textButtonColor(@teal);
-    font-weight: @bold;
+    .textButtonColor(saturate(@blue, 60%));
+    font-weight: @normal;
 }
 dt{
     color: @teal;
     font-weight: bold;
 }
 hr {
-    .color(background-color, @gray, darker);
-    height: 3px;
+    .color(background-color, lighten(@lightBlue, 39%), none);
+    height: 2px;
     border: none;
-    margin: 40px 0px 40px 0px;
+    margin: 20px 0px 20px 0px;
     clear: both;
 }
 img{
@@ -67,7 +70,7 @@ img{
 }
 //Text Globals: Lists
 ul, ol{
-    margin: 20px 0px 20px 20px;
+    margin: 10px 0px 10px 20px;
     > li{
         margin: 0px 0px 10px 0px;
         &:last-child{

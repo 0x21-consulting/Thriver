@@ -7,38 +7,37 @@
             <header>
                 <h1>Who We Are</h1>
                 <p>
-                    The Wisconsin Coalition Against Sexual Assault<br>
-                    Creates the social change necessary<br>
-                    to end sexual violence.
+                    WCASA is a membership agency comprised of organizations and <br>
+                    individuals working to end sexual violence in Wisconsin. <br>
+                    WCASA is made up of it's staff, board, volunteers and <br> 
+                    51 sexual assault service provider agencies.
                 </p>
             </header>
         </div>
-        <div class="infoTabsContainer">
-            <ul class="infoTabs tabsTitle">
-                <li class="active"><span class="fa">&#xf018;</span> About WCASA</li>
-                <li><span class="fa">&#xf279;</span> WCASA Philosophies</li>
-            </ul>
+        <div class="container">
+            <div class="side">
+                <h2 class="sidebarTitle">The Parts of WCASA</h2>
+                <ul class="infoTabs tabs">
+                    <li class="active"><span class="fa">&#xf018;</span> About WCASA</li>
+                    <li><span class="fa">&#xf279;</span> WCASA Philosophies</li>
+                    <li><span class="fa">&#xf0c0;</span> WCASA Staff</li>
+                    <li><span class="fa">&#xf0c0;</span> Board of Directors</li>
+                </ul>
+            </div>
             <!--See above comment-->
-            <ul class="infoTabsContent">
+            <ul class="infoTabsContent tabsContent">
                 {{> mission }}
                 {{> philosophies }}
-            </ul>
-        </div>
-        <div class="membersTabsContainer">
-            <ul class="membersTabs tabsTitle">
-                <li class="active"><span class="fa">&#xf0c0;</span> WCASA Staff</li>
-                <li><span class="fa">&#xf0c0;</span> Board of Directors</li>
-            </ul>
-            <!--See above comment-->
-            <ul class="membersTabsContent">
-                <li class="active staff">
+                <li class="staff people">
+                    <h2>The WCASA Staff</h2>
                     <ul class="clearfix">
                         {{#each staff}}
                             {{> personStaff}}
                         {{/each}}
                     </ul>
                 </li>
-                <li class="board">
+                <li class="board people">
+                    <h2>Board of Directors</h2>
                     <ul class="clearfix">
                         {{#each board}}
                             {{> personBoard}}
@@ -77,6 +76,7 @@
 
 <template name="mission">
     <li class="active mission">
+        <h2>Our Mission</h2>
         <p><b>WCASA's mission is to create the social change necessary to end sexual violence.</b></p>
         <p>
             WCASA is a membership agency comprised of organizations and individuals working to end sexual violence in Wisconsin. Among these are the 51 sexual assault service provider (SASP) agencies throughout the state that offer support, advocacy and information to victims of sexual assault and their families.
@@ -84,7 +84,7 @@
         <p>
             WCASA works to ensure that every victim in Wisconsin gets the support and care they need. WCASA also works to create the social change necessary to ensure a future where no child, woman or man is ever sexually violated again.
         </p>
-        <h3>WCASA's Services Include:</h3>
+        <h2>Our Services</h2>
         <ul>
             <li>Providing Technical Assistance on issues related to sexual assault, including program development, legal advocacy, policy development, prevention, and victim and offender dynamics.</li>
             <li>Offering educational programming, including opportunities for training and webinars.</li>
@@ -101,6 +101,7 @@
 
 <template name="philosophies">
     <li class="philosophies">
+        <h2>Our Philosophies</h2>
         <ul>
             <li>We believe it is a basic human right to live free of sexual violence.</li>
             <li>We believe that everyone has a role and responsibility in this work.</li>

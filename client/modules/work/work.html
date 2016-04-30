@@ -7,9 +7,9 @@
             <header>
                 <h1>What We Do</h1>
                 <p>
-                    We are a statewide organization dedicated to support<br>
-                    and complement the work of Wisconsin’s community-based<br>
-                    sexual assault service provider programs and other organizations<br>
+                    We are a statewide organization dedicated to support and complement <br>
+                    the work of Wisconsin’s community-based sexual assault <br>
+                    service provider programs and other organizations <br>
                     working to end sexual violence.
                 </p>
                 {{>aboutSA}}
@@ -26,31 +26,29 @@
 <!--Nav-->
 <template name="workNav">
     <menu class="workNav">
+        <h2 class="sidebarTitle">Areas of Interest</h2>
         <ul>
             <li class="backToIndexWork">
-                <a href="#"  class="backToIndexWorkA"><span class="fa">&#xf0d9;</span> See All Work</a>
+                <h2>
+                    <a href="javascript:void(0);" class="backToIndexWorkA"><span class="fa">&#xf137;</span> Back to Index</a>
+                </h2>
             </li>
             {{#each tabs}}
                 {{> workListItem id=this}}
             {{/each}}
-            {{#if isAdmin}}
-                <li class="admin-work-newSection">Add new section</li>
-            {{/if}}
         </ul>
     </menu>
 </template>
 
 <template name="workListItem">
     <li data-id="{{this.id}}">
-        <i class="icon fa"><a href="#">{{icon}}</a></i>
-        <a class="toggle" href="#">{{name}}</a>
+        <h2>
+            <a class="toggle" href="#"><i class="icon fa">{{icon}}</i> {{name}} <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
+        </h2>
         <ul>
             {{#each tabs}}
                 <li data-id="{{this}}"><a href="#">{{tabName this}}</a></li>
             {{/each}}
-            {{#if isAdmin}}
-                <li class="admin-work-newSection">Add new section</li>
-            {{/if}}
         </ul>
     </li>
 </template>
@@ -82,9 +80,11 @@
         <main class="textBody workInner">
             <div class="workTextContainer">
                 <!--{{>workContentBlock}}-->
+                {{>workTertiary}}
                 {{{markdown content}}}
+                <hr>
+                <button class="backToTopWork">Back to Top <span class="fa">&#xf0d8;</span></button>
             </div>
-            {{>workTertiary}}
         </main>
         <footer class="truncate">
             <button>Read More <span class="fa">&#xf0d7;</span></button>
@@ -96,27 +96,21 @@
 <template name="workTertiary">
     <aside class="workTertiary">
         <ul>
-            <li class="title">Table of Contents</li>
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
-            {{> workSubListItem}}
+            <li><a href="#">WCASA Prevention Efforts</a></li>
+            <li><a href="#">Prevention Education Webinar Series</a></li>
+            <li><a href="#">Forward Wisconsin: A Plan for the Prevention of Sexual Violence</a></li>
+            <li><a href="#">FWI: Forward Wisconsin Initiative</a></li>
+            <li><a href="#">What is Epi Info?</a></li>
+            <li><a href="#">Doesn’t ALICE already collect data?</a></li>
+            <li><a href="#">Where can I go to learn more?</a></li>
+            <li><a href="#">National Prevention Organizations</a></li>
+
         </ul>
     </aside>
 </template>
 
 <template name="workSubListItem">
-    <li><a href="#">State Resources</a></li>
+    <li><a href="#">Index Item</a></li>
 </template>
 
 

@@ -1,9 +1,11 @@
 //Media Queries
 @1450: ~"only screen and (max-width: 1450px)";
 @1250: ~"only screen and (max-width: 1250px)";
-@1024: ~"only screen and (max-width: 1024px)";
+@1024: ~"only screen and (max-width: 1023px)";
 @mobile: ~"only screen and (max-width: 768px)";
 
+//Height
+@air: ~"only screen and (max-height: 767px)";
 
 
 
@@ -33,6 +35,22 @@
     :-ms-input-placeholder {color:@color;}
 }
 
+.columns(@width,@count,@gap){
+    -webkit-columns: @width @count;
+    -moz-columns: @width @count;
+    columns: @width @count;
+    -webkit-column-gap: @gap;
+    -moz-column-gap: @gap;
+    column-gap: @gap;
+}
+.avoidColumnSplit{
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside:avoid;
+    -moz-page-break-inside:avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+
 .clearfix{
     &:after {
       visibility: hidden;
@@ -55,7 +73,7 @@
 
 //Z-Axis
 @headerZ: 9;
-@utilityZ: 11;
+@utilityZ: 12;
 @mastheadZ:2;
 @sidebarZ: 11;
 @alertZ: 11;

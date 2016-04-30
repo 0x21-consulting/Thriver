@@ -37,14 +37,25 @@ Template.provider.helpers({
 // From jQuery Helpers File
 // TODO: Rewrite
 Template.providers.onRendered(function () {
-    //Toggle provider search
-    $('.providerSearch').click(function(event){
-        event.stopPropagation();
-        if($('.providers .providerSearch').hasClass('active')){
-            $('.providers .providerSearch').removeClass('active');
-        } else{
-            $('.providers .providerSearch').addClass('active');
-        }
+    //Toggle provider list view
+    $('.seeAllProviders').click(function(event){
+        event.stopPropagation();event.preventDefault();
+        $('body').addClass('providersListOpen');
+    });
+
+    $('.mapView').click(function(event){
+        event.stopPropagation();event.preventDefault();
+        $('body').removeClass('providersListOpen');
+    });
+
+    $('.providersList li').click(function(event){
+        event.stopPropagation();event.preventDefault();
+        alert('open the appropriated provider');
+        $('body').removeClass('providersListOpen');
+    });
+
+    $('section.providers .providerSearch form input').click(function(event){
+        $('body').removeClass('providersListOpen');
     });
 
     $(function() { //shorthand document.ready function

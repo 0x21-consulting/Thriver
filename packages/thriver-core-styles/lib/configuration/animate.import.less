@@ -39,6 +39,12 @@
     transform: translateY(@x);
 }
 
+.translateX(@x){
+    -ms-transform: translateX(@x);
+    -webkit-transform: translateX(@x);
+    transform: translateX(@x);
+}
+
 .scale(@x, @y){
     -ms-transform: scale(@x,@y); /* IE 9 */
     -webkit-transform: scale(@x,@y); /* Safari */
@@ -254,71 +260,122 @@
 
 
 
+@keyframes mastheadin {
+    0%  {.opacity(0);}
+    100% {.opacity(1);}
+}
+
+
+
+
+
 //Work Section Animations
 
 
-@keyframes workcontent {
+@keyframes workcontentin {
     0%  {
-        width: 0px;
-        opacity: 0;
-        .translate(0px,100px);
+        display: none;
+        .opacity(0);
     }
-    100% {  
-        width: inherit;
-        opacity: 1;
-        .translate(0px,0px);
+    1%  {
+        display: inherit;
+        .opacity(0);
+    }
+    100%  {
+        display: inherit;
+        .opacity(1);
+    }
+}
+
+@keyframes detailsopen {
+    0% {
+        max-height: 0px;
+        .opacity(0);
+        //transform: translateY(-1.25em);
+    }
+    100% {
+        max-height: 9999px;
+        .opacity(1);
+        //transform: translateY(0);
+    }
+}
+
+@keyframes workcontentout {
+    0%  {
+        display: none;
+        .opacity(1);
+    }
+    1%  {
+        display: inherit;
+        .opacity(1);
+    }
+    100%  {
+        display: inherit;
+        .opacity(0);
     }
 }
 
 @keyframes workmain {
     0%  {
-        background-color: transparent;
+        //background-color: transparent;
         //.shadow(0px,0px,5px,-3px,0.0);
-        .scale(0.93,0.93);
+        //.scale(0.93,0.93);
         //max-width: 900px;
-        opacity: 0;
+        .opacity(0);
     }
     100%  {
-        background-color: @white;
-        .scale(1,1);
+        //background-color: @white;
+        //.scale(1,1);
         //.shadow(0px,0px,20px,-3px,0.15);
-        opacity: 1;
+        .opacity(1);
     }
 }
 
 @keyframes workfadein {
     0%  {
-        background-color: @white;
+        //background-color: @white;
         .scale(1,1);
         //.shadow(0px,0px,20px,-3px,0.15);
-        opacity: 1;
+        .opacity(1);
     }
     100%  {
-        background-color: transparent;
+        //background-color: transparent;
         //.shadow(0px,0px,5px,-3px,0.0);
         .scale(0.93,0.93);
         //max-width: 900px;
-        opacity: 0;
+        .opacity(0);
     }
 }
 
 @keyframes workfadeinend {
     0%  {
-        opacity: 0;
+        .opacity(100);
     }
     1%  {
-        opacity: 0;
+        .opacity(0);
     }
 
     100%  {
-        opacity: 1;
+        .opacity(100);
     }
 }
 
 
-
-
-@keyframes mastheadin {
-    0%  {.opacity(0);}
-    100% {.opacity(1);}
+@keyframes workaccordion {
+    0%  {
+        overflow: hidden;
+        max-height: 0px;
+        .opacity(0);
+    }
+    30%{max-height: 0px;overflow: hidden;.opacity(0);}
+    40%  {
+        max-height: 9999px;
+        overflow: hidden;
+        .opacity(0);
+    }
+    100%{
+        max-height: 9999px;
+        overflow: hidden;
+        .opacity(1);
+    }
 }

@@ -2,11 +2,21 @@
     <section class="news rightLarge hasSidebar">
         <div class="scroller">
             <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
-            {{#if currentUser}}
-                <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button>
-            {{else}}
-                <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button>
-            {{/if}}
+            <div class="links">
+                {{#if currentUser}}
+                    <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button> | 
+                {{else}}
+                    <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button> | 
+                {{/if}}
+
+                <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
+                    Inquire About our Newsroom <span class="fa">&#xf05a;</span>
+                    <span class="contactInfo">
+                        For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
+                    </span>
+                </button>
+            </div>
+
             <ul class="newsTabs tabs">
                 <li class="active">In the News</li>
                 <li>Press Releases</li>

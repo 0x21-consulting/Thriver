@@ -72,12 +72,20 @@ body{
     left: 0px;
     visibility: hidden;
     background-color: #10202a;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#172333+0,23485b+100 */
+    background: rgb(23,35,51); /* Old browsers */
+    background: -moz-linear-gradient(45deg,  rgba(23,35,51,1) 0%, rgba(35,72,91,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#172333', endColorstr='#23485b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+         
     .opacity(0);
     z-index: 3;
     cursor: pointer;
     width: 100%;
     height: 100%;
-    .transition(all,375ms,ease-out,0ms);
+    will-change:opacity;
+    .transition(all,@canvasDuration,@canvasEase,0ms);
 }
 
 
@@ -128,16 +136,16 @@ body{
 
 //Make first section under masthead animate into place
 .masterContainer > section:nth-child(2){
-    will-change:opacity,transition;
-    .transition2(transform,0ms,@canvasEase, 350ms, opacity,250ms,@canvasEase, 0ms);
-    .opacity(0);
-    .translate(0px,-35px);
+    //will-change:opacity,transition;
+    //.transition2(transform,0ms,@canvasEase, 350ms, opacity,250ms,@canvasEase, 0ms);
+    //.opacity(0);
+    //.translate(0px,-35px);
 }
 .fixedHeader{
     .masterContainer > section:nth-child(2){
-        .transition2(transform,@canvasDuration,@canvasEase, @headerDelay, opacity,250ms,@canvasEase, 100ms);
-        .opacity(1);
-        .translate(0px,0px);
+        //.transition2(transform,@canvasDuration,@canvasEase, @headerDelay, opacity,250ms,@canvasEase, 100ms);
+        //.opacity(1);
+        //.translate(0px,0px);
     }
 }
 
@@ -206,7 +214,7 @@ body{
 @rightLargeWidth: 1100px;
 //Page Take Over Opacities
 @overlayOpacity: 0.9;
-@overlayOpacityHover: 0.83;
+@overlayOpacityHover: 0.85;
 
 //Context
 aside.sidebar{
@@ -270,6 +278,23 @@ body{
     }
 }
 
+body{
+    &.leftSmall{.canvasCenter{.translate(@leftSmallWidth,295px);}}
+    &.leftMedium{.canvasCenter{.translate(@leftMediumWidth,295px);}}
+    &.rightSmall{.canvasCenter{.translate(-(@rightSmallWidth),295px);}}
+    &.rightMedium{.canvasCenter{.translate(-(@rightMediumWidth),295px);}}
+    &.rightLarge{.canvasCenter{.translate(-(@rightLargeWidth),295px);}}
+    //Fixed Header Requires X Transform Accomodation
+    &.fixedHeader{
+        &.leftSmall{.canvasCenter{.translate(@leftSmallWidth,137px);}}
+        &.leftMedium{.canvasCenter{.translate(@leftMediumWidth,137px);}}
+        &.rightSmall{.canvasCenter{.translate(-(@rightSmallWidth),137px);}}
+        &.rightMedium{.canvasCenter{.translate(-(@rightMediumWidth),137px);}}
+        &.rightLarge{.canvasCenter{.translate(-(@rightLargeWidth),137px);}}
+    }
+}
+
+
 //Overlay for Sidebars
 body{
     &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
@@ -289,6 +314,15 @@ body{
     }*/
 }
 
+
+.canvasCenter{
+    .translateY(295px);
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
+}
+.fixedHeader .canvasCenter{
+    .translateY(136px);
+}
 
 
 
@@ -314,3 +348,11 @@ dl{
 }
 
 
+.canvasCenter{
+    .translateY(295px);
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
+}
+.fixedHeader .canvasCenter{
+    .translateY(136px);
+}
