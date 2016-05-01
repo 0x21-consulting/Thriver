@@ -3,7 +3,7 @@
  * @method
  *   @param {$.Event} event
  */
-var closeAsides = function (event) {
+/*var closeAsides = function (event) {
     event.preventDefault(); event.stopPropagation();
     
     // Start with body changes
@@ -69,7 +69,7 @@ Template.utilityNav.events({
         $('figure.help').removeClass('active');
     }
 
-});
+});*/
 // More sidebar closure methods... one for each template :(
 /*Template.body.events({ 'click .overlay' : closeAsides });
 Template.languageSelect.events (closure);

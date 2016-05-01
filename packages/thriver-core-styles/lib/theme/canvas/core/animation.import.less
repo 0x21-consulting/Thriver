@@ -1,0 +1,215 @@
+/* 
+- animation.import.less -
+Styles associated with animating the theme shell construct.
+This file is directly relevant to variables and elements found in context.import.less.
+Including: 8 off-canvas classes to animate the multiple canvas.
+Set canvasEffectId with value 1-9 in theme.import.less and it is applied to the '.canvas' element.
+*/
+
+
+.canvasEffect(@canvasEffectId){
+    // Overlay appears on body during an active off canvas event
+    &@{offActive} @{overlay}{
+        opacity: 1;
+        z-index: 1;
+    }
+    // 1 - Slide Over Canvas
+    & when (@canvasEffectId = 1){
+        @{off}{
+            visibility: visible;
+            -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+            &:after{display: none;}
+        }
+        &@{offActive}{
+            @{off}{
+                visibility: visible;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);            
+            }
+        }
+    }
+
+    // 2 - Reveal
+    & when (@canvasEffectId = 2){
+        @{off}{
+            z-index: 1;
+            &:after{display: none;}
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: translate3d(300px, 0, 0);
+                transform: translate3d(300px, 0, 0);
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+            }
+        }
+    }
+
+
+    // 3 - Slide Along
+    & when (@canvasEffectId = 3){
+        @{off}{
+            z-index: 1;
+            -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+            &:after{display: none;}
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: translate3d(300px, 0, 0);
+                transform: translate3d(300px, 0, 0);
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+
+
+    // 4 - Reverse Slide Out
+    & when (@canvasEffectId = 4){
+        @{off}{
+            z-index: 1;
+            -webkit-transform: translate3d(50%, 0, 0);
+            transform: translate3d(50%, 0, 0);
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: translate3d(300px, 0, 0);
+                transform: translate3d(300px, 0, 0);
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+
+    // 5 - Push (Scale Down)
+    & when (@canvasEffectId = 5){
+        -webkit-perspective: 1500px;
+        perspective: 1500px;
+        .st-pusher {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        @{off}{
+            opacity: 1;
+            -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);       
+            &:after{display: none;}     
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: translate3d(0, 0, -300px);
+                transform: translate3d(0, 0, -300px);
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+
+    // 6 - Scale Up
+    & when (@canvasEffectId = 6){
+        -webkit-perspective: 1500px;
+        perspective: 1500px;
+        -webkit-perspective-origin: 0% 50%;
+        perspective-origin: 0% 50%;
+        @{off}{
+             z-index: 1;
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, -300px);
+            transform: translate3d(0, 0, -300px);           
+        }
+        &@{offActive}{
+            .st-pusher{
+                -webkit-transform: translate3d(300px, 0, 0);
+                transform: translate3d(300px, 0, 0);                
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    }
+
+    // 7 - Door
+    & when (@canvasEffectId = 7){
+        -webkit-perspective: 1500px;
+        perspective: 1500px;
+        .st-pusher {
+            -webkit-transform-origin: 100% 50%;
+            transform-origin: 100% 50%;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        @{off}{
+            opacity: 1;
+            -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+            &:after{display: none;}
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: rotateY(-10deg);
+                transform: rotateY(-10deg);
+            }  
+            @{off}{
+                visibility: visible;
+                -webkit-transition: -webkit-transform 0.5s;
+                transition: transform 0.5s;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);                
+            }          
+        }
+    }
+    //8 - Fall In
+    & when (@canvasEffectId = 8){
+        -webkit-perspective: 1500px;
+        perspective: 1500px;
+        -webkit-perspective-origin: 0% 50%;
+        perspective-origin: 0% 50%;
+        @{off} {
+            z-index: 1;
+            opacity: 1;
+            -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+        }
+        &@{offActive}{
+            .st-pusher {
+                -webkit-transform: translate3d(300px, 0, 0);
+                transform: translate3d(300px, 0, 0);
+            }
+            @{off}{
+                visibility: visible;
+                -webkit-transition-timing-function: ease-in-out;
+                transition-timing-function: ease-in-out;
+                -webkit-transition-property: -webkit-transform;
+                transition-property: transform;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+                -webkit-transition-speed: 0.2s;
+                transition-speed: 0.2s;
+            }
+        }
+    }
+}

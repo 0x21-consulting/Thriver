@@ -1,0 +1,185 @@
+/* 
+- context.import.less -
+Styles associated with the theme shell construct.
+Including: Basic relationship of aside and main elements.
+*/
+
+//Temp
+//main{min-height: 2000px;}
+
+
+//Defaults
+header.mobileNav, header .mainNav{ display: none; } //Hides mobile navigation by default
+
+body{background-color: @bodyBgColor;}
+.offCanvas{background-color: @blueGrayLight;}
+
+//Canvas Variables
+// @canvasEffectId : 'Variable declared in theme.import.less.'
+@canvas : ~'.canvas';
+@main : ~'main'; //Canvas Elements in Center
+@off : ~'.offCanvas';
+@offActive : ~'.offCanvasActive';
+@overlay : ~'.overlay';
+
+@{canvas}{
+    .canvasEffect(@canvasEffectId); //Adds animation class to canvas.
+    /*position: relative;
+    overflow: hidden;
+    z-index: 2;    
+    min-height: 100vh;
+    @{main}{
+        position: relative;
+        left: 0;
+        z-index: 99;
+        height: 100%;
+        -webkit-transition: -webkit-transform 0.5s;
+        transition: transform 0.5s;
+        &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            background: rgba(0,0,0,0.2);
+            content: '';
+            opacity: 0;
+            -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+            transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+    }
+    @{off} {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        visibility: hidden;
+        width: 300px;
+        height: 100vh;
+        background: #48a770;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            content: '';
+            opacity: 1;
+            -webkit-transition: opacity 0.5s;
+            transition: opacity 0.5s;
+        }
+    }
+    &@{offActive}{
+        @{off}{
+            &:after {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+                transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+            }
+        }
+    }*/
+    @{overlay}{
+        background-color: rgba(0,0,0,0.5);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 200ms;
+    }
+}
+
+
+
+///Below extracted from codrops
+
+*,
+*:after,
+*::before {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body,
+.canvas,
+.st-pusher,
+main {
+    height: 100%;
+}
+
+main{
+    overflow-y: scroll;
+    background: #f3efe0;
+}
+
+main{
+    position: relative;
+}
+
+.canvas {
+    position: relative;
+    overflow: hidden;
+}
+
+.st-pusher {
+    position: relative;
+    left: 0;
+    z-index: 99;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+
+.offCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    visibility: hidden;
+    width: 300px;
+    height: 100%;
+    //background: #48a770;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.offCanvas::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    content: '';
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.offCanvasActive .offCanvas::after {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+.no-csstransforms3d .st-pusher,
+.no-js .st-pusher {
+    padding-left: 300px;
+}

@@ -1,0 +1,38 @@
+<template name="base">
+    <div id="canvas" class="canvas">
+        <!--{{>header}}-->
+        <div class="st-pusher">
+            <main>
+                <section>
+                    <h1>Main Content</h1>
+                    {{>utilityNav}}
+                    <p>Lorem Ipsum Dalor</p>
+                </section>
+                <section>
+                    <h1>Main Content</h1>
+                    {{>utilityNav}}
+                    <p>Lorem Ipsum Dalor</p>
+                </section>
+                <!--{{#each sections}}
+                    {{> Template.dynamic template=template}}
+                {{/each}}-->
+            </main>
+            <div class="overlay" id="overlay"></div>
+        </div>
+        <aside class="offCanvas">
+            <h2>OFF CANVAS LEFT</h2>
+            <!--{{> accounts}}-->
+        </aside>
+        <!--<aside class="offCanvas">
+            <h2>OFF CANVAS RIGHT</h2>
+            {{>twitter}}
+            {{>resources}}
+            {{>news}}
+            {{>donate}}
+            {{>languageSelect}}
+        </aside>-->
+        <!--{{> articleNews}} //Article Page Template -->
+        <!--{{>help}}
+        {{>alerts}}-->
+    </div>
+</template>
