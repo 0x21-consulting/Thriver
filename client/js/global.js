@@ -47,12 +47,11 @@ Template.body.onRendered(function () {
 
 
 function toggleOffCanvas() {
-
     // Canvas Variables
     var eachToggle = document.querySelectorAll('.utilityNav > ul > li[data-sidebar]');
     var canvas = document.getElementById('canvas');
     var overlay = document.getElementById('overlay');
-    
+
     //Close Canvas Elements if Overlay or active LI is clicked
     var buttonParent = event.target.parentNode;
     if(buttonParent.classList.contains('active') || event.target == overlay){
