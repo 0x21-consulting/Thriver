@@ -1,12 +1,7 @@
 /* 
-- helpers.import.less -
-These helper classes can be applied to elements for a variety of states.
+- helpers > transforms.import.less -
+This file contains helpers for applying transforms and perspective changes.
 */
-
-
-//visibility
-.visible{visibility: visible;}
-.hidden{visibility: hidden;}
 
 //Transforms
 .transform(@x){
@@ -28,19 +23,4 @@ These helper classes can be applied to elements for a variety of states.
 .perspective-origin(@x){
     -webkit-perspective-origin: @x;
     perspective-origin: @x;
-}
-
-
-
-
-
-
-
-
-
-//Effects
-.opacity(@x){
-    zoom: 1; //Will this cause issues?
-    filter: ~'alpha(opacity='100*@x~')';
-    opacity: @x;
 }

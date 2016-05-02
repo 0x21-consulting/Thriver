@@ -1,0 +1,48 @@
+/* 
+- helpers > transitions.import.less -
+These helper classes are designed for applying cross-browser friendly and well-performed transitions.
+*/
+
+.transition (@transitionProperty, @duration, @ease, @delay) {
+    will-change:@transitionProperty;
+    -webkit-transition: @transitionProperty @duration @ease @delay;
+    & when (@transitionProperty = transform){
+        -webkit-transition: ~'-webkit-'@transitionProperty @duration @ease @delay;
+    }
+    -moz-transition: @transitionProperty @duration @ease @delay;
+    -ms-transition: @transitionProperty @duration @ease @delay;
+    -o-transition: @transitionProperty @duration @ease @delay;
+}
+
+.transition2 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2) {
+    will-change:@transitionProperty,@transitionProperty2;
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2;
+}
+
+.transition3 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2, @transitionProperty3, @duration3, @ease3, @delay3) {
+    will-change:@transitionProperty,@transitionProperty2,@transitionProperty3;
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3;
+}
+
+.transition4 (@transitionProperty, @duration, @ease, @delay, @transitionProperty2, @duration2, @ease2, @delay2, @transitionProperty3, @duration3, @ease3, @delay3, @transitionProperty4, @duration4, @ease4, @delay4) {
+    will-change:@transitionProperty,@transitionProperty2,@transitionProperty3,@transitionProperty4;
+    -webkit-transition: @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -moz-transition:    @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -ms-transition:     @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+    -o-transition:      @transitionProperty @duration @ease @delay, @transitionProperty2 @duration2 @ease2 @delay2, @transitionProperty3 @duration3 @ease3 @delay3, @transitionProperty4 @duration4 @ease4 @delay4;
+}
+
+.noTransition {
+    will-change:initial;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    transition: none;
+}
