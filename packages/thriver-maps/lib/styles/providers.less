@@ -1,0 +1,193 @@
+// Import from thriver:core-styles package
+@import "{thriver:core-styles}/lib/index.less";
+
+section.providers{
+    .providerSearch{
+        max-width: 660px;
+        margin: 0 auto;
+        padding: 40px 0px 40px 0px;
+        @media @mobile{
+            margin: 20px;
+            text-align: center;
+            padding-bottom: 0px;
+        }
+    }
+    main.mapTool{
+        display: table;
+        width: 100%;
+        //.shadowInset(0px,0px,13px,3px,0.5);
+        @media @mobile{
+            display: block;
+        }
+    }
+    figure.map, article.details{
+        display: table-cell;
+        height: 660px;
+    }
+    figure.map{
+        //temp
+        //background: url('/lib/img/map-temp.png') no-repeat;
+        //background-size: cover;
+        //width: 70%;
+        #mapCanvas{
+            height: 100%;
+        }
+        @media @mobile{
+            height: 200px;
+            width: 100%;
+            display: block;
+        }
+        // Map popups
+        p.providerTitle {
+            color: #000;
+            font-weight: normal;
+            line-height: normal;
+            font-size: 16px;
+        }
+    }
+    article.details{
+        width: 700px;
+        background: @navy;
+        position: relative;
+        vertical-align: top;
+        .shadow(closeLeft);
+        &:before{
+            content:"\f0d9";
+            .fa;
+            position: absolute;
+            top: 101px;
+            left: -59px;
+            font-size: 200px;
+            color: @lightBlue;
+        }
+        header{
+            background: @lightBlue;
+            padding: 80px 40px;
+        }
+        main{
+            background-color: @navy;
+            padding: 40px;
+        }
+        h2{
+            font-size: 27px;
+            border-bottom: none;
+            font-weight: 100;
+            padding-bottom: 0px;
+        }
+        address{
+            font-style: normal;
+            //font-weight: 700;
+            font-size: 17px;
+            margin: 15px 0px;
+            display: block;
+            color:@white;
+        }
+        ul{
+            li{
+                color:@white;
+                line-height: 16px;
+                letter-spacing: 0.5px;
+                a{
+                    //color: @teal;
+                    font-weight: 800;
+                }
+                &:before{
+                    .fa;
+                    margin-right: 5px;
+                }
+                &.email:before{content:"\f0e0";}
+                &.website:before{content:"\f108";}
+                &.facebook:before{content:"\f09a";}
+                &.twitter:before{content:"\f099";}
+                @media @1024{
+                    margin-bottom: 8px;
+                    &:before{
+                        display: none;
+                    }
+                }
+            }
+        }
+        ul.phones{
+            margin-bottom: 20px;
+        }
+        ul.outreach li{
+            padding: 5px 0px;
+            @media @1024{
+                padding: 2px 0px;
+            }
+        }
+        ul.outreach{
+            margin-bottom: 10px;
+        }
+        button.cta{
+            display: inline-block;
+            padding: 17px 24px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background-color: @orange;
+            color: @white;
+            position: relative;
+            z-index: 2;
+            margin-top: 20px;
+            height: auto;
+            line-height: 18px;
+            &:hover, &:focus{
+                background-color: darken(@orange, 2.5%);
+            }
+            &:active{
+                background-color: darken(@orange, 5%);
+            }
+        }
+        @media @1450{
+            width: 500px;
+        }
+        @media @1024{
+            width: 300px;
+            header, main{
+                padding: 20px;
+            }
+            &:before{
+                top: 67px;
+            }
+        }
+        @media @mobile{
+            height: auto;
+            display: block;
+            width: 100%;
+        }
+    }
+    form{
+        div{
+            width: 49%;
+            display: inline-block;
+            margin: 0px;
+            margin-bottom: 40px;
+            &:first-child{
+                margin-right: 2%;
+            }
+        }
+        label, input{
+            .rw;
+            text-transform: uppercase;
+        }
+        .styledSelect{
+            background-color: @orange;
+            top: 24px;
+            &:focus, input:focus{
+                background-color: darken(@orange, 5%);
+            }
+        }
+        input#zip{
+            width: 80%;
+            background: @gray;
+            display: inline-block;
+        }
+        input.submit{
+            width: 20%;
+            display: inline-block;
+            margin-left: -5px;
+        }
+    }
+}

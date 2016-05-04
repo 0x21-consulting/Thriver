@@ -6,12 +6,13 @@ Package.describe({
     documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
 
     var packages = [
         'ecmascript',                 // javascript
         'mongo',                      // database
+        'reactive-var',               // Support for reactive variables
         
         'templating',                 // Allow templates
         'spacebars',                  // Template Syntax
@@ -37,9 +38,11 @@ Package.onUse(function(api) {
     ], ['client', 'server']);
     
     api.addFiles([
+        'lib/client/shims.js',
+        'lib/client/marked.js',
+        'lib/client/markdown.js',
         'lib/client/history.js',
-        'lib/client/scroll.js',
-        'lib/client/markdown.js'
+        'lib/client/scroll.js'
     ], ['client']);
     
     api.addFiles([

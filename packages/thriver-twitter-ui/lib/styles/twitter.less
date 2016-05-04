@@ -1,0 +1,15 @@
+// Import from thriver:core-styles package
+@import "{thriver:core-styles}/lib/index.less";
+
+section.twitter{
+    h2 a{font-weight: @normal;}
+    .twitterElement {
+        padding: 30px;
+        background-color:@blueGray;
+        .shadow(close);
+    }
+    iframe{
+        height: ~'calc(100vh - 318px)' !important; //Overrides inline height
+        max-width: 296px !important; //Overrides max-width
+    }
+}
