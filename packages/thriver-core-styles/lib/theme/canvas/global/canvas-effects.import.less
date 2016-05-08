@@ -28,6 +28,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     }
 
     // 2 - Reveal
+    // Standard
     & when (@canvasEffectId = 2){
         @{off}{
             z-index: 0;
@@ -35,6 +36,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
         &@{offActive}{
             @{canvasPush}, @{header}, @{overlay}{
                 .transform(translate3d(300px, 0, 0));
+                @media @mobile{.transform(translate3d(85%, 0, 0));}
             }
             @{off}{
                 .visible;
