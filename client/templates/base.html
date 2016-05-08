@@ -1,8 +1,8 @@
 <template name="base">
     <div id="canvas" class="canvas">
         {{>header}}
+        {{> mainNav}}
         <div class="push">
-            {{> mainNav}}
             <main>
                 <section>
                     <h1>Main Content</h1>
@@ -16,8 +16,8 @@
                     {{> Template.dynamic template=template}}
                 {{/each}}-->
             </main>
-            <div class="overlay" id="overlay"></div>
         </div>
+        <div class="overlay" id="overlay"></div>
         <aside class="offCanvas">
             <h2>OFF CANVAS LEFT</h2>
             <div style="background:black;width:200px;height:200px;"></div>

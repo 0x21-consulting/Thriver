@@ -8,16 +8,16 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
 
 .canvasEffect(@canvasEffectId){
     // Overlay appears on body during an active off canvas event
-    &@{offActive} @{overlay}{
-        .opacity(1);
+    &@{offActive}{
+        @{overlay}{.opacity(1);}
+        overflow-y: hidden;
     }
     // 1 - Slide Over Canvas
     & when (@canvasEffectId = 1){
         @{off}{
-            z-index: 2;
+            z-index: 5;
             .visible;
             .transform(translate3d(-100%, 0, 0));
-            &:after{display: none;}
         }
         &@{offActive}{
             @{off}{
@@ -31,10 +31,9 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     & when (@canvasEffectId = 2){
         @{off}{
             z-index: 0;
-            &:after{display: none;}
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay}{
                 .transform(translate3d(300px, 0, 0));
             }
             @{off}{
@@ -49,10 +48,9 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
         @{off}{
             z-index: 0;
             .transform(translate3d(-50%, 0, 0));
-            &:after{display: none;}
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay}{
                 .transform(translate3d(300px, 0, 0));
             }
             @{off}{
@@ -70,7 +68,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform(translate3d(50%, 0, 0));
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay}{
                 .transform(translate3d(300px, 0, 0));
             }
             @{off}{
@@ -85,18 +83,17 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // Not functioning correctly
     & when (@canvasEffectId = 5){
         .perspective(1500px);
-        @{canvasPush} {
+        @{canvasPush}, @{header}{
             .transform-style(preserve-3d);
         }
         @{off}{
             z-index: 2;
             .opacity(1);
             .transition(transform,0.5s,linear,0ms);
-            .transform(translate3d(-100%, 0, 0));    
-            &:after{display: none;}     
+            .transform(translate3d(-100%, 0, 0));       
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay} {
                 .transform(translate3d(0, 0, -300px));
                 //.transform(translate3d(200px, -50px, -500px));
             }
@@ -109,6 +106,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     }
 
     // 6 - Scale Up
+    // Not fucntioning correctly
     & when (@canvasEffectId = 6){
         .perspective(1500px);
         .perspective-origin(0% 50%);
@@ -118,7 +116,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform(translate3d(0, 0, -300px));          
         }
         &@{offActive}{
-            @{canvasPush}{
+            @{canvasPush}, @{header}, @{overlay} {
                 .transform(translate3d(300px, 0, 0));            
             }
             @{off}{
@@ -133,7 +131,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // Not functioning correctly
     & when (@canvasEffectId = 7){
         .perspective(1500px);
-        @{canvasPush} {
+        @{canvasPush}, @{header}, @{overlay} {
             .transform-origin(100% 50%);
             .transform-style(preserve-3d);
         }
@@ -141,10 +139,9 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             z-index: 2;
             .opacity(1);
             .transform(translate3d(-100%, 0, 0));
-            &:after{display: none;}
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay}{
                 .transform(rotateY(-10deg));
             }  
             @{off}{
@@ -165,7 +162,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform(translate3d(0, -100%, 0));
         }
         &@{offActive}{
-            @{canvasPush} {
+            @{canvasPush}, @{header}, @{overlay} {
                 .transform(translate3d(300px, 0, 0));
             }
             @{off}{

@@ -58,7 +58,7 @@ function toggleOffCanvas() {
         for (var i = 0, element; element = eachToggle[i]; i++) {
             element.classList.remove('active');
         }
-        canvas.classList.remove('offCanvasActive');
+        document.body.classList.remove('offCanvasActive');
     }
     // Open Overlay and offCanvas elements if clicking inactive LI
     else if(buttonParent.hasAttribute('data-sidebar') && buttonParent.classList !== 'active'){
@@ -66,7 +66,7 @@ function toggleOffCanvas() {
             element.classList.remove('active');
         }
         buttonParent.classList.add('active');
-        canvas.classList.add('offCanvasActive');        
+        document.body.classList.add('offCanvasActive');        
     }
 }
 

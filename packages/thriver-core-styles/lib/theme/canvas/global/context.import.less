@@ -11,6 +11,7 @@ Including: Basic relationship of aside and main elements.
 @off : ~'.offCanvas';
 @offActive : ~'.offCanvasActive';
 @overlay : ~'.overlay';
+@header : ~'.mainHeader';
 
 //Defaults
 header.mobileNav{ display: none; } //Hides mobile navigation by default
@@ -33,25 +34,33 @@ body{background-color: @bodyBgColor;}
 }
 
 header.mainHeader{
-    z-index: 1;
-    //.zIndex(top);
-    //overflow: hidden;
+    position: fixed;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: white;
+    overflow: hidden;
+    z-index: 3;
 }
 
 
 //Canvas Specifications
+body{
+    .canvasEffect(@canvasEffectId);
+}
 @{canvas}{
-    .canvasEffect(@canvasEffectId); //Adds animation class to canvas. ('Variable declared in theme.import.less.')
     position: relative;
     overflow: hidden;
+    @{header}, @{canvasPush}{
+        .transition(transform,0.5s,linear,0ms);
+    }
     @{canvasPush} {
         margin-top:36px;
         position: relative;
         left: 0;
         z-index: 2;
-        //height: 100%;
-        .transition(transform,0.5s,linear,0ms);
-        will-change:initial; //transform value prevents header element from fixing to window
+        //will-change:initial; //transform value prevents header element from fixing to window
     }
     @{main}{
         overflow-y: auto;
@@ -61,7 +70,7 @@ header.mainHeader{
         padding-top: 136px;
     }
     @{off} {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         .hidden;
@@ -69,34 +78,17 @@ header.mainHeader{
         height: 100%;
         //background: #48a770;
         .transition(all,0.5s,linear,0ms);
-        &:after {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.2);
-            content: '';
-            .opacity(1);
-            .transition(opacity,0.5s,linear,0ms);
-        }
-    }
-    &@{offActive} @{off}:after{
-        width: 0;
-        height: 0;
-        .opacity(0);
-        .transition3(opacity,0.5s,linear,0ms,width,0.1s,linear,0.5s, height,0.1s,linear,0.5s);
     }
     @{overlay}{
         background-color: rgba(0,0,0,0.5);
-        position: fixed;
+        position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         .opacity(0);
-        z-index: 1;
-        .transition(opacity,200ms,linear,0ms);
+        z-index: 5;
+        .transition2(opacity,0.5s,linear,0ms,transform,0.5s,linear,0ms);
     }
 }
 
