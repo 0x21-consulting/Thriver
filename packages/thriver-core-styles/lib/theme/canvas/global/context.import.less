@@ -20,8 +20,15 @@ html, body, @{canvas}, @{canvasPush}, @{main} {height: 100%;} //From SRC. Requir
 body{background-color: @bodyBgColor;}
 .offCanvas{background-color: @blueGrayLight;}
 
+//Header Positioning
+header.mainHeader{
+    .zIndex(top);
+    overflow: hidden;
+}
+
 //Canvas Specifications
 @{canvas}{
+    padding-top: 100px;
     .canvasEffect(@canvasEffectId); //Adds animation class to canvas. ('Variable declared in theme.import.less.')
     position: relative;
     overflow: hidden;
