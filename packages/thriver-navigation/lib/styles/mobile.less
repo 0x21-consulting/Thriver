@@ -1,21 +1,7 @@
 // Import from thriver:core-styles package
-//@import "{thriver:core-styles}/lib/index.less";
-/*
-header.mobileHeader{
-    display: none;
-    @media @mobile{
-        display: block;
-    }
-}
+@import "{thriver:core-styles}/lib/index.less";
 
-header.mainHeader{
-    display: block;
-    @media @mobile{
-        display: none;
-    }
-}
-
-header.mobileHeader{
+header.mobileNav{
     background-color: @white;
     position: fixed;
     width: 100%;
@@ -123,7 +109,7 @@ header.mobileHeader{
     }
     section.mobileMenu{
         left: 0px;
-        .translate(-100%,0px);
+        .transform(translate(-100%,0px));
         background-color:mix(@gray, @navy, 55%);
         width: 85%;
         ul.mobSocial{
@@ -147,7 +133,7 @@ header.mobileHeader{
         right: 0px;
         background-color:mix(@gray, @navy, 55%);
         width: 85%;
-        .translate(100%,0px);
+        .transform(translate(100%,0px));
         header.profileOverview{
             padding: 20px;
             p{
@@ -210,7 +196,7 @@ header.mobileHeader{
 
 
 
-
+/*
 //Presets
 .closeTabMobile, .signOutMobile{
     color: @white;
@@ -266,10 +252,10 @@ body.menuOpen, body.accountOpen{
 //Menu Open
 body.menuOpen{
     .canvasCenter, header.mobileHeader{
-       .translate(85%,0px);
+       .transform(translate(85%,0px));
     }
     .section.mobileMenu{
-       .translate(0px,0px);
+       .transform(translate(0px,0px));
     }
     header.mobileHeader{
         section.fixedBar{
@@ -290,10 +276,10 @@ body.menuOpen{
 //Account Open
 body.accountOpen{
     .canvasCenter, header.mobileHeader{
-        .translate(-85%,0px);
+        .transform(translate(-85%,0px));
     }
     section.mobileMenuAccount{
-       .translate(100%,0px);
+       .transform(translate(100%,0px));
     }
     header.mobileHeader{
         section.fixedBar{
@@ -326,10 +312,10 @@ body.menuOpen.sidebarLeftMobile{
         }
     }
     .sidebar.sidebarsRight{
-        .translate(0%,0px);
+        .transform(translate(0%,0px));
         pointer-events: all;
         section{
-            .translate(0%,0px);
+            .transform(translate(0%,0px));
             right: inherit;
             left: 0px;
         }

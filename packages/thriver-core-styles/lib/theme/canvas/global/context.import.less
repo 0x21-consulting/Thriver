@@ -14,7 +14,16 @@ Including: Basic relationship of aside and main elements.
 @header : ~'.mainHeader';
 
 //Defaults
-header.mobileNav{ display: none; } //Hides mobile navigation by default
+header.mobileNav{ 
+    display: none; 
+    @media @mobile{
+        display: inherit;
+    }
+} 
+
+header.mainHeader, .utilityNav{
+    @media @mobile{display: none;}
+}
 //html, body, @{canvas}, @{canvasPush}, @{main} {height: 100%;} //From SRC. Required for effects. May remove.
 
 //Color Schematics
@@ -53,7 +62,7 @@ body{
     position: relative;
     overflow: hidden;
     @{header}, @{canvasPush}{
-        .transition(transform,0.5s,linear,0ms);
+        .transition(transform,@durationDefault,@easeDefault,0ms);
     }
     @{canvasPush} {
         margin-top:36px;
@@ -68,6 +77,9 @@ body{
         height: 6000px;
         position: relative;
         padding-top: 136px;
+        @media @mobile{
+            padding-top: 36px;
+        }
     }
     @{off} {
         position: fixed;
@@ -77,7 +89,7 @@ body{
         width: 300px;
         height: 100%;
         //background: #48a770;
-        .transition(all,0.5s,linear,0ms);
+        .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault);
         @media @mobile{
             width: 85%;
         }
@@ -91,8 +103,12 @@ body{
         height: 100%;
         .opacity(0);
         z-index: 5;
-        .transition2(opacity,0.5s,linear,0ms,transform,0.5s,linear,0ms);
+        .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
     }
+}
+
+@{offActive} @{overlay}{
+    .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
 }
 
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
