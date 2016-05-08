@@ -13,31 +13,44 @@ Including: Basic relationship of aside and main elements.
 @overlay : ~'.overlay';
 
 //Defaults
-header.mobileNav, header .mainNav{ display: none; } //Hides mobile navigation by default
-html, body, @{canvas}, @{canvasPush}, @{main} {height: 100%;} //From SRC. Required for effects. May remove.
+header.mobileNav{ display: none; } //Hides mobile navigation by default
+//html, body, @{canvas}, @{canvasPush}, @{main} {height: 100%;} //From SRC. Required for effects. May remove.
 
 //Color Schematics
 body{background-color: @bodyBgColor;}
 .offCanvas{background-color: @blueGrayLight;}
 
 //Header Positioning
-header.mainHeader{
-    .zIndex(top);
+.utilityNav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 36px;
+    width: 100%;
     overflow: hidden;
+    background-color: beige;
+    z-index: 10;
 }
+
+header.mainHeader{
+    //.zIndex(top);
+    //overflow: hidden;
+}
+
 
 //Canvas Specifications
 @{canvas}{
-    padding-top: 100px;
     .canvasEffect(@canvasEffectId); //Adds animation class to canvas. ('Variable declared in theme.import.less.')
     position: relative;
     overflow: hidden;
     @{canvasPush} {
-        position: relative;
+        margin-top:36px;
+        //position: relative;
         left: 0;
         .zIndex(above);
-        height: 100%;
+        //height: 100%;
         .transition(transform,0.5s,linear,0ms);
+        will-change:initial;
     }
     @{main}{
         overflow-y: auto;
@@ -74,11 +87,11 @@ header.mainHeader{
     }
     @{overlay}{
         background-color: rgba(0,0,0,0.5);
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 0;
         width: 100%;
-        height: 200vh;
+        height: 100%;
         .opacity(0);
         .zIndex(behind);
         .transition(opacity,200ms,linear,0ms);

@@ -1,18 +1,20 @@
 <template name="mainNav">
-    <nav class="mainNav">
-        <ul class="container">
-            <li class="brand">
-                <a href="#masthead" class="brandLink">
-                    <svg width="311" height="70">
-                        <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="311" height="70" />
-                    </svg>
-                </a>
-            </li>
-            {{#each sections}}
-                {{> menuItem}}
-            {{/each}}
-        </ul>
-    </nav>
+    <header class="mainHeader" id="menu">
+        <nav class="mainNav">
+            <ul class="container">
+                <li class="brand">
+                    <a href="#masthead" class="brandLink">
+                        <svg width="311" height="70">
+                            <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="311" height="70" />
+                        </svg>
+                    </a>
+                </li>
+                {{#each sections}}
+                    {{> menuItem}}
+                {{/each}}
+            </ul>
+        </nav>
+    </header>
 </template>
 
 <template name="menuItem">
