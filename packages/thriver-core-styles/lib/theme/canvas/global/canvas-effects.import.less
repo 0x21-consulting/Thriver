@@ -10,12 +10,12 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // Overlay appears on body during an active off canvas event
     &@{offActive} @{overlay}{
         .opacity(1);
-        z-index: 1;
+        .zIndex(between);
     }
     // 1 - Slide Over Canvas
     & when (@canvasEffectId = 1){
         @{off}{
-            z-index: 100;
+            .zIndex(top);
             .visible;
             .transform(translate3d(-100%, 0, 0));
             &:after{display: none;}
@@ -31,7 +31,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // 2 - Reveal
     & when (@canvasEffectId = 2){
         @{off}{
-            z-index: 1;
+            .zIndex(between);
             &:after{display: none;}
         }
         &@{offActive}{
@@ -48,7 +48,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // 3 - Slide Along
     & when (@canvasEffectId = 3){
         @{off}{
-            z-index: 1;
+            .zIndex(between);
             .transform(translate3d(-50%, 0, 0));
             &:after{display: none;}
         }
@@ -67,7 +67,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // 4 - Reverse Slide Out
     & when (@canvasEffectId = 4){
         @{off}{
-            z-index: 1;
+            .zIndex(between);
             .transform(translate3d(50%, 0, 0));
         }
         &@{offActive}{
@@ -90,7 +90,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform-style(preserve-3d);
         }
         @{off}{
-            z-index: 100;
+            .zIndex(top);
             .opacity(1);
             .transition(transform,0.5s,linear,0ms);
             .transform(translate3d(-100%, 0, 0));    
@@ -114,7 +114,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
         .perspective(1500px);
         .perspective-origin(0% 50%);
         @{off}{
-             z-index: 1;
+             .zIndex(between);
              .opacity(1);
             .transform(translate3d(0, 0, -300px));          
         }
@@ -138,7 +138,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform-style(preserve-3d);
         }
         @{off}{
-            z-index: 100;
+            .zIndex(top);
             .opacity(1);
             .transform(translate3d(-100%, 0, 0));
             &:after{display: none;}
@@ -160,7 +160,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
         .perspective(1500px);
         .perspective-origin(0% 50%);
         @{off} {
-            z-index: 1;
+            .zIndex(between);
             .opacity(1);
             .transform(translate3d(0, -100%, 0));
         }
