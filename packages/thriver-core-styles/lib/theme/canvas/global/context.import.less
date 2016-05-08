@@ -15,22 +15,30 @@ Including: Basic relationship of aside and main elements.
 @px : ~'px';
 @value:300;
 
-//Sidebar Widths
-// A data-width is applied to a button containing the data-sidebar and data-position data-values.
-// The data-width controls the canvas offset.
-// The data-widths applied need to be declare here.
-@offCanvasWidth1 : 356;
-@offCanvasWidth2 : 656;
-@offCanvasWidth3 : 700;
-@offCanvasWidth4 : 1100;
 
-body.offCanvasWidth@{value}{
-    *{background-color: blue !important;}
-}
 
-[data-width="600px"] {
-width: 600px;
+//Initialize Styles for Declared Widths
+@length : length(@offCanvasWidths);
+.offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
+    .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
+    @width : extract(@offCanvasWidths, @index);
+    .offCanvasWidth@{width} {
+        @{off}{ width:~"@{width}px"; }
+        &@{offActive}{
+            @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));}
+        }
+    }
 }
+.offCanvasWidthInit(@offCanvasWidths; @length);
+
+
+
+
+
+
+
+
+
 
 //Defaults
 header.mobileNav{ 
@@ -74,9 +82,9 @@ header.mainHeader{
 
 
 //Canvas Specifications
-body{
+/*body{
     .canvasEffect(@canvasEffectId);
-}
+}*/
 @{canvas}{
     position: relative;
     overflow: hidden;
@@ -106,7 +114,6 @@ body{
         left: 0;
         .hidden;
         z-index: 0;
-        width: 356px;
         height: 100%;
         //background: #48a770;
         .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault);
@@ -133,16 +140,12 @@ body{
         .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
     }
     @{off}{
+        .transition(transform,@durationDefault,@easeDefault,0ms);
         .visible;
         @media @mobile{.transform(translate3d(85%, 0, 0));}
     }
 }
 
-//Off Canvas Widths
-.offCanvasWidth@{offCanvasWidth1} @{off}{ width:~"@{offCanvasWidth1}px";}
-.offCanvasWidth@{offCanvasWidth2} @{off}{ width:~"@{offCanvasWidth2}px";}
-.offCanvasWidth@{offCanvasWidth3} @{off}{ width:~"@{offCanvasWidth3}px";}
-.offCanvasWidth@{offCanvasWidth4} @{off}{ width:~"@{offCanvasWidth4}px";}
 
 
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
