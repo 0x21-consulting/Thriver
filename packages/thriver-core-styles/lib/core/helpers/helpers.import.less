@@ -14,18 +14,3 @@ This file contains most globlized type helpers.
     filter: ~'alpha(opacity='100*@x~')';
     opacity: @x;
 }
-
-.zIndex(@type){
-    & when (@type = behind){
-        z-index:-1;
-    }
-    & when (@type = between){
-        z-index:0;
-    }
-    & when (@type = above){
-        z-index: 1;
-    }
-    & when (@type = top){
-        z-index: 2;
-    }
-}
