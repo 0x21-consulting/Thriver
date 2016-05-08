@@ -12,6 +12,25 @@ Including: Basic relationship of aside and main elements.
 @offActive : ~'.offCanvasActive';
 @overlay : ~'.overlay';
 @header : ~'.mainHeader';
+@px : ~'px';
+@value:300;
+
+//Sidebar Widths
+// A data-width is applied to a button containing the data-sidebar and data-position data-values.
+// The data-width controls the canvas offset.
+// The data-widths applied need to be declare here.
+@offCanvasWidth1 : 356;
+@offCanvasWidth2 : 656;
+@offCanvasWidth3 : 700;
+@offCanvasWidth4 : 1100;
+
+body.offCanvasWidth@{value}{
+    *{background-color: blue !important;}
+}
+
+[data-width="600px"] {
+width: 600px;
+}
 
 //Defaults
 header.mobileNav{ 
@@ -86,7 +105,8 @@ body{
         top: 0;
         left: 0;
         .hidden;
-        width: 300px;
+        z-index: 0;
+        width: 356px;
         height: 100%;
         //background: #48a770;
         .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault);
@@ -107,9 +127,23 @@ body{
     }
 }
 
-@{offActive} @{overlay}{
-    .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
+@{offActive}{
+    @{overlay}{
+        .opacity(1);
+        .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
+    }
+    @{off}{
+        .visible;
+        @media @mobile{.transform(translate3d(85%, 0, 0));}
+    }
 }
+
+//Off Canvas Widths
+.offCanvasWidth@{offCanvasWidth1} @{off}{ width:~"@{offCanvasWidth1}px";}
+.offCanvasWidth@{offCanvasWidth2} @{off}{ width:~"@{offCanvasWidth2}px";}
+.offCanvasWidth@{offCanvasWidth3} @{off}{ width:~"@{offCanvasWidth3}px";}
+.offCanvasWidth@{offCanvasWidth4} @{off}{ width:~"@{offCanvasWidth4}px";}
+
 
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
 .no-csstransforms3d @{canvasPush},
