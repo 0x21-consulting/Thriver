@@ -15,6 +15,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     // 1 - Slide Over Canvas
     & when (@canvasEffectId = 1){
         @{off}{
+            z-index: 100;
             .visible;
             .transform(translate3d(-100%, 0, 0));
             &:after{display: none;}
@@ -82,13 +83,16 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
     }
 
     // 5 - Push (Scale Down)
+    // Not functioning correctly
     & when (@canvasEffectId = 5){
         .perspective(1500px);
         @{canvasPush} {
             .transform-style(preserve-3d);
         }
         @{off}{
+            z-index: 100;
             .opacity(1);
+            .transition(transform,0.5s,linear,0ms);
             .transform(translate3d(-100%, 0, 0));    
             &:after{display: none;}     
         }
@@ -119,7 +123,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
                 .transform(translate3d(300px, 0, 0));            
             }
             @{off}{
-                .visibile;
+                .visible;
                 .transition(transform,0.5s,linear,0ms);
                 .transform(translate3d(0, 0, 0));
             }
@@ -134,6 +138,7 @@ Set canvasEffectId with value 1-8 in theme.import.less and it is applied to the 
             .transform-style(preserve-3d);
         }
         @{off}{
+            z-index: 100;
             .opacity(1);
             .transform(translate3d(-100%, 0, 0));
             &:after{display: none;}
