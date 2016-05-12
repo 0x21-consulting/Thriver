@@ -2,7 +2,7 @@
     <nav class="utilityNav">
         <ul>
             {{#if currentUser}}
-                <li class="notifications" data-position="left" data-width="356">
+                <li class="notifications" data-position="left" data-width="356" data-sidebar="notifications">
                     <button type="button">
                         <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
                         {{#if show}}
@@ -10,7 +10,7 @@
                         {{/if}}
                     </button>
                 </li>
-                <li class="accountDetails" data-position="left" data-width="356">
+                <li class="accountDetails" data-position="left" data-width="356" data-sidebar="accountDetails">
                     <button type="button">
                         <span class="fa userIcon">&#xf007;</span> {{name}} <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
@@ -21,18 +21,18 @@
                     </button>
                 </li>
             {{else}}
-                <li class="login" data-position="left" data-width="656">
+                <li class="login" data-position="left" data-width="656" data-sidebar="login">
                     <button type="button">
                         Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
                 </li>
-                <li class="register" data-width="356">
+                <li class="register" data-width="356" data-sidebar="register">
                     <button type="button" title="Sign Up">
                         Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
                     </button>
                 </li>
             {{/if}}
-            <li class="languageSelect" data-position="right" data-width="356">
+            <li class="languageSelect" data-position="right" data-width="356" data-sidebar="languageSelect">
                 <button type="button" title="languageSelect">
                     <span class="fa up">&#xf024;</span><span class="fa close">&#xf00d;</span>
                 </button>
@@ -42,22 +42,22 @@
                     <span class="fa">&#xf06a;</span> Get Help
                 </button>
             </li>
-            <li class="donate" data-position="right" data-width="656">
+            <li class="donate" data-position="right" data-width="656" data-sidebar="donate">
                 <button type="button" title="Donate">
                     <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
                 </button>
             </li>
-            <li class="learningCenter" data-position="right" data-width="700">
+            <li class="learningCenter" data-position="right" data-width="700" data-sidebar="learningCenter">
                 <button type="button">
                     <span class="fa up">&#xf19c;</span><span class="fa close">&#xf00d;</span>  Learning Center
                 </button>
             </li>
-            <li class="news" data-position="right" data-width="1100">
+            <li class="news" data-position="right" data-width="1100" data-sidebar="newsRoom">
                 <button type="button" title="Newsroom">
                     <span class="fa up">&#xf1ea;</span><span class="fa close">&#xf00d;</span> Newsroom
                 </button>
             </li>
-            <li class="twitter" data-position="right" data-width="356">
+            <li class="twitter" data-position="right" data-width="356" data-sidebar="twitter">
                 <button type="button">
                     <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
                 </button>

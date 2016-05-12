@@ -25,30 +25,7 @@
 @facebookC: #3b5998;
 @youtubeC: #e52d27;
 
-//Color Classes
-.color (@property, @color, @style) {
-    & when (@style = light) {
-        @{property}: lighten(@color, 2.5%);
-    }
-    & when (@style = lighter) {
-        @{property}: lighten(@color, 5%);
-    }
-    & when (@style = lightest) {
-        @{property}: lighten(@color, 7.5%);
-    }
-    & when (@style = dark) {
-        @{property}: darken(@color, 2.5%);
-    }
-    & when (@style = darker) {
-        @{property}: darken(@color, 5%);
-    }
-    & when (@style = darkest) {
-        @{property}: darken(@color, 7.5%);
-    }
-    & when (@style = none) {
-        @{property}: @color;
-    }
-}
+
 
 .truncatedTextGradient{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */

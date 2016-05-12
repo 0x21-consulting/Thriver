@@ -63,3 +63,68 @@ This file opperates as a configuration file for the Canvas theme.
 @offCanvasWidths : 356,656,700,1100;
 
 
+//Color Classes
+.color (@property, @color, @style) {
+    & when (@style = light) {
+        @{property}: lighten(@color, 2.5%);
+    }
+    & when (@style = lighter) {
+        @{property}: lighten(@color, 5%);
+    }
+    & when (@style = lightest) {
+        @{property}: lighten(@color, 7.5%);
+    }
+    & when (@style = dark) {
+        @{property}: darken(@color, 2.5%);
+    }
+    & when (@style = darker) {
+        @{property}: darken(@color, 5%);
+    }
+    & when (@style = darkest) {
+        @{property}: darken(@color, 7.5%);
+    }
+    & when (@style = none) {
+        @{property}: @color;
+    }
+}
+
+
+//Buttons
+//Button Colors
+.buttonColor(@color){
+    .color(background-color,@color,none);
+    span.notificationsAlert{
+        .color(border-color,@color,none);
+    }
+    &:hover{
+        background-color:lighten(saturate(@color, 10%),2%);
+        //.color(background-color,@color,light);
+        span.notificationsAlert{
+            border-color:lighten(saturate(@color, 10%),2%);
+        }
+    }
+    &:focus{
+        .color(background-color,@color,lighter);
+        span.notificationsAlert{
+            .color(border-color,@color,lighter);
+        }
+    }
+    &:active{
+        .color(background-color,@color,dark);
+        span.notificationsAlert{
+            .color(border-color,@color,dark);
+        }
+    }
+}
+
+//Text Button Colors
+.textButtonColor(@color){
+    .color(color,@color,none);
+    &:hover, &:focus{
+        .color(color,@color,dark);
+    }
+    &:active{
+        .color(color,@color,darker);
+    }
+}
+

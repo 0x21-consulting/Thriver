@@ -50,43 +50,6 @@ input[type=submit], .button, button{
 
 
 
-//Button Colors
-.buttonColor(@color){
-    .color(background-color,@color,none);
-    span.notificationsAlert{
-        .color(border-color,@color,none);
-    }
-    &:hover{
-        background-color:lighten(saturate(@color, 10%),2%);
-        //.color(background-color,@color,light);
-        span.notificationsAlert{
-            border-color:lighten(saturate(@color, 10%),2%);
-        }
-    }
-    &:focus{
-        .color(background-color,@color,lighter);
-        span.notificationsAlert{
-            .color(border-color,@color,lighter);
-        }
-    }
-    &:active{
-        .color(background-color,@color,dark);
-        span.notificationsAlert{
-            .color(border-color,@color,dark);
-        }
-    }
-}
-
-//Text Button Colors
-.textButtonColor(@color){
-    .color(color,@color,none);
-    &:hover, &:focus{
-        .color(color,@color,dark);
-    }
-    &:active{
-        .color(color,@color,darker);
-    }
-}
 
 .canvasCenter{
     input[type=submit], .button, button{

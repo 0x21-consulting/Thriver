@@ -9,7 +9,7 @@ Including: Basic relationship of aside and main elements.
 @canvasPush : ~'.push';
 @main : ~'main'; //Canvas Elements in Center
 @off : ~'.offCanvas';
-@offActive : ~'.offCanvasActive';
+@offActive : ~'.canvasActive';
 @overlay : ~'.overlay';
 @header : ~'.mainHeader';
 @px : ~'px';
@@ -22,7 +22,7 @@ Including: Basic relationship of aside and main elements.
 .offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
     .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
     @width : extract(@offCanvasWidths, @index);
-    .offCanvasWidth@{width} {
+    .canvasW@{width} {
         @{off}{ width:~"@{width}px"; }
         &@{offActive}{
             @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));}
@@ -51,7 +51,6 @@ header.mobileNav{
 header.mainHeader, .utilityNav{
     @media @mobile{display: none;}
 }
-//html, body, @{canvas}, @{canvasPush}, @{main} {height: 100%;} //From SRC. Required for effects. May remove.
 
 //Color Schematics
 body{background-color: @bodyBgColor;}
