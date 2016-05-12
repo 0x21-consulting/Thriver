@@ -4,7 +4,7 @@ Styles associated with the theme shell construct.
 Including: Basic relationship of aside and main elements.
 */
 
-//Contextual Variables
+//Contextual Elements
 @canvas : ~'.canvas';
 @canvasPush : ~'.push';
 @main : ~'main'; //Canvas Elements in Center
@@ -14,99 +14,14 @@ Including: Basic relationship of aside and main elements.
 @header : ~'.mainHeader';
 @utility : ~'.utilityNav';
 @mobileNav : ~'.mobileNav';
-@px : ~'px';
-@value:300;
 
+//Values
+@utilityH : 36px;
+@headerH: 200px;
+@headerFixedH : 50px;
+@headerMobileH : 50px;
 
-//Canvas Specifications
-@{canvas}{
-    position: relative;
-    overflow: hidden;
-    @{header}, @{canvasPush}{
-        .transition(transform,@durationDefault,@easeDefault,0ms);
-    }
-    @{utility}{
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 36px;
-        width: 100%;
-        overflow: hidden;
-        background-color: beige;
-        z-index: 10;
-    }
-    @{header}{
-        position: fixed;
-        top: 36px;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        background: white;
-        overflow: hidden;
-        z-index: 3;
-    }
-    @{mobileNav}{ 
-        display: none; 
-        @media @mobile{ display: inherit; }
-    } 
-    @{canvasPush} {
-        margin-top:36px;
-        position: relative;
-        left: 0;
-        z-index: 2;
-        //will-change:initial; //transform value prevents header element from fixing to window
-    }
-    @{main}{
-        overflow-y: auto;
-        background: #f3efe0;
-        height: 6000px;
-        position: relative;
-        padding-top: 136px;
-        @media @mobile{
-            padding-top: 36px;
-        }
-    }
-    @{off} {
-        position: fixed;
-        top: 0;
-        left: 0;
-        .hidden;
-        z-index: 0;
-        height: 100%;
-        //background: #48a770;
-        .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault);
-        @media @mobile{
-            width: 85%;
-        }
-    }
-    @{overlay}{
-        background-color: rgba(0,0,0,0.5);
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        .opacity(0);
-        z-index: 5;
-        .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
-    }
-    @media @mobile{@{header},@{utility}{ display: none; } } //Hide Desktop header elements on mobile
-}
-
-@{offActive}{
-    @{overlay}{
-        .opacity(1);
-        .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
-    }
-    @{off}{
-        .transition(transform,@durationDefault,@easeDefault,0ms);
-        .visible;
-        @media @mobile{.transform(translate3d(85%, 0, 0));}
-    }
-}
-
-
-//Initialize Styles for Declared Widths
+//Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
 .offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
     .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
@@ -118,10 +33,73 @@ Including: Basic relationship of aside and main elements.
         }
     }
 }
+//Initialize Canvas Width Classes
 .offCanvasWidthInit(@offCanvasWidths; @length);
 
-/* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
-.no-csstransforms3d @{canvasPush},
-.no-js @{canvasPush} {
-    padding-left: 300px;
-}*/
+//Canvas Specifications
+@{canvas}{
+    position: relative;
+    overflow: hidden;
+    @{utility}, @{header}, @{off}{ position: fixed; }
+    @{utility}, @{header}, @{overlay} { width: 100%; }
+    @{overlay}{ .opacity(1); }
+    @{off}{ .visible; }
+    @{off},@{overlay}{ height: 100%; }
+    @{utility}, @{header}, @{canvasPush}, @{off}, @{overlay}{ top: 0; left: 0; }
+
+    @{utility}{
+        z-index: 5;
+        height: @utilityH;
+    }
+    @{header}{
+        z-index: 3;
+        top: @utilityH;
+        height: @headerH;
+    }
+    @{canvasPush} {
+        z-index: 2;
+        position: relative;
+        margin-top:@utilityH;
+        //will-change:initial; //transform value prevents header element from fixing to window
+    }
+    @{main}{
+        position: relative;
+        padding-top: @utilityH + @headerH;
+        @media @mobile{ padding-top: @headerMobileH; }
+    }
+    @{off} {
+        z-index: 0;
+        .hidden;
+    }
+    @{overlay}{
+        z-index: 4;
+        position: absolute;
+        .opacity(0);
+    }
+    //Mobile Context
+    @{mobileNav}{ 
+        display:none; 
+        height: @headerMobileH;
+    } 
+    @media @mobile{
+        @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
+        @{mobileNav}{ display: inherit; } //Show Mobile Header
+    }
+}
+
+//Active Canvas
+@{offActive}{
+    overflow: hidden;
+    @{overlay}{ .opacity(1); }
+    @{off}{ .visible; }
+}
+
+//Canvas Animations
+@{header}, @{canvasPush}{ .transition(transform,@durationDefault,@easeDefault,0ms); }
+@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
+@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+@{offActive}{
+    @{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+    @{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+}
+

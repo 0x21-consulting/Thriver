@@ -65,6 +65,13 @@ This file opperates as a configuration file for the Canvas theme.
 //Color Schematics
 body{background-color: @bodyBgColor;}
 .offCanvas{background-color: @blueGrayLight;}
+.utilityNav{background-color: beige;}
+.mainHeader{background: white;}
+.overlay{background-color: rgba(0,0,0,0.5);}
+main{
+    background: #f3efe0;
+    height: 6000px;
+}
 
 
 
@@ -132,4 +139,11 @@ body{background-color: @bodyBgColor;}
         .color(color,@color,darker);
     }
 }
+
+//Canvas Needs Help
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
+.no-csstransforms3d @{canvasPush},
+.no-js @{canvasPush} {
+    padding-left: 300px;
+}*/
 
