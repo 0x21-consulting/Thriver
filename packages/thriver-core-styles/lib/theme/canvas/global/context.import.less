@@ -15,7 +15,7 @@ Including: Basic relationship of aside and main elements.
 @utility : ~'.utilityNav';
 @mobileNav : ~'.mobileNav';
 
-//Values
+//Element Heights
 @utilityH : 36px;
 @headerH: 200px;
 @headerFixedH : 50px;
@@ -40,41 +40,41 @@ Including: Basic relationship of aside and main elements.
 @{canvas}{
     position: relative;
     overflow: hidden;
+    //Constants
     @{utility}, @{header}, @{off}{ position: fixed; }
+    @{main}, @{canvasPush}{ position: relative; }
     @{utility}, @{header}, @{overlay} { width: 100%; }
     @{overlay}{ .opacity(1); }
     @{off}{ .visible; }
     @{off},@{overlay}{ height: 100%; }
     @{utility}, @{header}, @{canvasPush}, @{off}, @{overlay}{ top: 0; left: 0; }
 
-    @{utility}{
-        z-index: 5;
-        height: @utilityH;
-    }
-    @{header}{
-        z-index: 3;
-        top: @utilityH;
-        height: @headerH;
-    }
-    @{canvasPush} {
-        z-index: 2;
-        position: relative;
-        margin-top:@utilityH;
-        //will-change:initial; //transform value prevents header element from fixing to window
-    }
-    @{main}{
-        position: relative;
-        padding-top: @utilityH + @headerH;
-        @media @mobile{ padding-top: @headerMobileH; }
-    }
     @{off} {
         z-index: 0;
         .hidden;
     }
-    @{overlay}{
+    @{canvasPush} {
+        z-index: 1;
+        margin-top:@utilityH;
+        //will-change:initial; //transform value prevents header element from fixing to window
+    }
+    @{header}{
+        z-index: 2;
+        top: @utilityH;
+        height: @headerH;
+    }
+    @{utility}{
         z-index: 4;
+        height: @utilityH;
+    }
+    @{overlay}{
+        z-index: 3;
         position: absolute;
         .opacity(0);
+    }
+    @{main}{
+        padding-top: @utilityH + @headerH;
+        @media @mobile{ padding-top: @headerMobileH; }
     }
     //Mobile Context
     @{mobileNav}{ 
