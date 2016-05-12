@@ -1,7 +1,10 @@
 /* 
 - context.import.less -
 Styles associated with the theme shell construct.
-Including: Basic relationship of aside and main elements.
+Including: 
+Main element widths/heights, z-indexing, positioning, visibility
+Basic relationship of aside and main elements.
+Canvas Animations.
 */
 
 //Contextual Elements
@@ -29,7 +32,8 @@ Including: Basic relationship of aside and main elements.
     .canvasW@{width} {
         @{off}{ width:~"@{width}px"; }
         &@{offActive}{
-            @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));}
+            &.canvasLeft{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));} }
+            &.canvasRight{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"-@{width}px", 0, 0));} }
         }
     }
 }
@@ -72,10 +76,9 @@ Including: Basic relationship of aside and main elements.
         position: absolute;
         .opacity(0);
     }
-    @{main}{
-        padding-top: @utilityH + @headerH;
-        @media @mobile{ padding-top: @headerMobileH; }
-    }
+    //Offset the main content according to the combined height of headers
+    @{main}{ padding-top: @utilityH + @headerH; }
+
     //Mobile Context
     @{mobileNav}{ 
         display:none; 
@@ -84,6 +87,7 @@ Including: Basic relationship of aside and main elements.
     @media @mobile{
         @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
         @{mobileNav}{ display: inherit; } //Show Mobile Header
+        @{main} { padding-top: @headerMobileH; }
     }
 }
 
@@ -92,14 +96,16 @@ Including: Basic relationship of aside and main elements.
     overflow: hidden;
     @{overlay}{ .opacity(1); }
     @{off}{ .visible; }
+    //Places the offCanvas Element on the right while canvasRight is active
+    &.canvasRight{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
 
 //Canvas Animations
-@{header}, @{canvasPush}{ .transition(transform,@durationDefault,@easeDefault,0ms); }
-@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
-@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+//@{header}, @{canvasPush}{ .transition(transform,@durationDefault,@easeDefault,0ms); }
+//@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
+//@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
 @{offActive}{
-    @{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-    @{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+    //@{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+    //@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
 }
 
