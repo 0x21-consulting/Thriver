@@ -12,84 +12,43 @@ Including: Basic relationship of aside and main elements.
 @offActive : ~'.canvasActive';
 @overlay : ~'.overlay';
 @header : ~'.mainHeader';
+@utility : ~'.utilityNav';
+@mobileNav : ~'.mobileNav';
 @px : ~'px';
 @value:300;
 
 
-
-//Initialize Styles for Declared Widths
-@length : length(@offCanvasWidths);
-.offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
-    .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
-    @width : extract(@offCanvasWidths, @index);
-    .canvasW@{width} {
-        @{off}{ width:~"@{width}px"; }
-        &@{offActive}{
-            @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));}
-        }
-    }
-}
-.offCanvasWidthInit(@offCanvasWidths; @length);
-
-
-
-
-
-
-
-
-
-
-//Defaults
-header.mobileNav{ 
-    display: none; 
-    @media @mobile{
-        display: inherit;
-    }
-} 
-
-header.mainHeader, .utilityNav{
-    @media @mobile{display: none;}
-}
-
-//Color Schematics
-body{background-color: @bodyBgColor;}
-.offCanvas{background-color: @blueGrayLight;}
-
-//Header Positioning
-.utilityNav{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 36px;
-    width: 100%;
-    overflow: hidden;
-    background-color: beige;
-    z-index: 10;
-}
-
-header.mainHeader{
-    position: fixed;
-    top: 36px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: white;
-    overflow: hidden;
-    z-index: 3;
-}
-
-
 //Canvas Specifications
-/*body{
-    .canvasEffect(@canvasEffectId);
-}*/
 @{canvas}{
     position: relative;
     overflow: hidden;
     @{header}, @{canvasPush}{
         .transition(transform,@durationDefault,@easeDefault,0ms);
     }
+    @{utility}{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 36px;
+        width: 100%;
+        overflow: hidden;
+        background-color: beige;
+        z-index: 10;
+    }
+    @{header}{
+        position: fixed;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: white;
+        overflow: hidden;
+        z-index: 3;
+    }
+    @{mobileNav}{ 
+        display: none; 
+        @media @mobile{ display: inherit; }
+    } 
     @{canvasPush} {
         margin-top:36px;
         position: relative;
@@ -131,6 +90,7 @@ header.mainHeader{
         z-index: 5;
         .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms);
     }
+    @media @mobile{@{header},@{utility}{ display: none; } } //Hide Desktop header elements on mobile
 }
 
 @{offActive}{
@@ -146,6 +106,19 @@ header.mainHeader{
 }
 
 
+//Initialize Styles for Declared Widths
+@length : length(@offCanvasWidths);
+.offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
+    .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
+    @width : extract(@offCanvasWidths, @index);
+    .canvasW@{width} {
+        @{off}{ width:~"@{width}px"; }
+        &@{offActive}{
+            @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));}
+        }
+    }
+}
+.offCanvasWidthInit(@offCanvasWidths; @length);
 
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
 .no-csstransforms3d @{canvasPush},
