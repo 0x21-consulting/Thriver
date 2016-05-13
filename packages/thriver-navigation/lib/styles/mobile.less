@@ -10,7 +10,7 @@ header.mobileNav{
     z-index: 16;
     height: 60px;
     .shadow(close);
-    .transition(all,375ms,ease-out,0ms);
+    //.transition(all,375ms,ease-out,0ms);
     section.fixedBar{
         a.brandLink {
             display: inline-block;
@@ -31,7 +31,7 @@ header.mobileNav{
             opacity: 0.9;
             span{
                 opacity: 1;
-                .transition(all,400ms,ease,300ms);
+                //.transition(all,400ms,ease,300ms);
                 &:nth-child(2){
                     position: absolute;
                     top: 0px;
@@ -43,7 +43,7 @@ header.mobileNav{
         }
     }
     section.mobileMenuAccount, section.mobileMenu{
-        .transition(all,375ms,ease-out,0ms);
+        //.transition(all,375ms,ease-out,0ms);
         top: 0px;
         height: 100vh;
         position: fixed;
@@ -60,7 +60,7 @@ header.mobileNav{
                     letter-spacing: 0.5px;
                     &:active{
                         background-color: darken(@lightBlue, 5%);
-                            .transition(all,100ms,ease,0ms);
+                            //.transition(all,100ms,ease,0ms);
                             font-size: 98%;
                     }
                 }
@@ -77,19 +77,19 @@ header.mobileNav{
                     background-color:mix(@gray, @navy, 45%);
                     text-transform: uppercase;
                     font-weight: 800;
-                    .transition(all,250ms,ease-in,0ms);
+                    //.transition(all,250ms,ease-in,0ms);
                     &:before{
                         opacity: 0;
                         content: '';
                         font-size: 12px;
                         position: relative;
                         top: -1px;
-                        .transition(all,250ms,ease-out,0ms);
+                        //.transition(all,250ms,ease-out,0ms);
                     }
                     &:active{
                         font-size: 98%;
                         background-color:mix(@gray, @navy, 40%);
-                        .transition(all,100ms,ease,0ms);
+                        //.transition(all,100ms,ease,0ms);
                     }
                 }
                 &.getHelpMobile a{
