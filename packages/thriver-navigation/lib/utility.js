@@ -1,3 +1,5 @@
+
+
 /**
  * Remove all open sidebars
  * @method

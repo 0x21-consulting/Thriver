@@ -1,4 +1,8 @@
 //Helpers
+Template.registerHelper('equals', function (a, b) {
+    return a === b;
+});
+
 //Class Control
 //Add Class
 function addClass(el, cls){

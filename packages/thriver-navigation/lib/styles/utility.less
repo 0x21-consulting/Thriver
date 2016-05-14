@@ -2,11 +2,11 @@
 @import "{thriver:core-styles}/lib/index.less";
 //Variables
 @utilityHeight: 36px;
-@utilityButtonPadding: 0px 12px;
-@socialButtonPadding: 0px 11px 0px 0px;
+@utilityaPadding: 0px 12px;
+@socialaPadding: 0px 11px 0px 0px;
 
 // Constants
-nav.utilityNav{
+nav.utility{
     position: fixed;
     top: 0px;
     left: 0px;
@@ -21,19 +21,20 @@ nav.utilityNav{
         margin: 0px;
         list-style: none;
     }
-    button{
+    li{float: left;}
+    a{
         height: @utilityHeight;
         line-height: @utilityHeight;
-        padding: @utilityButtonPadding;
+        padding: @utilityaPadding;
         .shadowNone;
         .transform(scale(1,1)) !important;
     }
 }
 
-//Button Specifics
-nav.utilityNav{
+//a Specifics
+nav.utility{
     li{
-        //Button & Span Positioning
+        //a & Span Positioning
         position: relative;
         &.social, &.getHelp, &.donate, &.twitter, &.news, &.learningCenter, &.languageSelect{
             float: right;
@@ -42,13 +43,13 @@ nav.utilityNav{
         &.login, &.accountDetails, &.notifications, &.register, &.logout{
             float: left;
         }
-        &.login > button span.close, &.register > button span.close, &.accountDetails > button span.close{
+        &.login > a span.close, &.register > a span.close, &.accountDetails > a span.close{
             left: inherit;
             right: 9px;
             font-size: 13px;
             top: 7px;
         }
-        &.login > button span.up, &.register > button span.up, &.logout > button span.up{
+        &.login > a span.up, &.register > a span.up, &.logout > a span.up{
             top: 1px;
         }
         &.notifications.active{
@@ -59,7 +60,7 @@ nav.utilityNav{
         &.social a{
             display: inline-block;
             height: @utilityHeight;
-            padding: @socialButtonPadding;
+            padding: @socialaPadding;
             //.font(2.2,3.6,0.025,@light,normal);
             .textButtonColor(@blueGray);
             background-color: darken(@gray, 5%);
@@ -68,44 +69,44 @@ nav.utilityNav{
             padding: 0px 11px 0px 11px;
             //background-color: darken(@gray, 5%);
         }
-        //Button Colors
-        &.login > button, &.accountDetails > button, &.donate > button{
+        //a Colors
+        &.login > a, &.accountDetails > a, &.donate > a{
             .buttonColor(@teal);
         }
-        &.twitter > button{
+        &.twitter > a{
             .buttonColor(lighten(@blueGray,5%));
         }
-        &.learningCenter > button{
+        &.learningCenter > a{
             .buttonColor(saturate(@blue, 55%));
         }
-        &.news > button{
+        &.news > a{
             .buttonColor(@blue); 
         }
-        &.register > button, &.logout > button{
+        &.register > a, &.logout > a{
             background-color: transparent;
             .textButtonColor(@blue);
         }
-        &.register.active button{
+        &.register.active a{
             color: @white;
         }
-        &.getHelp > button{
+        &.getHelp > a{
             .buttonColor(@orange);
         }
-        &.notifications > button{
+        &.notifications > a{
             .buttonColor(@teal);
         }
         &.languageSelect {
-            > button{
+            > a{
                .buttonColor(lighten(@blueGray,7%));
                 span.up{
                     //.font(2.2,3.6,@baseLS,@light,normal);
                 }
             }
-            &.active > button span.fa.close{color:@white;}
+            &.active > a span.fa.close{color:@white;}
         }
     }
-    //Active Button
-    li.active > button:first-child, button.active{
+    //Active a
+    li.active > a:first-child, a.active{
         ////.color(background-color,lighten(@navy,0%),none);
         .fa.close{
             pointer-events: none;
