@@ -3,47 +3,47 @@
 //Sidebar sections
 var sidebars = [{
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
-        width: 231, //Sets the sidebar width & body class
+        width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
         content: 'acc' //Content of said sidebar
     },{ 
         id: 'notifications', 
-        width: 231, 
+        width: 356, 
         position:'left',
         content: 'notif' 
     },{ 
         id: 'signin', 
-        width: 231, 
+        width: 356, 
         position:'left',
         content: 'signin' 
     },{ 
         id: 'register', 
-        width: 231, 
+        width: 356, 
         position:'left',
         content: 'register' 
     },{ 
         id: 'twitter', 
-        width: 231, 
+        width: 356, 
         position:'right',
         content: 'twitter' 
     },{ 
         id: 'resources', 
-        width: 231, 
+        width: 700, 
         position:'right',
         content: 'resources' 
     },{ 
         id: 'news', 
-        width: 231, 
+        width: 1100, 
         position:'right',
         content: 'news' 
     },{ 
         id: 'donate', 
-        width: 231, 
+        width: 656, 
         position:'right',
         content: 'donate' 
     },{ 
         id: 'lang', 
-        width: 231, 
+        width: 356, 
         position:'right',
         content: 'lang' 
     }

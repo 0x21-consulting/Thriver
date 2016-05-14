@@ -1,9 +1,9 @@
-//Helpers
+//Spacebars Helpers
 Template.registerHelper('equals', function (a, b) {
     return a === b;
 });
 
-//Class Control
+//UI Helpers
 //Add Class
 function addClass(el, cls){
     el.classList.add(cls);
@@ -19,59 +19,52 @@ function removeClassByPrefix(el, prefix) {
     return el;
 }
 
-
+//Functions
 //Off Canvas Effects
-//This function fires on click events of any element containing the data-attribute, "data-sidebar".
-function toggleOffCanvas() {
+//event.target function fires on click events of any element containing the data-attribute, "data-sidebar".
+function toggleCanvas() {
     // Canvas Variables
-    var eachToggle = document.querySelectorAll('li[data-sidebar]');
+    var toggle = document.querySelectorAll('[data-sidebar]');
     var overlay = document.getElementById('overlay');
-    var buttonParent = event.target.parentNode;
-    var thisSidebarWidth = buttonParent.dataset.width;
+    var sidebar = document.querySelectorAll('section.sidebar');
     var body = document.body;
-
     //Close open canvas elements if overlay or active li is clicked
-    if(buttonParent.classList.contains('active') || event.target == overlay){
-        //Remove any active classes on data-sidebar elements
-        for (var i = 0, element; element = eachToggle[i]; i++) { removeClass(element,'active'); }
-        //Remove all canvas effect classes
-        removeClassByPrefix(body, "canvas");
-        //toggle aria-hidden
-        overlay.setAttribute('aria-hidden', 'true');  
+    if(event.target.classList.contains('active') || event.target == overlay){
+        for (var i = 0, e; e = toggle[i]; i++) { removeClass(e,'active'); } //Clear all active Toggles
+        for (var i = 0, e; e = sidebar[i]; i++) { removeClass(e,'active'); } //Clear all active Sidebars
+        removeClassByPrefix(body, "canvas"); //Remove all canvas effect classes
+        overlay.setAttribute('aria-hidden', 'true'); //toggle aria-hidden
     }
-
     // Open Overlay and offCanvas elements if clicking inactive list item
-    else if(buttonParent.hasAttribute('data-sidebar') && buttonParent.classList !== 'active'){
-        //Remove any currently active data-sidebar toggles
-        for (var i = 0, element; element = eachToggle[i]; i++) { removeClass(element,'active'); }
-        //Add active class to currently clicked item
-        addClass(buttonParent,'active');
-        //Add master canvas effect class
-        addClass(body,'canvasActive');
-        // Add/Remove left/right
-        if(buttonParent.dataset.position == 'left'){
-            removeClass(body,'canvasRight');
-            addClass(body,'canvasLeft');
+    else if(event.target.hasAttribute('data-sidebar') && event.target.classList !== 'active'){
+        removeClassByPrefix(body, 'canvasW'); //Remove any currently active sidebar-width effect classes
+        addClass(body,'canvasActive'); //Add master canvas effect class
+        overlay.setAttribute('aria-hidden', 'false'); //toggle aria-hidden
+        for (var i = 0, e; e = toggle[i]; i++) { removeClass(e,'active'); } //Clear all active toggles
+        addClass(event.target,'active'); //Add active class to clicked element
+        //Sets values based on the parameters of the current sidebar
+        for (var i = 0, e; e = sidebar[i]; i++) {
+            removeClass(e,'active'); //Clear all active sidebars
+            if (e.getAttribute('id') == event.target.dataset.sidebar){ //If Sidebar ID matches toggles' data-sidebar
+                e.classList.add('active'); //Add active class to given sidebar
+                addClass(body,'canvasW' + e.dataset.width); //Add new sidebar-width effect class 
+                if(e.dataset.position == 'left'){ // Add/Remove left/right
+                    removeClass(body,'canvasRight');
+                    addClass(body,'canvasLeft');
+                }
+                if(e.dataset.position == 'right'){ // Add/Remove right/left
+                    body.classList.remove('canvasLeft'); 
+                    body.classList.add('canvasRight');  
+                }
+            }
         }
-        // Add/Remove right/left
-        if(buttonParent.dataset.position == 'right'){
-            body.classList.remove('canvasLeft'); 
-            body.classList.add('canvasRight');  
-        }
-        //Remove any currently active sidebar-width effect classes
-        removeClassByPrefix(document.body, 'canvasW');
-        //Add new sidebar-width effect class
-        addClass(body,'canvasW' + thisSidebarWidth);   
-        //toggle aria-hidden
-        overlay.setAttribute('aria-hidden', 'false');    
     }
 }
 
-
 Template.body.events({
     //Canvas Actions
-    'click .utility > ul > li[data-sidebar] button': function (event) { toggleOffCanvas(); },
-    'click .overlay': function (event) { toggleOffCanvas(); }
+    'click [data-sidebar]': function (event) { toggleCanvas(); },
+    'click .overlay': function (event) { toggleCanvas(); }
 });
 
 
