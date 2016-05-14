@@ -9,8 +9,7 @@ Canvas Animations.
 
 //Contextual Elements
 @canvas : ~'.canvas';
-@canvasPush : ~'.push';
-@main : ~'main'; //Canvas Elements in Center
+@canvasPush : ~'main';
 @off : ~'.offCanvas';
 @offActive : ~'.canvasActive';
 @overlay : ~'.overlay';
@@ -46,7 +45,7 @@ Canvas Animations.
     overflow: hidden;
     //Constants
     @{utility}, @{header}, @{off}{ position: fixed; }
-    @{main}, @{canvasPush}{ position: relative; }
+    @{canvasPush}{ position: relative; }
     @{utility}, @{header}, @{overlay} { width: 100%; }
     @{overlay}{ .opacity(1); }
     @{off}{ .visible; }
@@ -77,7 +76,7 @@ Canvas Animations.
         .opacity(0);
     }
     //Offset the main content according to the combined height of headers
-    @{main}{ padding-top: @utilityH + @headerH; }
+    @{canvasPush}{ padding-top: @utilityH + @headerH; }
 
     //Mobile Context
     @{mobileNav}{ 
@@ -87,7 +86,7 @@ Canvas Animations.
     @media @mobile{
         @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
         @{mobileNav}{ display: inherit; } //Show Mobile Header
-        @{main} { padding-top: @headerMobileH; }
+        @{canvasPush} { padding-top: @headerMobileH; }
     }
 }
 

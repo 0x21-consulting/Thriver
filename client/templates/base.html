@@ -1,14 +1,16 @@
 <template name="base">
     <div id="canvas" class="canvas">
         {{>header}}
-        <div class="push">
-            <main>
-                <!--{{#each sections}}
-                    {{> Template.dynamic template=template}}
-                {{/each}}-->
-            </main>
-        </div>
-        <aside class="offCanvas">{{>sidebars}}</aside>
+        <main>
+            <!--{{#each sections}}
+                {{> Template.dynamic template=template}}
+            {{/each}}-->
+        </main>
+        <aside class="offCanvas">
+            {{#each sidebars}}
+                {{> Template.dynamic template=sidebar}}
+            {{/each}}
+        </aside>
         <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
         <!--{{> articleNews}} //Article Page Template -->
         <!--{{>help}} //Get Help Modules -->
