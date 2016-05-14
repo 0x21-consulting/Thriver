@@ -1,6 +1,6 @@
 <template name="sidebars">
     {{#each item}}
-        <section id="{{id}}" class="sidebar windowHSansUtility" data-width="{{width}}" data-position="{{position}}">
+        <section id="{{id}}" class="sidebar scrollBox windowHSansUtility" data-width="{{width}}" data-position="{{position}}">
             <div class="scroll ">
                 {{> Template.dynamic template=content}}
             </div>
