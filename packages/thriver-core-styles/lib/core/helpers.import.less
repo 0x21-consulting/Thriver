@@ -8,11 +8,57 @@ This file contains most globlized type helpers.
 .visible{visibility: visible;}
 .hidden{visibility: hidden;}
 
-//Effects
-.opacity(@x){
-    zoom: 1; //Will this cause issues?
-    filter: ~'alpha(opacity='100*@x~')';
-    opacity: @x;
+//Opacity
+.opacity(@amt){
+    zoom: 1;
+    filter: ~'alpha(opacity='100*@amt~')';
+    opacity: @amt;
+}
+
+.borderRadius(@amt){
+  -webkit-border-radius: @amt;
+  -moz-border-radius: @amt;
+  border-radius: @amt;
+}
+
+.userSelect(@value){
+    -webkit-user-select:@value;
+    -moz-user-select:@value;
+    -ms-user-select: @value;
+}
+
+.placeholderColor(@color){
+    ::-webkit-input-placeholder {color:@color;}
+    :-moz-placeholder {color:@color;}
+    ::-moz-placeholder {color:@color;}
+    :-ms-input-placeholder {color:@color;}
+}
+
+.columns(@width,@count,@gap){
+    -webkit-columns: @width @count;
+    -moz-columns: @width @count;
+    columns: @width @count;
+    -webkit-column-gap: @gap;
+    -moz-column-gap: @gap;
+    column-gap: @gap;
+}
+.avoidColumnSplit{
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside:avoid;
+    -moz-page-break-inside:avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+
+.clearfix{
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
 }
 
 //Media Queries
@@ -144,4 +190,70 @@ This file contains most globlized type helpers.
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+
+
+
+//Color Classes
+.color (@property, @color, @style) {
+    & when (@style = light) {
+        @{property}: lighten(@color, 2.5%);
+    }
+    & when (@style = lighter) {
+        @{property}: lighten(@color, 5%);
+    }
+    & when (@style = lightest) {
+        @{property}: lighten(@color, 7.5%);
+    }
+    & when (@style = dark) {
+        @{property}: darken(@color, 2.5%);
+    }
+    & when (@style = darker) {
+        @{property}: darken(@color, 5%);
+    }
+    & when (@style = darkest) {
+        @{property}: darken(@color, 7.5%);
+    }
+    & when (@style = none) {
+        @{property}: @color;
+    }
+}
+//Buttons
+//Button Colors
+.buttonColor(@color){
+    .color(background-color,@color,none);
+    span.notificationsAlert{
+        .color(border-color,@color,none);
+    }
+    &:hover{
+        background-color:lighten(saturate(@color, 10%),2%);
+        //.color(background-color,@color,light);
+        span.notificationsAlert{
+            border-color:lighten(saturate(@color, 10%),2%);
+        }
+    }
+    &:focus{
+        .color(background-color,@color,lighter);
+        span.notificationsAlert{
+            .color(border-color,@color,lighter);
+        }
+    }
+    &:active{
+        .color(background-color,@color,dark);
+        span.notificationsAlert{
+            .color(border-color,@color,dark);
+        }
+    }
+}
+
+//Text Button Colors
+.textButtonColor(@color){
+    .color(color,@color,none);
+    &:hover, &:focus{
+        .color(color,@color,dark);
+    }
+    &:active{
+        .color(color,@color,darker);
+    }
 }

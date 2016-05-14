@@ -1,149 +1,28 @@
 /*
 Theme name: Canvas
-Canvas is a Thriver theme designed around an off-canvas organizational system.
-This file opperates as a configuration file for the Canvas theme.
+Description: Canvas is a Thriver theme designed around an off-canvas organizational system.
+This file opperates as the theme index. It contains imports to the theme files and an index of file content.
 */
 
 //Imports
-@import "global/context.import.less"; //Sets up the shell of the canvas contextual elements.
-//@import "global/canvas-effects.import.less"; //Contains global level animation mixins and styles for contextual elements.
-
-//Options
-//1. Theme Canvas Effect
-// Referenced in animation.import.less.
-@canvasEffectId : 2; // 1-8 Desktop effects available. (Currently only 2 active)
-@bodyBgColor : mix(@gray, @navy, 70%);
-@offCanvasBgColor : @blueGrayLight;
-
-@easeDefault: cubic-bezier(0.465, 0.183, 0.153, 0.946);
-@durationDefault: 450ms;
-
-//Color Variables
-@white: #ffffff;
-@altWhite: #fafafa;
-@altWhite2: #f9f9f9;
-@black: #062031;
-@gray: #ebf2f2;
-@navy: #062131;
-@blue: #2c5465; //Only used in Utility nav twice?
-@teal: #00b7c5;
-@aqua: #1db7c5;
-@orange: #f1592a;
-@darkOrange: #D63500; //For text to be on
-@yellow: #F5D76E;
-@gold: #f2af47;
-@lightBlue: #566a75; //Flat
-@darkBlue: #4e606a; //Flat
-@midnightBlue: #6d7f88; //Flat
-
-//Refined
-@blueGray: mix(@navy, @gray, 71%);
-@blueGrayLight: lighten(mix(@navy, @gray, 60%),3%);
-
-//Social
-@twitterC: #00b0ed;
-@facebookC: #3b5998;
-@youtubeC: #e52d27;
-
-
-//Fonts
-.fa{font-family: "FontAwesome";}
-.os{font-family: "Old Standard TT', serif";}
-.rw{font-family: 'Raleway', sans-serif;}
-
-//Weights
-@light: 400;
-@normal: 600;
-@bold: 700;
-
-//Sidebar Initialization
-// A data-width is applied to a button containing the data-sidebar and data-position data-values.
-// The data-width controls the canvas offset and off-canvas element size.
-// The data-widths applied on the toggle element also need to be declare here.
-@offCanvasWidths : 356,656,700,1100;
-
-//Color Schematics
-body{background-color: @bodyBgColor;}
-.offCanvas{background-color: @blueGrayLight;}
-.utilityNav{background-color: beige;}
-.mainHeader{background: white;}
-.overlay{background-color: rgba(0,0,0,0.5);}
-main{
-    background: #f3efe0;
-    height: 6000px;
-}
+@import "core/context.import.less"; //Sets up the shell of the canvas contextual elements.
 
 
 
-//Color Classes
-.color (@property, @color, @style) {
-    & when (@style = light) {
-        @{property}: lighten(@color, 2.5%);
-    }
-    & when (@style = lighter) {
-        @{property}: lighten(@color, 5%);
-    }
-    & when (@style = lightest) {
-        @{property}: lighten(@color, 7.5%);
-    }
-    & when (@style = dark) {
-        @{property}: darken(@color, 2.5%);
-    }
-    & when (@style = darker) {
-        @{property}: darken(@color, 5%);
-    }
-    & when (@style = darkest) {
-        @{property}: darken(@color, 7.5%);
-    }
-    & when (@style = none) {
-        @{property}: @color;
-    }
-}
+/////////////////////////////////////////////////////////////////
 
 
-//Buttons
-//Button Colors
-.buttonColor(@color){
-    .color(background-color,@color,none);
-    span.notificationsAlert{
-        .color(border-color,@color,none);
-    }
-    &:hover{
-        background-color:lighten(saturate(@color, 10%),2%);
-        //.color(background-color,@color,light);
-        span.notificationsAlert{
-            border-color:lighten(saturate(@color, 10%),2%);
-        }
-    }
-    &:focus{
-        .color(background-color,@color,lighter);
-        span.notificationsAlert{
-            .color(border-color,@color,lighter);
-        }
-    }
-    &:active{
-        .color(background-color,@color,dark);
-        span.notificationsAlert{
-            .color(border-color,@color,dark);
-        }
-    }
-}
+/*
+Canvas Theme Developer Index
+    1. core/context.less
+       Context contains the specifications for the root level page elements.
+       Here contains the functions and styles which are responsibile for:
+       off-canvas elements structure, header sizes and positioning, animating the canvas.
 
-//Text Button Colors
-.textButtonColor(@color){
-    .color(color,@color,none);
-    &:hover, &:focus{
-        .color(color,@color,dark);
-    }
-    &:active{
-        .color(color,@color,darker);
-    }
-}
+/////////////////////////////////////////////////////////////////
 
-//Canvas Needs Help
-/* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
-.no-csstransforms3d @{canvasPush},
-.no-js @{canvasPush} {
-    padding-left: 300px;
-}*/
-
+Thriver Core Styles Developer Index (To be moved out of theme folder)
+    1. core/reset.import.less (Generic Style Reset [http://meyerweb.com/eric/tools/css/reset/])
+    2. core/helpers.import.less
+       Helpers include commonly used styles/mixins for rapid development, such as:
+       shadows, border-radius, gradients, transitions, animations, etc.
