@@ -5,6 +5,7 @@ This file opperates as the theme index. It contains imports to the theme files a
 */
 
 //Imports
+@import "core/options.import.less"; //Site options. This is the main controller for extending the theme.
 @import "core/context.import.less"; //Sets up the shell of the canvas contextual elements.
 
 
@@ -14,7 +15,11 @@ This file opperates as the theme index. It contains imports to the theme files a
 
 /*
 Canvas Theme Developer Index
-    1. core/context.less
+    1. core/options.less
+       Options are used to manage and extend the theme.
+       This file sets things such as: theme options, color scheme, typography etc.
+       
+    2. core/context.less
        Context contains the specifications for the root level page elements.
        Here contains the functions and styles which are responsibile for:
        off-canvas elements structure, header sizes and positioning, animating the canvas.
@@ -26,3 +31,4 @@ Thriver Core Styles Developer Index (To be moved out of theme folder)
     2. core/helpers.import.less
        Helpers include commonly used styles/mixins for rapid development, such as:
        shadows, border-radius, gradients, transitions, animations, etc.
+*/
