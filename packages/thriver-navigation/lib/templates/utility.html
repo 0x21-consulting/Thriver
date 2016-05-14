@@ -45,6 +45,9 @@
                             {{#if title}}
                                 {{title}}
                             {{/if}}
+                            {{#if equals sidebar 'accounts'}}
+                                {{name}}
+                            {{/if}}
                             {{#if this.alerts}}
                                 {{#if show}}
                                     <span class="notificationsAlert fa">&#xf06a;</span>

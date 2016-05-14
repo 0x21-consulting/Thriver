@@ -5,17 +5,17 @@ var sidebars = [{
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
-        content: 'acc' //Content of said sidebar
+        content: 'accountDetails' //Template of said sidebar's content
     },{ 
         id: 'notifications', 
         width: 356, 
         position:'left',
-        content: 'notif' 
+        content: 'notifications' 
     },{ 
-        id: 'signin', 
+        id: 'login', 
         width: 356, 
         position:'left',
-        content: 'signin' 
+        content: 'login' 
     },{ 
         id: 'register', 
         width: 356, 
@@ -45,7 +45,7 @@ var sidebars = [{
         id: 'lang', 
         width: 356, 
         position:'right',
-        content: 'lang' 
+        content: 'languageSelect' 
     }
 ];
 Template.sidebars.item = function() {
@@ -55,7 +55,7 @@ Template.sidebars.item = function() {
 //Utility Nav Items
 var utilityItem = [{ 
         //Notifications
-        title: 'Notifications', //Readable Title
+        //title: 'Notifications', //Readable Title
         icon : '&#xf0f3;', //Icon to be used (http://fontawesome.io/cheatsheet/)
         type: 'sidebar', //Sets Link type. (Accepts: sidebar, external, null) *Required
         sidebar: 'notifications', //which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
@@ -66,7 +66,6 @@ var utilityItem = [{
         //preIcon: '&#xf007;', //If icon has right toggle icon and aside icon
     },{ 
         //Accounts
-        title: '{{name}}', //Renders Logged-in user's name
         icon : '&#xf0da;',
         iconAfter: true,
         preIcon: '&#xf007;',
@@ -79,7 +78,7 @@ var utilityItem = [{
         icon : '&#xf0da;',
         iconAfter: true,
         type: 'sidebar',
-        sidebar: 'signin',
+        sidebar: 'login',
         user: 'inactive'
     },{  
         //Register
@@ -98,12 +97,12 @@ var utilityItem = [{
         user: 'active'
     },{ 
         //Facebook
-        icon : '&#xf099;',
+        icon : '&#xf082;',
         type: 'external',
         url: 'https://www.facebook.com/wcasa'
     },{ 
         //Youtube
-        icon : '&#xf099;',
+        icon : '&#xf167;',
         type: 'external',
         url: 'https://www.youtube.com/user/WCASAVPCC'
     },{ 
