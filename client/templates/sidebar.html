@@ -1,7 +1,7 @@
 <template name="sidebars">
     {{#each item}}
         <section id="{{id}}" class="sidebar" data-width="{{width}}" data-position="{{position}}">
-            {{content}}
+            {{> Template.dynamic template=content}}
         </section>
     {{/each}}
 </template>

@@ -16,6 +16,7 @@ Canvas Animations.
 @header : ~'.mainHeader';
 @utility : ~'.utility';
 @mobileNav : ~'.mobileNav';
+@sidebar : ~'section.sidebar';
 
 //Element Heights
 @utilityH : 36px;
@@ -55,6 +56,10 @@ Canvas Animations.
     @{off} {
         z-index: 0;
         .hidden;
+        @{sidebar}{
+            display: none;
+            &.active{display: block;} //Show active sidebar
+        }
     }
     @{canvasPush} {
         z-index: 1;
