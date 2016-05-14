@@ -1,8 +1,7 @@
 <template name="sidebars">
     {{#each section}}
         <section id="{{id}}" data-width="{{width}}" data-position="{{position}}">
-            <h1>Section {{id}}</h1>
-            <p>Lorem ipsum dalor emu de num.</p>
+            {{content}}
         </section>
     {{/each}}
 </template>
