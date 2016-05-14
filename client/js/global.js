@@ -27,9 +27,10 @@ function toggleCanvas() {
     var toggle = document.querySelectorAll('[data-sidebar]');
     var overlay = document.getElementById('overlay');
     var sidebar = document.querySelectorAll('section.sidebar');
+    var close = document.querySelectorAll('.closeTab');
     var body = document.body;
     //Close open canvas elements if overlay or active li is clicked
-    if(event.target.classList.contains('active') || event.target == overlay){
+    if(event.target.classList.contains('active') || event.target == overlay || event.target == close){
         for (var i = 0, e; e = toggle[i]; i++) { removeClass(e,'active'); } //Clear all active Toggles
         for (var i = 0, e; e = sidebar[i]; i++) { removeClass(e,'active'); } //Clear all active Sidebars
         removeClassByPrefix(body, "canvas"); //Remove all canvas effect classes
@@ -64,7 +65,8 @@ function toggleCanvas() {
 Template.body.events({
     //Canvas Actions
     'click [data-sidebar]': function (event) { toggleCanvas(); },
-    'click .overlay': function (event) { toggleCanvas(); }
+    'click .overlay': function (event) { toggleCanvas(); },
+    'click .closeTab': function (event) { toggleCanvas(); }
 });
 
 
