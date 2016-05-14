@@ -1,7 +1,9 @@
 <template name="sidebars">
     {{#each item}}
-        <section id="{{id}}" class="sidebar" data-width="{{width}}" data-position="{{position}}">
-            {{> Template.dynamic template=content}}
+        <section id="{{id}}" class="sidebar windowHSansUtility" data-width="{{width}}" data-position="{{position}}">
+            <div class="scroll ">
+                {{> Template.dynamic template=content}}
+            </div>
         </section>
     {{/each}}
 </template>

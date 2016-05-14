@@ -69,4 +69,10 @@ Template.body.events({
 });
 
 
+Template.body.onRendered(function () {
+    //Init Custom Scrollbars
+    //SimpleScrollbar.initAll();
+});
+
+
 

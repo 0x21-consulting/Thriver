@@ -23,6 +23,10 @@ Canvas Animations.
 @headerH: 200px;
 @headerFixedH : 50px;
 @headerMobileH : 50px;
+@windowHSansUtility : ~'calc(100% - @{utilityH})';
+
+
+.windowHSansUtility{ height: @windowHSansUtility;}
 
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
@@ -55,6 +59,7 @@ Canvas Animations.
 
     @{off} {
         z-index: 0;
+        top: @utilityH;
         .hidden;
         @{sidebar}{
             display: none;
@@ -103,16 +108,6 @@ Canvas Animations.
     //Places the offCanvas Element on the right while canvasRight is active
     &.canvasRight{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
