@@ -6,12 +6,9 @@
                 {{> Template.dynamic template=template}}
             {{/each}}-->
         </main>
-        <aside class="offCanvas">
-            {{#each sidebars}}
-                {{> Template.dynamic template=sidebar}}
-            {{/each}}
-        </aside>
+        <aside class="offCanvas">{{>sidebars}}</aside>
         <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
+        <!--The below templates need homes-->
         <!--{{> articleNews}} //Article Page Template -->
         <!--{{>help}} //Get Help Modules -->
         <!--{{>alerts}} //Alert Templates -->

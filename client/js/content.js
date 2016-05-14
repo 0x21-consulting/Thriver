@@ -1,4 +1,7 @@
-var sidebar = [
+//This file contains temporary content declarations to eventually be merged into Mongo
+
+//Sidebar elements
+var sidebars = [
     { id: 'accounts', width: 231, position:'left' },
     { id: 'notifications', width: 231, position:'left' },
     { id: 'signin', width: 231, position:'left' },
@@ -9,3 +12,6 @@ var sidebar = [
     { id: 'donate', width: 231, position:'right' },
     { id: 'lang', width: 231, position:'right' }
 ];
+Template.sidebars.section = function() {
+    return sidebars;
+};
