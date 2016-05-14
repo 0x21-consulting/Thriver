@@ -3,29 +3,13 @@
         {{>header}}
         <div class="push">
             <main>
-                <section>
-                    <h1>Main Content</h1>
-                    <p>Lorem Ipsum Dalor</p>
-                </section>
-                <section>
-                    <h1>Main Content</h1>
-                    <p>Lorem Ipsum Dalor</p>
-                </section>
                 <!--{{#each sections}}
                     {{> Template.dynamic template=template}}
                 {{/each}}-->
             </main>
         </div>
-        <aside class="offCanvas">
-            <h2>OFF CANVAS LEFT</h2>
-            <!--{{> accounts}}
-            {{>twitter}}
-            {{>resources}}
-            {{>news}}
-            {{>donate}}
-            {{>languageSelect}}-->
-        </aside>
-        <div class="overlay" id="overlay"></div>
+        <aside class="offCanvas">{{>sidebars}}</aside>
+        <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
         <!--{{> articleNews}} //Article Page Template -->
         <!--{{>help}} //Get Help Modules -->
         <!--{{>alerts}} //Alert Templates -->

@@ -100,15 +100,32 @@ Canvas Animations.
     &.canvasRight{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
 
-//Canvas Animations
 
-@{header}, @{canvasPush}{ 
-    .transition(transform 375ms ease 0ms, opacity 300ms ease 0ms); 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Canvas Animations
+//This requires Animations not transitions
+//@{header}, @{canvasPush}{ .transition(transform 375ms ease 0ms, opacity 300ms ease 0ms); }
 //@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
 //@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-@{offActive}{
+//@{offActive}{
     //@{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
     //@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-}
+//}
 

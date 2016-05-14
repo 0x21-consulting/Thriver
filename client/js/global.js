@@ -32,6 +32,8 @@ function toggleOffCanvas() {
         for (var i = 0, element; element = eachToggle[i]; i++) { removeClass(element,'active'); }
         //Remove all canvas effect classes
         removeClassByPrefix(body, "canvas");
+        //toggle aria-hidden
+        overlay.setAttribute('aria-hidden', 'true');  
     }
 
     // Open Overlay and offCanvas elements if clicking inactive list item
@@ -55,7 +57,9 @@ function toggleOffCanvas() {
         //Remove any currently active sidebar-width effect classes
         removeClassByPrefix(document.body, 'canvasW');
         //Add new sidebar-width effect class
-        addClass(body,'canvasW' + thisSidebarWidth);       
+        addClass(body,'canvasW' + thisSidebarWidth);   
+        //toggle aria-hidden
+        overlay.setAttribute('aria-hidden', 'false');    
     }
 }
 
