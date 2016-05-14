@@ -64,6 +64,7 @@ var utilityItem = [{
         //url: 'wcasa.org', //*required if type=external
         //iconPos: 'right', //default is left
         //preIcon: '&#xf007;', //If icon has right toggle icon and aside icon
+        //position: 'right' //default is left (accepts: 'left', 'right')
     },{ 
         //Accounts
         icon : '&#xf0da;',
@@ -96,51 +97,59 @@ var utilityItem = [{
         type: 'null',
         user: 'active'
     },{ 
-        //Facebook
-        icon : '&#xf082;',
-        type: 'external',
-        url: 'https://www.facebook.com/wcasa'
-    },{ 
-        //Youtube
-        icon : '&#xf167;',
-        type: 'external',
-        url: 'https://www.youtube.com/user/WCASAVPCC'
-    },{ 
-        //Twitter
-        title: 'Twitter',
-        icon : '&#xf099;',
+        //Language
+        icon : '&#xf024;',
         type: 'sidebar',
-        sidebar: 'twitter'
+        sidebar: 'lang',
+        position : 'right'
     },{ 
-        //News
-        title: 'News',
-        icon : '&#xf1ea;',
-        type: 'sidebar',
-        sidebar: 'news'
-    },{ 
-        //Learning Center
-        title: 'Learning Center',
-        icon : '&#xf19c;',
-        type: 'sidebar',
-        sidebar: 'resources'
+        //Get Help
+        title: 'Get Help',
+        type: 'null',
+        icon : '&#xf06a;',
+        position : 'right'
     },{ 
         //Donate
         title: 'Donate',
         icon : '&#xf004;',
         type: 'sidebar',
-        sidebar: 'donate'
-    },{ 
-        //Get Help
-        title: 'Get Help',
-        type: 'null',
-        icon : '&#xf06a;'
-    },{ 
-        //Language
-        title: 'Language',
-        icon : '&#xf024;',
+        sidebar: 'donate',
+        position : 'right'
+    },{
+        //Learning Center
+        title: 'Learning Center',
+        icon : '&#xf19c;',
         type: 'sidebar',
-        sidebar: 'lang'
+        sidebar: 'resources',
+        position : 'right'
+    },{ 
+        //News
+        title: 'News',
+        icon : '&#xf1ea;',
+        type: 'sidebar',
+        sidebar: 'news',
+        position : 'right'
+    },{ 
+        //Twitter
+        title: 'Twitter',
+        icon : '&#xf099;',
+        type: 'sidebar',
+        sidebar: 'twitter',
+        position : 'right'
+    },{ 
+        //Youtube
+        icon : '&#xf167;',
+        type: 'external',
+        url: 'https://www.youtube.com/user/WCASAVPCC',
+        position : 'right'
+    },{ 
+        //Facebook
+        icon : '&#xf082;',
+        type: 'external',
+        url: 'https://www.facebook.com/wcasa',
+        position : 'right'
     }
+
 ];
 Template.utility.item = function() {
     return utilityItem;

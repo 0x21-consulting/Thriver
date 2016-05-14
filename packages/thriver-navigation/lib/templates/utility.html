@@ -3,7 +3,7 @@
         <ul>
             {{#each item}}
                 {{#if equals type 'external'}}
-                    <li class="external">
+                    <li class="external {{#if equals position 'right'}}right{{/if}}">
                         <a href="{{url}}" target="_blank">
                             {{# if preIcon}}
                                 <span class="fa preIcon">{{{preIcon}}}</span>
@@ -18,7 +18,7 @@
                     </li>
                 {{/if}}
                 {{#if equals type 'null'}}
-                    <li class="null">
+                    <li class="null {{#if equals position 'right'}}right{{/if}}">
                         <a href="#">
                             {{# if preIcon}}
                                 <span class="fa preIcon">{{{preIcon}}}</span>
@@ -33,8 +33,8 @@
                     </li>
                 {{/if}}
                 {{#if equals type 'sidebar'}}
-                    <li class="sidebar">
-                        <a href="#{{sidebar}}" class="{{sidebar}} {{#if iconAfter}}iconAfter{{/if}}" data-sidebar="{{sidebar}}">
+                    <li class="sidebar {{#if equals position 'right'}}right{{/if}}">
+                        <a href="#{{sidebar}}" class="{{#if iconAfter}}iconAfter{{/if}}" data-sidebar="{{sidebar}}">
                             {{# if preIcon}}
                                 <span class="fa preIcon">{{{preIcon}}}</span>
                             {{/if}}
