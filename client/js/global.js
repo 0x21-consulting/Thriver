@@ -66,12 +66,8 @@ function toggleOffCanvas() {
 
 Template.body.events({
     //Canvas Actions
-    'click .utilityNav > ul > li[data-sidebar] button': function (event) {
-        toggleOffCanvas();
-    },
-    'click .overlay': function (event) {
-        toggleOffCanvas();
-    }
+    'click .utility > ul > li[data-sidebar] button': function (event) { toggleOffCanvas(); },
+    'click .overlay': function (event) { toggleOffCanvas(); }
 });
 
 
