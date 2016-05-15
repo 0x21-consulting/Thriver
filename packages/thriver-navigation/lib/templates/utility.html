@@ -2,11 +2,12 @@
     <nav class="utility">
         <ul>
             {{#each item}}
-            <li class="{{#if equals position 'right'}}right{{/if}}">
-                <a href="{{#if equals type 'external'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon{{{icon}}}{{/if}} {{#if preIcon}}iconPre{{{icon}}}{{/if}} {{#if iconAfter}}iconPost{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}{{#if equals type 'sidebar'}}{{/if}}" data-sidebar="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" data-active="false">
-                    {{#if title}}{{title}}{{/if}}
-                </a>       
-            </li>     
+                <li class="{{#if equals position 'right'}}right{{/if}}">
+                    <a href="{{#if equals type 'external'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon{{{icon}}}{{/if}} {{#if iconAfter}}iconAfter{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}{{#if equals type 'sidebar'}}{{/if}}" data-sidebar="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" data-active="false">
+                        {{title}}
+                        {{#if equals sidebar 'accounts'}}<i>&#xf007;</i> {{name}}{{/if}}
+                    </a>       
+                </li>     
             {{/each}}    
         </ul>
     </nav>

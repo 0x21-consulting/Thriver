@@ -62,14 +62,12 @@ var utilityItem = [{
         user: 'active', //Set If item should only be active when logged in/out (accepts: 'active','inactive')
         alerts: true //Set to true to add notification element
         //url: 'wcasa.org', //*required if type=external
-        //iconPos: 'right', //default is left
-        //preIcon: '&#xf007;', //If icon has right toggle icon and aside icon
+        //iconAfter: true, //default is false. Will place the icon :after instead of :before
         //position: 'right' //default is left (accepts: 'left', 'right')
     },{ 
         //Accounts
         icon : 'CaretRight',
         iconAfter: true,
-        preIcon: 'User',
         type: 'sidebar',
         sidebar: 'accounts',
         user: 'active'
@@ -93,7 +91,7 @@ var utilityItem = [{
         //Sign Out
         title: 'Sign Out',
         icon : 'CaretRight',
-        iconPos: 'right',
+        iconAfter: true,
         type: 'null',
         user: 'active'
     },{ 
