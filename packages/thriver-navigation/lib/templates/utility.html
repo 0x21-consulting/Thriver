@@ -2,71 +2,12 @@
     <nav class="utility">
         <ul>
             {{#each item}}
-                {{#if equals type 'external'}}
-                    <li class="external {{#if equals position 'right'}}right{{/if}}">
-                        <a href="{{url}}" target="_blank">
-                            {{# if preIcon}}
-                                <span class="fa preIcon">{{{preIcon}}}</span>
-                            {{/if}}
-                            {{#if title}}
-                                {{title}}
-                            {{/if}}
-                            {{#if icon}}
-                                <span class="fa icon">{{{icon}}}</span>
-                            {{/if}}
-                        </a>
-                    </li>
-                {{/if}}
-                {{#if equals type 'null'}}
-                    <li class="null {{#if equals position 'right'}}right{{/if}}">
-                        <a href="#">
-                            {{# if preIcon}}
-                                <span class="fa preIcon">{{{preIcon}}}</span>
-                            {{/if}}
-                            {{#if title}}
-                                {{title}}
-                            {{/if}}
-                            {{#if icon}}
-                                <span class="fa icon">{{{icon}}}</span>
-                            {{/if}}
-                        </a>
-                    </li>
-                {{/if}}
-                {{#if equals type 'sidebar'}}
-                    <li class="sidebar {{#if equals position 'right'}}right{{/if}}">
-                        <a href="#{{sidebar}}" class="{{#if iconAfter}}iconAfter{{/if}}" data-sidebar="{{sidebar}}">
-                            {{# if preIcon}}
-                                <span class="fa preIcon">{{{preIcon}}}</span>
-                            {{/if}}
-                            {{#if icon}}
-                                <span class="fa icon up">{{{icon}}}</span>
-                                <span class="fa icon close">&#xf00d;</span>
-                            {{/if}}
-                            {{#if title}}
-                                {{title}}
-                            {{/if}}
-                            {{#if equals sidebar 'accounts'}}
-                                {{name}}
-                            {{/if}}
-                            {{#if this.alerts}}
-                                {{#if show}}
-                                    <span class="notificationsAlert fa">&#xf06a;</span>
-                                {{/if}}
-                            {{/if}}
-                        </a>
-                    </li>
-                {{/if}}
-            {{/each}}
+            <li class="{{#if equals position 'right'}}right{{/if}}">
+                <a href="{{#if equals type 'external'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon{{{icon}}}{{/if}} {{#if preIcon}}iconPre{{{icon}}}{{/if}} {{#if iconAfter}}iconPost{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}{{#if equals type 'sidebar'}}{{/if}}" data-sidebar="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" data-active="false">
+                    {{#if title}}{{title}}{{/if}}
+                </a>       
+            </li>     
+            {{/each}}    
         </ul>
     </nav>
 </template>
-
-
-<!--
-{{{myHtml}}}
-
-Template.foo.helpers({
-  myHtml() {
-    return '<h1>This H1 will render</h1>';
-  }
-});-->

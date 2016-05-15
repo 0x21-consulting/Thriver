@@ -56,7 +56,7 @@ Template.sidebars.item = function() {
 var utilityItem = [{ 
         //Notifications
         //title: 'Notifications', //Readable Title
-        icon : '&#xf0f3;', //Icon to be used (http://fontawesome.io/cheatsheet/)
+        icon : 'Bell', //Icon class to be applied (see icons.less)
         type: 'sidebar', //Sets Link type. (Accepts: sidebar, external, null) *Required
         sidebar: 'notifications', //which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
         user: 'active', //Set If item should only be active when logged in/out (accepts: 'active','inactive')
@@ -67,16 +67,16 @@ var utilityItem = [{
         //position: 'right' //default is left (accepts: 'left', 'right')
     },{ 
         //Accounts
-        icon : '&#xf0da;',
+        icon : 'CaretRight',
         iconAfter: true,
-        preIcon: '&#xf007;',
+        preIcon: 'User',
         type: 'sidebar',
         sidebar: 'accounts',
         user: 'active'
     },{ 
         //Sign In
         title: 'Sign In',
-        icon : '&#xf0da;',
+        icon : 'CaretRight',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'login',
@@ -84,7 +84,7 @@ var utilityItem = [{
     },{  
         //Register
         title: 'Create an Account',
-        icon : '&#xf0da;',
+        icon : 'CaretRight',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'register',
@@ -92,13 +92,13 @@ var utilityItem = [{
     },{ 
         //Sign Out
         title: 'Sign Out',
-        icon : '&#xf0da;',
+        icon : 'CaretRight',
         iconPos: 'right',
         type: 'null',
         user: 'active'
     },{ 
         //Language
-        icon : '&#xf024;',
+        icon : 'Flag',
         type: 'sidebar',
         sidebar: 'lang',
         position : 'right'
@@ -106,45 +106,45 @@ var utilityItem = [{
         //Get Help
         title: 'Get Help',
         type: 'null',
-        icon : '&#xf06a;',
+        icon : 'Important',
         position : 'right'
     },{ 
         //Donate
         title: 'Donate',
-        icon : '&#xf004;',
+        icon : 'Heart',
         type: 'sidebar',
         sidebar: 'donate',
         position : 'right'
     },{
         //Learning Center
         title: 'Learning Center',
-        icon : '&#xf19c;',
+        icon : 'Institution',
         type: 'sidebar',
         sidebar: 'resources',
         position : 'right'
     },{ 
         //News
         title: 'News',
-        icon : '&#xf1ea;',
+        icon : 'Newspaper',
         type: 'sidebar',
         sidebar: 'news',
         position : 'right'
     },{ 
         //Twitter
         title: 'Twitter',
-        icon : '&#xf099;',
+        icon : 'Twitter',
         type: 'sidebar',
         sidebar: 'twitter',
         position : 'right'
     },{ 
         //Youtube
-        icon : '&#xf167;',
+        icon : 'Youtube',
         type: 'external',
         url: 'https://www.youtube.com/user/WCASAVPCC',
         position : 'right'
     },{ 
         //Facebook
-        icon : '&#xf082;',
+        icon : 'Facebook',
         type: 'external',
         url: 'https://www.facebook.com/wcasa',
         position : 'right'
@@ -154,3 +154,5 @@ var utilityItem = [{
 Template.utility.item = function() {
     return utilityItem;
 };
+
+
