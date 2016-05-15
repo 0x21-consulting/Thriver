@@ -1,8 +1,10 @@
 <template name="sidebars">
     {{#each item}}
         <section id="{{id}}" class="sidebar scrollBox windowHSansUtility" data-width="{{width}}" data-position="{{position}}" data-active="false">
-            <div class="scroll ">
+            <div class="scroll">
+                <a href="#" data-focus="head">Focus Head</a><!--Temp, to be placed in each section-->
                 {{> Template.dynamic template=content}}
+                <button data-focus="reset">close</button>
             </div>
         </section>
     {{/each}}

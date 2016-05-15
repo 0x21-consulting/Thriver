@@ -1,3 +1,4 @@
+
 //Spacebars Helpers
 Template.registerHelper('equals', function (a, b) {
     return a === b;
@@ -23,9 +24,49 @@ function removeClassByPrefix(el, prefix) {
     return el;
 }
 
+
+
+
+
+//Focus Trigger Functions
+//Needs written work, however function events occur flawlessly
+var resetFocus = false;
+var startGlobalFocus = document.getElementById('focus0');
+var endGlobalFocus = document.getElementById('focus0end');
+$("body").on("keydown", function(event) {
+    if(event.keyCode == 9){
+        var active;
+        active = document.activeElement; 
+        if(resetFocus == true){
+            //active.blur();
+            document.getElementById('focus0').focus();
+            resetFocus = false;
+            event.preventDefault();
+
+        } 
+        if(active.getAttribute('id') == 'focus0end'){
+            //alert('end');
+            var sidebarSections = document.querySelectorAll('section.sidebar');
+            for (var i = 0, e; e = sidebarSections[i]; i++) { 
+                if (e.dataset.active == 'true'){
+                    //alert('derp');
+                    //document.getElementById('focus0').focus();
+                    $('#' + e.id + " [data-focus=head]").focus();
+                    event.preventDefault();
+                }
+            }
+        }
+        if(active.dataset.focus == 'reset'){
+            resetFocus = true;
+        }
+    }
+});
+
+
 //Functions
 //Off Canvas Effects
 //event.target function fires on click events of any element containing the data-attribute, "data-sidebar".
+//Note: Focus actions may be too expensive. will need to evaluate.
 function toggleCanvas() {
 
     // Canvas Variables
@@ -34,12 +75,16 @@ function toggleCanvas() {
     var sidebar = document.querySelectorAll('section.sidebar');
     var body = document.body;
 
+    //Deactivate any open focusTraps
+    //focusTrap.deactivate();
+
     //Close open canvas elements if overlay or active li is clicked
     if(event.target.dataset.active == 'true' || event.target == overlay || event.target.classList.contains('closeTab')){
         for (var i = 0, e; e = toggle[i]; i++) { activeSwitch(e,'false'); } //Clear all active Toggles
         for (var i = 0, e; e = sidebar[i]; i++) { activeSwitch(e,'false'); } //Clear all active Sidebars
         removeClassByPrefix(body, "canvas"); //Remove all canvas effect classes
         overlay.setAttribute('aria-hidden', 'true'); //toggle aria-hidden
+        document.getElementById('focus0').focus();
     }
 
     // Open Overlay and offCanvas elements if clicking inactive list item
@@ -54,6 +99,7 @@ function toggleCanvas() {
             activeSwitch(e,'false');; //Clear all active sidebars
             if (e.getAttribute('id') == event.target.dataset.sidebar){ //If Sidebar ID matches toggles' data-sidebar
                 activeSwitch(e,'true'); //Add active class to given sidebar
+                //focusTrap.activate(e); //Pauses Focus to Group
                 addClass(body,'canvasW' + e.dataset.width); //Add new sidebar-width effect class 
                 if(e.dataset.position == 'left'){ // Add/Remove left/right
                     removeClass(body,'canvasRight');
@@ -64,6 +110,8 @@ function toggleCanvas() {
                     body.classList.add('canvasRight');  
                 }
             }
+            $('#' + e.id + " [data-focus=head]").focus();
+            event.preventDefault();
         }
     }
 }
@@ -73,13 +121,5 @@ Template.body.events({
     'click [data-sidebar]': function (event) { toggleCanvas(); },
     'click .overlay': function (event) { toggleCanvas(); },
     'click .closeTab': function (event) { toggleCanvas(); }
+    //'keyup': function (event) { tabAction(); } //This is ideal over jQuery bit above
 });
-
-
-Template.body.onRendered(function () {
-    //Init Custom Scrollbars
-    //SimpleScrollbar.initAll();
-});
-
-
-
