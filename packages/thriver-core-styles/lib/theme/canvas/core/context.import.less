@@ -41,7 +41,6 @@ Canvas Animations.
 
 //Initialize Canvas Width/Height Classes
 .offCanvasWidthInit(@offCanvasWidths; @length);
-.windowHSansUtility{ height: @windowHSansUtility;}
 
 //Canvas Specifications
 @{canvas}{
@@ -61,6 +60,7 @@ Canvas Animations.
         top: @utilityH;
         .hidden;
         @{sidebar}{
+            height: @windowHSansUtility;
             display: none;
             &[aria-hidden="false"]{display: block;} //Show active sidebar
         }
@@ -111,11 +111,16 @@ Canvas Animations.
 
 //Canvas Animations
 //This requires Animations not transitions
-//@{header}, @{canvasPush}{ .transition(transform 375ms ease 0ms, opacity 300ms ease 0ms); }
-//@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
-//@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-//@{offActive}{
-    //@{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-    //@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
-//}
+/*@{header}, @{canvasPush}{ .transition(transform 375ms ease 0ms, opacity 300ms ease 0ms); }
+@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
+@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+@{offActive}{
+    @{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+    @{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+}*/
 
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
+.no-csstransforms3d @{canvasPush},
+.no-js @{canvasPush} {
+    padding-left: 300px;
+}*/

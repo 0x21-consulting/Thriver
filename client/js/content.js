@@ -57,13 +57,13 @@ var utilityItem = [{
         //Notifications
         //title: 'Notifications', //Readable Title
         icon : 'Bell', //Icon class to be applied (see icons.less)
+        //iconAfter: true, //default is false. Will place the icon :after instead of :before
         type: 'sidebar', //Sets Link type. (Accepts: sidebar, external, null) *Required
         sidebar: 'notifications', //which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
+        //position: 'right' //default is left (accepts: 'left', 'right')
         user: 'active', //Set If item should only be active when logged in/out (accepts: 'active','inactive')
         alerts: true //Set to true to add notification element
         //url: 'wcasa.org', //*required if type=external
-        //iconAfter: true, //default is false. Will place the icon :after instead of :before
-        //position: 'right' //default is left (accepts: 'left', 'right')
     },{ 
         //Accounts
         icon : 'CaretRight',

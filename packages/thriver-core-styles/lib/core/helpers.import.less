@@ -4,56 +4,16 @@ These helper classes can be applied to elements for a variety of states.
 This file contains most globlized type helpers.
 */
 
-//visibility
-.visible{visibility: visible;}
-.hidden{visibility: hidden;}
+//Media Queries
+//Width
+@1450: ~"only screen and (max-width: 1450px)";
+@1250: ~"only screen and (max-width: 1250px)";
+@1024: ~"only screen and (max-width: 1023px)";
+@mobile: ~"only screen and (max-width: 768px)";
+//Height
+@air: ~"only screen and (max-height: 767px)";
 
-.noScroll{
-    overflow: hidden;
-}
-
-//Opacity
-.opacity(@amt){
-    zoom: 1;
-    filter: ~'alpha(opacity='100*@amt~')';
-    opacity: @amt;
-}
-
-.borderRadius(@amt){
-  -webkit-border-radius: @amt;
-  -moz-border-radius: @amt;
-  border-radius: @amt;
-}
-
-.userSelect(@value){
-    -webkit-user-select:@value;
-    -moz-user-select:@value;
-    -ms-user-select: @value;
-}
-
-.placeholderColor(@color){
-    ::-webkit-input-placeholder {color:@color;}
-    :-moz-placeholder {color:@color;}
-    ::-moz-placeholder {color:@color;}
-    :-ms-input-placeholder {color:@color;}
-}
-
-.columns(@width,@count,@gap){
-    -webkit-columns: @width @count;
-    -moz-columns: @width @count;
-    columns: @width @count;
-    -webkit-column-gap: @gap;
-    -moz-column-gap: @gap;
-    column-gap: @gap;
-}
-.avoidColumnSplit{
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside:avoid;
-    -moz-page-break-inside:avoid;
-    page-break-inside: avoid;
-    break-inside: avoid-column;
-}
-
+//Clearfix
 .clearfix{
     &:after {
       visibility: hidden;
@@ -65,15 +25,58 @@ This file contains most globlized type helpers.
     }
 }
 
-//Media Queries
-@1450: ~"only screen and (max-width: 1450px)";
-@1250: ~"only screen and (max-width: 1250px)";
-@1024: ~"only screen and (max-width: 1023px)";
-@mobile: ~"only screen and (max-width: 768px)";
+//State adjustment Classes
+.visible{visibility: visible;}
+.hidden{visibility: hidden;}
+.noScroll{overflow: hidden;}
 
-//Height
-@air: ~"only screen and (max-height: 767px)";
+//Opacity
+.opacity(@amt){
+    zoom: 1;
+    filter: ~'alpha(opacity='100*@amt~')';
+    opacity: @amt;
+}
 
+//Border Radius
+.borderRadius(@amt){
+  -webkit-border-radius: @amt;
+  -moz-border-radius: @amt;
+  border-radius: @amt;
+}
+
+//User Select (Unknown purpose)
+.userSelect(@value){
+    -webkit-user-select:@value;
+    -moz-user-select:@value;
+    -ms-user-select: @value;
+}
+
+//Placeholder Color
+.placeholderColor(@color){
+    ::-webkit-input-placeholder {color:@color;}
+    :-moz-placeholder {color:@color;}
+    ::-moz-placeholder {color:@color;}
+    :-ms-input-placeholder {color:@color;}
+}
+
+//Columns
+.columns(@width,@count,@gap){
+    -webkit-columns: @width @count;
+    -moz-columns: @width @count;
+    columns: @width @count;
+    -webkit-column-gap: @gap;
+    -moz-column-gap: @gap;
+    column-gap: @gap;
+}
+
+//Column helper class
+.avoidColumnSplit{
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside:avoid;
+    -moz-page-break-inside:avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
 
 //Transforms
 .transform(@x){
@@ -129,8 +132,7 @@ This file contains most globlized type helpers.
     }
 }
 
-
-//Mixins
+//Box Shadows (Needs improvement)
 .boxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
     -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
     -moz-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
@@ -141,36 +143,16 @@ This file contains most globlized type helpers.
     -moz-box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
     box-shadow: inset @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);
 }
-
-//Definitions
 .shadow(@type){
-    & when (@type = far){
-        .boxShadow(0px,0px,20px,-3px,0.2);
-    }
-    & when (@type = closeInset){
-        .insetBoxShadow(0px,0px,10px,0px,0.5);
-    }
-    & when (@type = close){
-        .boxShadow(0px,0px,5px,0px,0.3);
-    }
-    & when (@type = closeLeft){
-        .boxShadow(-5px,0px,6px,-3px,0.2);
-    }
-    & when (@type = closeRight){
-        .boxShadow(5px,0px,6px,-3px,0.2);
-    }
-    & when (@type = closeDown){
-        .boxShadow(0px,1px,3px,0px,0.3);
-    }
-    & when (@type = closeUp){
-        .boxShadow(0px,-1px,3px,0px,0.3);
-    }
-    & when (@type = middleUp){
-        .boxShadow(0px,-4px,5px,1px,0.3);
-    }
+    & when (@type = far){ .boxShadow(0px,0px,20px,-3px,0.2); }
+    & when (@type = closeInset){ .insetBoxShadow(0px,0px,10px,0px,0.5); }
+    & when (@type = close){ .boxShadow(0px,0px,5px,0px,0.3); }
+    & when (@type = closeLeft){ .boxShadow(-5px,0px,6px,-3px,0.2); }
+    & when (@type = closeRight){ .boxShadow(5px,0px,6px,-3px,0.2); }
+    & when (@type = closeDown){ .boxShadow(0px,1px,3px,0px,0.3); }
+    & when (@type = closeUp){ .boxShadow(0px,-1px,3px,0px,0.3); }
+    & when (@type = middleUp){ .boxShadow(0px,-4px,5px,1px,0.3); }
 }
-
-//Hard Shadow
 .hardShadow(@width,@height,@left,@marginTop){
     &:after{
         z-index: -1;
@@ -188,76 +170,46 @@ This file contains most globlized type helpers.
         width: @width;
     }
 }
-
-//Deactivate Shadow
 .shadowNone{
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
 }
 
-
-
-
-//Color Classes
+//Color Classes (Pending Deletion)
 .color (@property, @color, @style) {
-    & when (@style = light) {
-        @{property}: lighten(@color, 2.5%);
-    }
-    & when (@style = lighter) {
-        @{property}: lighten(@color, 5%);
-    }
-    & when (@style = lightest) {
-        @{property}: lighten(@color, 7.5%);
-    }
-    & when (@style = dark) {
-        @{property}: darken(@color, 2.5%);
-    }
-    & when (@style = darker) {
-        @{property}: darken(@color, 5%);
-    }
-    & when (@style = darkest) {
-        @{property}: darken(@color, 7.5%);
-    }
-    & when (@style = none) {
-        @{property}: @color;
-    }
+    & when (@style = light) { @{property}: lighten(@color, 2.5%); }
+    & when (@style = lighter) { @{property}: lighten(@color, 5%); }
+    & when (@style = lightest) { @{property}: lighten(@color, 7.5%); }
+    & when (@style = dark) { @{property}: darken(@color, 2.5%); }
+    & when (@style = darker) { @{property}: darken(@color, 5%); }
+    & when (@style = darkest) { @{property}: darken(@color, 7.5%); }
+    & when (@style = none) { @{property}: @color; }
 }
+
 //Buttons
 //Button Colors
 .buttonColor(@color){
     .color(background-color,@color,none);
-    span.notificationsAlert{
-        .color(border-color,@color,none);
-    }
+    span.notificationsAlert{ .color(border-color,@color,none); }
     &:hover{
         background-color:lighten(saturate(@color, 10%),2%);
         //.color(background-color,@color,light);
-        span.notificationsAlert{
-            border-color:lighten(saturate(@color, 10%),2%);
-        }
+        span.notificationsAlert{ border-color:lighten(saturate(@color, 10%),2%); }
     }
     &:focus{
         .color(background-color,@color,lighter);
-        span.notificationsAlert{
-            .color(border-color,@color,lighter);
-        }
+        span.notificationsAlert{ .color(border-color,@color,lighter); }
     }
     &:active{
         .color(background-color,@color,dark);
-        span.notificationsAlert{
-            .color(border-color,@color,dark);
-        }
+        span.notificationsAlert{ .color(border-color,@color,dark); }
     }
 }
 
 //Text Button Colors
 .textButtonColor(@color){
     .color(color,@color,none);
-    &:hover, &:focus{
-        .color(color,@color,dark);
-    }
-    &:active{
-        .color(color,@color,darker);
-    }
+    &:hover, &:focus{ .color(color,@color,dark); }
+    &:active{ .color(color,@color,darker); }
 }

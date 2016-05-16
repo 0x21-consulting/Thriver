@@ -1,6 +1,6 @@
 <template name="sidebars">
     {{#each item}}
-        <section id="{{id}}" class="sidebar scrollBox windowHSansUtility" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
+        <section id="{{id}}" class="sidebar scrollBox" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
             <div class="scroll">
                 {{> Template.dynamic template=content}}
                 <button data-canvas-event="close">close</button>

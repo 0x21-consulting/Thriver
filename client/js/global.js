@@ -158,6 +158,6 @@ Template.body.events({
     //Canvas Actions
     'click [aria-controls]': function (event) { toggleCanvas(); },
     'click .overlay': function (event) { toggleCanvas(); },
-    'click .closeTab': function (event) { toggleCanvas(); }
+    'click [data-canvas-event="close"]': function (event) { toggleCanvas(); }
     //'keyup': function (event) { tabAction(); } //This is ideal over jQuery bit above
 });
