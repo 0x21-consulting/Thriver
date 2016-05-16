@@ -14,14 +14,12 @@ function removeClass(e, cls){
     e.classList.remove(cls);
 }
 
-
 //Remove Class (by Prefix)
 function removeClassByPrefix(e, prefix) {
     var regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
     e.className = e.className.replace(regx, '');
     return e;
 }
-
 
 function hidden(e,state){
     if (state == false){
@@ -121,6 +119,47 @@ $("body").on("keydown", function(event) {
         }
 
 */
+var resetFocus = false;
+var focusToGroup = false;
+var topFocus = false;
+//Needs to work if a user focuses last or first element and then makes move.
+//This only works if the tab key alone is being used.
+$("body").on("keydown", function(event) {
+    if(event.keyCode == 9){
+        var active;
+        active = document.activeElement; 
+        if($(active).is('#utility li:last-child a')){ focusToGroup = true; }
+        if($(active).is("[data-canvas-event='close']")){ resetFocus = true; }
+        if($(active).is("[data-focus='head']")){ topFocus = true; }
+        if(!event.shiftKey){
+            if(resetFocus == true){
+                //$("[data-focus=global] :focusable:first-of-type").focus();
+                alert('go to top of global.');
+                resetFocus = false;
+                event.preventDefault();
+            } 
+            if(focusToGroup == true){
+                //$("[data-focus=group][data-active=true] :focusable:first-of-type").focus();
+                alert('go to top of open sidebar');
+                focusToGroup = false;
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+        }
+        if(event.shiftKey){
+            if(topFocus == true){
+                //$("[data-focus=global] :focusable:first-of-type").focus();
+                alert('go back to end of utility nav');
+                topFocus = false;
+                event.preventDefault();
+            }             
+            //if($(active).is('#utility li:first-child a')){ focusToGroup = true; }
+            //if($(active).is("[data-canvas-event='close']")){ resetFocus = true; }
+        }
+    }
+});
+
 
 function clearCanvas(){
     document.body.classList.remove('noScroll');
