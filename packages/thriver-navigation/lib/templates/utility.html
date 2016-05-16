@@ -1,10 +1,10 @@
 <template name="utility">
     <!--Need to improve condition for controlling focus IDs-->
-    <nav class="utility" data-focus="global" tab-index="-1" id="utility">
+    <nav class="utility" data-focus="global">
         <ul>
             {{#each item}}
                 <li class="{{#if equals position 'right'}}right{{/if}}">
-                    <a id="{{#if equals sidebar 'notifications'}}focus0{{/if}}{{#if equals icon 'Facebook'}}focus0end{{/if}}" href="{{#if equals type 'external'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon{{{icon}}}{{/if}} {{#if iconAfter}}iconAfter{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}{{#if equals type 'sidebar'}}{{/if}}" data-sidebar="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" data-active="false">
+                    <a id="{{#if equals sidebar 'notifications'}}focus0{{/if}}{{#if equals icon 'Facebook'}}focus0end{{/if}}" href="{{#if equals type 'external'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon{{{icon}}}{{/if}} {{#if iconAfter}}iconAfter{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" data-sidebar="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" data-active="false" aria-controls="{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}" aria-expanded="false">
                         {{title}}
                         {{#if equals sidebar 'accounts'}}<i>&#xf007;</i> {{name}}{{/if}}
                     </a>       

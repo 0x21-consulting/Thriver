@@ -11,7 +11,7 @@ Canvas Animations.
 @canvas : ~'.canvas';
 @canvasPush : ~'main';
 @off : ~'.offCanvas';
-@offActive : ~'.canvasActive';
+@offActive : ~'[data-canvas-state=open]';
 @overlay : ~'.overlay';
 @header : ~'.mainHeader';
 @utility : ~'.utility';
@@ -25,24 +25,23 @@ Canvas Animations.
 @headerMobileH : 50px;
 @windowHSansUtility : ~'calc(100% - @{utilityH})';
 
-
-.windowHSansUtility{ height: @windowHSansUtility;}
-
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
 .offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
     .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
     @width : extract(@offCanvasWidths, @index);
-    .canvasW@{width} {
+    .canvas[data-canvas-width='@{width}'] {
         @{off}{ width:~"@{width}px"; }
         &@{offActive}{
-            &.canvasLeft{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));} }
-            &.canvasRight{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"-@{width}px", 0, 0));} }
+            &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));} }
+            &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"-@{width}px", 0, 0));} }
         }
     }
 }
-//Initialize Canvas Width Classes
+
+//Initialize Canvas Width/Height Classes
 .offCanvasWidthInit(@offCanvasWidths; @length);
+.windowHSansUtility{ height: @windowHSansUtility;}
 
 //Canvas Specifications
 @{canvas}{
@@ -101,22 +100,14 @@ Canvas Animations.
 }
 
 //Active Canvas
+//Body is given class noScroll, pausing scroller on body (helpers.less)
 @{offActive}{
     overflow: hidden;
     @{overlay}{ .opacity(1); }
     @{off}{ .visible; }
     //Places the offCanvas Element on the right while canvasRight is active
-    &.canvasRight{ @{off}, @{overlay}{ right: 0; left: initial; } }
+    &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
-
-
-
-
-
-
-
-
-
 
 //Canvas Animations
 //This requires Animations not transitions
