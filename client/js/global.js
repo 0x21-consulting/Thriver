@@ -40,127 +40,64 @@ function active(e,state){
 
 
 
-//Focus Trigger Functions
-//Needs written work, however function events occur flawlessly
-/*var resetFocus = false;
-var startGlobalFocus = document.getElementById('focus0');
-var endGlobalFocus = document.getElementById('focus0end');
-$("body").on("keydown", function(event) {
-    if(event.keyCode == 9){
-        var active;
-        active = document.activeElement; 
-        if(resetFocus == true){
-            //active.blur();
-            document.getElementById('focus0').focus();
-            resetFocus = false;
-            event.preventDefault();
-
-        } 
-        if(active.getAttribute('id') == 'focus0end'){
-            //alert('end');
-            var sidebarSections = document.querySelectorAll('section.sidebar');
-            for (var i = 0, e; e = sidebarSections[i]; i++) { 
-                if (e.dataset.active == 'true'){
-                    //alert('derp');
-                    //document.getElementById('focus0').focus();
-                    $('#' + e.id + " [data-focus=head]").focus();
-                    event.preventDefault();
-                }
-            }
-        }
-        if(active.dataset.focus == 'reset'){
-            resetFocus = true;
-        }
-    }
-});*/
-
-/*
-focusableEls = 'a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
-nonFocusableEls '[tabindex=-1], [disabled], :hidden';
-focusable = $(focusableEls:not(nonFocusableEls));
-focusGroup= $()
-
-focusGroups = querySelectorAll('[data-focus]');
-for (var i = 0, e; e = focusGroups[i]; i++) {
-    e.querySelectorAll(this.id + " > .foo");
-
-for (var i = 0, e; e = focusable[i]; i++) { 
-//Focus Trigger Functions
-//The selector, ":focusable" is derivative of the library: focusable.js
-var resetFocus = false;
-var focusToGroup = false;
-$("body").on("keydown", function(event) {
-    if(event.keyCode == 9){
-        var active;
-        active = document.activeElement; 
-        if(resetFocus == true){
-            $("[data-focus=global] :focusable:first-of-type").focus();
-            resetFocus = false;
-            event.preventDefault();
-        } 
-        if(focusToGroup == true){
-            $("[data-focus=group][data-active=true] :focusable:first-of-type").focus();
-            focusToGroup = false;
-            event.preventDefault();
-        }
-        if(active == $("[data-focus=global] :focusable:last-of-type")){ focusToGroup = true; }
-        if(active == $("[data-focus=group] :focusable:last-of-type")){ resetFocus = true; }
-    }
-});
 
 
+function currentFocusGroup(){
+    var focusable ='a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
+    var globalFocusGroup = $('[data-focus="global"]').find(focusable);
+    var focusGlobalElFirst = globalFocusGroup[0];
+    var focusGlobalElLast = globalFocusGroup[globalFocusGroup.length-1];
+    var activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(focusable);
+    var focusGroupElFirst = activeFocusGroup[0];
+    var focusGroupElLast = activeFocusGroup[activeFocusGroup.length - 1];
+    console.log(focusGroupElFirst);
+    console.log(focusGroupElLast);
+    console.log(focusGlobalElFirst);
+    console.log(focusGlobalElLast);
+}
+currentFocusGroup();
 
-        var sidebarSections = document.querySelectorAll('section.sidebar');
-        for (var i = 0, e; e = sidebarSections[i]; i++) { 
-            if (e.dataset.active == 'true'){
-                $('#' + e.id + " [data-focus=group] :focusable:first-of-type").focus();
-                event.preventDefault();
-            }
-        }
 
-*/
+//Focus Groups
 var resetFocus = false;
 var focusToGroup = false;
 var topFocus = false;
-//Needs to work if a user focuses last or first element and then makes move.
 //This only works if the tab key alone is being used.
 $("body").on("keydown", function(event) {
     if(event.keyCode == 9){
         var active;
         active = document.activeElement; 
-        if($(active).is('#utility li:last-child a')){ focusToGroup = true; }
-        if($(active).is("[data-canvas-event='close']")){ resetFocus = true; }
-        if($(active).is("[data-focus='head']")){ topFocus = true; }
+        console.log(active);
+        if($(active).is(FocusGlobalElLast)){ focusToGroup = true; } // :focusable
+        if($(active).is(FocusGroupElLast)){ resetFocus = true; } // :focusable
+        if($(active).is(FocusGroupElFirst)){ topFocus = true; } // :focusable
         if(!event.shiftKey){
             if(resetFocus == true){
-                //$("[data-focus=global] :focusable:first-of-type").focus();
+                FocusGlobalElFirst.focus();
                 alert('go to top of global.');
                 resetFocus = false;
                 event.preventDefault();
             } 
             if(focusToGroup == true){
-                //$("[data-focus=group][data-active=true] :focusable:first-of-type").focus();
+                focusGroupElFirst.focus();
                 alert('go to top of open sidebar');
                 focusToGroup = false;
                 event.preventDefault();
-                event.stopPropagation();
-                return false;
             }
         }
         if(event.shiftKey){
             if(topFocus == true){
-                //$("[data-focus=global] :focusable:first-of-type").focus();
+                FocusGlobalElLast.focus();
                 alert('go back to end of utility nav');
                 topFocus = false;
                 event.preventDefault();
-            }             
-            //if($(active).is('#utility li:first-child a')){ focusToGroup = true; }
-            //if($(active).is("[data-canvas-event='close']")){ resetFocus = true; }
+            }
         }
     }
 });
 
 
+//Off Canvas Effects
 function clearCanvas(){
     document.body.classList.remove('noScroll');
     var canvas = document.getElementById('canvas');
@@ -168,11 +105,8 @@ function clearCanvas(){
     canvas.setAttribute('data-canvas-state','closed');
     canvas.setAttribute('data-canvas-width','');
 }
-
-//Off Canvas Effects
 //event.target function fires on click events of any element containing the data-attribute, "data-sidebar".
 function toggleCanvas() {
-
     // Canvas Variables
     var toggle = document.querySelectorAll('[aria-controls]');
     var overlay = document.getElementById('overlay');
@@ -210,6 +144,7 @@ function toggleCanvas() {
             event.preventDefault();
         }
     }
+    currentFocusGroup(); //Recalculate live focus areas
 }
 
 Template.body.events({
