@@ -1,3 +1,4 @@
+//////// Helpers ////////
 
 //Spacebars Helpers
 Template.registerHelper('equals', function (a, b) {
@@ -38,6 +39,10 @@ function active(e,state){
 }
 
 
+//////// Systems ////////
+
+///// Focus Groups
+// Focusable Variables
 var focusable ='a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
 var globalFocusGroup = $('[data-focus="global"]').find(focusable);
 var focusGlobalElFirst = globalFocusGroup[0];
@@ -62,8 +67,7 @@ function currentFocusGroup(){
 }
 currentFocusGroup();
 
-
-//Focus Groups
+//Focus Groups Events
 var resetFocus = false;
 var focusToGroup = false;
 var topFocus = false;
@@ -102,7 +106,8 @@ $("body").on("keydown", function(event) {
 });
 
 
-//Off Canvas Effects
+//// Canvas States
+
 function clearCanvas(){
     document.body.classList.remove('noScroll');
     var canvas = document.getElementById('canvas');
@@ -140,7 +145,6 @@ function toggleCanvas() {
             hidden(e,true); //Clear all active sidebars
             if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
                 hidden(e,false); //Add active class to given sidebar
-                //focusTrap.activate(e); //Pauses Focus to Group
                 canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class 
                 if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
                 if(e.dataset.position == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
