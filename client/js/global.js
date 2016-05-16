@@ -38,18 +38,23 @@ function active(e,state){
 }
 
 
+var focusable ='a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
+var globalFocusGroup = $('[data-focus="global"]').find(focusable);
+var focusGlobalElFirst = globalFocusGroup[0];
+var focusGlobalElLast = globalFocusGroup[globalFocusGroup.length-1];
+var activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(focusable);
+var focusGroupElFirst = activeFocusGroup[0];
+var focusGroupElLast = activeFocusGroup[activeFocusGroup.length - 1];
 
-
-
-
+//Redundant with above
 function currentFocusGroup(){
-    var focusable ='a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
-    var globalFocusGroup = $('[data-focus="global"]').find(focusable);
-    var focusGlobalElFirst = globalFocusGroup[0];
-    var focusGlobalElLast = globalFocusGroup[globalFocusGroup.length-1];
-    var activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(focusable);
-    var focusGroupElFirst = activeFocusGroup[0];
-    var focusGroupElLast = activeFocusGroup[activeFocusGroup.length - 1];
+    focusable ='a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
+    globalFocusGroup = $('[data-focus="global"]').find(focusable);
+    focusGlobalElFirst = globalFocusGroup[0];
+    focusGlobalElLast = globalFocusGroup[globalFocusGroup.length-1];
+    activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(focusable);
+    focusGroupElFirst = activeFocusGroup[0];
+    focusGroupElLast = activeFocusGroup[activeFocusGroup.length - 1];
     console.log(focusGroupElFirst);
     console.log(focusGroupElLast);
     console.log(focusGlobalElFirst);
@@ -68,27 +73,27 @@ $("body").on("keydown", function(event) {
         var active;
         active = document.activeElement; 
         console.log(active);
-        if($(active).is(FocusGlobalElLast)){ focusToGroup = true; } // :focusable
-        if($(active).is(FocusGroupElLast)){ resetFocus = true; } // :focusable
-        if($(active).is(FocusGroupElFirst)){ topFocus = true; } // :focusable
+        if($(active).is(focusGroupElLast)){ resetFocus = true; } // :focusable
+        if($(active).is(focusGlobalElLast)){ focusToGroup = true; } // :focusable
+        if($(active).is(focusGroupElFirst)){ topFocus = true; } // :focusable
         if(!event.shiftKey){
+            topFocus = false;
             if(resetFocus == true){
-                FocusGlobalElFirst.focus();
-                alert('go to top of global.');
+                focusGlobalElFirst.focus();
                 resetFocus = false;
                 event.preventDefault();
             } 
             if(focusToGroup == true){
                 focusGroupElFirst.focus();
-                alert('go to top of open sidebar');
                 focusToGroup = false;
                 event.preventDefault();
             }
         }
         if(event.shiftKey){
+            resetFocus = false;
+            focusToGroup = false;
             if(topFocus == true){
-                FocusGlobalElLast.focus();
-                alert('go back to end of utility nav');
+                focusGlobalElLast.focus();
                 topFocus = false;
                 event.preventDefault();
             }
@@ -119,7 +124,7 @@ function toggleCanvas() {
         for (var i = 0, e; e = sidebar[i]; i++) { hidden(e,true); } //Clear all active Sidebars
         clearCanvas(); //Remove all canvas effect classes
         hidden(overlay,true);
-        //NEED TO FOCUS: document.getElementById('focus0').focus();
+        focusGlobalElFirst.focus();
     }
 
     // Open Overlay and offCanvas elements if clicking inactive list item
@@ -140,9 +145,11 @@ function toggleCanvas() {
                 if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
                 if(e.dataset.position == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
             }
-            //NEED TO FOCUS: $('#' + e.id + " [data-focus=head]").focus();
+            //focusGroupElFirst.focus();
             event.preventDefault();
         }
+        currentFocusGroup(); //Recalculate live focus areas
+        focusGroupElFirst.focus();
     }
     currentFocusGroup(); //Recalculate live focus areas
 }
