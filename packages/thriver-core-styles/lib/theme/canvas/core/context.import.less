@@ -62,7 +62,7 @@ Canvas Animations.
         .hidden;
         @{sidebar}{
             display: none;
-            &[data-active="true"]{display: block;} //Show active sidebar
+            &[aria-hidden="false"]{display: block;} //Show active sidebar
         }
     }
     @{canvasPush} {

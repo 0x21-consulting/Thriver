@@ -1,6 +1,6 @@
 <template name="sidebars">
     {{#each item}}
-        <section id="{{id}}" class="sidebar scrollBox windowHSansUtility" data-width="{{width}}" data-position="{{position}}" data-focus="group" data-hidden="true">
+        <section id="{{id}}" class="sidebar scrollBox windowHSansUtility" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
             <div class="scroll">
                 <a href="#" data-focus="head">Focus Head</a><!--Temp, to be placed in each section-->
                 {{> Template.dynamic template=content}}

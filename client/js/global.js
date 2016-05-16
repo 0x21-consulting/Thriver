@@ -26,19 +26,15 @@ function removeClassByPrefix(e, prefix) {
 function hidden(e,state){
     if (state == false){
         e.setAttribute('aria-hidden', 'false');
-        e.dataset.hidden = 'false';
     } else{
-        e.setAttribute('aria-hidden', 'true');
-        e.dataset.hidden = 'true';       
+        e.setAttribute('aria-hidden', 'true');      
     }
 }
 
 function active(e,state){
     if(state == true){
-        e.dataset.active = 'true';
         e.setAttribute('aria-expanded','true');
     } else{
-        e.dataset.active = 'false';
         e.setAttribute('aria-expanded','false');        
     }
 }
@@ -145,9 +141,9 @@ function toggleCanvas() {
     var canvas = document.getElementById('canvas');
 
     //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
-    if(event.target.dataset.active == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
-        for (var i = 0, e; e = toggle[i]; i++) { active(e,false); } //Clear all active Toggles
-        for (var i = 0, e; e = sidebar[i]; i++) { active(e,false); } //Clear all active Sidebars
+    if(event.target.getAttribute('aria-expanded') == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
+        for (var i = 0, e; e = toggle[i]; i++) { active(e,false); } //Remove current toggle active states
+        for (var i = 0, e; e = sidebar[i]; i++) { hidden(e,true); } //Clear all active Sidebars
         clearCanvas(); //Remove all canvas effect classes
         hidden(overlay,true);
         //NEED TO FOCUS: document.getElementById('focus0').focus();
@@ -163,9 +159,9 @@ function toggleCanvas() {
         active(event.target,true); //Add active class to clicked element
         //Sets values based on the parameters of the current sidebar
         for (var i = 0, e; e = sidebar[i]; i++) {
-            active(e,false);; //Clear all active sidebars
+            hidden(e,true); //Clear all active sidebars
             if (e.getAttribute('id') == event.target.dataset.sidebar){ //If Sidebar ID matches toggles' data-sidebar
-                active(e,true); //Add active class to given sidebar
+                hidden(e,false); //Add active class to given sidebar
                 //focusTrap.activate(e); //Pauses Focus to Group
                 canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class 
                 if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
