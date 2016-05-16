@@ -60,10 +60,6 @@ function currentFocusGroup(){
     activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(focusable);
     focusGroupElFirst = activeFocusGroup[0];
     focusGroupElLast = activeFocusGroup[activeFocusGroup.length - 1];
-    console.log(focusGroupElFirst);
-    console.log(focusGroupElLast);
-    console.log(focusGlobalElFirst);
-    console.log(focusGlobalElLast);
 }
 currentFocusGroup();
 
