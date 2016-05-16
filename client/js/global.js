@@ -135,7 +135,7 @@ function clearCanvas(){
 function toggleCanvas() {
 
     // Canvas Variables
-    var toggle = document.querySelectorAll('[data-sidebar]');
+    var toggle = document.querySelectorAll('[aria-controls]');
     var overlay = document.getElementById('overlay');
     var sidebar = document.querySelectorAll('section.sidebar');
     var canvas = document.getElementById('canvas');
@@ -150,7 +150,7 @@ function toggleCanvas() {
     }
 
     // Open Overlay and offCanvas elements if clicking inactive list item
-    else if(event.target.hasAttribute('data-sidebar') && event.target.dataset.active == 'false'){
+    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
         clearCanvas();
         document.body.classList.add('noScroll');
         canvas.setAttribute('data-canvas-state','open'); //Add master canvas effect class
@@ -160,7 +160,7 @@ function toggleCanvas() {
         //Sets values based on the parameters of the current sidebar
         for (var i = 0, e; e = sidebar[i]; i++) {
             hidden(e,true); //Clear all active sidebars
-            if (e.getAttribute('id') == event.target.dataset.sidebar){ //If Sidebar ID matches toggles' data-sidebar
+            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
                 hidden(e,false); //Add active class to given sidebar
                 //focusTrap.activate(e); //Pauses Focus to Group
                 canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class 
@@ -175,7 +175,7 @@ function toggleCanvas() {
 
 Template.body.events({
     //Canvas Actions
-    'click [data-sidebar]': function (event) { toggleCanvas(); },
+    'click [aria-controls]': function (event) { toggleCanvas(); },
     'click .overlay': function (event) { toggleCanvas(); },
     'click .closeTab': function (event) { toggleCanvas(); }
     //'keyup': function (event) { tabAction(); } //This is ideal over jQuery bit above
