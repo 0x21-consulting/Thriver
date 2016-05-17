@@ -123,7 +123,8 @@ var utilityItem = [{
     },{ 
         //Get Help
         title: 'Get Help',
-        type: 'null',
+        type: 'internal',
+        targetId: 'providers',
         icon : 'Important',
         position : 'right',
         more: 'help'
