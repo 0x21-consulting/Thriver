@@ -114,7 +114,7 @@ function clearCanvas(){
 //event.target function fires on click events of any element containing the data-attribute, "data-sidebar".
 function toggleCanvas() {
     // Canvas Variables
-    var toggle = document.querySelectorAll('[aria-controls]');
+    var toggle = document.querySelectorAll('[aria-controls][data-toggle=canvas]');
     var overlay = document.getElementById('overlay');
     var sidebar = document.querySelectorAll('section.sidebar');
     var canvas = document.getElementById('canvas');
@@ -154,10 +154,37 @@ function toggleCanvas() {
     currentFocusGroup(); //Recalculate live focus areas
 }
 
+
+//// Tabs
+function toggleTabs(){
+    // Tabs Variables
+    var toggle = document.querySelectorAll('[aria-controls][data-toggle=tabs]');
+    var content = document.querySelectorAll('div.tabs > [aria-hidden]');
+    if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
+        for (var i = 0, e; e = toggle[i]; i++) { active(e,false); }   
+        active(event.target, true);
+        for (var i = 0, e; e = content[i]; i++) {
+            hidden(e,true); //Clear all active content
+            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
+                hidden(e,false); //Add active class to given sidebar
+            }
+        }        
+    }
+    //var content = document.querySelectorAll();
+
+
+}
+
+
+
+
 Template.body.events({
     //Canvas Actions
-    'click [aria-controls]': function (event) { toggleCanvas(); },
+    'click [aria-controls][data-toggle=canvas]': function (event) { toggleCanvas(); },
     'click .overlay': function (event) { toggleCanvas(); },
-    'click [data-canvas-event="close"]': function (event) { toggleCanvas(); }
+    'click [data-canvas-event="close"]': function (event) { toggleCanvas(); },
     //'keyup': function (event) { tabAction(); } //This is ideal over jQuery bit above
+
+    //Tabs
+    'click [data-toggle=tabs]': function (event) { toggleTabs(); }
 });

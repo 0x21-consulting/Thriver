@@ -2,6 +2,15 @@
     {{#each item}}
         <section id="{{id}}" class="sidebar scrollBox" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
             <div class="scroll">
+                <header><h1>Header</h1></header>
+                <!--if tabs: 
+                    <menu class=tabs>
+                    <div class=tabs>
+                else{
+                    content
+                }
+
+                -->
                 {{> Template.dynamic template=content}}
                 <button data-canvas-event="close">close</button>
             </div>
