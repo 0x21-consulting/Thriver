@@ -118,6 +118,7 @@ function toggleCanvas() {
     var overlay = document.getElementById('overlay');
     var sidebar = document.querySelectorAll('section.sidebar');
     var canvas = document.getElementById('canvas');
+    var main = document.getElementById('main');
 
     //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
     if(event.target.getAttribute('aria-expanded') == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
@@ -125,12 +126,14 @@ function toggleCanvas() {
         for (var i = 0, e; e = sidebar[i]; i++) { hidden(e,true); } //Clear all active Sidebars
         clearCanvas(); //Remove all canvas effect classes
         hidden(overlay,true);
+        hidden(main,false);
         focusGlobalElFirst.focus();
     }
 
     // Open Overlay and offCanvas elements if clicking inactive list item
     else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
         clearCanvas();
+        hidden(main,true);
         document.body.classList.add('noScroll');
         canvas.setAttribute('data-canvas-state','open'); //Add master canvas effect class
         hidden(overlay,false);

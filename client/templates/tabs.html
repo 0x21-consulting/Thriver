@@ -1,18 +1,17 @@
 <template name="tabs">
     <menu class="tabs">
-        <li><a href="#actionAlerts" aria-expanded="false" aria-controls="#actionAlerts" data-toggle="tabs">Action Alerts</a></li>
-        <li><a href="#actionAlerts2" aria-expanded="false" aria-controls="#actionAlerts2" data-toggle="tabs">Action Alerts2</a></li>
-        <li><a href="#actionAlerts3" aria-expanded="false" aria-controls="#actionAlerts3" data-toggle="tabs">Action Alerts3</a></li>
+        {{#each tabs}}
+            <li>
+                <a href="#{{id}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
+            </li>
+        {{/each}}
     </menu>
     <div class="tabs">
-        <article id="actionAlerts" aria-hidden="true">
-            content
-        </article>
-        <article id="actionAlerts2" aria-hidden="true">
-            content 2
-        </article>
-        <article id="actionAlerts3" aria-hidden="true">
-            content 3
-        </article>
+        {{#each tabs}}
+            <article id="{{id}}" aria-hidden="true">
+                {{> Template.dynamic template=template}}
+            </article>
+        {{/each}}
     </div>
 </template>
+

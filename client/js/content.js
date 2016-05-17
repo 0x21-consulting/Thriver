@@ -5,47 +5,66 @@ var sidebars = [{
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
-        content: 'accountDetails' //Template of said sidebar's content
+        template: 'accountDetails', //Template of said sidebar's content
+        /*tabs: [{ //If unset, no tabs rendered
+                title: 'Action Alerts', //Tab Title
+                id: 'actionAlert', //Tab Id
+                template : 'actionAlert', //Tab Content Template
+            }];*/
     },{ 
         id: 'notifications', 
         width: 356, 
         position:'left',
-        content: 'notifications' 
+        template: 'notifications',
+        tabs: [{ //If sidebar has tabs: use this property
+                title: 'Action Alerts',
+                id: 'actionAlert',
+                template : 'actionAlert'
+            },{
+                title: 'News',
+                id: 'news',
+                template : 'news'
+            },{
+                title: 'Press Releases',
+                id: 'press',
+                template: 'press'
+            }
+        ]
     },{ 
         id: 'login', 
         width: 356, 
         position:'left',
-        content: 'login' 
+        template: 'login'
     },{ 
         id: 'register', 
         width: 356, 
         position:'left',
-        content: 'register' 
+        template: 'register' 
     },{ 
         id: 'twitter', 
         width: 356, 
         position:'right',
-        content: 'twitter' 
+        template: 'twitter' 
     },{ 
         id: 'resources', 
         width: 700, 
         position:'right',
-        content: 'resources' 
+        template: 'resources' 
     },{ 
         id: 'news', 
         width: 1100, 
         position:'right',
-        content: 'news' 
+        template: 'news' 
     },{ 
         id: 'donate', 
         width: 656, 
         position:'right',
-        content: 'donate' 
+        template: 'donate' 
     },{ 
         id: 'lang', 
         width: 356, 
         position:'right',
-        content: 'languageSelect' 
+        template: 'languageSelect' 
     }
 ];
 Template.sidebars.item = function() {

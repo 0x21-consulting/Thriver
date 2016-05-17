@@ -1,7 +1,7 @@
 <template name="base">
     <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
         {{>header}}
-        <main class="main" data-focus="group" aria-hidden="false">{{>content}}</main>
+        <main class="main" id="main" data-focus="group" aria-hidden="false">{{>content}}</main>
         <aside class="offCanvas">{{>sidebars}}</aside>
         <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
         
