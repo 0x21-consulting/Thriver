@@ -49,7 +49,7 @@ var sidebars = [{
         id: 'resources', 
         width: 700, 
         position:'right',
-        template: 'resources' 
+        template: 'resources'
     },{ 
         id: 'news', 
         width: 1100, 
