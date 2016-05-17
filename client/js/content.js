@@ -7,10 +7,10 @@ var sidebars = [{
         position:'left', //Which Direction the sidebar appears from
         template: 'accountDetails', //Template of said sidebar's content
         /*tabs: [{ //If unset, no tabs rendered
-                title: 'Action Alerts', //Tab Title
-                id: 'actionAlert', //Tab Id
-                template : 'actionAlert', //Tab Content Template
-            }];*/
+            title: 'Action Alerts', //Tab Title
+            id: 'actionAlert', //Tab Id
+            template : 'actionAlert', //Tab Content Template
+        }];*/
     },{ 
         id: 'notifications', 
         width: 356, 
@@ -83,6 +83,7 @@ var utilityItem = [{
         user: 'active', //Set If item should only be active when logged in/out (accepts: 'active','inactive')
         alerts: true //Set to true to add notification element
         //url: 'wcasa.org', //*required if type=external
+        //more: 'getHelp' //If list item has additional elements within. Get the template
     },{ 
         //Accounts
         icon : 'CaretRight',
@@ -124,7 +125,8 @@ var utilityItem = [{
         title: 'Get Help',
         type: 'null',
         icon : 'Important',
-        position : 'right'
+        position : 'right',
+        more: 'help'
     },{ 
         //Donate
         title: 'Donate',

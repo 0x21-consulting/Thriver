@@ -38,6 +38,11 @@ function active(e,state){
     }
 }
 
+function findAncestor (el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+}
+
 
 //////// Systems ////////
 
@@ -158,6 +163,20 @@ function toggleCanvas() {
 }
 
 
+//Dealing with Utility item "more" option. Used for popups/dropdowns
+function toggleMore(){
+    var parent = findAncestor(event.target, 'more');
+    var e = parent.getElementsByTagName('figure')[0];
+    if (event.target.getAttribute('aria-expanded') == 'false'){ 
+        active(event.target,true);
+        hidden(e,false);
+    } else{ 
+        event.target.setAttribute('aria-expanded', 'false');
+        active(event.target,false);
+        hidden(e,true);
+    }
+}
+
 //// Tabs
 function toggleTabs(){
     // Tabs Variables
@@ -189,5 +208,9 @@ Template.body.events({
     //'keyup': function (event) { tabAction(); } //This is ideal over jQuery bit above
 
     //Tabs
-    'click [data-toggle=tabs]': function (event) { toggleTabs(); }
+    'click [data-toggle=tabs]': function (event) { toggleTabs(); },
+
+    //'More' Hovers
+    'mouseenter li.more > a': function (event) { toggleMore(); },
+    'mouseleave li.more > a': function (event) { toggleMore(); }
 });
