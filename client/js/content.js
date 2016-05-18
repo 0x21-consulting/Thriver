@@ -47,12 +47,52 @@ var sidebars = [{
         id: 'resources', 
         width: 700, 
         position:'right',
-        template: 'resources'
+        template: 'resources',
+        tabs: [{ //If sidebar has tabs: use this property
+                title: 'Library',
+                id: 'library',
+                template : 'library'
+            },{
+                title: 'Infosheets',
+                id: 'infosheets',
+                template : 'infosheets'
+            },{
+                title: 'Stats & Data',
+                id: 'stats-data',
+                template: 'statsData'
+            },{
+                title: 'Webinars',
+                id: 'webinars',
+                template: 'webinars'
+            }
+        ]
     },{ 
         id: 'news', 
         width: 1100, 
         position:'right',
-        template: 'news' 
+        template: 'news',
+        tabs: [{ //If sidebar has tabs: use this property
+                title: 'In the News',
+                id: 'in-the-news',
+                template : 'inTheNews'
+            },{
+                title: 'Press Releases',
+                id: 'press-releases',
+                template : 'pressReleases'
+            },{
+                title: 'Newsletters',
+                id: 'newsletters',
+                template: 'newsletters'
+            },{
+                title: 'Annual Reports',
+                id: 'annual-reports',
+                template: 'annualReports'
+            },{
+                title: 'Press & Media Kits',
+                id: 'press-media-kits',
+                template: 'pressMediaKits'
+            }
+        ]
     },{ 
         id: 'donate', 
         width: 656, 
