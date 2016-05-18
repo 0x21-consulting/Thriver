@@ -20,7 +20,6 @@ Package.onUse(function (api) {
     
     api.addFiles([
         // Templates
-        'lib/templates/header.html',
         'lib/templates/main.html',
         'lib/templates/mobile.html',
         'lib/templates/utility.html',

@@ -6,30 +6,28 @@ var sidebars = [{
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
         template: 'accountDetails', //Template of said sidebar's content
-        /*tabs: [{ //If unset, no tabs rendered
-            title: 'Action Alerts', //Tab Title
-            id: 'actionAlert', //Tab Id
-            template : 'actionAlert', //Tab Content Template
-        }];*/
+        tabs: [{ //If sidebar has tabs: use this property
+                title: 'Profile',
+                icon : 'user',
+                id: 'profile',
+                template : 'profile'
+            },{
+                title: 'Subscriptions',
+                icon : 'envelope',
+                id: 'subscriptions',
+                template : 'subscriptions'
+            },{
+                title: 'Requests',
+                icon : 'book',
+                id: 'requests',
+                template: 'requests'
+            }
+        ]
     },{ 
         id: 'notifications', 
         width: 356, 
         position:'left',
-        template: 'notifications',
-        tabs: [{ //If sidebar has tabs: use this property
-                title: 'Action Alerts',
-                id: 'actionAlert',
-                template : 'actionAlert'
-            },{
-                title: 'News',
-                id: 'news',
-                template : 'news'
-            },{
-                title: 'Press Releases',
-                id: 'press',
-                template: 'press'
-            }
-        ]
+        template: 'notifications'
     },{ 
         id: 'login', 
         width: 356, 
@@ -67,7 +65,7 @@ var sidebars = [{
         template: 'languageSelect' 
     }
 ];
-Template.sidebars.item = function() {
+Template.aside.item = function() {
     return sidebars;
 };
 
@@ -75,7 +73,7 @@ Template.sidebars.item = function() {
 var utilityItem = [{ 
         //Notifications
         //title: 'Notifications', //Readable Title
-        icon : 'Bell', //Icon class to be applied (see icons.less)
+        icon : 'bell', //Icon class to be applied (see icons.less)
         //iconAfter: true, //default is false. Will place the icon :after instead of :before
         type: 'sidebar', //Sets Link type. (Accepts: sidebar, external, null) *Required
         sidebar: 'notifications', //which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
@@ -86,7 +84,7 @@ var utilityItem = [{
         //more: 'getHelp' //If list item has additional elements within. Get the template
     },{ 
         //Accounts
-        icon : 'CaretRight',
+        icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'accounts',
@@ -94,7 +92,7 @@ var utilityItem = [{
     },{ 
         //Sign In
         title: 'Sign In',
-        icon : 'CaretRight',
+        icon : 'Caret-right',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'login',
@@ -102,7 +100,7 @@ var utilityItem = [{
     },{  
         //Register
         title: 'Create an Account',
-        icon : 'CaretRight',
+        icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'register',
@@ -110,64 +108,66 @@ var utilityItem = [{
     },{ 
         //Sign Out
         title: 'Sign Out',
-        icon : 'CaretRight',
+        icon : 'caret-right',
         iconAfter: true,
         type: 'null',
         user: 'active'
     },{ 
         //Language
-        icon : 'Flag',
+        icon : 'flag',
         type: 'sidebar',
         sidebar: 'lang',
         position : 'right'
     },{ 
         //Get Help
         title: 'Get Help',
-        type: 'internal',
-        targetId: 'providers',
-        icon : 'Important',
+        type: 'link',
+        url: '#providers',
+        icon : 'important',
         position : 'right',
         more: 'help'
     },{ 
         //Donate
         title: 'Donate',
-        icon : 'Heart',
+        icon : 'heart',
         type: 'sidebar',
         sidebar: 'donate',
         position : 'right'
     },{
         //Learning Center
         title: 'Learning Center',
-        icon : 'Institution',
+        icon : 'institution',
         type: 'sidebar',
         sidebar: 'resources',
         position : 'right'
     },{ 
         //News
         title: 'News',
-        icon : 'Newspaper',
+        icon : 'news',
         type: 'sidebar',
         sidebar: 'news',
         position : 'right'
     },{ 
         //Twitter
         title: 'Twitter',
-        icon : 'Twitter',
+        icon : 'twitter',
         type: 'sidebar',
         sidebar: 'twitter',
         position : 'right'
     },{ 
         //Youtube
         icon : 'Youtube',
-        type: 'external',
+        type: 'link',
         url: 'https://www.youtube.com/user/WCASAVPCC',
-        position : 'right'
+        position : 'right',
+        target: '_blank'
     },{ 
         //Facebook
         icon : 'Facebook',
-        type: 'external',
+        type: 'link',
         url: 'https://www.facebook.com/wcasa',
-        position : 'right'
+        position : 'right',
+        target: '_blank'
     }
 
 ];

@@ -1,27 +1,30 @@
 //Iconography (http://fontawesome.io/cheatsheet/)
 @icons: 
-Twitter "\f099",
-Facebook "\f09a",
-Youtube "\f167",
-Close "\f00d",
-Bell "\f0f3",
-User "\f007",
-CaretRight "\f0da",
-Newspaper "\f1ea",
-Institution "\f19c",
-Heart "\f004",
-Important "\f06a",
-Flag "\f024";
+twitter "\f099",
+facebook "\f09a",
+youtube "\f167",
+close "\f00d",
+bell "\f0f3",
+user "\f007",
+caret-right "\f0da",
+news "\f1ea",
+institution "\f19c",
+heart "\f004",
+important "\f06a",
+flag "\f024",
+book "\f02d",
+envelope "\f0e0";
+
 
 @iconsLength : length(@icons);
-.iconsInit(@icons; @index) when (@index > 0) {
-    .iconsInit(@icons; (@index - 1)); // decrement.
+.icons-init(@icons; @index) when (@index > 0) {
+    .icons-init(@icons; (@index - 1)); // decrement.
     @pair : extract(@icons, @index);
     @key:   extract(@pair, 1);
     @value: extract(@pair, 2); 
-    .icon@{key}{
+    .icon-@{key}{
         &:before{ .fa; content:'@{value}'; }
-        &.iconAfter{
+        &.icon-after{
             &:before{content:'';}
             &:after{.fa; content:'@{value}'}
         }
@@ -29,11 +32,11 @@ Flag "\f024";
 }
 
 //Initialize Icon Classes
-.iconsInit(@icons; @iconsLength);
+.icons-init(@icons; @iconsLength);
 
 .icon[aria-expanded="true"][data-toggle="canvas"]{
     &:before{ content:'\f00d'; }
-    &.iconAfter{
+    &.icon-after{
         &:before{content: '';}
         &:after{content:'\f00d'; }
     }

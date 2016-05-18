@@ -1,0 +1,13 @@
+<template name="aside">
+    <aside class="off-canvas">
+        {{#each item}}
+            <section id="{{id}}" class="sidebar scroll-box" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
+                <div class="scroll">
+                    <header><h1>Header</h1></header>
+                    {{>tabs}}
+                    <button data-canvas-event="close">close</button>
+                </div>
+            </section>
+        {{/each}}
+    </aside>
+</template>

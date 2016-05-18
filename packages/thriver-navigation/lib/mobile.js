@@ -16,7 +16,7 @@ function removeOpenAccounts(){
 }
 
 // Events
-Template.mobileHeader.events({
+Template.navigationMobile.events({
 
     //Menu Actions
     'click button.menuToggle': function (event) {

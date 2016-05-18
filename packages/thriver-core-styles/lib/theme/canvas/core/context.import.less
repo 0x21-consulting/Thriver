@@ -10,12 +10,12 @@ Canvas Animations.
 //Contextual Elements
 @canvas : ~'.canvas';
 @canvasPush : ~'main';
-@off : ~'.offCanvas';
+@off : ~'.off-canvas';
 @offActive : ~'[data-canvas-state=open]';
 @overlay : ~'.overlay';
-@header : ~'.mainHeader';
+@header : ~'header.main';
 @utility : ~'.utility';
-@mobileNav : ~'.mobileNav';
+@mobileNav : ~'header.mobile';
 @sidebar : ~'section.sidebar';
 
 //Element Heights
@@ -27,8 +27,8 @@ Canvas Animations.
 
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
-.offCanvasWidthInit(@offCanvasWidths; @index) when (@index > 0) {
-    .offCanvasWidthInit(@offCanvasWidths; (@index - 1)); // decrement.
+.off-canvas-width-init(@offCanvasWidths; @index) when (@index > 0) {
+    .off-canvas-width-init(@offCanvasWidths; (@index - 1)); // decrement.
     @width : extract(@offCanvasWidths, @index);
     .canvas[data-canvas-width='@{width}'] {
         @{off}{ width:~"@{width}px"; }
@@ -40,7 +40,7 @@ Canvas Animations.
 }
 
 //Initialize Canvas Width/Height Classes
-.offCanvasWidthInit(@offCanvasWidths; @length);
+.off-canvas-width-init(@offCanvasWidths; @length);
 
 //Canvas Specifications
 @{canvas}{
