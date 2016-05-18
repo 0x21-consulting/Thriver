@@ -6,7 +6,6 @@ var sidebars = [{
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
-        template: 'account', //Template of said sidebar's content
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'Profile',
                 icon : 'user',
@@ -53,7 +52,6 @@ var sidebars = [{
         id: 'resources', 
         width: 700, 
         position:'right',
-        template: 'resources',
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'Library',
                 id: 'library',
@@ -77,7 +75,6 @@ var sidebars = [{
         id: 'news', 
         width: 1100, 
         position:'right',
-        template: 'news',
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'In the News',
                 id: 'in-the-news',
@@ -225,3 +222,47 @@ Template.utility.item = function() {
 };
 
 
+
+
+
+var lists =[{
+    type: 'generic', //accepts: generic, details
+    itemType: 'category',
+    paginate: true, //Default is false
+    perPage: 10, //if paginate:true, how many before paginate
+    style: 'striped',
+    //If standard
+    items: {
+        title: 'One Webinar',
+        date: '06991020', //This is temporary
+        friendlyDate: '02/11/29',
+        content: 'lorem ipsum.'        
+    },
+    //If category
+    category: {
+        title: 'Summer Webinars',
+        id: 'summerWebinars',
+        items: {
+            title: 'One Webinar',
+            date: '06991020', //This is temporary
+            friendlyDate: '02/11/29',
+            content: 'lorem ipsum.'
+        }
+    },
+    //If catalog
+    catalog: {
+        title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
+        byline: 'Sumru Erkut, et al., Center for Research on Women, 1993',
+        id: 'summerWebinars',
+        callNumber: '6504S',
+        copies: 1,
+        subjectHeadings: 'Ethnology -- United States. Minority teenagers -- United States -- Societies and clubs.',
+        classification: 'Organizational',
+        category: 'Organizational Material',
+        type: 'Book or Booklet'
+    }
+}
+];
+
+
+var item

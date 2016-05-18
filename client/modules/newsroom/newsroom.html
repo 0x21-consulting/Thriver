@@ -1,138 +1,99 @@
-<template name="news">
-    <!--Newsroom Links/Info-->
-    <div class="links">
-        {{#if currentUser}}
-            <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button> | 
-        {{else}}
-            <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button> | 
-        {{/if}}
-
-        <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
-            Inquire About our Newsroom <span class="fa">&#xf05a;</span>
-            <span class="contactInfo">
-                For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
-            </span>
-        </button>
-    </div>
-    <li class="dtHide subscriptionsMob">
-        {{#if currentUser}}
-            <button id="manageSubscriptionsMob"><span class="fa">&#xf0e0;</span> Manage Subscriptions</button>
-        {{else}}
-            <button id="subscriptionsRegisterMob"><span class="fa">&#xf0e0;</span> Subscribe to Newsroom</button>
-        {{/if}}
-    </li>
-    <!--Search-->
-    <aside class="toolBar">
-        <form autocomplete="off">
-            <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
-        </form>
-    </aside>
-</template>
 
 <!-- Newsletter Content Sections -->
 <template name="inTheNews">
-    <li class="active">
-        <ul class="newsItems inTheNews stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>In the News</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        <span class="publisher">{{publisher}}</span>
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
+    <ul class="newsItems inTheNews stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>{{title}}</h2></li>
+        {{#each news}}
+            <li>
+                <div class="inner">
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    <span class="publisher">{{publisher}}</span>
+                </div>
+            </li>
+        {{/each}}
+        {{> loadMore }}
+    </ul>
 </template>
+
 <template name="pressReleases">
-    <li>
-        <ul class="newsItems stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Press Releases</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
+    <ul class="newsItems stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>{{title}}</h2></li>
+        {{#each news}}
+            <li>
+                <div class="inner">
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    {{#if content}}
+                        <p class="content">{{content}}</p>
+                    {{/if}}
+                </div>
+            </li>
+        {{/each}}
+        {{> loadMore }}
+    </ul>
 </template>
+
 <template name="actionAlerts">
-    <li>
-        <ul class="newsItems stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Action Alerts</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
+    <ul class="newsItems stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>Action Alerts</h2></li>
+        {{#each news}}
+            <li>
+                <div class="inner">
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    {{#if content}}
+                        <p class="content">{{content}}</p>
+                    {{/if}}
+                </div>
+            </li>
+        {{/each}}
+        {{> loadMore }}
+    </ul>
 </template>
+
 <template name="newsletters">
-    <li>
-        <ul class="newsItems newsletters stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Newsletters</h2></li>
-            {{#each news}}
-                <li>
-                    <div class="inner">
-                        <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
-                        <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
-                        {{#if content}}
-                            <p class="content">{{content}}</p>
-                        {{/if}}
-                    </div>
-                </li>
-            {{/each}}
-            {{> loadMore }}
-        </ul>
-    </li>
+    <ul class="newsItems newsletters stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>Newsletters</h2></li>
+        {{#each news}}
+            <li>
+                <div class="inner">
+                    <time class="dateMeta" datetime="{{date}}">{{friendlyDate}}</time>
+                    <h3><a href="{{url}}" target="_blank">{{title}}</a></h3>
+                    {{#if content}}
+                        <p class="content">{{content}}</p>
+                    {{/if}}
+                </div>
+            </li>
+        {{/each}}
+        {{> loadMore }}
+    </ul>
 </template>
 
 
 <template name="annualReports">
-    <li>
-        <ul class="newsItems inTheNews stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Annual Reports</h2></li>
-            {{>annualReportSingle}}
-            {{>annualReportSingle}}
-            {{>annualReportSingle}}
-            {{>annualReportSingle}}
-            {{>annualReportSingle}}
-        </ul>
-    </li>
+    <ul class="newsItems inTheNews stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>Annual Reports</h2></li>
+        {{>annualReportSingle}}
+        {{>annualReportSingle}}
+        {{>annualReportSingle}}
+        {{>annualReportSingle}}
+        {{>annualReportSingle}}
+    </ul>
 </template>
 
-<template name="mediaKits">
-    <li>
-        <ul class="newsItems stripes">
-            {{>backToNewsMobile}}
-            <li class="mainTitle dtHide"><h2>Media Kits</h2></li>
-            {{>newsItem4}}
-            {{>newsItem5}}
-        </ul>
-    </li>
+<template name="pressMediaKits">
+    <ul class="newsItems stripes">
+        {{>backToNewsMobile}}
+        <li class="mainTitle dtHide"><h2>Media Kits</h2></li>
+        {{>newsItem4}}
+        {{>newsItem5}}
+    </ul>
 </template>
 
 
@@ -185,3 +146,48 @@
         </a>
     </li>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--OLD MAN-->
+<template name="news">
+    <!--Newsroom Links/Info-->
+    <div class="links">
+        {{#if currentUser}}
+            <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button> | 
+        {{else}}
+            <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button> | 
+        {{/if}}
+
+        <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
+            Inquire About our Newsroom <span class="fa">&#xf05a;</span>
+            <span class="contactInfo">
+                For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
+            </span>
+        </button>
+    </div>
+    <li class="dtHide subscriptionsMob">
+        {{#if currentUser}}
+            <button id="manageSubscriptionsMob"><span class="fa">&#xf0e0;</span> Manage Subscriptions</button>
+        {{else}}
+            <button id="subscriptionsRegisterMob"><span class="fa">&#xf0e0;</span> Subscribe to Newsroom</button>
+        {{/if}}
+    </li>
+    <!--Search-->
+    <aside class="toolBar">
+        <form autocomplete="off">
+            <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
+        </form>
+    </aside>
+</template>
+
