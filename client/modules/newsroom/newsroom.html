@@ -1,54 +1,32 @@
 <template name="news">
-    <section class="news rightLarge hasSidebar">
-        <div class="scroller">
-            <h2><span class="fa">&#xf1ea;</span> Newsroom</h2>
-            <div class="links">
-                {{#if currentUser}}
-                    <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button> | 
-                {{else}}
-                    <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button> | 
-                {{/if}}
+    <!--Newsroom Links/Info-->
+    <div class="links">
+        {{#if currentUser}}
+            <button id="manageSubscriptions" class="newsroomButton manageSubscriptions">Manage Newsroom Subscriptions <span class="fa">&#xf0da;</span></button> | 
+        {{else}}
+            <button id="subscriptionsRegister" class="newsroomButton mobHide subscriptionsRegister">Login to Subscribe to the Newsroom <span class="fa">&#xf0da;</span></button> | 
+        {{/if}}
 
-                <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
-                    Inquire About our Newsroom <span class="fa">&#xf05a;</span>
-                    <span class="contactInfo">
-                        For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
-                    </span>
-                </button>
-            </div>
-
-            <ul class="newsTabs tabs">
-                <li class="active">In the News</li>
-                <li>Press Releases</li>
-                <li>Action Alerts</li>
-                <li>Newsletters</li>
-                <li>Annual Reports</li>
-                <li>Press/Media Kits</li>
-                <!--Mobile Button-->
-                <li class="dtHide subscriptionsMob">
-                    {{#if currentUser}}
-                        <button id="manageSubscriptionsMob"><span class="fa">&#xf0e0;</span> Manage Subscriptions</button>
-                    {{else}}
-                        <button id="subscriptionsRegisterMob"><span class="fa">&#xf0e0;</span> Subscribe to Newsroom</button>
-                    {{/if}}
-                </li>
-            </ul>
-            <aside class="toolBar">
-                <form autocomplete="off">
-                    <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
-                </form>
-            </aside>
-            <ul class="newsContent tabsContent">
-                {{> inTheNews }}
-                {{> pressReleases }}
-                {{> actionAlerts }}
-                {{> newsletters }}
-                {{> annualReports}}
-                {{> mediaKits }}
-            </ul>
-            <button type="button" class="closeTab">Close</button>
-        </div>
-    </section>
+        <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
+            Inquire About our Newsroom <span class="fa">&#xf05a;</span>
+            <span class="contactInfo">
+                For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
+            </span>
+        </button>
+    </div>
+    <li class="dtHide subscriptionsMob">
+        {{#if currentUser}}
+            <button id="manageSubscriptionsMob"><span class="fa">&#xf0e0;</span> Manage Subscriptions</button>
+        {{else}}
+            <button id="subscriptionsRegisterMob"><span class="fa">&#xf0e0;</span> Subscribe to Newsroom</button>
+        {{/if}}
+    </li>
+    <!--Search-->
+    <aside class="toolBar">
+        <form autocomplete="off">
+            <label for="searchNews" class="fa">&#xf002;</label><input id="searchNews" type="search" placeholder="Search" />
+        </form>
+    </aside>
 </template>
 
 <!-- Newsletter Content Sections -->

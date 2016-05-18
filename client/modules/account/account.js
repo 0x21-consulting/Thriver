@@ -264,7 +264,7 @@ Template.utility.events({
 });
 
 // Get the right information to each of the account templates
-Template.accountDetails.helpers({
+Template.account.helpers({
     name: function () {
         var user = Meteor.user();
         console.debug(user);
@@ -278,14 +278,14 @@ Template.accountDetails.helpers({
     }
 });
 
-Template.accountDetails.onRendered(function () {
+Template.account.onRendered(function () {
     if (window.innerWidth < 768) {
         removeActiveClass();
     }
 });
 
 
-Template.accountDetails.events({
+Template.account.events({
     // Switch tabs
     'click ul.accountDetailsTabs > li': function (event) {
         var index = $(event.target).index() + 1;

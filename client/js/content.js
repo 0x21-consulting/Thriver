@@ -2,10 +2,11 @@
 
 //Sidebar sections
 var sidebars = [{
+        title: 'Account Details',
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
-        template: 'accountDetails', //Template of said sidebar's content
+        template: 'account', //Template of said sidebar's content
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'Profile',
                 icon : 'user',
@@ -24,26 +25,31 @@ var sidebars = [{
             }
         ]
     },{ 
+        title: 'Notifications',
         id: 'notifications', 
         width: 356, 
         position:'left',
         template: 'notifications'
     },{ 
+        title: 'Account Sign in',
         id: 'login', 
         width: 356, 
         position:'left',
         template: 'login'
     },{ 
+        title: 'Create an Account',
         id: 'register', 
         width: 356, 
         position:'left',
         template: 'register' 
     },{ 
+        title: 'Twitter',
         id: 'twitter', 
         width: 356, 
         position:'right',
         template: 'twitter' 
     },{ 
+        title: 'Learning Center',
         id: 'resources', 
         width: 700, 
         position:'right',
@@ -67,6 +73,7 @@ var sidebars = [{
             }
         ]
     },{ 
+        title: 'Newsroom',
         id: 'news', 
         width: 1100, 
         position:'right',
@@ -94,11 +101,13 @@ var sidebars = [{
             }
         ]
     },{ 
+        title: 'Donate',
         id: 'donate', 
         width: 656, 
         position:'right',
         template: 'donate' 
     },{ 
+        title: 'Language Select',
         id: 'lang', 
         width: 356, 
         position:'right',
