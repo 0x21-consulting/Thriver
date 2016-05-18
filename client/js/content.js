@@ -252,6 +252,7 @@ var lists =[{
     //If catalog
     catalog: {
         title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
+        id: 1,
         byline: 'Sumru Erkut, et al., Center for Research on Women, 1993',
         id: 'summerWebinars',
         callNumber: '6504S',
@@ -259,10 +260,12 @@ var lists =[{
         subjectHeadings: 'Ethnology -- United States. Minority teenagers -- United States -- Societies and clubs.',
         classification: 'Organizational',
         category: 'Organizational Material',
-        type: 'Book or Booklet'
+        type: 'Book or Booklet',
+        status: {
+            type: 'transit',
+            style: 'neutral',
+            text: 'In Transit',
+
+        }
     }
-}
-];
-
-
-var item
+}];

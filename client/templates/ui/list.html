@@ -23,42 +23,6 @@
         </section>
     {{/if}}
 
-    {{#if equals type 'catalog'}}
-        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
-        {{#each item}}
-            <article>
-                <aside>
-                    {{#if type}}
-                        <dl class="material"><dt>Material</dt><dd>{{catalog.type}}</dd></dl>
-                    {{/if}}
-                    {{#if stauts}}
-                        <dl class="{{catalog.status.type}}"><dt>Status</dt><dd>{{catalog.status.text}}</dd></dl>
-                    {{/if}}
-                    <menu>
-                        {{#if equals catalog.status.type 'transit'}}
-                            <li><button>Request Copy</button></li>
-                        {{/if}}
-                        <!--Remaining interaction buttons here-->
-                    </menu>
-                </aside>
-                <details aria-expanded="false" aria-controls="{{catalog.id}}">
-                    <summary id="catalog{{catalog.id}}">
-                        <h1>{{catalog.title}}</h1>   
-                        <p>{{catalog.byline}}</p>   
-                    </summary>       
-                    <dl>
-                        <dt>Call Number</dt><dd>{{catalog.callNumber}}</dd>
-                        <dt>Copies</dt><dd>{{catalog.copies}}</dd>
-                        <dt>Subject Headings</dt><dd>{{catalog.subjectHeading}}</dd>
-                        <dt>Classification</dt><dd>{{catalog.classification}}</dd>
-                        <dt>Category</dt><dd>{{catalog.category}}</dd>
-                        <dt>Material</dt><dd>{{catalog.type}}</dd>
-                    </dl>
-                </details>
-            </article>
-        {{/each}}
-        </section>
-    {{/if}}
 
     {{#if equals type 'toggle'}}
     <!--container-->
@@ -77,6 +41,43 @@
         {{#each item}}
         {{/each}}
     <!--container-->
+    {{/if}}
+    {{#if equals type 'catalog'}}
+        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
+        {{#each item}}
+            <article>
+                <details aria-expanded="false" aria-controls="{{catalog.id}}">
+                    <summary id="catalog{{catalog.id}}">
+                        <h1>{{catalog.title}}</h1>   
+                        <p>{{catalog.byline}}</p>   
+                    </summary>       
+                    <dl>
+                        <!--Would be nice to have the spacebars tag just do: prop:val-->
+                        <dt>Call Number</dt><dd>{{catalog.callNumber}}</dd>
+                        <dt>Copies</dt><dd>{{catalog.copies}}</dd>
+                        <dt>Subject Headings</dt><dd>{{catalog.subjectHeading}}</dd>
+                        <dt>Classification</dt><dd>{{catalog.classification}}</dd>
+                        <dt>Category</dt><dd>{{catalog.category}}</dd>
+                        <dt>Material</dt><dd>{{catalog.type}}</dd>
+                    </dl>
+                </details>
+                <aside>
+                    {{#if type}}
+                        <dl class="material"><dt>Material</dt><dd>{{catalog.type}}</dd></dl>
+                    {{/if}}
+                    {{#if stauts}}
+                        <dl class="{{catalog.status.type}}"><dt>Status</dt><dd>{{catalog.status.text}}</dd></dl>
+                    {{/if}}
+                    <menu>
+                        {{#if equals catalog.status.type 'transit'}}
+                            <li><button>Request Copy</button></li>
+                        {{/if}}
+                        <!--Remaining interaction buttons here-->
+                    </menu>
+                </aside>
+            </article>
+        {{/each}}
+        </section>
     {{/if}}
 </template>
 
