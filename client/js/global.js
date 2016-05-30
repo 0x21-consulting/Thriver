@@ -17,6 +17,7 @@ Template.registerHelper("equals_or", function(param, arr) {
    }
 });
 
+
 //UI Helpers
 //Add Class
 function addClass(e, cls){
