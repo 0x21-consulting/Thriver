@@ -1,10 +1,10 @@
 <template name="profile">
-    <h3>Profile Overview</h3>
-    <form class="editable">
+    <h3>{{heading}}</h3>
+    <form>
 		{{#each items}}
 			<label for ="{{id}}">{{title}}</label>
 			<input id="{{id}}" type="{{type}}" name="{{id}}" value="{{value}}" {{disabled}} {{required}} />
 		{{/each}}
-        <input type="submit" value="Update Account">
+        <input type="submit" value="{{submitValue}}">
     </form>
 </template>

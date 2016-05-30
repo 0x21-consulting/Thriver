@@ -1,5 +1,11 @@
 // Populate Profile tab under Account Overview
 Template.profile.helpers({
+    heading: function () {
+        return 'Profile Overview';
+    }, 
+    submitValue: function () {
+        return 'Update Account';
+    },
     items: [{
         title: 'Name',
         id: 'updateName',
