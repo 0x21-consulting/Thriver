@@ -21,23 +21,6 @@
     </section>
 </template>
 
-<!-- Account Details Content Sections -->
-<template name="profile">
-    <li class="active accountSettings">
-        <h3>Account Settings</h3>
-        <form class="editable">
-            <label for="updateName">Name</label>
-            <input id="updateName" type="name" name="updateName" value="{{name}}" required />
-            <label for="updateProvider">Associated Organization</label>
-            <input id="updateProvider" type="text" value="{{organization}}" disabled />
-            <label for="updateEmail">Email</label>
-            <input id="updateEmail" type="email" name="updateEmail" value="{{email}}" required />
-            <label for="updatePassword">Password</label>
-            <input id="updatePassword" type="password" name="updatePassword" value="xxxxxx" required />
-            <input type="submit" value="Update Account">
-        </form>
-    </li>
-</template>
 
 <template name="subscriptions">
     <li class="subscriptions">

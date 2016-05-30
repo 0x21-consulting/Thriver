@@ -1,3 +1,4 @@
+//To be deleted. Used as reference for varieties of list data.
 var lists =[{
     type: 'generic', //accepts: generic, details
     itemType: 'category',

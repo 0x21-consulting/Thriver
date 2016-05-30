@@ -13,12 +13,12 @@ var sidebars = [{
                 title: 'Subscriptions',
                 icon : 'envelope',
                 id: 'subscriptions',
-                template : 'subscriptions'
+                template : 'userSubscriptions'
             },{
                 title: 'Requests',
                 icon : 'book',
                 id: 'requests',
-                template: 'requests'
+                template: 'userRequests'
             }
         ]
     },{ 
