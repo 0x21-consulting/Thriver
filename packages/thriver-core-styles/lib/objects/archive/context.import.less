@@ -1,0 +1,358 @@
+body, html{
+    background-color:mix(@gray, @navy, 70%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+body{
+    max-width: 100%;
+    overflow-x: hidden; //Can we get rid of this?
+    .full{
+        width: 100%;
+    }
+    .masterContainer{
+        //padding-top: 376px;
+        //will-change: padding;
+        //.transition(padding,375ms,ease-out,0ms);
+        background-color: @white;
+        @media @mobile{
+            padding-top: 0px;
+        }
+        min-height: 300px; // just for allowing a new section to be added via admin controls
+    }
+    &.fixedHeader{
+        .masterContainer{
+            //padding-top: 74px;
+            @media @mobile{
+                padding-top: 0px;
+            }
+        }
+    }
+}
+
+//This needs home
+.asideLink{
+    margin: 36px auto 45px auto;
+    padding: 0px;
+    color: @gray;
+    border-bottom: 2px solid @gray;
+    .shadowNone;
+    .font(1.2,1.5,0.025,@normal,none);
+}
+
+.container{
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.containerSmall{
+    max-width: 960px;
+    margin: 0 auto;
+    //padding: 30px;
+}
+.scroller{
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    isolation: isolate; //Prevents child elements from covering up scrollbar in chrome
+}
+.canvasCenter{
+    position: relative;
+    left: 0px;
+    z-index: 2;
+    will-change: transform;
+    .transition(transform,@canvasDuration,@canvasEase,@canvasDelay);
+    //padding-top: 376px;
+}
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    background-color: #10202a;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#172333+0,23485b+100 */
+    background: rgb(23,35,51); /* Old browsers */
+    background: -moz-linear-gradient(45deg,  rgba(23,35,51,1) 0%, rgba(35,72,91,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#172333', endColorstr='#23485b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+         
+    .opacity(0);
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    will-change:opacity;
+    .transition(all,@canvasDuration,@canvasEase,0ms);
+}
+
+
+.flex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flexNoWrap{
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+
+
+
+//Overrides
+.inline{
+    display: inline !important;
+}
+
+.dtHide{
+    display: none !important;
+    @media @mobile{
+        display: inherit !important;
+    }
+}
+
+.mobHide{
+    display: inherit !important;
+    @media @mobile{
+        display: none !important;
+    }
+}
+
+@media @mobile{
+    .fullBlockMob{
+        width: 100% !important;
+        display: block !important;
+    }
+}
+
+
+
+//Make first section under masthead animate into place
+.masterContainer > section:nth-child(2){
+    //will-change:opacity,transition;
+    //.transition2(transform,0ms,@canvasEase, 350ms, opacity,250ms,@canvasEase, 0ms);
+    //.opacity(0);
+    //.translate(0px,-35px);
+}
+.fixedHeader{
+    .masterContainer > section:nth-child(2){
+        //.transition2(transform,@canvasDuration,@canvasEase, @headerDelay, opacity,250ms,@canvasEase, 100ms);
+        //.opacity(1);
+        //.translate(0px,0px);
+    }
+}
+
+.accelerate{
+    backface-visibility: hidden;
+    //transform: translateZ(0);
+}
+
+// Generic hide property
+.hide, .hidden { display: none; }
+
+// Generic property for prevent text selection
+.preventSelect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select  : none; /* Chrome/Safari/Opera */
+    -khtml-user-select   : none; /* Konqueror */
+    -moz-user-select     : none; /* Firefox */
+    -ms-user-select      : none; /* IE/Edge */
+    user-select          : none; /* not yet supported */
+}
+
+
+
+//// Translated Element Classes
+
+.translateIn{
+    .translate(0px, 0px);
+}
+.translateLeftOut{
+    .translate(-100%, 0px);
+}
+.translateTopOut{
+    .translate(0px, -100%);
+}
+
+
+.canvasCenter{
+    min-height: 1500px;
+    min-height: 100vh;
+    //background-color: @gray;
+    .masterContainer{
+        min-height: 1500px;
+        min-height: 100vh;
+    }
+    //This prevents strange page loading loading behavior
+}
+
+
+
+
+
+
+::selection {background: @teal;}
+::-moz-selection {background: @teal;}
+
+
+
+
+//Sidebar / Main Canvas Interaction and Animation Controls
+@fixedHeaderTranslate: -160px; //Vertical Lift of Header on Fixed Navigation
+//Sidebar Widths
+@leftSmallWidth: 356px;
+@leftMediumWidth: 700px;
+@rightSmallWidth: 356px;
+@rightMediumWidth: 656px;
+@rightLargeWidth: 1100px;
+//Page Take Over Opacities
+@overlayOpacity: 0.9;
+@overlayOpacityHover: 0.85;
+
+//Context
+aside.sidebar{
+    position: fixed;
+    height: 100%;
+    height: 100vh;
+    top: 36px;
+    z-index: @sidebarZ;
+    will-change: transform, width;
+    .transition2(transform,@canvasDuration,@canvasEase,@canvasDelay,width,@canvasDuration, @canvasEase, @canvasDelay);
+    .scroller{height: ~'calc(100vh - 24px)';}
+    > section{
+        position: absolute;
+        left: 0px;
+        text-align: center;
+        will-change: transform, opacity;
+        .opacity(0);
+        .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,300ms, @canvasEase,0ms);
+        //Sidebar Section Default Off-canvas translate and width
+        &.leftSmall{.translate(-(@leftMediumWidth),0px); width: @leftSmallWidth;}
+        &.leftMedium{.translate(-(@leftMediumWidth),0px); width: @leftMediumWidth;}
+        &.rightSmall{.translate(@rightLargeWidth,0px); width: @rightSmallWidth;}
+        &.rightMedium{.translate(@rightLargeWidth,0px); width: @rightMediumWidth;}
+        &.rightLarge{.translate(@rightLargeWidth,0px); width: @rightLargeWidth;}
+        //Active Sidebar Section
+        &.active{
+            .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 100ms);
+            .translate(0px,0px);
+            .opacity(1); 
+        }
+    }
+    &.sidebarsLeft{
+        right: 100%;
+        width: @leftMediumWidth; //Should be widest sidebar on given side
+        section{
+            left: inherit;
+            right: 0px;
+            &.active{.translate(0px,0px);}
+        }
+    }
+    &.sidebarsRight{
+        width: @rightLargeWidth; //Should be widest sidebar on given side
+        left: 100%;
+    }
+}
+
+//Canvas Translate
+body{
+    &.leftSmall{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftSmallWidth,0px);}}
+    &.leftMedium{.canvasCenter, .mainNav, .sidebarsLeft{.translate(@leftMediumWidth,0px);}}
+    &.rightSmall{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightSmallWidth),0px);}}
+    &.rightMedium{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightMediumWidth),0px);}}
+    &.rightLarge{.canvasCenter, .mainNav, .sidebarsRight{.translate(-(@rightLargeWidth),0px);}}
+    //Fixed Header Requires X Transform Accomodation
+    &.fixedHeader{
+        &.leftSmall{header.mainHeader nav.mainNav{.translate(@leftSmallWidth,@fixedHeaderTranslate);}}
+        &.leftMedium{header.mainHeader nav.mainNav{.translate(@leftMediumWidth,@fixedHeaderTranslate);}}
+        &.rightSmall{header.mainHeader nav.mainNav{.translate(-(@rightSmallWidth),@fixedHeaderTranslate);}}
+        &.rightMedium{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightMediumWidth),@fixedHeaderTranslate);}}
+        &.rightLarge{header.mainHeader nav.mainNav{left: inherit;.translate(-(@rightLargeWidth),@fixedHeaderTranslate);}}
+    }
+}
+
+body{
+    &.leftSmall{.canvasCenter{.translate(@leftSmallWidth,295px);}}
+    &.leftMedium{.canvasCenter{.translate(@leftMediumWidth,295px);}}
+    &.rightSmall{.canvasCenter{.translate(-(@rightSmallWidth),295px);}}
+    &.rightMedium{.canvasCenter{.translate(-(@rightMediumWidth),295px);}}
+    &.rightLarge{.canvasCenter{.translate(-(@rightLargeWidth),295px);}}
+    //Fixed Header Requires X Transform Accomodation
+    &.fixedHeader{
+        &.leftSmall{.canvasCenter{.translate(@leftSmallWidth,137px);}}
+        &.leftMedium{.canvasCenter{.translate(@leftMediumWidth,137px);}}
+        &.rightSmall{.canvasCenter{.translate(-(@rightSmallWidth),137px);}}
+        &.rightMedium{.canvasCenter{.translate(-(@rightMediumWidth),137px);}}
+        &.rightLarge{.canvasCenter{.translate(-(@rightLargeWidth),137px);}}
+    }
+}
+
+
+//Overlay for Sidebars
+body{
+    &.leftSmall, &.leftMedium, &.rightSmall, &.rightMedium, &.rightLarge{
+        overflow: hidden; //Suspect scroll from main body
+        cursor: pointer;
+        .overlay{
+            .opacity(@overlayOpacity);
+            visibility: visible;
+            &:hover{.opacity(@overlayOpacityHover);}       
+        }
+    }
+    /*&.leftSmall, &.leftMedium{
+        .overlay{cursor: e-resize;}
+    }
+    &.rightSmall, &.rightMedium, &.rightLarge{
+        .overlay{cursor: w-resize;}
+    }*/
+}
+
+
+.canvasCenter{
+    .translateY(295px);
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
+}
+.fixedHeader .canvasCenter{
+    .translateY(136px);
+}
+
+
+
+
+//Definition Lists
+dl{
+    padding: 10px;
+    margin: 20px 0px 20px 0px;
+    dt{
+        display: inline;
+        &:after{content:": ";}
+    }
+    dd{
+        display: inline;
+        font-weight: @bold;
+    }
+}
+
+.dlColors(@x,@y,@z){
+    background-color: @x;
+    dt{color: @y;}
+    dd{color:@z;}
+}
+
+
+.canvasCenter{
+    .translateY(295px);
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
+}
+.fixedHeader .canvasCenter{
+    .translateY(136px);
+}

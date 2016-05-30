@@ -1,0 +1,353 @@
+// Import from thriver:core-styles package
+@import "{thriver:core-styles}/lib/index.less";
+
+header.mobileNav{
+    background-color: @white;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 16;
+    height: 60px;
+    .shadow(close);
+    //.transition(all,375ms,ease-out,0ms);
+    section.fixedBar{
+        a.brandLink {
+            display: inline-block;
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            margin-left: -88px;
+        }
+        .accountToggle{
+            float: right;
+        }
+        button{
+            font-size: 30px;
+            position: relative;
+            top: 13px;
+            padding: 0px 14px;
+            color: @navy;
+            opacity: 0.9;
+            span{
+                opacity: 1;
+                //.transition(all,400ms,ease,300ms);
+                &:nth-child(2){
+                    position: absolute;
+                    top: 0px;
+                    margin-left: -10px;
+                    opacity: 0;
+                    color: lighten(@navy, 2.5%);
+                }
+            }
+        }
+    }
+    section.mobileMenuAccount, section.mobileMenu{
+        //.transition(all,375ms,ease-out,0ms);
+        top: 0px;
+        height: 100vh;
+        position: fixed;
+        div > ul{
+            > li{
+                a{
+                    display: block;
+                    line-height: 60px;
+                    height: 60px;
+                    background-color: @lightBlue;
+                    color: @white;
+                    padding: 0px 20px;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                    &:active{
+                        background-color: darken(@lightBlue, 5%);
+                            //.transition(all,100ms,ease,0ms);
+                            font-size: 98%;
+                    }
+                }
+                &:nth-child(even){
+                    a{
+                        background-color: @darkBlue;
+                        &:active{
+                            background-color: darken(@darkBlue, 5%);
+
+                        }
+                    }
+                }
+                &.menuTitle a{
+                    background-color:mix(@gray, @navy, 45%);
+                    text-transform: uppercase;
+                    font-weight: 800;
+                    //.transition(all,250ms,ease-in,0ms);
+                    &:before{
+                        opacity: 0;
+                        content: '';
+                        font-size: 12px;
+                        position: relative;
+                        top: -1px;
+                        //.transition(all,250ms,ease-out,0ms);
+                    }
+                    &:active{
+                        font-size: 98%;
+                        background-color:mix(@gray, @navy, 40%);
+                        //.transition(all,100ms,ease,0ms);
+                    }
+                }
+                &.getHelpMobile a{
+                    background-color:@orange;
+                    &:active{
+                        background-color: darken(@orange, 5%);
+                    }
+                }
+                &.sidebarRig a:after{
+                    .fa;
+                    content:"\f061";
+                    color: #455056;
+                    float: right;
+                }
+            }
+        }
+    }
+    section.mobileMenu{
+        left: 0px;
+        .transform(translate(-100%,0px));
+        background-color:mix(@gray, @navy, 55%);
+        width: 85%;
+        ul.mobSocial{
+            text-align: center;
+            margin-top: 20px;
+            li, li a{
+                display: inline;
+                background: transparent !important; //override social class
+                padding: 0px 5px 0px 0px;
+                font-size: 24px;
+            }
+            li a{
+                &:active{
+                    color: @teal;
+                }
+            }
+        }
+    }
+
+    section.mobileMenuAccount{
+        right: 0px;
+        background-color:mix(@gray, @navy, 55%);
+        width: 85%;
+        .transform(translate(100%,0px));
+        header.profileOverview{
+            padding: 20px;
+            p{
+                color: #566a75;
+                font-weight: 600;
+                border-bottom: 2px solid #707f87;
+                padding-bottom: 15px;
+                font-size: 13px;
+                line-height: 17px;
+            }
+            span{
+                font-weight: 600;
+                display: block;
+                font-size: 16px;
+                color: @white;
+                margin-bottom: 5px;
+                //margin-top: 10px;
+            }
+        }
+        ul{
+            > li{
+                text-indent: 40px;
+                position: relative;
+                span.fa{
+                    font-size: 23px;
+                    font-weight: 100;
+                    position: absolute;
+                    left: -20px;
+                }
+                &.notifications:before{
+                    content:'3'; //Number of notifications
+                    border-radius: 50%;
+                    background-color: @aqua;
+                    color: @white;
+                    font-weight: 800;
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    position: absolute;
+                    left: 160px;
+                    margin-top: 20px;
+                    text-indent: 0px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//Presets
+.closeTabMobile, .signOutMobile{
+    color: @white;
+    background-color: transparent;
+    text-transform: none;
+    text-align: center;
+    display: block;
+    font-weight: 600;
+    margin: 0 auto;
+    line-height: 12px;
+    height: auto;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.closeTabMobile{
+    margin-bottom: 20px;
+}
+.mobileOverlay{
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    visibility: hidden;
+    background-color: @navy;
+    opacity: 0;
+    z-index: 3;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    height: ~'calc(100vh - 60px)';
+    .transition(all,375ms,ease-out,0ms);
+}
+
+
+
+
+//Consistent Openings
+body.menuOpen, body.accountOpen{
+    overflow: hidden;
+    .transition(all,375ms,ease-out,0ms);
+    top: 0px;
+    height: 100vh;
+    position: absolute;
+    .mobileOverlay{
+        opacity: 0.85; 
+        visibility: visible;
+        &:active{
+            opacity: 0.95;
+        }       
+    }
+}
+
+
+//Menu Open
+body.menuOpen{
+    .canvasCenter, header.mobileHeader{
+       .transform(translate(85%,0px));
+    }
+    .section.mobileMenu{
+       .transform(translate(0px,0px));
+    }
+    header.mobileHeader{
+        section.fixedBar{
+            button.menuToggle{
+                span{
+                    &:first-child{
+                        opacity: 0;
+                    }
+                    &:nth-child(2){
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//Account Open
+body.accountOpen{
+    .canvasCenter, header.mobileHeader{
+        .transform(translate(-85%,0px));
+    }
+    section.mobileMenuAccount{
+       .transform(translate(100%,0px));
+    }
+    header.mobileHeader{
+        section.fixedBar{
+            button.accountToggle{
+                span{
+                    &:first-child{
+                        opacity: 0;
+                    }
+                    &:nth-child(2){
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+//3rd tier
+body.menuOpen.sidebarLeftMobile{
+    .canvasCenter, header.mobileHeader{
+    }
+    header.mobileHeader section.mobileMenu{
+        li.menuTitle a:before {
+            .fa;
+            content: "\f0d9";
+            margin-right: 4px;
+            opacity: 1;
+        }
+    }
+    .sidebar.sidebarsRight{
+        .transform(translate(0%,0px));
+        pointer-events: all;
+        section{
+            .transform(translate(0%,0px));
+            right: inherit;
+            left: 0px;
+        }
+    }
+
+    //Section fade-ins
+    &.donateM{
+        section.donate{
+            opacity: 1;
+            z-index: 999;
+        }
+        header.mobileHeader{
+            .scroller{
+                overflow: hidden;
+            }
+        }
+    }
+    &.newsroomM{
+        section.news{
+            z-index: 999;
+            opacity: 1;
+        }
+        header.mobileHeader{
+            .scroller{
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+body.accountOpen.sidebarLeftMobile{
+    .mobileMenuAccount > .scroller{
+        overflow-y: hidden;
+    }
+}*/

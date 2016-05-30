@@ -1,0 +1,17 @@
+<!-- Admin panel on right side of page -->
+<template name="admin">
+    <aside id="admin-controls">
+        <button id="newSection" draggable="true" title="Add Page Section">&#xf12e;</button>
+        <button id="newActionAlert" title="Create Action Alert">&#xf0f3;</button>
+    </aside>
+    {{> debug}}
+</template>
+
+<!-- Admin controls on each section -->
+<template name="sectionAdmin">
+    <aside class="section-controls">
+        <button class="section-delete" title="Delete">&#xf014;</button>
+        <button class="section-edit" title="Edit">&#xf044;</button>
+        <input type="text" class="section-name" placeholder="Section Name" value="{{name}}" />
+    </aside>
+</template>

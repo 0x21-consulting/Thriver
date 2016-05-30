@@ -1,0 +1,55 @@
+<template name="contact">
+    <section class="contact mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="containerSmall">
+            <header>
+                <h1>Contact WCASA</h1>
+                <ul class="contactInfo">
+                    <li>Phone (608) 257-1516</li>
+                    <li>Fax (608)257-2150</li>
+                    <li><a href="mailto:wcasa@wcasa.org">wcasa@wcasa.org</a></li>
+                </ul>
+                <p class="address">
+                    2801 West Beltine Highway, Suite 202<br>
+                    Madision, Wisconsin 53713<br>
+                    <a href="https://www.google.com/maps/place/2801+W+Beltline+Hwy+%23202,+Madison,+WI+53713/@43.034741,-89.4274008,17z/data=!3m1!4b1!4m2!3m1!1s0x8807ad6daf6daa9d:0x93cfebcf81dadf8a" target="_blank">Map</a>
+                </p>
+            </header>
+            <main>
+                <form>
+                    <input id="name" type="text" name="name" placeholder="NAME" required>
+                    <input id="email" type="text" name="email" placeholder="EMAIL" required>
+                    <textarea id="comments" cols="20" rows="3" name="comments" placeholder="COMMENTS"></textarea>
+                    <input class="button button-melon" type="submit" value="Send Message">
+                </form>
+                <div class="footerBrand">
+                    <a href="#" class="brandLink">
+                        <svg width="178" height="40">
+                            <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="178" height="40" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="copyright">&copy; 2010-2016 Wisconsin Coalition Against Sexual Assault, Inc.</p>
+                <div class="topContainer">
+                    <a class="top button" href="#masthead">top <span class="fa">&#xf0d8;</span></a>
+                </div>
+            </main>
+        </div>
+    </section>
+</template>
+
+ <template name="thanksContact">
+    <div class="thanksContact formResponse">
+        <h3>Thanks for reaching out!</h3>
+        <p>An associate will get back in touch with you lorem ipsum ipsum lorem ipsum todor hodor lipsum.</p>
+    </div>
+</template>
+
+ <template name="failureContact">
+    <div class="thanksContact formResponse">
+        <h3>The form submission was unsuccessful!</h3>
+        <p>Please try again later or contact the site administrator for support.</p>
+    </div>
+</template>

@@ -1,0 +1,65 @@
+//Options
+//1. Theme Canvas Effect
+// Referenced in animation.import.less.
+@canvasEffectId : 2; // 1-8 Desktop effects available. (Currently only 2 active)
+@bodyBgColor : mix(@gray, @navy, 70%);
+@offCanvasBgColor : @blueGrayLight;
+
+@easeDefault: cubic-bezier(0.465, 0.183, 0.153, 0.946);
+@durationDefault: 450ms;
+
+//Color Variables
+@white: #ffffff;
+@altWhite: #fafafa;
+@altWhite2: #f9f9f9;
+@black: #062031;
+@gray: #ebf2f2;
+@navy: #062131;
+@blue: #2c5465; //Only used in Utility nav twice?
+@teal: #00b7c5;
+@aqua: #1db7c5;
+@orange: #f1592a;
+@darkOrange: #D63500; //For text to be on
+@yellow: #F5D76E;
+@gold: #f2af47;
+@lightBlue: #566a75; //Flat
+@darkBlue: #4e606a; //Flat
+@midnightBlue: #6d7f88; //Flat
+
+//Refined
+@blueGray: mix(@navy, @gray, 71%);
+@blueGrayLight: lighten(mix(@navy, @gray, 60%),3%);
+
+//Social
+@twitterC: #00b0ed;
+@facebookC: #3b5998;
+@youtubeC: #e52d27;
+
+//Fonts
+.fa{font-family: "FontAwesome";}
+.os{font-family: "Old Standard TT', serif";}
+.rw{font-family: 'Raleway', sans-serif;}
+
+//Weights
+@light: 400;
+@normal: 600;
+@bold: 700;
+
+//Sidebar Initialization
+// A data-width is applied to a button containing the data-sidebar and data-position data-values.
+// The data-width controls the canvas offset and off-canvas element size.
+// The data-widths applied on the toggle element also need to be declare here.
+@offCanvasWidths : 356,656,700,1100;
+
+//Color Schematics (Demo Content/Oprphans) Need Homes
+body{background-color: @bodyBgColor;}
+.off-canvas{background-color: @blueGrayLight;}
+.utility{background-color: beige;}
+header.main{background: white;}
+.overlay{background-color: rgba(0,0,0,0.5);}
+i{ font-style: normal; .fa; }
+main{
+    background: #f3efe0;
+    height: 6000px;
+}
+

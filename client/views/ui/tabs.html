@@ -1,0 +1,17 @@
+<template name="tabs">
+    <menu class="tabs">
+        {{#each tabs}}
+            <li>
+                <a href="#{{id}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
+            </li>
+        {{/each}}
+    </menu>
+    <div class="tabs">
+        {{#each tabs}}
+            <article id="{{id}}" aria-hidden="true">
+                {{> Template.dynamic template=template}}
+            </article>
+        {{/each}}
+    </div>
+</template>
+

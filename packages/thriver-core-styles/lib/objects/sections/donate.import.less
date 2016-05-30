@@ -1,0 +1,126 @@
+section.donate {
+    width: 656px;
+    h2 .fa{color: lighten(@orange, 10%);}
+    p, h3, h4{color: @white;}
+    p{
+        padding: 0px 100px;
+        .font(1.4,1.9,0.025,@normal,none);
+        margin: 0px 0px 40px 0px;
+    }
+    h3{
+        padding: 0px;
+        margin: 0px 0px 20px 0px;
+    }
+    h4{
+        text-align: left;
+        &.paymentDetails{
+            margin-top: 20px;
+        }
+    }
+    form{
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
+        .shadow(close);
+        padding: 30px 0px 40px 0px;
+        background-color: @blueGray;
+        .placeholderColor(lighten(@lightBlue,5%));
+        fieldset{
+            padding: 0px 107px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+            &:last-child{
+                margin-top: 30px;
+            }
+        }
+        input{
+            width: 100%;
+            margin: 0 auto;
+            margin-bottom: 15px;
+            .font(1.4,1.7,0.025,@normal,none);
+            &.customAmt{
+                width: 33.3333%;
+                display: block;
+                float: left;
+                background-color:darken(@blueGray, 10%);
+                .font(1.4,1.7,0.025,@normal,none);
+            }
+        }
+        label{
+            .opacity(1) !important; //override default
+        }
+        label.radio{
+            padding: 1px 0px;
+            width: 33.33333%;
+            margin: 0px;
+            float: left;
+            display: block;
+        }
+        label input{
+            margin-top: 6px;
+        }
+        // Credit Card Image in number text field
+        .cc-pic {
+            color: #fff;
+            font-size: 32px;
+            position: relative;
+            display: block;
+            margin: -51px 0 27px 394px;
+            min-height: 20px;
+        }
+        span.bill {
+            position: absolute;
+            right: 12px;
+        }
+        button.submit{
+            margin-top: 48px;
+            max-width: 180px;
+            width: 100%;
+            margin: 0 auto;
+            height: auto;
+            padding: 0px;
+            line-height: 50px;
+            height: 50px;
+        }
+    }
+    // Donation states
+    .hide { display: none; }
+}
+
+
+
+
+
+
+
+//////////////////// Needs to be organized
+@media @mobile{
+    section.donate{
+        p, h3{
+            padding: 0px;
+            margin: 0px 0px 10px 0px;
+            text-align: left;
+            color: @white;
+        }
+        form{
+            background-color: transparent;
+            label{
+                white-space: nowrap;
+            }
+            fieldset{
+                padding: 0px;
+            }
+            .cc-pic{
+                position: absolute;
+            }
+            .styledSelect.small, .cvv2{
+                width: 88px;
+            }
+            button.submit{
+                max-width: 999px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+

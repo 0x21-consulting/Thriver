@@ -1,0 +1,126 @@
+/* 
+- context.import.less -
+Styles associated with the theme shell construct.
+Including: 
+Main element widths/heights, z-indexing, positioning, visibility
+Basic relationship of aside and main elements.
+Canvas Animations.
+*/
+
+//Contextual Elements
+@canvas : ~'.canvas';
+@canvasPush : ~'main';
+@off : ~'.off-canvas';
+@offActive : ~'[data-canvas-state=open]';
+@overlay : ~'.overlay';
+@header : ~'header.main';
+@utility : ~'.utility';
+@mobileNav : ~'header.mobile';
+@sidebar : ~'section.sidebar';
+
+//Element Heights
+@utilityH : 36px;
+@headerH: 200px;
+@headerFixedH : 50px;
+@headerMobileH : 50px;
+@windowHSansUtility : ~'calc(100% - @{utilityH})';
+
+//Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
+@length : length(@offCanvasWidths);
+.off-canvas-width-init(@offCanvasWidths; @index) when (@index > 0) {
+    .off-canvas-width-init(@offCanvasWidths; (@index - 1)); // decrement.
+    @width : extract(@offCanvasWidths, @index);
+    .canvas[data-canvas-width='@{width}'] {
+        @{off}{ width:~"@{width}px"; }
+        &@{offActive}{
+            &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));} }
+            &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"-@{width}px", 0, 0));} }
+        }
+    }
+}
+
+//Initialize Canvas Width/Height Classes
+.off-canvas-width-init(@offCanvasWidths; @length);
+
+//Canvas Specifications
+@{canvas}{
+    position: relative;
+    overflow: hidden;
+    //Constants
+    @{utility}, @{header}, @{off}{ position: fixed; }
+    @{canvasPush}{ position: relative; }
+    @{utility}, @{header}, @{overlay} { width: 100%; }
+    @{overlay}{ .opacity(1); }
+    @{off}{ .visible; }
+    @{off},@{overlay}{ height: 100%; }
+    @{utility}, @{header}, @{canvasPush}, @{off}, @{overlay}{ top: 0; left: 0; }
+
+    @{off} {
+        z-index: 0;
+        top: @utilityH;
+        .hidden;
+        @{sidebar}{
+            height: @windowHSansUtility;
+            display: none;
+            &[aria-hidden="false"]{display: block;} //Show active sidebar
+        }
+    }
+    @{canvasPush} {
+        z-index: 1;
+        margin-top:@utilityH;
+        //will-change:initial; //transform value prevents header element from fixing to window
+    }
+    @{header}{
+        z-index: 2;
+        top: @utilityH;
+        height: @headerH;
+    }
+    @{utility}{
+        z-index: 4;
+        height: @utilityH;
+    }
+    @{overlay}{
+        z-index: 3;
+        position: absolute;
+        .opacity(0);
+    }
+    //Offset the main content according to the combined height of headers
+    @{canvasPush}{ padding-top: @utilityH + @headerH; }
+
+    //Mobile Context
+    @{mobileNav}{ 
+        display:none; 
+        height: @headerMobileH;
+    } 
+    @media @mobile{
+        @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
+        @{mobileNav}{ display: inherit; } //Show Mobile Header
+        @{canvasPush} { padding-top: @headerMobileH; }
+    }
+}
+
+//Active Canvas
+//Body is given class noScroll, pausing scroller on body (helpers.less)
+@{offActive}{
+    overflow: hidden;
+    @{overlay}{ .opacity(1); }
+    @{off}{ .visible; }
+    //Places the offCanvas Element on the right while canvasRight is active
+    &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
+}
+
+//Canvas Animations
+//This requires Animations not transitions
+/*@{header}, @{canvasPush}{ .transition(transform 375ms ease 0ms, opacity 300ms ease 0ms); }
+@{off}{ .transition2(transform,@durationDefault,@easeDefault,0ms,visibility,0ms,linear,@durationDefault); }
+@{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+@{offActive}{
+    @{off}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+    @{overlay}{ .transition2(opacity,300ms,linear,0ms,transform,@durationDefault,@easeDefault,0ms); }
+}*/
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback)
+.no-csstransforms3d @{canvasPush},
+.no-js @{canvasPush} {
+    padding-left: 300px;
+}*/

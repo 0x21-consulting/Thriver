@@ -1,0 +1,357 @@
+// Import from thriver:core-styles package
+/*
+@import "{thriver:core-styles}/lib/index.less";
+
+section.masthead{
+    z-index: @mastheadZ;
+    //position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-color: @navy;
+    //top: 135px;
+    //margin-bottom: 135px;
+    //min-height: 600px;
+    min-height: ~'calc(100vh - 295px)';
+    //padding: 160px 0px 0px 0px;
+    text-align: center;
+    color:@white;
+    will-change:transform;
+    .transition(transform,@canvasDuration,@canvasEase,0ms);
+    .opacity(1);
+    //.translate(0px, 135px);
+    //margin-bottom: -23px;
+    //.shadow(closeDown);
+    //.boxShadow(0px,3px,7px,0px,0.3);
+    @media @mobile{
+        display: block;
+        height: auto;
+        min-height: 0px;
+        padding-top: 0px;
+        .opacity(1);
+        .translate(0px,0px);
+    }
+    h1,p, a.cta{
+        color: @white;
+    }
+    a.cta{
+        display: inline-block;
+        .buttonColor(@orange);
+        margin: 7px 0px 0px 0px;
+        padding: 20px;
+    }
+    h1{
+        margin: 0px;
+        .font(3.6,4.2,0.15,@bold,uppercase);
+    }
+    p{
+    .font(1.6,3.0,0.025,@normal,none);
+    }
+    ul{margin-left: 0px;}
+    li{
+        list-style: none;
+    }
+    a{cursor: pointer;}
+}
+
+
+
+//Indicator Arrow
+section.masthead .arrow{
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -15px;
+    color: @white;
+    z-index: 4;
+    will-change:transform,opacity;
+    .fa;
+    .font(5.0,5.0,0.0,@light,none);
+    .opacity(0.5);
+    .translate(0px,0px);
+    .transition2(transform,250ms,@canvasEase, 0ms, opacity,250ms,@canvasEase, 0ms);
+    &:hover{
+        .opacity(1);
+    }
+}
+
+//Animate move on fixedHeader class added to body
+.fixedHeader section.masthead{
+    //.translate(0px, -156px);
+    .arrow{
+        .opacity(0);
+        .translate(0px,-20px);
+    }
+}
+
+
+// Slide Styles
+section.masthead{
+    //Nav styles
+    nav.mastheadNav{
+        position: absolute;
+        display: table;
+        z-index: 9999;
+        margin: 0px;
+        text-align: left;
+        width: 400px;
+        right: 10%;
+        right: ~'calc(50% - 595px)';
+        min-height: ~'calc(100vh - 289px)';
+        //margin-top: 80px;
+        .inner{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        h2{
+            .font(1.8,2.2,0.025,@normal,uppercase);
+            color: @white;
+            margin: 0px 0px 16px 0px;
+            padding: 0px 0px 0px 20px;
+            .opacity(0.7);
+        }
+        ul{
+            margin: 0px;
+            > li{
+                list-style: none;
+                display: inline-block;
+                .font(1.4,1.7,0.025,@normal,uppercase);
+                margin: 0px;
+                .textButtonColor(@gray);
+                cursor: pointer;
+                .opacity(0.7);
+                border-bottom: 2px solid transparent;
+                padding:15px 20px 15px 20px;
+                .transition(opacity,@canvasDuration,@canvasEase,0ms);
+                &.active{
+                    .opacity(1);
+                    //border-bottom: 2px solid @gray;
+                    //border-bottom: 2px solid rgba(255,255,255,0.15);
+                }
+                &:last-child{
+                    margin:0px;
+                }
+                //display: block;
+                position: relative;
+                //margin: 0px 12px 0px 12px;
+                &:after {
+                    .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: @white;
+                    top: 83%;
+                    width: ~'calc(100% - 20px)';
+                    .opacity(0);
+                    .translate(0px,10px);
+                }
+                &:hover {
+                    .opacity(0.9);
+                    &:after {
+                        .opacity(0.1);
+                        .translate(0px,0px);
+                    }
+                }
+                &.active{
+                    &:after{
+                        .opacity(0.3);
+                        .translate(0px,0px);
+                        //background-color: @teal;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+    //Slide Styles
+    ul.mastheadContent{
+        min-height: ~'calc(100vh - 295px)';
+        margin: 0px;
+        > li{
+            display: table;
+            min-height: ~'calc(100vh - 295px)';
+            position: absolute;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            > div{
+                display: table-cell;
+                vertical-align: middle;
+                text-align: left;
+                width: 700px;
+                position: relative;
+                left: 50%;
+                left: ~'calc(50% - 505px)';
+            }
+            div.border{
+                border-right: 2px solid @gray;
+                border-right: 2px solid rgba(255,255,255,0.15);
+                padding: 0px 60px 0px 0px;
+                .scale(0.99,0.99);
+                transform-origin:right center;
+                .transition(transform,@canvasDuration,@canvasEase,0ms);
+            }
+
+            //Animations
+            z-index: -1;
+            .opacity(0);
+            .transition(opacity,@canvasDuration,linear,0ms);
+
+            &.active{
+                z-index: 1;
+                .opacity(1);
+                //will-change:opacity;
+                //animation: mastheadin @canvasDuration @headerDelay 1 @headerFirstEase alternate;
+                div.border{
+                    .scale(1,1);
+                }
+            }
+        }
+        > li:after{
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            min-height:600px;
+            height: ~'calc(100vh - 268px)';
+            padding-top: 199px;
+            z-index: -1;
+            pointer-events: none;
+            background-color: @navy;
+            .opacity(0.95);
+            @media @mobile{
+                .opacity(0.75);
+            }
+        }
+    }
+}
+*/
+/* Specifications for styling a Masthead slide
+    -The ul.mastheadContent > li should have specific classes applied for desired style results
+        -'img' if the slide has an image background
+        -'<color>' to specifiy the slide theme
+*/
+//Background Styles, Colors, Constants & Images (Which will need to be dynamically loaded)
+/*section.masthead{
+    ul.mastheadContent{
+        > li:after{
+             background-color: @navy;
+        }
+        > li.blue{}
+        > li.yellow{}
+        > li.red{}
+        > li.teal{}
+        > li.gray{}
+        > li.navy{}
+    }
+}
+*/
+
+
+
+
+//Temp Image Declarations
+/*section.masthead ul.mastheadContent{
+    > li.img:first-child{
+        background-image: url('/lib/img/mastheadArticle.gif');
+        &:after{
+            background: #00c6ff; //fallback for old browsers
+            background: -webkit-linear-gradient(to left, #00c6ff , #0072ff);
+            background: linear-gradient(to left, #00c6ff , #0072ff); 
+        }
+    }
+    > li.img:nth-child(2){
+        background-image: url('/lib/img/mastheadAlert.jpg');
+        &:after{
+            background: #FF4E50; 
+            background: -webkit-linear-gradient(to left, #FF4E50 , #F9D423); 
+            background: linear-gradient(to left, #FF4E50 , #F9D423); 
+        }
+    }
+    > li.img:nth-child(3){
+        background-image: url('/lib/img/mastheadImpact.jpeg');
+        &:after{
+            background: #ddd6f3;
+            background: -webkit-linear-gradient(to left, #ddd6f3 , #faaca8); 
+            background: linear-gradient(to left, #ddd6f3 , #faaca8); 
+        }
+    }
+}
+
+
+
+//Temp Image Declarations
+section.masthead ul.mastheadContent{
+    > li.img:first-child{
+        background-image: url('/lib/img/mastheadArticle.gif');
+        a{.textButtonColor(@yellow) !important;}
+        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+
+        &:after{
+            background: rgba(34,119,180,1);
+            background: -moz-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(34,119,180,1)), color-stop(100%, rgba(0,165,168,1)));
+            background: -webkit-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -o-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: -ms-linear-gradient(left, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            background: linear-gradient(to right, rgba(34,119,180,1) 0%, rgba(0,165,168,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2277b4', endColorstr='#00a5a8', GradientType=1 );
+        }
+    }
+    > li.img:nth-child(2){
+        a{.textButtonColor(lighten(@yellow,15%)) !important;}
+        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+        background-image: url('/lib/img/mastheadAlert.jpg');
+        &:after{
+            background: #4b6cb7; 
+            background: -webkit-linear-gradient(to left, #4b6cb7 , #182848);
+            background: linear-gradient(to left, #4b6cb7 , #182848);
+        }
+    }
+    > li.img:nth-child(3){
+        a{.textButtonColor(@yellow) !important;}
+        a.button{.buttonColor(#f46b45) !important; color:@white !important;}
+        background-image: url('/lib/img/mastheadImpact.jpeg');
+        &:after{
+            background: #f46b45; 
+            background: -webkit-linear-gradient(to left, #f46b45 , #eea849); 
+            background: linear-gradient(to left, #f46b45 , #eea849);  
+        }
+    }
+}
+
+
+
+
+@media @air{
+    section.masthead, section.masthead ul.mastheadContent, section.masthead ul.mastheadContent > li{
+        min-height: ~'calc(100vh - 120px)';
+    }
+    section.masthead nav.mastheadNav{min-height: ~'calc(100vh - 160px)';}
+    section.masthead ul.mastheadContent > li > div{
+        min-height: 363px;
+    }
+}
+
+
+@media (max-width:1125px){
+    section.masthead ul.mastheadContent > li > div{
+        width: 600px;
+        padding-left: 50px;
+    }
+    section.masthead nav.mastheadNav{
+        right:~'calc(50% - 544px)' !important;
+    }
+}*/

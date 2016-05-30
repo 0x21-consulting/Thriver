@@ -1,0 +1,15 @@
+<template name="base">
+    <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
+        {{> utility}}
+        {{> navigation}}
+        {{> navigationMobile}}
+        {{> main}}
+        {{> aside}}
+        <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
+        
+        <!--The below templates need homes-->
+        <!--{{> articleNews}} //Article Page Template -->
+        <!--{{>help}} //Get Help Modules -->
+        <!--{{>alerts}} //Alert Templates -->
+    </div>
+</template>

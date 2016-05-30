@@ -1,0 +1,202 @@
+//Notifications & Events Lists
+ul.notificationMenu{
+    background-color: @blueGray;
+}
+ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
+    > li{
+        padding: 36px;
+        .dateMeta, .byLine{
+            .font(1.2,1.7,0.025,@bold,normal);
+            color: lighten(@lightBlue, 30%);
+        }
+        .text{
+            display: block;
+            .font(1.4,1.7,0.025,@bold,none);
+            a{
+                .textButtonColor(@teal);
+                color: @white;
+            }
+        }
+    }
+}
+ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
+    li.notificationEmpty, li.eventsEmpty{
+        text-align: center;
+        color: @white;
+        .font(1.4,2.2,0.025,@normal,none);
+        padding: 36px;
+        .shadow(close);
+    }
+    button{
+        display: inline-block;
+        margin-top: 10px;
+        text-indent: 0px;
+        .buttonColor(@teal);
+        &.deny{
+            .buttonColor(@orange);
+        }
+        &.unregister{
+             .asideLink;
+             margin: 10px 0px 0px 0px;
+             background-color: transparent;
+        }
+        &.redirectButton{
+            display: block;
+            margin: 0px auto;
+            .buttonColor(darken(@lightBlue, 2.5%));
+        }
+    }
+    span.response{
+        display: none;
+        .font(1.2,1.4,0.025,@normal,none);
+        color: @teal;
+        margin: 5px 0px 0px 0px;
+        .undo{
+            .asideLink;
+            clear: both;
+            display: block;
+            background-color: transparent;
+            margin: 5px 0px 0px 0px;
+        }
+    }
+    li.selected{
+        span.response{
+            display: block;
+        }
+        button.deny, button.approve, button.viewEvent, button.unregister{
+            display: none;
+        }
+    }
+}
+
+//Acount Details
+section.accountDetails{
+    .tabStyle(@blueGray,25%,65px,true);
+    form{
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%));
+        .row{
+            text-align: right;
+            max-width: 177px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+    //Content
+    ul.accountDetailsContent{
+        form{
+            max-width: 360px;
+            margin: 0 auto;
+            .toggleSwitch label{
+                .opacity(1);
+                &:first-child{
+                    margin-bottom: 0px; //Override Form Default
+                }
+            }
+            input[type=submit]{
+                margin: 16px 0px 0px 0px;
+            }
+            &#subscriptions {
+                max-width: none;
+                padding: 0px;
+                li{
+                    position: relative;
+                }
+            }
+        }
+        > li{
+            ul > li > span, dl{
+                margin: 0 auto;
+                display: block;
+                max-width: 360px;
+                &.response{
+                    display: none;
+                }
+            }
+            dl{
+                .dlColors(@black,@white,@white);
+                max-width: 340px;
+                margin: 10px auto 0px auto;
+
+                dd{
+                    &.statusPending{color: @yellow;}
+                    &.statusOccupy{color: @teal;}
+                    &.statusDelivery{color: @yellow;}
+                    &.statusPendingAvailability{color: @gray;}
+                }
+            }
+            &.selected{
+                span.response{
+                    display: block;
+                }
+            }
+            &.accountSettings{
+                padding: 0px 0px 80px 0px;
+            }
+            &.subscriptions, &.registeredEvents{
+                padding: 0px;
+            }
+            button{
+                .buttonColor(darken(@sidebarContentBgColor, 3%));
+                &.viewEvent{.buttonColor(@teal);}
+            }
+            dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
+            &:nth-child(even){
+                button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+                dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
+            }
+            span.byLine{
+                margin-top: 5px !important; //this cascade needs adjusting
+            }
+        }
+    }
+}
+
+
+// Registration form
+section.register, section.login{
+    form {
+        padding: 40px;
+        text-align: left;
+        background-color: @blueGray;
+       .shadow(close);
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
+        label{
+            display: none;
+        }
+        input{
+            margin-bottom: 15px;
+            &[type=submit]{
+                margin-bottom: 0px;
+            }
+        }
+        .noMatch:after {
+            content: '\f06a';
+            position: absolute;
+            top: 37px; 
+            right: 10px;
+            font-size: 22px;
+            .fa;
+        }
+        .showRegisterBtn{
+            cursor: pointer;
+            .textButtonColor(@white);
+            .font(1.4,1.4,0.025,@normal,none);
+            margin: 30px auto 0px auto;
+            padding: 0px;
+            display: block;
+            text-align: center;
+            padding: 0px;
+        }
+    }
+}
+
+
+.eventsRegistered.selected .response{
+    display: block !important;
+    margin-top: 5px;
+    color: @yellow;
+}
+
+.eventsRegistered button.unregister, .eventsRegistered button.undo{
+    background-color: transparent !important;
+}

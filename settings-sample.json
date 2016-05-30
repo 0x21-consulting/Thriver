@@ -1,0 +1,21 @@
+{
+    "public": {
+        "title": "My Nonprofit",
+        "favicon": "/path/to/favicon.png",
+        
+        "twitterAccount" : "https://twitter.com/my-nonprofit",
+        "twitterWidgetId": "1234567890",
+        "facebookPage"   : "https://www.facebook.com/my-nonprofit",
+        "youtubeChannel" : "https://www.youtube.com/user/my-nonprofit",
+        
+        "googleAnalyticsId": "",
+        "googleMapsApiKey": ""
+    },
+    
+    "paypal": {
+        "host": "api.paypal.com",
+        "port": "",
+        "client_id": "",
+        "client_secret": ""
+    }
+}

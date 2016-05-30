@@ -1,0 +1,99 @@
+<template name="navigationMobile">
+    <header class="mobile">
+        <section class="fixedBar">
+            {{> menuToggle}}
+            {{> brandMobile}}
+            {{> accountToggle}}
+        </section>
+        {{> mobileMenu}}
+        {{> mobileMenuAccount}}
+        <div class="mobileOverlay"></div>
+    </header>
+</template>
+
+
+<template name="menuToggle">
+    <button class="menuToggle fa">
+        <span>&#xf0c9;</span>
+        <span>&#xf061;</span>
+    </button>
+</template>
+
+<template name="accountToggle">
+    <button class="accountToggle fa">
+        <span>&#xf013;</span>
+        <span>&#xf060;</span>
+    </button>
+</template>
+
+<template name="brandMobile">
+    <a href="#" class="brandLink">
+        <svg width="177" height="40">
+            <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="177" height="40" />
+        </svg>
+    </a>
+</template>
+
+<template name="mobileMenu">
+    <section class="mobileMenu">
+        <div class="scroller">
+            <ul>
+                <li class="menuTitle"><a href="#">Menu</a></li>
+                <li class="getHelpMobile"><a href="#"><span class="fa">&#xf06a;</span> Get Help</a></li>
+                <li><a href="#">What we do</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Who We Are</a></li>
+                <li><a href="#">Get Involved</a></li>
+                <li><a href="#">Service Providers</a></li>
+                <li class="sidebarRig donate" data-sidebar="rightMedium"><a href="#">Donate</a></li>
+                <li class="sidebarRig newsroom"><a href="#">Newsroom</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li class="sidebarRig myAccountLink"><a href="#">My account</a></li>
+            </ul>
+            <ul class="mobSocial">
+                <li class="twitter fa">
+                    <a href="https://twitter.com/wcasa_org" target="_blank">
+                        &#xf099;
+                    </a>
+                </li>
+                <li class="social fa">
+                    <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
+                        &#xf16a;
+                    </a>
+                </li>
+                <li class="social fa">
+                    <a href="https://www.facebook.com/wcasa" target="_blank">
+                        &#xf082;
+                    </a>
+                </li>
+            </ul>
+            <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+        </div>
+    </section>
+</template>
+
+<template name="mobileMenuAccount">
+    <section class="mobileMenuAccount">
+        <div class="scroller">
+            {{#if currentUser}}
+                <header class="profileOverview">
+                    <p>
+                        <span>Eoghan McInerney</span>
+                        eoghan.tadhg@gmail.com<br>
+                        WCASA Madison
+                    </p>
+                </header>
+                <ul>
+                    <li class="sidebarRig registeredEventsMob"><a href="#"><span class="fa">&#xf274;</span> Registered Events</a></li>
+                    <li class="sidebarRig subscriptionsManagerMob"><a href="#"><span class="fa">&#xf0e0;</span> Subscriptions</a></li>
+                    <li class="sidebarRig notifications notificationsMob"><a href="#"><span class="fa">&#xf06a;</span>Notifications</a></li>
+                    <li class="sidebarRig profileSettingsMob"><a href="#"><span class="fa">&#xf013;</span> Profile Settings</a></li>
+                </ul>
+                <button type="button" class="signOutMobile">Sign Out <span class="fa">&#xf0da;</span></button>  
+                <button type="button" class="closeTab closeTabMobile">Close Tab</button>
+            {{else}}
+            <!--Is empty, however the login form is positioned in this section-->
+            {{/if}}     
+        </div>     
+    </section>
+</template>

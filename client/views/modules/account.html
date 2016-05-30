@@ -1,0 +1,11 @@
+<template name="accounts">
+    {{#if currentUser}}
+        <!-- If logged in -->
+        {{> account}}
+        {{> notifications}}
+    {{else}}
+        <!-- not logged in -->
+        {{> login}}
+        {{> register}}
+    {{/if}}
+</template>
