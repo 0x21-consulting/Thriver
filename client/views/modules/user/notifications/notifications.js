@@ -109,3 +109,42 @@ Template.debug.events({
             parent.querySelector(':nth-child(3)').value);
     }
 });
+
+Template.notifications.events({
+    //Temp UX Alert Notes
+    'click .notificationRenewal button': function (event) {
+        if (window.innerWidth >= 768) {
+            $('.overlay').click();
+            $('li.donate').click();
+        } else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+            $('.menuToggle').click();
+            $('.mobileMenu li.donate').click();
+        }
+    },
+    'click .notificationApproval > button': function (event) {
+        $(event.target).parent().addClass('selected');
+    },
+    'click .notificationApproval .undo': function (event) {
+        $(event.target).parent().parent().removeClass('selected');
+    },
+    'click section.notifications h2': function (event) {
+        removeOpenAccounts();
+    }
+});
+
+
+Template.login.events({
+    'click form .showRegisterBtn': function (event) {
+        if (window.innerWidth >= 768) {
+            $('li.register').click();
+        } 
+        /*else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+            $('.menuToggle').click();
+            $('.mobileMenu li.donate').click();
+        }*/
+    }
+});

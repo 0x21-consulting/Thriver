@@ -1,9 +1,8 @@
-//Sidebar sections
 var profileVars = [{
         title: 'Name',
         id: 'updateName',
         type: 'name',
-        value: 'name',
+        value: 'firstname',
         valueGlobal: 'true',
         required: 'required'
     },{ 

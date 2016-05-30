@@ -5,7 +5,7 @@
     <form class="editable">
         {{#each item}}
             <label for ="{{id}}">{{title}}</label>
-            <input id="{{id}}" type="{{type}}" name="{{id}}" value="{{#if valueGlobal}}{{currentUser.property value}}{{else}}{{value}}{{/if}}" {{disabled}} {{required}} />
+            <input id="{{id}}" type="{{type}}" name="{{id}}" value="{{currentUser.profile.['value']}}" {{disabled}} {{required}} />
         {{/each}}
         <input type="submit" value="Update Account">
     </form>
