@@ -1,20 +1,42 @@
 // Populate Profile tab under Account Overview
 Template.profile.helpers({
-    name: function () {
-        var user = Meteor.user();
-        if (user && user.profile)
-            return user.profile.firstname + ' ' + user.profile.lastname;
-        return '';
-    },
-    organization: function () {
-        return organization.get();
-    },
-    email: function () {
-        var user = Meteor.user();
-        if (user && user.emails && user.emails[0])
-            return user.emails[0].address;
-        return '';
-    }
+    items: [{
+        title: 'Name',
+        id: 'updateName',
+        type: 'name',
+        required: 'required',
+        value: function () {
+            var user = Meteor.user();
+            if (user && user.profile)
+                return user.profile.firstname + ' ' + user.profile.lastname;
+            return '';
+        }
+    },{ 
+        title: 'Associated Organization',
+        id: 'updateProvider',
+        type: 'text',
+        disabled: 'disabled',
+        value: function () {
+            return organization.get();
+        },  
+    },{ 
+        title: 'Email',
+        id: 'updateEmail',
+        type: 'email',
+        required: 'required',
+        value: function () {
+            var user = Meteor.user();
+            if (user && user.emails && user.emails[0])
+                return user.emails[0].address;
+            return '';
+        }   
+    },{ 
+        title: 'Password',
+        id: 'updatePassword',
+        type: 'password',
+        required: 'required',
+        value: 'xxxxxx'
+    }]
 });
 
 // Update Profile

@@ -1,12 +1,10 @@
-<!-- Account Details Content Sections -->
-<!--Although the value should be collecting currentUser.name: nothing displays-->
 <template name="profile">
     <h3>Account Settings</h3>
     <form class="editable">
-        {{#each item}}
-            <label for ="{{id}}">{{title}}</label>
-            <input id="{{id}}" type="{{type}}" name="{{id}}" value="{{currentUser.profile.['value']}}" {{disabled}} {{required}} />
-        {{/each}}
+		{{#each items}}
+			<label for ="{{id}}">{{title}}</label>
+			<input id="{{id}}" type="{{type}}" name="{{id}}" value="{{value}}" {{disabled}} {{required}} />
+		{{/each}}
         <input type="submit" value="Update Account">
     </form>
 </template>
