@@ -360,4 +360,32 @@ Template.utility.helpers({
     }
 });
 
+Template.login.events({
+    'click form .showRegisterBtn': function (event) {
+        if (window.innerWidth >= 768) {
+            $('li.register').click();
+        } 
+        /*else{
+            removeOpenAccounts();
+            $('.mobileOverlay').click();
+            $('.menuToggle').click();
+            $('.mobileMenu li.donate').click();
+        }*/
+    }
+});
+
+
+Template.utility.helpers({
+    // Show notifications on bell icon
+    show: function () {
+        if (Meteor.user())
+            return true;
+        return false;
+    },
+    // Show notification count
+    count: function () {
+        // Return count
+        return count.get();
+    }
+});
 

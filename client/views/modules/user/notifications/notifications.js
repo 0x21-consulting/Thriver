@@ -81,19 +81,21 @@ Template.notifications.helpers({
         else
             return all;
     }
-});
-Template.utility.helpers({
-    // Show notifications on bell icon
-    show: function () {
-        if (Meteor.user())
-            return true;
-        return false;
-    },
-    // Show notification count
-    count: function () {
-        // Return count
-        return count.get();
-    }
+    /* Notifications is already in the db schema:
+    However see below for proposed data schema.
+    Currently "type" would be equal to "template". If this gets change the view conditional will have to be updated.
+    notification: [{
+        type: 'action', //Would represent if an action is required. Could accept 'generic' as well.
+        content: 'soandso@gmail.com has requested access to the account',
+        actions: { //Only required if type is action
+            title: 'Approve',
+            action: 'approveUser', //reference some type of JS/data function
+        },{
+            title: 'Deny',
+            action: 'denyUser', //reference some type of JS/data function
+        }
+    }];
+    */
 });
 
 // Debug controls
@@ -131,20 +133,5 @@ Template.notifications.events({
     },
     'click section.notifications h2': function (event) {
         removeOpenAccounts();
-    }
-});
-
-
-Template.login.events({
-    'click form .showRegisterBtn': function (event) {
-        if (window.innerWidth >= 768) {
-            $('li.register').click();
-        } 
-        /*else{
-            removeOpenAccounts();
-            $('.mobileOverlay').click();
-            $('.menuToggle').click();
-            $('.mobileMenu li.donate').click();
-        }*/
     }
 });
