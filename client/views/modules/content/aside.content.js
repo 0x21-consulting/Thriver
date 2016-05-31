@@ -15,10 +15,15 @@ var sidebars = [{
                 id: 'subscriptions',
                 template : 'subscriptions'
             },{
+                title: 'Events',
+                icon : 'calendar',
+                id: 'events',
+                template: 'eventsRegistered'
+            },{
                 title: 'Requests',
                 icon : 'book',
                 id: 'requests',
-                template: 'userRequests'
+                template: 'requests'
             }
         ]
     },{ 

@@ -1,0 +1,18 @@
+<template name="requests">
+    <h3>{{heading}}</h3>
+    <ul>
+        {{#if items}}{{#each items}}
+            <li>
+                <p><a href="#{{id}}" title="{{title}}">{{title}}</a></p>
+                <address rel="author">{{byline}}</address>
+                <dl>
+                    <dt>{{statusHeading}}</dt>
+                    <dd class="{{status.type}}">{{status.message}}</dd>
+                </dl>
+                <button>{{detailsButton}}</button>
+            </li>              
+        {{/each}}
+        {{else}}<li class="none">{{none}}</li>{{/if}}
+        <li><button>{{moreButton}}</button></li>
+    </ul>
+</template>
