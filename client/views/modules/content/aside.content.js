@@ -34,10 +34,10 @@ var sidebars = [{
         template: 'notifications'
     },{ 
         title: 'Account Sign in',
-        id: 'login', 
+        id: 'signin', 
         width: 356, 
         position:'left',
-        template: 'login'
+        template: 'signin'
     },{ 
         title: 'Create an Account',
         id: 'register', 

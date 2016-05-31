@@ -5,8 +5,8 @@
             <li>
                 <time datetime="{{dateTime}}">{{friendlyDate}}</time>
                 <h4><a href="#{{id}}">{{title}}</a></h4>
-                <button data-type="details" aria-label="{{detailsButtonAria}}">{{detailsButton}}</button>
-                <button data-type="unregister" aria-label="{{unregisterButtonAria}}">{{unregisterButton}}</button>
+                <button data-action="details" aria-label="{{detailsButtonAria}}">{{detailsButton}}</button>
+                <button data-action="eventUnregister" aria-label="{{unregisterButtonAria}}">{{unregisterButton}}</button>
                 <!--If unregister=true{
                     <p class="event">
                         You have been unregistered for event.
@@ -16,6 +16,6 @@
             </li>             
         {{/each}}
         {{else}}<li class="none">{{none}}</li>{{/if}}
-        <li><button data-type="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
+        <li><button data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
     </ul>
 </template>
