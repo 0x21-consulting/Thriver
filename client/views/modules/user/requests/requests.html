@@ -9,10 +9,10 @@
                     <dt>{{statusHeading}}</dt>
                     <dd class="{{status.type}}">{{status.message}}</dd>
                 </dl>
-                <button>{{detailsButton}}</button>
+                <button aria-label="{{detailsButtonAria}}" data-type="details">{{detailsButton}}</button>
             </li>              
         {{/each}}
         {{else}}<li class="none">{{none}}</li>{{/if}}
-        <li><button>{{moreButton}}</button></li>
+        <li><button aria-label="{{moreButtonAria}}" data-type="more">{{moreButton}}</button></li>
     </ul>
 </template>

@@ -1,34 +1,21 @@
 <template name="eventsRegistered">
-    <li class="registeredEvents">
-        <h3>Registered Events</h3>
-        <ul class="eventsMenu stripes">
-            {{>eventsRegisteredzz}}
-            {{>eventsRegisteredzz}}
-            <li>        
-                <button type="button" class="viewEvents redirectButton">View All Events <span class="fa inline">&#xf0da;</span></button>
-            </li>
-        </ul>
-    </li>
-</template>
-
-<!--Tab Components-->
-<template name="eventsEmpty">
-    <li class="eventsEmpty">
-        <span>You are not currently registered for any events.</span>
-    </li>
-</template>
-
-<template name="eventsRegisteredzz">
-    <li class="eventsRegistered">
-        <span class="dateMeta">November 21, 2015</span>
-        <span class="text"><a href="#">Jerard Hall Group Meeting</a></span>
-        <span><button type="button" class="viewEvent">View Event</button></span>
-        <span><button type="button" class="unregister">Unregister</button></span>
-        <span class="response">{{> alertEventUnregister}}</span>
-    </li>
-</template>
-
-<template name="alertEventUnregister">
-    <span>You have been unregistered for event.
-    <button type="button" class="undo">Undo</button></span>
+    <h3>{{heading}}</h3>
+    <ul>
+        {{#if items}}{{#each items}}
+            <li>
+                <time datetime="{{dateTime}}">{{friendlyDate}}</time>
+                <h4><a href="#{{id}}">{{title}}</a></h4>
+                <button data-type="details" aria-label="{{detailsButtonAria}}">{{detailsButton}}</button>
+                <button data-type="unregister" aria-label="{{unregisterButtonAria}}">{{unregisterButton}}</button>
+                <!--If unregister=true{
+                    <p class="event">
+                        You have been unregistered for event.
+                        <button type="button" data-type="undo">Undo</button>
+                    </p>
+                }-->
+            </li>             
+        {{/each}}
+        {{else}}<li class="none">{{none}}</li>{{/if}}
+        <li><button data-type="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
+    </ul>
 </template>

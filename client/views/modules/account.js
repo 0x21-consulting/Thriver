@@ -22,47 +22,6 @@ getOrganization = function () {
         // Update reactive var
         organization.set(result);
     });
-},
-
-/**
- * Handle ListServ Subscriptions
- * @method
- *   @param {string}  url       - The ListServ URL
- *   @param {string}  email     - The email address to subscribe
- *   @param {boolean} subscribe - True to subscribe, false to unsubscribe
- */
-listServSubscribe = function (url, email, subscribe) {
-    // Mutual suspicion
-    url = '' + url;
-    email = '' + email;
-    if (!url || !email) return;
-    
-    // Prepare request
-    var xhr  = new XMLHttpRequest(),
-        form = new FormData();
-    
-    // Form details
-    if (subscribe) {
-        form.append('email', email);
-        form.append('pw', 'password');
-        form.append('pw-conf', 'password');
-    } else {
-        form.append('unsub', 'Unsubscribe');
-        form.append('unsubconfirm', 1);
-    }
-    
-    // This doesn't work anyway until proper XSS channels are in place
-    /*xhr.addEventListener('load', function () {
-        console.log(this);
-    });*/
-    
-    // Use proper subscribe/unsubscribe URL
-    if (subscribe)
-        xhr.open('POST', 'http://lists.wcasa-blog.org/subscribe.cgi/' + url);
-    else
-        xhr.open('POST', 'http://lists.wcasa-blog.org/options.cgi/' + url + '/' + email);
-    
-    xhr.send(form);
 };
 
 // Bind to login and on load

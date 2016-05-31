@@ -10,9 +10,15 @@ Template.requests.helpers({
     }, 
     detailsButton: function () {
         return 'Item Details';
+    },
+    detailsButtonAria: function () {
+        return 'View all the details related to this library item';
     }, 
     moreButton: function () {
         return 'View Library';
+    },
+    moreButtonAria: function () {
+        return 'View enitre Library section';
     },
     items: [{
             title: '"There is diversity Within Diversity": Community Leaders Views on increasing diversity in youth serving organizations.',
