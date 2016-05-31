@@ -1,70 +1,79 @@
-// Subscriptions tab
 Template.subscriptions.helpers({
-    /**
-     * Email Subscription to Press Releases
-     */
-    pressReleases: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.pressReleases;
-        return false;
-    },
-    /**
-     * Email Subscription to Action Alerts
-     */
-    actionAlerts: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.actionAlerts;
-        return false;
-    },
-    /**
-     * Email Subscription to the Newsletter
-     */
-    newsletter: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.newsletter;
-        return false;
-    },
-    /**
-     * Expert Witness Listserv Subscription
-     */
-    expertWitness: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.expertWitness;
-        return false;
-    },
-    /**
-     * SA Prevention Listserv Subscription
-     */
-    saPrevention: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.saPrevention;
-        return false;
-    },
-    /**
-     * Survivors & Allies Task Force Listserv Subscription
-     */
-    saTaskForce: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.saTaskForce;
-        return false;
-    },
-    /**
-     * Sexual Assault Advocates Listserv Subscription
-     */
-    saAdvocates: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.saAdvocates;
-        return false;
-    },
-    /**
-     * Campus Sexual Assault Listserv Subscription
-     */
-    campusSA: function () {
-        if (Meteor.user() && Meteor.user().profile)
-            return Meteor.user().profile.subscriptions.campusSA;
-        return false;
-    }
+    lists: [{
+        heading: 'Email Subscriptions',
+        items: [{
+                title: 'Press Releases',
+                id: 'pressReleasesToggle',
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.pressReleases;
+                    return false;
+                }
+            },{
+                title: 'Action Alerts',
+                id: 'actionAlertsToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.actionAlerts;
+                    return false;
+                }       
+            },{
+                title: 'Newsletter',
+                id: 'newsletterToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.newsletter;
+                    return false;
+                },     
+            }
+        ]
+    },{
+        heading: 'Mailing Lists (Listservs)',
+        items: [{
+                title: 'Expert Witness',
+                id: 'expertWitnessToggle',
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.expertWitness;
+                    return false;
+                }
+            },{
+                title: 'SA Prevention',
+                id: 'saPreventionToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.saPrevention;
+                    return false;
+                }
+            },{
+                title: 'Survivors & Allies Task Force',
+                id: 'saTaskForceToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.saTaskForce;
+                    return false;
+                }
+            },{
+                title: 'Sexual Assault Advocates',
+                id: 'saAdvocatesToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.saAdvocates;
+                    return false;
+                }  
+            },{
+                title: 'Campus Sexual Assault',
+                id: 'campusSAToggle', 
+                checked: function () {
+                    if (Meteor.user() && Meteor.user().profile)
+                        return Meteor.user().profile.subscriptions.campusSA;
+                    return false;
+                }
+            }
+        ]
+    }]
 });
+
 Template.subscriptions.events({
     /**
      * Subscribe to something
