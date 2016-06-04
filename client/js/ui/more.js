@@ -1,15 +1,15 @@
 //more.js controls display events for elements containing details/more. Via hover or click.
 Meteor.moreFunctions = {
     toggleMore : function(){
-        var parent = findAncestor(event.target, 'more');
+        var parent = h.findAncestor(event.target, 'more');
         var e = parent.getElementsByTagName('figure')[0];
         if (event.target.getAttribute('aria-expanded') == 'false'){ 
-            active(event.target,true);
-            hidden(e,false);
+            h.active(event.target,true);
+            h.hidden(e,false);
         } else{ 
             event.target.setAttribute('aria-expanded', 'false');
-            active(event.target,false);
-            hidden(e,true);
+            h.active(event.target,false);
+            h.hidden(e,true);
         }
     }
 }
