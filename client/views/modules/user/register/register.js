@@ -1,3 +1,37 @@
+Template.register.helpers({
+    submitValue: function () {
+        return 'Create Account';
+    },
+    success: function () {
+        return 'Registration successful!  Please check your email to verify your account.';
+    },
+    items: [{
+        title: 'Name',
+        id: 'nameReg',
+        type: 'name',
+        required: 'required',
+        placeholder: 'Name'
+    },{ 
+        title: 'Email Address',
+        id: 'emailReg',
+        type: 'email',
+        required: 'required',
+        placeholder: 'Email'
+    },{
+        title: 'Password',
+        id: 'passwordReg',
+        type: 'password',
+        required: 'required',
+        placeholder: 'Password'    
+    },{
+        title: 'Repeat Password',
+        id: 'repeatPasswordReg',
+        type: 'password',
+        required: 'required',
+        placeholder: 'Repeat Password' 
+    }]
+});
+
 //Register Form
 Template.register.events({
     /**
