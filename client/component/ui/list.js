@@ -1,6 +1,6 @@
 //To be deleted. Used as reference for varieties of list data.
 var lists =[{
-    type: 'generic', //accepts: generic, details
+    type: 'article', //accepts: generic, details, article
     itemType: 'category',
     paginate: true, //Default is false
     perPage: 10, //if paginate:true, how many before paginate
