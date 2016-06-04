@@ -1,19 +1,38 @@
 <template name="utility">
     <nav id="utility" class="utility" data-focus="global">
         <ul>
-            {{#each item}}
-                <li class="{{#if equals position 'right'}}right{{/if}} {{#if more}}more{{/if}}">
-                    <a href="{{#if equals type 'link'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon-{{{icon}}}{{/if}} {{#if iconAfter}}icon-after{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" aria-controls="{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}" aria-expanded="false" data-toggle="{{#if equals type 'sidebar'}}canvas{{/if}}">
-                        {{title}}
-                        {{#if equals sidebar 'accounts'}}<i>&#xf007;</i> {{name}}{{/if}}
-                    </a>
-                    {{#if more}}
-                        <figure aria-hidden="true">
-                            {{> Template.dynamic template=more}}
-                        </figure>
-                    {{/if}}       
-                </li>
-            {{/each}}    
+            {{#if currentUser}}
+                {{#each items}}
+                    {{#if equals user 'active'}}
+                        {{>utilityItem}}
+                    {{/if}}
+                {{/each}}    
+            {{else}}
+                 {{#each items}}
+                    {{#if equals user 'inactive'}}
+                        {{>utilityItem}}
+                    {{/if}}
+                {{/each}}             
+            {{/if}}
+             {{#each items}}
+                {{#if equals user 'public'}}
+                    {{>utilityItem}}
+                {{/if}}
+            {{/each}}
         </ul>
     </nav>
+</template>
+
+<template name="utilityItem">
+    <li class="{{#if equals position 'right'}}right{{/if}} {{#if more}}more{{/if}}">
+        <a href="{{#if equals type 'link'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon-{{{icon}}}{{/if}} {{#if iconAfter}}icon-after{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" aria-controls="{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}" aria-expanded="false" data-toggle="{{#if equals type 'sidebar'}}canvas{{/if}}" data-action="{{#if action}}{{action}}{{/if}}">
+            {{title}}
+            {{#if equals sidebar 'accounts'}}<i>&#xf007;</i> {{name}}{{/if}}
+        </a>
+        {{#if more}}
+            <figure aria-hidden="true">
+                {{> Template.dynamic template=more}}
+            </figure>
+        {{/if}}       
+    </li>
 </template>
