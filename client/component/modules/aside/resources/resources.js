@@ -4,7 +4,7 @@ function removeActiveClassResources(){
 }
 
 // Events
-Template.resources.events({
+Template.body.events({
     // Switch tabs
     'click ul.resourcesTabs > li': function (event) {
         var index = $(event.target).index() + 1;

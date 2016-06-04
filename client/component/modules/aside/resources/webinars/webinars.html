@@ -1,0 +1,17 @@
+<template name="webinars">
+    <li>
+        <ul class="resourcesItems infosheets stripes">
+            {{>backToResourcesMobile}}
+            <li class="mainTitle dtHide"><h2>Infosheets</h2></li>
+            <!--{{#each itemCategory}}-->
+                    <!--Category of Items Loop Here-->
+            <!--{{/each}}-->
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{>itemCategory}}
+            {{> loadMore }}
+        </ul>
+    </li>
+</template>

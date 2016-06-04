@@ -1,0 +1,44 @@
+<template name="filter">
+    <aside class="filter">
+        <form autocomplete="off">
+            <label for="{{filterId}}" class="fa">&#xf002;</label>
+            <input id="{{filterId}}" type="search" placeholder="Search" />
+            {{>filterObject}}
+        </form>
+    </aside>
+</template>
+
+<!--Pending explicit library content before making section reactive-->
+<template name="filterObject">
+    <fieldset class="filterObject">
+        <div class="styledSelect fullBlockMob">
+            <label class="dtHide">Classification</label>
+            <select id="category" name="category">
+                <option value="0">Select Classification</option>
+                <option value="01">Survivors</option>
+                <option value="02">Providers</option>
+                <option value="03">Resources</option>
+            </select>
+        </div>
+        <div class="styledSelect fullBlockMob">
+            <label class="dtHide">Category</label>
+            <select id="category" name="category">
+                <option value="0">Select Category</option>
+                <option value="01">Survivors</option>
+                <option value="02">Providers</option>
+                <option value="03">Resources</option>
+            </select>
+        </div>
+        <div class="styledSelect fullBlockMob">
+            <label class="dtHide">Material</label>
+            <select id="material" name="material">
+                <option value="0">Select Material Type</option>
+                <option value="01">Book</option>
+                <option value="02">CD</option>
+                <option value="03">eBook</option>
+            </select>
+        </div>
+        <input type="submit" value="Search Library" />
+        <button class="viewAll">View All Alphabetically <span class="fa">&#xf0da;</span></button>
+    </fieldset>
+</template>

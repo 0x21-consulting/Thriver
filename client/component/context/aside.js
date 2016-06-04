@@ -56,6 +56,8 @@ Template.aside.helpers({
         id: 'resources', 
         width: 700, 
         position:'right',
+        filter: 'true',
+        filterId: 'searchResources',
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'Library',
                 id: 'library',
@@ -79,6 +81,8 @@ Template.aside.helpers({
         id: 'news', 
         width: 1100, 
         position:'right',
+        filter: 'true',
+        filterId: 'searchNews',
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'In the News',
                 id: 'in-the-news',

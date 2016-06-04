@@ -6,6 +6,9 @@
             </li>
         {{/each}}
     </menu>
+    {{#if filter}}
+        {{>filter}}
+    {{/if}}
     <div class="tabs">
         {{#each tabs}}
             <article id="{{id}}" aria-hidden="true">
