@@ -4,7 +4,7 @@
 Template.body.events({
     //Sign Out [data-action=signout]
     'click [data-action="signout"]': function (event) {
-        //Need event to close asides
+        clearCanvas();
         event.preventDefault(); event.stopPropagation();
         Meteor.logout(function (error) {
             if (error instanceof Error)
