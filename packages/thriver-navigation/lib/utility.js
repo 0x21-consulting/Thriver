@@ -116,8 +116,20 @@ Template.utilityItem.helpers({
         if (user && user.profile)
             return user.profile.firstname + ' ' + user.profile.lastname;
         return '';
+    },
+    // Show notifications on bell icon
+    show: function () {
+        if (Meteor.user())
+            return true;
+        return false;
+    },
+    // Show notification count
+    count: function () {
+        // Return count
+        return count.get();
     }
 });
+
 /**
  * Remove all open sidebars
  * @method

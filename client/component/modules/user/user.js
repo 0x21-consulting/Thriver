@@ -56,37 +56,3 @@ Accounts.onEmailVerificationLink(function (token, done) {
     });
 });
 
-
-
-Template.utility.helpers({
-    name: function () {
-        var user = Meteor.user();
-        if (user && user.profile)
-            return user.profile.firstname + ' ' + user.profile.lastname;
-        return '';
-    },
-    // Show notifications on bell icon
-    show: function () {
-        if (Meteor.user())
-            return true;
-        return false;
-    },
-    // Show notification count
-    count: function () {
-        // Return count
-        return count.get();
-    }
-});
-
-// Logout
-Template.utility.events({
-    'click li.logout button': function (event) {
-        document.body.classList.remove('rightSmall', 'rightMedium', 'rightLarge', 'leftSmall', 'leftMedium');
-        event.preventDefault(); event.stopPropagation();
-        Meteor.logout(function (error) {
-            if (error instanceof Error)
-                console.error(error);
-        })
-    }
-});
-

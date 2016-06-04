@@ -1,5 +1,6 @@
-//Sidebar sections
-var sidebars = [{
+// Populate Profile tab under Account Overview
+Template.aside.helpers({
+    items: [{
         title: 'Account Details',
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items 
         width: 656, //Sets the sidebar width & body class
@@ -112,8 +113,5 @@ var sidebars = [{
         width: 356, 
         position:'right',
         template: 'languageSelect' 
-    }
-];
-Template.aside.item = function() {
-    return sidebars;
-};
+        }]
+});
