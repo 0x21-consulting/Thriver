@@ -1,7 +1,16 @@
-Template.languageSelect.events({
-    // Switch tabs
-    'click .languageList > ul > li': function (event) {
-        $('.languageList > ul > li').removeClass('active');
-        $(event.target).addClass('active');
-    }
+Template.languageSelect.helpers({
+    items: [{
+    	language: "English",
+    	id: 'eng',
+    	checked: "checked"
+    },{
+    	language: "Español",
+    	id: 'esp'
+    },{
+    	language: "Hmong Daw",
+    	id:"hmong"
+    },{
+    	language: "Pусский",
+    	id: "russ"
+    }]
 });
