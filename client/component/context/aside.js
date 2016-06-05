@@ -90,7 +90,7 @@ Template.aside.helpers({
             },{
                 title: 'Press Releases',
                 id: 'press-releases',
-                template : 'pressReleases'
+                template : 'press'
             },{
                 title: 'Newsletters',
                 id: 'newsletters',

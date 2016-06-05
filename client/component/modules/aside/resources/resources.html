@@ -1,36 +1,23 @@
-
-<template name="backToResourcesMobile">
-    <li class="menuTitle resourcesTabMenu dtHide"><a href="#">Learning Center</a></li>
+<template name="infosheets">
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
 </template>
 
-<template name="itemCategory">
-    <li class="itemCategory">
-        <div class="inner">
-            <details>
-                <summary>
-                    <h5>Learning Center Section Category</h5>
-                </summary>
-                <ul>
-                    {{>itemResources}}
-                    {{>itemResources}}
-                    {{>itemResources}}
-                    {{>itemResources}}
-                    {{>itemResources}}
-                </ul>
-            </details>
-        </div>
-    </li>
+<template name="statsData">
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
 </template>
 
-
-<template name="itemResources">
-    <li><a href="#">Doucment for Download</a></li>
+<template name="webinars">
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
 </template>
 
-
-
-
-
-
-
-
+<template name="library">
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
+</template>

@@ -1,36 +1,36 @@
 //To be deleted. Used as reference for varieties of list data.
 var lists =[{
-    type: 'article', //accepts: generic, details, article
+    type: 'article', //accepts: generic, details, article, catalog
     itemType: 'category',
     paginate: true, //Default is false
     perPage: 10, //if paginate:true, how many before paginate
     style: 'striped',
     //If standard
-    items: {
+    items: [{
         title: 'One Webinar',
         date: '06991020', //This is temporary
         friendlyDate: '02/11/29',
         content: 'lorem ipsum.'        
-    },
+    }],
     //If category
-    category: {
+    category: [{
         title: 'Summer Webinars',
         id: 'summerWebinars',
-        items: {
+        items: [{
             title: 'One Webinar',
             date: '06991020', //This is temporary
             friendlyDate: '02/11/29',
             content: 'lorem ipsum.'
-        }
-    },
+        }]
+    }],
     //If toggle
-    toggle: {
+    toggle: [{
         title: 'Press Releases',
         id: 'pressReleases',
         style: 'striped'
-    },
+    }],
     //If catalog
-    catalog: {
+    catalog: [{
         title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
         id: 1,
         byline: 'Sumru Erkut, et al., Center for Research on Women, 1993',
@@ -47,5 +47,5 @@ var lists =[{
             text: 'In Transit',
 
         }
-    }
+    }]
 }];

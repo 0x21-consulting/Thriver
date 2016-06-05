@@ -1,3 +1,4 @@
+//@mcchickenburger: I suggest search be contained in a global feature which can be reused
 // Newsroom sections
 Newsroom = new Mongo.Collection('newsroom'),
 
@@ -20,102 +21,16 @@ handleSearch = function (event) {
     
     // Otherwise, create RegExp for searching fields
     else search.set(new RegExp('.*' + value + '.*', 'gi') );
-},
-
-/**
- * Produce a Friendly Date string
- * @function
- *   @param {Collection} this
- * @returns {string}
- */
-friendlyDate = function () {
-    var date   = new Date(this.date),
-        days   = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                    'Friday', 'Saturday', 'Sunday'],
-        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-                    'August', 'September', 'October', 'November', 'December'];
-    
-    // Create friendly date string
-    return days[date.getDay()] + ', ' + date.getDate() + ' ' + 
-        months[date.getMonth()] + ' ' + date.getFullYear();
 };
-
-function removeActiveClass(){
-    $('.newsContent li').removeClass('active');
-    $('.newsTabs li').removeClass('active');
-}
 
 // Subscriptions
 Meteor.subscribe('inTheNews');
 Meteor.subscribe('pressReleases');
 Meteor.subscribe('actionAlerts');
 
-// Populate templates
-Template.inTheNews.helpers({
-    news: function () {
-        return Newsroom.find({
-            type: 'inTheNews',
-            $or: search.get() instanceof RegExp ? [{
-                title: search.get() },{
-                publisher: search.get()
-            }] : [{}]
-        }, {
-            limit: quantity.get(),
-            sort: { date: -1 }
-        });
-    },
-    friendlyDate: friendlyDate
-});
-Template.pressReleases.helpers({
-    news: function () {
-        return Newsroom.find({
-            type: 'pressRelease',
-            $or: search.get() instanceof RegExp ? [{
-                title: search.get() },{
-                content: search.get()
-            }] : [{}]
-        }, {
-            limit: quantity.get(),
-            sort: { date: -1 }
-        });
-    },
-    friendlyDate: friendlyDate
-});
-Template.actionAlerts.helpers({
-    news: function () {
-        return Newsroom.find({
-            type: 'actionAlert',
-            $or: search.get() instanceof RegExp ? [{
-                title: search.get() },{
-                content1: search.get()
-            }] : [{}]
-        }, {
-            limit: quantity.get(),
-            sort: { date: -1 }
-        });
-    },
-    friendlyDate: friendlyDate
-});
-
 // Events
-Template.news.events({
-    // Switch tabs
-    'click ul.newsTabs > li:not(:last-child)': function (event) {
-        var index = $(event.target).index() + 1;
-        
-        // Set the active tab
-        $('ul.newsTabs > li').removeClass('active');
-        $(event.target).addClass('active');
-        
-        // Set the active content
-        $('ul.newsContent > li').removeClass('active');
-        $('ul.newsContent > li:nth-child(' + index + ')').addClass('active');
-        
-        // Restore number of search results to 5
-        quantity.set(5);
-        $('button.loadMore.everything').removeClass('everything');
-    },
-
+Template.aside.events({
+    //A bunch of loadmore events
     'click button.loadMore': function (event) {
         quantity.set(0); // get all results
         
@@ -123,11 +38,14 @@ Template.news.events({
         if (event && event.target && event.target.classList)
             event.target.classList.add('everything');
     },
-    
     // "Load More" Results buttons
     'click button.newsroomButton': function (event) {
         $('li.accountDetails').click();
         $('.accountDetailsTabs li:nth-child(2)').click();
+    },
+    // "Load More" Results buttons
+    'click li.newsTabMenu': function (event) {
+        removeActiveClass();
     },
     
     // Search field
@@ -135,33 +53,7 @@ Template.news.events({
     'search #searchNews': handleSearch,
     
     // Don't allow search to submit form on enter; it doesn't go anywhere
-    'submit aside.searchFieldContainer.form': function (event) {
+    'submit form#searchNewsForm': function (event) {
         event.preventDefault(); event.stopPropagation();
-    },
-
-    // "Load More" Results buttons
-    'click li.newsTabMenu': function (event) {
-        removeActiveClass();
-    },
-
-    //Mobile subscription management
-    'click .subscriptionsMob button': function (event) {
-        //Not sure where this is being called
-        event.preventDefault();
-        $('.mobileOverlay').click();
-        $('button.accountToggle').click();
-        $('li.subscriptionsManagerMob').click();
-    },
-    'click .subscriptionsRegister': function (event) {
-        //Not sure where this is being called
-        event.preventDefault();
-        $('li.login').click();
-    }
-});
-
-
-Template.news.onRendered(function () {
-    if (window.innerWidth < 768) {
-        removeActiveClass();
     }
 });

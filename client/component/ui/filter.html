@@ -1,6 +1,6 @@
 <template name="filter">
     <aside class="filter">
-        <form autocomplete="off">
+        <form autocomplete="off" id="{{filterId}}Form">
             <label for="{{filterId}}" class="fa">&#xf002;</label>
             <input id="{{filterId}}" type="search" placeholder="Search" />
             {{>filterObject}}
