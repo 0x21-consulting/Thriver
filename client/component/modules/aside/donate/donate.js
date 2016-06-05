@@ -13,7 +13,21 @@ var donateException = function (element, message) {
 }
 
 // Donate form helpers
-Template.donateDefault.helpers({
+Template.donate.helpers({
+    amountTitle : 'Donation Amount',
+    detailsTitle : 'Payment Details',
+    states: [{
+        id: 'donateDefault',
+        content: '<h3>Be a part of the movement to end sexual assault!</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>',
+        active: 'true'
+    },{
+        id: 'donateSuccess',
+        content:'<h2><span class="fa">&#xf004;</span> Thank you!</h2><h3>Your donation was successful.</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>',
+    },{
+        id: 'donateFailure',
+        content:"<h3>We're sorry, the donation was unsuccessful.<br> Please try again later.</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>",
+    }],
+    amount: [{ value: "25" },{ value: "50" },{ value: "100" }, { value: "200" }],
     'name': function () {
         var user = Meteor.user();
         
@@ -37,7 +51,13 @@ Template.donateDefault.helpers({
 });
 
 // Donate form events
-Template.donateDefault.events({
+Template.donate.events({
+    'click form .custom': function (event) {
+        $('.customAmt').focus();
+    },
+    'click form .custom': function (event) {
+        document.getElementById('customAmt').checked = true;
+    },
     // Handle form submission
     'submit form': function (event) {
         if (event && event.preventDefault)
@@ -79,8 +99,8 @@ Template.donateDefault.events({
                 error = results.error;
                 if (error && error.response) {
                     // Hide default message and indicate error
-                    document.querySelector('.donateDefault').classList.add('hide');
-                    document.querySelector('.donateFailure').classList.remove('hide');
+                    document.querySelector('.donateDefault').setAttribute('aria-hidden', 'true');
+                    document.querySelector('.donateFailure').setAttribute('aria-hidden', 'false');
                     
                     // Re-enable submit button
                     form.querySelector('button.submit').disabled = false;
@@ -130,9 +150,9 @@ Template.donateDefault.events({
                 } else {
                     // Success!  Now hide the form and display success
                     form.classList.add('hide');
-                    document.querySelector('.donateDefault').classList.add('hide');
-                    document.querySelector('.donateFailure').classList.add('hide');
-                    document.querySelector('.donateSuccess').classList.remove('hide');
+                    document.querySelector('.donateDefault').setAtrribute('aria-hidden', 'true');
+                    document.querySelector('.donateFailure').setAtrribute('aria-hidden', 'true');
+                    document.querySelector('.donateSuccess').setAtrribute('aria-hidden', 'false');
                 }
             }
         });
@@ -212,16 +232,4 @@ Template.donateDefault.events({
         }
     }
 
-});
-
-Template.donate.onRendered(function () {
-    $('form .custom').click(function(){
-        $('.customAmt').focus();
-    });
-    $('.customAmt').click(function () {
-        document.querySelector('#radio5').checked = true;
-    });
-    /*$('.sidebar h2').click(function () {
-        document.body.classList.remove('sidebarLeftMobile','donateM');
-    });*/
 });

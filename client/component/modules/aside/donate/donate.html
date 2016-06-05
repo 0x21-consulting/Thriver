@@ -1,45 +1,28 @@
 <template name="donate">
-    <section class="donate rightMedium hasSidebar">
-        <div class="scroller">
-            {{> donateSuccess}}
-            {{> donateFailure}}
-            {{> donateDefault}}
-            <button type="button" class="closeTab">Close</button>
+    {{#each states}}
+        <div id="{{id}}" aria-hidden="{{#if active}}false{{else}}true{{/if}}">
+            {{{content}}}
         </div>
-    </section>
-</template>
-
-<template name="donateDefault">
-    <div class="donateDefault">
-        <h2><span class="fa">&#xf004;</span> Donate to WCASA</h2>
-        <h3>Be a part of the movement to end sexual assault!</h3>
-        <p>
-            <b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.
-        </p>
-    </div>
-    <form autocomplete="off">
+    {{/each}}
+    <form id="donateForm" autocomplete="off">
         <fieldset>
-            <h4>Donation Amount</h4>
-            <input id="radio1" type="radio" name="amount" value="25" />
-            <label for="radio1" class="radio">$25</label>
-            <input id="radio2" type="radio" name="amount" value="50" />
-            <label for="radio2" class="radio">$50</label>
-            <input id="radio3" type="radio" name="amount" value="100" checked />
-            <label for="radio3" class="radio">$100</label>
-            <input id="radio4" type="radio" name="amount" value="200" />
-            <label for="radio4" class="radio">$200</label>
-            <input id="radio5" type="radio" name="amount" value="custom" />
+            <h4>{{amountTitle}}</h4>
+            {{#each amount}}
+                <input id="amt{{value}}" type="radio" name="amount" value="{{value}}" />
+                <label for="amt{{value}}" class="radio">${{{value}}}</label>
+            {{/each}}
             <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
             <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" />
         </fieldset>
         <fieldset>
-            <h4 class="paymentDetails">Payment Details</h4>
-            <label>Name on Card
+            <h4>{{detailsTitle}}</h4>
+            <label>
+                Name on Card
                 <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
             </label>
-            <label>Credit Card Number
-                <input type="text" name="number" placeholder="#### #### #### ####" required 
-                    pattern="[\d ]{12,19}" />
+            <label>
+                Credit Card Number
+                <input type="text" name="number" placeholder="#### #### #### ####" required pattern="[\d ]{12,19}" />
             </label>
             <span class="cc-pic fa"> </span>
             <input type="hidden" name="type" value="mastercard" />
@@ -77,25 +60,3 @@
         </fieldset>
     </form>
 </template>
-
-
-<template name="donateSuccess">
-    <div class="donateSuccess hide">
-        <h2><span class="fa">&#xf004;</span> Thank you!</h2>
-        <h3>Your donation was successful.</h3>
-        <p>
-            <b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.
-        </p>
-    </div>
-</template>
-
-<template name="donateFailure">
-    <div class="donateFailure hide">
-        <h2><span class="fa">&#xf004;</span> Donate to WCASA</h2>
-        <h3>We're sorry, the donation was unsuccessful.<br> Please try again later.</h3>
-        <p>
-            <b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.
-        </p>
-    </div>
-</template>
-

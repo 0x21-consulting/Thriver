@@ -106,7 +106,7 @@ Template.aside.helpers({
             }
         ]
     },{ 
-        title: 'Donate',
+        title: 'Donate to WCASA',
         id: 'donate', 
         width: 656, 
         position:'right',
