@@ -2,14 +2,32 @@
 People = new Mongo.Collection('people');
 Meteor.subscribe('people');
 
-// People
 Template.who.helpers({
-    staff: function () {
-        return People.find({ boardMember: false }, { sort: { name: 1 }});
-    },
-    board: function () {
-        return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
-    }
+    headline: "Who We Are",
+    content: "<p>WCASA is a membership agency comprised of organizations and <br>individuals working to end sexual violence in Wisconsin. <br>WCASA is made up of it's staff, board, volunteers and <br> 51 sexual assault service provider agencies.</p>",
+    items: [{
+        tabs: [{
+            title: 'About WCASA',
+            icon: '&#xf018;',
+            id: 'about',
+            template : 'about'
+        },{
+            title: 'WCASA Philosophies',
+            icon: '&#xf279;',
+            id: 'philosophies',
+            template : 'philosophies'
+        },{
+            title: 'WCASA Staff',
+            icon: '&#xf0c0;',
+            id: 'staff',
+            template: 'staff'
+        },{
+            title: 'Board of Directors',
+            icon: '&#xf0c0;',
+            id: 'board',
+            template: 'board'
+        }]
+    }]
 });
 Template.personStaff.helpers({
     avatar: function () {
@@ -22,19 +40,15 @@ Template.personBoard.helpers({
     }
 });
 
-
-//Can this be merged into a simpler function in coorelation with: account details & newsroom tabs
-Template.who.events({
-    // Switch tabs
-    'click ul.infoTabs > li': function (event) {
-        var index = $(event.target).index() + 1;
-        
-        // Set the active tab
-        $('ul.infoTabs > li').removeClass('active');
-        $(event.target).addClass('active');
-        
-        // Set the active content
-        $('ul.infoTabsContent > li').removeClass('active');
-        $('ul.infoTabsContent > li:nth-child(' + index + ')').addClass('active');
+Template.staff.helpers({
+    board: function () {
+        return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
     }
 });
+
+Template.board.helpers({
+    staff: function () {
+        return People.find({ boardMember: false }, { sort: { name: 1 }});
+    }
+});
+
