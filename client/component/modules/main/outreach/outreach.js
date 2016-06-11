@@ -1,27 +1,85 @@
-Template.outreach.events({
-    // Switch tabs
-    'click ul.outreachTabs > li': function (event) {
-        /*var index = $(event.target).index() + 1;
-        $('ul.outreachTabs > li').removeClass('active');
-        $(event.target).addClass('active');
-        //Transition
-        $("body").addClass("outreachTransition").delay(500).queue(function(){
-            $(this).removeClass("outreachTransition").dequeue();
-            // Set the active content
-            $('ul.outreachContent').addClass('active');
-            $('ul.outreachContent > li').removeClass('active');
-            $('ul.outreachContent > li:nth-child(' + index + ')').addClass('active');
-        }); */    
+Template.outreach.helpers({
+    items: [{
+        headline: "Get Involved",
+        content: "<p>We believe that everyone has a role and a responsibility<br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.</p>",
+        tabs: [{
+                title: 'Volunteer',
+                id: 'volunteer',
+                template : 'volunteer'
+            },{
+                title: 'Join The Board',
+                id: 'joinTheBoard',
+                template : 'joinTheBoard'
+            },{
+                title: 'WCASA Jobs',
+                id: 'wcasaJobs',
+                template: 'wcasaJobs'
+            }
+        ]
+    }]
+});
 
-        var index = $(event.target).index() + 1;
-        $('ul.outreachTabs > li').removeClass('active');
-        $(event.target).addClass('active');
-        $("body").addClass("outreachTransition").delay(200).queue(function(){
-            $(this).removeClass("outreachTransition").dequeue();
-            $('ul.outreachContent').addClass('active');
-            $('ul.outreachContent > li').removeClass('active');
-            $('ul.outreachContent > li:nth-child(' + index + ')').addClass('active');
-        });
-    }
+Template.volunteer.helpers({
+    headline: "Volunteer with WCASA",
+    content: "<p>Interested in volunteering with WCASA? All interested parties should contact Kathleen Brandenburg, Office Manager at (608) 257-1516 or <a href='mailto:wcasa@wcasa.org'>wcasa@wcasa.org.</a></p>",
+    listHeadline: "Current Volunteering Opportunities",
+    lists: [{
+	    type: 'article', //accepts: generic, details, article
+	    itemType: 'category',
+	    style: 'striped',
+	    categories: [{
+	        title: 'Clerical',
+	        id: 'jobA',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+	    },{
+ 	        title: 'Another Position',
+	        id: 'jobB',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+        },{
+ 	        title: 'Yet Another Position',
+	        id: 'jobC',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+        }]
+	}]
+});
 
+Template.joinTheBoard.helpers({
+    headline: "Join The Board",
+    content: "Lorem Ipsum."
+});
+
+Template.wcasaJobs.helpers({
+    headline: "Join The Board",
+    content: "<p>Interested in volunteering with WCASA? All interested parties should contact Kathleen Brandenburg, Office Manager at (608) 257-1516 or <a href='mailto:wcasa@wcasa.org'>wcasa@wcasa.org.</a></p>",
+    listHeadline: "Find a Job at WCASA",
+    lists: [{
+	    type: 'article', //accepts: generic, details, article
+	    itemType: 'category',
+	    style: 'striped',
+	    categories: [{
+	        title: 'Clerical',
+	        id: 'jobA',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+	    },{
+ 	        title: 'Another Position',
+	        id: 'jobB',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+        },{
+ 	        title: 'Yet Another Position',
+	        id: 'jobC',
+	        items: [{
+	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
+	        }]
+        }]
+	}]
 });
