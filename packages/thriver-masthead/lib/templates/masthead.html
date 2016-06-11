@@ -1,5 +1,8 @@
 <template name="masthead">
-    <section class="masthead" id="masthead">
+    {{#if isAdmin}}
+        {{> sectionAdmin}}
+    {{/if}}
+    <section class="masthead" id="{{anchor name=name}}" data-id="{{_id}}">
         {{#each items}}
             {{>tabs}}
         {{/each}}
