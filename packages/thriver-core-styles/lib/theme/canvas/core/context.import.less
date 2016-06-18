@@ -1,7 +1,7 @@
-/* 
+/*
 - context.import.less -
 Styles associated with the theme shell construct.
-Including: 
+Including:
 Main element widths/heights, z-indexing, positioning, visibility
 Basic relationship of aside and main elements.
 Canvas Animations.
@@ -32,9 +32,19 @@ Canvas Animations.
     @width : extract(@offCanvasWidths, @index);
     .canvas[data-canvas-width='@{width}'] {
         @{off}{ width:~"@{width}px"; }
+        @maxWidth: (@width+100);
+        @maxWidthValue: unit(`Math.abs(@{maxWidth})`, px);
         &@{offActive}{
             &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"@{width}px", 0, 0));} }
             &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(~"-@{width}px", 0, 0));} }
+        }
+        @maxWidthMedia: ~"(max-width:"@maxWidthValue~")";
+        @media @maxWidthMedia{
+            @{off}{ width:80%; }
+            &@{offActive}{
+                &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(80%, 0, 0));} }
+                &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(-80%, 0, 0));} }
+            }
         }
     }
 }
@@ -88,10 +98,10 @@ Canvas Animations.
     @{canvasPush}{ padding-top: @utilityH + @headerH; }
 
     //Mobile Context
-    @{mobileNav}{ 
-        display:none; 
+    @{mobileNav}{
+        display:none;
         height: @headerMobileH;
-    } 
+    }
     @media @mobile{
         @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
         @{mobileNav}{ display: inherit; } //Show Mobile Header
