@@ -40,10 +40,17 @@ Canvas Animations.
         }
         @maxWidthMedia: ~"(max-width:"@maxWidthValue~")";
         @media @maxWidthMedia{
-            @{off}{ width:80%; }
+            @{off}{ width:90%; }
             &@{offActive}{
-                &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(80%, 0, 0));} }
-                &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(-80%, 0, 0));} }
+                &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(90%, 0, 0));} }
+                &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(-90%, 0, 0));} }
+            }
+        }
+        @media @mobile{
+            @{off}{ width:100%; }
+            &@{offActive}{
+                &[data-canvas-position='left']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(100%, 0, 0));} }
+                &[data-canvas-position='right']{ @{canvasPush}, @{header}, @{overlay}{.transform(translate3d(-100%, 0, 0));} }
             }
         }
     }
@@ -118,6 +125,10 @@ Canvas Animations.
     //Places the offCanvas Element on the right while canvasRight is active
     &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
+
+
+
+
 
 //Canvas Animations
 //This requires Animations not transitions
