@@ -1,5 +1,5 @@
 <template name="tabs">
-    <menu class="tabs">
+    <menu class="tabs {{class}}">
         {{#each tabs}}
             <li>
                 <a href="#{{id}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
@@ -9,7 +9,7 @@
     {{#if filter}}
         {{>filter}}
     {{/if}}
-    <div class="tabs">
+    <div class="tabs {{class}}">
         {{#each tabs}}
             <article id="{{id}}" aria-hidden="true">
                 {{> Template.dynamic template=template}}
