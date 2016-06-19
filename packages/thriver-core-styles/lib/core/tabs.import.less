@@ -1,3 +1,9 @@
+//Defaults
+@tabBgColor: #aaa;
+@tabBgColorActive: #222;
+@tabTextColor: #222;
+@tabTextColorActive: #fff;
+
 menu.tabs{
     list-style: none;
     display: -webkit-box;
@@ -5,25 +11,47 @@ menu.tabs{
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-     width: 100%;
+    width: 100%;
     > li{
         -webkit-box-flex: 1;
         -webkit-flex: 1;
         -moz-box-flex: 1;
         -ms-flex: 1;
         flex: 1;
+        //align-items: center;
+        //justify-content: center;
         display: flex;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+        a{
+            display: flex;
+            width:100%;
+            padding: 25px 5px;
+            align-items: center;
+            justify-content: center;
+            &[aria-expanded=false]{ background-color: @tabBgColor; color: @tabTextColor; }
+            &[aria-expanded=true]{background-color: @tabBgColorActive; color: @tabTextColorActive;}
+        }
+        //Currently Supports 12 tabs
+        &:first-child > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 3%); }
+        &:nth-child(2) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 5%); }
+        &:nth-child(3) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 7%); }
+        &:nth-child(4) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 9%); }
+        &:nth-child(5) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 11%); }
+        &:nth-child(6) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 13%); }
+        &:nth-child(7) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 15%); }
+        &:nth-child(8) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 17%); }
+        &:nth-child(9) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 19%); }
+        &:nth-child(10) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 21%); }
     }
-    > li > [aria-expanded=false]{background-color: pink;}
-    > li > [aria-expanded=true]{background-color: blue;}
     &.top{
         //list
     }
 }
 div.tabs{
+    background-color: @tabBgColor;
     > [aria-hidden=true]{display: none;}
     > [aria-hidden=false]{display: block;}
     &.top{}
