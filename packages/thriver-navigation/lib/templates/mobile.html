@@ -1,8 +1,7 @@
 <template name="navigationMobile">
     <header class="mobile">
         <button aria-controls="#mobile-navigation" aria-expanded="false" data-toggle="mobile-navigation">
-            <span>&#xf0c9;</span>
-            <span>&#xf061;</span>
+            <span class="fa">&#xf0c9;</span>
         </button>
         <a href="#" class="brandLink">
             <svg width="177" height="40">
@@ -11,7 +10,7 @@
         </a>
     </header>
     <nav id="mobile-navigation" class="mobile">
-        <button data-toggle="back-mobile">s</button>
+        <button data-toggle="back-mobile"><span class="fa">&#xf060;</span><span class="text">Back</span></button>
         <div class="scroll">
             <ul>
                 {{#each sections}}

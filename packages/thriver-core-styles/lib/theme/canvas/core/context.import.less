@@ -17,6 +17,7 @@ Canvas Animations.
 @utility : ~'.utility';
 @mobileNav : ~'header.mobile';
 @mobileMenu : ~'nav.mobile';
+//@mobileBackButton : ~'#mobileNavigation > button';
 @sidebar : ~'section.sidebar';
 
 //Element Heights
@@ -27,7 +28,10 @@ Canvas Animations.
 @windowHSansUtility : ~'calc(100% - @{utilityH})';
 
 //Default Colors
-@mobileHeaderBgColor: #222;
+@mobileHeaderBgColor: #eee;
+@mobileMenuToggleColor: #222;
+@mobileMenuBackBgColor:#999;;
+@mobileMenuBackTextColor: #fff;
 
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
@@ -131,7 +135,12 @@ Canvas Animations.
                 margin-left: -88px;
             }
             [data-toggle="mobile-navigation"]{
-               // float: right;
+               line-height: @headerMobileH;
+               margin: 0; border: none;
+               padding:0px 15px;
+               background-color: @mobileHeaderBgColor;
+               color: @mobileMenuToggleColor;
+               span{font-size: 30px; display: block; line-height: @headerMobileH;}
             }
         }
         @{mobileMenu}{
@@ -141,6 +150,29 @@ Canvas Animations.
             z-index: 1001;
             background-color:#aaa;
             width:100%;
+            button[data-toggle="back-mobile"]{
+                position: fixed;
+                z-index: 999;
+                width: 100%;
+                height: @headerMobileH;
+                text-align: left;
+                font-weight: 100;
+                span{pointer-events: none;}
+                line-height: @headerMobileH;
+                margin: 0; border: none;
+                padding:0px 15px;
+                background-color: @mobileMenuBackBgColor;
+                color: @mobileMenuBackTextColor;
+                span{font-size: 30px; line-height: @headerMobileH;}
+                span.text{
+                    position: absolute;
+                    font-size: 24px;
+                    left: 50%;
+                    font-weight:300;
+                    margin-left: -25px;
+                }
+
+            }
             &[aria-hidden=false]{
                 .transform(translate3d(100%, 0, 0));
             }
