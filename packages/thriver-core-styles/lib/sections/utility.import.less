@@ -18,8 +18,8 @@
 @baseColorResources: #aaa;
 @baseColorNews: #aaa;
 @baseColorTwitter: #aaa;
-@baseColorFacebook: #aaa;
-@baseColorYoutube: #aaa;
+@baseColorSocial: #eee;
+@baseTransparentColor: #222;
 */
 
 // Constants
@@ -50,7 +50,7 @@ nav.utility{
         .shadowNone;
         color: @utilityButtonDefaultColor;
         .transform(scale(1,1)) !important;
-        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.15));}
+        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.2));}
     }
 }
 
@@ -58,9 +58,18 @@ nav.utility{
 //Specifics
 nav.utility{
     ul > li> a{
-        &[href="#"]{ background-color: transparent;}
-        &[href="https://www.facebook.com/wcasa"]{ background-color: @baseColorFacebook;}
-        &[href="https://www.youtube.com/user/WCASAVPCC"]{ background-color: @baseColorYoutube;}
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 1px;
+        &[href="#"]{
+            background-color: transparent;
+            color: @baseTransparentColor;
+            &:hover{.boxShadow(none);}
+        }
+        &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            background-color: @baseColorSocial;
+            color: darken(@baseColorSocial,25%);
+        }
         &[href="#twitter"]{ background-color: @baseColorTwitter;}
         &[href="#providers"]{ background-color: @baseColorHelp;}
         &[href="#resources"]{ background-color: @baseColorResources;}
