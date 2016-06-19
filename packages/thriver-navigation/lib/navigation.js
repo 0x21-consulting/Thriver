@@ -2,9 +2,12 @@
  * @summary Main-level navigation
  * @function
  */
-Template.navigation.helpers({
+
+mainNavigationHelpers = {
     sections: function () {
         var sections = Thriver.sections.get();
         return sections;
     }
-});
+};
+
+Template.navigation.helpers(mainNavigationHelpers);
