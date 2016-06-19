@@ -1,11 +1,11 @@
-// Import from thriver:core-styles package
-@import "{thriver:core-styles}/lib/index.less";
 //Variables
 @utilityHeight: 36px;
 @utilityaPadding: 0px 12px;
 @socialaPadding: 0px 11px 0px 0px;
 //Default Colors
 //@utilityBgColor: #222; //This default should be defined but loaded before options.less
+//@utilityButtonDefaultColor: #222;
+//@utilityButtonDefaultBgColor: #eee;
 
 // Constants
 nav.utility{
@@ -16,6 +16,7 @@ nav.utility{
     width: 100%;
     height: @utilityHeight;
     line-height: @utilityHeight;
+    .boxShadow(2px 0px 2px 0px rgba(0,0,0,0.2));
     i{pointer-events: none;}
     > ul{
         background-color: @utilityBgColor;
@@ -26,9 +27,13 @@ nav.utility{
     }
     li{float: left;}
     a{
+        display: block;
         height: @utilityHeight;
         line-height: @utilityHeight;
         padding: @utilityaPadding;
+        background-color: @utilityButtonDefaultBgColor;
+        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.15));}
+        color: @utilityButtonDefaultColor;
         .shadowNone;
         .transform(scale(1,1)) !important;
     }
@@ -46,6 +51,7 @@ nav.utility li.more{
     }
 }
 
+//Specifics
 
 
 /*
