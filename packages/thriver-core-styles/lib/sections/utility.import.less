@@ -7,6 +7,21 @@
 //@utilityButtonDefaultColor: #222;
 //@utilityButtonDefaultBgColor: #eee;
 
+//WCASA specific utility nav item variables (Not really sure where to put these, redefined in options)
+/*
+@baseColorNotifications: #aaa;
+@baseColorAccount: #aaa;
+@baseColorSignOut: #aaa;
+@baseColorLang: #aaa;
+@baseColorHelp: #aaa;
+@baseColorDonate: #aaa;
+@baseColorResources: #aaa;
+@baseColorNews: #aaa;
+@baseColorTwitter: #aaa;
+@baseColorFacebook: #aaa;
+@baseColorYoutube: #aaa;
+*/
+
 // Constants
 nav.utility{
     position: fixed;
@@ -26,16 +41,30 @@ nav.utility{
         list-style: none;
     }
     li{float: left;}
-    a{
+    ul > li> a{
         display: block;
         height: @utilityHeight;
         line-height: @utilityHeight;
         padding: @utilityaPadding;
         background-color: @utilityButtonDefaultBgColor;
-        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.15));}
-        color: @utilityButtonDefaultColor;
         .shadowNone;
+        color: @utilityButtonDefaultColor;
         .transform(scale(1,1)) !important;
+        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.15));}
+    }
+}
+
+
+//Specifics
+nav.utility{
+    ul > li> a{
+        &[href="#"]{ background-color: transparent;}
+        &[href="https://www.facebook.com/wcasa"]{ background-color: @baseColorFacebook;}
+        &[href="https://www.youtube.com/user/WCASAVPCC"]{ background-color: @baseColorYoutube;}
+        &[href="#twitter"]{ background-color: @baseColorTwitter;}
+        &[href="#providers"]{ background-color: @baseColorHelp;}
+        &[href="#resources"]{ background-color: @baseColorResources;}
+        &[href="#news"]{ background-color: @baseColorNews;}
     }
 }
 
@@ -50,9 +79,6 @@ nav.utility li.more{
         display: block;
     }
 }
-
-//Specifics
-
 
 /*
     li{
