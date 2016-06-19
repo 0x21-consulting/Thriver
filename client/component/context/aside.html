@@ -4,7 +4,7 @@
             <section id="{{id}}" class="sidebar scroll-box" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
                 <div class="scroll">
                     <header><h1>{{title}}</h1></header>
-                    {{#if tabs}} 
+                    {{#if tabs}}
                         {{>tabs}}
                     {{else}}
                         {{#if filter}}
@@ -12,7 +12,7 @@
                         {{/if}}
                         {{> Template.dynamic template=template}}
                     {{/if}}
-                    <button data-canvas-event="close">close</button>
+                    <button data-canvas-event="close" class="mobile-hide">close</button>
                 </div>
             </section>
         {{/each}}

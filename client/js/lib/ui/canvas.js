@@ -17,6 +17,7 @@ Meteor.canvasFunctions = {
 	    var canvas = document.getElementById('canvas');
 	    var main = document.getElementById('main');
 		var activeTab = document.querySelectorAll('section.sidebar[aria-hidden=false] menu.tabs > li > a');
+		var activeTabContent = document.querySelectorAll('section.sidebar[aria-hidden=false] div.tabs > [aria-hidden]');
 
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
 	    if(event.target.getAttribute('aria-expanded') == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
@@ -54,20 +55,35 @@ Meteor.canvasFunctions = {
 	    }
 	    //Mobile
 	    else if(event.target.getAttribute('data-toggle')== "back-mobile"){
+			var mobileNavigation = document.getElementById('mobile-navigation');
+			var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
 			hiddenSidebar = true;
+			tabActive=false;
 			for (var i = 0, e; e = sidebar[i]; i++) {
 				if(e.getAttribute('aria-hidden')== "false"){
 					hiddenSidebar=false;
-					alert('sidebar active');
 					for (var i = 0, e; e = activeTab[i]; i++) {
 						if(e.getAttribute('aria-expanded')== "true"){
-							alert('tab active');
+							tabActive=true;
+							h.active(e, false);
+							for (var i = 0, e; e = activeTabContent[i]; i++) {
+								h.hidden(e, true);
+							}
 						}
+					}
+					if(tabActive==false){
+						for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
+						for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
+						c.clearCanvas(); //Remove all canvas effect classes
+						h.hidden(overlay,true);
+						h.hidden(main,false);
+						focusGlobalElFirst.focus();
 					}
 				}
 			 }
 			 if(hiddenSidebar == true){
-				 alert('plain');
+				for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+				h.hidden(mobileNavigation, true);
 			 }
 	    }
 
@@ -83,3 +99,4 @@ Template.body.events({
     'click .overlay': function (event) { c.toggleCanvas(); },
     'click [data-canvas-event="close"]': function (event) { c.toggleCanvas(); },
 });
+
