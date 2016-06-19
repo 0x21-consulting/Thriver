@@ -1,8 +1,29 @@
 // Import from thriver:core-styles package
 @import "{thriver:core-styles}/lib/index.less";
 
+//default colors
+//This is packaged and needs to be loaded before options.import.less
+//@mobileNavigationBgColor: #eee;
+//@mobileNavigationColor: #222;
+//@mobileNavigationBorderColor: #aaa;
 header.mobile{
     button{
         span{pointer-events: none;}
+    }
+}
+
+#mobile-navigation{
+    background-color: @mobileNavigationBgColor;
+    li{
+        i{display: none;}
+        a{
+            display: block;
+            color: @mobileNavigationColor;
+            font-weight: 100;
+            line-height: 40px;
+            border-bottom: 1px solid @mobileNavigationBorderColor;
+        &:after{display: none;}
+        &:before{display: none;}
+        }
     }
 }

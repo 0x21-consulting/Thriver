@@ -62,7 +62,10 @@ main{
     background: #f3efe0;
     height: 6000px;
 }
-
+.boxShadow(@val){
+    box-shadow:@val;
+    -webkit-box-shadow:@val;
+}
 
 .mobile{
     @media (min-width:768px){
@@ -75,6 +78,14 @@ main{
     }
 }
 
+.frozen{overflow:hidden;}
+*:focus{
+    outline: none !important;
+    .boxShadow(inset 0px 0px 0px 5000px rgba(0,0,0,0.2););
+    @media @mobile{
+        .boxShadow(none);
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -106,3 +117,7 @@ main{
 @mobileMenuToggleColor: @casal;
 @mobileMenuBackBgColor: @veniceBlue;
 @mobileMenuBackTextColor: @white;
+
+@mobileNavigationBgColor: @fiord;
+@mobileNavigationColor: @white;
+@mobileNavigationBorderColor: darken(@fiord,5%);

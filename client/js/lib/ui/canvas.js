@@ -84,6 +84,7 @@ Meteor.canvasFunctions = {
 			 if(hiddenSidebar == true){
 				for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
 				h.hidden(mobileNavigation, true);
+				document.body.classList.remove('noScroll');
 			 }
 	    }
 

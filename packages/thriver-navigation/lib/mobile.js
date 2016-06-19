@@ -18,6 +18,7 @@ Template.navigationMobile.events({
         } else{
             h.active(event.target, true);
             h.hidden(mobileNavigation, false);
+            document.body.classList.add('noScroll');
         }
     },
     'click [data-toggle=back-mobile]': function (event) {
@@ -27,5 +28,12 @@ Template.navigationMobile.events({
                 if(e)
              } //Clear all active Sidebars
              */
+    },
+    'click [data-type="main-navigation-item"]': function (event) {
+        var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+        var mobileNavigation = document.getElementById('mobile-navigation');
+        for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+        h.hidden(mobileNavigation, true);
+        document.body.classList.remove('noScroll');
     }
 });
