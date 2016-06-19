@@ -1,41 +1,40 @@
 <template name="navigationMobile">
     <header class="mobile">
-        <section class="fixedBar">
-            <button class="menuToggle fa">
-                <span>&#xf0c9;</span>
-                <span>&#xf061;</span>
-            </button>
-            <a href="#" class="brandLink">
-                <svg width="177" height="40">
-                    <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="177" height="40" />
-                </svg>
-            </a>
-        </section>
+        <button aria-controls="#mobile-navigation" aria-expanded="false" data-toggle="mobile-navigation">
+            <span>&#xf0c9;</span>
+            <span>&#xf061;</span>
+        </button>
+        <a href="#" class="brandLink">
+            <svg width="177" height="40">
+                <image xlink:href="/lib/img/wisconsin-coalition-against-sexual-assault.svg" src="/lib/img/wisconsin-coalition-against-sexual-assault.png" width="177" height="40" />
+            </svg>
+        </a>
     </header>
-    <nav class="mobile">
-        <ul>
-            {{#each sections}}
-                {{> menuItem}}
-            {{/each}}
-            {{#if currentUser}}
-                {{#each items}}
-                    {{#if equals user 'active'}}
-                        {{>utilityItem}}
-                    {{/if}}
+    <nav id="mobile-navigation" class="mobile">
+        <div class="scroll">
+            <ul>
+                {{#each sections}}
+                    {{> menuItem}}
                 {{/each}}
-            {{else}}
-                {{#each items}}
-                    {{#if equals user 'inactive'}}
-                        {{>utilityItem}}
-                    {{/if}}
-                {{/each}}
-            {{/if}}
-            {{#each items}}
-                {{#if equals user 'public'}}
-                    {{>utilityItem}}
+                {{#if currentUser}}
+                    {{#each items}}
+                        {{#if equals user 'active'}}
+                            {{>utilityItem}}
+                        {{/if}}
+                    {{/each}}
+                {{else}}
+                    {{#each items}}
+                        {{#if equals user 'inactive'}}
+                            {{>utilityItem}}
+                        {{/if}}
+                    {{/each}}
                 {{/if}}
-            {{/each}}
-        </ul>
+                {{#each items}}
+                    {{#if equals user 'public'}}
+                        {{>utilityItem}}
+                    {{/if}}
+                {{/each}}
+            </ul>
+        </div>
     </nav>
 </template>
-

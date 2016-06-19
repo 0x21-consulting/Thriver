@@ -16,6 +16,7 @@ Canvas Animations.
 @header : ~'header.main';
 @utility : ~'.utility';
 @mobileNav : ~'header.mobile';
+@mobileMenu : ~'nav.mobile';
 @sidebar : ~'section.sidebar';
 
 //Element Heights
@@ -118,7 +119,7 @@ Canvas Animations.
         @{canvasPush} { padding-top: @headerMobileH; }
         @{mobileNav}{
             position: fixed;
-            z-index: 999;
+            z-index: 1000;
             width: 100%;
             background-color: @mobileHeaderBgColor;
             .brandLink{
@@ -128,6 +129,17 @@ Canvas Animations.
                 max-height: 40px;
                 overflow: hidden;
                 margin-left: -88px;
+            }
+        }
+        @{mobileMenu}{
+            position: fixed;
+            height: 100vh;
+            left: -100%; top: 0;
+            z-index: 999;
+            background-color:#aaa;
+            width:100%;
+            &[aria-hidden=false]{
+                .transform(translate3d(100%, 0, 0));
             }
         }
     }
