@@ -25,6 +25,9 @@ Canvas Animations.
 @headerMobileH : 50px;
 @windowHSansUtility : ~'calc(100% - @{utilityH})';
 
+//Default Colors
+@mobileHeaderBgColor: #222;
+
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
 .off-canvas-width-init(@offCanvasWidths; @index) when (@index > 0) {
@@ -113,6 +116,20 @@ Canvas Animations.
         @{header},@{utility}{ display: none; } //Hide Desktop header elements on mobile
         @{mobileNav}{ display: inherit; } //Show Mobile Header
         @{canvasPush} { padding-top: @headerMobileH; }
+        @{mobileNav}{
+            position: fixed;
+            z-index: 999;
+            width: 100%;
+            background-color: @mobileHeaderBgColor;
+            .brandLink{
+                position: absolute;
+                left: 50%;
+                width: 177px;
+                max-height: 40px;
+                overflow: hidden;
+                margin-left: -88px;
+            }
+        }
     }
 }
 
