@@ -1,11 +1,12 @@
 //Variables
 @utilityHeight: 36px;
-@utilityaPadding: 0px 12px;
+@utilityaPadding: 2px 12px 0px 32px;
 @socialaPadding: 0px 11px 0px 0px;
 //Default Colors
 //@utilityBgColor: #222; //This default should be defined but loaded before options.less
 //@utilityButtonDefaultColor: #222;
 //@utilityButtonDefaultBgColor: #eee;
+//@utilityButtonActiveBgColor: #aaa;
 
 //WCASA specific utility nav item variables (Not really sure where to put these, redefined in options)
 /*
@@ -22,6 +23,48 @@
 @baseTransparentColor: #222;
 */
 
+//Specifics
+nav.utility{
+    ul > li> a{
+        &[href="#"], &[href="#register"]{
+            background-color: transparent;
+            color: @baseTransparentColor;
+            &:hover{.boxShadow(none);}
+        }
+        &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            background-color: @baseColorSocial;
+            color: darken(@baseColorSocial,60%);
+            font-size: 18px;
+        }
+        &[href="#"], &[href="#register"], &[href="#accounts"], &[href="#signin"], &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            padding: 2px 12px 0px 12px;
+            //&:before{ margin: 0px; position: relative; }
+            //&:after{position:absolute; margin-left: 0px;right: 0px; top: 2px;}
+        }
+        &[href="#notifications"],&[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            &:before{ margin: 0px; position: relative; }
+        }
+        &[href="#accounts"], &[href="#signin"], &[href="#"], &[href="#register"]{ padding-right: 24px;}
+        &[href="#twitter"]{ background-color: @baseColorTwitter;}
+        &[href="#providers"],{ background-color: @baseColorHelp;}
+        &[href="#resources"]{ background-color: @baseColorResources;}
+        &[href="#news"]{ background-color: @baseColorNews;}
+        &[href="#providers"][aria-expanded="true"]{
+            background-color: darken(@baseColorHelp,5%);
+            .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.1));
+        }
+        @media (max-width:1000px){
+            padding: 2px 12px 0px 12px !important;
+            i{display: none;}
+            &:before, &:after{display: none;}
+            &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+                &:before, &:after{display: block;}
+            }
+        }
+    }
+}
+
+
 // Constants
 nav.utility{
     position: fixed;
@@ -30,7 +73,6 @@ nav.utility{
     //z-index: @utilityZ;
     width: 100%;
     height: @utilityHeight;
-    line-height: @utilityHeight;
     .boxShadow(2px 0px 2px 0px rgba(0,0,0,0.2));
     i{pointer-events: none;}
     > ul{
@@ -41,39 +83,33 @@ nav.utility{
         list-style: none;
     }
     li{float: left;}
+    ul>li:first-child{ position: relative; z-index: 2;}
     ul > li> a{
         display: block;
-        height: @utilityHeight;
-        line-height: @utilityHeight;
+        height: @utilityHeight - 2px;
+        line-height: @utilityHeight - 2px;
+        //line-height: @utilityHeight;
         padding: @utilityaPadding;
         background-color: @utilityButtonDefaultBgColor;
+        font-weight: 500;
+        font-size: 13px;
+        letter-spacing: 1px;
         .shadowNone;
+        &:before, &:after{
+            font-size: 14px;
+            font-weight: 100;
+            position: absolute;
+            margin-left: -20px;
+            margin-top: -1px;
+        }
+        &:after{margin-left: 0px;right: 10px; top: 2px;}
         color: @utilityButtonDefaultColor;
         .transform(scale(1,1)) !important;
-        &:hover{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.2));}
-    }
-}
-
-
-//Specifics
-nav.utility{
-    ul > li> a{
-        font-weight: 500;
-        font-size: 14px;
-        letter-spacing: 1px;
-        &[href="#"]{
-            background-color: transparent;
-            color: @baseTransparentColor;
-            &:hover{.boxShadow(none);}
+        &:hover, &:focus{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.2));}
+        &[aria-expanded="true"]{
+            background-color: @utilityButtonActiveBgColor;
+            .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.5));
         }
-        &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
-            background-color: @baseColorSocial;
-            color: darken(@baseColorSocial,25%);
-        }
-        &[href="#twitter"]{ background-color: @baseColorTwitter;}
-        &[href="#providers"]{ background-color: @baseColorHelp;}
-        &[href="#resources"]{ background-color: @baseColorResources;}
-        &[href="#news"]{ background-color: @baseColorNews;}
     }
 }
 

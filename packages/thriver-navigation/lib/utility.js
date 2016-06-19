@@ -22,7 +22,7 @@ utilityNavigationHelpers = {
     },{
         //Sign In
         title: 'Sign In',
-        icon : 'Caret-right',
+        icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'signin',
