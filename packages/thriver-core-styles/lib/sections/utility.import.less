@@ -2,14 +2,16 @@
 @utilityHeight: 36px;
 @utilityaPadding: 2px 12px 0px 32px;
 @socialaPadding: 0px 11px 0px 0px;
-//Default Colors
-//@utilityBgColor: #222; //This default should be defined but loaded before options.less
-//@utilityButtonDefaultColor: #222;
-//@utilityButtonDefaultBgColor: #eee;
-//@utilityButtonActiveBgColor: #aaa;
 
-//WCASA specific utility nav item variables (Not really sure where to put these, redefined in options)
 /*
+//Default Colors
+@utilityBgColor: #222; //This default should be defined but loaded before options.less
+@utilityButtonDefaultColor: #222;
+@utilityButtonDefaultBgColor: #eee;
+@utilityButtonActiveBgColor: #aaa;
+*/
+/*
+//WCASA specific utility nav item variables (Not really sure where to put these, redefined in options)
 @baseColorNotifications: #aaa;
 @baseColorAccount: #aaa;
 @baseColorSignOut: #aaa;
@@ -25,6 +27,11 @@
 
 //Specifics
 nav.utility{
+    li.right{float: right;}
+    li.more{
+        figure{ display: none;}
+        figure[aria-hidden="false"]{display: block;}
+    }
     ul > li> a{
         &[href="#"], &[href="#register"]{
             background-color: transparent;
@@ -63,7 +70,6 @@ nav.utility{
         }
     }
 }
-
 
 // Constants
 nav.utility{
@@ -110,17 +116,5 @@ nav.utility{
             background-color: @utilityButtonActiveBgColor;
             .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.5));
         }
-    }
-}
-
-
-a.iconAfter{ span.icon{float: right;} }
-nav.utility li.right{float: right;}
-nav.utility li.more{
-    figure{
-        display: none;
-    }
-    figure[aria-hidden="false"]{
-        display: block;
     }
 }
