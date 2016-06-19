@@ -19,5 +19,13 @@ Template.navigationMobile.events({
             h.active(event.target, true);
             h.hidden(mobileNavigation, false);
         }
+    },
+    'click [data-toggle=back-mobile]': function (event) {
+        c.toggleCanvas();
+        //alert('sr');
+	        /*for (var i = 0, e; e = sidebar[i]; i++) {
+                if(e)
+             } //Clear all active Sidebars
+             */
     }
 });

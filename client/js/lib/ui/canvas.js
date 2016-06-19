@@ -16,6 +16,7 @@ Meteor.canvasFunctions = {
 	    var sidebar = document.querySelectorAll('section.sidebar');
 	    var canvas = document.getElementById('canvas');
 	    var main = document.getElementById('main');
+		var activeTab = document.querySelectorAll('section.sidebar[aria-hidden=false] menu.tabs > li > a');
 
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
 	    if(event.target.getAttribute('aria-expanded') == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
@@ -41,7 +42,7 @@ Meteor.canvasFunctions = {
 	            h.hidden(e,true); //Clear all active sidebars
 	            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
 	                h.hidden(e,false); //Add active class to given sidebar
-	                canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class 
+	                canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class
 	                if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
 	                if(e.dataset.position == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
 	            }
@@ -51,6 +52,25 @@ Meteor.canvasFunctions = {
 	        f.currentFocusGroup(); //Recalculate live focus areas
 	        focusGroupElFirst.focus();
 	    }
+	    //Mobile
+	    else if(event.target.getAttribute('data-toggle')== "back-mobile"){
+			hiddenSidebar = true;
+			for (var i = 0, e; e = sidebar[i]; i++) {
+				if(e.getAttribute('aria-hidden')== "false"){
+					hiddenSidebar=false;
+					alert('sidebar active');
+					for (var i = 0, e; e = activeTab[i]; i++) {
+						if(e.getAttribute('aria-expanded')== "true"){
+							alert('tab active');
+						}
+					}
+				}
+			 }
+			 if(hiddenSidebar == true){
+				 alert('plain');
+			 }
+	    }
+
 	    f.currentFocusGroup(); //Recalculate live focus areas
 	}
 }
