@@ -4,6 +4,8 @@
 @utilityHeight: 36px;
 @utilityaPadding: 0px 12px;
 @socialaPadding: 0px 11px 0px 0px;
+//Default Colors
+//@utilityBgColor: #222; //This default should be defined but loaded before options.less
 
 // Constants
 nav.utility{
@@ -14,8 +16,9 @@ nav.utility{
     width: 100%;
     height: @utilityHeight;
     line-height: @utilityHeight;
+    i{pointer-events: none;}
     > ul{
-        background-color: lighten(@blueGray,59%);
+        background-color: @utilityBgColor;
         height: @utilityHeight;
         width: 100%;
         margin: 0px;
@@ -31,8 +34,32 @@ nav.utility{
     }
 }
 
-//a Specifics
-nav.utility{
+
+a.iconAfter{
+    span.icon{float: right;}
+}
+
+a span.fa{
+    pointer-events: none;
+}
+
+nav.utility li.right{
+    float: right;
+}
+
+
+nav.utility li.more{
+    figure{
+        display: none;
+    }
+    figure[aria-hidden="false"]{
+        display: block;
+    }
+}
+
+
+
+/*
     li{
         i{pointer-events: none;}
         //a & Span Positioning
@@ -81,7 +108,7 @@ nav.utility{
             .buttonColor(saturate(@blue, 55%));
         }
         &.news > a{
-            .buttonColor(@blue); 
+            .buttonColor(@blue);
         }
         &.register > a, &.logout > a{
             background-color: transparent;
@@ -105,45 +132,4 @@ nav.utility{
             }
             &.active > a span.fa.close{color:@white;}
         }
-    }
-    //Active a
-    li.active > a:first-child, a.active{
-        ////.color(background-color,lighten(@navy,0%),none);
-        .fa.close{
-            pointer-events: none;
-            .opacity(1);
-        }
-        .fa.up{
-            pointer-events: none;
-            .opacity(0);
-        }
-        &.notifications{
-            .notificationAlert{
-                .opacity(0);
-            }
-        }
-    }
-}
-
-
-a.iconAfter{
-    span.icon{float: right;}
-}
-
-a span.fa{
-    pointer-events: none;
-}
-
-nav.utility li.right{
-    float: right;
-}
-
-
-nav.utility li.more{
-    figure{
-        display: none;
-    }
-    figure[aria-hidden="false"]{
-        display: block;
-    }
-}
+    }*/
