@@ -33,7 +33,7 @@ Template.workNav.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, name: 1 });
+        result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
     },
@@ -41,7 +41,7 @@ Template.workNav.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
+        result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
     },
@@ -49,7 +49,7 @@ Template.workNav.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result && result.tabs && result.tabs.length)
             return true;
@@ -60,7 +60,7 @@ Template.workNav.helpers({
         var result;
         id = id || this._id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result)
             return result.tabs;
@@ -73,7 +73,7 @@ Template.workListItem.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
+        result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
     },
@@ -81,7 +81,7 @@ Template.workListItem.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, name: 1 });
+        result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
     },
@@ -89,7 +89,7 @@ Template.workListItem.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result)
             return result.tabs;
@@ -98,7 +98,7 @@ Template.workListItem.helpers({
         var result;
         id = id || this;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result)
             return result.name;
@@ -111,7 +111,7 @@ Template.workContentContainer.helpers({
         var result;
         id = id || this._id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result)
             return result.tabs;
@@ -120,7 +120,7 @@ Template.workContentContainer.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, template: 1 });
+        result = Thriver.sections.get(id, ['template']);
         
         if (result)
             return result.template;
@@ -129,7 +129,7 @@ Template.workContentContainer.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, tabs: 1 });
+        result = Thriver.sections.get(id, ['tabs']);
         
         if (result)
             return result.tabs;
@@ -141,7 +141,7 @@ Template.workContent.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, content: 1 });
+        result = Thriver.sections.get(id, ['content']);
         if (result)
             return result.content;
     },
@@ -149,7 +149,7 @@ Template.workContent.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, icon: 1 });
+        result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
     },
@@ -157,7 +157,7 @@ Template.workContent.helpers({
         var result;
         id = id || this.id;
         
-        result = Sections.findOne({ '_id': id }, { '_id': 0, name: 1 });
+        result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
     }
