@@ -24,10 +24,10 @@ Package.onUse(function (api) {
         'lib/templates/mobile.html',
         'lib/templates/utility.html',
 
-        // Styles
+        // Styles (Removed as unable to access global less dependencies. Can be found in thriver-core-styles>lib>sections...)
         //'lib/styles/utility.less',
-        'lib/styles/header.less',
-        'lib/styles/mobile.less',
+        //'lib/styles/header.less',
+        //'lib/styles/mobile.less',
 
         // Helpers and methods
         'lib/navigation.js',

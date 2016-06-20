@@ -23,7 +23,7 @@ Canvas Animations.
 //Element Heights
 @utilityH : 36px;
 @headerH: 200px;
-@headerFixedH : 50px;
+@headerFixedH : 60px;
 @headerMobileH : 50px;
 @windowHSansUtility : ~'calc(100% - @{utilityH})';
 
@@ -100,6 +100,9 @@ Canvas Animations.
         z-index: 9;
         top: @utilityH;
         height: @headerH;
+        body.fixedHeader &{
+            height: @headerFixedH;
+        }
     }
     @{utility}{
         z-index: 10;
