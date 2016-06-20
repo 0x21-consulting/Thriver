@@ -2,7 +2,7 @@
 utilityNavigationHelpers = {
     items: [{
         //Notifications
-        //title: 'Notifications', //Readable Title
+        title: '<span class="mobile">Notifications</span>', //Readable Title
         icon : 'bell', //Icon class to be applied (see icons.less)
         //iconAfter: true, //default is false. Will place the icon :after instead of :before
         type: 'sidebar', //Sets Link type. (Accepts: sidebar, external, null) *Required
@@ -94,6 +94,7 @@ utilityNavigationHelpers = {
         user: 'public'
     },{
         //Youtube
+        title: '<span class="mobile">Youtube</span>',
         icon : 'youtube',
         type: 'link',
         url: 'https://www.youtube.com/user/WCASAVPCC',
@@ -102,6 +103,7 @@ utilityNavigationHelpers = {
         user: 'public'
     },{
         //Facebook
+        title: '<span class="mobile">Facebook</span>',
         icon : 'facebook',
         type: 'link',
         url: 'https://www.facebook.com/wcasa',
