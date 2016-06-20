@@ -27,12 +27,16 @@ Thriver.sections.get = function (id, fields) {
             fieldsObj.fields[ fields[i] ] = true;
     
     if (id) {
-        tabs = Thriver.sections.collection.find({ _id: id }, { tabs: true });
-        tabs = tabs.tabs;
+        //tabs = Thriver.sections.collection.findOne({ _id: id }, { tabs: true });
+        //tabs = tabs.tabs;
+        //if (tabs)
+        //    return Thriver.sections.collection.find({ _id: { $in: tabs }}, fieldsObj);
+        tabs = Thriver.sections.collection.findOne({ _id: id }, fieldsObj);
         
-        return Thriver.sections.collection.find({ _id: { $in: tabs }}, fieldsObj);
-    }
+        return tabs;
+    } else
     
     // Return all page sections
-    return Thriver.sections.collection.find({ displayOnPage: true }, fieldsObj);
+    return Thriver.sections.collection.find({ }, fieldsObj);
+    //return Thriver.sections.collection.find({ displayOnPage: true }, fieldsObj);
 };

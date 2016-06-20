@@ -143,7 +143,7 @@ Template.workContent.helpers({
         
         result = Thriver.sections.get(id, ['content']);
         if (result)
-            return result.content;
+            return result.content; return '';
     },
     icon: function (id) {
         var result;
