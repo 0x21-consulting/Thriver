@@ -14,14 +14,23 @@ header.mobile{
 
 #mobile-navigation{
     background-color: @mobileNavigationBgColor;
+    ul{margin:0px;padding:15px 0px;}
+    figure[aria-hidden="true"]{display: none;}
+    li:hover figure[aria-hidden="false"]{display: none;}
+    li a:focus + figure[aria-hidden="false"]{display: block;}
+    li a:focus + figure[aria-hidden="true"]{display: block;}
     li{
+        list-style: none;
+
         i{display: none;}
         a{
             display: block;
             color: @mobileNavigationColor;
             font-weight: 100;
             line-height: 40px;
-            border-bottom: 1px solid @mobileNavigationBorderColor;
+            text-transform: uppercase;
+            padding: 0px 15px;
+            //border-bottom: 1px solid @mobileNavigationBorderColor;
             &:after{display: none;}
             &:before{display: none;}
         }

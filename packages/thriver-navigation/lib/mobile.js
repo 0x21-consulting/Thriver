@@ -15,6 +15,7 @@ Template.navigationMobile.events({
         if(event.target.getAttribute('aria-expanded') == 'true'){
             h.active(event.target, false);
             h.hidden(mobileNavigation, true);
+            document.body.classList.remove('noScroll');
         } else{
             h.active(event.target, true);
             h.hidden(mobileNavigation, false);

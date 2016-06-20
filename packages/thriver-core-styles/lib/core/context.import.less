@@ -187,15 +187,19 @@ Canvas Animations.
         width:100%;
         background: @headerMobileTier1color;
         top: 0; left: 0;
+        z-index: 3;
     }
     aside.off-canvas:before{
         background: @headerMobileTier2color;
         top:-@headerMobileH;
         //z-index: -1;
+        z-index: 4;
     }
     @{off} menu.tabs > li > a[aria-expanded="true"]:before{
         background: @headerMobileTier3color;
         top:-@headerMobileH;
+        z-index: 5;
+        visibility: visible !important;
     }
 }
 
@@ -234,13 +238,15 @@ button[data-toggle="back-mobile"]{
     //background-color: @mobileMenuBackBgColor;
     background-color: transparent;
     color: @mobileMenuBackTextColor;
-    span{font-size: 30px; line-height: @headerMobileH; position: relative;}
+    span.fa{font-size: 30px; line-height: @headerMobileH; position: relative;}
     span.text{
         position: absolute;
-        font-size: 24px;
+        font-size: 28px;
         left: 50%;
-        font-weight:300;
-        margin-left: -25px;
+        top: 0;
+        font-weight: 500;
+        margin-left: -59px;
+        text-transform: uppercase;
     }
 
 }
