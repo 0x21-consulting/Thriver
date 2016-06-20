@@ -13,5 +13,5 @@ Meteor.publish('sections', function (id) {
         return Thriver.sections.get(id);
     
     // Otherwise return all sections
-    return Thriver.sections.get();
+    return Thriver.sections.collection.find();
 });
