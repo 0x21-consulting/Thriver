@@ -34,12 +34,13 @@ header.mobile{
             //border-bottom: 1px solid @mobileNavigationBorderColor;
             //&:after{display: none;}
             //&:before{display: none;}
-            &[href="#notifications"]{
+            &[href="#notifications"], &[href="#signin"]{
                 border-top: 2px solid darken(@mobileNavigationBgColor,15%);
             }
-            &[data-action="signout"]{
+            &[data-action="signout"], &[data-action="register"]{
                 border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
             }
+            &[href="#providers"]{background-color: @orange;}
             &[aria-expanded]:after{
                 content:"\f0da";
                 .fa;
