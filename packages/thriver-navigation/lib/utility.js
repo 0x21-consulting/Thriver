@@ -22,7 +22,7 @@ utilityNavigationHelpers = {
     },{
         //Sign In
         title: 'Sign In',
-        icon : 'Caret-right',
+        icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
         sidebar: 'signin',
@@ -44,13 +44,14 @@ utilityNavigationHelpers = {
         user: 'active',
         action: 'signout'
     },{
+    /*
         //Language
         icon : 'flag',
         type: 'sidebar',
         sidebar: 'lang',
         position : 'right',
         user: 'public'
-    },{
+    },{*/
         //Get Help
         title: 'Get Help',
         type: 'link',
@@ -93,7 +94,7 @@ utilityNavigationHelpers = {
         user: 'public'
     },{
         //Youtube
-        icon : 'Youtube',
+        icon : 'youtube',
         type: 'link',
         url: 'https://www.youtube.com/user/WCASAVPCC',
         position : 'right',
@@ -101,7 +102,7 @@ utilityNavigationHelpers = {
         user: 'public'
     },{
         //Facebook
-        icon : 'Facebook',
+        icon : 'facebook',
         type: 'link',
         url: 'https://www.facebook.com/wcasa',
         position : 'right',

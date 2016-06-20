@@ -1,0 +1,160 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Options 6/18/16
+//Colors
+@slateGray: #687d87;
+@fiord: #485e69;
+@white: #ffffff;
+@alabaster: #f9f9f9;
+@veniceBlue: #04648d;
+@casal: #2c5465;
+@porcelain: #ecf0f2;
+@teal: #00b7c5;
+@mystic: #dce8e8;
+@riverBed: #536b78;
+@orange: #f1592a;
+@blackPearl: #062131;
+//Another color
+//Definitions
+
+//Sidebar
+@sidebarPrimaryColor: @slateGray;
+
+//Tab Defaults (Overrides tabs.less)
+@tabBgColor: @fiord;
+@tabBgColorActive: @fiord;
+@tabTextColor: @white;
+@tabTextColorActive: @white;
+
+//Search/Filter Defaults
+@filterBgColor: @fiord;
+
+//Header
+@mobileHeaderBgColor: @alabaster;
+@mobileMenuToggleColor: @casal;
+@mobileMenuBackBgColor: @veniceBlue;
+@mobileMenuBackTextColor: @white;
+
+@mobileNavigationBgColor: @fiord;
+@mobileNavigationColor: @white;
+@mobileNavigationBorderColor: darken(@fiord,5%);
+
+@utilityBgColor: @porcelain;
+@utilityButtonDefaultColor: @white;
+@utilityButtonDefaultBgColor: @teal;
+@utilityButtonActiveBgColor: @blackPearl;
+
+//Utility Colors
+@baseColorHelp: @orange;
+@baseColorResources: @veniceBlue;
+@baseColorNews: @casal;
+@baseColorTwitter: @riverBed;
+@baseColorSocial: @mystic;
+@baseTransparentColor: @casal;
+
+//header colors
+@headerBgColor: @alabaster;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Helpers and Global Classes
+.boxShadow(@val){
+    box-shadow:@val;
+    -webkit-box-shadow:@val;
+}
+
+.mobile{
+    @media (min-width:768px){
+        display: none;
+    }
+}
+.mobile-hide{
+    @media(max-width:767px){
+        display: none;
+    }
+}
+.frozen{overflow:hidden;}
+*:focus{
+    outline: none !important;
+    .boxShadow(inset 0px 0px 0px 5000px rgba(0,0,0,0.2););
+    @media @mobile{
+        .boxShadow(none);
+    }
+}
+a span.fa{  pointer-events: none;}
+i{ font-style: normal; .fa; }
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Typography
+//Fonts
+.fa{font-family: "FontAwesome";}
+.os{font-family: "Old Standard TT', serif";}
+.rw{font-family: 'Raleway', sans-serif;}
+
+//Weights
+@light: 400;
+@normal: 600;
+@bold: 700;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Needs a home / pending deletion
+
+//Options
+//1. Theme Canvas Effect
+// Referenced in animation.import.less.
+@canvasEffectId : 2; // 1-8 Desktop effects available. (Currently only 2 active)
+@bodyBgColor : mix(@gray, @navy, 70%);
+@offCanvasBgColor : @blueGrayLight;
+
+@easeDefault: cubic-bezier(0.465, 0.183, 0.153, 0.946);
+@durationDefault: 450ms;
+
+//Color Variables
+@white: #ffffff;
+@altWhite: #fafafa;
+@altWhite2: #f9f9f9;
+@black: #062031;
+@gray: #ebf2f2;
+@navy: #062131;
+@blue: #2c5465; //Only used in Utility nav twice?
+//@teal: #00b7c5;
+@aqua: #1db7c5;
+
+@darkOrange: #D63500; //For text to be on
+@yellow: #F5D76E;
+@gold: #f2af47;
+@lightBlue: #566a75; //Flat
+@darkBlue: #4e606a; //Flat
+@midnightBlue: #6d7f88; //Flat
+
+//Refined
+@blueGray: mix(@navy, @gray, 71%);
+@blueGrayLight: lighten(mix(@navy, @gray, 60%),3%);
+
+//Social
+@twitterC: #00b0ed;
+@facebookC: #3b5998;
+@youtubeC: #e52d27;
+
+
+//Sidebar Initialization
+// A data-width is applied to a button containing the data-sidebar and data-position data-values.
+// The data-width controls the canvas offset and off-canvas element size.
+// The data-widths applied on the toggle element also need to be declare here.
+@offCanvasWidths : 356,656,700,1100;
+
+//Color Schematics (Demo Content/Oprphans) Need Homes
+body{background-color: @bodyBgColor;}
+.overlay{background-color: rgba(0,0,0,0.5);}
+
+body{
+    .rw;
+}
