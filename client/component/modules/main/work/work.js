@@ -98,7 +98,7 @@ Template.workListItem.helpers({
         var result;
         id = id || this;
         
-        result = Thriver.sections.get(id, ['tabs']);
+        result = Thriver.sections.get(id, ['name']);
         
         if (result)
             return result.name;
