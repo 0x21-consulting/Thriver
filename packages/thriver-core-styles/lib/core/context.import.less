@@ -32,6 +32,9 @@ Canvas Animations.
 @mobileMenuToggleColor: #222;
 @mobileMenuBackBgColor:#999;;
 @mobileMenuBackTextColor: #fff;
+@headerMobileTier1color: pink;
+@headerMobileTier2color: red;
+@headerMobileTier3color: orange;
 
 //Canvas Width Classes Declared Widths (theme.import.less) for sidebar/canvas positions
 @length : length(@offCanvasWidths);
@@ -84,7 +87,10 @@ Canvas Animations.
         z-index: 4;
         top: @utilityH;
         .hidden;
-        @media @mobile{ z-index: 11;}
+        @media @mobile{
+            z-index: 11;
+            top: @headerMobileH;
+        }
         @{sidebar}{
             height: @windowHSansUtility;
             display: none;
@@ -108,8 +114,8 @@ Canvas Animations.
         z-index: 10;
         height: @utilityH;
     }
-    @{mobileNav}{ z-index: 10; }
-    @{mobileMenu}{ z-index: 9; }
+    @{mobileNav}{ z-index: 9; }
+    @{mobileMenu}{ z-index: 10; }
     @{overlay}{
         z-index: 3;
         position: absolute;
@@ -155,29 +161,6 @@ Canvas Animations.
             left: -100%; top: 0;
             background-color:#aaa;
             width:100%;
-            button[data-toggle="back-mobile"]{
-                //position: fixed;
-                z-index: 999;
-                width: 100%;
-                height: @headerMobileH;
-                text-align: left;
-                font-weight: 100;
-                span{pointer-events: none;}
-                line-height: @headerMobileH;
-                margin: 0; border: none;
-                padding:0px 15px;
-                background-color: @mobileMenuBackBgColor;
-                color: @mobileMenuBackTextColor;
-                span{font-size: 30px; line-height: @headerMobileH;}
-                span.text{
-                    position: absolute;
-                    font-size: 24px;
-                    left: 50%;
-                    font-weight:300;
-                    margin-left: -25px;
-                }
-
-            }
             &[aria-hidden=false]{
                 .transform(translate3d(100%, 0, 0));
             }
@@ -195,8 +178,26 @@ Canvas Animations.
     &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
 
-
-
+//Mobile back button styles
+@media @mobile{
+    .canvas nav.mobile:before, aside.off-canvas:before, @{off} menu.tabs > li > a[aria-expanded="true"]:before{
+        content:'';
+        position: absolute;
+        height: @headerMobileH;
+        width:100%;
+        background: @headerMobileTier1color;
+        top: 0; left: 0;
+    }
+    aside.off-canvas:before{
+        background: @headerMobileTier2color;
+        top:-@headerMobileH;
+        //z-index: -1;
+    }
+    @{off} menu.tabs > li > a[aria-expanded="true"]:before{
+        background: @headerMobileTier3color;
+        top:-@headerMobileH;
+    }
+}
 
 
 //Canvas Animations
@@ -214,3 +215,34 @@ Canvas Animations.
 .no-js @{canvasPush} {
     padding-left: 300px;
 }*/
+
+
+
+button[data-toggle="back-mobile"]{
+    position: fixed;
+    display: none;
+    z-index: 999;
+    top:0; left:0;
+    width: 100%;
+    height: @headerMobileH;
+    text-align: left;
+    font-weight: 100;
+    span{pointer-events: none;}
+    line-height: @headerMobileH;
+    margin: 0; border: none;
+    padding:0px 15px;
+    //background-color: @mobileMenuBackBgColor;
+    background-color: transparent;
+    color: @mobileMenuBackTextColor;
+    span{font-size: 30px; line-height: @headerMobileH; position: relative;}
+    span.text{
+        position: absolute;
+        font-size: 24px;
+        left: 50%;
+        font-weight:300;
+        margin-left: -25px;
+    }
+
+}
+
+#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }

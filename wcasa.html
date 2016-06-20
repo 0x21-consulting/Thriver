@@ -12,7 +12,7 @@
         {{> utility}}
         {{> navigation}}
         {{> navigationMobile}}
-        <main class="main" id="main" data-focus="group" aria-hidden="false">
+        <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
         {{#each sections}}
             {{> Template.dynamic template=template}}
         {{/each}}
@@ -24,5 +24,4 @@
     {{#if isAdmin}}
         {{>admin}}
     {{/if}}
-
 </body>
