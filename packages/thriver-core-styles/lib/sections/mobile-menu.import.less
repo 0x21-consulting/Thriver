@@ -35,16 +35,27 @@ header.mobile{
             //&:after{display: none;}
             //&:before{display: none;}
             &[href="#notifications"], &[href="#signin"]{
-                border-top: 2px solid darken(@mobileNavigationBgColor,15%);
+                //border-top: 2px solid darken(@mobileNavigationBgColor,15%);
             }
             &[data-action="signout"], &[data-action="register"]{
-                border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
+                //border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
             }
             &[href="#providers"]{background-color: @orange;}
             &[aria-expanded]:after{
                 content:"\f0da";
                 .fa;
             }
+            &[href="#notifications"], &[href="#"], &[href="#accounts"] {
+                background: darken(@mobileNavigationBgColor,5%);
+            }
+            &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+                &:after{display: none;}
+                background: darken(@mobileNavigationBgColor,15%);
+            }
+            //&[href="#twitter"]{border-bottom:2px solid darken(@mobileNavigationBgColor,15%);}
+        }
+        &[data-type=main-navigation-item] a{
+                background: darken(@mobileNavigationBgColor,12%);
         }
         &:nth-child(even){background-color: darken(@mobileNavigationBgColor,3.5%); }
     }
