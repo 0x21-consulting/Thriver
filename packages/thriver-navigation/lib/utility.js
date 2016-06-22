@@ -55,7 +55,7 @@ utilityNavigationHelpers = {
         //Get Help
         title: 'Get Help',
         type: 'link',
-        url: '#providers',
+        url: '#service-providers',
         icon : 'important',
         position : 'right',
         more: 'help',
