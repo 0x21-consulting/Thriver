@@ -36,5 +36,18 @@ Template.navigationMobile.events({
         for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
         h.hidden(mobileNavigation, true);
         document.body.classList.remove('noScroll');
+    },
+    'click #mobile-navigation li > a[href="#service-providers"]': function (event) {
+        m.toggleMore();
+        event.preventDefault();
+        return false;
+
+    },
+    'click #mobile-navigation figure a[href="#service-providers"]': function (event) {
+        var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+        var mobileNavigation = document.getElementById('mobile-navigation');
+        for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+        h.hidden(mobileNavigation, true);
+        document.body.classList.remove('noScroll');
     }
 });

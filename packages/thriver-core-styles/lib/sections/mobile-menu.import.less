@@ -17,9 +17,10 @@ header.mobile{
     background-color: @mobileNavigationBgColor;
     ul{margin:0px;padding:0px;}
     figure[aria-hidden="true"]{display: none;}
-    li:hover figure[aria-hidden="false"]{display: none;}
-    li a:focus + figure[aria-hidden="false"]{display: block;}
-    li a:focus + figure[aria-hidden="true"]{display: block;}
+    figure[aria-hidden="false"]{display: block;}
+    //li:hover figure[aria-hidden="false"]{display: none;}
+    //li a:focus + figure[aria-hidden="false"]{display: block;}
+    //li a:focus + figure[aria-hidden="true"]{display: block;}
     li{
         list-style: none;
         margin: 0;
@@ -61,11 +62,11 @@ header.mobile{
         &:nth-child(even){background-color: darken(@mobileNavigationBgColor,3.5%); }
     }
     figure {
-        display: block;
+        //display: block;
         padding: 5px 10px 10px 10px;
         background: #eee;
         dt{color:#222;}
-        a[href="#providers"]{
+        a[href="#service-providers"]{
             margin-top: 10px;
             background: @teal;
             display: inline-block;
@@ -73,7 +74,7 @@ header.mobile{
     }
 }
 
-#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }
+//#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }
 
 
 button[data-toggle="back-mobile"]{
