@@ -7,6 +7,7 @@
 //@mobileNavigationColor: #222;
 //@mobileNavigationBorderColor: #aaa;
 header.mobile{
+    border-bottom: 1px solid #aaa;
     button{
         span{pointer-events: none;}
     }
@@ -71,3 +72,36 @@ header.mobile{
         }
     }
 }
+
+#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }
+
+
+button[data-toggle="back-mobile"]{
+    position: fixed;
+    display: none;
+    z-index: 999;
+    top:0; left:0;
+    width: 100%;
+    height: @headerMobileH;
+    text-align: left;
+    font-weight: 100;
+    span{pointer-events: none;}
+    line-height: @headerMobileH;
+    margin: 0; border: none;
+    padding:0px 15px;
+    //background-color: @mobileMenuBackBgColor;
+    background-color: transparent;
+    color: @mobileMenuBackTextColor;
+    span.fa{font-size: 30px; line-height: @headerMobileH; position: relative;}
+    span.text{
+        position: absolute;
+        font-size: 28px;
+        left: 50%;
+        top: 0;
+        font-weight: 500;
+        margin-left: -59px;
+        text-transform: uppercase;
+    }
+
+}
+
