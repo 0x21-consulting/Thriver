@@ -156,9 +156,9 @@ Canvas Animations.
         }
         @{mobileMenu}{
             position: fixed;
-            height: 100vh;
+            height: ~'calc(100vh - @{headerMobileH})';
             top: @headerMobileH;
-            left: -100%; top: 0;
+            left: -100%;
             background-color:#aaa;
             width:100%;
             &[aria-hidden=false]{
@@ -180,7 +180,7 @@ Canvas Animations.
 
 //Mobile back button styles
 @media @mobile{
-    .canvas nav.mobile:before, aside.off-canvas:before, @{off} menu.tabs > li > a[aria-expanded="true"]:before{
+    aside.off-canvas:before, @{off} menu.tabs > li > a[aria-expanded="true"]:before{
         content:'';
         position: absolute;
         height: @headerMobileH;
@@ -221,34 +221,3 @@ Canvas Animations.
 }*/
 
 
-
-button[data-toggle="back-mobile"]{
-    position: fixed;
-    display: none;
-    z-index: 999;
-    top:0; left:0;
-    width: 100%;
-    height: @headerMobileH;
-    text-align: left;
-    font-weight: 100;
-    span{pointer-events: none;}
-    line-height: @headerMobileH;
-    margin: 0; border: none;
-    padding:0px 15px;
-    //background-color: @mobileMenuBackBgColor;
-    background-color: transparent;
-    color: @mobileMenuBackTextColor;
-    span.fa{font-size: 30px; line-height: @headerMobileH; position: relative;}
-    span.text{
-        position: absolute;
-        font-size: 28px;
-        left: 50%;
-        top: 0;
-        font-weight: 500;
-        margin-left: -59px;
-        text-transform: uppercase;
-    }
-
-}
-
-#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }
