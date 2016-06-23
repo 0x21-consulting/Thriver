@@ -36,6 +36,28 @@ aside.off-canvas{
 }
 
 
+//Sidebar tab colors
+menu.tabs{
+    > li{
+        //Currently Supports 12 tabs
+        &:first-child > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 3%); }
+        &:nth-child(2) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 5%); }
+        &:nth-child(3) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 7%); }
+        &:nth-child(4) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 9%); }
+        &:nth-child(5) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 11%); }
+        &:nth-child(6) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 13%); }
+        &:nth-child(7) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 15%); }
+        &:nth-child(8) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 17%); }
+        &:nth-child(9) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 19%); }
+        &:nth-child(10) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 21%); }
+    }
+}
+div.tabs{
+    background-color: @tabBgColor;
+    > [aria-hidden=true]{display: none;}
+    > [aria-hidden=false]{display: block;}
+    &.top{}
+}
 
 
 
