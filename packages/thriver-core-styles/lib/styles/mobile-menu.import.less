@@ -13,6 +13,10 @@ header.mobile{
     button{
         padding: 0px !important;
         span{pointer-events: none;}
+        &:active #nav-icon{
+            box-shadow:inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+            -webkit-box-shadow:inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+        }
     }
 }
 
@@ -112,7 +116,7 @@ header.mobile{
 	}
 }
 //Active
-[aria-expanded="true"] #nav-icon{
+header.mobile [aria-expanded="true"] #nav-icon{
     background-color: @teal;
     span{background: @white; }
     span, span:before, span:after{ animation-fill-mode: forwards; }
@@ -121,7 +125,7 @@ header.mobile{
     span:after{ animation-name: sidebar-toggle-active-after; }
 }
 //Inactive
-[aria-expanded="false"] #nav-icon{
+header.mobile [aria-expanded="false"] #nav-icon{
     span { animation-name: sidebar-toggle-inactive; }
     span:before { animation-name: sidebar-toggle-inactive-before; }
     span:after { animation-name: sidebar-toggle-inactive-after; }
