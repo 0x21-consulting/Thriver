@@ -178,31 +178,6 @@ Canvas Animations.
     &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
 
-//Mobile back button styles
-@media @mobile{
-    aside.off-canvas:before, @{off} menu.tabs > li > a[aria-expanded="true"]:before{
-        content:'';
-        position: absolute;
-        height: @headerMobileH;
-        width:100%;
-        background: @headerMobileTier1color;
-        top: 0; left: 0;
-        z-index: 3;
-    }
-    aside.off-canvas:before{
-        background: @headerMobileTier2color;
-        top:-@headerMobileH;
-        //z-index: -1;
-        z-index: 4;
-    }
-    @{off} menu.tabs > li > a[aria-expanded="true"]:before{
-        background: @headerMobileTier3color;
-        top:-@headerMobileH;
-        z-index: 5;
-        visibility: visible !important;
-    }
-}
-
 
 //Canvas Animations
 //This requires Animations not transitions

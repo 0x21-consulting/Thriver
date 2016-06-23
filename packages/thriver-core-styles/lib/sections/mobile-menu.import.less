@@ -11,6 +11,7 @@
 header.mobile{
     border-bottom: 1px solid #aaa;
     button{
+        padding: 0px !important;
         span{pointer-events: none;}
     }
 }
@@ -77,102 +78,95 @@ header.mobile{
     }
 }
 
-//#mobile-navigation[aria-hidden="false"] + button[data-toggle="back-mobile"]{ display: block; }
 
-
-button[data-toggle="back-mobile"]{
-    position: fixed;
-    display: none;
-    z-index: 999;
-    top:0; left:0;
-    width: 100%;
-    height: @headerMobileH;
-    text-align: left;
-    font-weight: 100;
-    span{pointer-events: none;}
-    line-height: @headerMobileH;
-    margin: 0; border: none;
-    padding:0px 15px;
-    //background-color: @mobileMenuBackBgColor;
-    background-color: transparent;
-    color: @mobileMenuBackTextColor;
-    span.fa{font-size: 30px; line-height: @headerMobileH; position: relative;}
-    span.text{
-        position: absolute;
-        font-size: 28px;
-        left: 50%;
-        top: 0;
-        font-weight: 500;
-        margin-left: -59px;
-        text-transform: uppercase;
-    }
-
-}
-
-
+//// Material Design Menu Icon (Spinner) ////
+// This needs to be made cross-browser friendly
 #nav-icon {
-    width: 30px;
+	padding: 23px 15px 24px 15px;
     pointer-events: none;
-    height: 40px;
-    position: relative;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
-    cursor: pointer;
-    margin-top: 2px;
-    span{
-        display: block;
-        position: absolute;
-        height: 4px;
-        width: 100%;
-        border-radius: 5px;
-
-        background: @mobileNavIconColor;
-        opacity: 1;
-        left: 0;
-        margin-top: 12px;
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-        -webkit-transition: .25s ease-in-out;
-        -moz-transition: .25s ease-in-out;
-        -o-transition: .25s ease-in-out;
-        transition: .25s ease-in-out;
-        &:nth-child(1){top: 0px;}
-        &:nth-child(2), &:nth-child(3){ top: 9px; }
-        &:nth-child(4){ top: 18px; }
-    }
+	span{
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 3px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+		background: @mobileNavMenuIconColor;
+		animation-duration: 300ms;
+		animation-timing-function: ease-in-out;
+		&:before, &:after{
+			display: block;
+			width: inherit;
+			height: 3px;
+			position: absolute;
+			background: inherit;
+            border-radius:5px;
+            -webkit-border-radius:5px;
+			left: 0;
+			content: '';
+			animation-duration: 300ms;
+			animation-timing-function: ease-in-out;
+		}
+		&:before{ bottom: 250%; }
+		&:after{ top: 250%; }
+	}
+}
+//Active
+[aria-expanded="true"] #nav-icon{
+    background-color: @teal;
+    span{background: @white; }
+    span, span:before, span:after{ animation-fill-mode: forwards; }
+    span{ animation-name: sidebar-toggle-active; }
+    span:before{ animation-name: sidebar-toggle-active-before; }
+    span:after{ animation-name: sidebar-toggle-active-after; }
+}
+//Inactive
+[aria-expanded="false"] #nav-icon{
+    span { animation-name: sidebar-toggle-inactive; }
+    span:before { animation-name: sidebar-toggle-inactive-before; }
+    span:after { animation-name: sidebar-toggle-inactive-after; }
 }
 
-[aria-expanded="true"] #nav-icon{
-    span{
-        &:nth-child(1){
-            top: 9px;
-            width: 0%;
-            left: 50%;
-        }
-        &:nth-child(2){
-            -webkit-transform: rotate(45deg);
-            -moz-transform: rotate(45deg);
-            -o-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        &:nth-child(3){
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        }
-        &:nth-child(4){
-            top: 9px;
-            width: 0%;
-            left: 50%;
-        }
-    }
+//// Animations ////
+
+// Header Off-canvas Footer Toggler
+// Needs to be made cross-browser compatable
+@keyframes sidebar-toggle-active {
+  0% {} 100% { transform: rotate(180deg); }
+}
+@keyframes sidebar-toggle-active-before {
+	0% {}
+	100% {
+		transform: rotate(45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+}
+@keyframes sidebar-toggle-active-after {
+	0% {}
+	100% {
+		transform: rotate(-45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+}
+@keyframes sidebar-toggle-inactive {
+	0% { transform: rotate(-180deg); }
+	100% {}
+}
+@keyframes sidebar-toggle-inactive-before {
+	0% {
+		transform: rotate(45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+	100% {}
+}
+@keyframes sidebar-toggle-inactive-after {
+	0% {
+		transform: rotate(-45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+	100% {}
 }
