@@ -10,6 +10,8 @@ function scrollerResets(){
 
 Template.navigationMobile.events({
     'click [aria-controls][data-toggle=mobile-navigation]': function (event) {
+
+        //c.toggleCanvas(); //START HERE
         var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
         var mobileNavigation = document.getElementById('mobile-navigation');
         if(event.target.getAttribute('aria-expanded') == 'true'){
@@ -21,14 +23,7 @@ Template.navigationMobile.events({
             h.hidden(mobileNavigation, false);
             document.body.classList.add('noScroll');
         }
-    },
-    'click [data-toggle=back-mobile]': function (event) {
-        c.toggleCanvas();
-        //alert('sr');
-	        /*for (var i = 0, e; e = sidebar[i]; i++) {
-                if(e)
-             } //Clear all active Sidebars
-             */
+
     },
     'click [data-type="main-navigation-item"]': function (event) {
         var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
