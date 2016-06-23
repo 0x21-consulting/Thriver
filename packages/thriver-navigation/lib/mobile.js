@@ -10,20 +10,7 @@ function scrollerResets(){
 
 Template.navigationMobile.events({
     'click [aria-controls][data-toggle=mobile-navigation]': function (event) {
-
-        //c.toggleCanvas(); //START HERE
-        var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
-        var mobileNavigation = document.getElementById('mobile-navigation');
-        if(event.target.getAttribute('aria-expanded') == 'true'){
-            h.active(event.target, false);
-            h.hidden(mobileNavigation, true);
-            document.body.classList.remove('noScroll');
-        } else{
-            h.active(event.target, true);
-            h.hidden(mobileNavigation, false);
-            document.body.classList.add('noScroll');
-        }
-
+        c.toggleCanvas(); //START HERE
     },
     'click [data-type="main-navigation-item"]': function (event) {
         var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');

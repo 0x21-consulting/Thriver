@@ -20,7 +20,7 @@ Meteor.canvasFunctions = {
 		var activeTabContent = document.querySelectorAll('section.sidebar[aria-hidden=false] div.tabs > [aria-hidden]');
 
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
-	    if(event.target.getAttribute('aria-expanded') == 'true' || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
+	    if(event.target.getAttribute('aria-expanded') == 'true' && event.target.id !== "mobile-toggle" || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
 	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
 	        for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
 	        c.clearCanvas(); //Remove all canvas effect classes
@@ -30,7 +30,7 @@ Meteor.canvasFunctions = {
 	    }
 
 	    // Open Overlay and offCanvas elements if clicking inactive list item
-	    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
+	    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false' && event.target.id !== "mobile-toggle"){
 	        c.clearCanvas();
 	        h.hidden(main,true);
 	        document.body.classList.add('noScroll');
@@ -54,7 +54,7 @@ Meteor.canvasFunctions = {
 	        focusGroupElFirst.focus();
 	    }
 	    //Mobile
-	    else if(event.target.getAttribute('data-toggle')== "back-mobile"){
+	    else if(event.target.getAttribute('data-toggle')== "mobile-navigation"){
 			var mobileNavigation = document.getElementById('mobile-navigation');
 			var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
 			hiddenSidebar = true;
@@ -82,10 +82,30 @@ Meteor.canvasFunctions = {
 				}
 			 }
 			 if(hiddenSidebar == true){
-				for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+				for (var i = 0, e; e = toggleMobile[i]; i++) {
+					if(e.getAttribute('aria-expanded')== "true"){
+						for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+						h.hidden(mobileNavigation, true);
+						document.body.classList.remove('noScroll');
+					} else{
+						//alert('ma');
+						h.active(event.target, true);
+						h.hidden(mobileNavigation, false);
+						document.body.classList.add('noScroll');
+					}
+				} //Remove current toggle active states
+			 }
+			/*
+			if(event.target.getAttribute('aria-expanded') == 'true'){
+				if(event.target)
+				h.active(event.target, false);
 				h.hidden(mobileNavigation, true);
 				document.body.classList.remove('noScroll');
-			 }
+			} else{
+				h.active(event.target, true);
+				h.hidden(mobileNavigation, false);
+				document.body.classList.add('noScroll');
+			}*/
 	    }
 
 	    f.currentFocusGroup(); //Recalculate live focus areas
