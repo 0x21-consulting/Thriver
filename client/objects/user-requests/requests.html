@@ -1,5 +1,5 @@
 <template name="requests">
-    <h3>{{heading}}</h3>
+    <header class="mobile"><h2>{{heading}}</h2></header>
     <ul>
         {{#if items}}{{#each items}}
             <li>
@@ -10,7 +10,7 @@
                     <dd class="{{status.type}}">{{status.message}}</dd>
                 </dl>
                 <button aria-label="{{detailsButtonAria}}" data-action="details">{{detailsButton}}</button>
-            </li>              
+            </li>
         {{/each}}
         {{else}}<li class="none">{{none}}</li>{{/if}}
         <li><button aria-label="{{moreButtonAria}}" data-action="more">{{moreButton}}</button></li>

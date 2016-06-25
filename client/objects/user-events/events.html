@@ -1,5 +1,5 @@
 <template name="eventsRegistered">
-    <h3>{{heading}}</h3>
+    <header class="mobile"><h2>{{heading}}</h2></header>
     <ul>
         {{#if items}}{{#each items}}
             <li>
@@ -13,7 +13,7 @@
                         <button type="button" data-type="undo">Undo</button>
                     </p>
                 }-->
-            </li>             
+            </li>
         {{/each}}
         {{else}}<li class="none">{{none}}</li>{{/if}}
         <li><button data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>

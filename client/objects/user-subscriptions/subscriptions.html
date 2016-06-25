@@ -1,7 +1,7 @@
 <template name="subscriptions">
     <form id="subscriptions">
         {{#each lists}}
-            <h3>{{heading}}</h3>
+            <header class="mobile"><h2>{{heading}}</h2></header>
             <ul>
                 {{#each items}}
                     <li>
@@ -10,7 +10,7 @@
                             <input id="{{id}}" type="checkbox" checked="{{checked}}">
                             <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
                         </div>
-                    </li>                
+                    </li>
                 {{/each}}
             </ul>
         {{/each}}

@@ -1,3 +1,12 @@
+
+//Defaults
+@sidebarPrimaryColor: #222;
+@sidebarSecondaryColor: #444;
+@sidebarHeadingColor: #fff;
+@sidebarTextColor: #fff;
+@sidebarTabBgColor: #555;
+
+//Sidebar Styles
 aside.off-canvas{
     background-color: @sidebarPrimaryColor;
     text-align: center;
@@ -6,59 +15,55 @@ aside.off-canvas{
             display: block;
             padding: 34px 0px 34px 0px;
             text-align: center;
-            color: @white;
+            color: @sidebarHeadingColor;
             .font(1.8,1.8,0.1,@normal,uppercase);
             .fa{font-weight: @light;}
-            a{
-                color: @white;
-            }
-            @media @mobile{
-                padding: 10px 0px;
-            }
+            a{ color: @sidebarHeadingColor; }
+            @media @mobile{ padding: 10px 0px; }
         }
     }
     .sidebar-content{
-        background-color: @blueGray;
-        color:@white;
+        background-color: @sidebarSecondaryColor;
+        color:@sidebarTextColor;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
     }
-    button[data-canvas-event="close"]{
-        margin: 36px auto 45px auto;
-        padding: 0px;
-        color: #ebf2f2;
-        border-bottom: 2px solid #ebf2f2;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-        .font(1.2,1.5,0.025,@bold,none);
-    }
 }
 
-
-//Sidebar tab colors
+//Sidebar Tabs Colors
+div.tabs{ background-color: @sidebarTabBgColor; }
 menu.tabs{
     > li{
         //Currently Supports 12 tabs
-        &:first-child > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 3%); }
-        &:nth-child(2) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 5%); }
-        &:nth-child(3) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 7%); }
-        &:nth-child(4) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 9%); }
-        &:nth-child(5) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 11%); }
-        &:nth-child(6) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 13%); }
-        &:nth-child(7) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 15%); }
-        &:nth-child(8) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 17%); }
-        &:nth-child(9) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 19%); }
-        &:nth-child(10) > a[aria-expanded=false]{ background-color: lighten(@tabBgColor, 21%); }
+        &:first-child > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 3%); }
+        &:nth-child(2) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 5%); }
+        &:nth-child(3) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 7%); }
+        &:nth-child(4) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 9%); }
+        &:nth-child(5) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 11%); }
+        &:nth-child(6) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 13%); }
+        &:nth-child(7) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 15%); }
+        &:nth-child(8) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 17%); }
+        &:nth-child(9) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 19%); }
+        &:nth-child(10) > a[aria-expanded=false]{ background-color: lighten(@sidebarTabBgColor, 21%); }
     }
 }
-div.tabs{
-    background-color: @tabBgColor;
-    > [aria-hidden=true]{display: none;}
-    > [aria-hidden=false]{display: block;}
-    &.top{}
-}
 
+//Sidebar Mobile
+@media @mobile{
+    aside.off-canvas{
+        div.tabs{
+            > article{
+                //display: block;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background: @sidebarPrimaryColor;
+                min-height: 100vh;
+                width: 100%;
+            }
+        }
+    }
+}
 
 
 /*
