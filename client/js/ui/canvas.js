@@ -66,6 +66,7 @@ Meteor.canvasFunctions = {
 						if(e.getAttribute('aria-expanded')== "true"){
 							tabActive=true;
 							h.active(e, false);
+							document.body.classList.remove('tab-open');
 							for (var i = 0, e; e = activeTabContent[i]; i++) {
 								h.hidden(e, true);
 							}

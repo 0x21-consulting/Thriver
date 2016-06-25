@@ -15,6 +15,7 @@ aside.off-canvas{
         h1, h2{
             display: block;
             padding: 34px 0px 34px 0px;
+            margin: 0;
             text-align: center;
             color: @sidebarHeadingColor;
             .font(1.8,1.8,0.1,@normal,uppercase);
@@ -51,6 +52,9 @@ menu.tabs{
 
 //Sidebar Mobile
 @media @mobile{
+    body.tab-open{
+        section.sidebar > .scroll{ overflow: hidden; }
+    }
     aside.off-canvas{
         div.tabs{
             > article{
@@ -61,6 +65,8 @@ menu.tabs{
                 background: @sidebarPrimaryColor;
                 min-height: 100vh;
                 width: 100%;
+                height: ~'calc(100vh - @{headerMobileH})';
+                overflow: scroll;
                 > header + *, * > header + *{ //Containing element after header
                     background-color: @sidebarSecondaryColor;
                     color:@sidebarTextColor;
