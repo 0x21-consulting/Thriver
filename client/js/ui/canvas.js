@@ -38,6 +38,7 @@ Meteor.canvasFunctions = {
 	        h.hidden(overlay,false);
 	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Clear all active toggles
 	        h.active(event.target,true); //Add active class to clicked element
+			if(document.getElementById("mobile-toggle").getAttribute('aria-expanded') !== "true"){ document.getElementById("mobile-toggle").click(); } //Open Mobile Menu
 	        //Sets values based on the parameters of the current sidebar
 	        for (var i = 0, e; e = sidebar[i]; i++) {
 	            h.hidden(e,true); //Clear all active sidebars
