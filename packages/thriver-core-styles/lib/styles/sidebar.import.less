@@ -10,8 +10,9 @@
 aside.off-canvas{
     background-color: @sidebarPrimaryColor;
     text-align: center;
+    ul, ol{ list-style: none; margin: 0;}
     header{
-        h1{
+        h1, h2{
             display: block;
             padding: 34px 0px 34px 0px;
             text-align: center;
@@ -60,6 +61,12 @@ menu.tabs{
                 background: @sidebarPrimaryColor;
                 min-height: 100vh;
                 width: 100%;
+                > header + *, * > header + *{ //Containing element after header
+                    background-color: @sidebarSecondaryColor;
+                    color:@sidebarTextColor;
+                    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                }
             }
         }
     }
