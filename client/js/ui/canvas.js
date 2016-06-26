@@ -27,6 +27,7 @@ Meteor.canvasFunctions = {
 	        h.hidden(overlay,true);
 	        h.hidden(main,false);
 	        focusGlobalElFirst.focus();
+			if(document.getElementById("mobile-toggle").getAttribute('aria-expanded') !== "false"){ document.getElementById("mobile-toggle").click(); }
 	    }
 
 	    // Open Overlay and offCanvas elements if clicking inactive list item
@@ -99,13 +100,13 @@ Meteor.canvasFunctions = {
 						var toggleMenuItems = document.querySelectorAll('menu.tabs li [aria-expanded]');
 						for (var i = 0, e; e = toggleMenuItems[i]; i++) {
 							if(e.getAttribute('aria-expanded') == "true"){
-								e.setAttribute('aria-expanded') == "false";
+								e.setAttribute('aria-expanded', "false");
 							}
 						}
 						var tabBodies = document.querySelectorAll('div.tabs article[aria-hidden]');
 						for (var i = 0, e; e = tabBodies[i]; i++) {
 							if(e.getAttribute('aria-hidden') == "false"){
-								e.setAttribute('aria-hidden') == "true";
+								e.setAttribute('aria-hidden', "true");
 							}
 						}
 					}
