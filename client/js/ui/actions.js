@@ -9,6 +9,9 @@ Template.body.events({
             if (error instanceof Error)
                 console.error(error);
         })
-    }
-    
+    },
+    'click [data-action="userRegister"]': function (event) {
+        document.querySelector('#utility [href="#register"]').click();
+    },
+
 });
