@@ -1,5 +1,8 @@
 #signin, #register{
-    form label{display: none;}
+    form{
+        label{display: none;}
+        input[type="submit"]{ margin: 16px 0px 0px 0px; }
+    }
 }
 #signin, #register, #accounts{
     form{
@@ -44,6 +47,7 @@ ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
     }
 }
 
+
 ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
     li.notificationEmpty, li.eventsEmpty{
         text-align: center;
@@ -53,7 +57,7 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
         .shadow(close);
     }
     button{
-        display: inline-block;
+        display: block;
         margin-top: 10px;
         text-indent: 0px;
         .buttonColor(@teal);
@@ -69,6 +73,11 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
             display: block;
             margin: 0px auto;
             .buttonColor(darken(@lightBlue, 2.5%));
+            &:after{
+                margin-left: 5px;
+                content:"\f0da";
+                .fa;
+            }
         }
     }
     span.response{
@@ -94,6 +103,10 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
     }
 }
 
+ul.eventsMenu > li{
+    text-align: left;
+}
+
 
 //Acount Details
 aside.off-canvas{
@@ -117,7 +130,7 @@ aside.off-canvas{
                 }
             }
             input[type=submit]{
-                margin: 16px 0px 0px 0px;
+                //margin: 16px 0px 0px 0px;
             }
             &#subscriptions {
                 max-width: none;
