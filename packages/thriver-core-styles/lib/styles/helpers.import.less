@@ -221,3 +221,24 @@ This file contains most globlized type helpers.
     .shadowNone;
     .font(1.2,1.5,0.025,@normal,none);
 }
+
+
+//Definition Lists
+dl{
+    padding: 10px;
+    margin: 20px 0px 20px 0px;
+    dt{
+        display: inline;
+        &:after{content:": ";}
+    }
+    dd{
+        display: inline;
+        font-weight: @bold;
+    }
+}
+
+.dlColors(@x,@y,@z){
+    background-color: @x;
+    dt{color: @y;}
+    dd{color:@z;}
+}

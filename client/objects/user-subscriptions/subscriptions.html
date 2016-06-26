@@ -2,11 +2,11 @@
     <form id="subscriptions">
         {{#each lists}}
             <header><h2>{{heading}}</h2></header>
-            <ul>
+            <ul class="toggleSwitches stripes">
                 {{#each items}}
                     <li>
-                        <label for="{{id}}">{{title}}</label>
-                        <div>
+                        <label for="{{id}}" class="toggleSwitchLabel">{{title}}</label>
+                        <div class="toggleSwitch">
                             <input id="{{id}}" type="checkbox" checked="{{checked}}">
                             <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
                         </div>

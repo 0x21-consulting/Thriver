@@ -1,7 +1,10 @@
 #signin, #register{
+    form label{display: none;}
+}
+#signin, #register, #accounts{
     form{
+        label{text-align: left;}
         padding:30px;
-        label{display: none;}
         //@media @mobile{padding: 15px;}
     }
     .sidebar-content{
@@ -9,7 +12,7 @@
         //@media @mobile { padding-bottom: 15px;}
     }
 }
-
+#accounts form{padding-top: 0px;}
 
 
 
@@ -86,4 +89,95 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
             display: none;
         }
     }
+}
+
+
+//Acount Details
+aside.off-canvas{
+    form{
+        .row{
+            text-align: right;
+            max-width: 177px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+    //Content
+    .sidebar-content{
+        form{
+            max-width: 360px;
+            margin: 0 auto;
+            .toggleSwitch label{
+                .opacity(1);
+                &:first-child{
+                    margin-bottom: 0px; //Override Form Default
+                }
+            }
+            input[type=submit]{
+                margin: 16px 0px 0px 0px;
+            }
+            &#subscriptions {
+                max-width: none;
+                padding: 0px;
+                li{
+                    position: relative;
+                }
+            }
+        }
+        > li{
+            ul > li > span, dl{
+                margin: 0 auto;
+                display: block;
+                max-width: 360px;
+                &.response{
+                    display: none;
+                }
+            }
+            dl{
+                .dlColors(@black,@white,@white);
+                max-width: 340px;
+                margin: 10px auto 0px auto;
+
+                dd{
+                    &.statusPending{color: @yellow;}
+                    &.statusOccupy{color: @teal;}
+                    &.statusDelivery{color: @yellow;}
+                    &.statusPendingAvailability{color: @gray;}
+                }
+            }
+            &.selected{
+                span.response{
+                    display: block;
+                }
+            }
+            &.accountSettings{
+                padding: 0px 0px 80px 0px;
+            }
+            &.subscriptions, &.registeredEvents{
+                padding: 0px;
+            }
+            button{
+                .buttonColor(darken(@sidebarSecondaryColor, 3%));
+                &.viewEvent{.buttonColor(@teal);}
+            }
+            dl{background-color: darken(@sidebarSecondaryColor, 8.5%);}
+            &:nth-child(even){
+                button{.buttonColor(darken(@sidebarSecondaryColor, 1%));}
+                dl{background-color: darken(@sidebarSecondaryColor, 6.5%);}
+            }
+            span.byLine{
+                margin-top: 5px !important; //this cascade needs adjusting
+            }
+        }
+    }
+}
+
+.eventsRegistered.selected .response{
+    display: block !important;
+    margin-top: 5px;
+    color: @yellow;
+}
+
+.eventsRegistered button.unregister, .eventsRegistered button.undo{
+    background-color: transparent !important;
 }
