@@ -2,7 +2,7 @@
     <menu class="tabs {{class}}">
         {{#each tabs}}
             <li>
-                <a href="#{{id}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
+                <a href="#{{id}}" class="{{#if icon}}icon-{{icon}}{{/if}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
             </li>
         {{/each}}
     </menu>

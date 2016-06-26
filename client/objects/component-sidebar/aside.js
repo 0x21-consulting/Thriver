@@ -18,7 +18,7 @@ Template.aside.helpers({
                 template : 'subscriptions'
             },{
                 title: 'Events',
-                icon : 'calendar',
+                icon : 'cal',
                 id: 'events',
                 template: 'eventsRegistered'
             },{
