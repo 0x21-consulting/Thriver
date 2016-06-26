@@ -1,4 +1,4 @@
-/* 
+/*
 - helpers > helpers.import.less -
 These helper classes can be applied to elements for a variety of states.
 This file contains most globlized type helpers.
@@ -81,7 +81,7 @@ This file contains most globlized type helpers.
 //Transforms
 .transform(@x){
     -webkit-transform: @x;
-    transform: @x;  
+    transform: @x;
 }
 .transform-style(@x){
     -webkit-transform-style: @x;
@@ -175,7 +175,7 @@ This file contains most globlized type helpers.
     -moz-box-shadow: none;
     box-shadow: none;
 }
-
+.hide{display: none;}
 //Color Classes (Pending Deletion)
 .color (@property, @color, @style) {
     & when (@style = light) { @{property}: lighten(@color, 2.5%); }

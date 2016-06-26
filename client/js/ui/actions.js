@@ -13,5 +13,7 @@ Template.body.events({
     'click [data-action="userRegister"]': function (event) {
         document.querySelector('#utility [href="#register"]').click();
     },
-
+    'click [data-action="signin"]': function (event) {
+        document.querySelector('#utility [href="#signin"]').click();
+    }
 });

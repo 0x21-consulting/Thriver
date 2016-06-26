@@ -1,6 +1,13 @@
-#signin{
+#signin, #register{
     form{
         padding:30px;
         label{display: none;}
+        @media @mobile{
+            padding: 15px;
+        }
+    }
+    .sidebar-content{
+        padding-bottom: 30px;
+        @media @mobile { padding-bottom: 15px;}
     }
 }

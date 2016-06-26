@@ -1,19 +1,19 @@
 Template.requests.helpers({
     heading: function () {
         return 'Library Activity';
-    }, 
+    },
     none: function () {
         return 'No activity at this time.';
-    }, 
+    },
     statusHeading: function () {
         return 'Status';
-    }, 
+    },
     detailsButton: function () {
         return 'Item Details';
     },
     detailsButtonAria: function () {
         return 'View all the details related to this library item';
-    }, 
+    },
     moreButton: function () {
         return 'View Library';
     },

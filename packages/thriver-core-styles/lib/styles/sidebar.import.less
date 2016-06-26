@@ -30,7 +30,6 @@ aside.off-canvas{
         color:@sidebarTextColor;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-        padding-bottom: 30px;
     }
     button[data-action]{
         cursor: pointer;
@@ -60,6 +59,7 @@ aside.off-canvas{
         border-bottom: 2px solid #ebf2f2;
         .shadowNone;
         .font(1.2,1.5,0.025,600,none);
+        &:focus{ background-color: rgba(0,0,0,0.25); }
     }
 }
 
