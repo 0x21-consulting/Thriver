@@ -10,7 +10,7 @@
 aside.off-canvas{
     background-color: @sidebarPrimaryColor;
     text-align: center;
-    ul, ol{ list-style: none; margin: 0;}
+    ul, ol, li{ list-style: none; margin: 0;}
     form { .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
     header{
         h1, h2{
@@ -61,6 +61,22 @@ aside.off-canvas{
         .shadowNone;
         .font(1.2,1.5,0.025,600,none);
         &:focus{ background-color: rgba(0,0,0,0.25); }
+    }
+    ul.stripes{
+        li{
+            background-color: darken(@sidebarSecondaryColor, 5%);
+            &:nth-child(even){
+                background-color: darken(@sidebarSecondaryColor, 4%);
+            }
+        }
+        &.hoverLi{
+            li:hover{
+                background-color: darken(@sidebarSecondaryColor, 7.5%);
+                &:nth-child(even){
+                    background-color: darken(@sidebarSecondaryColor, 6.5%);
+                }
+            }
+        }
     }
 }
 
