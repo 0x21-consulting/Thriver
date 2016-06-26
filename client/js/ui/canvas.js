@@ -56,6 +56,7 @@ Meteor.canvasFunctions = {
 	    }
 	    //Mobile
 	    else if(event.target.getAttribute('data-toggle')== "mobile-navigation"){
+			//Events
 			var mobileNavigation = document.getElementById('mobile-navigation');
 			var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
 			hiddenSidebar = true;
@@ -94,6 +95,19 @@ Meteor.canvasFunctions = {
 						h.active(event.target, true);
 						h.hidden(mobileNavigation, false);
 						document.body.classList.add('noScroll');
+						//Close any open tabs
+						var toggleMenuItems = document.querySelectorAll('menu.tabs li [aria-expanded]');
+						for (var i = 0, e; e = toggleMenuItems[i]; i++) {
+							if(e.getAttribute('aria-expanded') == "true"){
+								e.setAttribute('aria-expanded') == "false";
+							}
+						}
+						var tabBodies = document.querySelectorAll('div.tabs article[aria-hidden]');
+						for (var i = 0, e; e = tabBodies[i]; i++) {
+							if(e.getAttribute('aria-hidden') == "false"){
+								e.setAttribute('aria-hidden') == "true";
+							}
+						}
 					}
 				} //Remove current toggle active states
 			 }

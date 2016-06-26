@@ -2,8 +2,6 @@
 Meteor.tabsFunctions = {
 	toggleTabs : function(){
 	    // Tabs Variables
-	    var toggle = document.querySelectorAll('[aria-controls][data-toggle=tabs]');
-	    var content = document.querySelectorAll('div.tabs > [aria-hidden]');
 	    if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
 			var thisToggleMenu = event.target.parentNode.parentNode;
 			var thisToggleMenuButtons = thisToggleMenu.querySelectorAll('[aria-controls][data-toggle=tabs]');
@@ -19,10 +17,6 @@ Meteor.tabsFunctions = {
 	                h.hidden(e,false); //Add active class to given sidebar
 	            }
 			}
-			/*
-	        for (var i = 0, e; e = content[i]; i++) {
-	            h.hidden(e,true); //Clear all active content
-	        }*/
 	    }
 	}
 }
@@ -33,4 +27,29 @@ t = Meteor.tabsFunctions;
 Template.body.events({
     //Tabs
     'click [data-toggle=tabs]': function (event) { t.toggleTabs(); },
+});
+
+Template.body.onRendered(function() {
+	if (window.innerWidth > 767){
+		var toggleMenus = document.querySelectorAll('menu.tabs');
+		//alert(toggleMenus);
+		for (var i = 0, e; e = toggleMenus[i]; i++) {
+			//alert(e);
+			var menuItem = e.querySelectorAll('[data-toggle="tabs"]');
+			menuItem[0].click();
+			//alert(menuItem);
+			/*var menuItem = e.querySelectorAll('a');
+			for (var i = 0, e; e = menuItem[i]; i++) {
+				h.hidden(e, true);
+			}*/
+		}
+		//toggleMenus.style.background="green";
+		/*for (var i = 0, e; e = toggleMenus[i]; i++) {
+			e.style.background = "green";
+			var toggleMenuItem = e.querySelectorAll('[data-toggle="tabs"]');
+			for (var i = 0, e; e = toggleMenuItem[i]; i++) {
+				//e.style.background = "green";
+			}
+		}*/
+	}
 });
