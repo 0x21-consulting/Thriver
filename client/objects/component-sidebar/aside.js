@@ -91,6 +91,7 @@ Template.aside.helpers({
         filter: 'true',
         filterId: 'searchNews',
         class: 'top',
+        subhead: 'newsSubHead', // header subtemplate
         tabs: [{ //If sidebar has tabs: use this property
                 title: 'In the News',
                 id: 'in-the-news',
