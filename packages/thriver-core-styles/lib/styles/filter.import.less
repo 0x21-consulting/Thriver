@@ -18,11 +18,15 @@
             position: absolute;
             left: 0px;
         }
+        fieldset{display: none;}
         input{
             font-weight: bold;
             &[type=search]{
                 background-color: transparent;
             }
         }
+    }
+    &.active-filter{
+        fieldset{display: block;}
     }
 }

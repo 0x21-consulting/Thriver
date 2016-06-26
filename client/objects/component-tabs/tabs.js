@@ -17,6 +17,13 @@ Meteor.tabsFunctions = {
 	                h.hidden(e,false); //Add active class to given sidebar
 	            }
 			}
+			//If filter active
+			if (event.target.getAttribute('aria-controls') == '#library'){
+				event.target.parentNode.parentNode.parentNode.querySelector('aside.filter').classList.add('active-filter');
+			}
+			else{
+				event.target.parentNode.parentNode.parentNode.querySelector('aside.filter').classList.remove('active-filter');
+			}
 	    }
 	}
 }

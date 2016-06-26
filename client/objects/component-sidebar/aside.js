@@ -48,6 +48,7 @@ Template.aside.helpers({
         template: 'register'
     },{
         title: 'Twitter',
+        icon: 'twitter',
         id: 'twitter',
         width: 356,
         position:'right',

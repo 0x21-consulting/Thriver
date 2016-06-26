@@ -1,11 +1,12 @@
 //Structure
 section.news {
+    aside.filter fieldset{display: none;}
     width: 1100px;
     height: ~"calc(100vh - 32px)";
     text-align: left;
     top: 0px;
-    .tabStyle(@blueGray,16.66666%,65px,true);
-    .links{color: darken(@blueGray, 0%);font-weight: bold;}
+    //.tabStyle(@blueGray,16.66666%,65px,true);
+    //.links{color: darken(@blueGray, 0%);font-weight: bold;}
     button.manageSubscriptions, button.subscriptionsRegister, button.inquire{
         .shadowNone;
         margin: 0 auto;
@@ -31,10 +32,10 @@ section.news {
         text-align: right;
         .opacity(0);
         visibility: hidden;
-        .scale(0,0);
-        .accelerate;
+        //.scale(0,0);
+        //.accelerate;
         transform-origin: 95% 0px;
-        .transition(all,350ms,@canvasEase,@canvasDelay);
+        //.transition(all,350ms,@canvasEase,@canvasDelay);
         cursor: auto;
         box-shadow:0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         -webkit-box-shadow:0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -54,8 +55,8 @@ section.news {
     }
     button.inquire:hover span.contactInfo{
         visibility: visible;
-        .opacity(0.99);
-        .scale(1,1);
+        //.opacity(0.99);
+        //.scale(1,1);
     }
     h2{
         padding-bottom: 0px;
@@ -128,7 +129,7 @@ section.news{
                     display: block;
                     margin-bottom: 10px;
                 }
-            }            
+            }
         }
     }
     li.loadMore{
@@ -162,7 +163,7 @@ section.news{
 
 
 ////////////////////////////////////////////////////////// To be Optimized
-
+/*
 section.news{
     ul.newsContent{
         @media @mobile{
@@ -193,7 +194,7 @@ section.news{
         }
     }
 }
-section.news{    
+section.news{
     ul.newsContent{
         @media @mobile{
             position: fixed;
@@ -260,7 +261,7 @@ section.news{
                                 //background-color:mix(@gray, @navy, 40%);
                             }
                         }*/
-                    }
+                   /* }
                 }
             }
         }
@@ -311,4 +312,4 @@ section.news{
         }
     }
 }
-
+*/

@@ -3,7 +3,7 @@
         {{#each items}}
             <section id="{{id}}" class="sidebar scroll-box" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
                 <div class="scroll">
-                    <header><h1>{{title}}</h1></header>
+                    <header><h1 class="{{#if icon}}icon-{{icon}}{{/if}}" >{{title}}</h1></header>
                     <div class="sidebar-content">
                         {{#if tabs}}
                             {{>tabs}}
