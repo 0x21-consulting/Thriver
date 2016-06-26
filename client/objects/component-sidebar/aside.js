@@ -2,6 +2,7 @@
 Template.aside.helpers({
     items: [{
         title: 'Account Details',
+        icon: 'user',
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items
         width: 656, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
@@ -30,6 +31,7 @@ Template.aside.helpers({
         ]
     },{
         title: 'Notifications',
+        icon: 'bell',
         id: 'notifications',
         width: 356,
         position:'left',
@@ -55,6 +57,7 @@ Template.aside.helpers({
         template: 'twitter'
     },{
         title: 'Learning Center',
+        icon: 'institution',
         id: 'resources',
         width: 700,
         position:'right',
@@ -81,6 +84,7 @@ Template.aside.helpers({
         ]
     },{
         title: 'Newsroom',
+        icon: 'news',
         id: 'news',
         width: 1100,
         position:'right',
@@ -111,6 +115,7 @@ Template.aside.helpers({
         ]
     },{
         title: 'Donate to WCASA',
+        icon: 'heart',
         id: 'donate',
         width: 656,
         position:'right',
@@ -121,5 +126,5 @@ Template.aside.helpers({
         width: 356,
         position:'right',
         template: 'languageSelect'
-        }]
+    }]
 });
