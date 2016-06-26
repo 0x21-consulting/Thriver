@@ -65,18 +65,15 @@ aside.off-canvas{
     ul.stripes{
         li{
             background-color: darken(@sidebarSecondaryColor, 5%);
-            &:nth-child(even){
-                background-color: darken(@sidebarSecondaryColor, 4%);
-            }
+            &:nth-child(even){ background-color: darken(@sidebarSecondaryColor, 4%); }
         }
         &.hoverLi{
             li:hover{
                 background-color: darken(@sidebarSecondaryColor, 7.5%);
-                &:nth-child(even){
-                    background-color: darken(@sidebarSecondaryColor, 6.5%);
-                }
+                &:nth-child(even){ background-color: darken(@sidebarSecondaryColor, 6.5%); }
             }
         }
+        //&:last-child{ margin-bottom: -30px; }
     }
 }
 
