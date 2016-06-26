@@ -10,6 +10,7 @@
 aside.off-canvas{
     background-color: @sidebarPrimaryColor;
     text-align: center;
+    @media @mobile{ text-align: left; }
     ul, ol, li{ list-style: none; margin: 0;}
     form { .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
     header{
@@ -22,7 +23,10 @@ aside.off-canvas{
             .font(1.6,1.6,0.1,@normal,uppercase);
             .fa{font-weight: @light;}
             a{ color: @sidebarHeadingColor; }
-            @media @mobile{ padding: 20px 0px; }
+            @media @mobile{
+                padding: 20px;
+                text-align: left;
+            }
         }
     }
     .sidebar-content{
@@ -30,6 +34,7 @@ aside.off-canvas{
         color:@sidebarTextColor;
         box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+        @media @mobile { .shadowNone; }
     }
     form + button[data-action]{
         cursor: pointer;
@@ -119,8 +124,7 @@ menu.tabs{
                 > header + *, * > header + *{ //Containing element after header
                     background-color: @sidebarSecondaryColor;
                     color:@sidebarTextColor;
-                    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-                    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                    margin-bottom: 50px;
                 }
             }
         }

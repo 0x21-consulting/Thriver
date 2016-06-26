@@ -9,15 +9,18 @@
         label{text-align: left;}
         padding:30px;
         //@media @mobile{padding: 15px;}
+        @media @mobile{ padding: 20px; }
     }
     .sidebar-content{
         padding-bottom: 30px;
+        //@media @mobile {padding: 20px;}
         //@media @mobile { padding-bottom: 15px;}
     }
 }
 #accounts{
     .sidebar-content{ padding-bottom: 0px; }
     form{padding-top: 0px;}
+    @media @mobile{ form{padding-top: 20px;} }
 }
 
 
@@ -32,6 +35,7 @@ ul.notificationMenu{
 ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
     > li{
         padding: 36px;
+        @media @mobile{ padding: 20px; }
         .dateMeta, .byLine{
             .font(1.2,1.7,0.025,@bold,normal);
             color: lighten(@lightBlue, 30%);
@@ -55,6 +59,10 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
         .font(1.4,2.2,0.025,@normal,none);
         padding: 36px;
         .shadow(close);
+        @media @mobile{
+            text-align: left;
+            padding: 20px;
+        }
     }
     button{
         display: block;
@@ -72,6 +80,7 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
         &.redirectButton{
             display: block;
             margin: 0px auto;
+            @media @mobile{ margin: 0px; }
             .buttonColor(darken(@lightBlue, 2.5%));
             &:after{
                 margin-left: 5px;
@@ -127,6 +136,10 @@ aside.off-canvas{
         form{
             max-width: 360px;
             margin: 0 auto;
+            @media @mobile{
+                max-width: 9999px;
+                margin: 0;
+            }
             .toggleSwitch label{
                 .opacity(1);
                 &:first-child{

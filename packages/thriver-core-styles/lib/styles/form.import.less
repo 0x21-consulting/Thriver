@@ -248,12 +248,18 @@ form{
         text-align: right !important;
         .opacity(1);
         .font(1.4,1.4,0.025,@normal,none);
+        @media @mobile{
+            text-align: left !important;
+            left: 0px;
+            padding-left: 20px;
+        }
     }
     .toggleSwitch {
         display: inline-block;
         position: absolute;
         top: 11px;
         width: 60px;
+        @media @mobile{ right: 20px;}
         .userSelect(none);
         &:before{
             .fa;

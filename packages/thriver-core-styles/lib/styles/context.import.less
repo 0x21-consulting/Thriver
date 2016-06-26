@@ -91,6 +91,7 @@ Canvas Animations.
         @media @mobile{
             z-index: 11;
             top: @headerMobileH - 1px;
+            .shadowNone;
         }
         @{sidebar}{
             height: @windowHSansUtility;
@@ -122,6 +123,7 @@ Canvas Animations.
         z-index: 9;
         position: absolute;
         .opacity(0);
+        display: none;
     }
     //Offset the main content according to the combined height of headers
     @{canvasPush}{ padding-top: @utilityH + @headerH; }
@@ -174,7 +176,7 @@ Canvas Animations.
 //Body is given class noScroll, pausing scroller on body (helpers.less)
 @{offActive}{
     overflow: hidden;
-    @{overlay}{ .opacity(1); }
+    @{overlay}{ .opacity(1); display: block; }
     @{off}{ .visible; }
     //Places the offCanvas Element on the right while canvasRight is active
     &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
