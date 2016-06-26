@@ -1,3 +1,25 @@
 //Defaults
 @filterBgColor: #222;
-.filter{background-color: @filterBgColor;}
+.filter{
+    background-color: @filterBgColor;
+    form{
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
+        margin: 0 auto;
+        width: 300px;
+        position: relative;
+        .placeholderColor(@white);
+        label{
+            position: absolute;
+            color: @white;
+            font-size: 16px;
+            top: 6px;
+            font-weight: normal;
+        }
+        input{
+            font-weight: bold;
+            &[type=search]{
+                background-color: transparent;
+            }
+        }
+    }
+}

@@ -13,6 +13,8 @@
     input, textarea{
         background-color: @baseColor;
         color: @inputColor;
+        margin-bottom: 15px;
+        &[type="submit"]{margin-bottom: 0px;}
         &:focus{
             background-color: darken(@baseColor, 3%);
         }
@@ -326,6 +328,7 @@ form{
         color: @yellow;
         background-color: darken(@sidebarSecondaryColor, 8.5%);
         padding: 10px;
+        margin: 15px 0px 0px 0px;
     }
     .error {
         &.customAmt{
