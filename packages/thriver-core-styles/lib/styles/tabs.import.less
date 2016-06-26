@@ -31,7 +31,11 @@ menu.tabs{
             align-items: center;
             justify-content: center;
             &[aria-expanded=false]{ background-color: @tabBgColor; color: @tabTextColor; }
-            &[aria-expanded=true]{background-color: @tabBgColorActive; color: @tabTextColorActive;}
+            &[aria-expanded=true]{
+                background-color: @tabBgColorActive;
+                color: @tabTextColorActive;
+                &:focus{ .shadowNone; }
+            }
             @media @mobile{
                 display: block;
                 color: @mobileNavigationColor;
