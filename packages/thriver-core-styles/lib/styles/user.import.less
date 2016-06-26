@@ -103,13 +103,17 @@ ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
     }
 }
 
-ul.eventsMenu > li{
+ul.eventsMenu, ul.libraryMenu > li{
     text-align: left;
 }
 
 
 //Acount Details
 aside.off-canvas{
+    dl.status{
+        background-color: rgba(0,0,0,0.15);
+        margin: 10px 0px;
+    }
     form{
         .row{
             text-align: right;
@@ -150,9 +154,10 @@ aside.off-canvas{
                 }
             }
             dl{
-                .dlColors(@black,@white,@white);
+                //.dlColors(@black,@white,@white);
                 max-width: 340px;
                 margin: 10px auto 0px auto;
+                background-color: rgba(0,0,0,0.5);
 
                 dd{
                     &.statusPending{color: @yellow;}
@@ -181,8 +186,9 @@ aside.off-canvas{
                 button{.buttonColor(darken(@sidebarSecondaryColor, 1%));}
                 dl{background-color: darken(@sidebarSecondaryColor, 6.5%);}
             }
-            span.byLine{
+            .byLine{
                 margin-top: 5px !important; //this cascade needs adjusting
+                font-style: normal;
             }
         }
     }

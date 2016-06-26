@@ -1,18 +1,20 @@
 <template name="requests">
     <header><h2>{{heading}}</h2></header>
-    <ul>
+    <ul class="libraryMenu stripes">
         {{#if items}}{{#each items}}
-            <li>
-                <p><a href="#{{id}}" title="{{title}}">{{title}}</a></p>
-                <address rel="author">{{byline}}</address>
-                <dl>
-                    <dt>{{statusHeading}}</dt>
-                    <dd class="{{status.type}}">{{status.message}}</dd>
-                </dl>
-                <button aria-label="{{detailsButtonAria}}" data-action="details">{{detailsButton}}</button>
+            <li class="libraryActivityItem">
+                <div class="inner-container">
+                    <p class="text"><a href="#{{id}}" title="{{title}}">{{title}}</a></p>
+                    <address class="byLine" rel="author">{{byline}}</address>
+                    <dl class="status">
+                        <dt>{{statusHeading}}</dt>
+                        <dd class="{{status.type}}">{{status.message}}</dd>
+                    </dl>
+                    <button aria-label="{{detailsButtonAria}}" class="viewDetails" data-action="details">{{detailsButton}}</button>
+                </div>
             </li>
         {{/each}}
         {{else}}<li class="none">{{none}}</li>{{/if}}
-        <li><button aria-label="{{moreButtonAria}}" data-action="more">{{moreButton}}</button></li>
+        <li><button aria-label="{{moreButtonAria}}" data-action="more" class="viewLibrary redirectButton">{{moreButton}}</button></li>
     </ul>
 </template>
