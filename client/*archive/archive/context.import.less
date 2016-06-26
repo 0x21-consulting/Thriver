@@ -31,15 +31,7 @@ body{
     }
 }
 
-//This needs home
-.asideLink{
-    margin: 36px auto 45px auto;
-    padding: 0px;
-    color: @gray;
-    border-bottom: 2px solid @gray;
-    .shadowNone;
-    .font(1.2,1.5,0.025,@normal,none);
-}
+
 
 .container{
     width: 100%;
@@ -78,7 +70,7 @@ body{
     background: -webkit-linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(45deg,  rgba(23,35,51,1) 0%,rgba(35,72,91,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#172333', endColorstr='#23485b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-         
+
     .opacity(0);
     z-index: 3;
     cursor: pointer;
@@ -243,7 +235,7 @@ aside.sidebar{
         &.active{
             .transition2(transform,@canvasDuration,@canvasEase,0ms, opacity,@canvasDuration, @canvasEase, 100ms);
             .translate(0px,0px);
-            .opacity(1); 
+            .opacity(1);
         }
     }
     &.sidebarsLeft{
@@ -303,7 +295,7 @@ body{
         .overlay{
             .opacity(@overlayOpacity);
             visibility: visible;
-            &:hover{.opacity(@overlayOpacityHover);}       
+            &:hover{.opacity(@overlayOpacityHover);}
         }
     }
     /*&.leftSmall, &.leftMedium{

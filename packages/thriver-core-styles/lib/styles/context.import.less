@@ -84,9 +84,10 @@ Canvas Animations.
     @{utility}, @{header}, @{canvasPush}, @{off}, @{overlay}{ top: 0; left: 0; }
 
     @{off} {
-        z-index: 4;
+        z-index: 11;
         top: @utilityH;
         .hidden;
+        .boxShadow(0px,0px,4px,6px,0.15);
         @media @mobile{
             z-index: 11;
             top: @headerMobileH - 1px;
@@ -100,6 +101,7 @@ Canvas Animations.
     @{canvasPush} {
         z-index: 1;
         margin-top:@utilityH;
+        min-height: 100vh;
         //will-change:initial; //transform value prevents header element from fixing to window
     }
     @{header}{
@@ -111,13 +113,13 @@ Canvas Animations.
         }
     }
     @{utility}{
-        z-index: 10;
+        z-index: 13;
         height: @utilityH;
     }
     @{mobileNav}{ z-index: 9; }
     @{mobileMenu}{ z-index: 10; }
     @{overlay}{
-        z-index: 3;
+        z-index: 9;
         position: absolute;
         .opacity(0);
     }

@@ -10,3 +10,80 @@
     }
 }
 
+
+
+
+
+
+//Notifications & Events Lists
+ul.notificationMenu{
+    background-color: @blueGray;
+}
+
+ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
+    > li{
+        padding: 36px;
+        .dateMeta, .byLine{
+            .font(1.2,1.7,0.025,@bold,normal);
+            color: lighten(@lightBlue, 30%);
+        }
+        .text{
+            display: block;
+            .font(1.4,1.7,0.025,@bold,none);
+            a{
+                .textButtonColor(@teal);
+                color: @white;
+            }
+        }
+    }
+}
+
+ul.notificationMenu, ul.eventsMenu, ul.libraryMenu{
+    li.notificationEmpty, li.eventsEmpty{
+        text-align: center;
+        color: @white;
+        .font(1.4,2.2,0.025,@normal,none);
+        padding: 36px;
+        .shadow(close);
+    }
+    button{
+        display: inline-block;
+        margin-top: 10px;
+        text-indent: 0px;
+        .buttonColor(@teal);
+        &.deny{
+            .buttonColor(@orange);
+        }
+        &.unregister{
+             .asideLink;
+             margin: 10px 0px 0px 0px;
+             background-color: transparent;
+        }
+        &.redirectButton{
+            display: block;
+            margin: 0px auto;
+            .buttonColor(darken(@lightBlue, 2.5%));
+        }
+    }
+    span.response{
+        display: none;
+        .font(1.2,1.4,0.025,@normal,none);
+        color: @teal;
+        margin: 5px 0px 0px 0px;
+        .undo{
+            .asideLink;
+            clear: both;
+            display: block;
+            background-color: transparent;
+            margin: 5px 0px 0px 0px;
+        }
+    }
+    li.selected{
+        span.response{
+            display: block;
+        }
+        button.deny, button.approve, button.viewEvent, button.unregister{
+            display: none;
+        }
+    }
+}
