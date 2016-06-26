@@ -111,24 +111,16 @@ section#news{
             }
         }
     }
-    li.loadMore{
-        text-align: center;
-        padding: 30px 0px;
-        button{
-            .buttonColor(@blueGray);
-            margin: 0 auto;
-            & + span.everything {
-                display: none;
-                margin: 0 auto;
-            }
-        }
-        &.everything { display: none; }
-        &.everything + span.everything { display: block; }
-    }
 }
 
 
-
+//Center Annual Reports / Press/Media Kits
+article#press-media-kits, article#annual-reports{
+    article{
+        text-align: center;
+        h3{text-align: center !important;}
+    }
+}
 
 
 

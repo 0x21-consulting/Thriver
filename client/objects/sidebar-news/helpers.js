@@ -97,7 +97,7 @@ Template.newsletters.helpers({
         type: 'article', //accepts: generic, details, article, catalog
         paginate: 'true', //Default is false
         perPage: 10, //if paginate:true, how many before paginate
-        style: 'striped',
+        style: 'stripes',
         items: [{
             title: 'One Webinar',
             date: '06991020', //This is temporary
@@ -119,17 +119,15 @@ Template.pressMediaKits.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: [{
-            title: 'One Webinar',
+            title: 'Press Kit (2015) (PDF)',
             date: '06991020', //This is temporary
             friendlyDate: '02/11/29',
-            content: 'lorem ipsum.',
-            icon: 'graph'
+            icon: 'megaphone'
         },{
-            title: 'One Webinar',
+            title: 'Media Kit (2015) (PDF)',
             date: '06991020', //This is temporary
             friendlyDate: '02/11/29',
-            content: 'lorem ipsum.',
-            icon: 'graph'
+            icon: 'camera'
         }],
     }]
 });
@@ -141,15 +139,15 @@ Template.annualReports.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: [{
-            title: 'One Webinar',
+            title: 'Annual Report (2015)(PDF)',
             date: '06991020', //This is temporary
             friendlyDate: '02/11/29',
-            content: 'lorem ipsum.'
+            icon: 'graph'
         },{
-            title: 'One Webinar',
+            title: 'Annual Report (2014)(PDF)',
             date: '06991020', //This is temporary
             friendlyDate: '02/11/29',
-            content: 'lorem ipsum.'
+            icon: 'graph'
         }],
     }]
 });

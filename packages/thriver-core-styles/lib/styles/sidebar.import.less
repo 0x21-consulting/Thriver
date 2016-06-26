@@ -145,3 +145,35 @@ menu.tabs{
         color: @white;
     }
 }
+
+//Read More paginate button
+aside.off-canvas{
+    li.loadMore{
+        text-align: center;
+        padding: 30px 0px;
+        button{
+            .buttonColor(@blueGray);
+            margin: 0 auto;
+            & + span.everything {
+                display: none;
+                margin: 0 auto;
+            }
+        }
+        &.everything { display: none; }
+        &.everything + span.everything { display: block; }
+    }
+    @media @mobile{
+        li.loadMore{
+            text-align: left;
+            padding: 20px;
+        }
+    }
+}
+
+//Icons on articles
+article a.icon:before{
+    font-size: 30px;
+    font-weight: 100;
+    display: block;
+    color:@teal;
+}
