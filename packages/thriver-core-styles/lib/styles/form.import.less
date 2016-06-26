@@ -1,0 +1,378 @@
+//Form Setup
+.formColors(@baseColor,@inputColor,@buttonColor,@labelColor,@radioColor,@radioSelect,@placeholderColor, @autofillColor){
+    .placeholderColor(@placeholderColor);
+    label{
+        .textButtonColor(@labelColor);
+    }
+    label.radio{
+        background-color: @radioColor;
+        &:hover{
+            background-color: darken(@radioColor, 5%);
+        }
+    }
+    input, textarea{
+        background-color: @baseColor;
+        color: @inputColor;
+        &:focus{
+            background-color: darken(@baseColor, 3%);
+        }
+        &:-webkit-autofill {
+            //Chrome Autocomplete
+            -webkit-box-shadow: 0 0 0px 1000px @autofillColor inset !important;
+            -webkit-text-fill-color: @white;
+            &:focus{
+                -webkit-text-fill-color: @white;
+            }
+        }
+    }
+    input[type=radio]:checked + label.radio{
+        background-color: @radioSelect;
+        &:before {
+            background-color: @radioSelect;
+        }
+    }
+    .styledSelect, .cvv2, input[type=text]{
+        background-color: @baseColor;
+        &:hover{
+            background-color: darken(@baseColor, 2.5%);
+        }
+        &:focus, input:focus{
+            background-color: darken(@baseColor, 5%);
+        }
+    }
+    .styledSelect, .cvv2, input[type=text]{
+        &:hover{
+            //background-color: darken(@baseColor, 1%);
+        }
+    }
+    button.submit, input[type=submit]{
+        .buttonColor(@buttonColor);
+    }
+}
+
+//Default Form Colors
+form{.formColors(@lightBlue,@white,@teal,@black,@lightBlue,@teal,@white, @teal);}
+
+//Form Defaults
+form{
+    input, textarea, select{
+        font-family:inherit;
+    }
+    input[type=checkbox], input[type=checkbox] + label{
+        display: inline-block;
+        width: auto;
+    }
+    input[type=checkbox] + label{
+        margin-right: 20px;
+    }
+    label{
+        display: block;
+        position: relative;
+        .font(1.4,1.4,0.01,@bold,none);
+        //color: @white;
+        //.opacity(0.8);
+        margin: 16px 0px 4px 0px;
+        cursor: pointer;
+        /*&:hover{
+            .opacity(1);
+        }*/
+        &:first-child{
+            margin: 0px 0px 4px 0px;
+        }
+    }
+    label.radio{
+        line-height: 47px;
+        color: @white;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        float: none;
+        text-align: center;
+        width: auto;
+        padding: 0px 20px;
+        margin: 0px 0px 4px 0px;
+        .transition(background-color, 200ms, ease, 0ms);
+    }
+    input, textarea{
+        display: block;
+        width: 100%;
+        text-indent: 12px;
+        padding: 16px 0px;
+        border: none;
+        .font(1.6,1.7,0.01,@bold,none);
+        &:focus{
+            outline: none;
+        }
+    }
+    textarea{
+        text-indent: 0px;
+        width: ~'calc(100% - 32px)';
+        padding: 16px;
+        min-height: 200px;
+        resize: none;
+    }
+    select{
+        .font(1.6,1.7,0.01,@bold,none);
+    }
+    input[type=file]{
+        background-color: transparent;
+        color: @orange;
+        text-indent: 0px;
+    }
+    input.button {
+        width: auto;
+        text-indent: 0px;
+        margin: 20px 0px 20px 0px;
+    }
+    button.submit{
+        text-indent: 0px;
+    }
+    input[type="radio"] {
+        display: none;
+        width: auto;
+        margin: 0px 4px 0px 24px;
+        position: relative;
+        top: -1px;
+    }
+    input[type='search']{
+        background: transparent;
+        border: none;
+        width: 100%;
+        max-width: 300px;
+        padding: 0px;
+        margin: 0 auto;
+        text-indent: 20px;
+        border-bottom: 2px solid @white;
+        .font(1.2,3.0,0.01,@bold,uppercase);
+        color: @white;
+    }
+    fieldset{
+        position: relative;
+    }
+}
+
+
+//Styled Selects & cvv2
+form{
+    .styledSelect:before{
+        .fa;
+        content: "\f0d7";
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        z-index: 2;
+        font-size: 12px;
+        pointer-events: none;
+    }
+    .styledSelect, .cvv2{
+        position: relative;
+        float: left;
+        width: 45%;
+        margin: 30px 1% 0px 0px;
+        height: 49px;
+        color: @white;
+        font-weight: bold;
+        label{
+            position: absolute;
+            left: 0px;
+            top: -20px;
+        }
+        &.small{
+            width: 18%;
+            margin-right: 0px;
+        }
+        select{
+            display: block;
+            background: transparent;
+            width: 100%;
+            height: 49px;
+            border: 0;
+            text-indent: 15px;
+            -webkit-appearance: none;
+            .font(1.4,1.4,0.025,@light,none);
+            .borderRadius(none);
+            &:focus{
+                outline: none;
+            }
+        }
+        select, select option {
+            color: @white;
+            font-weight: bold;
+        }
+        input{
+            background-color: @darkBlue;
+            color: @midnightBlue;
+        }
+    }
+    .cvv2{
+        margin-left: 5%;
+        width: 30%;
+        &:focus{
+            background-color: transparent;
+        }
+        input{
+            width: 100%;
+            color: @white;
+        }
+        label{
+            position: absolute;
+        }
+    }
+    .styledSelect, .cvv2, input[type=text]{
+        &:hover{
+            background-color: darken(@darkBlue, 1%);
+        }
+    }
+}
+
+
+
+
+//Toggle Switches
+form{
+    ul.toggleSwitches > li{
+        line-height: 60px;
+    }
+    //On Off Switches
+    label.toggleSwitchLabel{
+        color: @white;
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        left: -15px;
+        margin-right: 15px;
+        cursor: pointer;
+        text-align: right;
+        .opacity(1);
+        .font(1.4,1.4,0.025,@normal,none);
+    }
+    .toggleSwitch {
+        display: inline-block;
+        position: absolute;
+        top: 11px;
+        width: 60px;
+        .userSelect(none);
+        &:before{
+            .fa;
+            content:"\f00c";
+            position: absolute;
+            text-indent: 7px;
+            font-size: 16px;
+            font-weight: 100;
+            z-index: 4;
+            top: -10px;
+            .opacity(1);
+        }
+        label:first-child{
+            color: @white;
+            cursor: pointer;
+        }
+        input[type=checkbox]{
+            display: none;
+            + label{
+                display: block;
+                overflow: hidden;
+                cursor: pointer;
+                height: 36px;
+                line-height: 36px;
+                padding: 0;
+                margin: 0px;
+                background-color: rgba(255, 255, 255, 0.2);
+                .shadow(far);
+                .transition(background-color,200ms,ease,0ms);
+                &:before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 30px;
+                    width: 30px;
+                    margin: 0px;
+                    background: @gray;
+                    z-index: 4;
+                    .opacity(1);
+                    .transition(all,200ms,ease,0ms);
+                }
+                &:hover{
+                    &:before{
+                        opacity: 1;
+                    }
+                }
+            }
+            &:checked{
+                +label{
+                    background-color: @aqua;
+                }
+                +label, +label:before{
+                    border-color: @aqua;
+                    .opacity(1);
+                }
+                +label:before{
+                    right: 0px;
+                    background-color: @white;
+                }
+            }
+        }
+    }
+}
+
+
+//Errors & Messages
+
+form{
+    p#login-error {
+        .font(1.2,1.8,0.025,@normal,none);
+        color: @yellow;
+        background-color: darken(@sidebarSecondaryColor, 8.5%);
+        padding: 10px;
+    }
+    .error {
+        &.customAmt{
+        }
+    }
+    [data-error]{
+        &:after {
+            content: attr(data-error);
+            display: block;
+            clear: both;
+            margin-bottom: 5px;
+            .font(1.2,1.8,0.025,@normal,none);
+            color: @yellow;
+            background-color: darken(@sidebarSecondaryColor, 8.5%);
+            padding: 10px;
+        }
+        /*&:before{
+            content: "\f0d7";
+            display: block;
+            position: absolute;
+            top: 62px;
+            left: 18px;
+            color: #f1592a; //Searching purpose
+            font-size: 14px;
+            .fa;
+        }*/
+    }
+    .styledSelect[data-error]:after {
+        width: 200%;
+        margin-top: 20px;
+    }
+    /*[data-error='Donation amount must be greater than zero']{
+        &:after{
+            position: relative;
+            margin-bottom: 12px;
+            top: 12px;
+        }
+        &:before{
+            left: inherit;
+            right: 126px;
+            top: inherit;
+            bottom: 28px;
+            z-index: 9;
+        }
+        input[type=radio]:checked + label.radio.custom{
+            background-color: @orange, 2.5%;
+        }
+    }*/
+}
+
