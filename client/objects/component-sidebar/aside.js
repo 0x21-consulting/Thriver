@@ -100,6 +100,10 @@ Template.aside.helpers({
                 id: 'press-releases',
                 template : 'press'
             },{
+                title: 'Action Alerts',
+                id: 'action-alerts',
+                template : 'actionAlerts'
+            },{
                 title: 'Newsletters',
                 id: 'newsletters',
                 template: 'newsletters'

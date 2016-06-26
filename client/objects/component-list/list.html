@@ -16,8 +16,27 @@
                     {{/each}}
                 {{else}}
                     {{#each items}}
-                        {{>articleItem}}
+                        <article role="document">
+                            <div class="inner-container-wide">
+                                <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">
+                                    {{#if friendlyDate}}
+                                        <time class="dateMeta" datetime="{{date}}">{{{friendlyDate}}}</time>
+                                    {{else}}
+                                        <time class="dateMeta">January 1st, 2016</time>
+                                    {{/if}}
+                                    {{#if title}}<h3>{{{title}}}</h3>{{/if}}
+                                    {{#if publisher}}<p class="content text">{{{publisher}}}</p>{{/if}}
+                                    {{#if content}}<p class="content text">{{{content}}}</p>{{/if}}
+                                </a>
+                            </div>
+                        </article>
                     {{/each}}
+                {{/if}}
+                {{#if equals paginate 'true'}}
+                <li class="loadMore">
+                    <button type="button">Load More <span class="fa"></span></button>
+                    <span class="everything">That's everything!</span>
+                </li>
                 {{/if}}
             </section>
         {{/if}}

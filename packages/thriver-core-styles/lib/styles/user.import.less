@@ -31,24 +31,27 @@
 ul.notificationMenu{
     background-color: @blueGray;
 }
-
-ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
-    > li{
-        padding: 36px;
-        @media @mobile{ padding: 20px; }
-        .dateMeta, .byLine{
-            .font(1.2,1.7,0.025,@bold,normal);
-            color: lighten(@lightBlue, 30%);
-        }
-        .text{
-            display: block;
-            .font(1.4,1.7,0.025,@bold,none);
-            a{
-                .textButtonColor(@teal);
-                color: @white;
-            }
+aside.off-canvas{
+    ul.eventsMenu, ul.notificationMenu, ul.libraryMenu{
+        > li{
+            padding: 36px;
+            @media @mobile{ padding: 20px; }
         }
     }
+    .dateMeta, .byLine{
+        .font(1.2,1.7,0.025,@bold,normal);
+        color: lighten(@lightBlue, 30%);
+    }
+    .text{
+        display: block;
+        margin:0px;
+        .font(1.4,1.7,0.025,@light,none);
+        a{
+            .textButtonColor(@teal);
+            color: @white;
+        }
+    }
+    h3{margin-bottom: 3px;}
 }
 
 

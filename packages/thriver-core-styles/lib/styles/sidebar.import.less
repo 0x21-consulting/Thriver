@@ -70,8 +70,8 @@ aside.off-canvas{
         .font(1.2,1.5,0.025,600,none);
         &:focus{ background-color: rgba(0,0,0,0.25); }
     }
-    ul.stripes{
-        li{
+    ul.stripes, section.stripes{
+        li, > article{
             background-color: darken(@sidebarSecondaryColor, 5%);
             &:nth-child(even){ background-color: darken(@sidebarSecondaryColor, 4%); }
         }
@@ -133,5 +133,15 @@ menu.tabs{
                 }
             }
         }
+    }
+}
+
+//Article Styles
+[data-list-type="article"]{
+    text-align: left;
+    p{ margin-bottom: 0px; color: @white;}
+    article{
+        padding: 20px;
+        color: @white;
     }
 }
