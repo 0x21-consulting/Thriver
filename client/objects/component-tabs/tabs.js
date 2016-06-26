@@ -37,19 +37,17 @@ Template.body.onRendered(function() {
 			//alert(e);
 			var menuItem = e.querySelectorAll('[data-toggle="tabs"]');
 			menuItem[0].click();
-			//alert(menuItem);
-			/*var menuItem = e.querySelectorAll('a');
-			for (var i = 0, e; e = menuItem[i]; i++) {
-				h.hidden(e, true);
-			}*/
 		}
-		//toggleMenus.style.background="green";
-		/*for (var i = 0, e; e = toggleMenus[i]; i++) {
-			e.style.background = "green";
-			var toggleMenuItem = e.querySelectorAll('[data-toggle="tabs"]');
-			for (var i = 0, e; e = toggleMenuItem[i]; i++) {
-				//e.style.background = "green";
-			}
-		}*/
 	}
+	/*$(window).resize(function() {
+		if (window.innerWidth > 767){
+			var toggleMenus = document.querySelectorAll('menu.tabs');
+			//alert(toggleMenus);
+			for (var i = 0, e; e = toggleMenus[i]; i++) {
+				//alert(e);
+				var menuItem = e.querySelectorAll('[data-toggle="tabs"]');
+				menuItem[0].click();
+			}
+		}
+	});*/
 });
