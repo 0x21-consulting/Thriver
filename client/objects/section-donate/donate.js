@@ -1,4 +1,4 @@
-/** 
+/**
  * Donate form validation and error handling
  * @method
  *   @param {Element} element - The element to target
@@ -27,14 +27,14 @@ Template.donate.helpers({
         id: 'donateFailure',
         content:"<h3>We're sorry, the donation was unsuccessful.<br> Please try again later.</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>",
     }],
-    amount: [{ value: "25" },{ value: "50" },{ value: "100" }, { value: "200" }],
+    amount: [{ value: "25" },{ value: "50" },{ value: "100", checked: "checked" }, { value: "200" }],
     'name': function () {
         var user = Meteor.user();
-        
+
         // Just return name of logged in user
         if (user && user.profile)
             return user.profile.firstname + ' ' + user.profile.lastname;
-        
+
         // Otherwise
         return '';
     },
@@ -42,10 +42,10 @@ Template.donate.helpers({
         // Just display this and the next ten years
         var years = [], i,
             thisYear = new Date().getUTCFullYear();
-        
+
         for (i = 0; i < 10; ++i)
             years.push(thisYear + i);
-        
+
         return years;
     }
 });
@@ -62,17 +62,17 @@ Template.donate.events({
     'submit form': function (event) {
         if (event && event.preventDefault)
             event.preventDefault();
-        
+
         var form = event.target,
-        
+
         // Calculate total
-        total = form['amount'].value === 'custom' ? 
+        total = form['amount'].value === 'custom' ?
             document.querySelector('#customAmt').value :
             form['amount'].value;
-        
+
         // Disable submit button to prevent accidental double-submit
         form.querySelector('button.submit').disabled = true;
-        
+
         // Initiate Purchase
         Meteor.Paypal.purchase({
             name        : form['name'  ].value,
@@ -86,7 +86,7 @@ Template.donate.events({
             currency    : 'USD'
         }, function (error, results) {
             var i, j, details;
-            
+
             if (error) {
                 console.debug('error?', error);
             } else {
@@ -95,24 +95,24 @@ Template.donate.events({
                 //   saved (true or false)
                 //   if false: "error" contains the reasons for failure
                 //   if true: "payment" contains the transaction information
-                
+
                 error = results.error;
                 if (error && error.response) {
                     // Hide default message and indicate error
                     document.querySelector('.donateDefault').setAttribute('aria-hidden', 'true');
                     document.querySelector('.donateFailure').setAttribute('aria-hidden', 'false');
-                    
+
                     // Re-enable submit button
                     form.querySelector('button.submit').disabled = false;
-                    
+
                     // Handle error details
                     if (error.response.details) {
                         details = error.response.details;
-                        
+
                         for (i = 0, j = details.length; i < j; ++i) {
                             switch (details[i].issue) {
                                 case 'Invalid expiration (cannot be in the past)':
-                                    donateException(form['year'], 
+                                    donateException(form['year'],
                                         'Expiration date cannot be in the past');
                                     break;
                                 case 'The credit card number is not valid for the specified credit card type':
@@ -121,7 +121,7 @@ Template.donate.events({
                                     switch (details[i].field) {
                                         case 'payer.funding_instruments[0].credit_card':
                                         case 'payer.funding_instruments[0].credit_card.number':
-                                            donateException(form['number'], 
+                                            donateException(form['number'],
                                                 'Invalid credit card number');
                                             break;
                                         case 'payer.funding_instruments[0].credit_card.cvv2':
@@ -138,7 +138,7 @@ Template.donate.events({
                             }
                         }
                     }
-                    
+
                     // If there aren't any details, check for other errors
                     switch (error.response.name) {
                         case 'CREDIT_CARD_REFUSED':
@@ -156,21 +156,21 @@ Template.donate.events({
                 }
             }
         });
-        
+
     },
-    
+
     // Show credit card type
     'keyup [name="number"]': function (event) {
         if (!event || !event.target)
             return;
-        
+
         var ccImage = event.target.parentElement.parentElement.
                 querySelector('.cc-pic'),
             ccType  = event.target.parentElement.parentElement.
                 querySelector('[name="type"]');
-        
+
         if (!ccImage || !ccType) return;
-        
+
         switch ( event.target.value.substr(0, 2) ) {
             // American Express
             case '34':
@@ -208,12 +208,12 @@ Template.donate.events({
                         ccType.value = 'mastercard';
                 }
         }
-        
+
         // Based on credit card type, space out the numbers
-        
+
         // If this is the backspace key, ignore
         if (event.keyCode === 8) return;
-        
+
         // American Express and Diners Club cards indent at 4 and 10
         if (ccType.value === 'amex') {
             if (event.target.value.length === 4 || event.target.value.length === 11) {
@@ -223,7 +223,7 @@ Template.donate.events({
             // Otherwise, don't indent at all
             return;
         }
-        
+
         // All other credit cards have a space after 4, 8, and 12
         if (event.target.value.length === 4 || event.target.value.length === 9
             || event.target.value.length === 14) {
