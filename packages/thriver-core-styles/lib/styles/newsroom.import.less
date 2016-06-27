@@ -6,6 +6,14 @@ section#news {
     //.links{color: darken(@blueGray, 0%);font-weight: bold;}
     .links{
         margin-top: -27px;
+        @media @mobile{
+            margin-top: -12px;
+            margin-left: 20px;
+            color: @sidebarPrimaryColor;
+            button{
+                padding-bottom: 10px;
+            }
+        }
     }
     button.manageSubscriptions, button.subscriptionsRegister, button.inquire{
         .shadowNone;
@@ -122,6 +130,10 @@ article#press-media-kits, article#annual-reports{
     article{
         text-align: center;
         h3{text-align: center !important;}
+        @media @mobile{
+            text-align: left;
+            h3{text-align: left !important;}
+        }
     }
 }
 

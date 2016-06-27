@@ -177,3 +177,23 @@ article a.icon:before{
     display: block;
     color:@teal;
 }
+
+@media @mobile{
+    .librarySearchHeader{margin-bottom: 0px !important;}
+    #resources article details{
+        width: auto !important;
+        margin: 0px !important;
+    }
+    #resources article aside.info{
+        width:100% !important;
+        padding-top: 0px !important;
+        > *{
+            width:25%;
+            float: left;
+            button{
+                //min-height: 65px;
+            }
+        }
+    }
+}
+
