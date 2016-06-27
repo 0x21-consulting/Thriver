@@ -1,9 +1,9 @@
 Template.library.helpers({
     lists: [{
 	    type: 'catalog', //accepts: generic, details, article
-	    paginate: true, //Default is false
+	    paginate: 'true', //Default is false
 	    perPage: 10, //if paginate:true, how many before paginate
-	    style: 'striped',
+	    style: 'stripes',
 	    //If catalog
 	    items: [{
 	        title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
@@ -75,7 +75,7 @@ Template.library.helpers({
             <!--These List Items should only show based on user's filter selection-->
             <dt class="fa" title="search terms">&#xf002;</dt>
             <dd>"Survivor Stories"</dd>
-            <dt class="fa" title="classification">&#xf0b1;</dt> 
+            <dt class="fa" title="classification">&#xf0b1;</dt>
             <dd>Providers</dd>
             <dt class="fa" title="category">&#xf07c;</dt>
             <dd>Resources</dd>
@@ -171,7 +171,7 @@ Template.library.helpers({
 
 <template name="loginToRequest">
     <span class="loginToRequest"><button>Login</button> to Request Copy</span>
-</template>                
+</template>
 
 
 <template name="requestSuccess">

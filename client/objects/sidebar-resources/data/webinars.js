@@ -4,7 +4,7 @@ Template.webinars.helpers({
 	    itemType: 'category',
 	    paginate: true, //Default is false
 	    perPage: 10, //if paginate:true, how many before paginate (Not currently functioning)
-	    style: 'striped',
+	    style: 'stripes',
 	    categories: [{
 	        title: 'Summer Webinars',
 	        id: 'summerWebinars',

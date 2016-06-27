@@ -3,15 +3,17 @@
             <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
                 {{#if equals itemType 'category'}}
                     {{#each categories}}
-                        <article>
-                            <details aria-expanded="false" aria-controls="{{id}}">
-                                <summary id="{{id}}">
-                                    <h1>{{{title}}}</h1>
-                                </summary>
-                                {{#each items}}
-                                    {{>articleItem}}
-                                {{/each}}
-                            </details>
+                        <article class="itemCategory">
+                                <details aria-expanded="false" aria-controls="{{id}}">
+                                    <summary id="{{id}}">
+                                        <h1>{{{title}}}</h1>
+                                    </summary>
+                                    <div class="inner">
+                                        {{#each items}}
+                                            {{>articleItem}}
+                                        {{/each}}
+                                    </div>
+                                </details>
                         </article>
                     {{/each}}
                 {{else}}
@@ -45,37 +47,45 @@
             <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
             {{#each items}}
                 <article>
-                    <details aria-expanded="false" aria-controls="{{id}}">
-                        <summary id="catalog{{id}}">
-                            <h1>{{title}}</h1>
-                            <p>{{byline}}</p>
-                        </summary>
-                        <dl>
-                            <!--Would be nice to have the spacebars tag just do: prop:val-->
-                            <dt>Call Number</dt><dd>{{callNumber}}</dd>
-                            <dt>Copies</dt><dd>{{copies}}</dd>
-                            <dt>Subject Headings</dt><dd>{{subjectHeading}}</dd>
-                            <dt>Classification</dt><dd>{{classification}}</dd>
-                            <dt>Category</dt><dd>{{category}}</dd>
-                            <dt>Material</dt><dd>{{type}}</dd>
-                        </dl>
-                    </details>
-                    <aside>
-                        {{#if type}}
-                            <dl class="material"><dt>Material</dt><dd>{{type}}</dd></dl>
-                        {{/if}}
-                        {{#if stauts}}
-                            <dl class="{{status.type}}"><dt>Status</dt><dd>{{status.text}}</dd></dl>
-                        {{/if}}
-                        <menu>
-                            {{#if equals status.type 'transit'}}
-                                <li><button>Request Copy</button></li>
+                    <div class="inner">
+                        <details aria-expanded="false" aria-controls="{{id}}">
+                            <summary id="catalog{{id}}">
+                                <h1>{{title}}</h1>
+                                <p class="meta">{{byline}}</p>
+                            </summary>
+                            <dl>
+                                <!--Would be nice to have the spacebars tag just do: prop:val-->
+                                <dt>Call Number</dt><dd>{{callNumber}}</dd>
+                                <dt>Copies</dt><dd>{{copies}}</dd>
+                                <dt>Subject Headings</dt><dd>{{subjectHeading}}</dd>
+                                <dt>Classification</dt><dd>{{classification}}</dd>
+                                <dt>Category</dt><dd>{{category}}</dd>
+                                <dt>Material</dt><dd>{{type}}</dd>
+                            </dl>
+                        </details>
+                        <aside class="info">
+                            {{#if type}}
+                                <dl class="material"><dt>Material</dt><dd>{{type}}</dd></dl>
                             {{/if}}
-                            <!--Remaining interaction buttons here-->
-                        </menu>
-                    </aside>
+                            {{#if status}}
+                                <dl class="status {{status.type}}"><dt>Status</dt><dd>{{status.text}}</dd></dl>
+                            {{/if}}
+                            <menu class="availability">
+                                {{#if equals status.type 'transit'}}
+                                    <li><button>Request Copy</button></li>
+                                {{/if}}
+                                <!--Remaining interaction buttons here-->
+                            </menu>
+                        </aside>
+                    </div>
                 </article>
             {{/each}}
+            {{#if equals paginate 'true'}}
+            <li class="loadMore">
+                <button type="button">Load More <span class="fa"></span></button>
+                <span class="everything">That's everything!</span>
+            </li>
+            {{/if}}
             </section>
         {{/if}}
         {{#if equals type 'event'}}

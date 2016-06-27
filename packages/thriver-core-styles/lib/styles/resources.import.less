@@ -1,33 +1,5 @@
-//Structure
-section.learningCenter {
-    width: 1100px;
-    height: ~"calc(100vh - 32px)";
-    text-align: left;
-    top: 0px;
-    .tabStyle(@blueGray,25%,65px,true);
-    ul.resourcesItems > li .inner {
-        padding: 0px;
-        margin: 0 auto;
-        .clearfix;
-    }
-    .closeTab{
-        display: block;
-    }
-    ul.newsItems > li .inner{
-        max-width: 600px;
-        padding: 30px;
-        margin: 0 auto;
-    }
-    @media @1250{
-        width: 900px;
-    }
-    @media @1024{
-        width: 700px;
-    }
-}
-
 //Element Styles
-section.learningCenter{
+section#resources{
     h3{
         padding: 0px;
         text-align: left;
@@ -77,12 +49,30 @@ section.learningCenter{
 
 
 
+//Animate
+/*.learningCenter .toolBar fieldset.filter{
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    .opacity(0);
+    //.transition2(height,500ms, ease,0ms, opacity,500ms, ease,0ms);
+}
+.learningCenter .toolBar.filter fieldset.filter{
+    .opacity(1);
+    height: 277px;
+    //.transition2(height,500ms, ease,300ms, opacity,300ms, ease,500ms);
+}
+*/
+
 
 //Library
-.library > li{
-    details{background-color: darken(@sidebarContentBgColor, 3%);}
-    &:nth-child(even) details{background-color: darken(@sidebarContentBgColor, 1%);}
+//.library > li{
+#resources article{
+    details{background-color: darken(@sidebarSecondaryColor, 3%);}
+    &:nth-child(even) details{background-color: darken(@sidebarSecondaryColor, 1%);}
     p{margin:0px;}
+    text-align: left;
+    .clearfix;
     details{
         width: 429px;
         float: left;
@@ -90,7 +80,7 @@ section.learningCenter{
         .shadow(far);
         summary{
             padding: 20px;
-            h5{
+            h1{
                 .font(1.4,2.0,0.025,@normal,none);
                 color: @gray;
                 margin: 0px;
@@ -101,7 +91,7 @@ section.learningCenter{
                 margin: 10px 0px 0px 0px;
             }
             &:hover{
-                h5{
+                h1{
                     color: @white;
                 }
                 p{
@@ -122,12 +112,12 @@ section.learningCenter{
     }
     dl dt, dl dd, button{.font(1.2,1.6,0.025,@normal,none)};
     button.requestLibraryItem{display: block;width: 100%;}
-    dl{background-color: darken(@sidebarContentBgColor, 8.5%);}
-    button{.buttonColor(darken(@sidebarContentBgColor, 3%));}
+    dl{background-color: darken(@sidebarSecondaryColor, 8.5%);}
+    button{.buttonColor(darken(@sidebarSecondaryColor, 3%));}
     //summary{background-color: darken(@sidebarContentBgColor, 8.5%);}
     &:nth-child(even){
-        dl{background-color: darken(@sidebarContentBgColor, 6.5%);}
-        button{.buttonColor(darken(@sidebarContentBgColor, 1%));}
+        dl{background-color: darken(@sidebarSecondaryColor, 6.5%);}
+        button{.buttonColor(darken(@sidebarSecondaryColor, 1%));}
         //summary{background-color: darken(@sidebarContentBgColor, 6.5%);}
     }
     dl.material dt{display: none;}
@@ -137,7 +127,7 @@ section.learningCenter{
         float: left;
     }
     details dl{
-        .dlColors(darken(@sidebarContentBgColor, 8.5%),@gray,@yellow);
+        .dlColors(darken(@sidebarSecondaryColor, 8.5%),@gray,@yellow);
         margin: 0px 20px 20px 20px;
         padding: 20px;
         dt{font-weight: @normal;}
@@ -190,8 +180,7 @@ section.learningCenter{
 }
 
 
-.librarySearchHeader{
-    background-color: #3e505a; //Not standard 3%?
+#resources{
     h2{
         margin: 0px;
     }
@@ -199,8 +188,8 @@ section.learningCenter{
         margin: 0px 30px 0px 30px;
         padding: 15px;
         text-align: center;
-        .dlColors(darken(@sidebarContentBgColor, 8.5%),@teal,@gray);
-        .font(1.2,1.6,0.025,@normal,none);
+        .dlColors(darken(@sidebarSecondaryColor, 8.5%),@teal,@gray);
+        //.font(1.2,1.6,0.025,@normal,none);
         dt{
             margin-right: 5px;
             cursor: help;
@@ -217,8 +206,6 @@ section.learningCenter{
     }
 }
 
-
-
 /*.learningCenter ul.resourcesContent li.library{
     height: 0px;
     overflow: hidden;
@@ -234,30 +221,21 @@ section.learningCenter{
     animation: catalogueupdate @canvasDuration @headerDelay 1 @headerFirstEase alternate;
 }*/
 
-.learningCenter .toolBar fieldset.filter{
-    display: block;
-    height: 0px;
-    overflow: hidden;
-    .opacity(0);
-    .transition2(height,500ms, ease,0ms, opacity,500ms, ease,0ms);
-}
-.learningCenter .toolBar.filter fieldset.filter{
-    .opacity(1);
-    height: 277px;
-    .transition2(height,500ms, ease,300ms, opacity,300ms, ease,500ms);
+
+
+
+
+.librarySearchHeader{
+    background: #3e505a;
 }
 
-
-
-
-
-li.itemCategory{
+article.itemCategory{
     .inner ul{
         margin: 0px 30px 0px 30px;
         > li{
             padding: 0px 20px;
             line-height: 30px;
-            background-color: darken(@sidebarContentBgColor, 5.5%) !important;
+            background-color: darken(@sidebarSecondaryColor, 5.5%) !important;
             .font(1.2,2.6,0.025,@normal,none);
             a{
                 .font(1.3,2.6,0.025,@bold,none);
@@ -273,7 +251,7 @@ li.itemCategory{
         }
     }
     details, .inner ul{
-        background-color: darken(@sidebarContentBgColor, 3%);
+        background-color: darken(@sidebarSecondaryColor, 3%);
     }
     .inner ul{
         box-shadow:  0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -284,14 +262,14 @@ li.itemCategory{
             padding: 30px;
             background-color: transparent;
             .transition(background-color,250ms,ease,0ms);
-            h5{
+            h1{
                 .font(1.4,2.0,0.025,@normal,none);
                 color: @gray;
                 margin: 0px;
             }
             &:hover{
-                background-color: darken(@sidebarContentBgColor, 8%);
-                h5{
+                background-color: darken(@sidebarSecondaryColor, 8%);
+                h1{
                     //color: @teal;
                 }
                 p{
@@ -302,9 +280,9 @@ li.itemCategory{
     }
     &:nth-child(even){
         details, .inner ul{
-        background-color: darken(@sidebarContentBgColor, 1%);
+        background-color: darken(@sidebarSecondaryColor, 1%);
         summary:hover{
-            background-color: darken(@sidebarContentBgColor, 6%);
+            background-color: darken(@sidebarSecondaryColor, 6%);
         }
         }
     }
@@ -312,8 +290,9 @@ li.itemCategory{
 
 
 .itemCategory{
+    h3{text-align: left !important;}
     details{
-        h5{
+        h1{
             &:after{
                 .fa;
                 margin-left: 10px;
@@ -324,7 +303,7 @@ li.itemCategory{
 }
 .itemCategory details[open]{
     padding-bottom: 30px;
-    h5{
+    h1{
         color: lighten(@yellow, 5%);
         &:after{
             content:"\f13a";
@@ -333,4 +312,16 @@ li.itemCategory{
     summary:hover{
         background-color: transparent !important;
     }
+}
+
+.status.transit dd{ color: @teal !important;}
+
+//Basic Category Detail/summary
+#resources article.itemCategory details{
+    margin: 0px;
+    width:100%;
+    padding: 0px;
+}
+article.itemCategory{
+    padding: 0px;
 }
