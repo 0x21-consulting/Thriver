@@ -26,6 +26,7 @@ Meteor.canvasFunctions = {
 	        c.clearCanvas(); //Remove all canvas effect classes
 	        h.hidden(overlay,true);
 	        h.hidden(main,false);
+			document.body.classList.remove('open-canvas');
 	        focusGlobalElFirst.focus();
 			if(document.getElementById("mobile-toggle").getAttribute('aria-expanded') !== "false"){ document.getElementById("mobile-toggle").click(); }
 	    }
@@ -33,6 +34,7 @@ Meteor.canvasFunctions = {
 	    // Open Overlay and offCanvas elements if clicking inactive list item
 	    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false' && event.target.id !== "mobile-toggle"){
 	        c.clearCanvas();
+			document.body.classList.add('open-canvas');
 	        h.hidden(main,true);
 	        document.body.classList.add('noScroll');
 	        canvas.setAttribute('data-canvas-state','open'); //Add master canvas effect class

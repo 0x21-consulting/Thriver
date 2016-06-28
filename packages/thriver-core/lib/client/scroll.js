@@ -71,13 +71,8 @@ handleHeaderStateChange = function (event) {
 
 // Smooth scrolling
 // We only care about same page links (that start with a hash)
-Template.body.events({
-    'click a[href*=#]': function (event) {
-        if(event.target.parentNode.parentNode.parentNode.id !== "utility"){
-            smoothScroll
-        }
-    }
-});
+Template.body.events({ 'click #menu a[href*=#]': smoothScroll });
+
 // Handle header state change
 Template.body.onRendered(function () {
     window.addEventListener('scroll', handleHeaderStateChange);

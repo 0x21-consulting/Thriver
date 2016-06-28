@@ -1,6 +1,7 @@
 //tabs.js are the events and functions associated with UI tabs.
 Meteor.tabsFunctions = {
 	toggleTabs : function(){
+		event.preventDefault();
 	    // Tabs Variables
 	    if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
 			var thisToggleMenu = event.target.parentNode.parentNode;

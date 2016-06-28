@@ -33,8 +33,7 @@ var focusToGroup = false;
 var topFocus = false;
 //This only works if the tab key alone is being used.
 $("body").on("keydown", function(event) {
-    console.log('k');
-   /* if(event.keyCode == 9){
+    if(event.keyCode == 9){
         var active;
         active = document.activeElement;
         console.log(active);
@@ -63,5 +62,5 @@ $("body").on("keydown", function(event) {
                 event.preventDefault();
             }
         }
-    }*/
+    }
 });

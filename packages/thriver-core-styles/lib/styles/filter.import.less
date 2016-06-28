@@ -21,8 +21,9 @@
         fieldset{display: none;}
         input{
             font-weight: bold;
-            &[type=search]{
+            &[type=search], &[type=search]:focus{
                 background-color: transparent;
+                .shadowNone;
             }
         }
     }

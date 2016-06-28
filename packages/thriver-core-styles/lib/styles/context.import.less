@@ -91,16 +91,21 @@ Canvas Animations.
         z-index: 1;
         top: @utilityH;
         .hidden;
-        .boxShadow(0px,0px,4px,6px,0.15);
+        //.boxShadow(0px,0px,4px,6px,0.15);
         @media @mobile{
             z-index: 11;
             top: @headerMobileH - 1px;
             .shadowNone;
         }
         @{sidebar}{
+            display: block;
             height: @windowHSansUtility;
-            display: none;
-            &[aria-hidden="false"]{display: block;} //Show active sidebar
+            height: 0; width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            .opacity(0);
+            .transform(translate(100%,0px);)
+            //&[aria-hidden="false"]{display: block;} //Show active sidebar
         }
     }
     @{canvasPush} {
@@ -108,13 +113,15 @@ Canvas Animations.
         margin-top:@utilityH;
         min-height: 100vh;
         background: #fff;
-        .boxShadow(0px 2px 2px 0px rgba(0,0,0,0.5);)
+        .boxShadow(0px 2px 2px 0px rgba(0,0,0,0.5));
         //will-change:initial; //transform value prevents header element from fixing to window
+        @media @mobile{ z-index: 1; }
     }
     @{header}{
         z-index: 20;
         top: @utilityH;
         height: @headerH;
+        border-bottom:1px solid #eee;
         body.fixedHeader &{
             height: @headerFixedH;
         }
@@ -122,6 +129,7 @@ Canvas Animations.
     @{utility}{
         z-index: 27;
         height: @utilityH;
+        .shadowNone !important;
     }
     @{mobileNav}{ z-index: 9; }
     @{mobileMenu}{ z-index: 10; }
@@ -186,11 +194,19 @@ Canvas Animations.
 @{offActive}{
     overflow: hidden;
     @{overlay}{
-        .opacity(1);
+        .opacity(0.95);
         width:100%;
         height: 100%;
     }
     @{off}{ .visible; }
+    @{off} @{sidebar}[aria-hidden="false"]{
+            height: @windowHSansUtility;
+            width: auto;
+            visibility: visible;
+            .opacity(1);
+            overflow: auto;
+            .transform(translate(0%,0px);)
+    }
     //Places the offCanvas Element on the right while canvasRight is active
     &[data-canvas-position=right]{ @{off}, @{overlay}{ right: 0; left: initial; } }
 }
@@ -222,16 +238,126 @@ Canvas Animations.
 }
 
 @{header}{.shadowNone !important;}
-@{offActive} @{overlay}{
-   /* .keyframes(overlay;{
-            0% {
+
+/*
+.open-canvas @{off}{
+    transition: width 0ms linear 500ms;
+}*/
+@media (min-width:768px){
+    &[data-canvas-position='left'] @{off} section[aria-hidden="false"]{
+        .keyframes(offwait;{
+                0% {
+                height: @windowHSansUtility;
+                width: auto;
+                visibility: visible;
+                .opacity(0);
+                overflow: auto;
+                .transform(translate(100%,0px));
+                }
+                100% {
+                height: @windowHSansUtility;
+                width: auto;
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(0%,0px));
+                overflow: auto;
+                }
+        });
+        .animation(offwait 500ms @easeDefault);
+    }
+
+    &[data-canvas-position='right'] @{off} section[aria-hidden="false"]{
+        .keyframes(offwaitright;{
+                0% {
+                height: @windowHSansUtility;
+                width: auto;
+                visibility: visible;
+                .opacity(0);
+                overflow: auto;
+                .transform(translate(-100%,0px));
+                }
+                100% {
+                height: @windowHSansUtility;
+                width: auto;
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(0%,0px));
+                overflow: auto;
+                }
+        });
+        .animation(offwaitright 500ms @easeDefault);
+    }
+}
+
+@media @mobile{#overlay{display:none;}}
+
+@media @mobile{
+    #mobile-navigation{
+        transition: all 375ms @easeDefault;
+    }
+    .off-canvas, aside.off-canvas div.tabs > article{  .boxShadow(-2px -2px 2px 0px rgba(0,0,0,0.5)); }
+    [data-canvas-state="open"] .off-canvas{
+        width: 100%;
+        .keyframes(mobilesidebar;{
+                0% {
+                visibility: visible;
+                .transform(translate(-100%,0px));
+                }
+                100% {
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(0%,0px));
+                }
+        });
+        .animation(mobilesidebar 500ms @easeDefault);
+    }
+    [data-canvas-state="closed"] .off-canvas{
+        width: 100%;
+        .keyframes(mobilesidebarb;{
+                0% {
+                visibility: visible;
+                .transform(translate(0%,0px));
+                }
+                100% {
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(-100%,0px));
+                }
+        });
+        .animation(mobilesidebarb 500ms @easeDefault);
+    }
+    aside.off-canvas div.tabs > article[aria-hidden="false"]{
+
+        .keyframes(mobilesidebartab;{
+                0% {
+                visibility: visible;
+                .transform(translate(-100%,0px));
+                }
+                100% {
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(0%,0px));
+                }
+        });
+        .animation(mobilesidebartab 500ms @easeDefault);
+    }
+    aside.off-canvas div.tabs > article[aria-hidden="true"]{
+        display: block !important;
+        visibility: hidden;
+        .keyframes(mobilesidebartabback;{
+                0% {
                 display:block;
                 visibility: visible;
-                opacity:0 !important;
-            }
-            100% {
-               opacity:0.95 !important;
-            }
-    });*/
-    .animation(~"slideinR@{width}" 500ms @easeDefault);
+                .transform(translate(0%,0px));
+                }
+                100% {
+                display:block;
+                visibility: visible;
+                .opacity(1);
+                .transform(translate(-100%,0px));
+                }
+        });
+        .animation(mobilesidebartabback 500ms @easeDefault);
+    }
 }
+
