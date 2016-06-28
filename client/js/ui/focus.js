@@ -33,9 +33,10 @@ var focusToGroup = false;
 var topFocus = false;
 //This only works if the tab key alone is being used.
 $("body").on("keydown", function(event) {
-    if(event.keyCode == 9){
+    console.log('k');
+   /* if(event.keyCode == 9){
         var active;
-        active = document.activeElement; 
+        active = document.activeElement;
         console.log(active);
         if($(active).is(focusGroupElLast)){ resetFocus = true; } // :focusable
         if($(active).is(focusGlobalElLast)){ focusToGroup = true; } // :focusable
@@ -46,7 +47,7 @@ $("body").on("keydown", function(event) {
                 focusGlobalElFirst.focus();
                 resetFocus = false;
                 event.preventDefault();
-            } 
+            }
             if(focusToGroup == true){
                 focusGroupElFirst.focus();
                 focusToGroup = false;
@@ -62,5 +63,5 @@ $("body").on("keydown", function(event) {
                 event.preventDefault();
             }
         }
-    }
+    }*/
 });
