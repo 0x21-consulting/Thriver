@@ -20,10 +20,7 @@ Template.masthead.helpers({
 })
 
 Template.masthead.events({
-    'click section.masthead .arrow': function (event) {
-        offset = $('[id="what-we-do"]').offset().top - 125;
-        $('body').animate({ scrollTop: offset }, 500);
-    },
+    /*
     //These are temporary for demo purposes: need to find a way to quickly link with rich content
     'click section.masthead .jobsOpen': function (event) {
         offset = $('[id="get-involved"]').offset().top - 125;
@@ -32,26 +29,30 @@ Template.masthead.events({
     'click section.masthead .eventsOpen': function (event) {
         offset = $('[id="events"]').offset().top - 125;
         $('body').animate({ scrollTop: offset }, 1500);
-    }
+    }*/
 });
 
 Template.masthead.onRendered(function () {
     //Auto Rotate function
     function transitionSlider(){
-        $( "#masthead menu.tabs > li" ).each(function() {
-            if($(this).hasClass( "active" ) && $(this).is(':not(:last-child)')){
-                $(this).next().trigger( "click" );
-                return false;
-            }
-            if($(this).hasClass( "active" ) && $(this).is(':last-child')){
-                $('ul.mastheadTabs > li:first-child').trigger( "click" );
-                return false;
-            }
-        });
+        //if ($(window).width() > 767) {
+            $( ".masthead menu.tabs > li" ).each(function() {
+                //$(this).next().find('a').trigger( "click" );
+                if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':not(:last-child)')){
+                    $(this).next().find('a')[0].click();
+                    return false;
+                }
+                if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':last-child')){
+                    //$(this).parent().find('li:first-child').find('a')[0].click();
+                    $('.masthead menu.tabs > li:first-child a')[0].click();
+                    return false;
+                }
+            });
+       // }
     }
-    var sliderTimer = setInterval(transitionSlider, 9000);
-    $("#masthead menu.tabs > li").click(function() {
+    var sliderTimer = setInterval(transitionSlider, 8000);
+    $("#masthead menu.tabs > li a").click(function() {
         clearInterval(sliderTimer);
-        sliderTimer = setInterval(transitionSlider, 9000);
+        sliderTimer = setInterval(transitionSlider, 8000);
     });
 });

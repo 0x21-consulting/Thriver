@@ -47,6 +47,15 @@ Template.body.onRendered(function() {
 			menuItem[0].click();
 		}
 	}
+	if (window.innerWidth < 768){
+		var toggleMenus = document.querySelectorAll('#main menu.tabs');
+		//alert(toggleMenus);
+		for (var i = 0, e; e = toggleMenus[i]; i++) {
+			//alert(e);
+			var menuItem = e.querySelectorAll('[data-toggle="tabs"]');
+			menuItem[0].click();
+		}
+	}
 	/*$(window).resize(function() {
 		if (window.innerWidth > 767){
 			var toggleMenus = document.querySelectorAll('menu.tabs');

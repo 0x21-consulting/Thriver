@@ -98,7 +98,12 @@ i{ font-style: normal; .fa; }
 
 .container{
     max-width: 1200px;
+    padding: 40px;
     margin: 0 auto;
+    .clearfix;
+    @media @mobile{
+        padding: 15px;
+    }
 }
 
 .inner-container{
@@ -204,4 +209,4 @@ body{
     .rw;
 }
 
-aside.section-controls{display: none;}
+aside.section-controls, aside#admin-controls, p#dAddNotification{display: none;}
