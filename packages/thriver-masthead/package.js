@@ -12,23 +12,23 @@ Package.onUse(function (api) {
         'thriver:core',
         'thriver:core-styles'
     ]);
-    
+
     // Resources
     api.addAssets([
-        
+
     ], ['client']);
-    
+
     api.addFiles([
         // Templates
         'lib/templates/masthead.html',
-        
+
         // Styles
-        'lib/styles/masthead.less',
-        
+        //'lib/styles/masthead.less',
+
         // Helpers and methods
         'lib/masthead.js',
     ], ['client']);
-    
+
 });
 
 Package.onTest(function(api) {

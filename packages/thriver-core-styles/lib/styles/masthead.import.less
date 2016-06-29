@@ -1,9 +1,61 @@
-// Import from thriver:core-styles package
-/*
-@import "{thriver:core-styles}/lib/index.less";
+section#masthead, section.masthead{
+    menu.tabs{
+        float: right;
+        display: block;
+        width: 30%;
+        li{
+            display: block;
+            clear: both;
+            text-align: left;
+            width: 100%;
+            a{
+                justify-content: flex-start;
+                align-items: left;
+            }
+        }
+    }
+    div.tabs{
+        float: left;
+        width: 70%;
+    }
+}
 
-section.masthead{
-    z-index: @mastheadZ;
+section#masthead, section.masthead{
+    menu.tabs, menu.tabs li a, div.tabs, div.tabs > div{ background-color: transparent !important; }
+}
+
+//section#masthead, section.masthead{
+//Temp Image Declarations
+section#masthead div.tabs, section.masthead div.tabs{
+    >article{
+        padding-top: @headerH;
+    }
+    > article:first-child{
+        background-image: url('/lib/img/mastheadArticle.gif');
+        &:after{
+            background: #00c6ff; //fallback for old browsers
+            background: -webkit-linear-gradient(to left, #00c6ff , #0072ff);
+            background: linear-gradient(to left, #00c6ff , #0072ff);
+        }
+    }
+    > article.img:nth-child(2){
+        background-image: url('/lib/img/mastheadAlert.jpg');
+        &:after{
+            background: #FF4E50;
+            background: -webkit-linear-gradient(to left, #FF4E50 , #F9D423);
+            background: linear-gradient(to left, #FF4E50 , #F9D423);
+        }
+    }
+    > article.img:nth-child(3){
+        background-image: url('/lib/img/mastheadImpact.jpeg');
+        &:after{
+            background: #ddd6f3;
+            background: -webkit-linear-gradient(to left, #ddd6f3 , #faaca8);
+            background: linear-gradient(to left, #ddd6f3 , #faaca8);
+        }
+    }
+}
+/*section#masthead{
     //position: relative;
     overflow: hidden;
     width: 100%;
@@ -16,7 +68,7 @@ section.masthead{
     text-align: center;
     color:@white;
     will-change:transform;
-    .transition(transform,@canvasDuration,@canvasEase,0ms);
+    .trans(transfor @durationDefault @easeDefault 0ms);
     .opacity(1);
     //.translate(0px, 135px);
     //margin-bottom: -23px;
@@ -28,7 +80,7 @@ section.masthead{
         min-height: 0px;
         padding-top: 0px;
         .opacity(1);
-        .translate(0px,0px);
+        .transform(translate(0px,0px));
     }
     h1,p, a.cta{
         color: @white;
@@ -56,7 +108,7 @@ section.masthead{
 
 
 //Indicator Arrow
-section.masthead .arrow{
+section#masthead .arrow{
     display: block;
     position: absolute;
     cursor: pointer;
@@ -69,8 +121,8 @@ section.masthead .arrow{
     .fa;
     .font(5.0,5.0,0.0,@light,none);
     .opacity(0.5);
-    .translate(0px,0px);
-    .transition2(transform,250ms,@canvasEase, 0ms, opacity,250ms,@canvasEase, 0ms);
+    .transform(translate(0px,0px));
+    .trans(all 250ms @easeDefault 0ms);
     &:hover{
         .opacity(1);
     }
@@ -81,13 +133,13 @@ section.masthead .arrow{
     //.translate(0px, -156px);
     .arrow{
         .opacity(0);
-        .translate(0px,-20px);
+        .transform(translate(0px,-20px));
     }
 }
-
-
+*/
+/*
 // Slide Styles
-section.masthead{
+section#masthead{
     //Nav styles
     nav.mastheadNav{
         position: absolute;
@@ -123,7 +175,7 @@ section.masthead{
                 .opacity(0.7);
                 border-bottom: 2px solid transparent;
                 padding:15px 20px 15px 20px;
-                .transition(opacity,@canvasDuration,@canvasEase,0ms);
+                .trans(opacity @durationDefault @easeDefault 0ms);
                 &.active{
                     .opacity(1);
                     //border-bottom: 2px solid @gray;
@@ -136,7 +188,7 @@ section.masthead{
                 position: relative;
                 //margin: 0px 12px 0px 12px;
                 &:after {
-                    .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+                    .trans(all @durationDefault @easeDefault 0ms);
                 }
                 &:after {
                     content: '';
@@ -149,19 +201,19 @@ section.masthead{
                     top: 83%;
                     width: ~'calc(100% - 20px)';
                     .opacity(0);
-                    .translate(0px,10px);
+                    .transform(translate(0px,10px));
                 }
                 &:hover {
                     .opacity(0.9);
                     &:after {
                         .opacity(0.1);
-                        .translate(0px,0px);
+                        .transform(translate(0px,0px));
                     }
                 }
                 &.active{
                     &:after{
                         .opacity(0.3);
-                        .translate(0px,0px);
+                        .transform(translate(0px,0px));
                         //background-color: @teal;
                     }
                 }
@@ -198,15 +250,15 @@ section.masthead{
                 border-right: 2px solid @gray;
                 border-right: 2px solid rgba(255,255,255,0.15);
                 padding: 0px 60px 0px 0px;
-                .scale(0.99,0.99);
+                //.scale(0.99,0.99);
                 transform-origin:right center;
-                .transition(transform,@canvasDuration,@canvasEase,0ms);
+                .trans(transform @durationDefault @easeDefault 0ms);
             }
 
             //Animations
             z-index: -1;
             .opacity(0);
-            .transition(opacity,@canvasDuration,linear,0ms);
+            .trans(opacity @durationDefault linear 0ms);
 
             &.active{
                 z-index: 1;
@@ -214,7 +266,7 @@ section.masthead{
                 //will-change:opacity;
                 //animation: mastheadin @canvasDuration @headerDelay 1 @headerFirstEase alternate;
                 div.border{
-                    .scale(1,1);
+                    //.scale(1,1);
                 }
             }
         }
@@ -236,8 +288,9 @@ section.masthead{
             }
         }
     }
-}
-*/
+}*/
+
+
 /* Specifications for styling a Masthead slide
     -The ul.mastheadContent > li should have specific classes applied for desired style results
         -'img' if the slide has an image background
@@ -261,39 +314,12 @@ section.masthead{
 
 
 
-
-//Temp Image Declarations
-/*section.masthead ul.mastheadContent{
-    > li.img:first-child{
-        background-image: url('/lib/img/mastheadArticle.gif');
-        &:after{
-            background: #00c6ff; //fallback for old browsers
-            background: -webkit-linear-gradient(to left, #00c6ff , #0072ff);
-            background: linear-gradient(to left, #00c6ff , #0072ff); 
-        }
-    }
-    > li.img:nth-child(2){
-        background-image: url('/lib/img/mastheadAlert.jpg');
-        &:after{
-            background: #FF4E50; 
-            background: -webkit-linear-gradient(to left, #FF4E50 , #F9D423); 
-            background: linear-gradient(to left, #FF4E50 , #F9D423); 
-        }
-    }
-    > li.img:nth-child(3){
-        background-image: url('/lib/img/mastheadImpact.jpeg');
-        &:after{
-            background: #ddd6f3;
-            background: -webkit-linear-gradient(to left, #ddd6f3 , #faaca8); 
-            background: linear-gradient(to left, #ddd6f3 , #faaca8); 
-        }
-    }
-}
+/*
 
 
 
 //Temp Image Declarations
-section.masthead ul.mastheadContent{
+section#masthead ul.mastheadContent{
     > li.img:first-child{
         background-image: url('/lib/img/mastheadArticle.gif');
         a{.textButtonColor(@yellow) !important;}
@@ -315,7 +341,7 @@ section.masthead ul.mastheadContent{
         a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
         background-image: url('/lib/img/mastheadAlert.jpg');
         &:after{
-            background: #4b6cb7; 
+            background: #4b6cb7;
             background: -webkit-linear-gradient(to left, #4b6cb7 , #182848);
             background: linear-gradient(to left, #4b6cb7 , #182848);
         }
@@ -325,9 +351,9 @@ section.masthead ul.mastheadContent{
         a.button{.buttonColor(#f46b45) !important; color:@white !important;}
         background-image: url('/lib/img/mastheadImpact.jpeg');
         &:after{
-            background: #f46b45; 
-            background: -webkit-linear-gradient(to left, #f46b45 , #eea849); 
-            background: linear-gradient(to left, #f46b45 , #eea849);  
+            background: #f46b45;
+            background: -webkit-linear-gradient(to left, #f46b45 , #eea849);
+            background: linear-gradient(to left, #f46b45 , #eea849);
         }
     }
 }
@@ -336,22 +362,22 @@ section.masthead ul.mastheadContent{
 
 
 @media @air{
-    section.masthead, section.masthead ul.mastheadContent, section.masthead ul.mastheadContent > li{
+    section#masthead, section#masthead ul.mastheadContent, section#masthead ul.mastheadContent > li{
         min-height: ~'calc(100vh - 120px)';
     }
-    section.masthead nav.mastheadNav{min-height: ~'calc(100vh - 160px)';}
-    section.masthead ul.mastheadContent > li > div{
+    section#masthead nav.mastheadNav{min-height: ~'calc(100vh - 160px)';}
+    section#masthead ul.mastheadContent > li > div{
         min-height: 363px;
     }
 }
 
 
 @media (max-width:1125px){
-    section.masthead ul.mastheadContent > li > div{
+    section#masthead ul.mastheadContent > li > div{
         width: 600px;
         padding-left: 50px;
     }
-    section.masthead nav.mastheadNav{
+    section#masthead nav.mastheadNav{
         right:~'calc(50% - 544px)' !important;
     }
 }*/

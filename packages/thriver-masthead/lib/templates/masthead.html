@@ -3,9 +3,11 @@
         {{> sectionAdmin}}
     {{/if}}
     <section class="masthead" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#each items}}
-            {{>tabs}}
-        {{/each}}
+        <div class="container">
+            {{#each items}}
+                {{>tabs}}
+            {{/each}}
+        </div>
         <div class="arrow fa">&#xf107;</div>
     </section>
 </template>
