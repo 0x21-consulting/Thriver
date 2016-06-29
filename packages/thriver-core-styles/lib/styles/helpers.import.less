@@ -132,6 +132,13 @@ This file contains most globlized type helpers.
     }
 }
 
+.trans(@transition) {
+	-webkit-transition: @transition;
+	-moz-transition:    @transition;
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
+}
+
 //Box Shadows (Needs improvement)
 .boxShadow(@horizontal, @vertical, @blur, @spread, @opacity){
     -webkit-box-shadow: @horizontal @vertical @blur @spread rgba(0,0,0,@opacity);

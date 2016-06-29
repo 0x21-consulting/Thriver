@@ -22,8 +22,8 @@ Canvas Animations.
 
 //Element Heights
 @utilityH : 36px;
-@headerH: 200px;
-@headerFixedH : 60px;
+@headerH: 210px;
+@headerFixedH : 90px;
 @headerMobileH : 50px;
 @windowHSansUtility : ~'calc(100% - @{utilityH})';
 
@@ -84,7 +84,7 @@ Canvas Animations.
     @{utility}, @{header}, @{canvasPush}, @{off}, @{overlay}{ top: 0; left: 0; }
 
     @{canvasPush}, @{header}, @{overlay}{
-        transition: transform 500ms @easeDefault, opacity 500ms @easeDefault;
+        transition: transform @durationDefault @easeDefault, opacity @durationDefault @easeDefault;
     }
 
     @{off} {
@@ -122,6 +122,7 @@ Canvas Animations.
         top: @utilityH;
         height: @headerH;
         border-bottom:1px solid #eee;
+        .trans(all @durationDefault @easeDefault 0ms);
         body.fixedHeader &{
             height: @headerFixedH;
         }
@@ -263,7 +264,7 @@ Canvas Animations.
                 overflow: auto;
                 }
         });
-        .animation(offwait 500ms @easeDefault);
+        .animation(offwait @durationDefault @easeDefault);
     }
 
     &[data-canvas-position='right'] @{off} section[aria-hidden="false"]{
@@ -285,7 +286,7 @@ Canvas Animations.
                 overflow: auto;
                 }
         });
-        .animation(offwaitright 500ms @easeDefault);
+        .animation(offwaitright @durationDefault @easeDefault);
     }
 }
 
@@ -309,7 +310,7 @@ Canvas Animations.
                 .transform(translate(0%,0px));
                 }
         });
-        .animation(mobilesidebar 500ms @easeDefault);
+        .animation(mobilesidebar @durationDefault @easeDefault);
     }
     [data-canvas-state="closed"] .off-canvas{
         width: 100%;
@@ -324,7 +325,7 @@ Canvas Animations.
                 .transform(translate(-100%,0px));
                 }
         });
-        .animation(mobilesidebarb 500ms @easeDefault);
+        .animation(mobilesidebarb @durationDefault @easeDefault);
     }
     aside.off-canvas div.tabs > article[aria-hidden="false"]{
 
@@ -339,7 +340,7 @@ Canvas Animations.
                 .transform(translate(0%,0px));
                 }
         });
-        .animation(mobilesidebartab 500ms @easeDefault);
+        .animation(mobilesidebartab @durationDefault @easeDefault);
     }
     aside.off-canvas div.tabs > article[aria-hidden="true"]{
         display: block !important;
@@ -357,7 +358,7 @@ Canvas Animations.
                 .transform(translate(-100%,0px));
                 }
         });
-        .animation(mobilesidebartabback 500ms @easeDefault);
+        .animation(mobilesidebartabback @durationDefault @easeDefault);
     }
 }
 
