@@ -6,20 +6,20 @@ section.work img{display: none;}
 section.work{
     width: 100%;
     background-color: lighten(@gray, 5.5%);
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+38,f2f2f2+100 */
-background: rgb(255,255,255); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 38%, rgba(242,242,242,1) 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-background-size: 110%;
-h2.sidebarTitle{display: none;}
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+38,f2f2f2+100 */
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 38%, rgba(242,242,242,1) 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background-size: 110%;
+    h2.sidebarTitle{display: none;}
     > main{
         width: 100%;
         max-width: 1016px;
         margin: 0 auto;
         background-color:transparent;
-        .accelerate;
+        //.accelerate;
         //.flex;
         @media @1024{margin: 30px;}
         @media @mobile{margin: 0px;}
@@ -28,10 +28,10 @@ h2.sidebarTitle{display: none;}
             min-height: 543px;
             max-height: 543px;
             overflow: hidden;
-            .accelerate;
+            //.accelerate;
             //Truncation Gradient
             .backToTopWork{
-                .buttonColor(@teal);
+                //.buttonColor(@teal);
 
             }
             &:after{
@@ -42,7 +42,7 @@ h2.sidebarTitle{display: none;}
                 height: 50px;
                 bottom: 40px;
                 left: 0px;
-                .truncatedTextGradient;
+                //.truncatedTextGradient;
             }
         }
     }
@@ -60,7 +60,7 @@ h2.sidebarTitle{display: none;}
 section.work header details{
     margin: 16px 0px 5px 0px;
     summary{
-        .buttonColor(@orange);
+        //.buttonColor(@orange);
         display: inline-block;
         color: @white;
         .down{display: none;position: static;}
@@ -97,7 +97,7 @@ section.work header details{
         }
     }
     &[open]{
-        > div {animation: detailsopen 500ms 0ms 1 @canvasEase alternate;}
+       // > div {animation: detailsopen 500ms 0ms 1 @canvasEase alternate;}
         summary{
             .down{display: inline-block;}
             .up{display: none;}
@@ -150,7 +150,7 @@ section.work .workNav > ul{
             background-color: rgba(250,250,250,1);
             min-height: 100px;
             will-change:background;
-            .transition(background-color,@canvasDuration,@canvasEase,0ms);
+            //.transition(background-color,@canvasDuration,@easeDefault,0ms);
             > li{
                 display: inline;
                 position: relative;
@@ -161,7 +161,7 @@ section.work .workNav > ul{
                 }
                 &:last-child:after{display: none;}
                 a{
-                    .textButtonColor(darken(@blue, 10%));
+                    //.textButtonColor(darken(@blue, 10%));
                     position: relative;
                     //text-decoration: underline;
                     &:hover{
@@ -292,7 +292,7 @@ section.work .workNav > ul{
             .opacity(1);
             border-bottom: 2px solid transparent;
             //padding:20px 20px;
-            .transition(opacity,@canvasDuration,@canvasEase,0ms);
+            //.trans(opacity @durationDefault @easeDefault 0ms);
             &.active{
                 .opacity(1);
                 //border-bottom: 2px solid @gray;
@@ -307,7 +307,7 @@ section.work .workNav > ul{
             //margin: 0px 12px 0px 12px;
             &:after {
                 pointer-events: none;
-                .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+                //.transition2(opacity,@durationDefault, @easeDefault,0ms,transform,350ms,@canvasEase,0ms);
             }
             h2{
                 text-align: left;
@@ -327,33 +327,33 @@ section.work .workNav > ul{
                     //width: ~'calc(100% - 20px)';
                     width: 100%;
                     .opacity(0);
-                    .translate(0px,10px);
-                    .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+                    //.translate(0px,10px);
+                    //.transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
                 }
                 &:hover {
                     a{
-                        .transition(opacity,@canvasDuration,@canvasEase,100ms);
+                        //.transition(opacity,@canvasDuration,@canvasEase,100ms);
                         .opacity(1);
                     }
                     &:after {
-                        .transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
+                        //.transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
                         .opacity(1);
-                        .translate(0px,0px);
+                        //.translate(0px,0px);
                     }
                 }
             }
             ul{
                 .opacity(0);
-                .transition2(max-height,300ms,@canvasEase,100ms,opacity,200ms,linear,0ms) !important;
+                //.transition2(max-height,300ms,@canvasEase,100ms,opacity,200ms,linear,0ms) !important;
             }
             &.active{
                 h2:after{
                     .opacity(1);
-                    .translate(0px,0px);
+                    //.translate(0px,0px);
                     //background-color: @teal;
                 }
                 ul{
-                    animation: workaccordion 1000ms 0ms 1 @canvasEase alternate;
+                    //animation: workaccordion 1000ms 0ms 1 @canvasEase alternate;
                     .opacity(1);
                 }
             }
@@ -393,7 +393,7 @@ section.work .workNav > ul{
                 min-height: 0px;
                 background-color: transparent;
                 text-align: left;
-                .transition(all,500ms,@canvasEase,0ms);
+                //.transition(all,500ms,@canvasEase,0ms);
                 >li{
                     display: block;
                     //background-color: transparent !important;
@@ -438,10 +438,10 @@ section.work .workNav > ul{
                 > ul{
                     //background-color: @navy;
                     max-height: 9999px;
-                    .transition(all,@canvasDuration,@canvasEase,0ms);
+                    //.transition(all,@canvasDuration,@canvasEase,0ms);
                     > li > a{
                         color: @white;
-                        .transition(color,200ms,@canvasEase,0ms);
+                        //.transition(color,200ms,@canvasEase,0ms);
                         &:hover{color: lighten(@yellow, 22%);}
                     }
                     > li.active a{
@@ -495,9 +495,9 @@ section.work{
                 margin-right: 16px;
                 font-style: normal;
                 color:@black;
-                .font(5.4,5.4,0,@light,none);  
+                .font(5.4,5.4,0,@light,none);
                 @media @mobile{
-                    .font(2.4,2.4,0,@light,none); 
+                    .font(2.4,2.4,0,@light,none);
                     top: 0px;
                 }
             }*/
@@ -569,12 +569,12 @@ section.work{
                 }
                 ul{
                     margin: 0px;
-                    .columns(70px,3,30px);
+                    //.columns(70px,3,30px);
                     li{
                         margin: 0px;
                         padding: 0px;
                         .font(1.4,1.8,0.025,@normal,none);
-                        .avoidColumnSplit;
+                        //.avoidColumnSplit;
                         a{.textButtonColor(lighten(@navy, 3%));}
                         &:nth-child(even) a{.textButtonColor(lighten(@navy, 7%));}
                     }
@@ -583,7 +583,7 @@ section.work{
                     list-style: none;
                     &:before{display: none;}
                     a:before{
-                        .fa; 
+                        .fa;
                         content:"\f054";
                         margin: 0px;
                         padding: 0px;
@@ -615,9 +615,9 @@ section.work{
             bottom:0px;
             .opacity(1);
             visibility: visible;
-            .translate(0px,0px);
-            .transition2(visibility,0ms,linear,300ms,opacity,300ms,ease,0ms);
-            .shadow(closeUp);
+            //.translate(0px,0px);
+            //.transition2(visibility,0ms,linear,300ms,opacity,300ms,ease,0ms);
+            //.shadow(closeUp);
             &:hover{background-color: darken(@orange, 5%);}
             button{
                 .rw;
@@ -657,7 +657,7 @@ body.workActive section.work{
         box-shadow: -11px 0px 5px -6px rgba(0, 0, 0, 0.2);
         -webkit-box-shadow:-11px 0px 5px -6px rgba(0, 0, 0, 0.2);
         min-height: 607px;
-        .translate(0px,0px);
+        //.translate(0px,0px);
         .opacity(1);
     }
     .workContent, li.backToIndexWork{display: block;}
@@ -666,7 +666,7 @@ body.workActive section.work{
         @media @1024{display: none;}
     }
     .workTextContainer{
-        table{.tableColor(@gray, @blueGray, @white);}
+        //table{.tableColor(@gray, @blueGray, @white);}
         //padding-right: 20px;
         //width: 661px;
         width: auto;
@@ -686,7 +686,7 @@ body.workActive section.work{
 section.work > main{overflow: visible;}
 section.work > main .workTextContainer{
     will-change:min-height;
-    .transition(max-height,500ms,ease,0ms);
+    //.transition(max-height,500ms,ease,0ms);
 }
 .workReadingAnimate{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
@@ -706,30 +706,30 @@ body section.work > main{
 }
 
 body.workActive section.work > main{
-    .transition(opacity,@canvasDuration,@canvasEase,0ms);
-    .accelerate;
+    //.transition(opacity,@canvasDuration,@canvasEase,0ms);
+    //.accelerate;
     will-change:opacity,transform;
     overflow: hidden;
     transform-origin: 50% 25%;
     max-width: 1016px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
+    //animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
 body section.work > main{
-    .transition2(background-color,100ms,ease,0ms,opacity,@canvasDuration,@canvasEase,0ms);
+    //.transition2(background-color,100ms,ease,0ms,opacity,@canvasDuration,@canvasEase,0ms);
 }
 
 //Work Out
 body.workFadeIn section.work > main{
         will-change:opacity,transform;
-        animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
+        //animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
 body.workBack section.work > main{
     .workNav > ul > li{opacity: 1;}
-    animation: workfadeinend 300ms 0ms 1 @canvasEase alternate !important;
+    //animation: workfadeinend 300ms 0ms 1 @canvasEase alternate !important;
     .opacity(1);
 }
 
@@ -754,9 +754,9 @@ body.workFadeIn section.work .workNav > ul > li{
         .opacity(1);
         transform-origin:50% 50%;
         will-change:opacity,transform;
-        .scale(3,3);
+        //.scale(3,3);
         .opacity(0);
-        .transition2(opacity,175ms,@canvasEase,0ms,transform,300ms,@canvasEase,0ms);
+        //.transition2(opacity,175ms,@canvasEase,0ms,transform,300ms,@canvasEase,0ms);
         > ul, a.toggle{
             //.opacity(0);
             //will-change:opacity;
@@ -767,12 +767,12 @@ body.workFadeIn section.work .workNav > ul > li{
 
 body.workFadeOut section.work > main{
     .opacity(0);
-    .transition(opacity,175ms,@canvasEase,0ms);
+    //.transition(opacity,175ms,@canvasEase,0ms);
 }
 
 body section.work > main{
     .opacity(1);
-    .transition(opacity,505ms,@canvasEase,0ms);
+    //.transition(opacity,505ms,@canvasEase,0ms);
 }
 
 /*body.workActive section.work .workNav > ul > li{
@@ -785,24 +785,24 @@ body.workBack section.work .workNav > ul > li{
     transform-origin:50% 25%;
     will-change:opacity;
     .opacity(0);
-    .transition2(opacity,300ms,ease-out,150ms, transform, 250ms,ease-out,150ms);
+    //.transition2(opacity,300ms,ease-out,150ms, transform, 250ms,ease-out,150ms);
 }
 
 
 body.openNavItem.workActive section.work .workNav > ul > li.active > ul{
-    .noAnimation;
+   //.noAnimation;
     .opacity(1);
 }
 
 section.work .workContent article{
     .opacity(0) !important;
-    .transition(opacity,300ms,ease,0ms) !important;
+    //.transition(opacity,300ms,ease,0ms) !important;
     //animation: workcontentout 1500ms 0ms 1 @canvasEase alternate !important;
 }
 
 section.work .workContent article.active{
     .opacity(1) !important;
-    animation: workcontentin 400ms 0ms 1 ease alternate !important;
+    //animation: workcontentin 400ms 0ms 1 ease alternate !important;
 }
 
 .workActive section.work > main{
