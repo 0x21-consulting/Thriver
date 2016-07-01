@@ -3,6 +3,7 @@
         {{#if isAdmin}}
             {{> sectionAdmin}}
         {{/if}}
+        <div class="containerSmall">
         <header>
             <h1>{{heading}}</h1>
             <ul class="contactInfo">
@@ -16,6 +17,7 @@
                 <a href="{{mapUrl}}" target="_blank">Map</a>
             </p>
         </header>
+        </div>
         <form>
             {{#each items}}
                 <label for ="{{id}}">{{title}}</label>
