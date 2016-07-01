@@ -1,6 +1,6 @@
 //Main Section headings
-section.mainSection{padding: 60px 0px 60px 0px;}
-section.mainSection > div > header{
+#main > section{padding: 60px 0px 60px 0px;}
+#main > section > div > header{
     text-align: center;
     @media @mobile{
         padding-top: 40px;
@@ -64,7 +64,7 @@ section.mainSection > div > header{
 }
 
 //Contact
-.masterContainer section.mainSection > div > header{
+#main > section > div > header{
     //margin-bottom: 0px;
     &:after{
         .fa;
@@ -78,9 +78,9 @@ section.mainSection > div > header{
     }
 }
 //Providers
-.masterContainer section.mainSection.providers > div > header{margin-bottom: 20px;}
+#main > section.providers > div > header{margin-bottom: 20px;}
 //Outreach
-.masterContainer section.mainSection.outreach > div > header{
+#main > section.outreach > div > header{
     h1, p{color: @white;}
     h1{
         &:before, &:after{
@@ -93,6 +93,6 @@ section.mainSection > div > header{
     }
 }
 
-.masterContainer section.mainSection{
+#main > section{
     .boxShadow(0px,-5px,30px,-15px,0.3);
 }
