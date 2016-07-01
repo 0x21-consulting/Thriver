@@ -68,3 +68,38 @@ div.tabs{
     > [aria-hidden=false]{display: block;}
     &.top{}
 }
+
+//Tabs Animation
+div.tabs article[aria-hidden="false"]{
+    .keyframes(animateTab;{
+            0% {
+            display: block;
+            opacity:0;
+            //.transform(translate(-100%,0px));
+            }
+            100% {
+                display: block;
+                opacity: 1;
+                //.transform(translate(0%,0px));
+            }
+    });
+    .animation(animateTab @durationDefault @easeDefault both);
+}
+
+div.tabs article[aria-hidden="true"]{
+    .keyframes(animateTabLeave;{
+            0% {
+            display: block;
+            opacity:1;
+            //.transform(translate(-100%,0px));
+            }
+            99%{ display: block;}
+            100% {
+                display: none;
+                opacity: 0;
+                //.transform(translate(0%,0px));
+            }
+    });
+    .animation(animateTabLeave @durationDefault @easeDefault both);
+
+}

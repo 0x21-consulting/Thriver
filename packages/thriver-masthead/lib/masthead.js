@@ -19,36 +19,30 @@ Template.masthead.helpers({
     }]
 })
 
-Template.masthead.events({
-    /*
-    //These are temporary for demo purposes: need to find a way to quickly link with rich content
-    'click section.masthead .jobsOpen': function (event) {
-        offset = $('[id="get-involved"]').offset().top - 125;
-        $('body').animate({ scrollTop: offset }, 1500);
-    },
-    'click section.masthead .eventsOpen': function (event) {
-        offset = $('[id="events"]').offset().top - 125;
-        $('body').animate({ scrollTop: offset }, 1500);
-    }*/
-});
+/*function mastheadHeight(){
+    var mastheadEls = document.querySelectorAll('.masthead div.tabs > article');
+    for (var i = 0, e; e = mastheadEls[i]; i++) {
+        console.log(e);
+    }
+}*/
+
+
 
 Template.masthead.onRendered(function () {
+    //mastheadHeight();
     //Auto Rotate function
     function transitionSlider(){
-        //if ($(window).width() > 767) {
-            $( ".masthead menu.tabs > li" ).each(function() {
-                //$(this).next().find('a').trigger( "click" );
-                if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':not(:last-child)')){
-                    $(this).next().find('a')[0].click();
-                    return false;
-                }
-                if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':last-child')){
-                    //$(this).parent().find('li:first-child').find('a')[0].click();
-                    $('.masthead menu.tabs > li:first-child a')[0].click();
-                    return false;
-                }
-            });
-       // }
+        //mastheadHeight();
+        $( ".masthead menu.tabs > li" ).each(function() {
+            if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':not(:last-child)')){
+                $(this).next().find('a')[0].click();
+                return false;
+            }
+            if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':last-child')){
+                $('.masthead menu.tabs > li:first-child a')[0].click();
+                return false;
+            }
+        });
     }
     var sliderTimer = setInterval(transitionSlider, 8000);
     $("#masthead menu.tabs > li a").click(function() {
