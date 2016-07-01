@@ -209,13 +209,46 @@ section#masthead, section.masthead{
 //Mobile
 section#masthead, section.masthead{
     @media @mobile{
-        height: 420px !important;
+        height: 240px !important;
         overflow: hidden !important;
         min-height: 0px;
+        @media (max-width:360px){
+            height: 320px !important;
+        }
         menu.tabs, div.tabs article, div.tabs{
             padding:0px; margin:0px !important;
             width: 100% !important;
         }
-        menu.tabs{display: none;}
+        div.tabs{
+            > article *{ display: none; }
+            > article h1,  article img{ display: block; }
+            > article .cta { display: inline-block; }
+            h1{ font-size: 22px; padding-top: 20px; }
+        }
+        //menu.tabs{display: none;}
+        menu.tabs{
+            width: auto !important;
+            border: none;
+            position: absolute;
+            bottom: 20px;
+            left:50%;
+            margin-left:-43px !important;
+            &:before{ display: none; }
+            li{
+                display: inline-block;
+                margin-right: 10px;
+                a{
+                    &:after{ display: none; }
+                    width: 16px;
+                    height: 16px;
+                    background: #fff !important;
+                    overflow: hidden;
+                    padding: 0px;
+                    border-radius: 50%;
+                    -webkit-border-radius:50%;
+                    opacity: 0.5;
+                }
+            }
+        }
     }
 }
