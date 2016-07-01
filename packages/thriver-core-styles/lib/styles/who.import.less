@@ -1,8 +1,9 @@
-section.who ul.infoTabsContent{
-    > li{
-        max-width: 631px;
-        margin: 0 auto;
-        text-align: left;
+section.who div.tabs > article{
+    .boxShadow(-11px 0px 5px -6px 0.3);
+}
+
+section.who div.tabs{
+    > article{
         h2{
             border-bottom: 2px solid darken(@gray, 5%);
             color: @black;
@@ -55,7 +56,7 @@ section.who ul.infoTabsContent{
                     &:nth-child(even){
                         margin-left: 2%;
                     }
-                    
+
                     //.flex;
                     float: left;
                     &:before{display: none;}
@@ -111,10 +112,6 @@ section.who{
     background: linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(249,249,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     .container{
-        .clearfix;
-        max-width: 1000px;
-        margin: 0 auto;
-        //padding: 20px;
         background-color: @blue;
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2c5465+0,1a2c3d+100 */
         background: rgb(44,84,101); /* Old browsers */
@@ -147,24 +144,6 @@ section.who{
             }
         }
     }
-    .side{
-        float: left;
-        width: 236px;
-        padding: 36px 30px 30px 30px;
-        li{
-            display: block;
-            margin: 0px;
-        }
-    }
-    ul.tabsContent{
-        float: left;
-        width: 644px;
-        //border-left: 2px solid @black;
-        padding: 30px;
-        background-color: @white;
-        .boxShadow(-11px,0px,5px,-6px,0.3);
-        li *:first-child{margin-top: 0px;}
-    }
 }
 
 
@@ -172,9 +151,9 @@ section.who{
 
 //New Navigation needs to be merged with work section nav styles
 //Nav Open
-section.who ul.tabs{
+section.who menu.tabs{
     //media query temp for mobile UX flow
-    @media @mobile{display: none !important;}
+    //@media @mobile{display: none !important;}
     //width: auto;
     margin: 0px;
     text-align: left;
@@ -185,15 +164,15 @@ section.who ul.tabs{
         text-indent: 0px;
         .opacity(0.5);
     }
-    @media @1024{width:220px;}
+    //@media @1024{width:220px;}
     > li{
         width: auto;
         //padding: 0px;
         margin: 0px;
         text-align: left;
         min-height: 0px;
-        .textButtonColor(@white);
-        .shadowNone;
+        //.textButtonColor(@white);
+        //.shadowNone;
        // &:active{background-color: darken(@navy, 1.5%);}
         &.backToIndexWork{
             //.opacity(0.85);
@@ -208,12 +187,12 @@ section.who ul.tabs{
         display: block;
         .font(1.4,1.7,0.025,@normal,uppercase);
         margin: 0px;
-        .textButtonColor(@white);
+        //.textButtonColor(@white);
         cursor: pointer;
         .opacity(0.5);
         border-bottom: 2px solid transparent;
         //padding:20px 20px;
-        .transition(opacity,@canvasDuration,@canvasEase,0ms);
+        //.transition(opacity,@canvasDuration,@canvasEase,0ms);
         &.active{
             .opacity(1);
             //border-bottom: 2px solid @gray;
@@ -228,7 +207,7 @@ section.who ul.tabs{
         //margin: 0px 12px 0px 12px;
         &:after {
             pointer-events: none;
-            .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+            //.transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
         }
         text-align: left;
         position: relative;
@@ -246,21 +225,21 @@ section.who ul.tabs{
             top: 83%;
             width: 100%;
             .opacity(0);
-            .translate(0px,10px);
-            .transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+            //.translate(0px,10px);
+            //.transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
         }
         &:hover{
         .opacity(1);
             &:after {
                 //.transition(opacity,@canvasDuration,@canvasEase,100ms);
                 .opacity(1);
-                .translate(0px,0px);
+                //.translate(0px,0px);
             }
         }
         &.active:after {
-            .transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
+            //.transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
             .opacity(1);
-            .translate(0px,0px);
+            //.translate(0px,0px);
         }
         .icon{display: none;}
         //Active List Item
