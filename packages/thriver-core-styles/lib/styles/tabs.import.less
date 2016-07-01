@@ -103,3 +103,46 @@ div.tabs article[aria-hidden="true"]{
     .animation(animateTabLeave @durationDefault @easeDefault both);
 
 }
+@media (min-width:768px){
+menu.tabs.left{
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: right;
+    //text-align: right;
+    //align-items: right;
+    //justify-content: right;
+    li, li a{
+        //width: 100%;
+        display: block;
+        background:transparent !important;
+    }
+    li a{ width: auto; padding: 20px;}
+}
+div.tabs.left{
+    width: 80%;
+    float: left;
+    > article{ padding: 40px;}
+}
+
+.tab-box{
+    background: @riverBed;
+    .boxShadow(0px 0px 10px 0px rgba(0,0,0,0.3));
+}
+}
+
+div.tabs.left{background: #fff;}
+
+.tab-box.container{
+    padding: 0px;
+    @media (max-width:1180px){
+        margin: 40px;
+    }
+    @media @mobile{ margin: 0px;}
+}
+
+@media @mobile{
+    div.tabs.left{
+        padding: 20px;
+    }
+}

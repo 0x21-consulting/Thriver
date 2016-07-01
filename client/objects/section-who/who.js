@@ -6,6 +6,7 @@ Template.who.helpers({
     headline: "Who We Are",
     content: "<p>WCASA is a membership agency comprised of organizations and <br>individuals working to end sexual violence in Wisconsin. <br>WCASA is made up of it's staff, board, volunteers and <br> 51 sexual assault service provider agencies.</p>",
     items: [{
+        class: 'left',
         tabs: [{
             title: 'About WCASA',
             icon: '&#xf018;',
