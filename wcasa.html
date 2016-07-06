@@ -14,9 +14,9 @@
         {{> navigationMobile}}
         <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
             {{>masthead}}
-        <!--{{#each sections}}
-            {{> Template.dynamic template=template}}
-        {{/each}}-->
+            {{#each sections}}
+                {{> Template.dynamic template=template}}
+            {{/each}}
         </main>
         {{> aside}}
         <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
