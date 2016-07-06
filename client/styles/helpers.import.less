@@ -214,6 +214,19 @@ This file contains most globlized type helpers.
     }
 }
 
+.keyframes(@name; @arguments) {
+	@-moz-keyframes @name { @arguments(); }
+	@-webkit-keyframes @name { @arguments(); }
+	@keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+	-webkit-animation: @arguments;
+	-moz-animation: @arguments;
+	animation: @arguments;
+}
+
+
 //Text Button Colors
 .textButtonColor(@color){
     .color(color,@color,none);
