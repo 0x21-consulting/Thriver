@@ -67,14 +67,14 @@ Meteor.canvasFunctions = {
 			hiddenSidebar = true;
 			tabActive=false;
 			if(window.innerWidth < 768){
-				var toggleMenuItems = document.querySelectorAll('menu.tabs li [aria-expanded]');
+				var toggleMenuItems = document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded]');
 				for (var i = 0, e; e = toggleMenuItems[i]; i++) {
 					if(e.getAttribute('aria-expanded') == "true"){
 						e.setAttribute('aria-expanded', "false");
 						tabActive=true;
 					}
 				}
-				var tabBodies = document.querySelectorAll('div.tabs article[aria-hidden]');
+				var tabBodies = document.querySelectorAll('.off-canvas div.tabs article[aria-hidden]');
 				for (var i = 0, e; e = tabBodies[i]; i++) {
 					if(e.getAttribute('aria-hidden') == "false"){
 						e.setAttribute('aria-hidden', "true");
