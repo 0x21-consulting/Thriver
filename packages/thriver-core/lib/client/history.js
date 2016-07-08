@@ -52,8 +52,8 @@ var updateLocation = function () {
             coordinates[i].id + '"]');
 
         if (link instanceof Element)
-            link.blur();
             link.classList.add('active');
+            link.blur();
             //This allows the UI to remove unwanted :focus class to last selection
             $("header.mainHeader nav.mainNav li a").blur();
 
