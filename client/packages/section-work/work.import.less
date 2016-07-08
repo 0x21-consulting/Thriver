@@ -15,14 +15,9 @@ section.work{
     background-size: 110%;
     h2.sidebarTitle{display: none;}
     > main{
-        width: 100%;
-        max-width: 1016px;
-        margin: 0 auto;
         background-color:transparent;
         //.accelerate;
         //.flex;
-        @media @1024{margin: 30px;}
-        @media @mobile{margin: 0px;}
         .workTextContainer{
             width: 620px;
             min-height: 543px;
@@ -31,7 +26,7 @@ section.work{
             //.accelerate;
             //Truncation Gradient
             .backToTopWork{
-                //.buttonColor(@teal);
+                .buttonColor(@teal);
 
             }
             &:after{
@@ -57,10 +52,11 @@ section.work{
 
 
 //About SA
-section.work header details{
-    margin: 16px 0px 5px 0px;
+section.work details{
+    text-align: center;
+    margin: -26px 0px 42px 0px;
     summary{
-        //.buttonColor(@orange);
+        .buttonColor(@orange);
         display: inline-block;
         color: @white;
         .down{display: none;position: static;}
@@ -641,7 +637,7 @@ section.work{
 
 //body.workReading section.work >main .workContent{height: 100vh;}
 body.workActive section.work{
-    > main{
+    > div.main{
         margin-top: 42px;
         //background-color: desaturate(@backgroundWork,35%);
         //.shadow(closeLeft);
@@ -674,7 +670,7 @@ body.workActive section.work{
 }
 
 //Tuncation Open
-.workReading section.work > main{
+.workReading section.work > .main{
     .workTextContainer{
         max-height: 9999px;
         overflow: hidden;
@@ -683,19 +679,19 @@ body.workActive section.work{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
 }
 
-section.work > main{overflow: visible;}
-section.work > main .workTextContainer{
+section.work > .main{overflow: visible;}
+section.work > .main .workTextContainer{
     will-change:min-height;
     //.transition(max-height,500ms,ease,0ms);
 }
 .workReadingAnimate{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
-    section.work > main .workTextContainer{max-height: 9999px;}
+    section.work > .main .workTextContainer{max-height: 9999px;}
 }
 
 
 //Animations and Transitions
-body section.work > main{
+body section.work > .main{
     max-width: 1016px;
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#296078+0,8299a3+100 */
 
@@ -705,7 +701,7 @@ body section.work > main{
     .workContent{overflow: hidden;}
 }
 
-body.workActive section.work > main{
+body.workActive section.work > .main{
     //.transition(opacity,@canvasDuration,@canvasEase,0ms);
     //.accelerate;
     will-change:opacity,transform;
@@ -717,17 +713,17 @@ body.workActive section.work > main{
     //animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
-body section.work > main{
+body section.work > .main{
     //.transition2(background-color,100ms,ease,0ms,opacity,@canvasDuration,@canvasEase,0ms);
 }
 
 //Work Out
-body.workFadeIn section.work > main{
+body.workFadeIn section.work > .main{
         will-change:opacity,transform;
         //animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
-body.workBack section.work > main{
+body.workBack section.work > .main{
     .workNav > ul > li{opacity: 1;}
     //animation: workfadeinend 300ms 0ms 1 @canvasEase alternate !important;
     .opacity(1);
@@ -765,12 +761,12 @@ body.workFadeIn section.work .workNav > ul > li{
     }
 }
 
-body.workFadeOut section.work > main{
+body.workFadeOut section.work > .main{
     .opacity(0);
     //.transition(opacity,175ms,@canvasEase,0ms);
 }
 
-body section.work > main{
+body section.work > .main{
     .opacity(1);
     //.transition(opacity,505ms,@canvasEase,0ms);
 }
@@ -805,7 +801,7 @@ section.work .workContent article.active{
     //animation: workcontentin 400ms 0ms 1 ease alternate !important;
 }
 
-.workActive section.work > main{
+.workActive section.work > .main{
     background-color: @blue;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4097bc+0,30728f+100 */
     background: rgb(64,151,188); /* Old browsers */
