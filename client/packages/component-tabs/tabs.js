@@ -37,7 +37,7 @@ Template.body.events({
     'click [data-toggle=tabs]': function (event) { t.toggleTabs(); },
 });
 
-Template.body.onRendered(function() {
+Template.tabs.onRendered(function() {
 	if (window.innerWidth > 767){
 		var toggleMenus = document.querySelectorAll('menu.tabs');
 		//alert(toggleMenus);
