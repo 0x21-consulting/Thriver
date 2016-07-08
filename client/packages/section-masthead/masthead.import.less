@@ -122,6 +122,8 @@ section#masthead, section.masthead{
         .font(3.6,4.2,0.15,@bold,uppercase);
         @media @mobile{
             .font(2.6,3.2,0.15,@bold,uppercase);
+            text-align: center;
+            padding-top: 0px !important; //override tabs
         }
     }
     p{
@@ -211,11 +213,14 @@ section#masthead, section.masthead{
 section#masthead, section.masthead{
     background: @sidebarPrimaryColor;
     @media @mobile{
-        height: 240px !important;
+        height: 267px !important;
         overflow: hidden !important;
+        width: 100%;
+        display: table;
         min-height: 0px;
-        @media (max-width:360px){
-            height: 300px !important;
+        > div.container{
+            display: table-cell;
+            vertical-align: middle;
         }
         menu.tabs, div.tabs article, div.tabs{
             padding:0px; margin:0px !important;
@@ -225,6 +230,7 @@ section#masthead, section.masthead{
             > article *{ display: none; }
             > article h1,  article img{ display: block; }
             > article .cta { display: inline-block; }
+            > article{ text-align: center; margin-top: -40px;}
             h1{ font-size: 22px; padding-top: 20px; }
         }
         //menu.tabs{display: none;}
@@ -232,7 +238,7 @@ section#masthead, section.masthead{
             width: auto !important;
             border: none;
             position: absolute;
-            bottom: 20px;
+            bottom: 10px;
             left:50%;
             margin-left:-43px !important;
             &:before{ display: none; }
@@ -249,6 +255,11 @@ section#masthead, section.masthead{
                     border-radius: 50%;
                     -webkit-border-radius:50%;
                     opacity: 0.5;
+                    -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer */
+                    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+                    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+                    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
                 }
             }
         }
