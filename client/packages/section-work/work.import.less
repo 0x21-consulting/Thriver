@@ -92,7 +92,7 @@ section.work .sa details{
         }
     }
     &[open]{
-       // > div {animation: detailsopen 500ms 0ms 1 @canvasEase alternate;}
+        > div {animation: detailsopen 500ms 0ms 1 @easeDefault alternate;}
         summary{
             .down{display: inline-block;}
             .up{display: none;}
@@ -145,7 +145,7 @@ section.work .workNav > ul{
             background-color: rgba(250,250,250,1);
             min-height: 100px;
             will-change:background;
-            //.transition(background-color,@canvasDuration,@easeDefault,0ms);
+            .trans(background-color @durationDefault @easeDefault 0ms);
             > li{
                 display: inline;
                 position: relative;
@@ -289,7 +289,7 @@ section.work .workNav > ul{
             .opacity(1);
             border-bottom: 2px solid transparent;
             //padding:20px 20px;
-            //.trans(opacity @durationDefault @easeDefault 0ms);
+            .trans(opacity @durationDefault @easeDefault 0ms);
             &.active{
                 .opacity(1);
                 //border-bottom: 2px solid @gray;
@@ -326,15 +326,15 @@ section.work .workNav > ul{
                     .opacity(0);
                     .trans(all 250ms ease);
                     .transform(translate(0px,10px));
-                    //.transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
+                    transition: opacity @durationDefault @easeDefault 0ms, transform 350ms @easeDefault 0ms;
                 }
                 &:hover {
                     a{
-                        //.transition(opacity,@canvasDuration,@canvasEase,100ms);
+                        .trans(opacity @durationDefault @easeDefault 100ms);
                         .opacity(1);
                     }
                     &:after {
-                        //.transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
+                        transition: opacity @durationDefault @easeDefault 100ms, transform 350ms @easeDefault 100ms;
                         .opacity(1);
                         .transform(translate(0px,0px));
                     }
@@ -355,7 +355,7 @@ section.work .workNav > ul{
                     .opacity(1);
                 }
             }
-            /*> a{
+            > a{
                 margin-bottom: 0px;
                 padding:16px 0px 16px 0px;
                 text-decoration: none;
@@ -368,20 +368,20 @@ section.work .workNav > ul{
                     margin-left: 5px;
                     font-size: 14px;
                 }
-            }*/
-            /*.icon, > a{
+            }
+            .icon, > a{
                 display: inline-block;
                 height: auto;
                 width: auto;
                 background-color: transparent;
                 color: @white;
-                .font(2.0,2.0,0,@light,none);
+                //.font(2.0,2.0,0,@light,none);
                 .opacity(1);
-                .scale(1,1);
-                .accelerate;
-                @media @1024{.font(1.6,16.0,0,@light,none);}
+                .transform(scale(1,1));
+                //.accelerate;
+                //@media @1024{.font(1.6,16.0,0,@light,none);}
             }
-            .icon{margin: 0px 20px 0px 5px;}*/
+            .icon{margin: 0px 20px 0px 5px;}
             .icon{display: none;}
             > ul{
                 max-height: 0px;
@@ -391,7 +391,7 @@ section.work .workNav > ul{
                 min-height: 0px;
                 background-color: transparent;
                 text-align: left;
-                //.transition(all,500ms,@canvasEase,0ms);
+                .trans(all 500ms @easeDefault 0ms);
                 >li{
                     display: block;
                     //background-color: transparent !important;
@@ -436,10 +436,10 @@ section.work .workNav > ul{
                 > ul{
                     //background-color: @navy;
                     max-height: 9999px;
-                    //.transition(all,@canvasDuration,@canvasEase,0ms);
+                    .trans(all @durationDefault @easeDefault 0ms);
                     > li > a{
                         color: @white;
-                        //.transition(color,200ms,@canvasEase,0ms);
+                        .trans(color 200ms @easeDefault 0ms);
                         &:hover{color: lighten(@yellow, 22%);}
                     }
                     > li.active a{
@@ -614,8 +614,8 @@ section.work .main.container{
             bottom:0px;
             .opacity(1);
             visibility: visible;
-            //.translate(0px,0px);
-            //.transition2(visibility,0ms,linear,300ms,opacity,300ms,ease,0ms);
+            .transform(translate(0px,0px));
+            transition: visibility 0ms linear 300ms, opacity 300ms ease 0ms);
             //.shadow(closeUp);
             &:hover{background-color: darken(@orange, 5%);}
             button{
@@ -653,7 +653,7 @@ body.workActive section.work .main.container{
         box-shadow: -11px 0px 5px -6px rgba(0, 0, 0, 0.2);
         -webkit-box-shadow:-11px 0px 5px -6px rgba(0, 0, 0, 0.2);
         min-height: 607px;
-        //.translate(0px,0px);
+        .transform(translate(0px,0px));
         .opacity(1);
         display: block;
     }
@@ -683,7 +683,7 @@ body.workActive section.work .main.container{
 section.work > .main{overflow: visible;}
 section.work > .main .workTextContainer{
     will-change:min-height;
-    //.transition(max-height,500ms,ease,0ms);
+    .trans(max-height 500ms ease 0ms);
 }
 .workReadingAnimate{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
@@ -703,7 +703,7 @@ body section.work > .main{
 }
 
 body.workActive section.work > .main{
-    //.transition(opacity,@canvasDuration,@canvasEase,0ms);
+    .trans(opacity @durationDefault @easeDefault 0ms);
     //.accelerate;
     will-change:opacity,transform;
     overflow: hidden;
@@ -711,22 +711,22 @@ body.workActive section.work > .main{
     //max-width: 1016px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    //animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
+    animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
 body section.work > .main{
-    //.transition2(background-color,100ms,ease,0ms,opacity,@canvasDuration,@canvasEase,0ms);
+    transition: background-color 100ms ease 0ms, opacity @durationDefault @easeDefault 0ms;
 }
 
 //Work Out
 body.workFadeIn section.work > .main{
         will-change:opacity,transform;
-        //animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
+        animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
 body.workBack section.work > .main{
     .workNav > ul > li{opacity: 1;}
-    //animation: workfadeinend 300ms 0ms 1 @canvasEase alternate !important;
+    animation: workfadeinend 300ms 0ms 1 @easeDefault alternate !important;
     .opacity(1);
 }
 
@@ -751,25 +751,25 @@ body.workFadeIn section.work .workNav > ul > li{
         .opacity(1);
         transform-origin:50% 50%;
         will-change:opacity,transform;
-        //.scale(3,3);
+        .scale(3,3);
         .opacity(0);
-        //.transition2(opacity,175ms,@canvasEase,0ms,transform,300ms,@canvasEase,0ms);
+        transition: opacity 175ms @easeDefault 0ms, transform 300ms @easeDefault 0ms;
         > ul, a.toggle{
             //.opacity(0);
             //will-change:opacity;
-            //.transition(opacity,150ms,ease-out,0ms);
+            .trans(opacity 150ms ease-out 0ms);
         }
     }
 }
 
 body.workFadeOut section.work > .main{
     .opacity(0);
-    //.transition(opacity,175ms,@canvasEase,0ms);
+    .trans(opacity 175ms @easeDefault 0ms);
 }
 
 body section.work > .main{
     .opacity(1);
-    //.transition(opacity,505ms,@canvasEase,0ms);
+    .trans(opacity 505ms @easeDefault 0ms);
 }
 
 /*body.workActive section.work .workNav > ul > li{
@@ -782,24 +782,24 @@ body.workBack section.work .workNav > ul > li{
     transform-origin:50% 25%;
     will-change:opacity;
     .opacity(0);
-    //.transition2(opacity,300ms,ease-out,150ms, transform, 250ms,ease-out,150ms);
+    transition: opacity 300ms ease-out 150ms, transform 250ms ease-out 150ms;
 }
 
 
 body.openNavItem.workActive section.work .workNav > ul > li.active > ul{
-   //.noAnimation;
+   .noAnimation;
     .opacity(1);
 }
 
 section.work .workContent article{
     .opacity(0) !important;
-    //.transition(opacity,300ms,ease,0ms) !important;
-    //animation: workcontentout 1500ms 0ms 1 @canvasEase alternate !important;
+    .trans(opacity 300ms ease 0ms) !important;
+    animation: workcontentout 1500ms 0ms 1 @easeDefault alternate !important;
 }
 
 section.work .workContent article.active{
     .opacity(1) !important;
-    //animation: workcontentin 400ms 0ms 1 ease alternate !important;
+    animation: workcontentin 400ms 0ms 1 ease alternate !important;
 }
 
 .workActive section.work > .main{
