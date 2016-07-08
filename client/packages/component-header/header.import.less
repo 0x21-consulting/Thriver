@@ -67,6 +67,7 @@ header#menu{
                 list-style:none;
                 display: inline-block;
                 &:first-child{display: none;}
+                &:focus{ .shadowNone !important; }
                 @media (max-width:1100px){
                     //display: flex;
                     //flex: 1;
@@ -96,9 +97,11 @@ header#menu{
                         height: 2px;
                         background-color: @lightBlue;
                         top: 83%;
-                        left: 16px;
-                        width: ~'calc(100% - 32px)';
+                        left: 33px;
+                        width:100%;
+                        width: ~'calc(100% - 66px)';
                         .opacity(0);
+                        .trans(all 250ms ease);
                         .transform(translate(0px,10px));
                     }
                     &:hover {
@@ -115,7 +118,8 @@ header#menu{
                         }
                     }
                     //&:active{background-color: @gray;}
-                    &:focus{
+                    &:focus, &.active{
+                        .shadowNone !important;
                         &:after{
                             .opacity(1);
                             .transform(translate(0px,0px));
