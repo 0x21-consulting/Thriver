@@ -4,7 +4,6 @@ section.work img{display: none;}
 //Setup
 @backgroundWork: saturate(@blue, 10%);
 section.work{
-    width: 100%;
     background-color: lighten(@gray, 5.5%);
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+38,f2f2f2+100 */
     background: rgb(255,255,255); /* Old browsers */
@@ -52,9 +51,9 @@ section.work{
 
 
 //About SA
-section.work details{
+section.work .sa details{
     text-align: center;
-    margin: -26px 0px 42px 0px;
+    margin: -26px 0px 0px 0px;
     summary{
         .buttonColor(@orange);
         display: inline-block;
@@ -247,17 +246,19 @@ section.work .workNav > ul{
         text-align: left;
     }
     //media query temp for mobile UX flow
-    @media @mobile{display: none !important;}
+    //@media @mobile{display: none !important;}
     > ul{
         width: auto;
         margin: 0px;
         text-align: left;
+        li:focus{ .shadowNone; }
         li h2 > a{
             background-color: transparent !important;
             padding: 6px 0px 15px 0px;
             margin: 0px;
             text-indent: 0px;
             .opacity(0.5);
+            &:focus{ .shadowNone; }
         }
         @media @1024{width:220px;}
         > li.active h2 span.fa.down{display: inline;}
@@ -303,7 +304,7 @@ section.work .workNav > ul{
             //margin: 0px 12px 0px 12px;
             &:after {
                 pointer-events: none;
-                //.transition2(opacity,@durationDefault, @easeDefault,0ms,transform,350ms,@canvasEase,0ms);
+                .trans(all 250ms ease);
             }
             h2{
                 text-align: left;
@@ -323,7 +324,8 @@ section.work .workNav > ul{
                     //width: ~'calc(100% - 20px)';
                     width: 100%;
                     .opacity(0);
-                    //.translate(0px,10px);
+                    .trans(all 250ms ease);
+                    .transform(translate(0px,10px));
                     //.transition2(opacity,@canvasDuration,@canvasEase,0ms,transform,350ms,@canvasEase,0ms);
                 }
                 &:hover {
@@ -334,22 +336,22 @@ section.work .workNav > ul{
                     &:after {
                         //.transition2(opacity,@canvasDuration,@canvasEase,100ms,transform,350ms,@canvasEase,100ms);
                         .opacity(1);
-                        //.translate(0px,0px);
+                        .transform(translate(0px,0px));
                     }
                 }
             }
             ul{
                 .opacity(0);
-                //.transition2(max-height,300ms,@canvasEase,100ms,opacity,200ms,linear,0ms) !important;
+                transition: max-height 300ms @easeDefault 100ms, opacity 200ms linear 0ms !important;
             }
             &.active{
                 h2:after{
                     .opacity(1);
-                    //.translate(0px,0px);
+                    .transform(translate(0px,0px));
                     //background-color: @teal;
                 }
                 ul{
-                    //animation: workaccordion 1000ms 0ms 1 @canvasEase alternate;
+                    animation: workaccordion 1000ms 0ms 1 @easeDefault alternate;
                     .opacity(1);
                 }
             }
@@ -454,7 +456,8 @@ section.work .workNav > ul{
 
 
 //Content Styles
-section.work{
+section.work .main.container{
+    padding: 0px 0px !important;
     .workContent{
         // Only show active content articles
         article { display: none; .clearfix; }
@@ -636,17 +639,14 @@ section.work{
 //Active Work Object
 
 //body.workReading section.work >main .workContent{height: 100vh;}
-body.workActive section.work{
-    > div.main{
-        margin-top: 42px;
+body.workActive section.work .main.container{
+        //margin-top: 42px;
         //background-color: desaturate(@backgroundWork,35%);
         //.shadow(closeLeft);
-        max-width: 1056px;
+        //max-width: 1056px;
         //box-shadow:0 19px 38px rgba(0,0,0,0.20), 0 15px 12px rgba(0,0,0,0.05);
         //-webkit-box-shadow:0 19px 38px rgba(0,0,0,0.20), 0 15px 12px rgba(0,0,0,0.05);
 
-
-    }
     //Needs to be moved
     .workContent{
         position: relative;
@@ -655,6 +655,7 @@ body.workActive section.work{
         min-height: 607px;
         //.translate(0px,0px);
         .opacity(1);
+        display: block;
     }
     .workContent, li.backToIndexWork{display: block;}
     .workTertiary{
@@ -692,7 +693,7 @@ section.work > .main .workTextContainer{
 
 //Animations and Transitions
 body section.work > .main{
-    max-width: 1016px;
+    //max-width: 1016px;
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#296078+0,8299a3+100 */
 
 //padding: 10px;
@@ -707,7 +708,7 @@ body.workActive section.work > .main{
     will-change:opacity,transform;
     overflow: hidden;
     transform-origin: 50% 25%;
-    max-width: 1016px;
+    //max-width: 1016px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     //animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
