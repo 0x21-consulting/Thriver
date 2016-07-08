@@ -22,7 +22,7 @@ Meteor.tabsFunctions = {
 			if (event.target.getAttribute('aria-controls') == '#library'){
 				event.target.parentNode.parentNode.parentNode.querySelector('aside.filter').classList.add('active-filter');
 			}
-			else{
+			if (event.target.getAttribute('aria-controls') == '#infosheets' || event.target.getAttribute('aria-controls') == '#stats-data' || event.target.getAttribute('aria-controls') == '#webinars'){
 				event.target.parentNode.parentNode.parentNode.querySelector('aside.filter').classList.remove('active-filter');
 			}
 	    }
