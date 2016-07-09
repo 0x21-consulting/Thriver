@@ -9,11 +9,14 @@
                 {{{content}}}
             </header>
         </div>
-        {{#each items}}
-            {{>tabs}}
-        {{/each}}
+        <div class="container tab-box">
+            {{#each items}}
+                {{>tabs}}
+            {{/each}}
+        </div>
     </section>
 </template>
+
 
 <!--Content Templates-->
 <template name="volunteer">
