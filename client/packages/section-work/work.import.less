@@ -36,7 +36,7 @@ section.work{
                 height: 50px;
                 bottom: 40px;
                 left: 0px;
-                //.truncatedTextGradient;
+                .truncatedTextGradient;
             }
         }
     }
@@ -228,6 +228,10 @@ section.work .workNav > ul{
     min-height: 601px;
     float: left;
     padding: 36px 30px 30px 30px;
+    @media (max-width:945px){
+        padding:20px;
+        width:200px;
+    }
     h2.sidebarTitle{
         display: block;
         font-size: 18px;
@@ -261,6 +265,9 @@ section.work .workNav > ul{
             &:focus{ .shadowNone; }
         }
         @media @1024{width:220px;}
+        @media (max-width:945px){
+            width:200px;
+        }
         > li.active h2 span.fa.down{display: inline;}
         > li.active h2 span.fa.up{display: none;}
         > li{
@@ -458,6 +465,12 @@ section.work .workNav > ul{
 //Content Styles
 section.work .main.container{
     padding: 0px 0px !important;
+    @media (max-width:1180px){
+        margin: 40px !important;
+    }
+    @media (max-width:945px){
+        margin:0px !important;
+    }
     .workContent{
         // Only show active content articles
         article { display: none; .clearfix; }
@@ -568,14 +581,14 @@ section.work .main.container{
                 }
                 ul{
                     margin: 0px;
-                    //.columns(70px,3,30px);
+                    .columns(70px,3,30px);
                     li{
                         margin: 0px;
                         padding: 0px;
                         .font(1.4,1.8,0.025,@normal,none);
-                        //.avoidColumnSplit;
-                        a{.textButtonColor(lighten(@navy, 3%));}
-                        &:nth-child(even) a{.textButtonColor(lighten(@navy, 7%));}
+                        .avoidColumnSplit;
+                        a{.textButtonColor(lighten(@navy, 12%));}
+                        &:nth-child(even) a{.textButtonColor(lighten(@navy, 16%));}
                     }
                 }
                 ul li{
@@ -660,7 +673,7 @@ body.workActive section.work .main.container{
     .workContent, li.backToIndexWork{display: block;}
     .workTertiary{
         display: block;
-        @media @1024{display: none;}
+        @media @mobile{display: none;}
     }
     .workTextContainer{
         //table{.tableColor(@gray, @blueGray, @white);}
@@ -711,6 +724,10 @@ body.workActive section.work > .main{
     //max-width: 1016px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    @media (max-width:945px){
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08), 0 6px 6px rgba(0, 0, 0, 0.11);
+        -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08), 0 6px 6px rgba(0, 0, 0, 0.11);
+    }
     animation: workmain 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
