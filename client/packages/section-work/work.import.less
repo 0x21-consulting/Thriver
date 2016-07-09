@@ -51,6 +51,7 @@ section.work{
 
 
 //About SA
+@media @mobile{section.work .sa.container{margin-bottom:40px; margin-top:40px;}}
 section.work .sa details{
     text-align: center;
     margin: -26px 0px 0px 0px;
@@ -90,6 +91,29 @@ section.work .sa details{
             padding: 0px 0px 0px 0px;
             color: @orange;
         }
+        @media (max-width:945px){
+            padding:20px;
+            .column, .column:first-child, .column:last-child{
+                width: 100%;
+                padding: 10px 0px;
+            }
+        }
+        @media @mobile{
+            padding: 15px;
+            .shadowNone;
+            background: #f9f9f9;
+            margin-left: -15px;
+            margin-right: -15px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            h2{
+                font-size: 115%;
+                line-height: 115%;
+            }
+            p{
+                .font(1.2,1.8,0,@normal,none);
+            }
+        }
     }
     &[open]{
         > div {animation: detailsopen 500ms 0ms 1 @easeDefault alternate;}
@@ -126,11 +150,20 @@ section.work .workNav > ul{
         box-shadow: 0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
         -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
         width: 23.6%;
+        @media (max-width:1100px){
+            width:28%;
+        }
+        @media (max-width:865px){
+            width:42%;
+        }
         margin: 0 0.5% 1% 0.5%;
         display: inline-block;
         //min-height: 228px;
         .borderRadius(2px);
         overflow: hidden;
+        @media @mobile{
+            width:100%;
+        }
         &:first-child{display: none;}
         i{display: none;}
         &:hover{
