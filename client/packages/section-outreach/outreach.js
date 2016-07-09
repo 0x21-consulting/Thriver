@@ -1,22 +1,22 @@
 Template.outreach.helpers({
-    items: [{
-        headline: "Get Involved",
-        content: "<p>We believe that everyone has a role and a responsibility<br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.</p>",
-        tabs: [{
-                title: 'Volunteer',
-                id: 'volunteer',
-                template : 'volunteer'
-            },{
-                title: 'Join The Board',
-                id: 'joinTheBoard',
-                template : 'joinTheBoard'
-            },{
-                title: 'WCASA Jobs',
-                id: 'wcasaJobs',
-                template: 'wcasaJobs'
-            }
-        ]
-    }]
+	headline: "Get Involved",
+	content: "<p>We believe that everyone has a role and a responsibility<br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.</p>",
+	items: [{
+		tabs: [{
+				title: 'Volunteer',
+				id: 'volunteer',
+				template : 'volunteer'
+			},{
+				title: 'Join The Board',
+				id: 'joinTheBoard',
+				template : 'joinTheBoard'
+			},{
+				title: 'WCASA Jobs',
+				id: 'wcasaJobs',
+				template: 'wcasaJobs'
+			}
+		]
+	}]
 });
 
 Template.volunteer.helpers({
