@@ -884,3 +884,94 @@ section.work .workContent article.active{
     background: linear-gradient(135deg,  rgba(64,151,188,1) 0%,rgba(48,114,143,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4097bc', endColorstr='#30728f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+
+
+
+
+
+//Mobile Context
+@media @mobile{
+    section.work{}
+    .workActive section.work{
+        //Navigation
+        .workNav{
+            .transform(translate(0%,0px));
+            .trans(all 350ms ease-out 0ms);
+            width:100%;
+            padding:0px;
+            min-height: 0px;
+            height:auto;
+            overflow: auto;
+            visibility: visible;
+            opacity: 1;
+            > .sidebarTitle{display: none !important;}
+            > ul{
+                padding: 15px;
+                width: auto;
+                &, >li, >li>ul{
+                animation-duration: 0ms !important;
+                transition-duration: 0ms !important;
+                transition-delay:0ms !important;
+                animation-delay:0ms !important;
+                .trans(none) !important;
+                >li a{
+                    padding: 10px 0px;
+                }
+                }
+                >li >ul{display: block;}
+
+                >li.backToIndexWork a{
+                    padding: 20px 10px;
+                    background: rgba(0,0,0,0.1) !important;
+                    opacity: 1;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        //Content
+        .workContent{
+            header{
+                padding: 0px !important;
+            }
+            footer{ margin-left: -15px !important;}
+            padding:15px !important;
+            .transform(translate(0px,100%)) !important;
+            opacity: 0 !important;
+            .trans(all 350ms ease 0ms) !important;
+            > article > h2{
+                display: block;
+            }
+            .main{padding:0px !important;}
+            .backToPrevious{
+                padding: 20px 10px;
+                background: @teal;
+                color:@white;
+                opacity: 1;
+                margin-bottom: 20px;
+                font-size: 14px;
+                font-size: 1.4rem;
+                line-height: 14px;
+                line-height: 1.4rem;
+                letter-spacing: 0.25px;
+                letter-spacing: 0.025rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                display: block;
+
+            }
+        }
+    }
+    .workActive.mobile-article-open section.work{
+        .workNav{
+            height:0px;
+            overflow: hidden;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .workContent{
+            .transform(translate(0px,0%)) !important;
+            opacity: 1 !important;
+        }
+    }
+}

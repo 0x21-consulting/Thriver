@@ -1,29 +1,32 @@
 // Helper for changing tabs
 var changeTabs = function (event) {
     event.stopPropagation(); event.preventDefault();
-    
+
     var parent = document.querySelector('section.mainSection.work'),
         active = parent.querySelectorAll('.active'),
         article, i = 0, j = active.length;
-    
+
     // Remove active class from all elements under parent
     for (; i < j; ++i)
         active[i].classList.remove('active');
-    
+
     // Make article with same ID as tab active
     article = parent.querySelector('article[data-id="' +
         event.currentTarget.dataset.id + '"]');
     if (!article) return; // don't do anything if there's no article
     article.classList.add('active');
-        
+
     // Make tab active, too
     event.currentTarget.classList.add('active');
-    
+
     // Is this is a submenu item?
     parent = event.currentTarget.parentElement.parentElement;
     if ( parent.nodeName.toLowerCase() === 'li' ) {
         // Make active
         parent.classList.add('active');
+    }
+    if ( parent.nodeName.toLocaleLowerCase() === 'li'){
+        document.body.classList.add('mobile-article-open');
     }
 };
 
@@ -32,7 +35,7 @@ Template.workNav.helpers({
     name: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
@@ -40,7 +43,7 @@ Template.workNav.helpers({
     icon: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
@@ -48,20 +51,20 @@ Template.workNav.helpers({
     hasChildren: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['tabs']);
-        
+
         if (result && result.tabs && result.tabs.length)
             return true;
-            
+
         return false;
     },
     tabs: function (id) {
         var result;
         id = id || this._id;
-        
+
         result = Thriver.sections.get(id, ['tabs']);
-        
+
         if (result)
             return result.tabs;
     }
@@ -72,7 +75,7 @@ Template.workListItem.helpers({
     icon: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
@@ -80,7 +83,7 @@ Template.workListItem.helpers({
     name: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
@@ -88,18 +91,18 @@ Template.workListItem.helpers({
     tabs: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['tabs']);
-        
+
         if (result)
             return result.tabs;
     },
     tabName: function (id) {
         var result;
         id = id || this;
-        
+
         result = Thriver.sections.get(id, ['name']);
-        
+
         if (result)
             return result.name;
     }
@@ -110,27 +113,27 @@ Template.workContentContainer.helpers({
     tabs: function (id) {
         var result;
         id = id || this._id;
-        
+
         result = Thriver.sections.get(id, ['tabs']);
-        
+
         if (result)
             return result.tabs;
     },
     template: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['template']);
-        
+
         if (result)
             return result.template;
     },
     subtabs: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['tabs']);
-        
+
         if (result)
             return result.tabs;
     }
@@ -140,7 +143,7 @@ Template.workContent.helpers({
     content: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['content']);
         if (result)
             return result.content; return '';
@@ -148,7 +151,7 @@ Template.workContent.helpers({
     icon: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['icon']);
         if (result)
             return result.icon;
@@ -156,7 +159,7 @@ Template.workContent.helpers({
     name: function (id) {
         var result;
         id = id || this.id;
-        
+
         result = Thriver.sections.get(id, ['name']);
         if (result)
             return result.name;
@@ -166,11 +169,11 @@ Template.workContent.helpers({
 // Set the first tab as active
 /*Template.tab.onRendered(function () {
     var parent;
-    
+
     try {
         // TODO:  How robust is this?!
         parent = this.firstNode.parentElement.parentElement.parentElement;
-        
+
         // Set the very first result as active.  Should be the first in the DOM.
         parent.querySelector('main > article').classList.add('active');
         parent.querySelector('menu li').classList.add('active');
@@ -197,6 +200,9 @@ Template.workContent.events({
     'click .workTertiary > ul > li > a': function (event) {
         event.stopPropagation(); event.preventDefault();
         alert('This will scroll down to the appropriate subsection content.')
+    },
+    'click .backToPrevious': function (event) {
+        document.body.classList.remove('mobile-article-open');
     }
 });
 
@@ -238,7 +244,6 @@ Template.work.onRendered(function () {
         }
     });
 
-
     $('.workNav li.backToIndexWork').click(function(){
         event.preventDefault();
         $("body").addClass("workFadeOut").delay(175).queue(function(){
@@ -249,4 +254,5 @@ Template.work.onRendered(function () {
         //offset = $('[id="what-we-do"]').offset().top - 125;
         //$('body').animate({ scrollTop: offset }, 350);
     });
+
 });
