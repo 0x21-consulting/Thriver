@@ -160,7 +160,29 @@ div.tabs.left{background: #fff;}
 }
 
 @media @mobile{
-    div.tabs.left{
-        padding: 20px;
+    main{
+        div.tabs.left{
+            padding: 0px;
+            margin: 0px;
+            article{margin: 0px !important;}
+        }
+        menu.tabs{
+            >li{
+                padding: 0px !important;
+                margin: 0px !important;
+                border: none !important;
+                >a{
+                    padding: 20px 15px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    line-height: 20px;
+                    opacity: 1 !important;
+                    &:after{display: none;}
+                    &[aria-expanded="true"]{
+                        background:@teal;
+                    }
+                }
+            }
+        }
     }
 }
