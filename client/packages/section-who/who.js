@@ -30,6 +30,7 @@ Template.who.helpers({
         }]
     }]
 });
+
 Template.personStaff.helpers({
     avatar: function () {
         return Site.findOne({}, { avatar: 1 });
@@ -41,13 +42,13 @@ Template.personBoard.helpers({
     }
 });
 
-Template.staff.helpers({
+Template.board.helpers({
     board: function () {
         return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
     }
 });
 
-Template.board.helpers({
+Template.staff.helpers({
     staff: function () {
         return People.find({ boardMember: false }, { sort: { name: 1 }});
     }
