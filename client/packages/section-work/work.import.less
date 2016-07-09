@@ -144,6 +144,10 @@ section.work .workNav > ul{
     .clearfix;
     width: 100%;
     text-align: center;
+    @media (max-width:945px){
+        padding-bottom: 60px;
+    }
+    @media @mobile{ padding-bottom: 0px;}
     > li {
         list-style: none;
         vertical-align: top;
@@ -323,6 +327,7 @@ section.work .workNav > ul{
         @media @1024{width:220px;}
         @media (max-width:945px){
             width:200px;
+            padding-bottom:0px;
         }
         > li.active h2 span.fa.down{display: inline;}
         > li.active h2 span.fa.up{display: none;}
@@ -526,6 +531,7 @@ section.work .main.container{
     }
     @media (max-width:945px){
         margin:0px !important;
+        //.shadowNone !important;
     }
     .workContent{
         // Only show active content articles
@@ -537,6 +543,9 @@ section.work .main.container{
         padding: 30px;
         .boxShadow(-11px,0px,5px,-6px,0.3);
         .opacity(0);
+        @media (max-width:1100px){
+            .shadowNone !important;
+        }
         header{
             //border-bottom: 3px solid #ebf2f2;
             background: transparent;

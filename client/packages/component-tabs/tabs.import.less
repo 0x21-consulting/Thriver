@@ -107,21 +107,36 @@ div.tabs article[aria-hidden="true"]{
 menu.tabs.left{
     display: block;
     float: left;
-    width: 20%;
-    text-align: right;
-    //text-align: right;
-    //align-items: right;
-    //justify-content: right;
+    width: 236px;
+    min-height: 579px;
+    float: left;
+    padding: 36px 30px 30px 30px;
+    @media (max-width:945px){
+        padding:20px;
+        width:200px;
+    }
+    //li{padding: 0px;}
     li, li a{
         //width: 100%;
         display: block;
         background:transparent !important;
     }
-    li a{ width: auto; padding: 20px;}
+    li a{ width: auto; padding:0px;}
+    //.li a{ width: auto; padding: 6px 0px 15px 0px;}
+    li a{
+        font-size: 14px;
+        font-size: 1.4rem;
+        line-height: 14px;
+        line-height: 1.4rem;
+        letter-spacing: 0.25px;
+        letter-spacing: 0.025rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding-top: 5px;
+    }
 }
 div.tabs.left{
-    width: 80%;
-    float: left;
+    overflow: hidden;
     > article{ padding: 40px;}
 }
 
@@ -137,6 +152,9 @@ div.tabs.left{background: #fff;}
     padding: 0px;
     @media (max-width:1180px){
         margin: 40px;
+    }
+    @media (max-width:945px){
+        margin: 0px;
     }
     @media @mobile{ margin: 0px;}
 }
