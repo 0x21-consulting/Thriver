@@ -12,6 +12,10 @@ section.work{
     background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     background-size: 110%;
+    @media @mobile{
+        .shadowNone !important;
+        padding-bottom:0px !important;
+    }
     h2.sidebarTitle{display: none;}
     > .main{
         background-color:transparent;
@@ -163,6 +167,9 @@ section.work .workNav > ul{
         overflow: hidden;
         @media @mobile{
             width:100%;
+            margin: 0px;
+            .borderRadius(0px);
+            .shadowNone;
         }
         &:first-child{display: none;}
         i{display: none;}
@@ -177,6 +184,11 @@ section.work .workNav > ul{
             .font(1.4,2.0,0.025,@light,none);
             background-color: rgba(250,250,250,1);
             min-height: 100px;
+            @media @mobile{
+                display: none;
+                min-height: 0px;
+                padding: 15px;
+            }
             will-change:background;
             .trans(background-color @durationDefault @easeDefault 0ms);
             > li{
@@ -197,6 +209,10 @@ section.work .workNav > ul{
                         color: @teal;
                     }
                 }
+                @media @mobile{
+                    display: block;
+                    &:after{display: none;}
+                }
             }
         }
     }
@@ -213,6 +229,13 @@ section.work .workNav > ul{
             text-indent: 4px;
             white-space: nowrap;
             padding: 20px;
+            @media @mobile{
+                padding:20px 15px;
+                font-weight: 600;
+            }
+        }
+        @media @mobile{
+             .font(1.6,1.6,0.025,600,uppercase);
         }
         span.fa{
             font-size: 19px;
