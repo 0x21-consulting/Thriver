@@ -20,23 +20,23 @@
 
 <!--Content Templates-->
 <template name="volunteer">
-    <h2>{{headline}}</h2>
-    {{content}}
-    <h3>{{listHeadline}}</h3>
+    <h2>{{{headline}}}</h2>
+    {{{content}}}
+    <h3>{{{listHeadline}}}</h3>
     {{#each lists}}
         {{>list}}
     {{/each}}
 </template>
 
 <template name="joinTheBoard">
-    <h2>{{headline}}</h2>
+    <h2>{{{headline}}}</h2>
    {{{content}}}
 </template>
 
 <template name="wcasaJobs">
-    <h2>{{headline}}</h2>
+    <h2>{{{headline}}}</h2>
     {{{content}}}
-    <h3>{{listHeadline}}</h3>
+    <h3>{{{listHeadline}}}</h3>
     {{#each lists}}
         {{>list}}
     {{/each}}
