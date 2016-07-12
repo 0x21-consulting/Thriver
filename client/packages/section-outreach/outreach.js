@@ -55,7 +55,7 @@ Template.joinTheBoard.helpers({
 });
 
 Template.wcasaJobs.helpers({
-    headline: "Join The Board",
+    headline: "WCASA Jobs",
     content: "<p>Interested in volunteering with WCASA? All interested parties should contact Kathleen Brandenburg, Office Manager at (608) 257-1516 or <a href='mailto:wcasa@wcasa.org'>wcasa@wcasa.org.</a></p>",
     listHeadline: "Find a Job at WCASA",
     lists: [{
