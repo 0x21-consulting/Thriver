@@ -180,3 +180,31 @@ section.contact{
         }
     }
 }
+
+#main section.contact{
+    p.address {
+        border: none !important;
+    }
+    label{display: none;}
+    input, textarea{text-transform: uppercase !important;}
+    input.button{text-transform: none !important;}
+    p.copyright{
+        margin-bottom: 0px;
+        padding-bottom: 40px;
+    }
+    ul.contactInfo li, p.address li{
+        margin-bottom: 0px;
+    }
+    @media @mobile{
+        padding: 20px;
+        p.address {
+            border: none !important;
+            background: rgba(0,0,0,0.1);
+            margin: 0px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        form{ padding: 0px;}
+        > div > header:after{display:none;}
+    }
+}
