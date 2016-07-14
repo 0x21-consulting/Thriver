@@ -1,5 +1,5 @@
+#main section.providers{padding-bottom: 0px !important;}
 section.providers{
-
     article.details{
         width: 700px;
         background: @navy;
@@ -49,17 +49,12 @@ section.providers{
                 &:before{
                     .fa;
                     margin-right: 5px;
+                    display: inline-block !important;
                 }
                 &.email:before{content:"\f0e0";}
                 &.website:before{content:"\f108";}
                 &.facebook:before{content:"\f09a";}
                 &.twitter:before{content:"\f099";}
-                @media @1024{
-                    margin-bottom: 8px;
-                    &:before{
-                        display: none;
-                    }
-                }
             }
         }
         ul.phones{
@@ -198,10 +193,6 @@ section.providers{
         display: table;
         width: 100%;
     }
-    figure.map, article.details{
-        display: table-cell;
-        height: 600px;
-    }
     figure.map{
         #mapCanvas{
             height: 100%;
@@ -215,24 +206,32 @@ section.providers{
             overflow: hidden;
         }
     }
-    figure.map, article.details{
-        display: table-cell;
-        height: 600px;
-    }
     figure.map{
         #mapCanvas{
             height: 100%;
         }
-        @media @mobile{
-            height: 200px;
-            width: 100%;
+    }
+    article.details{ width:500px;}
+    figure.map, article.details{
+        display: table-cell;
+        height: 600px;
+        @media (max-width:1000px){
             display: block;
+            width: 100%;
+            height: 300px;
+            #mapCanvas{
+                height: 100%;
+            }
+        }
+    }
+    article.details{
+        @media (Max-width:1000px){
+            height:auto;
         }
     }
 
 
     article.details{
-        width: 500px;
         background-color: @blue;
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2c5465+0,1a2c3d+100 */
         background: rgb(44,84,101); /* Old browsers */
@@ -404,3 +403,29 @@ section.providers{
 }
 
 
+
+//Responsive Styles
+@media (max-width:1000px){
+    #main section.providers{
+         article.details{
+             background: #2c5465;
+             padding-bottom: 20px;
+             header{
+                 padding: 20px 20px 10px 20px;
+                 background: transparent;
+             }
+             .main{
+                 padding: 0px 20px;
+             }
+             address{
+                 margin: 0px;
+                 padding: 0px;
+             }
+             ul.phones{
+                background: transparent !important;
+                padding: 0px;
+             }
+             ul.outreach{ margin-bottom:-10px; padding: 0px;}
+         }
+    }
+}
