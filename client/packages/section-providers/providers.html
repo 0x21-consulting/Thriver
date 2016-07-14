@@ -7,8 +7,8 @@
             <header>
                 <h1>Service Providers</h1>
                 <p>
-                    We believe that diversity and safe, accessible services are fundamental <br>
-                    to social change. WCASA supports service providers agencies <br>
+                    We believe that diversity and safe, accessible services are fundamental
+                    to social change. WCASA supports service providers agencies
                     all over the state of Wisconsin.
                 </p>
             </header>
@@ -27,7 +27,7 @@
                 <div class="findByZip">
                     <label for="zip">Find by Zip Code</label>
                     <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
-                    <input id="zip" type="text" pattern="[0-9]*" 
+                    <input id="zip" type="text" pattern="[0-9]*"
                         maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
                         min="53001" max="54990" name="zip">
                     <!--<input class="submit" type="submit" value="Go">-->
@@ -38,13 +38,13 @@
         </div>
 
 
-        <main class="mapTool">
+        <div class="main mapTool">
             <figure class="map">
                 <div id="mapCanvas">
                 </div>
             </figure>
             {{> provider}}
-        </main>
+        </div>
     </section>
 </template>
 
@@ -61,7 +61,7 @@
                     <h2>{{name}}</h2>
                     <p class="county-served">Counties Served: {{providerCounties}}</p>
                 </header>
-                <main>
+                <div class="main">
                     <address>{{address}}</address>
                     <ul class="phones">
                         <li><strong>Phone:</strong> {{phone}}</li>
@@ -83,7 +83,7 @@
                         {{/if}}
                     </ul>
                     <!--<button class="cta button-aqua">Jobs &amp; More</button>-->
-                </main>
+                </div>
             </div>
         {{/with}}
     </article>

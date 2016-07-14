@@ -1,11 +1,11 @@
-/*section.providers{
+section.providers{
 
     article.details{
         width: 700px;
         background: @navy;
         position: relative;
         vertical-align: top;
-        .shadow(closeLeft);
+        //.shadow(closeLeft);
         &:before{
             content:"\f0d9";
             .fa;
@@ -19,8 +19,8 @@
             background: @lightBlue;
             padding: 80px 40px;
         }
-        main{
-            background-color: @navy;
+        .main{
+            //background-color: @navy;
             padding: 40px;
         }
         h2{
@@ -100,7 +100,7 @@
         }
         @media @1024{
             width: 300px;
-            header, main{
+            header, .main{
                 padding: 20px;
             }
             &:before{
@@ -113,7 +113,7 @@
             width: 100%;
         }
     }
-}*/
+}
 
 
 section.providers{
@@ -190,11 +190,11 @@ section.providers{
             margin-bottom: 10px;
             display: inline-block;
         }
-    }  
+    }
 
 
 
-    main.mapTool{
+    .main.mapTool{
         display: table;
         width: 100%;
     }
@@ -214,7 +214,7 @@ section.providers{
             white-space: nowrap;
             overflow: hidden;
         }
-    }  
+    }
     figure.map, article.details{
         display: table-cell;
         height: 600px;
@@ -318,7 +318,7 @@ section.providers{
             background: rgba(0,0,0,0.3);
             padding: 40px;
         }
-        main{
+        .main{
             //background-color: @navy;
             padding: 20px;
         }
