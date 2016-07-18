@@ -21,11 +21,11 @@
         <form>
             {{#each items}}
                 <label for ="{{id}}">{{title}}</label>
-                <input id="{{id}}" type="{{type}}" name="{{#if equals id 'repeatPasswordReg'}}repeat{{else}}{{type}}{{/if}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
+                <input autocomplete="off" id="{{id}}" type="{{type}}" name="{{#if equals id 'repeatPasswordReg'}}repeat{{else}}{{type}}{{/if}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
             {{/each}}
             <label for="comments">Comments</label>
             <textarea id="comments" cols="20" rows="3" name="comments" placeholder="Comments"></textarea>
-            <input type="submit" value="{{submitValue}}" class="button" />
+            <input autocomplete="off" type="submit" value="{{submitValue}}" class="button" />
             <p class="hide">{{success}}</p>
         </form>
         <div class="footerBrand">
