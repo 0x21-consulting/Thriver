@@ -66,12 +66,22 @@ handleHeaderStateChange = function (event) {
                 document.body.classList.add('fixedHeaderReturn');
             }
         }
+
+        //Back to Top
+        if (window.scrollY > 1000 && $(window).width() > 767){
+            document.getElementById("back-to-top").classList.add('active');
+        } else {
+            if (document.getElementById("back-to-top").classList.contains('active')){
+                document.getElementById("back-to-top").classList.remove('active');
+            }
+        }
     }, 1);
 };
 
 // Smooth scrolling
 // We only care about same page links (that start with a hash)
 Template.body.events({ 'click #menu a[href*=#]': smoothScroll });
+Template.body.events({ 'click #back-to-top': smoothScroll });
 
 // Handle header state change
 Template.body.onRendered(function () {
