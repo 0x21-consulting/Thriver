@@ -20,7 +20,7 @@ var smoothScroll = function (event) {
     if (!target.length) return;
 
     // Calculate target Y offset
-    offset = target.offset().top - 95;
+    offset = target.offset().top - 120;
 
     // We want to scroll at 750 pixels per second
     speed = Math.abs(posY - offset);
