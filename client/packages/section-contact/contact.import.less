@@ -7,6 +7,10 @@ section.contact{
         max-width: 655px;
         margin: 0 auto;
     }
+    p{
+        display: block;
+        clear:both;
+    }
     ul.contactInfo, p.address{
         text-align: center;
         font-size: 13px;
@@ -15,6 +19,7 @@ section.contact{
         color: @navy;
         margin-left: 0px;
         .os;
+        clear:both;
         a{
             color: @black;
             text-decoration: underline;
@@ -144,6 +149,7 @@ section.contact{
 }
 
 section.contact{
+    //p.staff-reference{border: none !important;}
     > div > header p{
         border-top: none;
         padding: 0px;
@@ -184,6 +190,9 @@ section.contact{
 #main section.contact{
     p.address {
         border: none !important;
+        padding-bottom: 20px;
+        display: block !important;
+        margin: 0 auto;
     }
     label{display: none;}
     input, textarea{text-transform: uppercase !important;}

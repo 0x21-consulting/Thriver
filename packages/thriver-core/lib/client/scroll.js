@@ -82,6 +82,7 @@ handleHeaderStateChange = function (event) {
 // We only care about same page links (that start with a hash)
 Template.body.events({ 'click #menu a[href*=#]': smoothScroll });
 Template.body.events({ 'click #back-to-top': smoothScroll });
+Template.body.events({ 'click #staff-list': smoothScroll });
 
 // Handle header state change
 Template.body.onRendered(function () {

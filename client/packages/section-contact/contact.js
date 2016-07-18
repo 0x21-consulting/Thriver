@@ -24,3 +24,9 @@ Template.contact.helpers({
         placeholder: 'Email'
     }]
 });
+
+Template.contact.events({
+    'click #staff-list': function (event) {
+        document.querySelector('[href="#staff"]').click();
+    }
+});
