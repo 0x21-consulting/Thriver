@@ -99,6 +99,7 @@ Meteor.canvasFunctions = {
 						for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
 						for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
 						c.clearCanvas(); //Remove all canvas effect classes
+						document.body.classList.add('noScroll');
 						h.hidden(overlay,true);
 						h.hidden(main,false);
 						focusGlobalElFirst.focus();
