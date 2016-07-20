@@ -123,6 +123,8 @@ menu.tabs{
                 width: 100%;
                 height: ~'calc(100vh - @{headerMobileH})';
                 overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+                isolation: isolate;
                 > header + *, * > header + *{ //Containing element after header
                     background-color: @sidebarSecondaryColor;
                     color:@sidebarTextColor;
