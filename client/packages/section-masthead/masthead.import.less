@@ -210,7 +210,7 @@ section#masthead, section.masthead{
 
 
 //Mobile
-section#masthead, section.masthead{
+main section#masthead, main section.masthead{
     background: @sidebarPrimaryColor;
     @media @mobile{
         height: 267px !important;
@@ -244,7 +244,7 @@ section#masthead, section.masthead{
             &:before{ display: none; }
             li{
                 display: inline-block;
-                margin-right: 10px;
+                margin-right: 10px !important;
                 a{
                     &:after{ display: none; }
                     width: 18px;
@@ -254,7 +254,10 @@ section#masthead, section.masthead{
                     padding: 0px;
                     border-radius: 50%;
                     -webkit-border-radius:50%;
-                    opacity: 0.5;
+                    opacity: 0.5 !important;
+                    &[aria-expanded="true"]{
+                        opacity: 1 !important;
+                    }
                     -moz-user-select: none; /* Firefox */
                     -ms-user-select: none; /* Internet Explorer */
                     -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
