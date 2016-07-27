@@ -12,32 +12,32 @@ Package.onUse(function (api) {
         'thriver:core',
         'thriver:core-styles'
     ]);
-    
+
     // Resources
     api.addAssets([
-        
+
     ], ['client']);
-    
+
     api.addFiles([
         // Templates
-        'lib/templates/header.html',
+        'lib/templates/main.html',
         'lib/templates/mobile.html',
         'lib/templates/utility.html',
-        
-        // Styles
-        'lib/styles/utility.less',
-        'lib/styles/header.less',
-        'lib/styles/mobile.less',
-        
+
+        // Styles (Removed as unable to access global less dependencies. Can be found in thriver-core-styles>lib>sections...)
+        //'lib/styles/utility.less',
+        //'lib/styles/header.less',
+        //'lib/styles/mobile.less',
+
         // Helpers and methods
         'lib/navigation.js',
         'lib/utility.js',
         'lib/mobile.js'
     ], ['client']);
-    
+
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:navigation');

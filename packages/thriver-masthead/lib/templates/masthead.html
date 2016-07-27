@@ -1,113 +1,43 @@
 <template name="masthead">
-    <section class="masthead" id="masthead">
-        <!--newsTabs temp. class left on, can we combine with newsroom tab scripts-->
-        <nav class="mastheadNav">
-            <div class="inner">
-                <h2>What's New</h2>
-                <ul class="mastheadTabs tabs">
-                    <li class="active">April is Sexual Assault Awareness Month</li>
-                    <li>WCASA is Hiring</li>
-                    <li>Training Institute Conference</li>
-                </ul>
-            </div>
-        </nav>
-        <!--See above comment-->
-        <ul class="mastheadContent tabsContent">
-            {{>mastheadArticle}}
-            <!--{{>mastheadArticle}}-->
-            <!--{{>mastheadArticle}}-->
-        </ul>
-        <div class="arrow">&#xf107;</div>
+    {{#if isAdmin}}
+        {{> sectionAdmin}}
+    {{/if}}
+    <section class="masthead" id="masthead" data-id="{{_id}}">
+        <div class="container">
+            {{#each items}}
+                {{>tabs}}
+            {{/each}}
+        </div>
+        <!--<div class="arrow fa">&#xf107;</div>-->
     </section>
 </template>
 
-<template name="mastheadArticle">
-    <!--Start of Loop-->
-    <li class="active mastheadArticle img">
-        <div>
-            <div class="border">
-                <h1>April is Sexual Assault Awareness Month</h1>
-                <p>
-                    To stay present and get more out of your SAAM, WCASA encourages you to use April as an opportunity to engage with this year’s social norm for the prevention of sexual violence: Objectification and Sexualization. 
-                </p>
-                <p>
-                    Look out for ‪<a href="https://twitter.com/hashtag/saam" target="_blank">#‎SAAM‬ posts</a> on Twitter this month and check out our <a href="https://www.facebook.com/events/206945502994621/" target="_blank">SAAM Facebook event</a> for events in Wisconsin. Read our special <a href="http://www.wcasa.org/file_open.php?id=1359" target="_blank">SAAM edition Voice newlsetter.</a>
-                </p>
-                <a class="cta button" target="_blank" onClick="alert('This could link to an article template page about SAAM.');">Learn About SAAM</a>
-            </div>
-        </div>
-    </li>
-    <li class="mastheadArticle img">
-        <div>
-            <div class="border">
-                <h1>Join the WCASA team in making a big difference</h1>
-                <p>Job Openings currently include:</p>
-                <ul>
-                    <li><a class="jobsOpen">Evaluation Coordinator</a></li>
-                    <li><a class="jobsOpen">SART/CCR Coordinator</a></li>
-                    <li><a class="jobsOpen">Prison Rape Elimination Act (PREA) Coordinator Project Position</a></li>
-                </ul>
-                <a class="cta button jobsOpen">Get Involved</a>
-            </div>
-        </div>
-    </li>
-    <li class="mastheadArticle img">
-        <div>
-            <div class="border">
-                <h1>Training Institute Conference</h1>
-                <p>June 8 &amp; 9, 2016<br>
-                    <a href="http://www.kalahariresorts.com/wisconsin" target="_blank">Kalahari Resorts, Wisconsin Dells</a></p>
-                <p>
-                    WCASA is excited to bring back its statewide Training Institute, a multi-disciplinary conference, covering an array of topics for professionals committed to ending sexual violence.
-                </p>
-                <a class="cta button eventsOpen">Event Details</a>
-                <a class="cta button" href="http://www.wcasa.org/file_open.php?id=1356" target="_blank"><span class="fa">&#xf1c1;</span> Download Program</a>
-            </div>
-        </div>
-    </li>
-    <!--End of loop-->
+<!--Content Templates (Could be markdown editable areas)-->
+<template name="slideA">
+    <h1>April is Sexual Assault Awareness Month</h1>
+    <p> To stay present and get more out of your SAAM, WCASA encourages you to use April as an opportunity to engage with this year’s social norm for the prevention of sexual violence: Objectification and Sexualization.</p>
+    <p>Look out for ‪<a href="https://twitter.com/hashtag/saam" target="_blank">#‎SAAM‬ posts</a> on Twitter this month and check out our <a href="https://www.facebook.com/events/206945502994621/" target="_blank">SAAM Facebook event</a> for events in Wisconsin. Read our special <a href="http://www.wcasa.org/file_open.php?id=1359" target="_blank">SAAM edition Voice newlsetter.</a></p>
+    <a class="cta button" target="_blank" onClick="alert('This could link to an article template page about SAAM.');">Learn About SAAM</a>
+    <img class="masthead-bg" src="lib/img/mastheadArticle.gif" alt="" />
 </template>
 
-<!--Possibly to be deleted-->
-<!--<template name="mastheadImpact">
-    <section class="masthead mastheadImpact" id="masthead">
-        <div>
-            <h1>
-                <span class="small">Creating the</span>
-                <span class="large">Social Change</span>
-                <span class="small">Necessary to</span>
-                <span class="large">End Sexual Violence</span>
-            </h1>
-            <a class="cta providers button" href="#">Get Help Now</a>
-        </div>
-    </section>
+<template name="slideB">
+    <h1>Join the WCASA team in making a big difference</h1>
+    <p>Job Openings currently include:</p>
+    <ul>
+        <li><a class="jobsOpen">Evaluation Coordinator</a></li>
+        <li><a class="jobsOpen">SART/CCR Coordinator</a></li>
+        <li><a class="jobsOpen">Prison Rape Elimination Act (PREA) Coordinator Project Position</a></li>
+    </ul>
+    <a class="cta button jobsOpen">Get Involved</a>
+    <img class="masthead-bg" src="lib/img/mastheadAlert.jpg" alt="" />
 </template>
 
-
-<template name="mastheadAlert">
-    <section class="masthead mastheadAlert" id="masthead">
-        <div>
-            <h1>Action Alert</h1>
-            <p class="date">November 15th, 2015</p>
-            <p class="excerpt">
-                Some Wisconsin Legislators are attempting to <strong>take away the federally protected rights of transgender students</strong> to use the bathroom and changing facility that aligns with their gender.
-            </p>
-            <a class="cta button" href="#">Act Now</a>
-        </div>
-    </section>
+<template name="slideC">
+    <h1>Training Institute Conference</h1>
+    <p>June 8 &amp; 9, 2016<br><a href="http://www.kalahariresorts.com/wisconsin" target="_blank">Kalahari Resorts, Wisconsin Dells</a></p>
+    <p> WCASA is excited to bring back its statewide Training Institute, a multi-disciplinary conference, covering an array of topics for professionals committed to ending sexual violence.</p>
+    <a class="cta button eventsOpen">Event Details</a>
+    <a class="cta button" href="http://www.wcasa.org/file_open.php?id=1356" target="_blank"><span class="fa">&#xf1c1;</span> Download Program</a>
+    <img class="masthead-bg" src="lib/img/mastheadImpact.jpeg" alt="" />
 </template>
-
-<template name="mastheadArticle">
-    <section class="masthead mastheadArticle" id="masthead">
-        <div>
-            <h1>April is Sexual Assault Awareness Month</h1>
-            <p>
-                To stay present and get more out of your SAAM, WCASA encourages you to use April as an opportunity to engage with this year’s social norm for the prevention of sexual violence: Objectification and Sexualization. 
-            </p>
-            <p>
-                Look out for ‪<a href="https://twitter.com/hashtag/saam" target="_blank">#‎SAAM‬ posts</a> on Twitter this month and check out our <a href="https://www.facebook.com/events/206945502994621/" target="_blank">SAAM Facebook event</a> for events in Wisconsin. Read our special <a href="http://www.wcasa.org/file_open.php?id=1359" target="_blank">SAAM edition Voice newlsetter.</a>
-            </p>
-            <a class="cta button" target="_blank" onClick="alert('This could link to an article template page about SAAM.');">Read more about SAAM</a>
-        </div>
-    </section>
-</template>-->

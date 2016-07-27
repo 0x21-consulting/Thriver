@@ -8,6 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
+    // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles'
@@ -18,21 +19,22 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Client processing
     api.addFiles([
         // Templates
         'lib/templates/providers.html',
         
         // Styles
-        'lib/styles/providers.less',
-        'lib/styles/maps.less',
+        'lib/templates/providers.less',
         
         // Helpers and methods
-        'lib/providers.js',
-        'lib/maps.js'
+        'lib/client/providers.js',
+        'lib/client/maps.js'
     ], ['client']);
     
+    // Server processing
     api.addFiles([
-        'lib/server/providers.js'
+        'lib/providers.js'
     ], ['server']);
 });
 

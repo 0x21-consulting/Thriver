@@ -8,6 +8,8 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
+    
+    // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles',
@@ -20,27 +22,39 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Client processing
     api.addFiles([
         // Templates
-        'lib/templates/account.html',
-        'lib/templates/details.html',
-        'lib/templates/login.html',
+        'lib/templates/events.html',
         'lib/templates/notifications.html',
+        'lib/templates/profile.html',
         'lib/templates/register.html',
+        'lib/templates/requests.html',
+        'lib/templates/signin.html',
+        'lib/templates/subscriptions.html',
         
         // Styles
-        'lib/styles/accounts.less',
+        'lib/templates/user.less',
         
         // Helpers and methods
-        'lib/accounts.js',
+        'lib/client/user.js',
+        'lib/client/events.js',
+        'lib/client/notifications.js',
+        'lib/client/profile.js',
+        'lib/client/register.js',
+        'lib/client/requests.js',
+        'lib/client/signin.js',
+        'lib/client/subscriptions.js'
     ], ['client']);
     
+    // Server processing
     api.addFiles([
-        'lib/server.js'
+        'lib/accounts.js',
+        'lib/notifications.js'
     ], ['server']);
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:accounts');

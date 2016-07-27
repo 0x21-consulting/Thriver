@@ -26,13 +26,10 @@ Thriver.sections.get = function (id, fields) {
         for (i = 0, j = fields.length; i < j; ++i)
             fieldsObj.fields[ fields[i] ] = true;
     
-    if (id) {
-        tabs = Thriver.sections.collection.find({ _id: id }, { tabs: true });
-        tabs = tabs.tabs;
-        
-        return Thriver.sections.collection.find({ _id: { $in: tabs }}, fieldsObj);
-    }
+    if (id)
+        return Thriver.sections.collection.findOne({ _id: id }, fieldsObj);
     
     // Return all page sections
+    //return Thriver.sections.collection.find({ }, fieldsObj);
     return Thriver.sections.collection.find({ displayOnPage: true }, fieldsObj);
 };

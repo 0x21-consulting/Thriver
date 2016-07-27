@@ -1,0 +1,25 @@
+<template name="aside">
+    <aside class="off-canvas">
+        {{#each items}}
+            <section id="{{id}}" class="sidebar scroll-box" data-width="{{width}}" data-position="{{position}}" data-focus="group" aria-hidden="true">
+                <div class="scroll">
+                    <header>
+                        <h1 class="{{#if icon}}icon-{{icon}}{{/if}}" >{{title}}</h1>
+                        {{#if subhead}}{{> Template.dynamic template=subhead}}{{/if}}
+                    </header>
+                    <div class="sidebar-content">
+                        {{#if tabs}}
+                            {{>tabs}}
+                        {{else}}
+                            {{#if filter}}
+                                {{>filter}}
+                            {{/if}}
+                            {{> Template.dynamic template=template}}
+                        {{/if}}
+                    </div>
+                    <button data-canvas-event="close" class="mobile-hide">close</button>
+                </div>
+            </section>
+        {{/each}}
+    </aside>
+</template>

@@ -6,8 +6,10 @@ Package.describe({
     documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
+    
+    // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles',
@@ -19,20 +21,25 @@ Package.onUse(function(api) {
         
     ], ['client']);
     
+    // Client processing
     api.addFiles([
         // Templates
-        'lib/templates/payments.html',
+        'lib/templates/donate.html',
         
         // Styles
-        'lib/styles/payments.less',
+        'lib/templates/donate.less',
         
         // Helpers and methods
-        'lib/payments.js',
+        'lib/client/donate.js'
     ], ['client']);
     
+    // Server processing
+    api.addFiles([
+        
+    ], ['server']);
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:payments');

@@ -1,0 +1,207 @@
+@import "{thriver:core-styles}/lib/index.less";
+
+//Variables
+@utilityHeight: 36px;
+@utilityaPadding: 2px 12px 0px 32px;
+@socialaPadding: 0px 11px 0px 0px;
+
+/*
+//Default Colors
+@utilityBgColor: #222; //This default should be defined but loaded before options.less
+@utilityButtonDefaultColor: #222;
+@utilityButtonDefaultBgColor: #eee;
+@utilityButtonActiveBgColor: #aaa;
+*/
+/*
+//WCASA specific utility nav item variables (Not really sure where to put these, redefined in options)
+@baseColorNotifications: #aaa;
+@baseColorAccount: #aaa;
+@baseColorSignOut: #aaa;
+@baseColorLang: #aaa;
+@baseColorHelp: #aaa;
+@baseColorDonate: #aaa;
+@baseColorResources: #aaa;
+@baseColorNews: #aaa;
+@baseColorTwitter: #aaa;
+@baseColorSocial: #eee;
+@baseTransparentColor: #222;
+*/
+
+//Specifics
+nav.utility{
+    li.right{float: right;}
+    li.more{
+        figure[aria-hidden="true"]{ display: none;}
+        figure[aria-hidden="false"]{display: block !important;}
+    }
+    ul > li> a{
+        &[href="#"], &[href="#register"]{
+            background-color: transparent;
+            color: @baseTransparentColor;
+            &:hover{.boxShadow(none);}
+        }
+        &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            background-color: @baseColorSocial;
+            color: darken(@baseColorSocial,60%);
+            &:before,&:after{font-size: 18px;}
+        }
+        &[href="#"], &[href="#register"], &[href="#accounts"], &[href="#signin"], &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            padding: 2px 12px 0px 12px;
+            //&:before{ margin: 0px; position: relative; }
+            //&:after{position:absolute; margin-left: 0px;right: 0px; top: 2px;}
+        }
+        &[href="#notifications"],&[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            &:before{ margin: 0px; position: relative; }
+        }
+        &[href="#accounts"], &[href="#signin"], &[href="#"], &[href="#register"]{ padding-right: 24px;}
+        &[href="#twitter"]{ background-color: @baseColorTwitter;}
+        &[href="#service-providers"],{ background-color: @baseColorHelp;}
+        &[href="#resources"]{ background-color: @baseColorResources;}
+        &[href="#news"]{ background-color: @baseColorNews;}
+        &[href="#service-providers"][aria-expanded="true"]{
+            background-color: darken(@baseColorHelp,5%);
+            .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.1));
+        }
+        &[href="#register"][aria-expanded="true"]{ color:@white;}
+        @media (max-width:1000px){
+            padding: 2px 12px 0px 12px !important;
+            i{display: none;}
+            &:before, &:after{display: none;}
+            &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+                &:before, &:after{display: block;}
+            }
+        }
+    }
+}
+
+// Constants
+nav.utility{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    //z-index: @utilityZ;
+    width: 100%;
+    height: @utilityHeight;
+    .boxShadow(2px 0px 2px 0px rgba(0,0,0,0.2));
+    i{pointer-events: none;}
+    > ul{
+        background-color: @utilityBgColor;
+        height: @utilityHeight;
+        width: 100%;
+        margin: 0px;
+        list-style: none;
+    }
+    li{float: left;}
+    ul>li:first-child{ position: relative; z-index: 2;}
+    ul > li> a{
+        display: block;
+        position: relative;
+        height: @utilityHeight - 2px;
+        line-height: @utilityHeight - 2px;
+        //line-height: @utilityHeight;
+        padding: @utilityaPadding;
+        background-color: @utilityButtonDefaultBgColor;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 1px;
+        @media (max-width:1200px){ font-size: 11px; }
+        .shadowNone;
+        &:before, &:after{
+            font-size: 14px;
+            font-weight: 100;
+            position: absolute;
+            margin-left: -20px;
+            margin-top: -1px;
+        }
+        &:after{margin-left: 0px;right: 10px; top: 2px;}
+        color: @utilityButtonDefaultColor;
+        //.transform(scale(1,1)) !important;
+        &:hover, &:focus{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.2));}
+        &[aria-expanded="true"]{
+            background-color: @utilityButtonActiveBgColor;
+            .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.5));
+        }
+    }
+}
+
+//Get Help Popup
+
+//Get Help Tooltip
+@media (min-width:768px){
+figure.help{
+    position: fixed;
+    right: 13px;
+    width: 370px;
+    //padding: 20px 20px 0px 0px;
+    top: 49px;
+    z-index: 9999;
+    //.opacity(0);
+    //visibility: hidden;
+    //.scale(0,0);
+    //.accelerate;
+    transform-origin: 85% 0%;
+    //.transition(all,350ms,@canvasEase,@canvasDelay);
+    box-shadow:1px 1px 2px 0px rgba(0,0,0,0.2);
+    //Inner element serves purpose to allow the figure to have padding to be moused over
+    .inner{
+        background: @orange;
+        padding: 20px;
+        color: #fff;
+        .borderRadius(2px);
+        position: relative;
+        &:before{
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid @orange;
+            position: absolute;
+            right: 20px;
+            top: -7px;
+        }
+    }
+    h2{
+        border-bottom: 2px solid darken(@orange, 5%);
+        color: @white;
+        font-size: 17px;
+        line-height: 32px;
+        font-weight: 600;
+        padding: 0px 0px 6px 0px;
+        margin:0px 0px 10px 0px;
+    }
+    dl{
+        margin: 0px;
+        padding: 0px;
+        //background-color: darken(@orange, 10%);
+        //padding: 20px;
+        .borderRadius(2px);
+    }
+    dt{
+        color: @gray;
+        .font(1.2,1.5,0.025,@bold,uppercase);
+        //.opacity(0.9);
+        margin-bottom: 5px;
+        font-weight: 500;
+        &:nth-child(3){
+            margin-top: 20px;
+        }
+    }
+    dd{
+        .font(1.8,2.2,0.025,@normal,none);
+    }
+    dt,dd{display: block;}
+}
+
+figure.help.active{
+    visibility: visible;
+    .opacity(1);
+    //.scale(1,1);
+}
+
+/*li.getHelp:hover figure{
+    visibility: visible;
+    .opacity(1);
+    .scale(1,1);
+}*/
+}

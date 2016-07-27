@@ -1,8 +1,5 @@
-function removeActiveClass(){
-    $('.newsContent li').removeClass('active');
-    $('.newsTabs li').removeClass('active');
-    $('.accountDetailsContent > li').removeClass('active');
-}
+Template.navigationMobile.helpers(mainNavigationHelpers);
+Template.navigationMobile.helpers(utilityNavigationHelpers);
 
 function scrollerResets(){
     var allScrollers = document.getElementsByClassName('scroller');
@@ -11,109 +8,28 @@ function scrollerResets(){
     }
 }
 
-function removeOpenAccounts(){
-    document.body.classList.remove('registeredEventsM', 'subscriptionsManagerM', 'notificationsM', 'profileSettingsM');
-}
+Template.navigationMobile.events({
+    'click [aria-controls][data-toggle=mobile-navigation]': function (event) {
+        c.toggleCanvas(); //START HERE
+    },
+    'click [data-type="main-navigation-item"]': function (event) {
+        var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+        var mobileNavigation = document.getElementById('mobile-navigation');
+        for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+        h.hidden(mobileNavigation, true);
+        document.body.classList.remove('noScroll');
+    },
+    'click #mobile-navigation li > a[href="#service-providers"]': function (event) {
+        m.toggleMore();
+        event.preventDefault();
+        return false;
 
-// Events
-Template.headerMobile.events({
-
-    //Menu Actions
-    'click button.menuToggle': function (event) {
-        if(document.body.classList.contains('menuOpen')){
-            document.body.classList.remove('menuOpen');
-            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
-            //Newsroom Function
-            removeActiveClass();
-        } else{
-            document.body.classList.remove('accountOpen');
-            document.body.classList.add('menuOpen');
-        }
     },
-    'click button.accountToggle': function (event) {
-        if(document.body.classList.contains('accountOpen')){
-            document.body.classList.remove('accountOpen');
-            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
-            //Newsroom Function
-            removeActiveClass();
-            removeOpenAccounts();
-        } else{
-            document.body.classList.remove('menuOpen');
-            document.body.classList.add('accountOpen');
-        }
-    },
-    'click .mobileOverlay': function (event) {
-        if(document.body.classList.contains('menuOpen') || document.body.classList.contains('accountOpen')){
-            document.body.classList.remove('accountOpen');
-            document.body.classList.remove('menuOpen');
-            document.body.classList.remove('newsroomM', 'donateM', 'sidebarLeftMobile');
-            //Newsroom Function
-            removeActiveClass();
-            removeOpenAccounts();
-        }
-    },
-    'click .closeTabMobile': function (event) {
-        if(document.body.classList.contains('menuOpen') || document.body.classList.contains('accountOpen')){
-            document.body.classList.remove('accountOpen');
-            document.body.classList.remove('menuOpen');
-        }
-    },
-
-    //LI events
-    'click .myAccountLink': function (event) {
-        document.body.classList.remove('menuOpen');
-        document.body.classList.add('accountOpen');
-    },
-    'click .mobileMenu .menuTitle a': function (event) {
-        if(document.body.classList.contains('donateM', 'sidebarLeftMobile', 'newsroomM')){
-            document.body.classList.remove('donateM', 'sidebarLeftMobile');
-            //Newsroom Function
-            removeActiveClass();
-        } else if(document.body.classList.contains('newsroomM', 'sidebarLeftMobile')){
-            document.body.classList.remove('newsroomM', 'sidebarLeftMobile');
-            //Newsroom Function
-            removeActiveClass();
-        } else{
-            document.body.classList.remove('menuOpen');
-        }
-    },
-    'click .mobileMenu li.getHelpMobile': function (event) {
-        $('.mobileOverlay').click();
-        alert('Scroll to Providers.');
-    },
-    //Sends previous nav back to top
-    'click .mobileMenu .donate': function (event) {
-        document.body.classList.add('sidebarLeftMobile','donateM');
-        scrollerResets();
-    },
-    'click .mobileMenu .newsroom': function (event) {
-        document.body.classList.add('sidebarLeftMobile','newsroomM');
-        scrollerResets();
-    },
-
-
-    //Accounts Side
-    'click .mobileMenuAccount .registeredEventsMob': function (event) {
-        removeOpenAccounts();
-        document.body.classList.add('sidebarLeftMobile','registeredEventsM');
-        scrollerResets();
-    },
-    'click .mobileMenuAccount .subscriptionsManagerMob': function (event) {
-        removeOpenAccounts();
-        document.body.classList.add('sidebarLeftMobile','subscriptionsManagerM');
-        scrollerResets();
-    },
-    'click .mobileMenuAccount .notificationsMob': function (event) {
-        removeOpenAccounts();
-        document.body.classList.add('sidebarLeftMobile','notificationsM');
-        scrollerResets();
-    },
-    'click .mobileMenuAccount .profileSettingsMob': function (event) {
-        removeOpenAccounts();
-        document.body.classList.add('sidebarLeftMobile','profileSettingsM');
-        scrollerResets();
+    'click #mobile-navigation figure a[href="#service-providers"]': function (event) {
+        var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+        var mobileNavigation = document.getElementById('mobile-navigation');
+        for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+        h.hidden(mobileNavigation, true);
+        document.body.classList.remove('noScroll');
     }
-
-
-
 });

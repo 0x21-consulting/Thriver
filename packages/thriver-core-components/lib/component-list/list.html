@@ -1,0 +1,120 @@
+<template name="list">
+    {{#if equals type 'article'}}
+        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
+            {{#if equals itemType 'category'}}
+                {{#each categories}}
+                    <article class="itemCategory">
+                        <details aria-expanded="false" aria-controls="{{id}}">
+                            <summary id="{{id}}">
+                                <h1>{{{title}}}</h1>
+                            </summary>
+                            <div class="inner">
+                                {{#each items}}
+                                    {{>articleItem}}
+                                {{/each}}
+                            </div>
+                        </details>
+                    </article>
+                {{/each}}
+            {{else}}
+                {{#each items}}
+                    <article role="document">
+                        <div class="inner-container-wide">
+                            <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">
+                                {{#if friendlyDate}}
+                                    <time class="dateMeta" datetime="{{date}}">{{{friendlyDate}}}</time>
+                                {{else}}
+                                    <time class="dateMeta">January 1st, 2016</time>
+                                {{/if}}
+                                {{#if title}}<h3>{{{title}}}</h3>{{/if}}
+                                {{#if publisher}}<p class="content text">{{{publisher}}}</p>{{/if}}
+                                {{#if content}}<p class="content text">{{{content}}}</p>{{/if}}
+                            </a>
+                        </div>
+                    </article>
+                {{/each}}
+            {{/if}}
+            {{#if equals paginate 'true'}}
+            <li class="loadMore">
+                <button type="button">Load More <span class="fa"></span></button>
+                <span class="everything">That's everything!</span>
+            </li>
+            {{/if}}
+        </section>
+    {{/if}}
+    <!--Catalog List pending explicit instructions on library-->
+    {{#if equals type 'catalog'}}
+        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
+        {{#each items}}
+            <article>
+                <div class="inner">
+                    <details aria-expanded="false" aria-controls="{{id}}">
+                        <summary id="catalog{{id}}">
+                            <h1>{{title}}</h1>
+                            <p class="meta">{{byline}}</p>
+                        </summary>
+                        <dl>
+                            <!--Would be nice to have the spacebars tag just do: prop:val-->
+                            <dt>Call Number</dt><dd>{{callNumber}}</dd>
+                            <dt>Copies</dt><dd>{{copies}}</dd>
+                            <dt>Subject Headings</dt><dd>{{subjectHeading}}</dd>
+                            <dt>Classification</dt><dd>{{classification}}</dd>
+                            <dt>Category</dt><dd>{{category}}</dd>
+                            <dt>Material</dt><dd>{{type}}</dd>
+                        </dl>
+                    </details>
+                    <aside class="info">
+                        {{#if type}}
+                            <dl class="material"><dt>Material</dt><dd>{{type}}</dd></dl>
+                        {{/if}}
+                        {{#if status}}
+                            <dl class="status {{status.type}}"><dt>Status</dt><dd>{{status.text}}</dd></dl>
+                        {{/if}}
+                        <menu class="availability">
+                            {{#if equals status.type 'transit'}}
+                                <li><button>Request Copy</button></li>
+                            {{/if}}
+                            <!--Remaining interaction buttons here-->
+                        </menu>
+                    </aside>
+                </div>
+            </article>
+        {{/each}}
+        {{#if equals paginate 'true'}}
+        <li class="loadMore">
+            <button type="button">Load More <span class="fa"></span></button>
+            <span class="everything">That's everything!</span>
+        </li>
+        {{/if}}
+        </section>
+    {{/if}}
+    {{#if equals type 'event'}}
+    <!--container-->
+        {{#each items}}
+        {{/each}}
+    <!--container-->
+    {{/if}}
+    {{#if equals type 'location'}}
+    <!--container-->
+        {{#each items}}
+        {{/each}}
+    <!--container-->
+    {{/if}}
+    {{#if equals type 'toggle'}}
+    <!--container-->
+        {{#each items}}
+        {{/each}}
+    <!--container-->
+    {{/if}}
+</template>
+
+<!--This could exist in another file perhaps.-->
+<template name="articleItem">
+    <article role="document">
+        <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">
+            {{#if date}}<time class="dateMeta" datetime="{{date}}">{{{friendlyDate}}}</time>{{/if}}
+            {{#if title}}<h3>{{{title}}}</h3>{{/if}}
+            {{#if content}}<p class="content">{{{content}}}</p>{{/if}}
+        </a>
+    </article>
+</template>

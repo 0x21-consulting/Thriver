@@ -8,6 +8,8 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
+    
+    // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles'
@@ -18,19 +20,25 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Client processing
     api.addFiles([
         // Templates
         'lib/templates/outreach.html',
         
         // Styles
-        'lib/styles/outreach.less',
+        'lib/templates/outreach.less',
         
         // Helpers and methods
-        'lib/outreach.js',
+        'lib/client/outreach.js'
     ], ['client']);
+    
+    // Server processing
+    api.addFiles([
+        
+    ], ['server']);
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:outreach');

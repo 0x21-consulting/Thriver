@@ -12,28 +12,28 @@ Package.onUse(function (api) {
         'thriver:core',
         'thriver:core-styles'
     ]);
-    
+
     // Resources
     api.addAssets([
-        
+
     ], ['client']);
-    
+
     api.addFiles([
         // Templates
         'lib/templates/masthead.html',
-        
+
         // Styles
-        'lib/styles/masthead.less',
-        
+        'lib/templates/masthead.less',
+
         // Helpers and methods
         'lib/masthead.js',
     ], ['client']);
-    
+
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
-    api.use('masthead');
+    api.use('thriver:masthead');
     api.mainModule('masthead-tests.js');
 });

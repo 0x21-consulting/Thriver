@@ -8,6 +8,8 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
+    
+    // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles',
@@ -19,24 +21,25 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Client processing
     api.addFiles([
         // Templates
         'lib/templates/admin.html',
-        'lib/templates/debug.html',
         
         // Styles
-        'lib/styles/admin.less',
+        'lib/templates/admin.less',
         
         // Helpers and methods
         'lib/client/admin.js',
         'lib/client/newActionAlert.js',
         'lib/client/newSection.js',
         'lib/client/editSection.js',
-        'lib/client/deleteSection.js',
+        'lib/client/deleteSection.js'
     ], ['client']);
     
+    // Server processing
     api.addFiles([
-        'lib/server/admin.js'
+        'lib/server.js'
     ], ['server']);
 });
 

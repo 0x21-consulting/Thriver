@@ -1,77 +1,36 @@
 <template name="utility">
-    <nav class="utility">
+    <nav id="utility" class="utility" data-focus="global">
         <ul>
             {{#if currentUser}}
-                <li class="notifications" data-sidebar="leftSmall">
-                    <button type="button">
-                        <span class="fa up">&#xf0f3;</span><span class="fa close">&#xf00d;</span>
-                        {{#if show}}
-                            <span class="notificationsAlert fa">&#xf06a;</span>
-                        {{/if}}
-                    </button>
-                </li>
-                <li class="accountDetails" data-sidebar="leftMedium">
-                    <button type="button">
-                        <span class="fa userIcon">&#xf007;</span> {{name}} <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </button>
-                </li>
-                <li class="logout">
-                    <button type="button" title="Sign Out">
-                        Sign Out <span class="fa">&#xf0da;</span>
-                    </button>
-                </li>
+                {{#each items}}
+                    {{#if equals user 'active'}}
+                        {{>utilityItem}}
+                    {{/if}}
+                {{/each}}
             {{else}}
-                <li class="login" data-sidebar="leftSmall">
-                    <button type="button">
-                        Sign In <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </button>
-                </li>
-                <li class="register" data-sidebar="leftSmall">
-                    <button type="button" title="Sign Up">
-                        Create an Account <span class="fa up">&#xf0da;</span><span class="fa close">&#xf00d;</span>
-                    </button>
-                </li>
+                 {{#each items}}
+                    {{#if equals user 'inactive'}}
+                        {{>utilityItem}}
+                    {{/if}}
+                {{/each}}
             {{/if}}
-            <li class="languageSelect" data-sidebar="rightSmall">
-                <button type="button" title="languageSelect">
-                    <span class="fa up">&#xf024;</span><span class="fa close">&#xf00d;</span>
-                </button>
-            </li>
-            <li class="getHelp">
-                <button type="button" title="Get Help">
-                    <span class="fa">&#xf06a;</span> Get Help
-                </button>
-            </li>
-            <li class="donate" data-sidebar="rightMedium">
-                <button type="button" title="Donate">
-                    <span class="fa up">&#xf004;</span><span class="fa close">&#xf00d;</span> Donate
-                </button>
-            </li>
-            <li class="learningCenter" data-sidebar="rightMedium">
-                <button type="button">
-                    <span class="fa up">&#xf19c;</span><span class="fa close">&#xf00d;</span>  Learning Center
-                </button>
-            </li>
-            <li class="news" data-sidebar="rightLarge">
-                <button type="button" title="Newsroom">
-                    <span class="fa up">&#xf1ea;</span><span class="fa close">&#xf00d;</span> Newsroom
-                </button>
-            </li>
-            <li class="twitter" data-sidebar="rightSmall">
-                <button type="button">
-                    <span class="fa up">&#xf099;</span><span class="fa close">&#xf00d;</span>  Twitter Feed
-                </button>
-            </li>
-            <li class="social fa youtube">
-                <a href="https://www.youtube.com/user/WCASAVPCC" target="_blank">
-                    &#xf167;
-                </a>
-            </li>
-            <li class="social fa facebook">
-                <a href="https://www.facebook.com/wcasa" target="_blank">
-                    &#xf082;
-                </a>
-            </li>
+             {{#each items}}
+                {{#if equals user 'public'}}
+                    {{>utilityItem}}
+                {{/if}}
+            {{/each}}
         </ul>
     </nav>
+</template>
+
+<template name="utilityItem">
+    <li class="{{#if equals position 'right'}}right{{/if}} {{#if more}}more{{/if}}">
+        <a href="{{#if equals type 'link'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}{{#if equals type 'null'}}#{{/if}}" target="{{#if equals type 'external'}}_blank{{/if}}" class="{{#if icon}}icon icon-{{{icon}}}{{/if}} {{#if iconAfter}}icon-after{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" aria-controls="{{#if equals type 'sidebar'}}#{{{sidebar}}}{{/if}}" aria-expanded="false" data-toggle="{{#if equals type 'sidebar'}}canvas{{/if}}" data-action="{{#if action}}{{action}}{{/if}}">
+            {{{title}}}
+            {{#if equals sidebar 'accounts'}}<i>&#xf007;</i> {{name}}{{/if}}
+        </a>
+        {{#if more}}
+                {{> Template.dynamic template=more}}
+        {{/if}}
+    </li>
 </template>

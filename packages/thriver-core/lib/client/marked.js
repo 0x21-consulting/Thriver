@@ -1,10 +1,10 @@
 /**
- * marked - a markdown parser
+ * Marked - a markdown parser
  * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
- * https://github.com/chjj/marked
+ * https://github.com/chjj/Marked
  */
 
-;(function() {
+//;(function() {
 
 /**
  * Block-Level Grammar
@@ -102,7 +102,7 @@ block.tables = merge({}, block.gfm, {
 function Lexer(options) {
   this.tokens = [];
   this.tokens.links = {};
-  this.options = options || marked.defaults;
+  this.options = options || Marked.defaults;
   this.rules = block.normal;
 
   if (this.options.gfm) {
@@ -518,7 +518,7 @@ inline.breaks = merge({}, inline.gfm, {
  */
 
 function InlineLexer(links, options) {
-  this.options = options || marked.defaults;
+  this.options = options || Marked.defaults;
   this.links = links;
   this.rules = inline.normal;
   this.renderer = this.options.renderer || new Renderer;
@@ -907,7 +907,7 @@ Renderer.prototype.text = function(text) {
 function Parser(options) {
   this.tokens = [];
   this.token = null;
-  this.options = options || marked.defaults;
+  this.options = options || Marked.defaults;
   this.options.renderer = this.options.renderer || new Renderer;
   this.renderer = this.options.renderer;
   this.renderer.options = this.options;
@@ -1143,14 +1143,14 @@ function merge(obj) {
  * Marked
  */
 
-function marked(src, opt, callback) {
+Marked = function (src, opt, callback) {
   if (callback || typeof opt === 'function') {
     if (!callback) {
       callback = opt;
       opt = null;
     }
 
-    opt = merge({}, marked.defaults, opt || {});
+    opt = merge({}, Marked.defaults, opt || {});
 
     var highlight = opt.highlight
       , tokens
@@ -1214,11 +1214,11 @@ function marked(src, opt, callback) {
     return;
   }
   try {
-    if (opt) opt = merge({}, marked.defaults, opt);
+    if (opt) opt = merge({}, Marked.defaults, opt);
     return Parser.parse(Lexer.lex(src, opt), opt);
   } catch (e) {
     e.message += '\nPlease report this to https://github.com/chjj/marked.';
-    if ((opt || marked.defaults).silent) {
+    if ((opt || Marked.defaults).silent) {
       return '<p>An error occured:</p><pre>'
         + escape(e.message + '', true)
         + '</pre>';
@@ -1231,13 +1231,13 @@ function marked(src, opt, callback) {
  * Options
  */
 
-marked.options =
-marked.setOptions = function(opt) {
-  merge(marked.defaults, opt);
-  return marked;
+Marked.options =
+Marked.setOptions = function(opt) {
+  merge(Marked.defaults, opt);
+  return Marked;
 };
 
-marked.defaults = {
+Marked.defaults = {
   gfm: true,
   tables: true,
   breaks: false,
@@ -1259,27 +1259,27 @@ marked.defaults = {
  * Expose
  */
 
-marked.Parser = Parser;
-marked.parser = Parser.parse;
+Marked.Parser = Parser;
+Marked.parser = Parser.parse;
 
-marked.Renderer = Renderer;
+Marked.Renderer = Renderer;
 
-marked.Lexer = Lexer;
-marked.lexer = Lexer.lex;
+Marked.Lexer = Lexer;
+Marked.lexer = Lexer.lex;
 
-marked.InlineLexer = InlineLexer;
-marked.inlineLexer = InlineLexer.output;
+Marked.InlineLexer = InlineLexer;
+Marked.inlineLexer = InlineLexer.output;
 
-marked.parse = marked;
+Marked.parse = Marked;
 
-if (typeof module !== 'undefined' && typeof exports === 'object') {
-  module.exports = marked;
+/*if (typeof module !== 'undefined' && typeof exports === 'object') {
+  module.exports = Marked;
 } else if (typeof define === 'function' && define.amd) {
-  define(function() { return marked; });
+  define(function() { return Marked; });
 } else {
-  this.marked = marked;
+  this.Marked = Marked;
 }
 
 }).call(function() {
   return this || (typeof window !== 'undefined' ? window : global);
-}());
+}());*/
