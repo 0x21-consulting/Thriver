@@ -1,21 +1,13 @@
 <template name="register">
-    <section class="register leftSmall hasSidebar">
-        <div class="scroller">
-            <h2>Create a New Account</h2>
-            <form>
-                <!--<p id="register-error" style="display:none;"></p>-->
-                <label for="nameReg">Name</label>
-                <input id="nameReg" type="name" name="name" placeholder="Name" required />
-                <label for="emailReg">Email Address</label>
-                <input id="emailReg" type="email" name="email" placeholder="Email" required />
-                <label for="passwordReg">Password</label>
-                <input id="passwordReg" type="password" name="password" placeholder="Password" required />
-                <label for="repeatPasswordReg">Repeat Password</label>
-                    <input id="repeatPasswordReg" type="password" name="repeat" placeholder="Repeat Password" required />
-                <input type="submit" name="submitButton" value="Create Account" disabled />
-            </form>
-            <p class="hide">Registration successful!  Please check your email to verify your account.</p>
-            <button type="button" class="closeTab">Close</button>
-        </div>
-    </section>
+    <form>
+        {{#each items}}
+            <label for ="{{id}}">{{title}}</label>
+            <input id="{{id}}" type="{{type}}" name="{{#if equals id 'repeatPasswordReg'}}repeat{{else}}{{type}}{{/if}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
+        {{/each}}
+        <input type="submit" name="submitButton" value="{{submitValue}}" disabled />
+        <!--These messages really shouldn't be in this template-->
+        <p id="login-error" class="hide"></p>
+        <p class="hide">{{success}}</p>
+    </form>
+    <button data-action="signin">{{signin}}</button>
 </template>
