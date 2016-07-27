@@ -48,7 +48,7 @@ Template.tabs.onRendered(function() {
 		}
 	}
 	if (window.innerWidth < 768){
-		var toggleMenus = document.querySelectorAll('#main menu.tabs');
+		var toggleMenus = document.querySelectorAll('#main #masthead menu.tabs');
 		//alert(toggleMenus);
 		for (var i = 0, e; e = toggleMenus[i]; i++) {
 			//alert(e);

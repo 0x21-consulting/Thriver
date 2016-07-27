@@ -147,4 +147,3 @@ Template.body.events({
     'click .overlay': function (event) { c.toggleCanvas(); },
     'click [data-canvas-event="close"]': function (event) { c.toggleCanvas(); },
 });
-

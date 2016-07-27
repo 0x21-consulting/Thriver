@@ -112,6 +112,12 @@ menu.tabs{
     body.tab-open{
         section.sidebar > .scroll{ overflow: hidden; }
     }
+    section.sidebar{
+        background-color: @sidebarSecondaryColor;
+        > header{
+             background:@sidebarPrimaryColor;
+        }
+    }
     aside.off-canvas{
         div.tabs{
             > article{
@@ -119,11 +125,14 @@ menu.tabs{
                 position: absolute;
                 top: 0px;
                 left: 0px;
-                background: @sidebarPrimaryColor;
+                background: @sidebarSecondaryColor;
                 min-height: 100vh;
                 width: 100%;
                 height: ~'calc(100vh - @{headerMobileH})';
                 overflow: scroll;
+                -webkit-overflow-scrolling: touch;
+                isolation: isolate;
+                //>
                 > header + *, * > header + *{ //Containing element after header
                     background-color: @sidebarSecondaryColor;
                     color:@sidebarTextColor;
@@ -131,6 +140,9 @@ menu.tabs{
                     &.toggleSwitches:nth-child(2) {
                         margin-bottom: 0px;
                     }
+                }
+                > header{
+                    background:@sidebarPrimaryColor;
                 }
             }
         }

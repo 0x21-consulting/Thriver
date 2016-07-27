@@ -196,6 +196,9 @@ section.providers{
     .main.mapTool{
         display: table;
         width: 100%;
+        @media @mobile{
+            display: block;
+        }
     }
     figure.map{
         #mapCanvas{
@@ -345,10 +348,10 @@ section.providers{
 
 .providersList{
     padding: 20px;
-    height: 540px;
+    //height: 540px;
     ul{
         .columns(5,100px,20px);
-        height: 400px;
+        //height: 400px;
         padding-bottom: 0px;
     }
     display: none;
@@ -431,5 +434,14 @@ section.providers{
              }
              ul.outreach{ margin-bottom:-10px; padding: 0px;}
          }
+    }
+}
+
+@media @mobile{
+    #main section.providers{
+        form#search > *, form#search > * label {
+            margin: 0px !important;
+            margin-top: 9px !important;
+        }
     }
 }

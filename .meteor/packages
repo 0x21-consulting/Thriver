@@ -4,10 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-accounts-password
-reactive-var
-twitter
-mrt:paypal
 meteor-base
 mobile-experience
 session
@@ -17,7 +13,6 @@ logging
 reload
 random
 ejson
-mizzao:user-status
 standard-minifier-css
 standard-minifier-js
 tinytest
@@ -27,3 +22,18 @@ thriver:sections
 thriver:navigation
 thriver:core-styles
 thriver:masthead
+thriver:accounts
+thriver:administration
+thriver:events
+thriver:maps
+thriver:outreach
+thriver:payments
+thriver:twitter-ui
+thriver:core-components
+wcasa:news
+wcasa:learning-center
+wcasa:work
+wcasa:who-we-are
+wcasa:contact
+thriver:i18n
+wcasa:non-spa

@@ -942,6 +942,7 @@ section.work .workContent article.active{
         }
         //Content
         .workContent{
+            display: none !important;
             header{
                 padding: 0px !important;
             }
@@ -981,8 +982,25 @@ section.work .workContent article.active{
             opacity: 0;
         }
         .workContent{
+            display: block !important;
             .transform(translate(0px,0%)) !important;
             opacity: 1 !important;
         }
+    }
+}
+
+main section.work h2.sidebarTitle{
+    display: block;
+    text-align: center;
+    font-weight: 300;
+    border-bottom: 2px solid #eee;
+    margin: 20px 40px;
+    padding-bottom: 10px;
+}
+
+@media @mobile{
+    main section.work .workContent{
+        height: 0px !important;
+        overflow: hidden !important;
     }
 }

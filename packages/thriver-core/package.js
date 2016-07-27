@@ -50,7 +50,8 @@ Package.onUse(function (api) {
         'lib/client/ui/canvas.js',
         'lib/client/ui/focus.js',
         'lib/client/ui/helpers-script.js',
-        'lib/client/ui/helpers-spacebars.js'
+        'lib/client/ui/helpers-spacebars.js',
+        'lib/client/ui/canvas.js'
         
     ], ['client']);
     
