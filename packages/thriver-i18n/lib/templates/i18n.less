@@ -1,0 +1,26 @@
+@import "{thriver:core-styles}/lib/index.less";
+
+section.languageSelect{
+    &.active{width: 356px;} //Why is this section not behaving as others and requires width?
+    .languageList {
+        .shadow(close);
+        h2 .fa{font-weight: @light;}
+        ul li{
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            cursor: pointer;
+            font-weight: @normal;
+            &:hover{
+                background-color: @blue;
+            }
+            &.active{
+                background-color: @teal;
+                .shadow(closeDown);
+                &:hover, &:nth-child(even):hover{
+                    background-color: @teal;
+                }
+            }
+        }
+    }
+}

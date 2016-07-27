@@ -5,6 +5,9 @@
  * @returns {String}
  */
 Template.registerHelper('markdown', function (text) {
+    //debug
+    if (text === null) return;
+    
     // Fail if no text
     check(text, String);
     

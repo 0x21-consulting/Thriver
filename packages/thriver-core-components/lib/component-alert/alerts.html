@@ -1,0 +1,10 @@
+<template name="alerts">
+	{{#each alert}}
+	    <figure class="alert {{class}}" id="alert">
+	        <figcaption class="container">
+	            {{alert}}
+	            <span class="closeAlert fa">&#xf00d;</span>
+	        </figcaption>
+	    </figure>
+    {{/each}}
+</template>

@@ -1,0 +1,18 @@
+<template name="subscriptions">
+    <form id="subscriptions">
+        {{#each lists}}
+            <header><h2>{{heading}}</h2></header>
+            <ul class="toggleSwitches stripes">
+                {{#each items}}
+                    <li>
+                        <label for="{{id}}" class="toggleSwitchLabel">{{title}}</label>
+                        <div class="toggleSwitch">
+                            <input id="{{id}}" type="checkbox" checked="{{checked}}">
+                            <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/each}}
+    </form>
+</template>

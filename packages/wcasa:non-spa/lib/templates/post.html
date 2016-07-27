@@ -1,0 +1,59 @@
+<template name="post">
+    <section class="post">
+        <article class="{{data.category}}" id="{{id}}">
+            <header>
+                {{#each data.logos}}
+                     <a href="{{url}}" title="{{title}}">
+                        <img src="{{src}}" alt="{{title}}" />
+                    </a>   
+                {{/each}}
+            </header>
+            <aside>
+                <div class="left">
+                    <h3><a href="{{home.url}}" title="{{home.text}}"><span class="fa">&#xf0d9;</span>{{home.text}}</a></h3>
+                </div>
+                <div class="right">
+                    <h3>Share this {{data.category}}:</h3>
+                    <ul class="share">
+                        {{#each share}}
+                            <li>
+                                <a href="{{url}}" title="{{id}}" target="_blank" onClick="{{#if print}}window.print();{{/if}}" class="fa">{{{icon}}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </aside>
+            <header class="title">
+                <p> {{data.category}}</p>
+                <h1>{{data.title}}</h1>
+            </header>
+            <main class="textBody">
+                {{{data.content}}}
+            </main>
+            <footer>
+                <p class="hash">###</p>
+                <address>
+                    <h3>{{footer.media.title}}</h3>
+                    {{#each footer.media.contact}}
+                        <ul>
+                            <li class="name">{{name}}{{#if org}}<span>{{org}}</span>{{/if}}</li>
+                            <li class="phone"><a href="tel://1{{phone}}">{{phone}}</a>{{#if phoneExt}}, x {{phoneExt}}{{/if}}</li>
+                            <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
+                        </ul>
+                    {{/each}}
+                </address>
+                <hr>
+                {{#each footer.about}}
+                    {{{content}}}
+                {{/each}}
+                <ul class="social">
+                    {{#each footer.social}}
+                        <li>
+                            <a href="{{url}}" title="{{id}}" target="_blank" class="fa" {{onClick}}>{{{icon}}}</a>
+                        </li>      
+                    {{/each}}
+                </ul>
+            </footer>
+        </article>
+    </section>
+</template>

@@ -1,0 +1,43 @@
+<template name="outreach">
+    <section class="outreach" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="containerSmall">
+            <header>
+                <h1>{{{headline}}}</h1>
+                {{{content}}}
+            </header>
+        </div>
+        <div class="container tab-box">
+            {{#each items}}
+                {{>tabs}}
+            {{/each}}
+        </div>
+    </section>
+</template>
+
+
+<!--Content Templates-->
+<template name="volunteer">
+    <h2>{{{headline}}}</h2>
+    {{{content}}}
+    <h3>{{{listHeadline}}}</h3>
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
+</template>
+
+<template name="joinTheBoard">
+    <h2>{{{headline}}}</h2>
+   {{{content}}}
+</template>
+
+<template name="wcasaJobs">
+    <h2>{{{headline}}}</h2>
+    {{{content}}}
+    <h3>{{{listHeadline}}}</h3>
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
+</template>

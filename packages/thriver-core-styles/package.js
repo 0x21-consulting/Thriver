@@ -6,7 +6,7 @@ Package.describe({
     documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
 
     var packages = [
@@ -22,12 +22,12 @@ Package.onUse(function(api) {
 
     ], ['client']);
 
-    /*api.addFiles([
+    api.addFiles([
         'lib/index.less'
-    ], ['client']);*/
+    ], ['client']);
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:core-styles');

@@ -38,21 +38,30 @@ Package.onUse(function (api) {
     ], ['client', 'server']);
     
     api.addFiles([
+        // Client scripts
         'lib/client/shims.js',
         'lib/client/marked.js',
         'lib/client/markdown.js',
         'lib/client/history.js',
-        'lib/client/scroll.js'
+        'lib/client/scroll.js',
+        
+        // UI Scripts
+        'lib/client/ui/actions.js',
+        'lib/client/ui/canvas.js',
+        'lib/client/ui/focus.js',
+        'lib/client/ui/helpers-script.js',
+        'lib/client/ui/helpers-spacebars.js'
+        
     ], ['client']);
     
     api.addFiles([
         
     ], ['server']);
     
-    api.export([ 'Thriver' ]);
+    api.export([ 'Thriver', /* TODO: remove these!! */ 'h', 'c' ]);
 }); 
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
     api.use('thriver:core');

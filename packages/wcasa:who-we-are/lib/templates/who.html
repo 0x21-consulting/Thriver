@@ -1,0 +1,98 @@
+<template name="who">
+    <section class="who" id="{{anchor name=name}}" data-id="{{_id}}">
+         {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="containerSmall">
+            <header>
+                <h1>{{{headline}}}</h1>
+                {{{content}}}
+            </header>
+            <div class="container tab-box">
+                {{#each items}}
+                    {{>tabs}}
+                {{/each}}
+            </div>
+        </div>
+    </section>
+</template>
+
+<template name="staff">
+    <h2>The WCASA Staff</h2>
+    <ul class="clearfix">
+        {{#each staff}}
+            {{> personStaff}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="board">
+    <h2>Board of Directors</h2>
+    <ul class="clearfix">
+        {{#each board}}
+            {{> personBoard}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="personStaff">
+    <li>
+        {{#if picture}}
+            <img src="{{picture}}" alt="{{name}}" />
+        {{else}}
+            <img src="{{avatar.avatar}}" alt="{{name}}" />
+        {{/if}}
+        <div class="details">
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+    </li>
+</template>
+
+<template name="personBoard">
+    <li>
+        <div class="details">
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+    </li>
+</template>
+
+<template name="about">
+    <h2>Our Mission</h2>
+    <p><b>WCASA's mission is to create the social change necessary to end sexual violence.</b></p>
+    <p>
+        WCASA is a membership agency comprised of organizations and individuals working to end sexual violence in Wisconsin. Among these are the 51 sexual assault service provider (SASP) agencies throughout the state that offer support, advocacy and information to victims of sexual assault and their families.
+    </p>
+    <p>
+        WCASA works to ensure that every victim in Wisconsin gets the support and care they need. WCASA also works to create the social change necessary to ensure a future where no child, woman or man is ever sexually violated again.
+    </p>
+    <h2>Our Services</h2>
+    <ul>
+        <li>Providing Technical Assistance on issues related to sexual assault, including program development, legal advocacy, policy development, prevention, and victim and offender dynamics.</li>
+        <li>Offering educational programming, including opportunities for training and webinars.</li>
+        <li>Raising public awareness about sexual assault.</li>
+        <li>Promoting best practices for the primary prevention of sexual violence.</li>
+        <li>Working on Legislative initiatives designed to benefit victims of sexual assault and other violent crimes.</li>
+        <li>Housing an extensive Resource Center which covers all aspects of sexual assault and is available to all Wisconsin residents.</li>
+    </ul>
+    <p class="sub">
+        WCASA offers information and referral on any issue related to sexual violence. We do not offer direct services to victim/survivors of sexual violence, however we can connect you to a local agency that does. Also, WCASA cannot offer legal advice and no information obtained from The Wisconsin Coalition Against Sexual Assault, Inc. can be considered legal advice.
+    </p>
+</template>
+
+<template name="philosophies">
+    <h2>Our Philosophies</h2>
+    <ul>
+        <li>We believe it is a basic human right to live free of sexual violence.</li>
+        <li>We believe that everyone has a role and responsibility in this work.</li>
+        <li>We do not do this work in isolation. We believe in the importance of collaborations and alliance building.</li>
+        <li>Our work is driven by survivors' voices. Survivors and all those affected by sexual violence deserve compassionate services, dignity, privacy and respect.</li>
+        <li>We believe that this work is based in a feminist perspective that sexual violence is rooted in oppressive power relations</li>
+        <li>We believe that sexual violence is any unwanted sexual contact (verbal and/or physical), including rape, incest, child sexual assault, ritual abuse, acquaintance rape/assault, intimate partner or marital rape, sexual harassment, exposure and voyeurism. Sexual violence refers to acts of violence where sex is used as the weapon.</li>
+        <li>We believe that diversity and safe, accessible services are fundamental to social change.</li>
+        <li>We believe in the power of advocacy, education, prevention and driving public policy as agents of social change.</li>
+    </ul>
+</template>

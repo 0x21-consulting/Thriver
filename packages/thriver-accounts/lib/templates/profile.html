@@ -1,0 +1,10 @@
+<template name="profile">
+    <header><h2>{{heading}}</h2></header>
+    <form>
+		{{#each items}}
+			<label for ="{{id}}">{{title}}</label>
+			<input id="{{id}}" type="{{type}}" name="{{id}}" value="{{value}}" {{disabled}} {{required}} />
+		{{/each}}
+        <input type="submit" value="{{submitValue}}">
+    </form>
+</template>

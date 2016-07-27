@@ -1,0 +1,10 @@
+<template name="languageSelect">
+    <form id="lang">
+        <ul>
+        {{#each items}}
+            <label for="{{id}}">{{language}}</label>
+            <input name="lang" type="radio" id="{{id}}" data-language="{{id}}" {{checked}}>
+        {{/each}}
+        </ul>
+    </form>
+</template>

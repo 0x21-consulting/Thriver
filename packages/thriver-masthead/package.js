@@ -23,7 +23,7 @@ Package.onUse(function (api) {
         'lib/templates/masthead.html',
 
         // Styles
-        //'lib/styles/masthead.less',
+        'lib/templates/masthead.less',
 
         // Helpers and methods
         'lib/masthead.js',
@@ -31,9 +31,9 @@ Package.onUse(function (api) {
 
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use('ecmascript');
     api.use('tinytest');
-    api.use('masthead');
+    api.use('thriver:masthead');
     api.mainModule('masthead-tests.js');
 });
