@@ -85,7 +85,8 @@ Meteor.canvasFunctions = {
 			for (var i = 0, e; e = sidebar[i]; i++) {
 				if(e.getAttribute('aria-hidden')== "false"){
 					hiddenSidebar=false;
-					for (var i = 0, e; e = activeTab[i]; i++) {
+					//The below statement caused browser crash on resource items. Unable to dermine current purpose.
+					/*for (var i = 0, e; e = activeTab[i]; i++) {
 						if(e.getAttribute('aria-expanded')== "true"){
 							tabActive=true;
 							h.active(e, false);
@@ -94,11 +95,12 @@ Meteor.canvasFunctions = {
 								h.hidden(e, true);
 							}
 						}
-					}
+					}*/
 					if(tabActive==false){
 						for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
 						for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
 						c.clearCanvas(); //Remove all canvas effect classes
+						document.body.classList.add('noScroll');
 						h.hidden(overlay,true);
 						h.hidden(main,false);
 						focusGlobalElFirst.focus();

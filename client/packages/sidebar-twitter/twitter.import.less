@@ -7,8 +7,12 @@ section#twitter{
         .shadow(close);
     }
     iframe{
+        height: 100%;
+        height: 100vh;
         height: ~'calc(100vh - 297px)' !important; //Overrides inline height
         max-width: 296px !important; //Overrides max-width
-        @media @mobile{}
+        @media @mobile{
+            height: ~'calc(100vh - 182px)' !important;
+        }
     }
 }
