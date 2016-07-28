@@ -9,7 +9,7 @@ Meteor.canvasFunctions = {
 	    canvas.setAttribute('data-canvas-width','');
 	},
 	//event.target function fires on click events of any element containing the data-attribute, "data-sidebar".
-	toggleCanvas : function() {
+	toggleCanvas : function (event) {
 	    // Canvas Variables
 	    var toggle = document.querySelectorAll('[aria-controls][data-toggle=canvas]');
 	    var overlay = document.getElementById('overlay');
@@ -18,9 +18,12 @@ Meteor.canvasFunctions = {
 	    var main = document.getElementById('main');
 		var activeTab = document.querySelectorAll('section.sidebar[aria-hidden=false] menu.tabs > li > a');
 		var activeTabContent = document.querySelectorAll('section.sidebar[aria-hidden=false] div.tabs > [aria-hidden]');
-
+		
+		// Events are required
+		if (!event || !event.target) return;
+		
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
-	    if(event.target.getAttribute('aria-expanded') == 'true' && event.target.id !== "mobile-toggle" || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
+	    if (event.target.getAttribute('aria-expanded') == 'true' && event.target.id !== "mobile-toggle" || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
 	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
 	        for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
 	        c.clearCanvas(); //Remove all canvas effect classes
@@ -142,8 +145,8 @@ Meteor.canvasFunctions = {
 c = Meteor.canvasFunctions;
 
 Template.body.events({
-    //Canvas Actions
-    'click [aria-controls][data-toggle=canvas]': function (event) { c.toggleCanvas(); },
-    'click .overlay': function (event) { c.toggleCanvas(); },
-    'click [data-canvas-event="close"]': function (event) { c.toggleCanvas(); },
+	//Canvas Actions
+	'click [aria-controls][data-toggle=canvas]': c.toggleCanvas,
+	'click .overlay': c.toggleCanvas,
+	'click [data-canvas-event="close"]': c.toggleCanvas
 });

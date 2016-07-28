@@ -44,14 +44,13 @@ Package.onUse(function (api) {
         'lib/client/markdown.js',
         'lib/client/history.js',
         'lib/client/scroll.js',
+        'lib/client/canvas.js',
         
         // UI Scripts
         'lib/client/ui/actions.js',
-        'lib/client/ui/canvas.js',
         'lib/client/ui/focus.js',
         'lib/client/ui/helpers-script.js',
-        'lib/client/ui/helpers-spacebars.js',
-        'lib/client/ui/canvas.js'
+        'lib/client/ui/helpers-spacebars.js'
     ], ['client']);
     
     api.addFiles([

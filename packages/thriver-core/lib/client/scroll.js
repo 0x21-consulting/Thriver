@@ -27,7 +27,10 @@ var smoothScroll = function (event) {
 
     // Smooth scroll to target
     $('.mainNav li a').removeClass('active');
-    $('body').animate({ scrollTop: offset }, speed > 750? 750 : speed);
+    
+    // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
+    $('body,html').stop(true, true).
+        animate({ scrollTop: offset }, speed > 750? 750 : speed);
 },
 
 /**

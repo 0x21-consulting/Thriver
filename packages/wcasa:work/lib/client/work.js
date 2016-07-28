@@ -228,7 +228,7 @@ Template.workContent.events({
 // Eoghan's stuff
 Template.work.onRendered(function () {
     // Handle adding and removing the Body 'workActive' class
-    $('.workNav > ul > li > h2 > a:not(.backToIndexWorkA), .workNav ul > li > ul > li > a').click(function () {
+    $('.workNav > ul > li > h2 > a:not(.backToIndexWorkA), .workNav ul > li > ul > li > a').click(function (event) {
         event.preventDefault();
         if($("body").hasClass('openNavItem')){
             $("body").removeClass('openNavItem');
@@ -244,7 +244,7 @@ Template.work.onRendered(function () {
         }
     });
 
-    $('.workNav li.backToIndexWork').click(function(){
+    $('.workNav li.backToIndexWork').click(function (event) {
         event.preventDefault();
         $("body").addClass("workFadeOut").delay(175).queue(function(){
         $('body').removeClass('workActive');
