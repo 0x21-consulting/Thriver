@@ -23,7 +23,21 @@ Package.onUse(function (api) {
     ], ['client']);
 
     api.addFiles([
-        'lib/index.less'
+        'lib/index.less',
+        
+        // Styles
+        'lib/styles/animate.less',
+        'lib/styles/buttons.less',
+        'lib/styles/context.less',
+        'lib/styles/fonts.less',
+        'lib/styles/forms.less',
+        'lib/styles/helpers.less',
+        'lib/styles/icons.less',
+        'lib/styles/print.less',
+        'lib/styles/reset.less',
+        'lib/styles/scroll.less',
+        'lib/styles/tables.less',
+        'lib/styles/type.less'
     ], ['client']);
 });
 
