@@ -1,4 +1,4 @@
-@media print {
+//@media print {
     //#header, #footer, #nav { display: none !important; }
 
     body #canvas {
@@ -59,7 +59,7 @@
         page-break-inside: avoid !important;
         text-align: left !important;
         header p, header h1{text-align: left !important;}
-        header h1{
+        header h1, menu.tabs.left li a[aria-expanded="true"]{
             margin: 0px !important;
             font-size: 36px !important;
             font-size: 3.6rem !important;
@@ -117,4 +117,47 @@
     section.work .main.container, section.work .sa.container{padding-top: 0px !important; padding-bottom: 0px !important; margin-top: 0px !important; margin-bottom: 0px !important;}
     section.work .workNav > ul > li > ul{padding: 0px 20px 10px 20px !important;}
     .workActive section.work .workNav{display: none !important;}
-}
+    .workActive section.work .workNav{display: none !important;}
+    section.work .main.container .workContent article.active{display: block !important;}
+    section.work .main.container .workContent article.active{
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    aside.workTertiary{
+        display: none !important;
+    }
+    menu.tabs.left li a{
+        display: none !important;
+    }
+    menu.tabs.left li a[aria-expanded="true"]{
+        display: block !important;
+        color: black !important;
+        &:after{display: none !important;}
+    }
+    section.who menu.tabs.left > li:first-child:before{
+        display: none !important;
+    }
+    section.who menu.tabs {
+        margin: 0px;
+        text-align: left;
+        width: 100% !important;
+        min-height: 0px !important;
+        float: none;
+        padding: 0px;
+    }
+    /* *{
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: static !important;
+        width: auto !important;
+        min-width: 500px !important;
+        max-width: 9999999999px !important;
+        color: black !important;
+        margin: 0px !important;
+        .transform(none) !important;
+    }*/
+//}
