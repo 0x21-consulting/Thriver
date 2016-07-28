@@ -1,0 +1,120 @@
+//@media print {
+    //#header, #footer, #nav { display: none !important; }
+
+    body #canvas {
+        header#menu *{
+            position: static !important;
+            opacity: 1 !important;
+            height: auto !important;
+            width: auto !important;
+            min-width:0px !important;
+            max-width:100% !important;
+            .noAnimation !important;
+            display: block !important;
+            .transform(none) !important;
+            &.brand-small{display: none !important;}
+            &.mainNav{
+                display: none !important;
+            }
+            &.brand{
+                width: 300px !important;
+                margin: 0px !important;
+                padding: 20px !important;
+            }
+        }
+        header#menu{
+            margin: 0px !important;
+            position:static !important;
+            height: 100px !important;
+        }
+        #utility, #mobile-header, #mobile-navigation, nav.mainNav, .brand-small{display: none !important;}
+        .brand, .brand *{display: block !important;}
+        .brand{
+            width: 300px !important;
+            margin: 0px !important;
+            padding: 20px !important;
+        }
+        #masthead{
+            img, div.tabs > article:nth-child(3):after, div.tabs > article:nth-child(3):after{ display: none !important;}
+            *{color: #000 !important;}
+            a{color:@teal !important;}
+        }
+    }
+
+    .canvas main{ padding: 0px !important; margin: 0px !important;}
+    #main > section{padding: 0px !important; padding-top: 40px !important;}
+    #main > section#masthead{padding-top: 0px !important;}
+    section#masthead, section.masthead{ height: auto !important;}
+    section#masthead menu.tabs, section.masthead menu.tabs{ display: none !important;}
+    section#masthead div.tabs, section.masthead div.tabs{width: 100% !important;}
+    section#masthead div.tabs > article, section.masthead div.tabs > article{padding: 0px !important;}
+    section#masthead .cta, section.work .sa details summary{
+        border: 1px solid black !important;
+        box-shadow: none !important;
+        text-align: left !important;
+    }
+    //#main > section{border-bottom: 1px solid black !important;}
+    #main > section:last-child{border-bottom: none !important;}
+    #main > section{
+        page-break-inside: avoid !important;
+        text-align: left !important;
+        header p, header h1{text-align: left !important;}
+        header h1{
+            margin: 0px !important;
+            font-size: 36px !important;
+            font-size: 3.6rem !important;
+            line-height: 42px !important;
+            line-height: 4.2rem !important;
+            letter-spacing: 1.5px !important;
+            letter-spacing: 0.15rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+        }
+    }
+    #main > section > div > header{ padding: 40px !important;}
+    #main > section .inner-container-wide, #main > section > div > header p{
+        max-width: 100% !important;
+        border: none !important;
+        width: 100% !important;
+    }
+    #main > section > div > header p{
+        font-size: 16px;
+        font-size: 1.6rem;
+        line-height: 30px;
+        line-height: 3rem;
+        letter-spacing: 0.25px;
+        letter-spacing: 0.025rem;
+        font-weight: 600;
+        text-transform: none;
+        .rw !important;
+    }
+    #main > section > div > header:after{ display: none !important;}
+    section.work .sa details[open] > div{
+        .boxShadow(none) !important;
+        border:1px solid gray !important;
+    }
+    section.work .workNav > ul li h2 a{
+        color: black !important;
+        padding: 0px 20px !important;
+    }
+    section.work .workNav > ul li h2 a{
+        .boxShadow(none) !important;
+        //border:1px solid black !im
+    }
+    section.work .workNav > ul > li > ul{
+        min-height: 0px !important;
+    }
+    section.work .workNav > ul > li{
+        width:95% !important;
+        .boxShadow(none) !important;
+    }
+    section.work .workNav > ul{
+        text-align: left !important;
+    }
+    section.work .workNav > ul h2 span.fa{display: none !important;}
+    section.work details{display: none !important;}
+    section.work details[open]{display: block !important;}
+    section.work .main.container, section.work .sa.container{padding-top: 0px !important; padding-bottom: 0px !important; margin-top: 0px !important; margin-bottom: 0px !important;}
+    section.work .workNav > ul > li > ul{padding: 0px 20px 10px 20px !important;}
+    .workActive section.work .workNav{display: none !important;}
+//}
