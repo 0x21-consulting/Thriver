@@ -12,6 +12,7 @@
         &.masthead, &#masthead{ padding:20px 0px;}
     }
 }
+
 #main > section > div > header{
     text-align: center;
     @media @mobile{
@@ -104,4 +105,14 @@
 #main section.events, #main section.contact {
     padding-top: 40px !important;
 }
+}
+
+//Overrides
+#main > section{
+    &#who-we-are, &#events, #service-providers, #contact {
+        border-top: 1px solid #e5e5e5;
+    }
+    &#get-involved{
+        border-top: 1px solid #016166;
+    }
 }
