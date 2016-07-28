@@ -36,7 +36,7 @@
         #masthead{
             img, div.tabs > article:nth-child(3):after, div.tabs > article:nth-child(3):after{ display: none !important;}
             *{color: #000 !important;}
-            a{color:@teal !important;}
+            a{color:#006691 !important;}
         }
     }
 
@@ -145,7 +145,7 @@
         float: none;
         padding: 0px;
     }
-     *{
+     section.work article.active{
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -158,5 +158,16 @@
         color: black !important;
         margin: 0px !important;
         .transform(none) !important;
+        padding: 0px !important;
     }
+    section.work > .main .workTextContainer {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0px !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    h2.mobile, section.work .main.container .workContent footer, section.work > .main .workTextContainer .backToTopWork{display: none !important;}
+    body.workActive section.work .main.container .workContent{padding: 0px !important;}
+    body.workActive section.work > .main{.boxShadow(none) !important;}
 }
