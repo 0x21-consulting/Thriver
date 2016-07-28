@@ -18,10 +18,10 @@ Meteor.canvasFunctions = {
 	    var main = document.getElementById('main');
 		var activeTab = document.querySelectorAll('section.sidebar[aria-hidden=false] menu.tabs > li > a');
 		var activeTabContent = document.querySelectorAll('section.sidebar[aria-hidden=false] div.tabs > [aria-hidden]');
-		
+
 		// Events are required
 		if (!event || !event.target) return;
-		
+
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
 	    if (event.target.getAttribute('aria-expanded') == 'true' && event.target.id !== "mobile-toggle" || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
 	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
@@ -144,9 +144,46 @@ Meteor.canvasFunctions = {
 //Define usage
 c = Meteor.canvasFunctions;
 
+
+
+//This needs a new home
+function mobToggle(){
+	c.toggleCanvas(); //START HERE
+}
+function mainNavItem(){
+	var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+	var mobileNavigation = document.getElementById('mobile-navigation');
+	for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+	h.hidden(mobileNavigation, true);
+	document.body.classList.remove('noScroll');
+}
+function toServiceProvidersTwo(){
+	m.toggleMore();
+	event.preventDefault();
+	return false;
+
+}
+function toServiceProviders(){
+	var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
+	var mobileNavigation = document.getElementById('mobile-navigation');
+	for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
+	h.hidden(mobileNavigation, true);
+	document.body.classList.remove('noScroll');
+}
+
 Template.body.events({
 	//Canvas Actions
 	'click [aria-controls][data-toggle=canvas]': c.toggleCanvas,
 	'click .overlay': c.toggleCanvas,
-	'click [data-canvas-event="close"]': c.toggleCanvas
+	'click [data-canvas-event="close"]': c.toggleCanvas,
+
+	//Mobile Events
+	'click [aria-controls][data-toggle=mobile-navigation]': c.toggleCanvas,
+
+	'click [data-type="main-navigation-item"]': c.toggleCanvas,
+
+	'click #mobile-navigation li > a[href="#service-providers"]': c.toggleCanvas, //toservice2
+
+	'click #mobile-navigation figure a[href="#service-providers"]': c.toggleCanvas
+
 });
