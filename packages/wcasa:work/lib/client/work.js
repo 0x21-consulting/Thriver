@@ -1,4 +1,8 @@
-// Helper for changing tabs
+/**
+ * Helper for changing tabs when a user clicks a link
+ * @method
+ *   @param {$.Event} event - jQuery Event instance
+ */
 var changeTabs = function (event) {
     event.stopPropagation(); event.preventDefault();
 
@@ -28,26 +32,41 @@ var changeTabs = function (event) {
     if ( parent.nodeName.toLocaleLowerCase() === 'li'){
         document.body.classList.add('mobile-article-open');
     }
+},
+
+/**
+ * Sections collection getter
+ * @function
+ *   @param {string} field - The name of the field whose value to return
+ *   @param {string} id    - The Mongo DB ID of the document to return.
+ *      Optional.  Uses `this` otherwise.
+ *   @returns {string}
+ */
+getValue = function (field) {
+    check(field, String);                // Must be a String
+    
+    // Meteor template helpers expect a function with a single variable
+    return function (id) {
+        check(id, Match.Maybe(String));  // String or undefined
+        
+        var result;
+        id = id || this.id || this._id;
+        
+        if (!id) return '';
+        
+        result = Thriver.sections.get( id, [field] );
+        
+        if (result)
+            return result[field];
+        else
+            return '';
+    };
 };
 
 // Tabs
 Template.workNav.helpers({
-    name: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['name']);
-        if (result)
-            return result.name;
-    },
-    icon: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['icon']);
-        if (result)
-            return result.icon;
-    },
+    name: getValue('name'),
+    icon: getValue('icon'),
     hasChildren: function (id) {
         var result;
         id = id || this.id;
@@ -59,126 +78,29 @@ Template.workNav.helpers({
 
         return false;
     },
-    tabs: function (id) {
-        var result;
-        id = id || this._id;
-
-        result = Thriver.sections.get(id, ['tabs']);
-
-        if (result)
-            return result.tabs;
-    }
+    tabs: getValue('tabs')
 });
 
 // Navigation
 Template.workListItem.helpers({
-    icon: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['icon']);
-        if (result)
-            return result.icon;
-    },
-    name: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['name']);
-        if (result)
-            return result.name;
-    },
-    tabs: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['tabs']);
-
-        if (result)
-            return result.tabs;
-    },
-    tabName: function (id) {
-        var result;
-        id = id || this;
-
-        result = Thriver.sections.get(id, ['name']);
-
-        if (result)
-            return result.name;
-    }
+    icon:     getValue('icon'),
+    name:     getValue('name'),
+    tabs:     getValue('tabs'),
+    tabName:  getValue('name')
 });
 
 // Content Container
 Template.workContentContainer.helpers({
-    tabs: function (id) {
-        var result;
-        id = id || this._id;
-
-        result = Thriver.sections.get(id, ['tabs']);
-
-        if (result)
-            return result.tabs;
-    },
-    template: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['template']);
-
-        if (result)
-            return result.template;
-    },
-    subtabs: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['tabs']);
-
-        if (result)
-            return result.tabs;
-    }
+    tabs:     getValue('tabs'),
+    template: getValue('template'),
+    subtabs:  getValue('tabs')
 });
 // Content
 Template.workContent.helpers({
-    content: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['content']);
-        if (result)
-            return result.content; return '';
-    },
-    icon: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['icon']);
-        if (result)
-            return result.icon;
-    },
-    name: function (id) {
-        var result;
-        id = id || this.id;
-
-        result = Thriver.sections.get(id, ['name']);
-        if (result)
-            return result.name;
-    }
+    content:  getValue('content'),
+    icon:     getValue('icon'),
+    name:     getValue('name')
 });
-
-// Set the first tab as active
-/*Template.tab.onRendered(function () {
-    var parent;
-
-    try {
-        // TODO:  How robust is this?!
-        parent = this.firstNode.parentElement.parentElement.parentElement;
-
-        // Set the very first result as active.  Should be the first in the DOM.
-        parent.querySelector('main > article').classList.add('active');
-        parent.querySelector('menu li').classList.add('active');
-    } catch (error) { }
-});*/
 
 // Helper for changing tabs
 Template.workNav.events({
@@ -205,25 +127,6 @@ Template.workContent.events({
         document.body.classList.remove('mobile-article-open');
     }
 });
-
-
-// From jQuery Providers file
-// TODO: rewrite this
-/*Template.work.onRendered(function () {
-    //Opening The workDetails pane
-    $('.workGrid > ul > li > a, .backToIndex a').click(function(){
-        if($('body').hasClass('workDetails')){
-            event.preventDefault();
-            $('body').removeClass('workDetails');
-        } else{
-            event.preventDefault();
-            $('body').addClass('workDetails');
-        }
-    });
-
-
-});*/
-
 
 // Eoghan's stuff
 Template.work.onRendered(function () {
