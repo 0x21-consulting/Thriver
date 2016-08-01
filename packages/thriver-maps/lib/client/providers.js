@@ -2,7 +2,6 @@
 Providers = new Mongo.Collection('providers');
 Meteor.subscribe('providers');
 
-
 // Counties and other provider data
 Template.providers.helpers({
     // All counties (for dropdown list)

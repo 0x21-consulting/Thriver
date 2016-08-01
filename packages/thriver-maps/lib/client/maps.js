@@ -4,6 +4,9 @@ Meteor.subscribe('counties');
 
 var Counties  = new Mongo.Collection('counties'),
 
+// Providers cursor
+providers,
+
 // Map handler
 map = {},
 
@@ -54,30 +57,74 @@ initialize = function () {
                 ]
             }
         ]);
-        // Get all providers' IDs, names, and coordinates
-        Providers.find({}, { name: 1, coordinates: 1}).
         
-        // Create map markers for each provider
-        forEach(function (provider) {
-            var marker = new google.maps.Marker({
-                position : new google.maps.LatLng(provider.coordinates[0],
-                           provider.coordinates[1]),
-                icon     : createPin('#00b7c5','#004146'),
-                animation: google.maps.Animation.DROP,
-                title    : provider.name,
-                id       : provider._id
+        // Wait for collection to become available before acting on it
+        Deps.autorun(function (c) {
+            // Get all providers' IDs, names, and coordinates
+            providers = Providers.find({}, { name: 1, coordinates: 1});
+            
+            // If collection not ready, try again
+            if ( !providers.count() ) return;
+            
+            // Create map markers for each provider
+            providers.forEach(function (provider) {
+                var marker = new google.maps.Marker({
+                    position : new google.maps.LatLng(provider.coordinates[0],
+                            provider.coordinates[1]),
+                    icon     : createPin('#00b7c5','#004146'),
+                    animation: google.maps.Animation.DROP,
+                    title    : provider.name,
+                    id       : provider._id
+                });
+                
+                // Add hover effect
+                google.maps.event.addListener(marker, 'mouseover', mouseover);
+                google.maps.event.addListener(marker, 'mouseout',  mouseout);
+                
+                // Display Label
+                google.maps.event.addListener(marker, 'mouseover', displayLabel);
+                google.maps.event.addListener(marker, 'mouseout',  hideLabel);
+                
+                // Add to map
+                marker.setMap(map);
             });
             
-            // Add hover effect
-            google.maps.event.addListener(marker, 'mouseover', mouseover);
-            google.maps.event.addListener(marker, 'mouseout',  mouseout);
+            // Stop
+            c.stop();
             
-            // Display Label
-            google.maps.event.addListener(marker, 'mouseover', displayLabel);
-            google.maps.event.addListener(marker, 'mouseout',  hideLabel);
-            
-            // Add to map
-            marker.setMap(map);
+            // Geolocation
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var closest,
+                    
+                    // Get the distance from current location for each provider
+                    providers = Providers.find({}, { coordinates: 1 }).map(function (provider) {
+                        // Calculate distance
+                        var distance = google.maps.geometry.spherical.computeDistanceBetween(
+                            new google.maps.LatLng(position.coords.latitude,
+                                position.coords.longitude),
+                            new google.maps.LatLng(provider.coordinates[0],
+                                provider.coordinates[1])
+                        );
+                        
+                        return { id: provider._id, distance: distance };
+                    });
+                    
+                    // Sort array
+                    providers.sort(function (a, b) { return a.distance - b.distance; });
+                    
+                    // Get closest provider
+                    closest = Providers.findOne({ _id: providers[0].id });
+                    
+                    // Center on it
+                    map.panTo(new google.maps.LatLng(
+                        closest.coordinates[0],
+                        closest.coordinates[1]
+                    ));
+                    
+                    // Show results
+                    Session.set('currentProvider', closest);
+                });
         });
         
         // Create a WCASA map marker
@@ -97,39 +144,6 @@ initialize = function () {
             marker.setMap(map);
         })();
         
-        // Geolocation
-        if (navigator.geolocation)
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var closest,
-                
-                // Get the distance from current location for each provider
-                providers = Providers.find({}, { coordinates: 1 }).map(function (provider) {
-                    // Calculate distance
-                    var distance = google.maps.geometry.spherical.computeDistanceBetween(
-                        new google.maps.LatLng(position.coords.latitude,
-                            position.coords.longitude),
-                        new google.maps.LatLng(provider.coordinates[0],
-                            provider.coordinates[1])
-                    );
-                    
-                    return { id: provider._id, distance: distance };
-                });
-                
-                // Sort array
-                providers.sort(function (a, b) { return a.distance - b.distance; });
-                
-                // Get closest provider
-                closest = Providers.findOne({ _id: providers[0].id });
-                
-                // Center on it
-                map.panTo(new google.maps.LatLng(
-                    closest.coordinates[0],
-                    closest.coordinates[1]
-                ));
-                
-                // Show results
-                Session.set('currentProvider', closest);
-            });
     },
     
     // Create SVG Marker Pin

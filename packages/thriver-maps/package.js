@@ -20,6 +20,11 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Server processing
+    api.addFiles([
+        'lib/providers.js'
+    ], ['server']);
+    
     // Client processing
     api.addFiles([
         // Templates
@@ -32,11 +37,6 @@ Package.onUse(function (api) {
         'lib/client/providers.js',
         'lib/client/maps.js'
     ], ['client']);
-    
-    // Server processing
-    api.addFiles([
-        'lib/providers.js'
-    ], ['server']);
 });
 
 Package.onTest(function (api) {
