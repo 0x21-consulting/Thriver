@@ -4,18 +4,18 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base
-mobile-experience
-session
-jquery
-tracker
-logging
-reload
-random
-ejson
-standard-minifier-css
-standard-minifier-js
-tinytest
+meteor-base@1.0.4
+mobile-experience@1.0.4
+session@1.1.6
+jquery@1.11.9
+tracker@1.1.0
+logging@1.1.14
+reload@1.1.10
+random@1.0.10
+ejson@1.0.12
+standard-minifier-css@1.1.8
+standard-minifier-js@1.1.8
+tinytest@1.0.11
 thriver:core
 thriver:escape
 thriver:sections
