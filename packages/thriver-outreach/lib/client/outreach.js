@@ -11,7 +11,7 @@ Template.outreach.helpers({
 				id: 'joinTheBoard',
 				template : 'joinTheBoard'
 			},{
-				title: 'WCASA Jobs',
+				title: 'Jobs & Internships',
 				id: 'wcasaJobs',
 				template: 'wcasaJobs'
 			}
