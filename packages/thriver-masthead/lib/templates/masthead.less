@@ -5,7 +5,8 @@ section#masthead, section.masthead{
     //background: black;
     overflow: hidden;
     position: relative;
-    height:700px;
+    height:510px;
+    @media (max-width:1100px){ height: 610px;}
     background: lighten(@navy,10%) !important;
     menu.tabs{
         float: right;
@@ -35,7 +36,7 @@ section#masthead, section.masthead{
 }
 
 section#masthead menu.tabs, section.masthead menu.tabs{
-    margin-top: @headerH + 0px;
+    margin-top: @headerH - 65px;
     position: relative;
     z-index: 3;
     border-left: 2px solid #fff;
@@ -44,7 +45,7 @@ section#masthead menu.tabs, section.masthead menu.tabs{
 section#masthead div.tabs, section.masthead div.tabs{
     >article{
         padding: 40px;
-        padding-top: @headerH + 0px;
+        padding-top: @headerH - 65px;
         .masthead-bg{
             position: absolute;
             top: 0; left: 0;
