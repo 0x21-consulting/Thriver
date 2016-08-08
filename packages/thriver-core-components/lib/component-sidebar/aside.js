@@ -4,7 +4,7 @@ Template.aside.helpers({
         title: 'Account Details',
         icon: 'user',
         id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items
-        width: 656, //Sets the sidebar width & body class
+        width: 700, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
         class: 'top', //Style. accepts 'left' and 'top'
         tabs: [{ //If sidebar has tabs: use this property
@@ -23,7 +23,7 @@ Template.aside.helpers({
                 id: 'events',
                 template: 'eventsRegistered'
             },{
-                title: 'Requests',
+                title: 'Library Activity',
                 icon : 'book',
                 id: 'requests',
                 template: 'requests'
