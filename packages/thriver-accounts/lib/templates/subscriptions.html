@@ -5,7 +5,10 @@
             <ul class="toggleSwitches stripes">
                 {{#each items}}
                     <li>
-                        <label for="{{id}}" class="toggleSwitchLabel">{{title}}</label>
+                        <label for="{{id}}" class="toggleSwitchLabel">
+                            {{title}}
+                            <span class="description">Lorem ipsum dalor aset ma dor.</span>
+                        </label>
                         <div class="toggleSwitch">
                             <input id="{{id}}" type="checkbox" checked="{{checked}}">
                             <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
