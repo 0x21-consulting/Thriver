@@ -3,11 +3,29 @@ Meteor.tabsFunctions = {
 	toggleTabs : function (event) {
 		event.preventDefault();
 	    // Tabs Variables
-	    if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
-			var thisToggleMenu = event.target.parentNode.parentNode;
-			var thisToggleMenuButtons = thisToggleMenu.querySelectorAll('[aria-controls][data-toggle=tabs]');
-			var thisTabsContent = thisToggleMenu.parentNode.querySelector('div.tabs');
-			var thisTabsContentElement = thisTabsContent.querySelectorAll('[aria-hidden]');
+		var thisToggleMenu = event.target.parentNode.parentNode;
+		var thisToggleMenuButtons = thisToggleMenu.querySelectorAll('[aria-controls][data-toggle=tabs]');
+		var thisTabsContent = thisToggleMenu.parentNode.querySelector('div.tabs');
+		var thisTabsContentElement = thisTabsContent.querySelectorAll('[aria-hidden]');
+
+		//Mobile Specific Collapsable
+		if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'true'){
+			if (window.innerWidth < 768){
+				for (var i = 0, e; e = thisToggleMenuButtons[i]; i++) {
+					h.active(e,false);
+				}
+				h.active(event.target, false);
+				for (var i = 0, e; e = thisTabsContentElement[i]; i++) {
+					h.hidden(e, true);
+					if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
+						h.hidden(e,true); //Add active class to given sidebar
+					}
+				}
+			}
+		}
+
+		//Standard
+	    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false'){
 			for (var i = 0, e; e = thisToggleMenuButtons[i]; i++) {
 				h.active(e,false);
 			}
@@ -56,6 +74,7 @@ Template.tabs.onRendered(function() {
 			menuItem[0].click();
 		}
 	}
+
 	/*$(window).resize(function() {
 		if (window.innerWidth > 767){
 			var toggleMenus = document.querySelectorAll('menu.tabs');
