@@ -54,6 +54,15 @@ Meteor.canvasFunctions = {
 	                if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
 	                if(e.dataset.position == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
 	            }
+				/*
+				// Working alternate for ie compat.
+	            h.hidden(e,true); //Clear all active sidebars
+	            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
+	                h.hidden(e,false); //Add active class to given sidebar
+	                canvas.setAttribute('data-canvas-width',e.getAttribute('width')); //Add new sidebar-width effect class
+	                if(e.getAttribute('data-position') == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
+	                if(e.getAttribute('data-position') == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
+	            }*/
 	            //focusGroupElFirst.focus();
 	            event.preventDefault();
 	        }

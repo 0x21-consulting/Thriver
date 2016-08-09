@@ -13,16 +13,16 @@ Package.onUse(function (api) {
         'ecmascript',                 // javascript
         'mongo',                      // database
         'reactive-var',               // Support for reactive variables
-        
+
         'templating',                 // Allow templates
         'spacebars',                  // Template Syntax
         'blaze-html-templates',       // Reactive templates
-        
+
         'gwendall:body-events',       // Support Meteor.body.events
-        
+
         'check',                      // Check library
         'audit-argument-checks',      // Enforce Check
-        
+
         'aldeed:collection2@2.9.1',   // Enforce schemas on collections
         'aldeed:autoform@5.8.1'       // Enforce schemas on forms
     ];
@@ -36,7 +36,7 @@ Package.onUse(function (api) {
         'lib/core.js',
         'lib/settings.js'
     ], ['client', 'server']);
-    
+
     api.addFiles([
         // Client scripts
         'lib/client/shims.js',
@@ -45,20 +45,20 @@ Package.onUse(function (api) {
         'lib/client/history.js',
         'lib/client/scroll.js',
         'lib/client/canvas.js',
-        
+
         // UI Scripts
         'lib/client/ui/actions.js',
         'lib/client/ui/focus.js',
         'lib/client/ui/helpers-script.js',
         'lib/client/ui/helpers-spacebars.js'
     ], ['client']);
-    
+
     api.addFiles([
-        
+
     ], ['server']);
-    
+
     api.export([ 'Thriver', /* TODO: remove these!! */ 'h', 'c' ]);
-}); 
+});
 
 Package.onTest(function (api) {
     api.use('ecmascript');
