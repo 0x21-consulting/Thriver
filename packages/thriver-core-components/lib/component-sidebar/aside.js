@@ -122,7 +122,7 @@ Template.aside.helpers({
         title: 'Donate to WCASA',
         icon: 'heart',
         id: 'donate',
-        width: 656,
+        width: 700,
         position:'right',
         template: 'donate'
     },{
