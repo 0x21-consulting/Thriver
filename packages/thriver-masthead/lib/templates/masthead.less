@@ -5,9 +5,17 @@ section#masthead, section.masthead{
     //background: black;
     overflow: hidden;
     position: relative;
-    height:510px;
+    height:570px;
+    padding: 0px 0px 60px 0px;
     @media (max-width:1100px){ height: 610px;}
+    @media (max-width:945px){ height: 700px;}
     background: lighten(@navy,10%) !important;
+    > .container{
+        padding: 250px 40px 40px 40px;
+        @media @mobile{
+            padding: 20px;
+        }
+    }
     menu.tabs{
         float: right;
         display: block;
@@ -36,16 +44,16 @@ section#masthead, section.masthead{
 }
 
 section#masthead menu.tabs, section.masthead menu.tabs{
-    margin-top: @headerH - 65px;
+    //margin-top: @headerH - 65px;
     position: relative;
     z-index: 3;
     border-left: 2px solid #fff;
-    padding: 30px 0px 50px 0px;
+    padding: 20px 0px 50px 0px;
 }
 section#masthead div.tabs, section.masthead div.tabs{
     >article{
-        padding: 40px;
-        padding-top: @headerH - 65px;
+        padding: 10px 40px 40px 40px;
+        //padding-top: @headerH - 65px;
         .masthead-bg{
             position: absolute;
             top: 0; left: 0;
