@@ -64,6 +64,7 @@ modules-runtime@0.7.5
 momentjs:moment@2.14.4
 mongo@1.1.10
 mongo-id@1.0.5
+mrt:modernizr-meteor@2.6.2
 mrt:paypal@1.1.1
 npm-bcrypt@0.8.7
 npm-mongo@1.5.45
