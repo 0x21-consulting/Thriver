@@ -27,7 +27,7 @@ var smoothScroll = function (event) {
 
     // Smooth scroll to target
     $('.mainNav li a').removeClass('active');
-    
+
     // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
     $('body,html').stop(true, true).
         animate({ scrollTop: offset }, speed > 750? 750 : speed);
@@ -60,7 +60,7 @@ handleHeaderStateChange = function (event) {
 
     // Set a timeout to add the class after one millisecond
     timeout = setTimeout(function () {
-        if (window.scrollY > 0 && $(window).width() > 767){
+        if ($(document).scrollTop() && $(window).width() > 767){
             document.body.classList.remove('fixedHeaderReturn');
             document.body.classList.add('fixedHeader');
         } else {
@@ -71,7 +71,7 @@ handleHeaderStateChange = function (event) {
         }
 
         //Back to Top
-        if (window.scrollY > 1000 && $(window).width() > 767){
+        if ($(document).scrollTop() > 1000 && $(window).width() > 767){
             document.getElementById("back-to-top").classList.add('active');
         } else {
             if (document.getElementById("back-to-top").classList.contains('active')){
