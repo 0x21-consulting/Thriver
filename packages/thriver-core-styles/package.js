@@ -26,6 +26,7 @@ Package.onUse(function (api) {
         'lib/index.less',
         
         // Styles
+        'lib/vendor/details-shim.less',
         'lib/styles/animate.less',
         'lib/styles/buttons.less',
         'lib/styles/context.less',
