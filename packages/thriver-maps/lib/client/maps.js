@@ -317,3 +317,28 @@ Template.providers.events({
         }
     }
 });
+
+/**
+ * Follow Provider link to pin on map
+ * @method
+ *   @param {$.Event} event - jQuery event passed to handler
+ */
+Template.providerListViewItem.events({
+    'click div.pad': function (event) {
+        if ( !(event instanceof $.Event) ) return;
+        event.stopPropagation();
+        event.preventDefault();
+
+        // Update info section
+        Session.set('currentProvider', Providers.findOne({ _id: this._id }));
+        
+        // Update map
+        map.panTo(new google.maps.LatLng(
+            this.coordinates[0],
+            this.coordinates[1]
+        ));
+
+        // Close providers section
+        document.body.classList.remove('providersListOpen');
+    }
+});

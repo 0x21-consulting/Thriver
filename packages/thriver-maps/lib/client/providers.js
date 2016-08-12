@@ -33,6 +33,31 @@ Template.provider.helpers({
     }
 });
 
+/**
+ * Populate "View All Service Providers"
+ * @method
+ * @returns {LocalCollection.Cursor}
+ */
+Template.providersList.helpers({
+    provider: function () {
+        return Providers.find({});
+    }
+});
+
+/**
+ * Make counties human-readable
+ * @method
+ * @returns {string}
+ */
+Template.providerListViewItem.helpers({
+    counties: function () {
+        if (this.counties instanceof Array)
+            return this.counties.join(', ');
+        else
+            return '' + this.counties; // coerce into string
+    }
+});
+
 // From jQuery Helpers File
 // TODO: Rewrite
 Template.providers.onRendered(function () {
@@ -44,12 +69,6 @@ Template.providers.onRendered(function () {
 
     $('.mapView').click(function(event){
         event.stopPropagation();event.preventDefault();
-        $('body').removeClass('providersListOpen');
-    });
-
-    $('.providersList li').click(function(event){
-        event.stopPropagation();event.preventDefault();
-        alert('open the appropriated provider');
         $('body').removeClass('providersListOpen');
     });
 

@@ -94,36 +94,9 @@
     <div class="providersList">
         <h1>Wisconsin Service Provider Agencies</h1>
         <ul>
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-            {{>providerListViewItem}}
-
+            {{#each provider}}
+                {{>providerListViewItem}}
+            {{/each}}
         </ul>
         <button class="closeProvider mapView">Back to Map View <span class="fa">&#xf0d8;</span></button>
     </div>
@@ -132,8 +105,8 @@
 <template name="providerListViewItem">
     <li>
         <div class="pad">
-            <b>Sexual Assault Center</b><br>
-            <span>Counties servied:</span> Madison, Milwaukee
+            <b>{{name}}</b><br>
+            <span>Counties servied:</span> {{counties}}
         </div>
     </li>
 </template>
