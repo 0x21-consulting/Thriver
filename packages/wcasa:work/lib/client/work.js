@@ -119,10 +119,6 @@ Template.workContent.events({
         offset = $('[id="what-we-do"]').offset().top + 228;
         $('body').animate({ scrollTop: offset }, 750);
     },
-    'click .workTertiary > ul > li > a': function (event) {
-        event.stopPropagation(); event.preventDefault();
-        alert('This will scroll down to the appropriate subsection content.')
-    },
     'click .backToPrevious': function (event) {
         document.body.classList.remove('mobile-article-open');
     }
@@ -158,4 +154,43 @@ Template.work.onRendered(function () {
         //$('body').animate({ scrollTop: offset }, 350);
     });
 
+});
+
+/**
+ * Dynamically Generate Tertiary menu
+ * @method
+ */
+Template.workContent.onRendered(function () {
+    var that = this;
+    Deps.autorun(function (c) {
+        var tertiary = that.firstNode.parentElement.querySelector('.workTertiary'),
+            content  = tertiary.parentElement.querySelectorAll('h3'),
+            ul       = document.createElement('ul'),
+            li, a, i = 0, j = content.length;
+
+        // Wait until ready
+        if (!j) return;
+
+        // Quit if there already is a menu (this method executes a dozen times
+        // for some reason...)
+        if (tertiary.children[0] instanceof Element) return;
+
+        // We're ready now
+        c.stop();
+
+        for (; i < j; ++i) {
+            // Create list and anchor elements
+            li = document.createElement('li');
+            a  = document.createElement('a');
+
+            // Create link details
+            a.href = '#' + content[i].id;
+            a.textContent = content[i].textContent;
+
+            // Add elements
+            ul.appendChild(li).appendChild(a);
+        }
+
+        tertiary.appendChild(ul);
+    });
 });
