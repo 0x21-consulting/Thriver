@@ -5,7 +5,7 @@
  */
 var changeTabs = function (event) {
     event.stopPropagation(); event.preventDefault();
-
+    //debugger;
     var parent = document.querySelector('section.mainSection.work'),
         active = parent.querySelectorAll('.active'),
         article, i = 0, j = active.length;

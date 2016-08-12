@@ -29,7 +29,10 @@ Package.onUse(function (api) {
         'lib/templates/work.less',
         
         // Helpers and methods
-        'lib/client/work.js'
+        'lib/client/work.js',
+
+        // Administration
+        'lib/client/admin.js'
     ], ['client']);
     
     // Server processing
