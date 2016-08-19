@@ -1,6 +1,6 @@
 Template.outreach.helpers({
 	headline: "Get Involved",
-	content: "<p>We believe that everyone has a role and a responsibility<br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.</p>",
+	content: "<p>We believe that everyone has a role and a responsibility <br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.<br><button class='action-alert-link'>See Action Alerts <span class='fa'>&#xf0da;</span></button></p>",
 	items: [{
 		tabs: [{
 				title: 'Volunteer',
@@ -82,4 +82,12 @@ Template.wcasaJobs.helpers({
 	        }]
         }]
 	}]
+});
+
+Template.outreach.onRendered(function() {
+	//This seems out of place
+	$('.action-alert-link').click(function(){
+		$("#utility a[href='#news']").trigger("click");
+		$(".sidebar-content menu.tabs a[href='#action-alerts']").trigger("click");
+	});
 });
