@@ -9,12 +9,12 @@ mobile-experience@1.0.4
 session@1.1.6
 jquery@1.11.9
 tracker@1.1.0
-logging@1.1.14
+logging@1.1.15
 reload@1.1.10
 random@1.0.10
 ejson@1.0.12
-standard-minifier-css@1.1.8
-standard-minifier-js@1.1.8
+standard-minifier-css@1.2.0
+standard-minifier-js@1.2.0
 tinytest@1.0.11
 thriver:core
 thriver:escape
@@ -37,3 +37,4 @@ wcasa:who-we-are
 wcasa:contact
 thriver:i18n
 wcasa:non-spa
+shell-server
