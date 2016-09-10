@@ -86,3 +86,12 @@ Template.profile.events({
         
     }
 });
+
+Template.profile.onRendered(function () {
+    // Populate profile form with current values
+    //AutoForm.getFieldValue('profile.firstname');
+    var result = AutoForm.getFormValues('updateProfile', Template.profile, 
+        Thriver.accounts.schema.user);
+    
+    console.debug(result);
+});

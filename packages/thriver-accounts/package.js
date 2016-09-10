@@ -17,6 +17,11 @@ Package.onUse(function (api) {
         'mizzao:user-status'
     ]);
     
+    // Schema
+    api.addFiles([
+        'lib/schema.js'
+    ], ['client', 'server']);
+
     // Resources
     api.addAssets([
         
