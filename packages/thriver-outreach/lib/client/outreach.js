@@ -91,3 +91,21 @@ Template.outreach.onRendered(function() {
 		$(".sidebar-content menu.tabs a[href='#action-alerts']").trigger("click");
 	});
 });
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.outreach.onRendered(function () {
+    // Get db ID from current instance
+    var instanceName = this.data.name;
+
+    // Register
+    Thriver.history.registry.insert({
+        element: Thriver.sections.generateId(instanceName),
+        /** Handle deep-linking */
+        callback: function (path) {
+            console.debug('Deep-link:', path);
+        }
+    });
+});

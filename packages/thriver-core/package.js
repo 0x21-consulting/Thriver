@@ -17,6 +17,7 @@ Package.onUse(function (api) {
         'templating',                 // Allow templates
         'spacebars',                  // Template Syntax
         'blaze-html-templates',       // Reactive templates
+        'iron:router@1.0.13',         // Template routing
 
         'gwendall:body-events',       // Support Meteor.body.events
 
@@ -38,6 +39,10 @@ Package.onUse(function (api) {
     ], ['client', 'server']);
 
     api.addFiles([
+        // Templates 
+        'lib/templates/head.html',
+        'lib/templates/canvas.html',
+        
         // Client scripts
         'lib/client/shims.js',
         'lib/client/details-shim.js',
@@ -53,6 +58,9 @@ Package.onUse(function (api) {
         'lib/client/ui/helpers-script.js',
         'lib/client/ui/helpers-spacebars.js'
     ], ['client']);
+
+    // Add iron routing
+    api.addFiles([ 'lib/router.js' ], [ 'client', 'server' ]);
 
     api.addFiles([
 

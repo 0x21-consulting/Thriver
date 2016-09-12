@@ -328,3 +328,21 @@ function calMobileEvent(){
         document.body.classList.remove('active-event');
     }
 }
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.events.onRendered(function () {
+    // Get db ID from current instance
+    var instanceName = this.data.name;
+
+    // Register
+    Thriver.history.registry.insert({
+        element: Thriver.sections.generateId(instanceName),
+        /** Handle deep-linking */
+        callback: function (path) {
+            console.debug('Deep-link:', path);
+        }
+    });
+});

@@ -12,7 +12,8 @@ Package.onUse(function (api) {
     // Dependencies
     api.use([
         'thriver:core',
-        'thriver:core-styles'
+        'thriver:core-styles',
+        'thriver:sections'
     ]);
     
     // Resources

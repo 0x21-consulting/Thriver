@@ -1,20 +1,21 @@
 /**
  * @summary Smooth scroll to a linked section
  * @method
- *   @param {$.Event} event - jQuery Event triggered by <a> element click
+ *   @param {string} path - Element ID to scroll to
  */
-var smoothScroll = function (event) {
-    if (!event || !event.currentTarget || !event.currentTarget.hash)
-        return;
+Thriver.history.smoothScroll = function (path) {
+    // Sanitize path
+    check(path, String);
 
-    event.stopPropagation();
-    event.preventDefault();
+    // Get rid of leading slashes and any sub paths
+    path = path.replace(/^\/*/, '').replace(/\/.*/g, '');
 
     // Get target element (that the anchor links to)
-    var target = $('[id="' + event.currentTarget.hash.slice(1) +'"]'),
+    // Otherwise, default to top of screen
+    var target = path? $('[id="' + path + '"]') : $('body'),
 
     // Where are we presently?
-    posY = event.pageY, offset, speed;
+    posY = window.scrollY, offset, speed;
 
     // If no target, don't bother
     if (!target.length) return;
@@ -31,7 +32,25 @@ var smoothScroll = function (event) {
     // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
     $('body,html').stop(true, true).
         animate({ scrollTop: offset }, speed > 750? 750 : speed);
-},
+};
+
+/**
+ * @summary Handle scroll event
+ * @method
+ *   @param {$.Event} event - jQuery Event triggered by <a> element click
+ */
+Thriver.history.smoothScrollEventHandler = function (event) {
+    // currentTarget will be an anchor element
+    check(event, $.Event);
+    
+    // Don't allow page to navigate away
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Smooth scroll to anchor's href destination
+    Thriver.history.navigate( event.currentTarget.pathname );
+};
+var smoothScrollEventHandler = Thriver.history.smoothScrollEventHandler,
 
 /**
  * @summary Timout in milliseconds to wait until scroll completion
@@ -70,24 +89,22 @@ handleHeaderStateChange = function (event) {
             }
         }
 
-        //Back to Top
-        if ($(document).scrollTop() > 1000 && $(window).width() > 767){
+        // Back to Top
+        // TODO: move this into appropriate module
+        if ($(document).scrollTop() > 1000 && $(window).width() > 767)
             document.getElementById("back-to-top").classList.add('active');
-        } else {
-            if (document.getElementById("back-to-top").classList.contains('active')){
-                document.getElementById("back-to-top").classList.remove('active');
-            }
-        }
+        else
+            document.getElementById("back-to-top").classList.remove('active');
     }, 1);
 };
 
 // Smooth scrolling
-// We only care about same page links (that start with a hash)
-Template.body.events({ 'click #menu a[href*=#]': smoothScroll });
-Template.body.events({ 'click #back-to-top': smoothScroll });
-Template.body.events({ 'click #staff-list': smoothScroll });
+// TODO: Modules should register smooth scroll events!!!
+Template.canvas.events({ 'click #menu a'      : smoothScrollEventHandler });
+Template.canvas.events({ 'click #back-to-top' : smoothScrollEventHandler });
+Template.canvas.events({ 'click #staff-list'  : smoothScrollEventHandler }); // link in contact section
 
 // Handle header state change
-Template.body.onRendered(function () {
+Template.canvas.onRendered(function () {
     window.addEventListener('scroll', handleHeaderStateChange);
 });

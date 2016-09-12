@@ -54,3 +54,21 @@ Template.staff.helpers({
         return People.find({ boardMember: false }, { sort: { name: 1 }});
     }
 });
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.who.onRendered(function () {
+    // Get db ID from current instance
+    var instanceName = this.data.name;
+
+    // Register
+    Thriver.history.registry.insert({
+        element: Thriver.sections.generateId(instanceName),
+        /** Handle deep-linking */
+        callback: function (path) {
+            console.debug('Deep-link:', path);
+        }
+    });
+});

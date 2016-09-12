@@ -5,7 +5,7 @@
  */
 var changeTabs = function (event) {
     event.stopPropagation(); event.preventDefault();
-    //debugger;
+    
     var parent = document.querySelector('section.mainSection.work'),
         active = parent.querySelectorAll('.active'),
         article, i = 0, j = active.length;
@@ -17,7 +17,10 @@ var changeTabs = function (event) {
     // Make article with same ID as tab active
     article = parent.querySelector('article[data-id="' +
         event.currentTarget.dataset.id + '"]');
-    if (!article) return; // don't do anything if there's no article
+
+    // don't do anything if there's no article
+    if (!article) return; 
+
     article.classList.add('active');
 
     // Make tab active, too
@@ -109,7 +112,7 @@ Template.workNav.events({
 
 Template.workContent.events({
     'click footer.truncate button': function (event) {
-        event.preventDefault;
+        event.preventDefault();
         $("body").addClass("workReadingAnimate").delay(2000).queue(function(){
             $("body").removeClass("workReadingAnimate").dequeue();
             $("body").addClass("workReading").dequeue();
@@ -192,5 +195,23 @@ Template.workContent.onRendered(function () {
         }
 
         tertiary.appendChild(ul);
+    });
+});
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.work.onRendered(function () {
+    // Get db ID from current instance
+    var instanceName = this.data.name;
+
+    // Register
+    Thriver.history.registry.insert({
+        element: Thriver.sections.generateId(instanceName),
+        /** Handle deep-linking */
+        callback: function (path) {
+            console.debug('Deep-link:', path);
+        }
     });
 });

@@ -1,12 +1,12 @@
 <template name="navigation">
     <header class="main" id="menu">
         <div class="brand">
-            <a href="#masthead" class="brandLink">
+            <a href="/" class="brandLink">
                 <img src="/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg" alt="WCASA" />
             </a>
         </div>
         <div class="brand-small">
-            <a href="#masthead" class="brandLink">
+            <a href="/" class="brandLink">
                 <img src="/lib/img/wcasa-small.svg" alt="WCASA" />
             </a>
         </div>
@@ -22,6 +22,6 @@
 
 <template name="menuItem">
     <li data-type="main-navigation-item">
-        <a href="#{{anchor name=name}}">{{name}}</a>
+        <a href="/{{anchor name=name}}">{{name}}</a>
     </li>
 </template>

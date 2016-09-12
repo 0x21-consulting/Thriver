@@ -3,7 +3,7 @@
  */
 Meteor.subscribe('sections');
 
-Template.body.helpers({
+Template.canvas.helpers({
     /**
      * @summary Display page sections in body
      * @function
@@ -13,26 +13,23 @@ Template.body.helpers({
     }
 });
 
-
-
 /**
  * @summary Dynamically-generate anchor href for each section
  * @method
  *   @param {String} name - The section name
  * @returns {String}
  */
-Template.registerHelper('anchor', function (name) {
+Thriver.sections.generateId = function (name) {
     var removeName;
-
+    
     // Name must exist and be a string
-    check(name, Spacebars.kw);
+    check(name, Match.OneOf(Spacebars.kw, String) );
 
-    // We're expecting to only build anchors for elements that actually have names
-    if (!name || !name.hash || !name.hash.name)
-        return '';
+    // Spacebars.kw looks like: { hash: { name: "elementName" } }
+    name = (name instanceof Spacebars.kw) ? name.hash.name : name;
 
-    // Mutual Suspicion
-    name = '' + name.hash.name;
+    // Return empty string if null
+    if (name === null) return '';
 
     // Is the name an empty string?
     removeName = !name.length;
@@ -47,4 +44,5 @@ Template.registerHelper('anchor', function (name) {
         return name;
 
     return '';  // otherwise return an empty string
-});
+};
+Template.registerHelper('anchor', Thriver.sections.generateId);

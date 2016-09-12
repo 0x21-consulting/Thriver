@@ -4,52 +4,78 @@
  */
 Thriver.history = {}
 
-// TODO: Make a location registry to allow sections to inform history api
-//       how to navigate within themselves
-Thriver.history.registry = {};
+/**
+ * @summary Registry for History, Routing, and Deep-Linking functionality
+ * @type {Collection}
+ */
+Thriver.history.registry = new Mongo.Collection(null);
+
+/**
+ * @summary Enforce Registry Schema
+ * @type {SimpleSchema}
+ */
+Thriver.history.schema = new SimpleSchema({
+    /** Element ID to link to */
+    element: {
+        type: String,
+        optional: false
+    },
+    /** For deep-link support */
+    callback: {
+        type: Function,
+        optional: true
+    },
+    /** Module's current/stateful path */
+    currentPath: {
+        type: String,
+        optional: false,
+        // By default, set the currentPath to the element's ID
+        autoValue: function (doc) { return doc.currentPath || doc.element }
+    }
+});
+
+// Attach Schema
+Thriver.history.registry.attachSchema(Thriver.history.schema);
 
 /**
  * @summary Update Browser's location bar
  * @method
  */
-var updateLocation = function () {
-    // Get Y coordinates for each page element
+Thriver.history.updateLocation = function () {
+    // Get Y coordinates for each registered page element
     // We have to regenerate this every time in case some elements
-    // grow or shrink in size, of which the Work section is particularly guilty
+    // grow or shrink in size
     var coordinates = [],
-        elements = document.querySelectorAll(
-            'main > section'),
+        elements = Thriver.history.registry.find().fetch(),
         i, j, k, l,
         links = document.querySelectorAll('nav.mainNav a'), link;
 
-    // For masthead and everything before first main section
-    coordinates.push({ id: '', y: 0 });
-
-    // For each main section, get its Y coordinate
+    // For each registered section, get its Y coordinate
     for (i = 0, j = elements.length; i < j; ++i)
-        coordinates.push({
-            id : elements[i].id,
-            y  : elements[i].offsetTop
-        });
+        elements[i].y = document.querySelector('#' + elements[i].element).offsetTop;
+
+    // For masthead and everything before first registered section
+    elements.unshift({ element: '', y: 0, currentPath: '' });
 
     // Does the current scroll position match with any element?
-    for (i = 0, j = coordinates.length; i < j; ++i) {
-        // We could probably binary search here, but meh.
+    for (i = 0, j = elements.length; i < j; ++i) {
         if (i !== j - 1)    // if this isn't the last element
-            if (window.scrollY > coordinates[i].y - 100)
-                if (window.scrollY > coordinates[i + 1].y - 100)
+            // 125px offset to take into account nav elements on their own canvas
+            if (window.scrollY > elements[i].y - 125)
+                if (window.scrollY > elements[i + 1].y - 125)
                     continue;
 
         // Update URL/location bar
-        window.history.replaceState({}, undefined, '#' + coordinates[i].id);
+        window.history.pushState({ path: elements[i].currentPath }, 
+            undefined, '/' + elements[i].currentPath);
 
         // Remove active class from all main nav items
         for (k = 0, l = links.length; k < l; ++k)
             links[k].classList.remove('active');
 
         // Add active class to associated menu item
-        link = document.querySelector('nav.mainNav a[href="#' +
-            coordinates[i].id + '"]');
+        link = document.querySelector('nav.mainNav a[href="/' +
+            elements[i].element + '"]');
 
         if (link instanceof Element)
             link.classList.add('active');
@@ -59,48 +85,76 @@ var updateLocation = function () {
 
         break;
     }
-},
+};
 
 /**
- * @summary Navigate to a section based on URL hash
+ * @summary Navigate to a section based on URI path
  * @method
+ *   @param {String} path - Path to navigate to
  */
-navigate = function () {
-    var a,
+Thriver.history.navigate = function (path) {
+    // Must have a path
+    check(path, String);
+    
+    // Break into constituent parts
+    path = path.split(/\//).
+    
+    // Ignore empties
+    filter(function (element) { return element.length != 0; });
+
+    // If there's no path, allow scroll to top
+    if (!path.length) Thriver.history.smoothScroll('/');
 
     /**
-     * @summary The current URI hash
-     * @type {string}
+     * @summary Get registered element
+     * @type {Object}
      */
-    hash = document.location.hash;
+    var location = Thriver.history.registry.findOne({ element: path[0] });
+    
+    // Navigate to the appropriate element, if it exists
+    if (location) {
+        // Smooth scroll to element
+        Thriver.history.smoothScroll(location.element);
 
-    // Check to see if there is a hashed location in the URI bar.  If there is, navigate
-    // to it.  The browser can't do it on its own because the Meteor site is dynamically
-    // generated, so the section with the proper ID doesn't actually exist, yet.
-    if (hash) {
-        // To accomplish this, create a link and click it for the user
-        a = document.createElement('a');
-        a.href = hash;
-        a.classList.add('hide'); // don't show the link
-        document.body.appendChild(a);
+        // Update element's stateful path
+        Thriver.history.registry.update({ element: location.element }, 
+            { $set: { currentPath: path.join('/') } })
 
-        // Click the link
-        a.click();
-
-        // Then remove the link
-        a.parentElement.removeChild(a);
+        // Now, pass the rest of the path along to the callback function
+        if (location.callback instanceof Function)
+            location.callback( path.slice(1) );
     }
+};
+
+/**
+ * @summary Handle Page-Load Navigation
+ * @function
+ *   @param {String} path - Path to navigate to
+ * @returns {Function}
+ */
+var onLoadNavigate = function (path) {
+    return function () {
+        Thriver.history.navigate(path);
+    };
 };
 
 // Manage Updating the Browser's Location bar, as well as reacting to changes
 // in the location bar, smooth scrolling to the proper location, then passing
 // additional URI parameters to the appropriately registered function.
-Template.body.onRendered(function () {
+Template.canvas.onRendered(function () {
     /**
      * @summary Timeout in milliseconds to wait until scroll completion to check position
      * @type {number}
      */
-    var timeout = 0;
+    var timeout = 0,
+
+    /** 
+     * @summary When the page reloads, the URI will be overridden based on the 
+     *   position while the page is rendering, preventing the client from actually
+     *   navigating to the proper location.  Override that change.
+     * @type {string}
+     */
+    path = document.location.pathname;
 
     /**
      * @summary Update Location Bar based on position on page
@@ -122,9 +176,24 @@ Template.body.onRendered(function () {
         clearTimeout(timeout);
 
         // Set a timeout to modify location bar about every quarter second
-        timeout = setTimeout(updateLocation, 200);
+        timeout = setTimeout(Thriver.history.updateLocation, 200);
     });
 
     // Wait a couple seconds for the page to render before navigating to the proper link
-    setTimeout(navigate, 3000);
+    // TODO: Is there a better way to do this?
+    setTimeout(onLoadNavigate(path), 3000);
+});
+
+/**
+ * @summary Handle Forward and Backward Browser buttons
+ * @method
+ *   @param {Event} event - Popstate event
+ */
+window.addEventListener('popstate', function (event) {
+    check(event,            Event);
+    check(event.state,      Object);
+    check(event.state.path, String);
+
+    // Navigate to path
+    Thriver.history.navigate(event.state.path);
 });

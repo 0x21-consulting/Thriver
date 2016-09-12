@@ -91,3 +91,21 @@ closeMapSearch = function (event) {
     if (search instanceof Element && search.classList.contains('active'))
         search.classList.remove('active');
 };
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.providers.onRendered(function () {
+    // Get db ID from current instance
+    var instanceName = this.data.name;
+
+    // Register
+    Thriver.history.registry.insert({
+        element: Thriver.sections.generateId(instanceName),
+        /** Handle deep-linking */
+        callback: function (path) {
+            console.debug('Deep-link:', path);
+        }
+    });
+});
