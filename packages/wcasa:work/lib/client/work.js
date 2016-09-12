@@ -163,10 +163,10 @@ Template.work.onRendered(function () {
  * Dynamically Generate Tertiary menu
  * @method
  */
-Template.workContent.onRendered(function () {
+Template.workContent.onRendered(function () { console.debug('work rendered', this);
     var that = this;
     Deps.autorun(function (c) {
-        var tertiary = that.firstNode.parentElement.querySelector('.workTertiary'),
+        var tertiary = that.firstNode.querySelector('.workTertiary'),
             content  = tertiary.parentElement.querySelectorAll('h3'),
             ul       = document.createElement('ul'),
             li, a, i = 0, j = content.length;
