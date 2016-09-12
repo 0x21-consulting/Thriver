@@ -121,7 +121,8 @@ details_shim.toggle = function(Details, state) {
 /**
  * Run details_shim() on each details tag
  */
-details_shim.init = function() {
+window.details_shim = {};
+window.details_shim.init = function() {
     // Because <details> must include a <summary>,
     //  collecting <summary> tags collects *valid* <details> tags
     var Summaries = document.getElementsByTagName('summary');
@@ -131,7 +132,7 @@ details_shim.init = function() {
 };
 
 // Run details_shim.init() when the page loads
-window.addEventListener
+/*window.addEventListener
     ? window.addEventListener('load', details_shim.init, false)
     : window.attachEvent && window.attachEvent('onload', details_shim.init)
-;
+;*/

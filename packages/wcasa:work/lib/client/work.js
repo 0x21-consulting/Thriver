@@ -163,7 +163,7 @@ Template.work.onRendered(function () {
  * Dynamically Generate Tertiary menu
  * @method
  */
-Template.workContent.onRendered(function () { console.debug('work rendered', this);
+Template.workContent.onRendered(function () {
     var that = this;
     Deps.autorun(function (c) {
         var tertiary = that.firstNode.querySelector('.workTertiary'),
@@ -214,4 +214,12 @@ Template.work.onRendered(function () {
             console.debug('Deep-link:', path);
         }
     });
+});
+
+/**
+ * @summary Support details elements in unsupported browsers
+ * @method
+ */
+Template.work.onRendered(function () {
+    details_shim.init();
 });
