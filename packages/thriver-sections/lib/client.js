@@ -23,6 +23,7 @@ Thriver.sections.generateId = function (name) {
     var removeName;
     
     // Name must exist and be a string
+    if (name === null || name === undefined) return '';
     check(name, Match.OneOf(Spacebars.kw, String) );
 
     // Spacebars.kw looks like: { hash: { name: "elementName" } }
@@ -39,6 +40,8 @@ Thriver.sections.generateId = function (name) {
 
     // anchors can't begin with numbers or hyphens
     replace(/^[\d-]*/g, '');
+
+    // TODO: Validate URI doesn't include improper characters?
 
     if (removeName || name.length > 0)
         return name;

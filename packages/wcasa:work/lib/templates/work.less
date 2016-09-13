@@ -316,7 +316,7 @@ section.work .workNav > ul{
         margin: 0px;
         text-align: left;
         li:focus{ .shadowNone; }
-        li h2 > a{
+        li h2 > a, a.backToIndexWorkA {
             background-color: transparent !important;
             padding: 6px 0px 15px 0px;
             margin: 0px;
@@ -340,12 +340,14 @@ section.work .workNav > ul{
             .shadowNone;
            // &:active{background-color: darken(@navy, 1.5%);}
             &.backToIndexWork{
-                //.opacity(0.85);
-                h2:after{display: none;}
                 .fa{
                     display: inline-block !important;
                     font-size: 14px;
                     margin-right: 5px;
+                }
+                a:hover {
+                    .trans(opacity @durationDefault @easeDefault 100ms);
+                    .opacity(1);
                 }
             }
             list-style: none;
@@ -374,7 +376,7 @@ section.work .workNav > ul{
                 pointer-events: none;
                 .trans(all 250ms ease);
             }
-            h2{
+            h2 {
                 text-align: left;
                 position: relative;
                 display: block;

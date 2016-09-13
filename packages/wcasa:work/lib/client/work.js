@@ -8,7 +8,8 @@ var changeTabs = function (event) {
     
     var parent = document.querySelector('section.mainSection.work'),
         active = parent.querySelectorAll('.active'),
-        article, i = 0, j = active.length;
+        article, i = 0, j = active.length, path, parentName,
+        target = event.currentTarget.parentElement;
 
     // Remove active class from all elements under parent
     for (; i < j; ++i)
@@ -16,24 +17,53 @@ var changeTabs = function (event) {
 
     // Make article with same ID as tab active
     article = parent.querySelector('article[data-id="' +
-        event.currentTarget.dataset.id + '"]');
+        target.dataset.id + '"]');
 
     // don't do anything if there's no article
-    if (!article) return; 
+    if (!article) { console.debug('No article:',parent,article); return; } 
 
     article.classList.add('active');
 
     // Make tab active, too
-    event.currentTarget.classList.add('active');
+    target.classList.add('active');
+
+    // Establish current path
+    parentName = parent.id;
+    path = parentName + '/';
 
     // Is this is a submenu item?
-    parent = event.currentTarget.parentElement.parentElement;
+    parent = target.parentElement.parentElement;
     if ( parent.nodeName.toLowerCase() === 'li' ) {
         // Make active
         parent.classList.add('active');
-    }
-    if ( parent.nodeName.toLocaleLowerCase() === 'li'){
+
+        // Add mobile article open
         document.body.classList.add('mobile-article-open');
+
+        // Add to path
+        path += Thriver.sections.generateId(
+            getValue('name')(parent.dataset.id) ) + '/';
+    }
+
+    // Add current link to history as well
+    path += Thriver.sections.generateId(
+        getValue('name')(target.dataset.id) );
+
+    // Update history registry
+    Thriver.history.registry.update({ element: parentName }, { $set: { currentPath: path } });
+
+    // Update URI
+    window.history.pushState({ path: path }, undefined, '/' + path);
+
+    // If not already active, add fade class, then active class to body
+    if (!document.body.classList.contains('workActive')) {
+        // Start Fade effect
+        document.body.classList.add('workFadeIn');
+        // End Fade effect
+        setTimeout(function () {
+            document.body.classList.remove('workFadeIn');
+            document.body.classList.add('workActive');
+        }, 250);
     }
 },
 
@@ -89,7 +119,16 @@ Template.workListItem.helpers({
     icon:     getValue('icon'),
     name:     getValue('name'),
     tabs:     getValue('tabs'),
-    tabName:  getValue('name')
+    tabName:  getValue('name'),
+    anchor:   function () {
+        //console.debug('parent data', Template.parentData());
+        //debugger;
+        //return Thriver.sections.generateId( getValue('name')( 
+        //    this instanceof String? this.toString() : this.id ) );
+
+        // TODO: Create true anchor refs
+        return '#';
+    }
 });
 
 // Content Container
@@ -98,6 +137,7 @@ Template.workContentContainer.helpers({
     template: getValue('template'),
     subtabs:  getValue('tabs')
 });
+
 // Content
 Template.workContent.helpers({
     content:  getValue('content'),
@@ -107,9 +147,20 @@ Template.workContent.helpers({
 
 // Helper for changing tabs
 Template.workNav.events({
-    'click li': changeTabs,
+    'click h2': changeTabs,
+    'click li > ul > li > a': changeTabs,
+    'click li.backToIndexWork': function (event) {
+        event.preventDefault(); event.stopPropagation();
+
+        // Fade out and make not active
+        document.body.classList.add('workFadeOut');
+        setTimeout(function () {
+            document.body.classList.remove('workActive', 'workReading', 'workFadeOut');
+        }, 200);
+    }
 });
 
+// TODO: Clean these up.
 Template.workContent.events({
     'click footer.truncate button': function (event) {
         event.preventDefault();
@@ -125,38 +176,6 @@ Template.workContent.events({
     'click .backToPrevious': function (event) {
         document.body.classList.remove('mobile-article-open');
     }
-});
-
-// Eoghan's stuff
-Template.work.onRendered(function () {
-    // Handle adding and removing the Body 'workActive' class
-    $('.workNav > ul > li > h2 > a:not(.backToIndexWorkA), .workNav ul > li > ul > li > a').click(function (event) {
-        event.preventDefault();
-        if($("body").hasClass('openNavItem')){
-            $("body").removeClass('openNavItem');
-        }
-        if(!$("body").hasClass('workActive')){
-            $("body").removeClass("workBack");
-            $("body").addClass('openNavItem');
-            $("body").addClass("workFadeIn").delay(250).queue(function(){
-                $(this).removeClass("workFadeIn").dequeue();
-                $(this).addClass("workActive").dequeue();
-            });
-            //$('body').addClass('workFadeOut');
-        }
-    });
-
-    $('.workNav li.backToIndexWork').click(function (event) {
-        event.preventDefault();
-        $("body").addClass("workFadeOut").delay(175).queue(function(){
-        $('body').removeClass('workActive');
-        $('body').removeClass('workReading');
-        $(this).removeClass("workFadeOut").dequeue();
-        });
-        //offset = $('[id="what-we-do"]').offset().top - 125;
-        //$('body').animate({ scrollTop: offset }, 350);
-    });
-
 });
 
 /**
@@ -204,14 +223,62 @@ Template.workContent.onRendered(function () {
  */
 Template.work.onRendered(function () {
     // Get db ID from current instance
-    var instanceName = this.data.name;
+    var instanceName = this.data.name,
+        data = this.data;
 
     // Register
     Thriver.history.registry.insert({
         element: Thriver.sections.generateId(instanceName),
+
         /** Handle deep-linking */
         callback: function (path) {
-            console.debug('Deep-link:', path);
+            var sections, section, i, j, link,
+
+            // Get Sections recursively
+            getTabs = function (id) {
+                var sections = {}, section,
+                    tabs  = Thriver.sections.get(id, ['tabs']).tabs,
+                    name, i, j;
+
+                // Get name and ID for each tab
+                for (i = 0, j = tabs.length; i < j; ++i) {
+                    // Get section name
+                    section = Thriver.sections.get( tabs[i], ['name'] );
+                    name = section.name;
+
+                    // Then sanitize section name
+                    name = Thriver.sections.generateId(name);
+
+                    // Add to link list and Recurse
+                    sections[ name ] = getTabs( tabs[i] );
+
+                    // Add ID to list as well
+                    sections[ name ]._id = section._id;
+                }
+
+                return sections;
+            };
+
+            // If there's no path, there's nothing to do
+            if (!path.length) return;
+
+            // Get link list of all browseable sections
+            sections = getTabs(data._id);
+
+            // Get link for deep-linked section
+            for (i = 0, j = path.length; i < j; ++i) {
+                if (sections[ path[i] ])
+                    sections = sections[ path[i] ];
+                else break;
+            }
+
+            // Find anchor element
+            link = document.querySelector('li[data-id="' + sections._id + '"] > a');
+
+            // Click anchor to activate page
+            link.click();
+
+            console.debug('Deep-link:', path, data, sections);
         }
     });
 });

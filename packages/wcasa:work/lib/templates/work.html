@@ -31,9 +31,8 @@
         <h2 class="sidebarTitle">Areas of Interest</h2>
         <ul>
             <li class="backToIndexWork">
-                <h2>
-                    <a href="javascript:void(0);" class="backToIndexWorkA"><span class="fa">&#xf137;</span> Back to Index</a>
-                </h2>
+                <a href="#" class="backToIndexWorkA">
+                    <span class="fa">&#xf137;</span> Back to Index</a>
             </li>
             {{#each tabs}}
                 {{> workListItem id=this}}
@@ -48,12 +47,12 @@
 <template name="workListItem">
     <li data-id="{{this.id}}">
         <h2>
-            <a class="toggle" href="#"><i class="icon fa">{{icon}}</i> {{name}} <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
+            <a class="toggle" href="{{anchor this}}"><i class="icon fa">{{icon}}</i> {{name}} <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
         </h2>
         <ul>
             <li data-id="{{this.id}}" class="mobile"><a href="#">Overview</a></li>
             {{#each tabs}}
-                <li data-id="{{this}}"><a href="#">{{tabName this}}</a></li>
+                <li data-id="{{this}}"><a href="{{anchor this}}">{{tabName this}}</a></li>
             {{/each}}
         </ul>
     </li>
@@ -99,7 +98,6 @@
         </header>
         <div class="main textBody workInner">
             <div class="workTextContainer" data-markdown="{{content}}">
-                <!--{{>workContentBlock}}-->
                 {{>workTertiary}}
                 {{{markdown content}}}
                 <hr>
@@ -120,41 +118,6 @@
 <template name="workSubListItem">
     <li><a href="#">Index Item</a></li>
 </template>
-
-
-
-<!--Filler Content Below-->
-
-<template name="workContentBlock">
-    <!--Need to do the following:
-    -Find all h3 and wrap all content succeeding it in a <div class="accordionContent">
-    -Set CSS .accordionContent to display:none
-    -On click of H3 toggle next sibling "accordionContent" the class active which changes display of element to block
-    -->
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p>
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p>
-    <h3>Intervention Programming</h3>
-    <p>
-        The sexual assault prevention movement started with intervention – brave, trailblazing activists who named the crime, got laws on the books, and built shelters to provide support and services to victims, helping them on their journey toward being survivors.
-    </p>
-    <p>
-        Sexual assault is pandemic. The numbers – as many as 17.7 million women and 2.78 million men have been victims of sexual assault (see more information on sexual assault numbers) – are staggering. The foundation of WCASA’s work is providing resources to agencies which provide direct services to the faces behind those numbers.
-    </p>
-</template>
-
-
 
 <template name="aboutSA">
     <details class="aboutSA">

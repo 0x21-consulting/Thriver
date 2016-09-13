@@ -118,7 +118,7 @@ Thriver.history.navigate = function (path) {
 
         // Update element's stateful path
         Thriver.history.registry.update({ element: location.element }, 
-            { $set: { currentPath: path.join('/') } })
+            { $set: { currentPath: path.join('/') } });
 
         // Now, pass the rest of the path along to the callback function
         if (location.callback instanceof Function)
@@ -192,8 +192,9 @@ Template.canvas.onRendered(function () {
 window.addEventListener('popstate', function (event) {
     check(event,            Event);
     check(event.state,      Object);
-    check(event.state.path, String);
+    check(event.state.path, Match.Maybe(String) );
 
     // Navigate to path
-    Thriver.history.navigate(event.state.path);
+    if (event.state.path)
+        Thriver.history.navigate(event.state.path);
 });

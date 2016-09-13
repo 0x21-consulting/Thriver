@@ -35,7 +35,7 @@ Thriver.history.smoothScroll = function (path) {
 };
 
 /**
- * @summary Handle scroll event
+ * @summary Handle anchor click event to smooth scroll
  * @method
  *   @param {$.Event} event - jQuery Event triggered by <a> element click
  */
@@ -100,9 +100,10 @@ handleHeaderStateChange = function (event) {
 
 // Smooth scrolling
 // TODO: Modules should register smooth scroll events!!!
-Template.canvas.events({ 'click #menu a'      : smoothScrollEventHandler });
+/*Template.canvas.events({ 'click #menu a'      : smoothScrollEventHandler });
 Template.canvas.events({ 'click #back-to-top' : smoothScrollEventHandler });
-Template.canvas.events({ 'click #staff-list'  : smoothScrollEventHandler }); // link in contact section
+Template.canvas.events({ 'click #staff-list'  : smoothScrollEventHandler });*/ // link in contact section
+//Template.canvas.events({ 'click a[href^="/"]': smoothScrollEventHandler });
 
 // Handle header state change
 Template.canvas.onRendered(function () {
