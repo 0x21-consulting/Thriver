@@ -19,7 +19,8 @@ Package.onUse(function (api) {
         'blaze-html-templates',       // Reactive templates
         'iron:router@1.0.13',         // Template routing
 
-        'sha',                        // SHA Hash Support
+        'sha',                        // SHA Hash support
+        'gwendall:body-events',       // Support Meteor.body.events
 
         'check',                      // Check library
         'audit-argument-checks',      // Enforce Check
