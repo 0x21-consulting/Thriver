@@ -1,8 +1,3 @@
-'use strict';
-
-// Subscriptions
-Meteor.subscribe('site');
-
 /**
  * Handle placeholder addition
  * @method
@@ -126,14 +121,16 @@ createMenu = function (event) {
     // Create templates menu
     var menu = document.createElement('menu'),
         // Get list of templates from database
-        templates = Site.findOne({}, { templates: 1 }),
+        templates = [
+            { 'name' : 'What We Do'       , 'template' : 'work'      }, 
+            { 'name' : 'Events'           , 'template' : 'events'    }, 
+            { 'name' : 'Who We Are'       , 'template' : 'who'       }, 
+            { 'name' : 'Get Involved'     , 'template' : 'outreach'  }, 
+            { 'name' : 'Service Providers', 'template' : 'providers' }, 
+            { 'name' : 'Contact Us'       , 'template' : 'contact'   }, 
+            { 'name' : 'Masthead'         , 'template' : 'masthead'  }],
         //
         a, i = 0, j;
-
-    // Templates is actually a property
-    if (!templates)
-        throw new RangeError('There are no templates in the database.');
-    templates = templates.templates;
 
     // Prepare the menu
     menu.id = 'templates-menu';

@@ -4,54 +4,66 @@
  *   @param {Event} event - KeyboardEvent passed to handler
  */
 var handler = function (event) {
-    if (! (event instanceof Event) ) return;
+    var id, name;
+
+    check(event, Event);
     event.stopPropagation();
 
-    if (event.type.toLowerCase() === 'keyup')
-        if (event.key.toLowerCase() !== 'enter')
-            return;
-    
-    // Must be enter key, so don't let it happen
-    event.preventDefault();
+    if (event.which)
+        if (event.which === 13) {
+            this.blur();
+            return false;
+        } else return;
 
     // Get section ID
-    var id = this.parentElement.parentElement.dataset.id;
+    id = this.parentElement.parentElement.dataset.id;
+    name = this.textContent;
     
-    // Add to db
-    Meteor.call('updateSectionName', id, this.textContent);
-
     // Remove editability
     this.contentEditable = false;
-    this.textContent = '';
+
+    // Add to db
+    if ( this.dataset.hash !== SHA256(name) ) {
+        this.textContent = '';
+        Meteor.call('updateSectionName', id, name);
+    }
 },
 
 /**
  * Handler for updating section content
  * @method
- *   @param {string} oldContent - Original markdown used for testing
- *                                if there was a change
+ *   @param {string} oldHash - SHA256 hash of original markdown
+ *     to detect if there was a change
  */
-updateSectionContent = function (oldContent) {
+updateSectionContent = function (oldHash) {
+    check(oldHash, String);
+
     /**
      * Handler for updating section content
      * @method
      *   @param {Event} event - Click event passed to handler
      */
     return function (event) {
-        if (! (event instanceof Event) ) return;
+        check(event, Event);
+
         event.stopPropagation();
         event.preventDefault();
 
+        var parent = event.target.parentElement, element;
+
         // Get section ID
         var id = this.parentElement.parentElement.dataset.id,
-            newContent = this.parentElement.querySelector('textarea').value;
+            content = this.parentElement.querySelector('textarea').value,
+            newHash = SHA256(content);
         
         // Don't commit if nothing changed
-        if (newContent !== oldContent) {
-            Meteor.call('updateSectionContent', id, newContent);
-            location.reload();
-        }
-        else console.debug('nothing changed');
+        if (newHash !== oldHash)
+            Meteor.call('updateSectionContent', id, content);
+
+        // Restore view
+        parent.classList.remove('edit');
+        parent.querySelector('textarea').remove();
+        parent.querySelector(':scope > button').remove();
     };
 };
 
@@ -61,18 +73,38 @@ Template.workNav.events({
      * @method
      *   @param {$.Event} event - jQuery Event handle
      */
-    'click li[data-id="new-section"]': function (event) {
-        if (! (event instanceof $.Event) ) return;
+    'click li.new-section a': function (event) {
+        var parent;
+
+        check(event, $.Event);
+
         event.preventDefault();
         event.stopPropagation();
 
-        var parent = document.querySelector('section.mainSection.work'),
-            elems  = parent.querySelectorAll('menu.workNav > ul > li'),
+        // Get arbitrary parent element
+        parent = event.target.parentElement.parentElement.parentElement;
+
+        // If this parent element has an ID, this is a sub page
+        if (parent.dataset.id) {
+            parent = parent;
+            elems  = parent.querySelectorAll('li[data-id]');
+        } else {
+            // Top-level page; get ID for work section
+            parent = event.delegateTarget.parentElement;
+            elems  = parent.querySelectorAll('menu.workNav > ul > li[data-id]');
+        }
 
         // Determine index
         index = elems.length;
 
-        Meteor.call('addSection', 'article', index, parent.dataset.id);
+        Meteor.call('addSection', 'article', index, parent.dataset.id, 'Unnamed Page',
+            function (error, id) {
+                Template.workListItem.onRendered(function () {
+                    // Let's be helpful and navigate to the new page
+                    var link = document.querySelector('li[data-id="' + id + '"] > a');
+                    link.click();
+                });
+            });
     }
 });
 
@@ -83,16 +115,20 @@ Template.workContent.events({
      *   @param {$.Event} event - jQuery Event handle
      */
     'click h2.workContentAdmin': function (event) {
-        if (! (event instanceof $.Event) ) return;
+        check(event, $.Event);
+
         event.preventDefault();
         event.stopPropagation();
 
         // Make content editable to allow user to change
         event.target.contentEditable = true;
 
+        // Calculate SHA hash to detect whether a change was made
+        event.target.dataset.hash = SHA256(event.target.textContent);
+
         // On blur or on enter, submit name change
-        //event.target.addEventListener('blur',  handler);
-        event.target.addEventListener('keyup', handler);
+        event.target.addEventListener('blur',  handler);
+        event.target.addEventListener('keypress', handler);
     },
     /**
      * Delete a section
@@ -100,12 +136,23 @@ Template.workContent.events({
      *   @param {$.Event} event - jQuery Event handle
      */
     'click header button.delete': function (event) {
-        if (! (event instanceof $.Event) ) return;
+        var link, parent;
+
+        check(event, $.Event);
+
         event.preventDefault();
         event.stopPropagation();
 
-        // Get work section ID
-        var id = event.delegateTarget.parentElement.parentElement.dataset.id;
+        // Get Nav link
+        link = event.delegateTarget.parentElement.querySelector('menu [data-id="' 
+            + this.id + '"]').parentElement.parentElement;
+        
+        // If the nav link has a parent with an ID, this is a tab
+        if (link.dataset.id)
+            parent = link.dataset.id;
+        else
+            // Otherwise parent is just the work section
+            parent = event.delegateTarget.parentElement.parentElement.dataset.id;
 
         // Warn
         if ( !window.confirm('Are you sure you want to delete this section?') )
@@ -113,7 +160,7 @@ Template.workContent.events({
         
         // First, remove reference to parent element
         // first parameter is parent ID, second this ID
-        Meteor.call('removeChild', id, this.id);
+        Meteor.call('removeChild', parent, this.id);
 
         // Then delete this section
         Meteor.call('deleteSection', this.id);
@@ -124,7 +171,8 @@ Template.workContent.events({
      *   @param {$.Event} event - jQuery event handler
      */
     'click header button.edit': function (event) {
-        if (! (event instanceof $.Event) ) return;
+        check(event, $.Event);
+
         event.preventDefault();
         event.stopPropagation();
 
@@ -141,14 +189,14 @@ Template.workContent.events({
         button = document.createElement('button');
         button.textContent = 'Save';
         button.addEventListener('mouseup', 
-            // Pass along original markdown content
-            updateSectionContent(content.dataset.markdown));
+            // Pass along hash of existing markdown
+            updateSectionContent(content.dataset.hash));
 
         // Textarea should get markdown
-        textarea.textContent = content.dataset.markdown;
+        textarea.textContent = Thriver.sections.get(this.id, ['content']).content;
 
-        // Replace section with textarea
-        parent.removeChild(content);
+        // Add textarea but hide preview
+        parent.classList.add('edit');
         parent.appendChild(textarea);
         parent.appendChild(button);
     }

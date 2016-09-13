@@ -6,22 +6,21 @@
 var changeTabs = function (event) {
     event.stopPropagation(); event.preventDefault();
     
-    var parent = document.querySelector('section.mainSection.work'),
-        active = parent.querySelectorAll('.active'),
-        article, i = 0, j = active.length, path, parentName,
-        target = event.currentTarget.parentElement;
+    var parent  = document.querySelector('section.mainSection.work'),
+        active  = parent.querySelectorAll('.active'),
+        target  = event.currentTarget.parentElement,
+        article = parent.querySelector('article[data-id="' +
+            target.dataset.id + '"]'),
+        i = 0, j = active.length, path, parentName;
+
+    // don't do anything if there's no article
+    if (!article) return;
 
     // Remove active class from all elements under parent
     for (; i < j; ++i)
         active[i].classList.remove('active');
 
     // Make article with same ID as tab active
-    article = parent.querySelector('article[data-id="' +
-        target.dataset.id + '"]');
-
-    // don't do anything if there's no article
-    if (!article) { console.debug('No article:',parent,article); return; } 
-
     article.classList.add('active');
 
     // Make tab active, too
@@ -142,7 +141,16 @@ Template.workContentContainer.helpers({
 Template.workContent.helpers({
     content:  getValue('content'),
     icon:     getValue('icon'),
-    name:     getValue('name')
+    name:     getValue('name'),
+    hash:     function () {
+        var content;
+        
+        content = getValue('content')(this.id);
+
+        // Return a SHA256 hash of the content for use in editing
+        if (content) return SHA256(content);
+        else         return '';
+    }
 });
 
 // Helper for changing tabs
@@ -276,7 +284,8 @@ Template.work.onRendered(function () {
             link = document.querySelector('li[data-id="' + sections._id + '"] > a');
 
             // Click anchor to activate page
-            link.click();
+            if (link instanceof Element)
+                link.click();
 
             console.debug('Deep-link:', path, data, sections);
         }

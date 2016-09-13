@@ -23,8 +23,9 @@ Meteor.methods({
      *   @param {string} template - Name of template to apply to section
      *   @param {number} index    - The index of the section relative to its siblings
      *   @param {string} parent   - The ID of a section's parent (optional)
+     *   @param {string} name     - Initial section name (optional)
      */
-    addSection: function (template, index, parent) {
+    addSection: function (template, index, parent, name, callback) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
@@ -33,10 +34,11 @@ Meteor.methods({
         check(template, String);
         check(index,    Number);
         check(parent,   Match.Maybe(String) );
+        check(name,     Match.Maybe(String) );
         
         // Add new section
-        Thriver.sections.collection.insert({
-            name         : null,
+        return Thriver.sections.collection.insert({
+            name         : name || null,
             icon         : '\uf0e9',  // default icon: umbrella
             content      : null,
             template     : template,

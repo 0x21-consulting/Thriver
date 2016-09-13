@@ -44,10 +44,26 @@ section.work{
             }
         }
     }
+    // Admin styles
+    .main > textarea, > button { display: none; }
+    .main.edit textarea, .main.edit button { display: initial; }
+    .edit .workTextContainer { display: none !important; }
+    textarea:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .main article header h2[contenteditable="true"] {
+        border: 1px solid @blue !important;
+        box-shadow: 0 0 5px @blue inset;
+        padding: 5px !important;
+    }
+    .main .workNav > ul li.new-section a { color: @orange; }
+    .main .workNav > ul li.new-section a:hover { color: @orange; }
+    .main .workNav > ul > li.new-section h2 a { background: @orange; }
+
     @media @mobile{opacity: 1 !important;}
     .workContent, .workNav, .workTertiary{
         display: block;
-        vertical-align: top;
     }
 }
 

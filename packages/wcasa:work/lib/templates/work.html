@@ -54,14 +54,17 @@
             {{#each tabs}}
                 <li data-id="{{this}}"><a href="{{anchor this}}">{{tabName this}}</a></li>
             {{/each}}
+            {{#if isAdmin}}
+                <li class="new-section"><a href="#">Add New Page</a></li>
+            {{/if}}
         </ul>
     </li>
 </template>
 
 <template name="workListItemAdmin">
-    <li data-id="new-section">
+    <li class="new-section">
         <h2>
-            <a class="toggle" href="#"><i class="icon fa"></i> New Section <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
+            <a class="toggle" href="#"><i class="icon fa"></i> Add New Page <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
         </h2>
     </li>
 </template>
@@ -85,7 +88,8 @@
 <template name="workContent">
     <article data-id="{{id}}">
         <h2 class="mobile">
-            <a href="javascript:void(0);" class="backToPrevious"><span class="fa">&#xf137;</span> Back to More Work</a>
+            <a href="javascript:void(0);" class="backToPrevious">
+                <span class="fa">&#xf137;</span> Back to More Work</a>
         </h2>
         <header>
             <i class="icon fa">{{icon id}}</i>
@@ -97,7 +101,7 @@
             {{/if}}
         </header>
         <div class="main textBody workInner">
-            <div class="workTextContainer" data-markdown="{{content}}">
+            <div class="workTextContainer" data-hash="{{hash}}">
                 {{>workTertiary}}
                 {{{markdown content}}}
                 <hr>
