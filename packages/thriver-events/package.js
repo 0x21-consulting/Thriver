@@ -20,15 +20,23 @@ Package.onUse(function (api) {
         
     ], ['client']);
     
+    // Both server and client
+    api.addFiles([
+        // Events Namespace and collection schema
+        'lib/schema.js'
+    ], [ 'client', 'server' ]);
+
     // Client processing
     api.addFiles([
         // Templates
         'lib/templates/events.html',
+        'lib/templates/admin.html',
         
         // Styles
         'lib/templates/events.less',
         
         // Helpers and methods
+        'lib/client/calendar.js',
         'lib/client/events.js',
     ], ['client']);
     

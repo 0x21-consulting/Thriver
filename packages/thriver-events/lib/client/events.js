@@ -1,235 +1,330 @@
-'use strict';
-
-// Current month and year
-var month  = new ReactiveVar(new Date().getMonth()),
-    year   = new ReactiveVar(new Date().getFullYear()),
-    months = ['January','February','March','April',
-              'May','June','July','August','September',
-              'October','November','December'],
-
-/**
- * Determine the last date of any given month
- * @function
- *   @param {number} specificMonth - Optional
- * @returns {number}
- */
-lastDate = function (specificMonth) {
-    // Mutual suspician
-    specificMonth = parseInt(specificMonth);
-    if (isNaN(specificMonth) || specificMonth < 0 || specificMonth > 11)
-        // if invalid month number, just use current month
-        specificMonth = month.get();
-
-    // if February
-    if (specificMonth === 1) {
-        // If the year is divisible by both 4 and 100, but not 400,
-        // then it's a leap year
-        if (year.get() % 4 === 0)
-            if ( (year.get() % 100) === 0 &&
-                 (year.get() % 400) !== 0? false : true)
-                    return 29;
-        return 28;
-    }
-    // There can't be more than 30 days in April, June, Sept., or Nov.
-    if (![3,5,8,10].every(function (val) { return specificMonth !== val; }))
-        return 30;
-
-    // All other months
-    return 31;
-},
-
-/**
- * Get number for month that's prior to current one
- * @function
- * @returns {number}
- */
-getLastMonth = function () {
-    var lastMonth = month.get() - 1;
-
-    return lastMonth < 0
-        ? (12 - Math.abs(lastMonth) % 12) : (lastMonth  % 12);
-},
+SimpleSchema.debug = true;
 
 // Subscribe to events
-Events = new Mongo.Collection('events');
 Meteor.subscribe('events');
+
+var nextPosition = 1,
+    prevPosition = -1,
+    slideTotal = new ReactiveVar(0);
+
+/** An List of all of today's events */
+Thriver.events.sameDayEvents = [];
+
+/**
+ * Get all events that start or end in the active month
+ * @function
+ * @returns {Object}
+ */
+Thriver.events.getThisMonthEvents = function () {
+    var currentEvents = {},
+        total = Thriver.calendar.lastDate();
+
+    // Get all events and organize them in an easily-accessible way
+    Thriver.events.collection.find({
+        $or: [{
+            start: { 
+                $gte: new Date( Thriver.calendar.thisYear.get(), 
+                    Thriver.calendar.thisMonth.get() ),
+                $lt : new Date( Thriver.calendar.thisYear.get(), 
+                    Thriver.calendar.thisMonth.get(), total )
+        }}, {
+            end: { 
+                $gte: new Date( Thriver.calendar.thisYear.get(), 
+                    Thriver.calendar.thisMonth.get() ),
+                $lt : new Date( Thriver.calendar.thisYear.get(), 
+                    Thriver.calendar.thisMonth.get(), total )
+            }
+        }]
+    }, { sort: { start: 1 } }).forEach(function (event) {
+        // If there's no start date, do nothing
+        if (! (event.start instanceof Date)) return;
+
+        var start = event.start.getDate(),
+            total = 1, i;
+
+        // If there's an end date, calculate total number of days
+        if (event.end instanceof Date) {
+            total = event.end.getDate() - start + 1;
+
+            // If total is negative, event spans multiple months
+            if ( total < 0) {
+                // If the event ends this month
+                if ( event.end.getMonth() === Thriver.calendar.thisMonth.get() ) {
+                    // Calculate total number of days for just this month
+                    total = event.end.getDate();
+                    start = 1;
+                } else
+                    // Otherwise, it starts this month
+                    total = Thriver.calendar.lastDate() - event.start.getDate() + 1;
+            }
+        }
+
+        // For each day, add event info
+        for (i = 0; i < total; ++i) {
+            // If the date doesn't already exist, add it
+            if (! currentEvents[ start + i ])
+                currentEvents[ start + i ] = [];
+            // Add event details
+            currentEvents[ start + i ].push(event);
+        }
+    });
+
+    return currentEvents;
+};
 
 // Events helpers
 Template.events.helpers({
     /**
-     * Return last month
+     * Provide current event data to event slides
      * @function
-     * @returns {string}
+     * @returns {string[]}
      */
-    lastMonth: function () {
-        var lastMonth = month.get() - 1;
+    events: function () {
+        var events = Thriver.events.collection.find({
+            $or: [{
+                start: { 
+                    $gte: new Date( Thriver.calendar.thisYear.get(), 
+                        Thriver.calendar.thisMonth.get() ),
+                    $lt : new Date( Thriver.calendar.thisYear.get(), 
+                        Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate() )
+            }}, {
+                end: { 
+                    $gte: new Date( Thriver.calendar.thisYear.get(), 
+                        Thriver.calendar.thisMonth.get() ),
+                    $lt : new Date( Thriver.calendar.thisYear.get(), 
+                        Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate() )
+                }
+            }]
+        }, { sort: { start: 1 } });
+        
+        // Update total for slides
+        slideTotal.set( events.count() );
 
-        return months[ getLastMonth() ] + ' ' +
-            ( lastMonth < 0 ? (year.get() - 1) : year.get() );
-    },
-    /**
-     * Return next month
-     * @function
-     * @returns {string}
-     */
-    nextMonth: function () {
-        var nextMonth = month.get() + 1;
-
-        return months[ nextMonth % 12 ] + ' ' +
-            (          nextMonth > 11 ?
-            (year.get() + 1) : year.get() );
+        return events;
     }
 });
 
-// Calendar helpers
-Template.calendar.helpers({
+// Event Details helpers
+Template.eventSlide.helpers({
     /**
-     * Return current month
+     * @summary Show Start Date
      * @function
-     * @returns {string}
+     * @returns {String}
      */
-    getMonth: function () {
-        return months[ month.get() ];
+    startDate: function () {
+        var date = this.start;
+        
+        return Thriver.calendar.months[ date.getMonth() ] + ' ' + 
+            date.getDate() + ', ' + date.getFullYear();
     },
     /**
-     * Return current year
+     * @summary Show Start Time
      * @function
-     * @returns {number}
+     * @returns {String}
      */
-    getYear: function () {
-        return year.get();
+    startTime: function () {
+        var time = this.start,
+            hour = time.getHours(),
+            minutes = time.getMinutes(),
+            am = false,
+            date = '';
+        
+        // If the event spans multiple days, include the date
+        if ( this.start.getDate() !== this.end.getDate() ) {
+            date = Thriver.calendar.months[ this.start.getMonth() ] + ' ' + this.start.getDate();
+            return date;
+        }
+
+        // Determine morning or evening
+        if (hour === (hour % 12) )
+            am = true;
+
+        // Convert to 12 hour clock
+        if (hour % 12 === 0)
+            hour = 12;
+        else
+            hour = hour % 12;
+        
+        // Format with leading zero if necessary
+        if (hour.toString().length < 2)
+            hour = '0' + hour;
+        
+        // Same for minutes
+        if (minutes.toString().length < 2)
+            minutes = '0' + minutes;
+        
+        return hour + ':' + minutes + (am? ' AM' : ' PM');
     },
     /**
-     * Return weeks and days in the month
+     * @summary Show End Date and time
      * @function
-     * @returns {Day[][]}
+     * @returns {String}
      */
-    week: function () {
-        var firstDay = new Date(year.get(), month.get()).getDay(),
-            total    = lastDate(),
-            weeks    = [],
-            week, day, i, j, count = 0,
+    endTime: function () {
+        // Do nothing if no date is set
+        if ( !(this.end instanceof Date) )
+            return '';
 
-            // Last day of last month
-            lastMonth = lastDate( getLastMonth() ),
+        var time = this.end,
+            hour = time.getHours(),
+            minutes = time.getMinutes(),
+            am = false,
+            date = '';
+        
+        // If the event spans multiple days, include the date
+        if ( this.start.getDate() !== this.end.getDate() ) {
+            date = Thriver.calendar.months[ this.end.getMonth() ] + ' ' + this.end.getDate();
+            return ' — ' + date;
+        }
 
-            // Today
-            today = new Date(), thisWeek, thisDay,
+        // Determine morning or evening
+        if (hour === (hour % 12) )
+            am = true;
 
-            // All events this month
-            currentEvents = {};
+        // Convert to 12 hour clock
+        if (hour % 12 === 0)
+            hour = 12;
+        else
+            hour = hour % 12;
+        
+        // Format with leading zero if necessary
+        if (hour.toString().length < 2)
+            hour = '0' + hour;
+        
+        // Same for minutes
+        if (minutes.toString().length < 2)
+            minutes = '0' + minutes;
+        
+        return ' - ' + hour + ':' + minutes + (am? ' AM' : ' PM');
+    },
+    /**
+     * @summary Create a link for address
+     * @function
+     * @returns {String}
+     */
+    address: function () {
+        // If this is a web link
+        if ( this.address.match(/^https?:/i) )
+            return '<a href="' + this.address + '" target="_blank">Online</a>';
+        
+        // If there is a location
+        if (this.location instanceof Object)
+            if (this.location.latitude && this.location.longitude)
+                return '<a href="https://www.google.com/maps/place/' + this.address +
+                    '/@' + this.location.latitude + ',' + this.location.longitude + 
+                    ',14z" target="_blank">' + this.address + '</a>';
+        
+        // Otherwise, just return the address
+        return this.address;
+    },
+    /**
+     * @summary Display number of other events occurring on same day
+     * @function
+     * @returns {Number}
+     */
+    numberSameDayEvents: function () {
+        // We use a list here instead of just a db count because an event that
+        // starts today can also end today, creating a duplicate.
 
-        // Get all events and organize them in an easily-accessible way
-        Events.find({
-            start: { $gt: new Date( year.get(), month.get() ) },
-            end  : { $lt: new Date( year.get(), month.get(), total ) }
-        }).forEach(function (event) {
-            // If there's no start date, do nothing
-            if (! (event.start instanceof Date)) return;
+        // The list
+        events = {};
 
-            var start = event.start.getDate(),
-                total = 1, i;
+        // For function scoping
+        var that = this,
 
-            // If there's an end date, calculate total number of days
-            if (event.end instanceof Date)
-                total = event.end.getDate() - start + 1;
+        // For each event, add ID to list
+        addEvent = function (event) {
+            // Don't include this event
+            if (that._id === event._id)
+                return;
+            
+            // Else, add
+            events[ event._id ] = event;
+        },
 
-            // For each day, add event info
-            for (i = 0; i < total; ++i) {
-                // If the date doesn't already exist, add it
-                if (! currentEvents[ start + i ])
-                    currentEvents[ start + i ] = [];
-                // Add event details
-                currentEvents[ start + i ].push(event);
+        // toDateString() removes time data, going to midnight today
+        yesterday = new Date( this.start.toDateString() );
+        tomorrow  = new Date( new Date(yesterday).setDate( yesterday.getDate() + 1 ));
+
+        // Today is clearly between yesterday and tomorrow
+        today = { $gte: yesterday, $lte: tomorrow },
+
+        // Total count
+        total = 0;
+
+        // Get all events that start today
+        Thriver.events.collection.find({ start: today }).forEach(addEvent);
+
+        // Get all events that end today
+        Thriver.events.collection.find({ end  : today }).forEach(addEvent);
+
+        // Get all events that both start before today and end after today
+        Thriver.events.collection.find({
+            start: {
+                // Before today at midnight
+                $lt: new Date( this.start.toDateString() )
+            },
+            end: {
+                // After today at 11:59:59 PM
+                $gt: new Date( this.start.toDateString() + ' 23:59:59' )
             }
-        });
+        }).forEach(addEvent);
 
-        console.debug('Events\n',
-            'Greater than', new Date( year.get(), month.get() ), '\n',
-            'Less than', new Date( year.get(), month.get(), total ), '\n',
-            currentEvents
-        );
+        // Enumerate list to get count
+        for (let event in events)
+            ++total;
+        
+        // Now store as array for other helpers
+        Thriver.events.sameDayEvents = [];
 
-        // If today is in the current month and year
-        if (today.getMonth() === month.get() &&
-            today.getFullYear() === year.get()) {
-                thisDay  = today.getDate();
-                thisWeek = today.getDate() - today.getDay();
-            }
+        for (let event in events)
+            Thriver.events.sameDayEvents.push( events[event] );
 
-        // Create weeks until we reach last day of the month
-        do {
-            // Create week
-            week = [];
-
-            // Create seven days
-            for (i = 0; i < 7; ++i) {
-                day = {};
-                // if we haven't started counting this month yet
-                // and this isn't the first day of the month, set
-                // the date for last month
-                if (!count) {
-                    if (i === firstDay)
-                        ++count;
-                    else {
-                        day.notCurrent = 'notCurrent';
-                        day.date = lastMonth - (firstDay - i - 1);
-                    }
-                }
-                // If we finished counting (next month's days)
-                if (count > total) {
-                    day.notCurrent = 'notCurrent';
-                    day.date = count - total;
-                    ++count;
-                }
-                // If we have started counting
-                if (count && count <= total) {
-                    day.date = count;
-                    ++count;
-                }
-
-                // If today or this week, add special styles
-                if (day.date === thisWeek)
-                    day.currentWeekStart = 'currentWeekStart';
-                if (day.date === thisDay)
-                    day.today = 'today';
-
-                // If there are events this day
-                if (currentEvents[count] instanceof Array) {
-                    day.hasEvent = 'hasEvent';
-
-                    // If the day is in the past
-                    if (count < thisDay)
-                        day.past = 'past';
-
-                    // Hyperlink first event
-                    day.href = currentEvents[count][0]._id;
-
-                    // Add event details
-                    // (and convert to array)
-                    day.currentEvents = currentEvents[count];
-                    console.info('Day', count, day); //debug
-                }
-
-                // Add day
-                week.push(day);
-            }
-
-            // Add week
-            weeks.push(week);
-        } while (count <= total);
-
-        // Return weeks
-        return weeks;
+        return total;
+    },
+    /**
+     * @summary Return same day events
+     * @function
+     * @returns {Object[]}
+     */
+    sameDayEvents: function () {
+        return Thriver.events.sameDayEvents;
+    },
+    /**
+     * @summary Return whether sameDayEvents is singular or plural
+     * @function
+     * @returns {Boolean}
+     */
+    isSingular: function () {
+        if (Thriver.events.sameDayEvents.length > 1)
+            return false;
+        return true;
     }
 });
 
-// Eoghan's Stuff
-var
-//currentSlide = 0,
-nextPosition = 1,
-prevPosition = -1,
-slideTotal = 3;
+Template.upcomingEvents.helpers({
+    /**
+     * @summary List five upcoming events
+     * @function
+     * @returns {Mongo.Collection}
+     */
+    upcomingEvents: function () {
+        return Thriver.events.collection.find({ start: { $gt: new Date() }},
+            { sort: { start: 1 }, limit: 5 });
+    }
+});
+
+Template.upcomingEventListItem.helpers({
+    /**
+     * @summary Show friendly date
+     * @function
+     * @returns {String}
+     */
+    friendlyDate: function () {
+        return Thriver.calendar.months[ this.start.getMonth() ].substr(0,3) + ' ' +
+            this.start.getDate();
+    }
+});
 
 Template.events.events({
     /**
@@ -240,12 +335,12 @@ Template.events.events({
     'click .scroll-prev-month, click .prevMonth': function (event) {
         if ( !(event instanceof $.Event) ) return;
 
-        var lastMonth = month.get() - 1;
+        var lastMonth = Thriver.calendar.thisMonth.get() - 1;
 
         if (lastMonth < 0)
-            year.set( year.get() - 1 );
+            Thriver.calendar.thisYear.set( Thriver.calendar.thisYear.get() - 1 );
 
-        month.set( getLastMonth() );
+        Thriver.calendar.thisMonth.set( Thriver.calendar.getLastMonth() );
     },
     /**
      * Switch to next month
@@ -255,78 +350,122 @@ Template.events.events({
     'click .scroll-next-month, click .nextMonth': function (event) {
         if ( !(event instanceof $.Event) ) return;
 
-        var nextMonth = month.get() + 1;
+        var nextMonth = Thriver.calendar.thisMonth.get() + 1;
 
         if (nextMonth > 11)
-            year.set( year.get() + 1);
+            Thriver.calendar.thisYear.set( Thriver.calendar.thisYear.get() + 1);
 
-        month.set(nextMonth % 12);
+        Thriver.calendar.thisMonth.set(nextMonth % 12);
+    },
+
+    /**
+     * @summary Show Even Add Form
+     * @method
+     *   @param {$.Event} event
+     */
+    'click li.addEvent': function (event) {
+        check(event, $.Event);
+
+        var slider = event.delegateTarget.querySelector('.eventsSlider'),
+            admin  = event.delegateTarget.querySelector('section.addEvent');
+
+        if (slider instanceof Element)
+            slider.classList.add('hide');
+        if (admin instanceof Element)
+            admin.classList.remove('hide');
+        
     },
 
     // Eoghan's stuff
     'click .sliderPrev': function (event) {
+        check(event, $.Event);
+
         if (prevPosition >= 0){
-            document.querySelector('.slides').style.webkitTransform = "translate(-" + prevPosition + "00% ,0px)";
-            prevPosition = prevPosition - 1;
-            nextPosition = nextPosition - 1;
+            document.querySelector('.slides').style.webkitTransform = 
+                'translate(-' + prevPosition + '00% ,0px)';
+            --prevPosition;
+            --nextPosition;
         }
     },
     'click .sliderNext': function (event) {
-        if (nextPosition < slideTotal){
-            document.querySelector('.slides').style.webkitTransform = "translate(-" + nextPosition + "00% ,0px)";
-            prevPosition = prevPosition + 1;
-            nextPosition = nextPosition + 1;
+        check(event, $.Event);
+
+        if (nextPosition < slideTotal.get()){
+            document.querySelector('.slides').style.webkitTransform = 
+                'translate(-' + nextPosition + '00% ,0px)';
+            ++prevPosition;
+            ++nextPosition;
         }
     },
     'click button.eventDate': function (event) {
-        document.querySelector('.slides').style.webkitTransform = "translate(-" + event.target.value + "00% ,0px)";
-        nextPosition = Number(event.target.value) + 1;
-        prevPosition = Number(event.target.value) - 1;
+        check(event, $.Event);
+
+        var id = event.target.datset.id;
+
+        document.querySelector('.slides').style.webkitTransform = 
+            'translate(-' + id + '00% ,0px)';
+
+        nextPosition = Number(id) + 1;
+        prevPosition = Number(id) - 1;
         calMobileEvent();
     },
     'click a.eventDate': function (event) {
+        check(event, $.Event);
         event.preventDefault();
-        document.querySelector('.slides').style.webkitTransform = "translate(-" + event.target.dataset.value + "00% ,0px)";
-        nextPosition = Number(event.target.dataset.value) + 1;
-        prevPosition = Number(event.target.dataset.value) - 1;
+
+        var id = event.target.datset.id;
+
+        document.querySelector('.slides').style.webkitTransform = 
+            'translate(-' + id + '00% ,0px)';
+
+        nextPosition = Number(id) + 1;
+        prevPosition = Number(id) - 1;
         calMobileEvent();
     },
     'click .unregister a': function (event) {
+        check(event, $.Event);
+
         event.preventDefault();
         //Append template:actionUnregisterPrompt to top of ul.actions
     },
     'click .notAccount a.login': function (event) {
+        check(event, $.Event);
         event.preventDefault();
+
         document.body.classList.add('leftSmall');
-        $('nav.utility li.login').addClass('active');
-        $('aside.sidebar section.login').addClass('active');
+        document.querySelector('nav.utility li.login').classList.add('active');
+        document.querySelector('aside.sidebar section.login').classList.add('active');
     },
     'click .notAccount a.create': function (event) {
+        check(event, $.Event);
         event.preventDefault();
+
         document.body.classList.add('leftSmall');
-        $('nav.utility li.register').addClass('active');
-        $('aside.sidebar section.register').addClass('active');
+        document.querySelector('nav.utility li.register').classList.add('active');
+        document.querySelector('aside.sidebar section.register').classList.add('active');
     },
     'click span.truncated': function (event) {
+        check(event, $.Event);
         $(event.currentTarget).parent().parent().parent().parent().addClass('extendedContent');
     },
     'click .eventSlide .actions .details': function (event) {
+        check(event, $.Event);
         $(event.currentTarget).parent().parent().parent().parent().addClass('extendedContent');
     },
     'click .back-to-events': function (event) {
+        check(event, $.Event);
         calMobileEvent();
     }
 });
 
 
 
-function calMobileEvent(){
-    if (!document.body.classList.contains('active-event')){
+function calMobileEvent() {
+    if ( !document.body.classList.contains('active-event') ) {
         document.body.classList.add('active-event');
         document.querySelector('.eventSlide .actions .details').click();
-    } else{
+    } else
         document.body.classList.remove('active-event');
-    }
 }
 
 /**
@@ -342,7 +481,45 @@ Template.events.onRendered(function () {
         element: Thriver.sections.generateId(instanceName),
         /** Handle deep-linking */
         callback: function (path) {
-            console.debug('Deep-link:', path);
+            Thriver.events.navigate(path);
         }
     });
 });
+
+/**
+ * @summary Navigate to an event
+ * @method
+ *   @param {String[]} path - The path by which to navigate
+ */
+Thriver.events.navigate = function (path) {
+    check(path, [String]);
+
+    console.debug('Path:', path);
+
+    var isMonth = false;
+
+    for (let i = 0; i < path.length; ++i) {
+        // Year
+        if ( path[i].match(/^\d{4}$/) ) {
+            Thriver.calendar.thisYear.set( Number( path[i] ) );
+            continue;
+        }
+        // Specific event ID
+        if (path[i].match(/^[a-z0-9]{17}$/i) ) {
+            // Todo
+            continue;
+        }
+        
+        // Check for month
+        Thriver.calendar.months.forEach(function (month, index) {
+            if (month.toLowerCase() === path[i].toLowerCase() ) {
+                Thriver.calendar.thisMonth.set(index);
+                isMonth = true;
+            }
+        });
+
+        if (isMonth) continue;
+
+        // Check for event title
+    }
+};

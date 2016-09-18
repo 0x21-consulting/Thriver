@@ -1,0 +1,7 @@
+<template name="eventsAdmin">
+    <section class="addEvent hide">
+        <h3>Add an Event</h3>
+        {{> quickForm collection="Thriver.events.collection" id="addEvent" type="insert"
+            omitFields="_id" meteormethod="addEvent" type="method" }}
+    </section>
+</template>
