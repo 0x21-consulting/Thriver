@@ -458,7 +458,21 @@ Template.events.events({
     }
 });
 
+/** Admin events */
+Template.eventsAdmin.events({
+    /**
+     * @summary Close Form
+     * @method
+     *   @param {$.Event} event
+     */
+    'click button.close': function (event) {
+        check(event, $.Event);
 
+        // Close add Event Form
+        event.delegateTarget.querySelector('.eventsSlider').classList.remove('hide');
+        event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
+    }
+});
 
 function calMobileEvent() {
     if ( !document.body.classList.contains('active-event') ) {

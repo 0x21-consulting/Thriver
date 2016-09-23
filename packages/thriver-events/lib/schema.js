@@ -53,7 +53,13 @@ Thriver.events.schema = new SimpleSchema({
     location: {
         type: Object,
         optional: false,
-        defaultValue: {}
+        defaultValue: {},
+        label: 'Event Location'
+    },
+    'location.name': {
+        type: String,
+        optional: false,
+        label: 'Location Name'
     },
     'location.latitude': {
         type: Number,
@@ -65,40 +71,51 @@ Thriver.events.schema = new SimpleSchema({
         decimal: true,
         optional: true
     },
-    /** Event address, which could be physical or web address */
+    'location.mapUrl': {
+        type: String,
+        regEx: SimpleSchema.RegEx.Url,
+        optional: true,
+        label: 'Google Maps URL'
+    },
+    'location.webinarUrl': {
+        type: String,
+        regEx: SimpleSchema.RegEx.Url,
+        optional: true,
+        label: 'Webinar URL'
+    },
+    /** Event address, which could be physical or web address 
     address: {
         type: String,
         optional: false
-    },
+    },*/
     /** Cost Tiers */
     cost: {
         type: Array,
         defaultValue: [],
-        optional: false
+        optional: false,
+        label: 'Price Tiers'
     },
     'cost.$': {
         type: Object
+    },
+    'cost.$.description': {
+        type: String,
+        optional: false,
+        label: 'Tier Description'
     },
     'cost.$.cost': {
         type: Number,
         decimal: true,
         optional: false,
-        defaultValue: 0
-    },
-    'cost.$.description': {
-        type: String,
-        optional: false
-    },
-    'cost.$.order': {
-        type: Number,
-        optional: false,
-        defaultValue: 0
+        defaultValue: 0,
+        label: 'Cost in Dollars'
     },
     /** Event HREF for Online Locations */
-    href: {
+    registerUrl: {
         type: String,
         regEx: SimpleSchema.RegEx.Url,
-        optional: true
+        optional: true,
+        label: 'URL for Third-Party Registration Site'
     }
 });
 Thriver.events.collection.attachSchema(Thriver.events.schema);

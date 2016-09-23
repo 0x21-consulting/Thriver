@@ -715,3 +715,34 @@ section.addEvent {
 header.eventsHeader li.addEvent {
     width: auto;
 }
+
+// Close Add Event
+section.addEvent button.close {
+    float: right;
+    color: #f1592a;
+    box-shadow: none;
+    padding: 0;
+    margin-top: -30px;
+}
+
+// Add Event form styles
+#addEvent [data-required="true"] label::after {
+    content: '\f069';
+    font: 10px FontAwesome;
+    color: @orange;
+    margin-left: 5px;
+}
+
+.glyphicon::after { font: 12px FontAwesome; }
+.glyphicon-plus::after  { content: '\f067'; }
+.glyphicon-minus::after { content: '\f068'; }
+
+#addEvent button { background: @orange; }
+#addEvent li { list-style-type: none; }
+#addEvent span.help-block {
+    color: #f55;
+    font-weight: bold;
+    float: right;
+    margin-top: -53px;
+    margin-right: 10px;
+}
