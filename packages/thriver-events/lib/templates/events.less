@@ -481,7 +481,7 @@ header.eventsHeader{
     input[type="search"] {
         border: none;
         border-bottom: 2px solid #ddd;
-        width: 200px;
+        width: 100%;
         position: relative;
         color: #4e8084;
         font-weight: 500;
@@ -712,21 +712,40 @@ section.addEvent {
     overflow: auto;
     padding: 20px;
 }
-header.eventsHeader li.addEvent {
-    width: auto;
+header.eventsHeader li.addEvent { width: auto; }
+header.eventsHeader li.addEvent::before {
+    position: absolute;
+    content: '';
+    width: 1px;
+    left: 0;
+    height: 100%;
+    background-color: #dddfe1;
+}
+header.eventsHeader li.addEvent .fa {
+    color: #647c7e;
+    font-weight: 600;
+}
+li.eventSlide .adminControls {
+    display: inline-block;
+    margin-left: 15px;
+}
+li.eventSlide .adminControls .fa {
+    font-size: 16px;
+    color: @orange;
+    cursor: pointer;
 }
 
 // Close Add Event
 section.addEvent button.close {
     float: right;
-    color: #f1592a;
+    color: @orange;
     box-shadow: none;
     padding: 0;
     margin-top: -30px;
 }
 
 // Add Event form styles
-#addEvent [data-required="true"] label::after {
+#eventForm [data-required="true"] label::after {
     content: '\f069';
     font: 10px FontAwesome;
     color: @orange;
@@ -737,9 +756,9 @@ section.addEvent button.close {
 .glyphicon-plus::after  { content: '\f067'; }
 .glyphicon-minus::after { content: '\f068'; }
 
-#addEvent button { background: @orange; }
-#addEvent li { list-style-type: none; }
-#addEvent span.help-block {
+#eventForm button { background: @orange; }
+#eventForm li { list-style-type: none; }
+#eventForm span.help-block {
     color: #f55;
     font-weight: bold;
     float: right;

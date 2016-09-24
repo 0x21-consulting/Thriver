@@ -49,7 +49,7 @@ var changeTabs = function (event) {
         getValue('name')(target.dataset.id) );
 
     // Update history registry
-    Thriver.history.registry.update({ element: parentName }, { $set: { currentPath: path } });
+    Thriver.history.update(parentName, path);
 
     // Update URI
     window.history.pushState({ path: path }, undefined, '/' + path);

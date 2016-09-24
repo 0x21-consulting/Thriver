@@ -81,10 +81,29 @@ Thriver.history.updateLocation = function () {
             link.classList.add('active');
             //link.blur();
             //This allows the UI to remove unwanted :focus class to last selection
-            $("header.mainHeader nav.mainNav li a").blur();
+            $('header.mainHeader nav.mainNav li a').blur();
 
         break;
     }
+};
+
+/**
+ * @summary Update a section's path
+ * @method
+ *   @param {String} section - Section name to update
+ *   @param {String} path    - Path to set for section
+ */
+Thriver.history.update = function (section, path) {
+    check(section, String);
+    check(path, String);
+
+    // Update collection with new path
+    Thriver.history.registry.update({ element: section }, {
+        $set: { currentPath: path }
+    });
+
+    // Update URI
+    Thriver.history.updateLocation();
 };
 
 /**

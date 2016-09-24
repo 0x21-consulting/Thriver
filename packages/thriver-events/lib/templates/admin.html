@@ -2,7 +2,7 @@
     <section class="addEvent hide">
         <h3>Add an Event</h3>
         <button class="fa close">&#xf057; Close</button>
-        {{> quickForm collection="Thriver.events.collection" id="addEvent" type="insert"
-            omitFields="_id" meteormethod="addEvent" type="method" }}
+        {{> quickForm collection="Thriver.events.collection" id="eventForm" 
+            meteormethod=method type="method" doc=doc }}
     </section>
 </template>

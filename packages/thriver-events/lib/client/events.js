@@ -3,11 +3,25 @@ SimpleSchema.debug = true;
 // Subscribe to events
 Meteor.subscribe('events');
 
-var nextPosition = 1,
-    prevPosition = -1,
-    slideTotal = new ReactiveVar(0);
+var currentSlide = new ReactiveVar(0),
+    slideTotal   = new ReactiveVar(0),
+    formMethod   = new ReactiveVar('addEvent'),
+    activeEvent  = new ReactiveVar(),
 
-/** An List of all of today's events */
+/**
+ * @summary Close Event Add/Update Admin Form
+ * @method
+ *   @param {$.Event} event
+ */
+closeForm = function (event) {
+    check(event, $.Event);
+
+    // Close add Event Form
+    event.delegateTarget.querySelector('.eventsSlider').classList.remove('hide');
+    event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
+};
+
+/** A list of all of today's events */
 Thriver.events.sameDayEvents = [];
 
 /**
@@ -17,7 +31,8 @@ Thriver.events.sameDayEvents = [];
  */
 Thriver.events.getThisMonthEvents = function () {
     var currentEvents = {},
-        total = Thriver.calendar.lastDate();
+        total = Thriver.calendar.lastDate(),
+        count = 0;
 
     // Get all events and organize them in an easily-accessible way
     Thriver.events.collection.find({
@@ -59,17 +74,38 @@ Thriver.events.getThisMonthEvents = function () {
             }
         }
 
+        // Add slide position
+        event.position = count;
+        ++count;
+
         // For each day, add event info
         for (i = 0; i < total; ++i) {
             // If the date doesn't already exist, add it
             if (! currentEvents[ start + i ])
                 currentEvents[ start + i ] = [];
+            
             // Add event details
             currentEvents[ start + i ].push(event);
         }
     });
 
     return currentEvents;
+};
+
+/**
+ * @summary Slide to an event
+ * @method
+ *   @param {Number} position - Event position to slide to
+ */
+Thriver.events.slide = function (position) {
+    check(position, Number);
+
+    // Set current slide
+    currentSlide.set(position);
+
+    // Smooth slide to it
+    document.querySelector('.slides').style.webkitTransform = 
+        'translate(-' + position + '00% ,0px)';
 };
 
 // Events helpers
@@ -130,10 +166,12 @@ Template.eventSlide.helpers({
             date = '';
         
         // If the event spans multiple days, include the date
-        if ( this.start.getDate() !== this.end.getDate() ) {
-            date = Thriver.calendar.months[ this.start.getMonth() ] + ' ' + this.start.getDate();
-            return date;
-        }
+        if (this.end instanceof Date)
+            if ( this.start.getDate() !== this.end.getDate() ) {
+                date = Thriver.calendar.months[ this.start.getMonth() ] + 
+                    ' ' + this.start.getDate();
+                return date;
+            }
 
         // Determine morning or evening
         if (hour === (hour % 12) )
@@ -204,18 +242,22 @@ Template.eventSlide.helpers({
      */
     address: function () {
         // If this is a web link
-        if ( this.address.match(/^https?:/i) )
-            return '<a href="' + this.address + '" target="_blank">Online</a>';
+        if (this.location.webinarUrl)
+            return '<a href="' + this.location.webinarUrl + '" target="_blank">Online</a>';
         
         // If there is a location
-        if (this.location instanceof Object)
+        /*if (this.location instanceof Object)
             if (this.location.latitude && this.location.longitude)
                 return '<a href="https://www.google.com/maps/place/' + this.address +
                     '/@' + this.location.latitude + ',' + this.location.longitude + 
-                    ',14z" target="_blank">' + this.address + '</a>';
+                    ',14z" target="_blank">' + this.address + '</a>';*/
         
-        // Otherwise, just return the address
-        return this.address;
+        if (this.location.mapUrl)
+            return '<a href="' + this.location.mapUrl + '" target="_blank">' +
+                this.location.name + '</a>';
+        
+        // Otherwise, just return the name
+        return this.location.name;
     },
     /**
      * @summary Display number of other events occurring on same day
@@ -302,6 +344,7 @@ Template.eventSlide.helpers({
     }
 });
 
+// Upcoming Events helpers
 Template.upcomingEvents.helpers({
     /**
      * @summary List five upcoming events
@@ -314,6 +357,7 @@ Template.upcomingEvents.helpers({
     }
 });
 
+// Upcoming Event item Helpers
 Template.upcomingEventListItem.helpers({
     /**
      * @summary Show friendly date
@@ -326,6 +370,7 @@ Template.upcomingEventListItem.helpers({
     }
 });
 
+// Events template events
 Template.events.events({
     /**
      * Switch to previous month
@@ -333,38 +378,59 @@ Template.events.events({
      *   @param {$.Event} event
      */
     'click .scroll-prev-month, click .prevMonth': function (event) {
-        if ( !(event instanceof $.Event) ) return;
+        check(event, $.Event);
 
-        var lastMonth = Thriver.calendar.thisMonth.get() - 1;
+        var lastMonth  = Thriver.calendar.thisMonth.get() - 1,
+            parentName = document.querySelector('#main > .events').id;
 
         if (lastMonth < 0)
             Thriver.calendar.thisYear.set( Thriver.calendar.thisYear.get() - 1 );
 
         Thriver.calendar.thisMonth.set( Thriver.calendar.getLastMonth() );
+
+        // Update Location Bar
+        Thriver.history.update(parentName,
+            parentName                      + '/' +
+            Thriver.calendar.thisYear.get() + '/' +
+            Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
+        ]);
     },
+
     /**
      * Switch to next month
      * @method
      *   @param {$.Event} event
      */
     'click .scroll-next-month, click .nextMonth': function (event) {
-        if ( !(event instanceof $.Event) ) return;
+        check(event, $.Event);
 
-        var nextMonth = Thriver.calendar.thisMonth.get() + 1;
+        var nextMonth  = Thriver.calendar.thisMonth.get() + 1,
+            parentName = document.querySelector('#main > .events').id;
 
         if (nextMonth > 11)
             Thriver.calendar.thisYear.set( Thriver.calendar.thisYear.get() + 1);
 
         Thriver.calendar.thisMonth.set(nextMonth % 12);
+
+        // Update Location Bar
+        Thriver.history.update(parentName,
+            parentName                      + '/' +
+            Thriver.calendar.thisYear.get() + '/' +
+            Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
+        ]);
     },
 
     /**
-     * @summary Show Even Add Form
+     * @summary Show Event Add Form
      * @method
      *   @param {$.Event} event
      */
     'click li.addEvent': function (event) {
         check(event, $.Event);
+
+        // Set appropriate form type
+        formMethod.set('addEvent');
+        activeEvent.set(null);
 
         var slider = event.delegateTarget.querySelector('.eventsSlider'),
             admin  = event.delegateTarget.querySelector('section.addEvent');
@@ -373,55 +439,78 @@ Template.events.events({
             slider.classList.add('hide');
         if (admin instanceof Element)
             admin.classList.remove('hide');
-        
     },
 
-    // Eoghan's stuff
+    /**
+     * @summary Go to previous slide
+     * @method
+     *   @param {$.Event} event
+     */
     'click .sliderPrev': function (event) {
         check(event, $.Event);
 
-        if (prevPosition >= 0){
-            document.querySelector('.slides').style.webkitTransform = 
-                'translate(-' + prevPosition + '00% ,0px)';
-            --prevPosition;
-            --nextPosition;
+        var position = currentSlide.get() - 1;
+
+        // If the position would be less than zero, go to last month
+        if (position < 0) {
+            document.querySelector('.prevMonth').click();
+            return;
         }
+
+        Thriver.events.slide(position);
     },
+
+    /**
+     * @summary Go to next slide
+     * @method
+     *   @param {$.Event} event
+     */
     'click .sliderNext': function (event) {
         check(event, $.Event);
 
-        if (nextPosition < slideTotal.get()){
-            document.querySelector('.slides').style.webkitTransform = 
-                'translate(-' + nextPosition + '00% ,0px)';
-            ++prevPosition;
-            ++nextPosition;
+        var position = currentSlide.get() + 1;
+
+        // If the position would be greater than the total, switch to next month
+        if ( position >= slideTotal.get() ) {
+            document.querySelector('.nextMonth').click();
+            return;
         }
+
+        Thriver.events.slide(position);
     },
+
+    /**
+     * @summary Navigate to an event from the calendar
+     * @method
+     *   @param {$.Event} event
+     */
     'click button.eventDate': function (event) {
         check(event, $.Event);
 
-        var id = event.target.datset.id;
+        Thriver.events.navigate( event.target.dataset.id );
 
-        document.querySelector('.slides').style.webkitTransform = 
-            'translate(-' + id + '00% ,0px)';
-
-        nextPosition = Number(id) + 1;
-        prevPosition = Number(id) - 1;
+        // Something to do with Mobile
         calMobileEvent();
     },
+
+    /**
+     * @summary Navigate to an event from Upcoming Events list
+     * @method
+     *   @param {$.Event} event
+     */
     'click a.eventDate': function (event) {
         check(event, $.Event);
         event.preventDefault();
 
-        var id = event.target.datset.id;
+        Thriver.events.navigate( event.target.dataset.id );
 
-        document.querySelector('.slides').style.webkitTransform = 
-            'translate(-' + id + '00% ,0px)';
-
-        nextPosition = Number(id) + 1;
-        prevPosition = Number(id) - 1;
+        // Something to do with Mobile
         calMobileEvent();
     },
+
+    //
+    // TODO
+    //
     'click .unregister a': function (event) {
         check(event, $.Event);
 
@@ -458,26 +547,102 @@ Template.events.events({
     }
 });
 
+/** Admin Helpers */
+Template.eventsAdmin.helpers({
+    /**
+     * @summary Meteor Method to call on submit
+     * @function
+     * @returns {String}
+     */
+    method: function () {
+        return formMethod.get();
+    },
+
+    /**
+     * @summary Document context for updates
+     * @function
+     * @returns {Object}
+     */
+    doc: function () {
+        return activeEvent.get();
+    }
+});
+
 /** Admin events */
 Template.eventsAdmin.events({
     /**
      * @summary Close Form
+     */
+    'click button.close': closeForm,
+    'submit #eventForm' : closeForm
+});
+
+/** Event Slide Events */
+Template.eventSlide.events({
+    /**
+     * @summary Register for Event
      * @method
      *   @param {$.Event} event
      */
-    'click button.close': function (event) {
+    'click li.register': function (event) {
         check(event, $.Event);
 
-        // Close add Event Form
-        event.delegateTarget.querySelector('.eventsSlider').classList.remove('hide');
-        event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
+        var a;
+
+        // If this is a third-party register link, navigate to it
+        if (this.registerUrl) {
+            // Create link
+            a = document.createElement('a');
+            a.href = this.registerUrl;
+            a.target = '_blank';            // new tab
+            a.classList.add('hide');        // keep hidden on page
+            document.body.appendChild(a);   // Required for Mozilla to click
+
+            a.click();
+            a.remove();
+        }
+
+        // TODO:  Add event to profile
+    },
+
+    /**
+     * @summary Edit Event
+     * @method
+     *   @param {$.Event} event
+     */
+    'click .adminControls .edit': function (event) {
+        check(event, $.Event);
+
+        var eventsSlider;
+
+        // Set form type to Update
+        formMethod.set('updateEvent');
+        activeEvent.set(this);
+
+        // Hide Slider and show admin interface
+        eventsSlider = event.delegateTarget.parentElement.parentElement;
+        eventsSlider.classList.add('hide');
+        eventsSlider.parentElement.querySelector('section.addEvent').
+            classList.remove('hide');
+    },
+
+    /**
+     * @summary Delete Event
+     * @method
+     *   @param {$.Event} event
+     */
+    'click .adminControls .delete': function (event) {
+        check(event, $.Event);
+
+        if ( confirm('Are you sure you want to delete this event?') )
+            Meteor.call('deleteEvent', this.id);
     }
 });
 
 function calMobileEvent() {
     if ( !document.body.classList.contains('active-event') ) {
         document.body.classList.add('active-event');
-        document.querySelector('.eventSlide .actions .details').click();
+        //document.querySelector('.eventSlide .actions .details').click();
     } else
         document.body.classList.remove('active-event');
 }
@@ -495,7 +660,7 @@ Template.events.onRendered(function () {
         element: Thriver.sections.generateId(instanceName),
         /** Handle deep-linking */
         callback: function (path) {
-            Thriver.events.navigate(path);
+            Thriver.events.parsePath(path);
         }
     });
 });
@@ -503,9 +668,46 @@ Template.events.onRendered(function () {
 /**
  * @summary Navigate to an event
  * @method
+ *   @param {String} id - The ID of an event to navigate to
+ */
+Thriver.events.navigate = function (id) {
+    check(id, String);
+
+    var thisEvent  = Thriver.events.collection.findOne({ _id: id }),
+        events, parentName, path;
+
+    // Set Month and year based on event Start date
+    Thriver.calendar.thisYear .set( thisEvent.start.getFullYear() );
+    Thriver.calendar.thisMonth.set( thisEvent.start.getMonth   () );
+
+    // Get all events for this month
+    events = Thriver.events.getThisMonthEvents();
+
+    // Navigate to appropriate slide
+    for (let event in events)
+        for (let i = 0; i < events[ event ].length; ++i)
+            if (events[ event ][i]._id === id)
+                Thriver.events.slide( events[ event ][i].position );
+
+    // Determine URI path
+    parentName = document.querySelector('#main > .events').id;
+    path = 
+        parentName                                      + '/' + 
+        Thriver.calendar.thisYear.get()                 + '/' +
+        Thriver.calendar.months[
+            Thriver.calendar.thisMonth.get() ]          + '/' +
+        Thriver.sections.generateId( thisEvent.name )   + '/' ;
+
+    // Update URI using History API
+    Thriver.history.update(parentName, path);
+};
+
+/**
+ * @summary Parse URL path for event data
+ * @method
  *   @param {String[]} path - The path by which to navigate
  */
-Thriver.events.navigate = function (path) {
+Thriver.events.parsePath = function (path) {
     check(path, [String]);
 
     console.debug('Path:', path);
@@ -520,7 +722,7 @@ Thriver.events.navigate = function (path) {
         }
         // Specific event ID
         if (path[i].match(/^[a-z0-9]{17}$/i) ) {
-            // Todo
+            Thriver.events.navigate( path[i] );
             continue;
         }
         

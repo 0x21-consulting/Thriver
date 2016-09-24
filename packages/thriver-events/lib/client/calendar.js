@@ -184,7 +184,7 @@ Template.calendar.helpers({
                         day.past = 'past';
 
                     // Hyperlink first event
-                    day.href = currentEvents[count][0]._id;
+                    day.id = currentEvents[count][0]._id;
 
                     // Add event details
                     // (and convert to array)

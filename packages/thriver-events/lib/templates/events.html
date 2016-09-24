@@ -30,7 +30,7 @@
                             <span class="fa">&#xf138;</span></li>
                         {{#if isAdmin}}
                             <li class="addEvent" title="Add an Event">
-                                <span class="fa">&#xf055;</span></li>
+                                <span class="fa">&#xf055;</span> Add Event</li>
                         {{/if}}
                         <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
                         <li class="mobile back-to-events">
@@ -79,7 +79,14 @@
                     {{/if}}
                 </header>
                 <div class="main">
-                    <h2>{{name}}</h2>
+                    <h2>{{name}}
+                        {{#if isAdmin}}
+                            <aside class="adminControls">
+                                <span class="fa edit" title="Edit Event">&#xf044;</span>
+                                <span class="fa delete" title="Delete Event">&#xf014;</span>
+                            </aside>
+                        {{/if}}
+                    </h2>
                     <p class="excerpt">
                         <b>{{startTime}}{{endTime}}: {{{ address }}}</b>
                     </p>
@@ -98,13 +105,13 @@
 
 
 <template name="upcomingEvents">
-        <ul class="upcomingEvents">
-            {{ #each upcomingEvents }}
-                {{>upcomingEventListItem}}
-            {{/each}}
-            <!--{{>actionNotLoggedIn}}-->
-        </ul>
-        <!--<button class="seeAllEvents">See All Upcoming <span class="fa">&#xf13a;</span></button>-->
+    <ul class="upcomingEvents">
+        {{ #each upcomingEvents }}
+            {{>upcomingEventListItem}}
+        {{/each}}
+        <!--{{>actionNotLoggedIn}}-->
+    </ul>
+    <!--<button class="seeAllEvents">See All Upcoming <span class="fa">&#xf13a;</span></button>-->
 </template>
 
 <template name="upcomingEventListItem">
@@ -182,7 +189,7 @@
             {{#each this}}
                 <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}}">
                     {{#if hasEvent}}
-                        <button data-id="{{href}}" class="eventDate">
+                        <button data-id="{{id}}" class="eventDate">
                             {{date}}
                             {{> eventSummary currentEvents}}
                         </button>
