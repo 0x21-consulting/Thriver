@@ -22,7 +22,7 @@
             </label>
             <label>
                 Credit Card Number
-                <input type="text" name="number" placeholder="#### #### #### ####" required pattern="[\d ]{12,19}" />
+                <input type="text" name="number" placeholder="#### #### #### ####" required pattern="[\d ]{12,19}" maxlength="42" />
             </label>
             <span class="cc-pic fa"> </span>
             <input type="hidden" name="type" value="mastercard" />
@@ -52,7 +52,7 @@
             </div>
             <div class="cvv2">
                 <label> CVV2 Number </label>
-                <input type="text" name="cvv2" required pattern="\d{3,4}" />
+                <input type="text" name="cvv2" required pattern="/^[0-9]{3,4}$/" maxlength="4" />
             </div>
          </fieldset>
          <fieldset>
