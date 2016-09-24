@@ -54,8 +54,6 @@ Template.donate.helpers({
 Template.donate.events({
     'click form .custom': function (event) {
         $('.customAmt').focus();
-    },
-    'click form .custom': function (event) {
         document.getElementById('customAmt').checked = true;
     },
     // Handle form submission

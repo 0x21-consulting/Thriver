@@ -12,7 +12,7 @@
                 <label for="amt{{value}}" class="radio">${{{value}}}</label>
             {{/each}}
             <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
-            <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" />
+            <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" onfocus="this.value = this.value;" />
         </fieldset>
         <fieldset>
             <h4>{{detailsTitle}}</h4>
