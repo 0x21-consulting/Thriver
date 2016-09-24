@@ -104,11 +104,16 @@ section#donate {
         // Credit Card Image in number text field
         .cc-pic {
             color: #fff;
+            pointer-events: none;
             font-size: 32px;
-            position: relative;
+            position: absolute;
+            right: 110px;
             display: block;
-            margin: -51px 0 27px 394px;
+            margin: -55px 0 27px 0px;
             min-height: 20px;
+            padding-right: 10px;
+            text-align: right;
+            @media @mobile{ right: 0px; }
         }
         span.bill {
             position: absolute;
