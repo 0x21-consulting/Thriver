@@ -75,20 +75,35 @@ section.work{
 section.work .sa details{
     text-align: center;
     margin: -26px 0px 0px 0px;
+    position: relative;   // for admin control positioning
+
     summary{
         .buttonColor(@orange);
         display: inline-block;
         color: @white;
         .down{display: none;position: static;}
     }
-    >div{
+
+    // Admin controls
+    > button {
+        position: absolute;
+        right: 0;
+        display: block;
+        color: @orange;
+        box-shadow: none;
+        font-size: 20px;
+    }
+
+    &.edit > section > section, &.edit button.edit { display: none; }
+
+    > section {
         //.insetBoxShadow(0px,0px,10px,0px,0.1);
         //.shadow(far);
         box-shadow: 0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
         -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
         margin: 40px 0px 0px 0px;
         padding: 15px 40px 15px 40px;
-        //width: 100%;
+        min-height: 10px; // for when section is empty
         background-color: darken(@white, 1%);
         text-align: left;
         .clearfix;
@@ -111,6 +126,17 @@ section.work .sa details{
             padding: 0px 0px 0px 0px;
             color: @orange;
         }
+
+        // Admin controls
+        textarea {
+            width: 100%;
+            height: 300px;
+        }
+        button {
+            background: @orange;
+            display: inline-block;
+        }
+
         @media (max-width:945px){
             padding:20px;
             .column, .column:first-child, .column:last-child{

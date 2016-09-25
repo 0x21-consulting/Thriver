@@ -35,11 +35,12 @@ Thriver.sections.schema = new SimpleSchema({
         max: 1,
         label: 'Section icon'
     },
-    /** Section content, mostly just for info sections */
-    content: {
-        type: String,
-        optional: true,
-        label: 'Section text'
+    /** Section data */
+    data: {
+        type: Object,
+        optional: false,
+        defaultValue: {},
+        blackbox: true
     },
     /** Section template, which is required */
     template: {
@@ -57,7 +58,7 @@ Thriver.sections.schema = new SimpleSchema({
         defaultValue: false,
     },
     /** Section Tabs or subsections */
-    tabs: {
+    children: {
         type: [String],
         defaultValue: []
     }

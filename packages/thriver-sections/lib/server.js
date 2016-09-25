@@ -4,8 +4,6 @@
  *   @param {String} id - ID of section to get children sections
  */
 Meteor.publish('sections', function (id) {
-    var tabs;
-    
     // id must be either a String or undefined
     check(id, Match.Maybe(String));
     
@@ -25,7 +23,7 @@ Meteor.methods({
      *   @param {string} parent   - The ID of a section's parent (optional)
      *   @param {string} name     - Initial section name (optional)
      */
-    addSection: function (template, index, parent, name, callback) {
+    addSection: function (template, index, parent, name) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
@@ -39,12 +37,9 @@ Meteor.methods({
         // Add new section
         return Thriver.sections.collection.insert({
             name         : name || null,
-            icon         : '\uf0e9',  // default icon: umbrella
-            content      : null,
             template     : template,
             order        : index,
-            displayOnPage: parent? false : true,
-            tabs         : []
+            displayOnPage: parent? false : true
         },
         // Update parent section, if there is one, to include section
         function (error, id) {
@@ -57,7 +52,7 @@ Meteor.methods({
             // Update parent element to include new child
             Thriver.sections.collection.update({ '_id': parent }, {
                 $addToSet: {
-                    tabs: id
+                    children: id
                 }
             });
         });
@@ -75,8 +70,8 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         
         // Mutual Suspicion
-        sectionId = '' + sectionId;
-        newIndex  = parseInt(newIndex);
+        check(sectionId, String);
+        check(newIndex, Number);
         
         // Update order
         Thriver.sections.collection.update({ '_id': sectionId }, {
@@ -94,19 +89,19 @@ Meteor.methods({
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
         
-        var tabs, i, j;
+        var children, i, j;
         
         // Parameter check
         check(id, String);
         
         // Delete any tabs
-        tabs = Thriver.sections.collection.findOne({ '_id': id }, { tabs: 1 });
-        if (tabs && tabs.tabs instanceof Array) {
-            tabs = tabs.tabs;
+        children = Thriver.sections.get(id, [ 'children' ]);
+        if (children && children.children instanceof Array) {
+            children = children.children;
             
             // Remove each tab, one at a time
-            for (i = 0, j = tabs.length; i < j; ++i) {
-                Thriver.sections.collection.remove({ '_id': tabs[i] });
+            for (i = 0, j = children.length; i < j; ++i) {
+                Thriver.sections.collection.remove({ '_id': children[i] });
             }
         }
         
@@ -138,24 +133,24 @@ Meteor.methods({
     },
     
     /**
-     * Update a section's content
+     * Update a section's data
      * @method
      *   @param {string} id      - MongoDB ID of section to update
-     *   @param {string} content - New content to replace
+     *   @param {string} data    - New data to replace
      */
-    updateSectionContent: function (id, content) {
+    updateSectionData: function (id, data) {
         // Check Authorization
         if (!Meteor.userId() || !Meteor.user().admin)
             throw new Meteor.Error('not-authorized');
         
         // Check parameters
-        check(id, String);
-        check(content, String);
+        check(id  , String);
+        check(data, Object);
         
         // Update section
         Thriver.sections.collection.update({ '_id': id }, {
             $set: {
-                content: content
+                data: data
             }
         });
     },
@@ -178,76 +173,8 @@ Meteor.methods({
         // Update list to remove child
         Thriver.sections.collection.update({ '_id': id }, {
             $pull: {
-                tabs: child
+                children: child
             }
-        });
-    },
-    
-    //
-    // Tab-related methods
-    //
-    
-    // Add a new tab
-    addTab: function (id, order) {
-        // Check Authorization
-        if (!Meteor.userId() || !Meteor.user().admin)
-            throw new Meteor.Error('not-authorized');
-            
-        // Mutual Suspicion
-        id = '' + id;
-        order = parseInt(order);
-        
-        // Add tab
-        Thriver.sections.collection.insert({
-            name: null,
-            icon: '\uf0e9',               // use default (umbrella)
-            content: null,
-            template: null,
-            order: order,
-            displayOnPage: false,
-            tabs: []
-        },
-        // Update parent section to include the tab
-        function (error, tabId) {
-            if (error) throw new Meteor.Error(error);
-            Thriver.sections.collection.update({ '_id': id}, {
-                $addToSet: {
-                    tabs: tabId
-                }
-            });
-        });
-    },
-    
-    // Update tab order
-    updateTabOrder: function (id, order) {
-        // Check Authorization
-        if (!Meteor.userId() || !Meteor.user().admin)
-            throw new Meteor.Error('not-authorized');
-        
-        // Mutual Suspicion
-        id = '' + id;
-        order = parseInt(order);
-        console.log('id ' + id);
-        console.log('order ' + order);
-        // Update order
-        Thriver.sections.collection.update({ '_id': id }, {
-            $set: { 'order': order }
-        });
-    },
-    
-    // Update tab name
-    updateTabName: function (id, name) {
-        // Check Authorization
-        if (!Meteor.userId() || !Meteor.user().admin)
-            throw new Meteor.Error('not-authorized');
-        
-        // Mutual Suspicion
-        id = '' + id;
-        name = '' + name;
-        
-        // Update tab name
-        Thriver.sections.collection.update({ '_id': id }, {
-            $set: { 'name': name }
         });
     }
 });

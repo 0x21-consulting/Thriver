@@ -6,30 +6,25 @@
     background: #fff;
     left: 20px;
     bottom: 20px;
-    border-radius: 5px 0 0 5px;
-    box-shadow: -5px 5px 25px -1px rgba(0,0,0,.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.7);
     text-align: center;
     padding: 10px;
     z-index: 100; // keep on top
 }
 #admin-controls button, .section-controls button {
     font-family: 'FontAwesome';
-    font-size: 50px;
+    font-size: 40px;
     vertical-align: middle;
-    text-rendering: auto; // optimizelegibility throws things off #1094
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0); // ensures no half-pixel rendering in firefox
-
     // Override blanket button styles
     display: inline;
     padding: 2px 6px 3px;
-    border: 2px outset buttonface;
-    color: #000;
+    color: @orange;
     letter-spacing: 0;
+    box-shadow: none;
 }
-#admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
-#admin-controls:hover, .section-controls:hover { opacity: 1; }
+//#admin-controls, .section-controls { transition: opacity .2s ease-in; opacity: .5; }
+//#admin-controls:hover, .section-controls:hover { opacity: 1; }
 article.active .section-controls {
     margin-top: 30px;
 }
@@ -60,10 +55,17 @@ section.placeholder {
     padding: 50px;
     text-align: center;
 }
+// Placeholder element when no other section exists, yet
+section.placeholder:nth-of-type(1) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 // Templates menu
 #templates-menu {
     position: absolute;
-    z-index: 3;
+    z-index: 100;
     background: #fff;
     box-shadow: 0 0 25px -1px rgba(0,0,0,.2);
     border-radius: 5px;

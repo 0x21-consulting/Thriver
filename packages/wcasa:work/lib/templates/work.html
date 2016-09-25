@@ -103,7 +103,7 @@
         <div class="main textBody workInner">
             <div class="workTextContainer" data-hash="{{hash}}">
                 {{>workTertiary}}
-                {{{markdown content}}}
+                {{{markdown data.content}}}
                 <hr>
                 <button class="backToTopWork">Back to Top of Article<span class="fa">&#xf0d8;</span></button>
             </div>
@@ -128,8 +128,15 @@
         <summary class="button">
             <span class="fa up">&#xf05a; </span>
             <span class="fa down">&#xf00d; </span>
-            About Sexual Violence</summary>
-        <div>
+            About Sexual Violence
+        </summary>
+        {{#if isAdmin}}
+            <button class="fa edit" title="Edit Section">&#xf044;</button>
+        {{/if}}
+        <section>
+            <section data-hash="{{hash}}">{{{ markdown data.aboutSA }}}</section>
+        </section>
+        <!--<div>
             <div class="column">
                 <h2>Etiam Vitae</h2>
                 <p>
@@ -148,6 +155,6 @@
                     Curabitur ornare dolor ac massa eleifend facilisis. Quisque gravida consequat velit vel malesuada. Nunc ex justo, commodo ut hendrerit vel, luctus at nibh. Nunc in augue eros. Cras euismod nulla nec enim tristique tempor eu ac nisi. Etiam vehicula ultrices odio, et commodo risus mollis vel.
                 </p>
             </div>
-        </div>
+        </div>-->
     </details>
 </template>

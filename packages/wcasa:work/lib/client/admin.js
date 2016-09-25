@@ -58,7 +58,7 @@ updateSectionContent = function (oldHash) {
         
         // Don't commit if nothing changed
         if (newHash !== oldHash)
-            Meteor.call('updateSectionContent', id, content);
+            Meteor.call('updateSectionData', id, { content: content });
 
         // Restore view
         parent.classList.remove('edit');
@@ -130,6 +130,7 @@ Template.workContent.events({
         event.target.addEventListener('blur',  handler);
         event.target.addEventListener('keypress', handler);
     },
+
     /**
      * Delete a section
      * @method
@@ -165,6 +166,7 @@ Template.workContent.events({
         // Then delete this section
         Meteor.call('deleteSection', this.id);
     },
+
     /**
      * Edit section markdown
      * @method
@@ -193,10 +195,60 @@ Template.workContent.events({
             updateSectionContent(content.dataset.hash));
 
         // Textarea should get markdown
-        textarea.textContent = Thriver.sections.get(this.id, ['content']).content;
+        textarea.textContent = Thriver.sections.get(this.id, ['data']).data.content;
 
         // Add textarea but hide preview
         parent.classList.add('edit');
+        parent.appendChild(textarea);
+        parent.appendChild(button);
+    }
+});
+
+// About SA events
+Template.aboutSA.events({
+    /**
+     * @summary Edit Section markdown
+     * @method
+     *   @param {$.Event} event
+     */
+    'click button.edit': function (event) {
+        check(event, $.Event);
+
+        var section = event.target.parentElement.querySelector('section > section'),
+            parent  = section.parentElement,
+            that    = this,
+    
+        // Create a textarea element through which to edit markdown
+        textarea = document.createElement('textarea'),
+
+        // Button by which to okay changes and commit to db
+        button = document.createElement('button');
+        button.textContent = 'Save';
+        button.addEventListener('mouseup', function (event) {
+            check(event, Event);
+
+            var parent = event.target.parentElement, element;
+
+            // Get section ID
+            var id = that._id,
+                content = this.parentElement.querySelector('textarea').value,
+                newHash = SHA256(content);
+            
+            // Don't commit if nothing changed
+            if (newHash !== section.dataset.hash)
+                Meteor.call('updateSectionData', id, { aboutSA: content });
+
+            // Restore view
+            parent.parentElement.classList.remove('edit');
+            parent.querySelector('textarea').remove();
+            parent.querySelector(':scope > button').remove();
+        });
+        
+        // Textarea should get markdown
+        textarea.textContent = Thriver.sections.get(this._id, ['data']).data.aboutSA;
+
+        // Add textarea but hide preview
+        parent.parentElement.classList.add('edit');
         parent.appendChild(textarea);
         parent.appendChild(button);
     }
