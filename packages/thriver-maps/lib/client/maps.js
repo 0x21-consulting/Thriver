@@ -93,6 +93,11 @@ initialize = function () {
                     google.maps.event.trigger(map,'resize');
                     map.setZoom(12);
                     map.setCenter(marker.getPosition());
+
+                    //Populate Details
+                    // Show results if the result has an ID
+                    if (this.id)
+                        Session.set('currentProvider', Providers.findOne({ _id: this.id }));
                 });
             });
 
@@ -208,9 +213,6 @@ initialize = function () {
         // Open new infowindow
         map.infowindow.open(this.get('map'), this);
 
-        // Show results if the result has an ID
-        if (this.id)
-            Session.set('currentProvider', Providers.findOne({ _id: this.id }));
     },
 
     // Create maps API script
