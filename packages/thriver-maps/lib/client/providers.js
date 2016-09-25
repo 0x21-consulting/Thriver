@@ -68,10 +68,6 @@ Template.providers.onRendered(function () {
         $('body').addClass('providersListOpen');
     });
 
-    $('section.providers .providerSearch form input').click(function(event){
-        $('body').removeClass('providersListOpen');
-    });
-
     $(function() { //shorthand document.ready function
         /*$('#search').on('submit', function(e) { //use on if jQuery 1.7+
             $('.providers .provider-search').removeClass('active');

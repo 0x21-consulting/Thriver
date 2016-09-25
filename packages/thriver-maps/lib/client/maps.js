@@ -330,6 +330,7 @@ Template.providers.events({
         // Close search field
         closeMapSearch();
         openDetails();
+        document.body.classList.remove('providersListOpen');
     },
     'click .mapView': function (event) {
         event.stopPropagation();event.preventDefault();
@@ -360,10 +361,11 @@ Template.providers.events({
     'keyup #zip': function (event) {
         if (event.currentTarget.value.length === 5) {
             getCounty(event.currentTarget.value);
-
+            document.body.classList.remove('providersListOpen');
             // Close search field
             closeMapSearch();
             openDetails();
+            google.maps.event.trigger(map,'resize');
         }
     }
 });
