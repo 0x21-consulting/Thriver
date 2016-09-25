@@ -83,7 +83,6 @@ initialize = function () {
 
                 // Display Label
                 google.maps.event.addListener(marker, 'mouseover', displayLabel);
-                google.maps.event.addListener(marker, 'mouseout',  hideLabel);
 
                 // Add to map
                 marker.setMap(map);
