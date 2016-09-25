@@ -103,21 +103,21 @@ Template.workNav.helpers({
         var result;
         id = id || this.id;
 
-        result = Thriver.sections.get(id, ['tabs']);
+        result = Thriver.sections.get(id, ['children']);
 
-        if (result && result.tabs && result.tabs.length)
+        if (result && result.children && result.children.length)
             return true;
 
         return false;
     },
-    tabs: getValue('tabs')
+    tabs: getValue('children')
 });
 
 // Navigation
 Template.workListItem.helpers({
     icon:     getValue('icon'),
     name:     getValue('name'),
-    tabs:     getValue('tabs'),
+    tabs:     getValue('children'),
     tabName:  getValue('name'),
     anchor:   function () {
         //console.debug('parent data', Template.parentData());
@@ -132,20 +132,20 @@ Template.workListItem.helpers({
 
 // Content Container
 Template.workContentContainer.helpers({
-    tabs:     getValue('tabs'),
+    tabs:     getValue('children'),
     template: getValue('template'),
-    subtabs:  getValue('tabs')
+    subtabs:  getValue('children')
 });
 
 // Content
 Template.workContent.helpers({
-    content:  getValue('content'),
+    data:     getValue('data'),
     icon:     getValue('icon'),
     name:     getValue('name'),
     hash:     function () {
         var content;
         
-        content = getValue('content')(this.id);
+        content = getValue('data')(this.id).content;
 
         // Return a SHA256 hash of the content for use in editing
         if (content) return SHA256(content);
@@ -243,22 +243,22 @@ Template.work.onRendered(function () {
             var sections, section, i, j, link,
 
             // Get Sections recursively
-            getTabs = function (id) {
+            getChildren = function (id) {
                 var sections = {}, section,
-                    tabs  = Thriver.sections.get(id, ['tabs']).tabs,
+                    children  = Thriver.sections.get(id, ['children']).children,
                     name, i, j;
 
                 // Get name and ID for each tab
-                for (i = 0, j = tabs.length; i < j; ++i) {
+                for (i = 0, j = children.length; i < j; ++i) {
                     // Get section name
-                    section = Thriver.sections.get( tabs[i], ['name'] );
+                    section = Thriver.sections.get( children[i], ['name'] );
                     name = section.name;
 
                     // Then sanitize section name
                     name = Thriver.sections.generateId(name);
 
                     // Add to link list and Recurse
-                    sections[ name ] = getTabs( tabs[i] );
+                    sections[ name ] = getChildren( children[i] );
 
                     // Add ID to list as well
                     sections[ name ]._id = section._id;
@@ -271,7 +271,7 @@ Template.work.onRendered(function () {
             if (!path.length) return;
 
             // Get link list of all browseable sections
-            sections = getTabs(data._id);
+            sections = getChildren(data._id);
 
             // Get link for deep-linked section
             for (i = 0, j = path.length; i < j; ++i) {

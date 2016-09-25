@@ -186,7 +186,7 @@ setTemplate = function (event) {
     // Determine index of placeholder among its parent
     for (i = 0, j = elements.length; i < j; ++i)
         if (elements[i] === placeholder)
-            index = i;
+            index = i + 1;
 
     // If element doesn't exist, just put it at the end
     index = index || elements.length;
@@ -202,10 +202,6 @@ setTemplate = function (event) {
     // @params { verb, sectionId, newIndex}
     for (; index < j; ++index)
         Meteor.call('updateSectionOrder', elements[index].dataset.id, index + 1);
-
-    // BUG: New sections don't appear in correct order for whatever reason.
-    //      Just reload page in the meantime...
-    location.reload();
 };
 
 // Bind Drag-and-drop events for adding new sections

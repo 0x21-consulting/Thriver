@@ -58,7 +58,7 @@ updateSectionContent = function (oldHash) {
         
         // Don't commit if nothing changed
         if (newHash !== oldHash)
-            Meteor.call('updateSectionContent', id, content);
+            Meteor.call('updateSectionData', id, { content: content });
 
         // Restore view
         parent.classList.remove('edit');

@@ -4,6 +4,7 @@
  *   @param {String}   id - The ID of a section whose details to get;
  *       returns all page sections by default
  *   @param {String[]} fields - Fields to include
+ * @returns {LocalCollection.Cursor | Object | undefined}
  */
 Thriver.sections.get = function (id, fields) {
     // Meteor Collection.find options
