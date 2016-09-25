@@ -4,6 +4,7 @@
 section.providers{
     z-index: 1;
     position: relative;
+    label{display: block !important;}
     article.details{
         width: 700px;
         background: @navy;
@@ -177,11 +178,15 @@ section.providers{
                 -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
                 text-indent: 0px;
             }
-            button.seeAllProviders {
+            button.button {
                 .buttonColor(saturate(@blue, 55%));
                 line-height: 29px;
                 border-radius: 0px;
                 margin-left: -1px;
+                &:nth-child(3){
+                    background: @teal;
+                    margin-left: -15px;
+                }
             }
         }
         > a{

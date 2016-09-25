@@ -87,6 +87,14 @@ initialize = function () {
 
                 // Add to map
                 marker.setMap(map);
+
+                //Click Marker
+                marker.addListener('click', function() {
+                    fullMap(false);
+                    google.maps.event.trigger(map,'resize');
+                    map.setZoom(12);
+                    map.setCenter(marker.getPosition());
+                });
             });
 
             // Stop
@@ -135,7 +143,7 @@ initialize = function () {
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           document.getElementById("service-providers").classList.add("full-view");
           if (map.getZoom() > 0) map.setZoom(7);
-          map.setCenter(new google.maps.LatLng(44.923579, -89.574563));
+          map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
       }
 
 
@@ -264,6 +272,17 @@ moveMap = function (county) {
         Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
 },
 
+// Setting the map view to full
+fullMap = function (condition) {
+    if (condition == true){
+        document.getElementById("service-providers").classList.add("full-view");
+        if (map.getZoom() > 0) map.setZoom(7);
+        map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
+    } else{
+        document.getElementById("service-providers").classList.remove("full-view");
+    }
+},
+
 // Get X and Y Coordinates based on web mercator projection
 getXY = function (lat, lon) {
     console.info('Meters per pixel', 156543.03392 * Math.cos(lat * Math.PI / 180)
@@ -291,6 +310,8 @@ getCounty = function (zip) {
     moveMap(county.name);
 };
 
+
+
 // On proper initialization (meteor sucks at handling race conditions)
 //Template.body.onRendered(function () {
     Template.providers.onRendered(initialize);
@@ -308,6 +329,21 @@ Template.providers.events({
 
         // Close search field
         closeMapSearch();
+        openDetails();
+    },
+    'click .mapView': function (event) {
+        event.stopPropagation();event.preventDefault();
+        document.body.classList.remove('providersListOpen');
+        document.getElementById("service-providers").classList.add("full-view");
+        google.maps.event.trigger(map,'resize');
+        fullMap(true);
+    },
+    'click .fullMap': function (event){
+        event.stopPropagation();event.preventDefault();
+        document.body.classList.remove('providersListOpen');
+        document.getElementById("service-providers").classList.add("full-view");
+        google.maps.event.trigger(map,'resize');
+        fullMap(true);
     },
     // Clicking ZIP Code GO button
     'click #zip + .submit': function (event) {
@@ -318,6 +354,7 @@ Template.providers.events({
 
         // Close search field
         closeMapSearch();
+        openDetails();
     },
     // Reaching 5 digits
     'keyup #zip': function (event) {
@@ -326,6 +363,7 @@ Template.providers.events({
 
             // Close search field
             closeMapSearch();
+            openDetails();
         }
     }
 });

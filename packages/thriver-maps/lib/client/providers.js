@@ -9,14 +9,14 @@ Template.providers.helpers({
     //       which is why we aren't using the counties collection here
     counties: function () {
         //return zipCodes.find({});
-        
+
         // NOTE: Meteor's mongo driver still doesn't support
         //   db.collection.distinct(), so we have to hack it
         return _.chain(
             Providers.find({}, { counties: 1 }).map(function (provider) {
                 return provider.counties;
         })).
-        
+
         // provider.counties is an array, so we have to flatten them all,
         // then sort them alphabetically, then return distinct ones
         flatten().sort().uniq().value();
@@ -64,12 +64,8 @@ Template.providers.onRendered(function () {
     //Toggle provider list view
     $('.seeAllProviders').click(function(event){
         event.stopPropagation();event.preventDefault();
+        document.getElementById("service-providers").classList.remove("full-view");
         $('body').addClass('providersListOpen');
-    });
-
-    $('.mapView').click(function(event){
-        event.stopPropagation();event.preventDefault();
-        $('body').removeClass('providersListOpen');
     });
 
     $('section.providers .providerSearch form input').click(function(event){
@@ -90,6 +86,12 @@ closeMapSearch = function (event) {
     var search = document.querySelector('.providers .providerSearch');
     if (search instanceof Element && search.classList.contains('active'))
         search.classList.remove('active');
+};
+
+// Close Map Search
+// TODO: This is currently GLOBAL!
+openDetails = function (event) {
+    document.getElementById("service-providers").classList.remove("full-view");
 };
 
 /**
