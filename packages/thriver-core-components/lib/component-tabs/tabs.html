@@ -2,16 +2,32 @@
     <menu class="tabs {{class}}">
         {{#each tabs}}
             <li>
-                <a href="#{{id}}" class="{{#if icon}}icon-{{icon}}{{/if}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs">{{title}}</a>
+                <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
             </li>
         {{/each}}
+        {{#if isAdmin}}
+            {{#if showAddPage}}
+                <li class="new-section">
+                    <a href="#" aria-expanded="false">Add New Page</a>
+                </li>
+            {{/if}}
+        {{/if}}
     </menu>
     {{#if filter}}
         {{>filter}}
     {{/if}}
     <div class="tabs {{class}}">
         {{#each tabs}}
-            <article id="{{id}}" aria-hidden="true">
+            <article data-id="{{id}}" aria-hidden="true" data-editable="{{editable}}" 
+                class="{{#if isAdmin}}admin{{/if}}">
+                {{#if isAdmin}}
+                    {{#if editable}}
+                        <aside class="admin">
+                            <button class="fa edit">&#xf044;</button>
+                            <button class="fa delete">&#xf1f8;</button>
+                        </aside>
+                    {{/if}}
+                {{/if}}
                 {{> Template.dynamic template=template}}
             </article>
         {{/each}}
