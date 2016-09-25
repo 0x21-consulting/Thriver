@@ -92,7 +92,7 @@ initialize = function () {
                     fullMap(false);
                     google.maps.event.trigger(map,'resize');
                     map.setZoom(12);
-                    map.setCenter(marker.getPosition());
+                    map.panTo(marker.getPosition());
 
                     // Show results if the result has an ID
                     if (this.id)
@@ -324,6 +324,7 @@ getCounty = function (zip) {
 Template.providers.events({
     // County drop-down list
     'change #county': function (event) {
+        openDetails();
         var name = event.target.value;
 
         // Mutual Suspician
@@ -333,7 +334,6 @@ Template.providers.events({
 
         // Close search field
         closeMapSearch();
-        openDetails();
         document.body.classList.remove('providersListOpen');
     },
     'click .mapView': function (event) {
