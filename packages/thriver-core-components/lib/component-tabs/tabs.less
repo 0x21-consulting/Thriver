@@ -140,7 +140,7 @@ menu.tabs.left{
 }
 div.tabs.left{
     overflow: hidden;
-    > article{ padding: 40px;}
+    > article{ padding: 40px; min-height: 565px; }
 }
 
 .tab-box{
@@ -212,4 +212,30 @@ div.tabs.left{background: #fff;}
             >li >a[aria-expanded="true"]:before{ right: 40px; }
         }
     }
+}
+
+// Admin controls
+article.admin aside.admin {
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+}
+article.admin aside.admin button {
+    color: @orange;
+    box-shadow: none;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px 0 10px 10px;
+}
+article.admin h2 { cursor: pointer; }
+article.admin.edit section.content { display: none; }
+article.admin textarea {
+    width: 100%;
+    height: 450px;
+
+    &:focus { box-shadow: none; }
+}
+article.admin > button {
+    background: @orange;
+    display: inline-block;
 }

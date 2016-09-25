@@ -48,7 +48,7 @@ section.who div.tabs{
             padding: 20px;
             margin: 0px 20px 0px 20px;
         }
-        &#staff, &#board{
+        &[data-id="staff"], &[data-id="board"] {
             ul{
                 margin: 0 auto;
                 text-align: center;
@@ -107,7 +107,7 @@ section.who div.tabs{
                     }
                 }
             }
-            &#board{
+            &[data-id="board"] {
                 ul{
                     margin-top: 0px;
                     > li{
@@ -277,9 +277,6 @@ section.who menu.tabs{
         }
     }
 }
-
-
-
 
 section.who menu.tabs.left{
     >li:first-child:before{

@@ -48,6 +48,7 @@ Package.onUse(function (api) {
         'lib/component-more/more.js',
         'lib/component-sidebar/aside.js',
         'lib/component-tabs/tabs.js',
+        'lib/component-tabs/admin.js',
         'lib/component-top/top.js'
     ], ['client']);
     

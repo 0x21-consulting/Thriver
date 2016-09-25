@@ -1,6 +1,6 @@
 //Canvas.js is dedicated to managing canvas events.
 //This includes how the canvas/off-canvas elements open/close and relate.
-Meteor.canvasFunctions = {
+Thriver.canvas = {
 	clearCanvas : function(){
 	    document.body.classList.remove('noScroll');
 	    var canvas = document.getElementById('canvas');
@@ -24,11 +24,11 @@ Meteor.canvasFunctions = {
 
 	    //Close open canvas elements if overlay or active li is clicked. Or if close canvas event fired
 	    if (event.target.getAttribute('aria-expanded') == 'true' && event.target.id !== "mobile-toggle" || event.target == overlay || event.target.getAttribute('data-canvas-event') == 'close'){
-	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
-	        for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
-	        c.clearCanvas(); //Remove all canvas effect classes
-	        h.hidden(overlay,true);
-	        h.hidden(main,false);
+	        for (var i = 0, e; e = toggle[i]; i++) { Thriver.util.makeActive(e,false); } //Remove current toggle active states
+	        for (var i = 0, e; e = sidebar[i]; i++) { Thriver.util.hide(e,true); } //Clear all active Sidebars
+	        Thriver.canvas.clearCanvas(); //Remove all canvas effect classes
+	        Thriver.util.hide(overlay,true);
+	        Thriver.util.hide(main,false);
 			document.body.classList.remove('open-canvas');
 	        focusGlobalElFirst.focus();
 			if(document.getElementById("mobile-toggle").getAttribute('aria-expanded') !== "false"){ document.getElementById("mobile-toggle").click(); }
@@ -36,29 +36,29 @@ Meteor.canvasFunctions = {
 
 	    // Open Overlay and offCanvas elements if clicking inactive list item
 	    else if(event.target.hasAttribute('aria-controls') && event.target.getAttribute('aria-expanded') == 'false' && event.target.id !== "mobile-toggle"){
-	        c.clearCanvas();
+	        Thriver.canvas.clearCanvas();
 			document.body.classList.add('open-canvas');
-	        h.hidden(main,true);
+	        Thriver.util.hide(main,true);
 	        document.body.classList.add('noScroll');
 	        canvas.setAttribute('data-canvas-state','open'); //Add master canvas effect class
-	        h.hidden(overlay,false);
-	        for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Clear all active toggles
-	        h.active(event.target,true); //Add active class to clicked element
+	        Thriver.util.hide(overlay,false);
+	        for (var i = 0, e; e = toggle[i]; i++) { Thriver.util.makeActive(e,false); } //Clear all active toggles
+	        Thriver.util.makeActive(event.target,true); //Add active class to clicked element
 			if(document.getElementById("mobile-toggle").getAttribute('aria-expanded') !== "true"){ document.getElementById("mobile-toggle").click(); } //Open Mobile Menu
 	        //Sets values based on the parameters of the current sidebar
 	        for (var i = 0, e; e = sidebar[i]; i++) {
-	            h.hidden(e,true); //Clear all active sidebars
+	            Thriver.util.hide(e,true); //Clear all active sidebars
 	            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
-	                h.hidden(e,false); //Add active class to given sidebar
+	                Thriver.util.hide(e,false); //Add active class to given sidebar
 	                canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class
 	                if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
 	                if(e.dataset.position == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
 	            }
 				/*
 				// Working alternate for ie compat.
-	            h.hidden(e,true); //Clear all active sidebars
+	            Thriver.util.hide(e,true); //Clear all active sidebars
 	            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
-	                h.hidden(e,false); //Add active class to given sidebar
+	                Thriver.util.hide(e,false); //Add active class to given sidebar
 	                canvas.setAttribute('data-canvas-width',e.getAttribute('width')); //Add new sidebar-width effect class
 	                if(e.getAttribute('data-position') == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
 	                if(e.getAttribute('data-position') == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
@@ -101,20 +101,20 @@ Meteor.canvasFunctions = {
 					/*for (var i = 0, e; e = activeTab[i]; i++) {
 						if(e.getAttribute('aria-expanded')== "true"){
 							tabActive=true;
-							h.active(e, false);
+							Thriver.util.makeActive(e, false);
 							document.body.classList.remove('tab-open');
 							for (var i = 0, e; e = activeTabContent[i]; i++) {
-								h.hidden(e, true);
+								Thriver.util.hide(e, true);
 							}
 						}
 					}*/
 					if(tabActive==false){
-						for (var i = 0, e; e = toggle[i]; i++) { h.active(e,false); } //Remove current toggle active states
-						for (var i = 0, e; e = sidebar[i]; i++) { h.hidden(e,true); } //Clear all active Sidebars
-						c.clearCanvas(); //Remove all canvas effect classes
+						for (var i = 0, e; e = toggle[i]; i++) { Thriver.util.makeActive(e,false); } //Remove current toggle active states
+						for (var i = 0, e; e = sidebar[i]; i++) { Thriver.util.hide(e,true); } //Clear all active Sidebars
+						Thriver.canvas.clearCanvas(); //Remove all canvas effect classes
 						document.body.classList.add('noScroll');
-						h.hidden(overlay,true);
-						h.hidden(main,false);
+						Thriver.util.hide(overlay,true);
+						Thriver.util.hide(main,false);
 						focusGlobalElFirst.focus();
 					}
 				}
@@ -122,13 +122,13 @@ Meteor.canvasFunctions = {
 			 if(hiddenSidebar == true){
 				for (var i = 0, e; e = toggleMobile[i]; i++) {
 					if(e.getAttribute('aria-expanded')== "true"){
-						for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
-						h.hidden(mobileNavigation, true);
+						for (var i = 0, e; e = toggleMobile[i]; i++) { Thriver.util.makeActive(e, false);}
+						Thriver.util.hide(mobileNavigation, true);
 						document.body.classList.remove('noScroll');
 					} else{
 						//alert('ma');
-						h.active(event.target, true);
-						h.hidden(mobileNavigation, false);
+						Thriver.util.makeActive(event.target, true);
+						Thriver.util.hide(mobileNavigation, false);
 						document.body.classList.add('noScroll');
 						//Close any open tabs
 					}
@@ -137,12 +137,12 @@ Meteor.canvasFunctions = {
 			/*
 			if(event.target.getAttribute('aria-expanded') == 'true'){
 				if(event.target)
-				h.active(event.target, false);
-				h.hidden(mobileNavigation, true);
+				Thriver.util.makeActive(event.target, false);
+				Thriver.util.hide(mobileNavigation, true);
 				document.body.classList.remove('noScroll');
 			} else{
-				h.active(event.target, true);
-				h.hidden(mobileNavigation, false);
+				Thriver.util.makeActive(event.target, true);
+				Thriver.util.hide(mobileNavigation, false);
 				document.body.classList.add('noScroll');
 			}*/
 	    }
@@ -150,20 +150,16 @@ Meteor.canvasFunctions = {
 	    f.currentFocusGroup(); //Recalculate live focus areas
 	}
 }
-//Define usage
-c = Meteor.canvasFunctions;
-
-
 
 //This needs a new home
 function mobToggle(){
-	c.toggleCanvas(); //START HERE
+	Thriver.canvas.toggleCanvas(); //START HERE
 }
 function mainNavItem(){
 	var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
 	var mobileNavigation = document.getElementById('mobile-navigation');
-	for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
-	h.hidden(mobileNavigation, true);
+	for (var i = 0, e; e = toggleMobile[i]; i++) { Thriver.util.makeActive(e, false);}
+	Thriver.util.hide(mobileNavigation, true);
 	document.body.classList.remove('noScroll');
 }
 function toServiceProvidersTwo(){
@@ -175,24 +171,24 @@ function toServiceProvidersTwo(){
 function toServiceProviders(){
 	var toggleMobile = document.querySelectorAll('[aria-controls][data-toggle=mobile-navigation]');
 	var mobileNavigation = document.getElementById('mobile-navigation');
-	for (var i = 0, e; e = toggleMobile[i]; i++) { h.active(e, false);}
-	h.hidden(mobileNavigation, true);
+	for (var i = 0, e; e = toggleMobile[i]; i++) { Thriver.util.makeActive(e, false);}
+	Thriver.util.hide(mobileNavigation, true);
 	document.body.classList.remove('noScroll');
 }
 
 Template.body.events({
 	//Canvas Actions
-	'click [aria-controls][data-toggle=canvas]': c.toggleCanvas,
-	'click .overlay': c.toggleCanvas,
-	'click [data-canvas-event="close"]': c.toggleCanvas,
+	'click [aria-controls][data-toggle=canvas]': Thriver.canvas.toggleCanvas,
+	'click .overlay': Thriver.canvas.toggleCanvas,
+	'click [data-canvas-event="close"]': Thriver.canvas.toggleCanvas,
 
 	//Mobile Events
-	'click [aria-controls][data-toggle=mobile-navigation]': c.toggleCanvas,
+	'click [aria-controls][data-toggle=mobile-navigation]': Thriver.canvas.toggleCanvas,
 
-	'click [data-type="main-navigation-item"]': c.toggleCanvas,
+	'click [data-type="main-navigation-item"]': Thriver.canvas.toggleCanvas,
 
-	'click #mobile-navigation li > a[href="#service-providers"]': c.toggleCanvas, //toservice2
+	'click #mobile-navigation li > a[href="#service-providers"]': Thriver.canvas.toggleCanvas, //toservice2
 
-	'click #mobile-navigation figure a[href="#service-providers"]': c.toggleCanvas
+	'click #mobile-navigation figure a[href="#service-providers"]': Thriver.canvas.toggleCanvas
 
 });

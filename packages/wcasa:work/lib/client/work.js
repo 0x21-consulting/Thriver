@@ -54,7 +54,7 @@ var changeTabs = function (event) {
     Thriver.history.update(parentName, path);
 
     // Update URI
-    window.history.pushState({ path: path }, undefined, '/' + path);
+    //window.history.pushState({ path: path }, undefined, '/' + path);
 
     // If not already active, add fade class, then active class to body
     if (!document.body.classList.contains('workActive')) {

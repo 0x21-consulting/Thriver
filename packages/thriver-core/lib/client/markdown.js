@@ -6,7 +6,7 @@
  */
 Template.registerHelper('markdown', function (text) {
     //debug
-    if (text === null) return;
+    if (text === undefined) return;
     
     // Fail if no text
     check(text, String);

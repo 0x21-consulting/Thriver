@@ -1,38 +1,52 @@
 //UI Helper Functions
-Meteor.helperFunctions = {
+Thriver.util = {
     //Add Class
-    addClass : function(e, cls){
-        e.classList.add(cls);
+    addClass : function (element, className) {
+        check(element, Element);
+        check(className, String);
+
+        element.classList.add(className);
     },
     //Remove Class
-    removeClass : function(e, cls){
-        e.classList.remove(cls);
+    removeClass : function (element, className) {
+        check(element, Element);
+        check(className, String);
+
+        element.classList.remove(className);
     },
     //Remove Class (by Prefix)
-    removeClassByPrefix : function(e, prefix) {
-        var regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
-        e.className = e.className.replace(regx, '');
-        return e;
-    },
-    hidden : function(e,state){
-        if (state == false){
-            e.setAttribute('aria-hidden', 'false');
-        } else{
-            e.setAttribute('aria-hidden', 'true');      
-        }
-    },
-    active : function(e,state){
-        if(state == true){
-            e.setAttribute('aria-expanded','true');
-        } else{
-            e.setAttribute('aria-expanded','false');        
-        }
-    },
-    findAncestor : function(el, cls) {
-        while ((el = el.parentElement) && !el.classList.contains(cls));
-        return el;
-    }
-}
+    removeClassByPrefix : function (element, prefix) {
+        check(element, Element);
+        check(prefix, String);
 
-//Define usage
-h = Meteor.helperFunctions;
+        var regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
+        element.className = element.className.replace(regx, '');
+        return element;
+    },
+    hide : function (element, state) {
+        check(element, Element);
+        check(state, Boolean);
+
+        if (state === false)
+            element.setAttribute('aria-hidden', 'false');
+        else
+            element.setAttribute('aria-hidden', 'true');  
+    },
+    makeActive : function (element, state) {
+        check(element, Element);
+        check(state, Boolean);
+
+        if (state === true)
+            element.setAttribute('aria-expanded', 'true');
+        else
+            element.setAttribute('aria-expanded', 'false');  
+    },
+    findAncestor : function (element, className) {
+        check(element, Element);
+        check(className, String);
+
+        // TODO: Infinite loop possibility here?
+        while ((element = element.parentElement) && !element.classList.contains(className));
+        return element;
+    }
+};
