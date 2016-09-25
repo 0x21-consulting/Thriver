@@ -30,9 +30,13 @@ initialize = function () {
             },
         };
 
-
         // Map instance
         map = new google.maps.Map(mapElement, options);
+
+       //var ctaLayer = new google.maps.KmlLayer({ url: 'data/wisconsin_counties.kml'});
+        //ctaLayer.setMap(map);
+
+        //Map Options
         map.set('styles', [
             {
                 "featureType": "poi",
@@ -312,6 +316,15 @@ getCounty = function (zip) {
 
     // Now get providers that support that county
     moveMap(county.name);
+},
+
+outlineCounty = function () {
+    //County Data
+    var ctaLayer = new google.maps.KmlLayer({
+        url: '/packages/$USER_&PACKAGENAME/lib/client/data/wisconsin_counties.kml',
+        map: map
+    });
+    ctaLayer.setMap(map);
 };
 
 
@@ -331,7 +344,7 @@ Template.providers.events({
         if (!name) throw new Error('Invalid county');
 
         moveMap(name);
-
+        outlineCounty();
         // Close search field
         closeMapSearch();
         document.body.classList.remove('providersListOpen');

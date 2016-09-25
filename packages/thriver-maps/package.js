@@ -8,31 +8,31 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
-    
+
     // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles'
     ]);
-    
+
     // Resources
     api.addAssets([
-        
+        'lib/client/data/wisconsin_counties.kml'
     ], ['client']);
-    
+
     // Server processing
     api.addFiles([
         'lib/providers.js'
     ], ['server']);
-    
+
     // Client processing
     api.addFiles([
         // Templates
         'lib/templates/providers.html',
-        
+
         // Styles
         'lib/templates/providers.less',
-        
+
         // Helpers and methods
         'lib/client/providers.js',
         'lib/client/maps.js'
