@@ -4,6 +4,8 @@
  *   @param {$.Event} event - jQuery Event instance
  */
 var changeTabs = function (event) {
+    check(event, $.Event);
+
     event.stopPropagation(); event.preventDefault();
     
     var parent  = document.querySelector('section.mainSection.work'),
@@ -143,9 +145,19 @@ Template.workContent.helpers({
     icon:     getValue('icon'),
     name:     getValue('name'),
     hash:     function () {
-        var content;
-        
-        content = getValue('data')(this.id).content;
+        var content = getValue('data')(this.id).content;
+
+        // Return a SHA256 hash of the content for use in editing
+        if (content) return SHA256(content);
+        else         return '';
+    }
+});
+
+// About SA
+Template.aboutSA.helpers({
+    data:   getValue('data'),
+    hash:   function () {
+        var content = getValue('data')(this.id).aboutSA;
 
         // Return a SHA256 hash of the content for use in editing
         if (content) return SHA256(content);
@@ -157,7 +169,15 @@ Template.workContent.helpers({
 Template.workNav.events({
     'click h2': changeTabs,
     'click li > ul > li > a': changeTabs,
+
+    /**
+     * @summary Navigate back to Index
+     * @method
+     *   @param {$.Event} event
+     */
     'click li.backToIndexWork': function (event) {
+        check(event, $.Event);
+
         event.preventDefault(); event.stopPropagation();
 
         // Fade out and make not active
