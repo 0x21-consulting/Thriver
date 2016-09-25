@@ -94,7 +94,6 @@ initialize = function () {
                     map.setZoom(12);
                     map.setCenter(marker.getPosition());
 
-                    //Populate Details
                     // Show results if the result has an ID
                     if (this.id)
                         Session.set('currentProvider', Providers.findOne({ _id: this.id }));
@@ -264,8 +263,11 @@ moveMap = function (county) {
     ));
 
     // If there was only one result, click on it for the user
-    if (providers.length === 1)
+    if (providers.length === 1){
         Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
+    } else{
+        document.getElementById("service-providers").classList.add("full-view");
+    }
 },
 
 // Setting the map view to full
@@ -364,11 +366,11 @@ Template.providers.events({
     // Reaching 5 digits
     'keyup #zip': function (event) {
         if (event.currentTarget.value.length === 5) {
+            openDetails();
             getCounty(event.currentTarget.value);
             document.body.classList.remove('providersListOpen');
             // Close search field
             closeMapSearch();
-            openDetails();
             google.maps.event.trigger(map,'resize');
         }
     }
