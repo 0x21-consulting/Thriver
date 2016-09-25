@@ -213,11 +213,6 @@ initialize = function () {
         if (this.id)
             Session.set('currentProvider', Providers.findOne({ _id: this.id }));
     },
-    // Hide info label on mouseout
-    hideLabel = function () {
-        //if (map.infowindow)
-        //    map.infowindow.close();
-    },
 
     // Create maps API script
     script = document.createElement('script');
@@ -283,6 +278,12 @@ fullMap = function (condition) {
     }
 },
 
+// Hide info label on mouseout
+hideLabel = function () {
+    if (map.infowindow)
+        map.infowindow.close();
+},
+
 // Get X and Y Coordinates based on web mercator projection
 getXY = function (lat, lon) {
     console.info('Meters per pixel', 156543.03392 * Math.cos(lat * Math.PI / 180)
@@ -337,6 +338,7 @@ Template.providers.events({
         document.body.classList.remove('providersListOpen');
         document.getElementById("service-providers").classList.add("full-view");
         google.maps.event.trigger(map,'resize');
+        hideLabel();
         fullMap(true);
     },
     'click .fullMap': function (event){
@@ -344,6 +346,7 @@ Template.providers.events({
         document.body.classList.remove('providersListOpen');
         document.getElementById("service-providers").classList.add("full-view");
         google.maps.event.trigger(map,'resize');
+        hideLabel();
         fullMap(true);
     },
     // Clicking ZIP Code GO button
