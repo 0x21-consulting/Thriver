@@ -1,5 +1,8 @@
 Template.outreach.helpers({
+	/** Section Title */
 	headline: "Get Involved",
+
+	/** Section Title Subtext */
 	content: "<p>We believe that everyone has a role and a responsibility <br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.<br><button class='action-alert-link'>See Action Alerts <span class='fa'>&#xf0da;</span></button></p>",
 	items: [{
 		tabs: [{
@@ -16,80 +19,70 @@ Template.outreach.helpers({
 				template: 'wcasaJobs'
 			}
 		]
-	}]
-});
+	}],
 
-Template.volunteer.helpers({
-    headline: "Volunteer with WCASA",
-    content: "<p>Interested in volunteering with WCASA? All interested parties should contact Kathleen Brandenburg, Office Manager at (608) 257-1516 or <a href='mailto:wcasa@wcasa.org'>wcasa@wcasa.org.</a></p>",
-    listHeadline: "Current Volunteering Opportunities",
-    lists: [{
-	    type: 'article', //accepts: generic, details, article
-	    itemType: 'category',
-	    style: 'striped',
-	    categories: [{
-	        title: 'Clerical',
-	        id: 'jobA',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-	    },{
- 	        title: 'Another Position',
-	        id: 'jobB',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-        },{
- 	        title: 'Yet Another Position',
-	        id: 'jobC',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-        }]
-	}]
-});
+	/**
+     * @summary Get subsections from db
+     * @function
+     * @returns {Object}
+     */
+    sections: function () {
+        var children = Thriver.sections.get(this._id, ['children']).children,
+            tabs = [];
+        
+        // Populate tabs in the format desired
+        for (let i = 0; i < children.length; ++i) {
+            // If db is not ready, do nothing
+            if (!Thriver.sections.get(children[i])) return;
 
-Template.joinTheBoard.helpers({
-    headline: "Join The Board",
-    content: "<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat..</p>",
-});
+            tabs.push({
+                id      : Thriver.sections.get(children[i])._id,
+                title   : Thriver.sections.get(children[i], ['name']).name,
+                content : Thriver.sections.get(children[i], ['data']).data.content || '',
+				lists   : [{
+					type      : 'article',
+					itemType  : 'category',
+					style     : 'stripped',
+					categories: Thriver.sections.get(children[i], ['data']).data.opportunities || []
+				}],
+                template: 'generic',
+                editable: true
+            });
+        }
 
-Template.wcasaJobs.helpers({
-    headline: "WCASA Jobs",
-    content: "<p>Interested in volunteering with WCASA? All interested parties should contact Kathleen Brandenburg, Office Manager at (608) 257-1516 or <a href='mailto:wcasa@wcasa.org'>wcasa@wcasa.org.</a></p>",
-    listHeadline: "Find a Job at WCASA",
-    lists: [{
-	    type: 'article', //accepts: generic, details, article
-	    itemType: 'category',
-	    style: 'striped',
-	    categories: [{
-	        title: 'Clerical',
-	        id: 'jobA',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-	    },{
- 	        title: 'Another Position',
-	        id: 'jobB',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-        },{
- 	        title: 'Yet Another Position',
-	        id: 'jobC',
-	        items: [{
-	            content: '<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p><p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>',
-	        }]
-        }]
-	}]
+        return [{
+            class: 'left',
+            showAddPage: true,
+            tabs: tabs
+        }];
+    }
 });
 
 Template.outreach.onRendered(function() {
 	//This seems out of place
-	$('.action-alert-link').click(function(){
+	/*$('.action-alert-link').click(function(){
 		$("#utility a[href='#news']").trigger("click");
 		$(".sidebar-content menu.tabs a[href='#action-alerts']").trigger("click");
-	});
+	});*/
+});
+
+Template.outreach.events({
+    /**
+     * @summary Support updating path
+     * @method
+     *   @param {$.Event} event
+     */
+    'click a[data-id]': function (event) {
+        check(event, $.Event);
+
+        // Get path
+        var section = event.target.parentElement.parentElement.
+                parentElement.parentElement.parentElement,
+            path    = section.id + '/' + Thriver.sections.generateId(event.target.textContent);
+
+        // Update history
+        Thriver.history.update(section.id, path);
+    }
 });
 
 /**
@@ -98,14 +91,66 @@ Template.outreach.onRendered(function() {
  */
 Template.outreach.onRendered(function () {
     // Get db ID from current instance
-    var instanceName = this.data.name;
+    var instanceName = this.data.name,
+		data = this.data;
 
     // Register
     Thriver.history.registry.insert({
         element: Thriver.sections.generateId(instanceName),
         /** Handle deep-linking */
         callback: function (path) {
-            console.debug('Deep-link:', path);
+            var sections, section, i, j, link,
+
+            // Get Sections recursively
+            getChildren = function (id) {
+                var sections = {}, section,
+                    children  = Thriver.sections.get(id, ['children']).children,
+                    name, i, j;
+
+                // Get name and ID for each tab
+                for (i = 0, j = children.length; i < j; ++i) {
+                    // Get section name
+                    section = Thriver.sections.get( children[i], ['name'] );
+                    name = section.name;
+
+                    // Then sanitize section name
+                    name = Thriver.sections.generateId(name);
+
+                    // Add to link list and Recurse
+                    sections[ name ] = getChildren( children[i] );
+
+                    // Add ID to list as well
+                    sections[ name ]._id = section._id;
+                }
+
+                return sections;
+            };
+
+            // If there's no path, there's nothing to do
+            if (!path.length) return;
+
+            // Get link list of all browseable sections
+            sections = getChildren(data._id);
+
+            // Also add static Staff and Board sections
+            sections['wcasa-staff']        = { _id: 'staff' };
+            sections['board-of-directors'] = { _id: 'board' };
+
+            // Get link for deep-linked section
+            for (i = 0, j = path.length; i < j; ++i) {
+                if (sections[ path[i] ])
+                    sections = sections[ path[i] ];
+                else break;
+            }
+
+            // Find anchor element
+            link = document.querySelector('a[data-id="' + sections._id + '"]');
+
+            // Click anchor to activate page
+            if (link instanceof Element)
+                link.click();
+
+            console.debug('Deep-link:', path, data, sections);
         }
     });
 });

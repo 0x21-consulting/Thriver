@@ -23,6 +23,7 @@
                 {{#if isAdmin}}
                     {{#if editable}}
                         <aside class="admin">
+                            <button class="fa add">&#xf067;</button>
                             <button class="fa edit">&#xf044;</button>
                             <button class="fa delete">&#xf1f8;</button>
                         </aside>
@@ -32,4 +33,14 @@
             </article>
         {{/each}}
     </div>
+</template>
+
+<template name="generic">
+    <h2>{{title}}</h2>
+    <section class="content" data-hash="{{hash}}">
+        {{{ markdown content }}}
+        {{#each lists}}
+            {{>list}}
+        {{/each}}
+    </section>
 </template>

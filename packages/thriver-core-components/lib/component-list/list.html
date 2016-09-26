@@ -3,12 +3,21 @@
         <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
             {{#if equals itemType 'category'}}
                 {{#each categories}}
-                    <article class="itemCategory">
+                    <article class="itemCategory" data-id="{{id}}">
                         <details aria-expanded="false" aria-controls="{{id}}">
                             <summary id="{{id}}">
                                 <h1>{{{title}}}</h1>
+                                {{#if isAdmin}}
+                                    <aside class="admin">
+                                        <button class="fa oppEdit">&#xf044;</button>
+                                        <button class="fa oppDelete">&#xf1f8;</button>
+                                    </aside>
+                                {{/if}}
                             </summary>
                             <div class="inner">
+                                {{#if content}}
+                                    {{> articleItem this}}
+                                {{/if}}
                                 {{#each items}}
                                     {{>articleItem}}
                                 {{/each}}

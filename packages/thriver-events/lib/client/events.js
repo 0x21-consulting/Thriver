@@ -635,7 +635,7 @@ Template.eventSlide.events({
         check(event, $.Event);
 
         if ( confirm('Are you sure you want to delete this event?') )
-            Meteor.call('deleteEvent', this.id);
+            Meteor.call('deleteEvent', this._id);
     }
 });
 

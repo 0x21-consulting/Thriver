@@ -134,6 +134,24 @@ updateSectionContent = function (oldHash) {
 // Administrative bindings
 Template.tabs.events({
     /**
+     * @summary Add a list item
+     * @method
+     *   @param {$.Event} event
+     */
+    'click [editable!="false"] button.add': function (event) {
+        check(event, $.Event);
+
+        event.preventDefault();
+
+        var id = event.target.parentElement.parentElement.dataset.id;
+
+        Meteor.call('addOpportunity', id, {
+            title: 'New Opportunity',
+            content: ''
+        });
+    },
+
+    /**
      * Edit section name
      * @method
      *   @param {$.Event} event - jQuery Event handle

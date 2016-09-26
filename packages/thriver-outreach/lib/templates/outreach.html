@@ -5,14 +5,14 @@
         {{/if}}
         <div class="containerSmall">
             <header>
-                <h1>{{{headline}}}</h1>
+                <h1>{{headline}}</h1>
                 {{{content}}}
             </header>
-        </div>
-        <div class="container tab-box">
-            {{#each items}}
-                {{>tabs}}
-            {{/each}}
+            <div class="container tab-box">
+                {{#each sections}}
+                    {{> tabs}}
+                {{/each}}
+            </div>
         </div>
     </section>
 </template>

@@ -60,10 +60,10 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         
         // Parameter checks
-        check(event, Object);
+        check(event, String);
 
         // Perform update
-        Thriver.events.collection.remove({ _id: event._id }, function (error, id) {
+        Thriver.events.collection.remove({ _id: event }, function (error, id) {
             if (error) throw new Meteor.Error(error);
         });
     }
