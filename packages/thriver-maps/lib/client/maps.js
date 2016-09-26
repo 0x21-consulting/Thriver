@@ -412,6 +412,7 @@ Template.providerListViewItem.events({
             this.coordinates[1]
         ));
         map.setZoom(11);
+        google.maps.event.trigger(marker, 'click')
         // Close providers section
         document.body.classList.remove('providersListOpen');
     }
