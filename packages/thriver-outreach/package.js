@@ -34,7 +34,7 @@ Package.onUse(function (api) {
     
     // Server processing
     api.addFiles([
-        
+        'lib/server/outreach.js'
     ], ['server']);
 });
 

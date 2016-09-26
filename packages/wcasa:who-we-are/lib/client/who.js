@@ -55,18 +55,6 @@ Template.who.helpers({
     }
 });
 
-Template.generic.helpers({
-    hash: function () {
-        if (!this) return;
-        
-        var content = Thriver.sections.get(this.id, ['data']).data.content;
-
-        if (!content) content = '';
-
-        return SHA256( content );
-    }
-});
-
 Template.board.helpers({
     board: function () {
         return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});

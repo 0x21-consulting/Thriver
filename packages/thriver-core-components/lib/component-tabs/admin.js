@@ -38,3 +38,15 @@ Template.tabs.events({
             });
     }
 });
+
+Template.generic.helpers({
+    hash: function () {
+        if (!this) return;
+        
+        var content = Thriver.sections.get(this.id, ['data']).data.content;
+
+        if (!content) content = '';
+
+        return SHA256( content );
+    }
+});

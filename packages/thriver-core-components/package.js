@@ -45,6 +45,7 @@ Package.onUse(function (api) {
         'lib/component-alert/alerts.js',
         'lib/component-help/help.js',
         'lib/component-list/list.js',
+        'lib/component-list/admin.js',
         'lib/component-more/more.js',
         'lib/component-sidebar/aside.js',
         'lib/component-tabs/tabs.js',

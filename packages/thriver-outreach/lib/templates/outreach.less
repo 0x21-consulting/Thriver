@@ -23,7 +23,7 @@
     }
     @media (min-width:768px){
         .tab-box{
-            padding: 34px 0px 0px 0px;
+            //padding: 34px 0px 0px 0px;  // commented out by Micah
             .borderRadius(2px);
             /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.15+0,0.1+100 */
             background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 100%); /* FF3.6-15 */
@@ -39,6 +39,10 @@
     menu.tabs{
         text-align: center;
         max-width: 1000px;
+        // added by Micah
+        width: auto;
+        min-height: initial;
+        //
         margin: 0 auto;
         padding-bottom:20px;
         @media @mobile{ padding-bottom:0px; z-index: 12; position: relative;}
@@ -46,7 +50,8 @@
         @media @mobile{ >li {text-align: left !important; } }
         @media (min-width:768px){
             > li{
-                display: inline-block;
+                //display: inline-block;
+                display: table-cell; // added by Micah
                 cursor: pointer;
                 position: relative;
                 @media @1450{margin: 0px;}
@@ -276,3 +281,5 @@ section.mainSection.outreach > div > header p {
         }
     }
 }
+
+section.outreach div.container div.tabs { clear: both; }
