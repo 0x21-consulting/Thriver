@@ -34,7 +34,10 @@ initialize = function () {
         map = new google.maps.Map(mapElement, options);
 
         // County Layer
-        var countyLayer = new geoXML3.parser({map: map});
+        var countyLayer = new geoXML3.parser({
+            map: map,
+            suppressInfoWindows: true
+        });
         countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
 
         //Map Options
