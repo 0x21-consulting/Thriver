@@ -19,11 +19,11 @@ initialize = function () {
         // Map options
         options = {
             scrollwheel : false,
-            zoom        : 12,
+            zoom        : 7,
             center      : new google.maps.LatLng(43.1, -89.4),
             zoomControl : true,
-            minZoom     : 6,
-            maxZoom     : 13,
+            minZoom     : 7,
+            maxZoom     : 16,
             streetViewControl: false,
             zoomControlOptions: {
                 style: 3
@@ -34,8 +34,11 @@ initialize = function () {
         map = new google.maps.Map(mapElement, options);
 
         // County Layer
-        var countyLayer = new geoXML3.parser({map: map});
-        //countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
+        var countyLayer = new geoXML3.parser({
+            map: map,
+            suppressInfoWindows: true
+        });
+        countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
 
         //Map Options
         map.set('styles', [
@@ -96,7 +99,7 @@ initialize = function () {
                 marker.addListener('click', function() {
                     fullMap(false);
                     google.maps.event.trigger(map,'resize');
-                    map.setZoom(12);
+                    map.setZoom(11);
                     map.panTo(marker.getPosition());
 
                     // Show results if the result has an ID
@@ -325,7 +328,6 @@ outlineCounty = function () {
         url: '/packages/$USER_$PACKAGENAME/lib/client/data/wisconsin_counties.kml',
         map: map
     });
-    ctaLayer.setMap(map);
 };
 
 
@@ -409,7 +411,7 @@ Template.providerListViewItem.events({
             this.coordinates[0],
             this.coordinates[1]
         ));
-
+        map.setZoom(11);
         // Close providers section
         document.body.classList.remove('providersListOpen');
     }
