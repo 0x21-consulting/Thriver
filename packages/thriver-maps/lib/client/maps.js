@@ -321,7 +321,7 @@ getCounty = function (zip) {
 outlineCounty = function () {
     //County Data
     var ctaLayer = new google.maps.KmlLayer({
-        url: '/packages/$USER_&PACKAGENAME/lib/client/data/wisconsin_counties.kml',
+        url: '/packages/$USER_$PACKAGENAME/lib/client/data/wisconsin_counties.kml',
         map: map
     });
     ctaLayer.setMap(map);

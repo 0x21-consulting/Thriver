@@ -27,6 +27,8 @@ Package.onUse(function (api) {
 
     // Client processing
     api.addFiles([
+        //Vendor
+        'lib/client/geoxml3.js',
         // Templates
         'lib/templates/providers.html',
 
@@ -35,7 +37,8 @@ Package.onUse(function (api) {
 
         // Helpers and methods
         'lib/client/providers.js',
-        'lib/client/maps.js'
+        'lib/client/maps.js',
+
     ], ['client']);
 });
 
