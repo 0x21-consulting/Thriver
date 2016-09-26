@@ -33,8 +33,9 @@ initialize = function () {
         // Map instance
         map = new google.maps.Map(mapElement, options);
 
-       //var ctaLayer = new google.maps.KmlLayer({ url: 'data/wisconsin_counties.kml'});
-        //ctaLayer.setMap(map);
+        // County Layer
+        var countyLayer = new geoXML3.parser({map: map});
+        //countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
 
         //Map Options
         map.set('styles', [
