@@ -411,7 +411,7 @@ Template.providerListViewItem.events({
             this.coordinates[0],
             this.coordinates[1]
         ));
-
+        map.setZoom(11);
         // Close providers section
         document.body.classList.remove('providersListOpen');
     }
