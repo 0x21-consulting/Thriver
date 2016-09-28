@@ -17,7 +17,7 @@ utilityNavigationHelpers = {
         icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
-        sidebar: 'accounts',
+        sidebar: 'account',
         user: 'active'
     },{
         //Sign In
@@ -25,7 +25,7 @@ utilityNavigationHelpers = {
         icon : 'caret-right',
         iconAfter: true,
         type: 'sidebar',
-        sidebar: 'signin',
+        sidebar: 'sign-in',
         user: 'inactive'
     },{
         //Register
@@ -55,7 +55,7 @@ utilityNavigationHelpers = {
         //Get Help
         title: 'Get Help',
         type: 'link',
-        url: '#service-providers',
+        url: '/service-providers',
         icon : 'important',
         position : 'right',
         more: 'help',
@@ -73,7 +73,7 @@ utilityNavigationHelpers = {
         title: 'Learning Center',
         icon : 'institution',
         type: 'sidebar',
-        sidebar: 'resources',
+        sidebar: 'learning-center',
         position : 'right',
         user: 'public'
     },{

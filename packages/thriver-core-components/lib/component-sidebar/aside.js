@@ -3,7 +3,7 @@ Template.aside.helpers({
     items: [{
         title: 'Account Details',
         icon: 'user',
-        id: 'accounts', //Sets the ID of the sidebar which gets targeted by utility nav items
+        id: 'account', //Sets the ID of the sidebar which gets targeted by utility nav items
         width: 700, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
         class: 'top', //Style. accepts 'left' and 'top'
@@ -38,7 +38,7 @@ Template.aside.helpers({
         template: 'notifications'
     },{
         title: 'Account Sign in',
-        id: 'signin',
+        id: 'sign-in',
         width: 356,
         position:'left',
         template: 'signin'
@@ -58,7 +58,7 @@ Template.aside.helpers({
     },{
         title: 'Learning Center',
         icon: 'institution',
-        id: 'resources',
+        id: 'learning-center',
         width: 700,
         position:'right',
         filter: 'true',

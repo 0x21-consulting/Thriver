@@ -26,4 +26,9 @@ mainNavigationHelpers = {
 Template.navigation.helpers(mainNavigationHelpers);
 
 // Smooth scroll
-Template.navigation.events({ 'click a' : Thriver.history.smoothScrollEventHandler });
+Template.navigation.events({
+    'click a' : function (event) {
+        check(event, $.Event);
+        //Thriver.history.navigate(event.target.pathname);
+    }
+});

@@ -26,9 +26,9 @@ Template.contact.helpers({
 });
 
 Template.contact.events({
-    'click #staff-list': function (event) {
-        document.querySelector('[href="#staff"]').click();
-    }
+    //'click #staff-list': function (event) {
+    //    document.querySelector('[href="#staff"]').click();
+    //}
 });
 
 /**

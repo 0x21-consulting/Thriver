@@ -35,7 +35,7 @@ nav.utility{
         figure[aria-hidden="false"]{display: block !important;}
     }
     ul > li> a{
-        &[href="#"], &[href="#register"]{
+        &[href="/"], &[href="/register"]{
             background-color: transparent;
             color: @baseTransparentColor;
             &:hover{.boxShadow(none);}
@@ -45,29 +45,29 @@ nav.utility{
             color: darken(@baseColorSocial,60%);
             &:before,&:after{font-size: 18px;}
         }
-        &[href="#"], &[href="#register"], &[href="#accounts"], &[href="#signin"], &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+        &[href="/"], &[href="/register"], &[href="/account"], &[href="/sign-in"], &[href="/notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
             padding: 2px 12px 0px 12px;
             //&:before{ margin: 0px; position: relative; }
             //&:after{position:absolute; margin-left: 0px;right: 0px; top: 2px;}
         }
-        &[href="#notifications"],&[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+        &[href="/notifications"],&[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
             &:before{ margin: 0px; position: relative; }
         }
-        &[href="#accounts"], &[href="#signin"], &[href="#"], &[href="#register"]{ padding-right: 24px;}
-        &[href="#twitter"]{ background-color: @baseColorTwitter;}
-        &[href="#service-providers"],{ background-color: @baseColorHelp;}
-        &[href="#resources"]{ background-color: @baseColorResources;}
-        &[href="#news"]{ background-color: @baseColorNews;}
-        &[href="#service-providers"][aria-expanded="true"]{
+        &[href="/account"], &[href="/sign-in"], &[href="/"], &[href="/register"]{ padding-right: 24px;}
+        &[href="/twitter"]{ background-color: @baseColorTwitter;}
+        &[href="/service-providers"],{ background-color: @baseColorHelp;}
+        &[href="/learning-center"]{ background-color: @baseColorResources;}
+        &[href="/news"]{ background-color: @baseColorNews;}
+        &[href="/service-providers"][aria-expanded="true"]{
             background-color: darken(@baseColorHelp,5%);
             .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.1));
         }
-        &[href="#register"][aria-expanded="true"]{ color:@white;}
+        &[href="/register"][aria-expanded="true"]{ color:@white;}
         @media (max-width:1000px){
             padding: 2px 12px 0px 12px !important;
             i{display: none;}
             &:before, &:after{display: none;}
-            &[href="#notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+            &[href="/notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
                 &:before, &:after{display: block;}
             }
         }

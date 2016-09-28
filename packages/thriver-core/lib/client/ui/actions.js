@@ -11,13 +11,13 @@ Template.body.events({
         })
     },
     'click [data-action="userRegister"]': function (event) {
-        document.querySelector('#utility [href="#register"]').click();
+        document.querySelector('#utility [href="/register"]').click();
     },
     'click [data-action="signin"]': function (event) {
-        document.querySelector('#utility [href="#signin"]').click();
+        document.querySelector('#utility [href="/signin"]').click();
     },
     'click [data-action="manageSubscription"]': function (event) {
-        document.querySelector('#utility [href="#accounts"]').click();
-        document.querySelector('#accounts [href="#subscriptions"]').click();
+        document.querySelector('#utility [href="/accounts"]').click();
+        document.querySelector('#accounts [href="/subscriptions"]').click();
     }
 });

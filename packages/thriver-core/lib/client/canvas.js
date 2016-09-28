@@ -64,7 +64,7 @@ Thriver.canvas = {
 	                if(e.getAttribute('data-position') == 'right'){ canvas.setAttribute('data-canvas-position','right'); }
 	            }*/
 	            //focusGroupElFirst.focus();
-	            event.preventDefault();
+	            //event.preventDefault();
 	        }
 	        f.currentFocusGroup(); //Recalculate live focus areas
 	        focusGroupElFirst.focus();

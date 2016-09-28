@@ -209,6 +209,7 @@ Template.canvas.onRendered(function () {
  *   @param {Event} event - Popstate event
  */
 window.addEventListener('popstate', function (event) {
+    console.debug('popstate', event);
     check(event,            Event);
     check(event.state,      Object);
     check(event.state.path, Match.Maybe(String) );
@@ -216,4 +217,20 @@ window.addEventListener('popstate', function (event) {
     // Navigate to path
     if (event.state.path)
         Thriver.history.navigate(event.state.path);
+});
+
+/**
+ * @summary Bind all anchor events that reference local resources
+ *   to smooth scroll to appropriate path
+ * @method
+ *   @param {$.Event} event
+ */
+Template.body.events({
+    // If href starts with a slash
+    'click a[href^="/"]': function (event) { console.debug('href', event.target);
+        check(event, $.Event);
+
+        // Navigate to path
+        Thriver.history.navigate(event.target.pathname);
+    }
 });
