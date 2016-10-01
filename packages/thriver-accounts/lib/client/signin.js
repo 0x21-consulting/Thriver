@@ -41,27 +41,21 @@ Template.signin.events({
 
         // Log in the user
         Meteor.loginWithPassword(email, password, function (error) {
-            var overlay;
-
-            // If no error, everything's fine
-            if (! (error instanceof Error) ) {
-                // Hide sidebars by clicking the overlay
-                overlay = document.querySelector('.overlay');
-                if (overlay instanceof Element)
-                    overlay.click();
-                    document.getElementById('#mobile-toggle').click();
-                return;
-            }
+            check(error, Match.Maybe(Error));
 
             // Handle errors
-            switch (error.error) {
-                case 403:
-                    handleError('So sorry. Either you\'ve mistyped your email address,' +
-                        ' or your password is incorrect.');
-                    break;
-                default:
-                    handleError('An unknown error has occurred.');
-            }
+            if (error)
+                switch (error.error) {
+                    case 403:
+                        handleError('So sorry. Either you\'ve mistyped your email address,' +
+                            ' or your password is incorrect.');
+                        break;
+                    default:
+                        handleError('An unknown error has occurred.');
+                }
+
+            // Close sidebars
+            Thriver.canvas.closeSidebars();
         });
     }
 });

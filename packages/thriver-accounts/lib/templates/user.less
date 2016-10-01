@@ -1,12 +1,13 @@
 @import "{thriver:core-styles}/lib/index.less";
 
-#signin, #register{
+#sign-in, #register{
     form{
         label{display: none;}
-        input[type="submit"]{ margin: 0px 0px 0px 0px; }
+        input[type="submit"]{ margin: 0; }
     }
+    a { color: @white; }
 }
-#signin, #register, #accounts{
+#sign-in, #register, #accounts{
     form{
         label{text-align: left;}
         padding:30px;
@@ -23,6 +24,7 @@
     .sidebar-content{ padding-bottom: 0px; }
     form{padding-top: 0px;}
     @media @mobile{ form{padding-top: 20px;} }
+    a { color: @white; }
 }
 
 
