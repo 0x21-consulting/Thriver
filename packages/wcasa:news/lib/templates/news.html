@@ -42,11 +42,13 @@
 
 <template name="newsSubHead">
     <div class="links">
-        <button id="manageSubscriptions" class="newsroomButton manageSubscriptions" data-action="manageSubscription">Manage Newsroom Subscriptions <span class="fa"></span></button> |
-        <button id="inquire" class="inquire" onclick="location.href='mailto:dominich@wcasa.org';">
+        <a href="/account/subscriptions" class="manageSubscriptions">
+            Manage Newsroom Subscriptions <span class="fa"></span>
+        </a> |
+        <button id="inquire" class="inquire">
             Inquire About our Newsroom <span class="fa"></span>
             <span class="contactInfo">
-                For information regarding WCASA's Newsroom: email Dominic Holt at dominich@wcasa.org.
+                For information regarding WCASA's Newsroom: email Dominic Holt at <a href="mailto:dominich@wcasa.org">dominich@wcasa.org</a>.
             </span>
         </button>
     </div>

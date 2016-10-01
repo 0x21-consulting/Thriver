@@ -30,30 +30,34 @@ Meteor.subscribe('actionAlerts');
 
 // Events
 Template.aside.events({
-    //A bunch of loadmore events
-    'click button.loadMore': function (event) {
-        quantity.set(0); // get all results
+    /**
+     * @summary Load More
+     * @method
+     *   @param {$.Event} event
+     */
+    'click li.loadMore button': function (event) {
+        check(event, $.Event);
+        check(event.target, Element)
+
+        // Get all results
+        quantity.set(0);
         
         // Hide "Load More Results" button
-        if (event && event.target && event.target.classList)
-            event.target.classList.add('everything');
-    },
-    // "Load More" Results buttons
-    'click button.newsroomButton': function (event) {
-        $('li.accountDetails').click();
-        $('.accountDetailsTabs li:nth-child(2)').click();
-    },
-    // "Load More" Results buttons
-    'click li.newsTabMenu': function (event) {
-        removeActiveClass();
+        event.target.classList.add('hide');
     },
     
     // Search field
-    'keyup  #searchNews': handleSearch,
-    'search #searchNews': handleSearch,
+    'keyup  #searchNews, search #searchNews': handleSearch,
     
-    // Don't allow search to submit form on enter; it doesn't go anywhere
+    /**
+     * @summary Prevent form submission
+     * @method
+     *   @param {$.Event} event
+     */
     'submit form#searchNewsForm': function (event) {
-        event.preventDefault(); event.stopPropagation();
+        check(event, $.Event);
+
+        // Prevent form submission
+        event.preventDefault();
     }
 });
