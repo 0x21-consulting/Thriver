@@ -31,6 +31,18 @@ Thriver.history.schema = new SimpleSchema({
         optional: false,
         // By default, set the currentPath to the element's ID
         autoValue: function (doc) { return doc.currentPath || doc.element }
+    },
+    /** Callback for special-case navigation */
+    accessFunction: {
+        type: Function,
+        optional: true
+    },
+    /** Data to pass to accessFunction */
+    accessData: {
+        type: Object, // only way to allow anything because no 'any' type
+        optional: true,
+        defaultValue: {},
+        blackbox: true
     }
 });
 
@@ -66,8 +78,7 @@ Thriver.history.updateLocation = function () {
                     continue;
 
         // Update URL/location bar
-        window.history.pushState({ path: elements[i].currentPath }, 
-            undefined, '/' + elements[i].currentPath);
+        Thriver.history.updateLocationBar(elements[i].currentPath);
 
         // Remove active class from all main nav items
         for (k = 0, l = links.length; k < l; ++k)
@@ -88,6 +99,17 @@ Thriver.history.updateLocation = function () {
 };
 
 /**
+ * @summary Update the URI Location Bar
+ * @method
+ *   @param {String} path
+ */
+Thriver.history.updateLocationBar = function (path) {
+    check(path, String);
+
+    window.history.pushState({ path: path }, undefined, '/' + path);
+};
+
+/**
  * @summary Update a section's path
  * @method
  *   @param {String} section - Section name to update
@@ -103,7 +125,7 @@ Thriver.history.update = function (section, path) {
     });
 
     // Update URI
-    Thriver.history.updateLocation();
+    Thriver.history.updateLocationBar(path);
 };
 
 /**
@@ -132,12 +154,15 @@ Thriver.history.navigate = function (path) {
     
     // Navigate to the appropriate element, if it exists
     if (location) {
-        // Smooth scroll to element
-        Thriver.history.smoothScroll(location.element);
+        // If this has a particular function used to access this component
+        if (location.accessFunction instanceof Function)
+            location.accessFunction( location.accessData );
+        else
+            // Smooth scroll to element
+            Thriver.history.smoothScroll(location.element);
 
         // Update element's stateful path
-        Thriver.history.registry.update({ element: location.element }, 
-            { $set: { currentPath: path.join('/') } });
+        Thriver.history.update(location.element, path.join('/') );
 
         // Now, pass the rest of the path along to the callback function
         if (location.callback instanceof Function)

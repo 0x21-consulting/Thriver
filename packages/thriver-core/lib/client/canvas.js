@@ -1,6 +1,110 @@
 //Canvas.js is dedicated to managing canvas events.
 //This includes how the canvas/off-canvas elements open/close and relate.
 Thriver.canvas = {
+	/**
+	 * @summary Remove Overlay
+	 * @method
+	 */
+	removeOverlay: function () {
+		// Canvas element
+		let canvas = document.querySelector('#canvas');
+
+		// Prevent body scrolling
+		document.body.classList.remove('noScroll');
+
+		// Open canvas
+		canvas.dataset.canvasState = '';
+	},
+
+	/**
+	 * @summary Close sidebars
+	 * @method
+	 */
+	closeSidebars: function () {
+		// Get all sidebars and links that happen to be open
+		let sidebars = document.querySelectorAll('.sidebar[aria-hidden="false"]'),
+			links    = document.querySelectorAll('a[data-toggle="canvas"][aria-expanded="true"]');
+		
+		// Close all sidebars
+		for (let i = 0; i < sidebars.length; ++i)
+			Thriver.util.hide( sidebars[i] );
+		
+		// Reset links
+		for (let i = 0; i < links.length; ++i) {
+			Thriver.util.makeActive( links[i], false );
+			links[i].removeEventListener('click', Thriver.canvas.handleCloseButton);
+		}
+		
+		// Remove overlay
+		Thriver.canvas.removeOverlay();
+	},
+
+	/**
+	 * @summary Add Overlay
+	 * @method
+	 */
+	addOverlay: function () {
+		// Canvas element
+		let canvas = document.querySelector('#canvas');
+
+		// Prevent body scrolling
+		document.body.classList.add('noScroll');
+
+		// Open canvas
+		canvas.dataset.canvasState = 'open';
+	},
+
+	/**
+	 * @summary Open Sidebar
+	 * @method
+	 *   @param {Object} data - Show the sidebar in this data object
+	 */
+	openSidebar: function (data) {
+		check(data, Object);
+		check(data.element, String);
+
+		// First, close any open sidebars
+		Thriver.canvas.closeSidebars();
+
+		// Get canvas and sidebars
+		let element = document.querySelector(data.element),
+			canvas  = document.querySelector('#canvas'),
+			sidebar = document.querySelector('#' + element.getAttribute('aria-controls') +
+				'.sidebar');
+
+		// Open Overlay
+		Thriver.canvas.addOverlay();
+
+		// Make link active
+		Thriver.util.makeActive(element);
+
+		// Make sidebar active
+		Thriver.util.hide(sidebar, false);
+
+		// Set width
+		canvas.dataset.canvasWidth = sidebar.dataset.width;
+		canvas.dataset.canvasPosition = sidebar.dataset.position;
+
+		// Bind closure
+		element.addEventListener('click', Thriver.canvas.handleCloseButton);
+	},
+
+	/**
+	 * @summary Handle close button
+	 * @method
+	 *   @param {Event|$.Event} event
+	 */
+	handleCloseButton: function (event) {
+		check(event, Match.OneOf(Event, $.Event) );
+
+		// Prevent anchor link from reopening sidebar while we're trying to close it
+		event.stopPropagation();
+		event.preventDefault();
+
+		Thriver.canvas.closeSidebars();
+	},
+
+	/* ============================================== */
 	clearCanvas : function(){
 	    document.body.classList.remove('noScroll');
 	    var canvas = document.getElementById('canvas');
@@ -48,7 +152,7 @@ Thriver.canvas = {
 	        //Sets values based on the parameters of the current sidebar
 	        for (var i = 0, e; e = sidebar[i]; i++) {
 	            Thriver.util.hide(e,true); //Clear all active sidebars
-	            if ('#' + e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
+	            if (e.getAttribute('id') == event.target.getAttribute('aria-controls')){ //If Sidebar ID matches toggles' data-sidebar
 	                Thriver.util.hide(e,false); //Add active class to given sidebar
 	                canvas.setAttribute('data-canvas-width',e.dataset.width); //Add new sidebar-width effect class
 	                if(e.dataset.position == 'left'){ canvas.setAttribute('data-canvas-position','left'); }
@@ -178,17 +282,18 @@ function toServiceProviders(){
 
 Template.body.events({
 	//Canvas Actions
-	'click [aria-controls][data-toggle=canvas]': Thriver.canvas.toggleCanvas,
-	'click .overlay': Thriver.canvas.toggleCanvas,
-	'click [data-canvas-event="close"]': Thriver.canvas.toggleCanvas,
+	//'click [aria-controls][data-toggle=canvas]': Thriver.canvas.toggleCanvas,
+	//'click .overlay': Thriver.canvas.toggleCanvas,
+	'click .overlay, click [data-canvas-event="close"]': Thriver.canvas.closeSidebars,
+	//'click [data-canvas-event="close"]': Thriver.canvas.toggleCanvas,
 
 	//Mobile Events
-	'click [aria-controls][data-toggle=mobile-navigation]': Thriver.canvas.toggleCanvas,
+	//'click [aria-controls][data-toggle=mobile-navigation]': Thriver.canvas.toggleCanvas,
 
-	'click [data-type="main-navigation-item"]': Thriver.canvas.toggleCanvas,
+	//'click [data-type="main-navigation-item"]': Thriver.canvas.toggleCanvas,
 
-	'click #mobile-navigation li > a[href="#service-providers"]': Thriver.canvas.toggleCanvas, //toservice2
+	//'click #mobile-navigation li > a[href="#service-providers"]': Thriver.canvas.toggleCanvas, //toservice2
 
-	'click #mobile-navigation figure a[href="#service-providers"]': Thriver.canvas.toggleCanvas
+	//'click #mobile-navigation figure a[href="#service-providers"]': Thriver.canvas.toggleCanvas
 
 });

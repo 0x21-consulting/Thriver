@@ -7,7 +7,6 @@ Template.library.helpers({
 	    //If catalog
 	    items: [{
 	        title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
-	        id: 1,
 	        byline: 'Sumru Erkut, et al., Center for Research on Women, 1993',
 	        id: 'summerWebinars',
 	        callNumber: '6504S',
@@ -23,7 +22,6 @@ Template.library.helpers({
 	        }
 	    },{
 	        title: 'There is diversity Within Diversity: Community Leaders Views on increasing diversity in youth serving organizations.',
-	        id: 2,
 	        byline: 'Sumru Erkut, et al., Center for Research on Women, 1993',
 	        id: 'summerWebinars',
 	        callNumber: '6504S',

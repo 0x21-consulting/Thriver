@@ -82,6 +82,16 @@ Template.outreach.events({
 
         // Update history
         Thriver.history.update(section.id, path);
+    },
+    /**
+     * @summary Action Alerts button
+     * @method
+     *   @param {$.Event} event
+     */
+    'click .action-alert-link': function (event) {
+        check(event, $.Event);
+
+        Thriver.history.navigate('/newsroom/action-alerts');
     }
 });
 

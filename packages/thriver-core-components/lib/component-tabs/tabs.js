@@ -58,8 +58,8 @@ Template.tabs.onRendered(function () {
 		toggleMenus = document.querySelectorAll('#main #masthead menu.tabs');
 
 	// For each toggle menu, select the first one
-	for (let i = 0; i < toggleMenus.length; ++i)
-		toggleMenus[i].querySelector('[data-toggle="tabs"]').click();
+	//for (let i = 0; i < toggleMenus.length; ++i)
+	//	toggleMenus[i].querySelector('[data-toggle="tabs"]').click();
 });
 
 /**

@@ -85,7 +85,7 @@ Template.aside.helpers({
     },{
         title: 'Newsroom',
         icon: 'news',
-        id: 'news',
+        id: 'newsroom',
         width: 1100,
         position:'right',
         filter: 'true',
@@ -132,4 +132,69 @@ Template.aside.helpers({
         position:'right',
         template: 'languageSelect'
     }]
+});
+
+Template.aside.events({
+    /**
+     * @summary Support updating path
+     * @method
+     *   @param {$.Event} event
+     */
+    'click a[data-id]': function (event) {
+        check(event, $.Event);
+
+        // Get path
+        var section = event.target.parentElement.parentElement.parentElement.
+                parentElement.parentElement,
+            path    = section.id + '/' + Thriver.sections.generateId(event.target.textContent);
+        
+        // Update history
+        Thriver.history.update(section.id, path);
+    }
+});
+
+/**
+ * @summary Register Deep-linking
+ * @method
+ */
+Template.aside.onRendered(function () {
+    // Remember aside
+    var aside    = this.firstNode,
+        sidebars = aside.querySelectorAll('section.sidebar'),
+
+    /**
+     * @summary Callback for Deep-linking
+     * @method
+     *   @param {String[]} path
+     */
+    deepLinkCallback = function (path) {
+        check(path, [String]);
+
+        let id   = aside.querySelector('section[aria-hidden="false"]').id,
+            tabs = document.querySelectorAll('#' + id + ' menu.tabs > li > a');
+
+        // Find tab, then click it
+        for (let i = 0; i < tabs.length; ++i)
+            if (path[0] === tabs[i].dataset.id)
+                tabs[i].click();
+
+        // Otherwise, if there isn't any path, click the first tab for the user
+        if (!path.length && tabs.length)
+            tabs[0].click();
+
+        console.debug('Deep-link:', path);
+    };
+
+    // Register each tab
+    for (let i = 0; i < sidebars.length; ++i)
+        Thriver.history.registry.insert({
+            element       : sidebars[i].id,
+            accessData    : {
+                element: 'a[aria-controls="' + sidebars[i].id + '"]'
+            },
+            accessFunction: Thriver.canvas.openSidebar,
+
+            /** Handle deep-linking */
+            callback: deepLinkCallback
+        });
 });

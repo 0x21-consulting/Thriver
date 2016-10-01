@@ -78,10 +78,10 @@ utilityNavigationHelpers = {
         user: 'public'
     },{
         //News
-        title: 'News',
+        title: 'Newsroom',
         icon : 'news',
         type: 'sidebar',
-        sidebar: 'news',
+        sidebar: 'newsroom',
         position : 'right',
         user: 'public'
     },{

@@ -25,7 +25,7 @@ Thriver.util = {
     },
     hide : function (element, state) {
         check(element, Element);
-        check(state, Boolean);
+        check(state, Match.Maybe(Boolean) );
 
         if (state === false)
             element.setAttribute('aria-hidden', 'false');
@@ -34,12 +34,12 @@ Thriver.util = {
     },
     makeActive : function (element, state) {
         check(element, Element);
-        check(state, Boolean);
+        check(state, Match.Maybe(Boolean) );
 
-        if (state === true)
-            element.setAttribute('aria-expanded', 'true');
-        else
+        if (state === false)
             element.setAttribute('aria-expanded', 'false');  
+        else
+            element.setAttribute('aria-expanded', 'true');
     },
     findAncestor : function (element, className) {
         check(element, Element);
