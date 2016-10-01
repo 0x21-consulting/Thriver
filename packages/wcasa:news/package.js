@@ -19,6 +19,9 @@ Package.onUse(function (api) {
     api.addAssets([
         
     ], ['client']);
+
+    // Schema
+    api.addFiles('lib/schema.js', ['client', 'server']);
     
     // Client processing
     api.addFiles([
@@ -37,8 +40,6 @@ Package.onUse(function (api) {
     api.addFiles([
         'lib/server.js'
     ], ['server']);
-    
-    api.export([ 'Newsroom' ]);
 });
 
 Package.onTest(function (api) {

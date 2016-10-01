@@ -1,6 +1,3 @@
-// Newsroom sections
-Newsroom = new Mongo.Collection('newsroom');
-
 // Structure
 //   _id           {string}   auto_incr
 //   title         {string}
@@ -17,11 +14,11 @@ Newsroom = new Mongo.Collection('newsroom');
 
 // Publish Newsroom sections -- they're public
 Meteor.publish('inTheNews', function () {
-    return Newsroom.find({ type: 'inTheNews' }, { sort: { date: 1 }});;
+    return Thriver.newsroom.collection.find({ type: 'inTheNews' }, { sort: { date: 1 }});;
 });
 Meteor.publish('pressReleases', function () {
-    return Newsroom.find({ type: 'pressRelease' }, { sort: { date: 1 }});
+    return Thriver.newsroom.collection.find({ type: 'pressRelease' }, { sort: { date: 1 }});
 });
 Meteor.publish('actionAlerts', function () {
-    return Newsroom.find({ type: 'actionAlert' }, { sort: { date: 1 }}); 
+    return Thriver.newsroom.collection.find({ type: 'actionAlert' }, { sort: { date: 1 }}); 
 });

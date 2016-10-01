@@ -1,7 +1,3 @@
-//@micchickenburger: I suggest search be contained in a global feature which can be reused
-// Newsroom sections
-Newsroom = new Mongo.Collection('newsroom'),
-
 // How many list items to load
 quantity = new ReactiveVar(5),
 
