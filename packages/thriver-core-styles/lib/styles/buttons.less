@@ -10,8 +10,10 @@ input[type=submit], .button, button{
     .font(1.4,2.2,0.05,@bold,normal);
     .color(color,@white,none);
     //.shadow(far);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
-    -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.15), 3px 3px 5px 1px rgba(0,0,0,0.1);
+    &:hover{
+        box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.1);
+        -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.1);
+    }
     will-change:background-color,transform;
     //.transition2(background-color, 200ms, @easeDefault, 0ms,transform, 50ms, @easeDefault, 0ms);
     &:active{

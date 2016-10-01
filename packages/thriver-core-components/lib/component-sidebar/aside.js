@@ -4,7 +4,7 @@ Template.aside.helpers({
         title: 'Account Details',
         icon: 'user',
         id: 'account', //Sets the ID of the sidebar which gets targeted by utility nav items
-        width: 700, //Sets the sidebar width & body class
+        width: 500, //Sets the sidebar width & body class
         position:'left', //Which Direction the sidebar appears from
         class: 'top', //Style. accepts 'left' and 'top'
         tabs: [{ //If sidebar has tabs: use this property
@@ -22,12 +22,12 @@ Template.aside.helpers({
                 icon : 'cal',
                 id: 'events',
                 template: 'eventsRegistered'
-            },{
+            }/*,{
                 title: 'Library Activity',
                 icon : 'book',
                 id: 'requests',
                 template: 'requests'
-            }
+            }*/
         ]
     },{
         title: 'Notifications',
@@ -59,24 +59,24 @@ Template.aside.helpers({
         title: 'Learning Center',
         icon: 'institution',
         id: 'learning-center',
-        width: 700,
+        width: 500,
         position:'right',
         filter: 'true',
         class: 'top',
         filterId: 'searchResources',
-        tabs: [{ //If sidebar has tabs: use this property
+        tabs: [/*{ //If sidebar has tabs: use this property
                 title: 'Library',
                 id: 'library',
                 template : 'library'
-            },{
+            },*/{
                 title: 'Infosheets',
                 id: 'infosheets',
                 template : 'infosheets'
-            },{
+            }/*,{
                 title: 'Stats & Data',
                 id: 'stats-data',
                 template: 'statsData'
-            },{
+            }*/,{
                 title: 'Webinars',
                 id: 'webinars',
                 template: 'webinars'
@@ -86,7 +86,7 @@ Template.aside.helpers({
         title: 'Newsroom',
         icon: 'news',
         id: 'newsroom',
-        width: 1100,
+        width: 700,
         position:'right',
         filter: 'true',
         filterId: 'searchNews',
@@ -108,7 +108,7 @@ Template.aside.helpers({
                 title: 'Newsletters',
                 id: 'newsletters',
                 template: 'newsletters'
-            },{
+            }/*,{
                 title: 'Annual Reports',
                 id: 'annual-reports',
                 template: 'annualReports'
@@ -116,7 +116,7 @@ Template.aside.helpers({
                 title: 'Press & Media Kits',
                 id: 'press-media-kits',
                 template: 'pressMediaKits'
-            }
+            }*/
         ]
     },{
         title: 'Donate to WCASA',

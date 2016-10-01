@@ -405,14 +405,14 @@ Template.providerListViewItem.events({
 
         // Update info section
         Session.set('currentProvider', Providers.findOne({ _id: this._id }));
-
+        console.log(Providers.findOne({ _id: this._id }));
         // Update map
         map.panTo(new google.maps.LatLng(
             this.coordinates[0],
             this.coordinates[1]
         ));
         map.setZoom(11);
-        google.maps.event.trigger(marker, 'click')
+        //google.maps.event.trigger(marker, 'click');
         // Close providers section
         document.body.classList.remove('providersListOpen');
     }
