@@ -28,10 +28,6 @@
                             <span class="fa">&#xf137;</span> {{lastMonth}}</li>
                         <li class="scroll-next-month preventSelect">{{nextMonth}}
                             <span class="fa">&#xf138;</span></li>
-                        {{#if isAdmin}}
-                            <li class="addEvent" title="Add an Event">
-                                <span class="fa">&#xf055;</span> Add Event</li>
-                        {{/if}}
                         <li class="search"><span class="fa">&#xf002;</span><input type="search"></li>
                         <li class="mobile back-to-events">
                             <button><span class="fa">&#xf137;</span> Back to Events</button></li>
@@ -120,6 +116,11 @@
                 There are currently no upcoming event<br>
                 Be sure to check back later!
             </li>
+            {{#if isAdmin}}
+                <li class="addEvent" title="Add an Event">
+                    <span class="fa">&#xf055;</span> Add Event
+                </li>
+            {{/if}}
         </ul>
     <!--<button class="seeAllEvents">See All Upcoming <span class="fa">&#xf13a;</span></button>-->
 </template>
