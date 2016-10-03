@@ -52,4 +52,11 @@
             </span>
         </button>
     </div>
+    {{#if isAdmin}}
+        <aside class="admin">
+            <button class="fa add">&#xf067; Add Newsroom Item</button>
+            {{> quickForm collection="Thriver.newsroom.collection" id="newsForm"
+                meteormethod="addNewsItem" type="method" doc=doc class="hide" }}
+        </aside>
+    {{/if}}
 </template>

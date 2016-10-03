@@ -10,13 +10,13 @@ Template.webinars.helpers({
 	        id: 'summerWebinars',
 	        items: [{
 	            title: 'One Webinar',
-	            date: '06991020', //This is temporary
+	            date: new Date('2016-01-01'), //This is temporary
 	            friendlyDate: '02/11/29',
 	            content: 'lorem ipsum.',
 	            url: 'http://google.com'
 	        },{
 	            title: 'One Webinar',
-	            date: '06991020', //This is temporary
+	            date: new Date('2016-01-01'), //This is temporary
 	            friendlyDate: '02/11/29',
 	            content: 'lorem ipsum.',
 	            url: 'http://google.com'
@@ -26,7 +26,7 @@ Template.webinars.helpers({
 	        id: 'summerWebinars',
 	        items: [{
 	            title: 'One Webinar',
-	            date: '06991020', //This is temporary
+	            date: new Date('2016-01-01'), //This is temporary
 	            friendlyDate: '02/11/29',
 	            content: 'lorem ipsum.',
 	            url: 'http://google.com'

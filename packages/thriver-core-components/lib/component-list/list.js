@@ -8,8 +8,7 @@ var lists =[{
     //If standard
     items: [{
         title: 'One Webinar',
-        date: '06991020', //This is temporary
-        friendlyDate: '02/11/29',
+        date: new Date('2016-01-01'),
         content: 'lorem ipsum.'        
     }],
     //If category
@@ -18,8 +17,7 @@ var lists =[{
         id: 'summerWebinars',
         items: [{
             title: 'One Webinar',
-            date: '06991020', //This is temporary
-            friendlyDate: '02/11/29',
+            date: new Date('2016-01-01'),
             content: 'lorem ipsum.'
         }]
     }],

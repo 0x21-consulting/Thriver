@@ -20,7 +20,7 @@ Template.post.helpers({
 		icon: '&#xf02f;',
 		print: 'print'
 	}],
-	data : {
+	testData : {
 		title: 'Bill Targets Transgendered Students',
 		id: 'post1',
 		category: 'news',

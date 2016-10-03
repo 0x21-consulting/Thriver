@@ -1,15 +1,15 @@
 // How many list items to load
-quantity = new ReactiveVar(5),
+Thriver.newsroom.quantity = new ReactiveVar(5);
 
 // Regular Expression for Search field
-search = new ReactiveVar(),
+Thriver.newsroom.search = new ReactiveVar();
 
 /**
  * Handle searching
  * @method
  *   @param {Event} event
  */
-handleSearch = function (event) {
+let handleSearch = function (event) {
     var value = event.target.value;
     
     // If field is empty, clear reactive search variable
@@ -23,6 +23,7 @@ handleSearch = function (event) {
 Meteor.subscribe('inTheNews');
 Meteor.subscribe('pressReleases');
 Meteor.subscribe('actionAlerts');
+Meteor.subscribe('newsletters');
 
 // Events
 Template.aside.events({
@@ -36,7 +37,7 @@ Template.aside.events({
         check(event.target, Element)
 
         // Get all results
-        quantity.set(0);
+        Thriver.newsroom.quantity.set(0);
         
         // Hide "Load More Results" button
         event.target.classList.add('hide');
@@ -55,5 +56,17 @@ Template.aside.events({
 
         // Prevent form submission
         event.preventDefault();
+    },
+
+    /** 
+     * @summary Show Add Newsroom Item form
+     * @method
+     *   @param {$.Event} event
+     */
+    'click aside.admin button.add': function (event) {
+        check(event, $.Event);
+
+        // Show form
+        document.querySelector('#newsForm').classList.remove('hide');
     }
 });

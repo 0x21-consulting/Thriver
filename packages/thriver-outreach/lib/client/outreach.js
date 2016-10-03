@@ -4,22 +4,6 @@ Template.outreach.helpers({
 
 	/** Section Title Subtext */
 	content: "<p>We believe that everyone has a role and a responsibility <br>in this work. WCASA is always seeking passionate folks<br>to join up and help make a difference.<br><button class='action-alert-link'>See Action Alerts <span class='fa'>&#xf0da;</span></button></p>",
-	items: [{
-		tabs: [{
-				title: 'Volunteer',
-				id: 'volunteer',
-				template : 'volunteer'
-			},{
-				title: 'Join The Board',
-				id: 'joinTheBoard',
-				template : 'joinTheBoard'
-			},{
-				title: 'Jobs & Internships',
-				id: 'wcasaJobs',
-				template: 'wcasaJobs'
-			}
-		]
-	}],
 
 	/**
      * @summary Get subsections from db
@@ -46,7 +30,9 @@ Template.outreach.helpers({
 					categories: Thriver.sections.get(children[i], ['data']).data.opportunities || []
 				}],
                 template: 'generic',
-                editable: true
+                editable: true,
+                isHidden: i === 0? 'false' : 'true',
+                isActive: i === 0? 'true'  : 'false'
             });
         }
 
@@ -56,14 +42,6 @@ Template.outreach.helpers({
             tabs: tabs
         }];
     }
-});
-
-Template.outreach.onRendered(function() {
-	//This seems out of place
-	/*$('.action-alert-link').click(function(){
-		$("#utility a[href='#news']").trigger("click");
-		$(".sidebar-content menu.tabs a[href='#action-alerts']").trigger("click");
-	});*/
 });
 
 Template.outreach.events({
@@ -136,7 +114,7 @@ Template.outreach.onRendered(function () {
                 return sections;
             };
 
-            // If there's no path, there's nothing to do
+            // If there's no path, do nothing
             if (!path.length) return;
 
             // Get link list of all browseable sections

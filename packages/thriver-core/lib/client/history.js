@@ -255,7 +255,10 @@ Template.body.events({
     'click a[href^="/"]': function (event) { console.debug('href', event.target);
         check(event, $.Event);
 
+        // Prevent navigation away from page
+        event.preventDefault();
+
         // Navigate to path
-        Thriver.history.navigate(event.target.pathname);
+        Thriver.history.navigate(event.target.pathname || '/');
     }
 });

@@ -10,6 +10,11 @@ section#newsroom {
         margin-top: -27px;
         font-weight: 800;
         color: rgba(255,255,255,0.25);
+
+        // Position on top of admin controls
+        position: relative;
+        z-index: 1;
+
         @media @mobile{
             margin-top: -12px;
             margin-left: 20px;
@@ -130,7 +135,6 @@ section#newsroom{
     }
 }
 
-
 //Center Annual Reports / Press/Media Kits
 article#press-media-kits, article#annual-reports{
     article{
@@ -139,6 +143,47 @@ article#press-media-kits, article#annual-reports{
         @media @mobile{
             text-align: left;
             h3{text-align: left !important;}
+        }
+    }
+}
+
+// Admin styles
+#newsroom aside.admin {
+    margin: 0 0 15px;
+
+    button {
+        color: @white;
+        background: @orange;
+    }
+
+    #newsForm {
+        margin: 15px auto;
+        text-align: left;
+        width: 90%;
+
+        select {
+            padding: 5px 10px;
+            font-size: 1.25rem;
+            font-weight: normal;
+            margin: 10px;
+        }
+
+        // Add * form styles
+        [data-required="true"] label::after {
+            content: '\f069';
+            font: 10px FontAwesome;
+            color: @orange;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+
+        // Validation error styles
+        span.help-block {
+            color: #f55;
+            font-weight: bold;
+            float: right;
+            margin-top: -53px;
+            margin-right: 10px;
         }
     }
 }

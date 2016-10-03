@@ -125,13 +125,13 @@ Template.aside.helpers({
         width: 700,
         position:'right',
         template: 'donate'
-    },{
+    }/*,{
         title: 'Language Select',
         id: 'lang',
         width: 356,
         position:'right',
         template: 'languageSelect'
-    }]
+    }*/]
 });
 
 Template.aside.events({

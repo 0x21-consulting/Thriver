@@ -1,9 +1,7 @@
 <template name="tabs">
     <menu class="tabs {{class}}">
         {{#each tabs}}
-            <li>
-                <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="false" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
-            </li>
+            {{> tabAnchor this}}
         {{/each}}
         {{#if isAdmin}}
             {{#if showAddPage}}
@@ -18,7 +16,7 @@
     {{/if}}
     <div class="tabs {{class}}">
         {{#each tabs}}
-            <article data-id="{{id}}" aria-hidden="true" data-editable="{{editable}}"
+            <article data-id="{{id}}" aria-hidden="{{isHidden}}" data-editable="{{editable}}"
                 class="{{#if isAdmin}}admin{{/if}}">
                 {{#if isAdmin}}
                     {{#if editable}}
@@ -43,4 +41,10 @@
             {{>list}}
         {{/each}}
     </section>
+</template>
+
+<template name="tabAnchor">
+    <li>
+        <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="{{isActive}}" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
+    </li>
 </template>

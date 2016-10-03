@@ -31,8 +31,14 @@ Template.masthead.helpers({
 Template.masthead.onRendered(function () {
     //mastheadHeight();
     //Auto Rotate function
-    function transitionSlider(){
-        //mastheadHeight();
+    function transitionSlider() {
+        var activeItem = document.querySelector('.masthead menu.tabs > li a[aria-expanded="true"]');
+
+        // If there is no active item, make the first active
+        if (!activeItem)
+            document.querySelector('.masthead menu.tabs > li a').
+                setAttribute('aria-expanded', true);
+
         $( ".masthead menu.tabs > li" ).each(function() {
             if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':not(:last-child)')){
                 $(this).next().find('a')[0].click();
@@ -44,9 +50,13 @@ Template.masthead.onRendered(function () {
             }
         });
     }
-    var sliderTimer = setInterval(transitionSlider, 8000);
-    $("#masthead menu.tabs > li a").click(function() {
+    setInterval(transitionSlider, 8000);
+
+    // Start
+    transitionSlider();
+
+    /*$("#masthead menu.tabs > li a").click(function() {
         clearInterval(sliderTimer);
         sliderTimer = setInterval(transitionSlider, 8000);
-    });
+    });*/
 });
