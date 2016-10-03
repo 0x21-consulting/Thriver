@@ -178,7 +178,7 @@ Template.tabs.events({
      * @method
      *   @param {$.Event} event - jQuery Event handle
      */
-    'click [editable!="false"] button.delete': function (event) {
+    'click div.tabs > article[editable!="false"] > aside.admin > button.delete': function (event) {
         var link, parent;
 
         check(event, $.Event);

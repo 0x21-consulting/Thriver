@@ -38,6 +38,11 @@
                                 {{#if content}}<p class="content text">{{{content}}}</p>{{/if}}
                             </a>
                         </div>
+                        {{#if isAdmin}}
+                            <aside class="admin">
+                                <button class="fa delete">&#xf1f8;</button>
+                            </aside>
+                        {{/if}}
                     </article>
                 {{/each}}
             {{/if}}

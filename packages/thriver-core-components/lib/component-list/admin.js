@@ -1,5 +1,5 @@
 /**
- * Handler for updating work section names
+ * Handler for updating section names
  * @method
  *   @param {Event} event - KeyboardEvent passed to handler
  */

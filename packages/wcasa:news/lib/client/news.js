@@ -70,3 +70,20 @@ Template.aside.events({
         document.querySelector('#newsForm').classList.remove('hide');
     }
 });
+
+// Administrative events
+Template.list.events({
+    /**
+     * @summary Delete a newsroom item
+     * @method
+     *   @param {$.Event} event
+     */
+    'click article[role="document"] aside.admin button.delete': function (event) {
+        check(event, $.Event);
+
+        event.stopPropagation(); console.debug(this)
+
+        if ( confirm('Are you sure you want to delete this Newsroom Item?') )
+            Meteor.call('deleteNewsItem', this._id);
+    }
+});

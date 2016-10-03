@@ -48,5 +48,23 @@ Meteor.methods({
         Thriver.newsroom.collection.insert(item, function (error, id) {
             if (error) throw new Meteor.Error(error);
         });
+    },
+    /**
+     * @summary Delete Newsroom Item
+     * @method
+     *   @param {String} id - ID of item to delete
+     */
+    deleteNewsItem: function (id) {
+        // Check authorization
+        if (!Meteor.userId() || !Meteor.user().admin)
+            throw new Meteor.Error('not-authorized');
+
+        // Parameter checks
+        check(id, String);
+
+        // Perform deletion
+        Thriver.newsroom.collection.remove({ _id: id }, function (error) {
+            if (error) throw new Meteor.Error(error);
+        });
     }
 });
