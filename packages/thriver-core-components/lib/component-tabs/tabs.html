@@ -8,7 +8,7 @@
         {{#if isAdmin}}
             {{#if showAddPage}}
                 <li class="new-section">
-                    <a href="#" aria-expanded="false">Add New Page</a>
+                    <a href="#" aria-expanded="false"><span class="fa">&#xf055;</span> Section</a>
                 </li>
             {{/if}}
         {{/if}}
@@ -18,7 +18,7 @@
     {{/if}}
     <div class="tabs {{class}}">
         {{#each tabs}}
-            <article data-id="{{id}}" aria-hidden="true" data-editable="{{editable}}" 
+            <article data-id="{{id}}" aria-hidden="true" data-editable="{{editable}}"
                 class="{{#if isAdmin}}admin{{/if}}">
                 {{#if isAdmin}}
                     {{#if editable}}

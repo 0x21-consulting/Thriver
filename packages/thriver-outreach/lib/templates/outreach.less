@@ -47,6 +47,7 @@
         padding-bottom:20px;
         padding-left: 0px;
         padding-right: 0px;
+        padding-top: 25px;
         @media @mobile{ padding-bottom:0px; z-index: 12; position: relative;}
         display: table;
         text-align: center;
@@ -65,12 +66,12 @@
                 @media @1450{margin: 0px;}
                 .font(1.5,1.6,0.2,@normal,uppercase);
                 .textButtonColor(@white);
-                a{background: transparent !important;}
+                a{background: transparent;}
                 //.accelerate;
                 //will-change:font;
                 //.transition(font,@canvasDuration,@canvasEase,0ms);
                 a{
-                    padding:0px 16px 16px 16px;
+                    padding:16px 16px 16px 16px;
                     margin: 0px 12px 0px 12px;
                     .font(1.5,1.6,0.2,@normal,uppercase);
                     padding-right: 0px;
@@ -111,6 +112,10 @@
                             background-color: @white;
                         }
                     }
+                }
+                &.new-section > a {
+                    padding-left: 16px !important; padding-right: 16px !important;
+                    &:after{display: none;}
                 }
                 &:first-child a{
                    //&:after{left: 16px;}
