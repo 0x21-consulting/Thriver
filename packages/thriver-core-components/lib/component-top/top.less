@@ -8,7 +8,7 @@
     bottom: 20px;
     right: 20px;
     padding: 10px 15px;
-    background: @teal;
+    background: darken(@gray,10%);
     color: #fff;
     font-weight: 700;
     border-radius: 50%;
@@ -27,8 +27,8 @@
     .trans(all 250ms ease);
     &.active{
         .transform(translate(0px, 0px));
-        opacity: 0.8;
-        &:hover{ opacity: 1; }
+        opacity: 1;
+        &:hover{ opacity: 1; background: @teal; }
     }
     span{
         display: block;
