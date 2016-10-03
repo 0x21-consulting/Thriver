@@ -3,26 +3,35 @@
 //.section-controls button, p#dAddNotification, #admin-controls button, .section-controls button, .section-controls input, #admin-controls, .section-controls{ display: none !important;}
 #admin-controls {
     position: fixed;
-    background: #fff;
+    background: transparent;
     left: 20px;
     bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,.7);
+    //border-radius: 5px;
     text-align: center;
-    padding: 10px;
+    //padding: 10px;
     z-index: 100; // keep on top
 }
-/*#admin-controls button, .section-controls button span {
+#admin-controls button{
     font-family: 'FontAwesome';
-    font-size: 40px;
+    font-size: 32px;
     vertical-align: middle;
     // Override blanket button styles
     display: inline;
     padding: 2px 6px 3px;
-    color: @orange;
+    color: @white;
     letter-spacing: 0;
     box-shadow: none;
-}*/
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    height: 50px;
+    width: 50px;
+    box-shadow: 2px 2px  5px 0px rgba(0,0,0,0.15);
+    background: #90a0a7;
+    &:nth-child(2){
+        background: #7e8a8f;
+    }
+}
 .section-controls{
     height: 30px;
     width: 100%;
