@@ -53,7 +53,9 @@
                     <button class="sliderNext fa">&#xf054;</button>
                 </div>
                 <article class="listViewEventsObject">
-                    Hello
+                    {{#each items}}
+                        {{>tabs}}
+                    {{/each}}
                 </article>
                 {{#if isAdmin}}
                     {{> eventsAdmin}}
@@ -63,6 +65,11 @@
     </section>
 </template>
 
+<template name="eventListItem">
+    <li>
+        <p><strong>{{name}}</strong></p>
+    </li>
+</template>
 
 <template name="eventSlide">
     <li class="eventSlide">
@@ -220,14 +227,89 @@
 </template>
 
 
-<template name="noEvents">
-    <li class="eventSlide">
-        <div class="eventContainer">
-            <div class="inner">
-                <header>
-                    <p>Woops! No events this month!</p>
-                </header>
-            </div>
-        </div>
-    </li>
+<template name="pastEventsList">
+    <h2>September 2016</h2>
+    <ul>
+        <li>
+            <a href="#">
+                <span>An Event Title</span>
+                <span class="badge">Sept 16th-18th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Titled Event</span>
+                <span class="badge">Sept 22nd</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Title of an Event</span>
+                <span class="badge">Sept 24th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Another Event</span>
+                <span class="badge">Sept 31st</span>
+            </a>
+        </li>
+    </ul>
+</template>
+
+<template name="upcomingEventsList">
+    <h2>October 2016</h2>
+    <ul>
+        <li>
+            <a href="#">
+                <span>An Event Title</span>
+                <span class="badge">Oct 16th-18th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Titled Event</span>
+                <span class="badge">Oct 22nd</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Title of an Event</span>
+                <span class="badge">Oct 24th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Another Event</span>
+                <span class="badge">Oct 31st</span>
+            </a>
+        </li>
+    </ul>
+    <h2>November 2016</h2>
+    <ul>
+        <li>
+            <a href="#">
+                <span>An Event Title</span>
+                <span class="badge">Nov 16th-18th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Titled Event</span>
+                <span class="badge">Nov 22nd</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Title of an Event</span>
+                <span class="badge">Nov 24th</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>Another Event</span>
+                <span class="badge">Nov 31st</span>
+            </a>
+        </li>
+    </ul>
 </template>

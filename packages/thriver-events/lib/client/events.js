@@ -110,6 +110,22 @@ Thriver.events.slide = function (position) {
 
 // Events helpers
 Template.events.helpers({
+
+    //Temp Future/Past Content
+    items: [{
+        //Need to find away to get background images in here
+        tabs: [{ //If sidebar has tabs: use this property
+                title: 'Upcoming Events',
+                id: 'upcomingEventsList', //These are for aria-controls
+                template: 'upcomingEventsList'
+            },{
+                title: 'Past Events',
+                id: 'pastEventsList',
+                template: 'pastEventsList'
+            }
+        ]
+    }],
+
     /**
      * Provide current event data to event slides
      * @function
@@ -394,6 +410,9 @@ Template.events.events({
             Thriver.calendar.thisYear.get() + '/' +
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     /**
@@ -419,6 +438,10 @@ Template.events.events({
             Thriver.calendar.thisYear.get() + '/' +
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
+
     },
 
     /**
@@ -440,6 +463,9 @@ Template.events.events({
             slider.classList.add('hide');
         if (admin instanceof Element)
             admin.classList.remove('hide');
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     /**
@@ -459,6 +485,9 @@ Template.events.events({
         }
 
         Thriver.events.slide(position);
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     /**
@@ -478,6 +507,9 @@ Template.events.events({
         }
 
         Thriver.events.slide(position);
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     /**
@@ -492,6 +524,9 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     /**
@@ -507,6 +542,9 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
+
+        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+        $(".listViewEvents").removeClass("active");
     },
 
     'click .listViewEvents': function (event) {
