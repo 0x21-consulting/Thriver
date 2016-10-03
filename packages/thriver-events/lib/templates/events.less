@@ -292,7 +292,7 @@
         position: relative;
         z-index: 2;
         &.notCurrent{
-            color: lighten(@teal, 2.75%);
+            color: desaturate(lighten(@teal, 10%),25%);
         }
         &.weekday{
             //background-color: #23cfdc;
@@ -307,20 +307,18 @@
                 z-index: -1;
                 border-radius: 20px;
                 margin-left: -8px;
-                            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            -webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             }
         }
         &.today{
             &:after {
                 border-radius: 50%;
-                background: @teal;
+                background: lighten(@teal,10%);
                 width: 1.9em;
                 content: '';
                 position: absolute;
                 height: 1.9em;
                 z-index: -1;
-                margin-left: -22px;
+                margin-left: -18px;
                 margin-top: 1px;
             }
         }
@@ -333,11 +331,13 @@
                 color: @teal;
                 .shadowNone;
                 background: #fff;
-                height: 20px;
-                width: 20px;
+                height: 26px;
+                width: 26px;
                //border-bottom: 3px solid @yellow;
                 border-radius: 50%;
-                display: inline;
+                display: inline-block;
+                font-size: 11px;
+                font-weight: bold;
             }
             span.eventSummary{
                 position: absolute;
@@ -350,12 +350,12 @@
                 text-align: left;
                 font-size: 12px;
                 padding: 10px;
-                right: -215px;
+                right: -210px;
                 bottom:33px;
                 pointer-events: none;
                 visibility: hidden;
                 ul{ list-style: none; margin:0px;}
-                ul li{padding: 0px !important; font-size: 80%; line-height: 82%; margin:0;}
+                ul li{padding: 0px !important; font-size: 80%; line-height: 142%; margin:0;}
                 opacity: 0;
                 //.accelerate;
                 transition: opacity 250ms @easeDefault 1ms, transform 250ms @easeDefault 1ms, visibility 0ms linear 250ms;
