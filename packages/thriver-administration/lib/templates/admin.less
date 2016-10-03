@@ -53,6 +53,7 @@
         line-height: 12px;
         padding-top: 5px;
         span{.fa;}
+        @media @mobile{width: 50%;}
     }
     p{
         font-weight: @bold;
@@ -62,11 +63,13 @@
         padding-top: 4px;
         //padding-left: 20px;
         opacity: 0.7;
+        @media @mobile{display: none;}
     }
     .direction{
         color: #fff;
         padding-left: 5px;
         opacity: 0.7;
+        @media @mobile{display: none;}
     }
     input{
         background: transparent;
@@ -81,6 +84,7 @@
         cursor: pointer;
         background: rgba(0,0,0,0.1);
         height: 26px;
+        @media @mobile{width: 50%; padding: 2px 0px 2px 0px; text-indent: 8px;}
         &:hover{
             background: rgba(0,0,0,0.15);
             + .edit{

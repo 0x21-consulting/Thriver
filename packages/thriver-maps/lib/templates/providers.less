@@ -202,6 +202,7 @@ section.providers{
                     background: @bodyBgColor;
                     margin-left: -5px;
                 }
+                @media @mobile{ width: 33%; }
             }
         }
         > a{
@@ -506,8 +507,15 @@ section.providers{
 @media @mobile{
     #main section.providers{
         form#search > *, form#search > * label {
-            margin: 0px !important;
+            //margin: 0px !important;
             margin-top: 9px !important;
+            &[for="zip"], &[for="county"]{
+                margin-bottom: 10px !important;
+            }
+            &[for="county"]{
+                //position: relative;
+                top: -33px;
+            }
         }
     }
 }
