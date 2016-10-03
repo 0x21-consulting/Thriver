@@ -26,7 +26,7 @@ Template.actionAlerts.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: function () {
-            return Thriver.newsroom.collection.find({
+            var items = Thriver.newsroom.collection.find({
                 type: 'actionAlert',
                 $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
                     title: Thriver.newsroom.search.get() },{
@@ -35,7 +35,13 @@ Template.actionAlerts.helpers({
             }, {
                 limit: Thriver.newsroom.quantity.get(),
                 sort: { date: -1 }
-            });
+            }).fetch();
+
+            // Dynamically create URL
+            for (let i = 0; i < items.length; ++i)
+                items[i].url = '/action-alert/' + Thriver.sections.generateId( items[i].title );
+            
+            return items;
         }
     }]
 });

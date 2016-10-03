@@ -16,18 +16,29 @@ Router.route('action-alert', {
     data: function () {
         if (!this.ready()) return;
         
-        let alert = Thriver.newsroom.collection.findOne(
-            { url: this.url.replace(/https?:\/{2,}.+?(:\d{,5})?\//i, '/') });
+        let item,
+            items = Thriver.newsroom.collection.find(
+            { type: 'actionAlert' }).fetch();
+        
+        // Find the Newsroom item that matches the name
+        for (let i = 0; i < items.length; ++i)
+            if (Thriver.sections.generateId(items[i].title) === this.params.title) {
+                item = items[i];
+                break;
+            }
+        
+        // TODO: Item not found needed here
+        if (!item) return;
         
         // The Post template expects the following additional information:
-        alert['category'] = 'Action Alert';
-        alert['logos'] = [{
+        item['category'] = 'Action Alert';
+        item['logos'] = [{
             title: 'WCASA',
             src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
             url: '/'
         }];
 
-        return alert;
+        return item;
     },
     action: function () {
         if ( this.ready() ) this.render();
@@ -52,29 +63,29 @@ Router.route('press-release', {
     data: function () {
         if (!this.ready()) return;
         
-        let alert,
-            alerts = Thriver.newsroom.collection.find(
+        let item,
+            items = Thriver.newsroom.collection.find(
             { type: 'pressRelease' }).fetch();
         
         // Find the Newsroom item that matches the name
-        for (let i = 0; i < alerts.length; ++i)
-            if (Thriver.sections.generateId(alerts[i].title) === this.params.title) {
-                alert = alerts[i];
+        for (let i = 0; i < items.length; ++i)
+            if (Thriver.sections.generateId(items[i].title) === this.params.title) {
+                item = items[i];
                 break;
             }
         
         // TODO: Item not found needed here
-        if (!alert) return;
+        if (!item) return;
         
         // The Post template expects the following additional information:
-        alert['category'] = 'Press Release';
-        alert['logos'] = [{
+        item['category'] = 'Press Release';
+        item['logos'] = [{
             title: 'WCASA',
             src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
             url: '/'
         }];
 
-        return alert;
+        return item;
     },
     action: function () {
         if ( this.ready() ) this.render();
