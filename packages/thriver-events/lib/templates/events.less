@@ -69,6 +69,9 @@
             line-height: 28px;
 
         }
+        @media @mobile{
+            min-height: 0px;
+        }
     }
     .eventsMain{
         background-color: lighten(@gray, 5%);
@@ -747,7 +750,7 @@ section.events{
     header.eventsHeader input[type="search"]{ background:transparent !important; .shadowNone !important;}
 }
 .back-to-events{display: none !important;}
-@media (max-width:945px){
+@media (max-width:1000px){
     header.eventsHeader > ul li:first-child, header.eventsHeader > ul li:nth-child(2){ display: none; }
     #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide h2{
         font-size: 120%;
