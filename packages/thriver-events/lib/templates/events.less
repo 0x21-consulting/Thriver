@@ -119,6 +119,7 @@
             }
             .slideScroller{
                 flex: 1;
+                background: #fff;
                 overflow: hidden;
                 .slides{
                     .extended{
@@ -139,7 +140,6 @@
                         }
                     }
                     list-style-type: none;
-                    vertical-align: top;
                     //height: 599px;
                     white-space: nowrap;
                     //.trans(transform 375ms @easeDefault 0ms);
@@ -151,6 +151,7 @@
                         margin-right: -3px;
                         background-color: @white;
                         z-index: 1;
+                        vertical-align: top;
                         .eventContainer{
                             padding: 0px;
                             overflow: auto;
@@ -158,7 +159,7 @@
                             .inner{
                                 padding: 0px;
                                 background-color: @white;
-                                //height: 600px;
+                                min-height: 600px;
                                 //.shadow(far);
                                 //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                                 //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
