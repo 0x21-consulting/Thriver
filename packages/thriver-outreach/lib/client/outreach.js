@@ -31,8 +31,7 @@ Template.outreach.helpers({
 				}],
                 template: 'generic',
                 editable: true,
-                isHidden: i === 0? 'false' : 'true',
-                isActive: i === 0? 'true'  : 'false'
+                isFirst: i === 0? true : false
             });
         }
 

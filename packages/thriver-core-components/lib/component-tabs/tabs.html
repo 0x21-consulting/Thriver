@@ -16,7 +16,7 @@
     {{/if}}
     <div class="tabs {{class}}">
         {{#each tabs}}
-            <article data-id="{{id}}" aria-hidden="{{isHidden}}" data-editable="{{editable}}"
+            <article data-id="{{id}}" aria-hidden="{{#if isFirst}}false{{else}}true{{/if}}" data-editable="{{editable}}"
                 class="{{#if isAdmin}}admin{{/if}}">
                 {{#if isAdmin}}
                     {{#if editable}}
@@ -45,6 +45,6 @@
 
 <template name="tabAnchor">
     <li>
-        <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="{{isActive}}" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
+        <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="{{#if isFirst}}true{{else}}false{{/if}}" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
     </li>
 </template>

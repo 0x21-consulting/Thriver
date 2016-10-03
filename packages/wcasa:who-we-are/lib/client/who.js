@@ -29,8 +29,7 @@ Template.who.helpers({
                 content : Thriver.sections.get(children[i], ['data']).data.content || '',
                 template: 'generic',
                 editable: true,
-                isHidden: i === 0? 'false' : 'true',
-                isActive: i === 0? 'true'  : 'false'
+                isFirst: i === 0? true : false
             });
         }
 
@@ -40,17 +39,13 @@ Template.who.helpers({
             icon: '&#xf0c0;',
             id: 'staff',
             template: 'staff',
-            editable: false,
-            isHidden: 'true',
-            isActive: 'false'
+            editable: false
         },{
             title: 'Board of Directors',
             icon: '&#xf0c0;',
             id: 'board',
             template: 'board',
-            editable: false,
-            isHidden: 'true',
-            isActive: 'false'
+            editable: false
         });
 
         return [{
