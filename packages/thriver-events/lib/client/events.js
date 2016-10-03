@@ -37,16 +37,16 @@ Thriver.events.getThisMonthEvents = function () {
     // Get all events and organize them in an easily-accessible way
     Thriver.events.collection.find({
         $or: [{
-            start: { 
-                $gte: new Date( Thriver.calendar.thisYear.get(), 
+            start: {
+                $gte: new Date( Thriver.calendar.thisYear.get(),
                     Thriver.calendar.thisMonth.get() ),
-                $lt : new Date( Thriver.calendar.thisYear.get(), 
+                $lt : new Date( Thriver.calendar.thisYear.get(),
                     Thriver.calendar.thisMonth.get(), total )
         }}, {
-            end: { 
-                $gte: new Date( Thriver.calendar.thisYear.get(), 
+            end: {
+                $gte: new Date( Thriver.calendar.thisYear.get(),
                     Thriver.calendar.thisMonth.get() ),
-                $lt : new Date( Thriver.calendar.thisYear.get(), 
+                $lt : new Date( Thriver.calendar.thisYear.get(),
                     Thriver.calendar.thisMonth.get(), total )
             }
         }]
@@ -83,7 +83,7 @@ Thriver.events.getThisMonthEvents = function () {
             // If the date doesn't already exist, add it
             if (! currentEvents[ start + i ])
                 currentEvents[ start + i ] = [];
-            
+
             // Add event details
             currentEvents[ start + i ].push(event);
         }
@@ -104,7 +104,7 @@ Thriver.events.slide = function (position) {
     currentSlide.set(position);
 
     // Smooth slide to it
-    document.querySelector('.slides').style.webkitTransform = 
+    document.querySelector('.slides').style.webkitTransform =
         'translate(-' + position + '00% ,0px)';
 };
 
@@ -118,21 +118,21 @@ Template.events.helpers({
     events: function () {
         var events = Thriver.events.collection.find({
             $or: [{
-                start: { 
-                    $gte: new Date( Thriver.calendar.thisYear.get(), 
+                start: {
+                    $gte: new Date( Thriver.calendar.thisYear.get(),
                         Thriver.calendar.thisMonth.get() ),
-                    $lt : new Date( Thriver.calendar.thisYear.get(), 
+                    $lt : new Date( Thriver.calendar.thisYear.get(),
                         Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate() )
             }}, {
-                end: { 
-                    $gte: new Date( Thriver.calendar.thisYear.get(), 
+                end: {
+                    $gte: new Date( Thriver.calendar.thisYear.get(),
                         Thriver.calendar.thisMonth.get() ),
-                    $lt : new Date( Thriver.calendar.thisYear.get(), 
+                    $lt : new Date( Thriver.calendar.thisYear.get(),
                         Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate() )
                 }
             }]
         }, { sort: { start: 1 } });
-        
+
         // Update total for slides
         slideTotal.set( events.count() );
 
@@ -149,8 +149,8 @@ Template.eventSlide.helpers({
      */
     startDate: function () {
         var date = this.start;
-        
-        return Thriver.calendar.months[ date.getMonth() ] + ' ' + 
+
+        return Thriver.calendar.months[ date.getMonth() ] + ' ' +
             date.getDate() + ', ' + date.getFullYear();
     },
     /**
@@ -164,11 +164,11 @@ Template.eventSlide.helpers({
             minutes = time.getMinutes(),
             am = false,
             date = '';
-        
+
         // If the event spans multiple days, include the date
         if (this.end instanceof Date)
             if ( this.start.getDate() !== this.end.getDate() ) {
-                date = Thriver.calendar.months[ this.start.getMonth() ] + 
+                date = Thriver.calendar.months[ this.start.getMonth() ] +
                     ' ' + this.start.getDate();
                 return date;
             }
@@ -182,15 +182,15 @@ Template.eventSlide.helpers({
             hour = 12;
         else
             hour = hour % 12;
-        
+
         // Format with leading zero if necessary
         if (hour.toString().length < 2)
             hour = '0' + hour;
-        
+
         // Same for minutes
         if (minutes.toString().length < 2)
             minutes = '0' + minutes;
-        
+
         return hour + ':' + minutes + (am? ' AM' : ' PM');
     },
     /**
@@ -208,7 +208,7 @@ Template.eventSlide.helpers({
             minutes = time.getMinutes(),
             am = false,
             date = '';
-        
+
         // If the event spans multiple days, include the date
         if ( this.start.getDate() !== this.end.getDate() ) {
             date = Thriver.calendar.months[ this.end.getMonth() ] + ' ' + this.end.getDate();
@@ -224,15 +224,15 @@ Template.eventSlide.helpers({
             hour = 12;
         else
             hour = hour % 12;
-        
+
         // Format with leading zero if necessary
         if (hour.toString().length < 2)
             hour = '0' + hour;
-        
+
         // Same for minutes
         if (minutes.toString().length < 2)
             minutes = '0' + minutes;
-        
+
         return ' - ' + hour + ':' + minutes + (am? ' AM' : ' PM');
     },
     /**
@@ -244,18 +244,18 @@ Template.eventSlide.helpers({
         // If this is a web link
         if (this.location.webinarUrl)
             return '<a href="' + this.location.webinarUrl + '" target="_blank">Online</a>';
-        
+
         // If there is a location
         /*if (this.location instanceof Object)
             if (this.location.latitude && this.location.longitude)
                 return '<a href="https://www.google.com/maps/place/' + this.address +
-                    '/@' + this.location.latitude + ',' + this.location.longitude + 
+                    '/@' + this.location.latitude + ',' + this.location.longitude +
                     ',14z" target="_blank">' + this.address + '</a>';*/
-        
+
         if (this.location.mapUrl)
             return '<a href="' + this.location.mapUrl + '" target="_blank">' +
                 this.location.name + '</a>';
-        
+
         // Otherwise, just return the name
         return this.location.name;
     },
@@ -279,7 +279,7 @@ Template.eventSlide.helpers({
             // Don't include this event
             if (that._id === event._id)
                 return;
-            
+
             // Else, add
             events[ event._id ] = event;
         },
@@ -315,7 +315,7 @@ Template.eventSlide.helpers({
         // Enumerate list to get count
         for (let event in events)
             ++total;
-        
+
         // Now store as array for other helpers
         Thriver.events.sameDayEvents = [];
 
@@ -403,6 +403,7 @@ Template.events.events({
      */
     'click .scroll-next-month, click .nextMonth': function (event) {
         check(event, $.Event);
+
 
         var nextMonth  = Thriver.calendar.thisMonth.get() + 1,
             parentName = document.querySelector('#main > .events').id;
@@ -691,8 +692,8 @@ Thriver.events.navigate = function (id) {
 
     // Determine URI path
     parentName = document.querySelector('#main > .events').id;
-    path = 
-        parentName                                      + '/' + 
+    path =
+        parentName                                      + '/' +
         Thriver.calendar.thisYear.get()                 + '/' +
         Thriver.calendar.months[
             Thriver.calendar.thisMonth.get() ]          + '/' +
@@ -725,7 +726,7 @@ Thriver.events.parsePath = function (path) {
             Thriver.events.navigate( path[i] );
             continue;
         }
-        
+
         // Check for month
         Thriver.calendar.months.forEach(function (month, index) {
             if (month.toLowerCase() === path[i].toLowerCase() ) {

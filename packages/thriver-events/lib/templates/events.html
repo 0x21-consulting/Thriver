@@ -41,9 +41,11 @@
                     <button class="sliderPrev fa">&#xf053;</button>
                     <div class="slideScroller">
                         <ul class="slides" id="slidesList">
-                            {{#each events}}
-                                {{> eventSlide}}
-                            {{/each}}
+                            {{#if events}}
+                                {{#each events}}
+                                    {{> eventSlide}}
+                                {{/each}}
+                            {{/if}}
                         </ul>
                     </div>
                     <button class="sliderNext fa">&#xf054;</button>
@@ -105,12 +107,15 @@
 
 
 <template name="upcomingEvents">
-    <ul class="upcomingEvents">
-        {{ #each upcomingEvents }}
-            {{>upcomingEventListItem}}
-        {{/each}}
-        <!--{{>actionNotLoggedIn}}-->
-    </ul>
+        <ul class="upcomingEvents">
+            {{ #each upcomingEvents }}
+                {{>upcomingEventListItem}}
+            {{/each}}
+            <li class="no-upcoming-list">
+                There are currently no upcoming event<br>
+                Be sure to check back later!
+            </li>
+        </ul>
     <!--<button class="seeAllEvents">See All Upcoming <span class="fa">&#xf13a;</span></button>-->
 </template>
 
@@ -202,4 +207,17 @@
 
         <div style="clear:both;"></div>
     </div>
+</template>
+
+
+<template name="noEvents">
+    <li class="eventSlide">
+        <div class="eventContainer">
+            <div class="inner">
+                <header>
+                    <p>Woops! No events this month!</p>
+                </header>
+            </div>
+        </div>
+    </li>
 </template>
