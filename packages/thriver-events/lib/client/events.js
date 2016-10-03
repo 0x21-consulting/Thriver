@@ -509,6 +509,16 @@ Template.events.events({
         calMobileEvent();
     },
 
+    'click .listViewEvents': function (event) {
+        if ($(event.target).hasClass("active")){
+            $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
+            $(event.target).removeClass("active");
+        } else{
+            $(".eventsMain").addClass("listViewEventsObjectOpen");
+            $(event.target).addClass("active");
+        }
+    },
+
     //
     // TODO
     //
