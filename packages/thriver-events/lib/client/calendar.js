@@ -5,7 +5,7 @@
 Thriver.calendar = {};
 
 // TODO: This should be internationalized
-Thriver.calendar.months = 
+Thriver.calendar.months =
     [ 'January'  , 'February', 'March'   , 'April'    ,
       'May'      , 'June'    , 'July'    , 'August'   ,
       'September', 'October' , 'November', 'December' ];
@@ -68,7 +68,7 @@ Template.events.helpers({
         var lastMonth = Thriver.calendar.thisMonth.get() - 1;
 
         return Thriver.calendar.months[ Thriver.calendar.getLastMonth() ] + ' ' +
-            ( lastMonth < 0 ? (Thriver.calendar.thisYear.get() - 1) 
+            ( lastMonth < 0 ? (Thriver.calendar.thisYear.get() - 1)
                 : Thriver.calendar.thisYear.get() );
     },
     /**
@@ -109,7 +109,7 @@ Template.calendar.helpers({
      * @returns {Day[][]}
      */
     week: function () {
-        var firstDay = new Date(Thriver.calendar.thisYear.get(), 
+        var firstDay = new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get()).getDay(),
 
             total    = Thriver.calendar.lastDate(),
@@ -126,9 +126,9 @@ Template.calendar.helpers({
             currentEvents = Thriver.events.getThisMonthEvents();
 
         console.debug('Events\n',
-            'Greater than', new Date( Thriver.calendar.thisYear.get(), 
+            'Greater than', new Date( Thriver.calendar.thisYear.get(),
                 Thriver.calendar.thisMonth.get() ), '\n',
-            'Less than', new Date( Thriver.calendar.thisYear.get(), 
+            'Less than', new Date( Thriver.calendar.thisYear.get(),
                 Thriver.calendar.thisMonth.get(), total ), '\n',
             currentEvents
         );
@@ -159,12 +159,6 @@ Template.calendar.helpers({
                         day.date = lastMonth - (firstDay - i - 1);
                     }
                 }
-                // If we finished counting (next month's days)
-                if (count > total) {
-                    day.notCurrent = 'notCurrent';
-                    day.date = count - total;
-                    ++count;
-                }
                 // If we have started counting
                 if (count && count <= total)
                     day.date = count;
@@ -175,6 +169,13 @@ Template.calendar.helpers({
                 if (day.date === thisDay)
                     day.today = 'today';
 
+                // If we finished counting (next month's days)
+                if (count > total) {
+                    day.notCurrent = 'notCurrent';
+                    day.currentWeekStart = '';
+                    day.date = count - total;
+                    ++count;
+                }
                 // If there are events this day
                 if (currentEvents[count] instanceof Array) {
                     day.hasEvent = 'hasEvent';
@@ -196,6 +197,7 @@ Template.calendar.helpers({
                 if (count && count <= total)
                     count++;
 
+
                 // Add day
                 week.push(day);
             }
@@ -208,3 +210,9 @@ Template.calendar.helpers({
         return weeks;
     }
 });
+
+/*
+Template.images.rendered = function(){
+    // Remove Current Week from "Not Current"
+    $('.notCurrent').removeClass("currentWeekStart");
+};*/
