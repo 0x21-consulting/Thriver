@@ -425,6 +425,11 @@ section.providers{
         .columns(5,100px,20px);
         //height: 400px;
         padding-bottom: 0px;
+        @media @mobile{
+            -webkit-columns: initial;
+            -moz-columns: initial;
+            columns: initial;
+        }
     }
     display: none;
     h1{
