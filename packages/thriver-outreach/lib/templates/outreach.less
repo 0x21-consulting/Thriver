@@ -40,18 +40,26 @@
         text-align: center;
         max-width: 1000px;
         // added by Micah
-        width: auto;
+        width: 100%;
         min-height: initial;
         //
         margin: 0 auto;
         padding-bottom:20px;
+        padding-left: 0px;
+        padding-right: 0px;
         @media @mobile{ padding-bottom:0px; z-index: 12; position: relative;}
         display: table;
+        text-align: center;
         @media @mobile{ >li {text-align: left !important; } }
         @media (min-width:768px){
             > li{
                 //display: inline-block;
-                display: table-cell; // added by Micah
+                display: inline-block; // added by Micah
+                //width: 25%;
+                text-align: left;
+                //width:25%;
+                white-space:nowrap;
+                padding:0px;
                 cursor: pointer;
                 position: relative;
                 @media @1450{margin: 0px;}
@@ -63,8 +71,10 @@
                 //.transition(font,@canvasDuration,@canvasEase,0ms);
                 a{
                     padding:0px 16px 16px 16px;
-                    //margin: 0px 12px 0px 12px;
+                    margin: 0px 12px 0px 12px;
                     .font(1.5,1.6,0.2,@normal,uppercase);
+                    padding-right: 0px;
+                    padding-left: 0px;
                     &:after {
                         content: '';
                         position: absolute;
@@ -74,8 +84,8 @@
                         height: 2px;
                         background-color: @white;
                         top: 83%;
-                        left: 29px;
-                        width: ~'calc(100% - 28px)';
+                        left: 10px;
+                        width: ~"calc(100% - 20px)";
                         .opacity(0);
                         .translate(0px,10px);
                         transition: opacity @durationDefault @easeDefault 0ms, transform @durationDefault @easeDefault 0ms;
@@ -103,7 +113,7 @@
                     }
                 }
                 &:first-child a{
-                    &:after{left: 16px;}
+                   //&:after{left: 16px;}
                     padding-left:0px;
                 }
                 &:last-child a{padding-right:0px;}
