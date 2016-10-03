@@ -173,6 +173,7 @@ Template.calendar.helpers({
                 if (count > total) {
                     day.notCurrent = 'notCurrent';
                     day.currentWeekStart = '';
+                    day.today = '';
                     day.date = count - total;
                     ++count;
                 }
