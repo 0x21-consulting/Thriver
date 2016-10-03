@@ -224,7 +224,7 @@ section.providers{
     figure.map{
         #mapCanvas{
             height: 100%;
-            @media @mobile{pointer-events: none;}
+            //@media @mobile{pointer-events: none;}
         }
         // Map popups
         p.providerTitle {
@@ -288,6 +288,10 @@ section.providers{
             padding: 0px 10px 10px 0px;
             margin-bottom: 0px;
             margin-top: 0px;
+            @media @mobile{
+                font-size: 22px;
+                line-height: 26px;
+            }
         }
         h3{
             display: inline-block;
@@ -308,6 +312,11 @@ section.providers{
             padding: 0px;
             font-style:normal;
             margin: 0px 0px 10px 0px;
+            @media @mobile{
+                font-weight: 500;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
         }
         ul{
             margin: 20px 0px;
@@ -330,6 +339,7 @@ section.providers{
         }
         ul.outreach{
             padding-left: 20px;
+            @media @mobile{ margin-top: 0px;}
             li{
                 color:@white;
                 line-height: 20px;
@@ -409,6 +419,7 @@ section.providers{
 
 .providersList{
     padding: 20px;
+    @media @mobile{padding: 20px 10px;}
     //height: 540px;
     ul{
         .columns(5,100px,20px);
@@ -427,6 +438,11 @@ section.providers{
         text-align: center;
         margin: 0px 20px 0px 20px;
         padding-top: 10px;
+        @media @mobile{
+            font-size: 22px;
+            line-height: 26px;
+            text-align: left;
+        }
     }
     ul, li{margin: 0px;padding: 0px;}
     ul{padding: 0px 20px;}
@@ -526,4 +542,8 @@ section.providers{
     article.locationDetails.details{
         display: none;
     }
+}
+
+.providersListOpen figure.map {
+    display: none !important;
 }
