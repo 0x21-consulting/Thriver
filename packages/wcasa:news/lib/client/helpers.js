@@ -33,7 +33,7 @@ Template.inTheNews.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: function () {
-            return Newsroom.find({
+            return Thriver.newsroom.collection.find({
                 type: 'inTheNews',
                 $or: search.get() instanceof RegExp ? [{
                     title: search.get() },{
@@ -55,7 +55,7 @@ Template.actionAlerts.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: function () {
-            return Newsroom.find({
+            return Thriver.newsroom.collection.find({
                 type: 'actionAlert',
                 $or: search.get() instanceof RegExp ? [{
                     title: search.get() },{
@@ -77,7 +77,7 @@ Template.press.helpers({
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
         items: function () {
-            return Newsroom.find({
+            return Thriver.newsroom.collection.find({
                 type: 'pressRelease',
                 $or: search.get() instanceof RegExp ? [{
                     title: search.get() },{

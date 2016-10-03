@@ -32,7 +32,7 @@ Template.notifications.helpers({
             i, j,
         
             // Ation alerts since last login
-            alerts = Newsroom.find({ date: { $gt: lastLogin.get() } }).fetch(),
+            alerts = Thriver.newsroom.collection.find({ date: { $gt: lastLogin.get() } }).fetch(),
         
             // Combination
             all = notifs.concat(alerts),

@@ -1,4 +1,7 @@
-// Is the user an admin?
+/**
+ * @summary Is the user an administrator?
+ * @type {ReactiveVar(Boolean)}
+ */
 var isAdmin = new ReactiveVar(false),
 
 /**
@@ -7,6 +10,8 @@ var isAdmin = new ReactiveVar(false),
  */
 checkAdmin = function () {
     Meteor.call('isAdmin', function (error, result) {
+        check(result, Boolean);
+
         // Update reactive var
         isAdmin.set(result);
     });
@@ -27,3 +32,4 @@ Template.registerHelper('isAdmin', getAdmin);
 // Bind checkAdmin function
 Template.body.onCreated(checkAdmin);
 Accounts     .onLogin  (checkAdmin);
+Accounts     .onLogout (checkAdmin);
