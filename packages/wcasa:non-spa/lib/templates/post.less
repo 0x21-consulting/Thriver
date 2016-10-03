@@ -21,18 +21,18 @@ section.post{
         a{
             display: inline-block;
             @media @mobile{display: block;}
+            img {
+                height: 80px;
+                width: auto;
+            }
             &.associatedBrandLinkSingle{
                 float: right;
-                @media @mobile{float: none;}
-                img{
-                    max-height: 80px;
-                    width: auto;
-                }
+                @media @mobile{ float: none; }
             }
         }
     }
     //social
-    div.articleUtility{
+    article > aside {
         background: @gray;
         padding: 7px 40px;
         position: relative;
@@ -76,7 +76,7 @@ section.post{
         }
     }
     //article title
-    div.title{
+    header.title{
         padding: 40px;
         background-color: @orange;
         @media @mobile{padding: 20px;}

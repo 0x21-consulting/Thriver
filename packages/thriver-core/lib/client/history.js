@@ -253,8 +253,8 @@ window.addEventListener('popstate', function (event) {
  *   @param {$.Event} event
  */
 Template.body.events({
-    // If href starts with a slash
-    'click a[href^="/"]': function (event) { console.debug('href', event.target);
+    // If href starts with a slash and is intended to remain in this tab
+    'click a[href^="/"][target!="_blank"]': function (event) { console.debug('href', event.target);
         check(event, $.Event);
 
         // Prevent navigation away from page

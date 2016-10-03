@@ -1,30 +1,31 @@
 Template.post.helpers({
 	home: {
-		url: 'http://www.wcasa.org',
+		url: '/',
 		text: 'Back to WCASA'
 	},
 	share : [{
-		id: 'twitter',
+		title: 'Tweet',
 		icon: '&#xf099;',
-		url: 'https://twitter.com/intent/tweet?url=' + window.location.href + '&text=' + document.title
+		url: 'https://twitter.com/intent/tweet?url=' + window.location.href
 	},{
-		id : 'facebook',
+		title : 'Share on Facebook',
 		icon: '&#xf082;',
 		url: 'https://www.facebook.com/sharer/sharer.php?&u=' + window.location.href
 	},{
-		id: 'google',
+		title: 'Share on Google+',
 		icon: '&#xf0d5;',
 		url: 'https://plus.google.com/share?url=' + window.location.href
 	},{
-		id: 'print',
+		title: 'Print',
 		icon: '&#xf02f;',
-		print: 'print'
+		print: true,
+		url: '#'
 	}],
 	testData : {
 		title: 'Bill Targets Transgendered Students',
 		id: 'post1',
 		category: 'news',
-		logo: [{
+		logos: [{
 			title: 'WCASA',
 			src: '/lib/img/wisconsin-coalition-against-sexual-assault.png',
 			url: 'http://www.wcasa.org'
@@ -44,32 +45,31 @@ Template.post.helpers({
 				phone: '608-257-1516',
 				phoneExt: '113',
 				email: 'dominich@wcasa.org'
-			},{
+			}/*,{
 				name: 'Tony Gibart',
 				org: 'EDAW',
 				phone: '608-237-3452',
 				email: 'tonyg@endabusewi.org'
-			}]
+			}*/]
 		},
-		about: [{
+		about: [/*{
 			content: '<p>End Domestic Abuse Wisconsin (<a href="www.endabusewi.org" target="_blank">www.endabusewi.org</a>) is the leading voice for victims of domestic abuse in Wisconsin. At End Domestic Abuse Wisconsin, we educate shelter and program volunteers and advocates, law enforcement, legislators, and community members to provide safety and support to survivors. We strive to shift Wisconsin from the attitudes and beliefs that cause domestic violence to values of mutual respect and equality, and we partner with communities in the effort to prevent and end domestic abuse.</p>'
-		},{
+		},*/{
 			content: '<p>The Wisconsin Coalition Against Sexual Assault (WCASA, <a href="www.wcasa.org" target="_blank">www.wcasa.org</a>) is a membership agency comprised of organizations and individuals working to end sexual violence in Wisconsin. Among these are the 51 sexual assault service provider agencies throughout the state that offer support, advocacy and information to survivors of sexual assault and their families. WCASA works to ensure that every survivor in Wisconsin gets the support and care they need. WCASA also works to create the social change necessary to ensure a future where no child, woman or man is ever sexually violated again.</p>'
 		}],
 		social : [{
-			id: 'twitter',
+			id: 'Twitter',
 			icon: '&#xf099;',
 			url: 'https://twitter.com/wcasa_org'
 		},{
-			id: 'facebook',
+			id: 'Facebook',
 			icon: '&#xf082;',
 			url: 'https://www.facebook.com/wcasa'
 		},{
-			id: 'youtube',
+			id: 'YouTube',
 			icon: '&#xf16a;',
 			url: 'https://www.youtube.com/user/WCASAVPCC'				
 		}]
-
 	}
 });
 
