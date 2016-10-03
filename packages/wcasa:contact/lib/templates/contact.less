@@ -151,7 +151,13 @@ section.contact{
 }
 
 section.contact{
-    //p.staff-reference{border: none !important;}
+    @media @mobile{
+        p.staff-reference{
+            border: none !important;
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+    }
     > div > header p{
         border-top: none;
         padding: 0px;
