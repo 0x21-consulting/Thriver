@@ -601,6 +601,21 @@ Template.eventSlide.events({
 
             a.click();
             a.remove();
+        } else{
+            var el = `
+                <li class="registration-form">
+                    <h2>Event Registration</h2>
+                    <form>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" />
+                        <label for="email">Email</label>
+                        <input type="text" name="email" />
+                        <input type="submit" value="Register" />
+                    </form>
+                </li>`
+            ;
+            $(event.target).parent().append(el); // add it to the div
+            $(event.target).remove();
         }
 
         // TODO:  Add event to profile
