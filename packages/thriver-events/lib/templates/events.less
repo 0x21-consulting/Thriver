@@ -33,7 +33,7 @@
     aside.eventsSidebar{
         //flex:1.1;
         width: 300px;
-        height: 650px;
+        //height: 650px;
         background-color: darken(@teal,0.5%);
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b5c2+0,00b3c6+100 */
         background: rgb(0,181,194); /* Old browsers */
@@ -88,11 +88,11 @@
             position: relative;
             z-index: 1;
             button.fa {
-                line-height: 50%;
-                height: 50%;
-                font-size: 30px;
+                line-height: 40px;
+                height: 40px;
+                font-size: 26px;
                 font-weight: 100;
-                top: 25%;
+                top: 13px;
                 left: 0px;
                 position: absolute;
                 //background: @white;
@@ -101,10 +101,10 @@
                 transition: opacity 350ms @easeDefault 0ms, transform 350ms @easeDefault 0ms;
                 padding: 0px 23px;
                 //.translate(0px,0px);
-                .opacity(0.5);
+                .opacity(0.3);
                 &:hover{
                     //.translate(-5px,0px);
-                    .opacity(0.9);
+                    .opacity(0.5);
                 }
                 z-index: 3;
                 .shadowNone;
@@ -139,25 +139,26 @@
                         }
                     }
                     list-style-type: none;
-                    height: 599px;
+                    vertical-align: top;
+                    //height: 599px;
                     white-space: nowrap;
                     //.trans(transform 375ms @easeDefault 0ms);
                     .eventSlide{
                         white-space: initial;
                         display: inline-block;
                         width: 100%;
-                        height: 649px;
+                        //height: 649px;
                         margin-right: -3px;
                         background-color: @white;
                         z-index: 1;
                         .eventContainer{
                             padding: 0px;
                             overflow: auto;
-                            height: 600px;
+                            //height: 600px;
                             .inner{
                                 padding: 0px;
                                 background-color: @white;
-                                height: 600px;
+                                //height: 600px;
                                 //.shadow(far);
                                 //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                                 //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
