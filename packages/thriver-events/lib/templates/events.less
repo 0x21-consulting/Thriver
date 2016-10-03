@@ -33,7 +33,7 @@
     aside.eventsSidebar{
         //flex:1.1;
         width: 300px;
-        //height: 650px;
+        min-height: 650px;
         background-color: darken(@teal,0.5%);
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b5c2+0,00b3c6+100 */
         background: rgb(0,181,194); /* Old browsers */
@@ -164,6 +164,26 @@
                                 //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                                 //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                             }
+                        }
+                        &.no-events-this-month{
+                            text-align: center;
+                            height: 400px;
+                            padding-top: 200px;
+                            h2{ text-align: center; border: none; margin-bottom: 0px; }
+                            .fa{
+                                background: @teal;
+                                border-radius: 50%;
+                                -webkit-border-radius:50%;
+                                color: #fff;
+                                display: block;
+                                height: 70px;
+                                width: 70px;
+                                line-height: 70px;
+                                font-size: 30px;
+                                margin: 0 auto;
+                                margin-bottom: 20px;
+                            }
+                            p{font-weight: bold;}
                         }
                         aside.otherEvents{
                             text-align: center;
