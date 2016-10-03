@@ -24,6 +24,10 @@ section.providers{
             background: @lightBlue;
             padding: 80px 40px;
         }
+        .crisis-line{
+            margin-top:10px;
+            .fa{color: @orange; margin-right: 5px;}
+        }
         .main{
             //background-color: @navy;
             padding: 40px;
@@ -135,7 +139,7 @@ section.providers{
                 display: inline-block;
                 margin: 0px;
                 text-align: left;
-                width: 180px;
+                width: 270px;
                 &:first-child,&:nth-child(2){
                     margin-right: 10px;
                 }
@@ -193,6 +197,10 @@ section.providers{
                 &:nth-child(3){
                     background: @teal;
                     margin-left: -15px;
+                }
+                &:nth-child(4){
+                    background: @bodyBgColor;
+                    margin-left: -5px;
                 }
             }
         }
@@ -266,33 +274,58 @@ section.providers{
         color: @white;
         p{
             color: @white;
+            opacity: 0.8;
             .font(1.4,1.7,0.025,@normal,none);
+            margin-bottom: 0px;
         }
         h2{
-            border-bottom: 2px solid #dce8e8;
+            //border-bottom: 2px solid #dce8e8;
             color: @white;
             font-size: 28px;
             line-height: 32px;
             font-weight: 100;
             padding: 0px 10px 10px 0px;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
             margin-top: 0px;
         }
+        h3{
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0px;
+            margin-left: 38px;
+            & + a, & + span{
+                display: block;
+                font-weight: @bold;
+                margin-left: 39px;
+                margin-top: -5px;
+            }
+        }
         address{
-            .font(1.6,1.8,0.025,@bold,none);
-            padding: 0px 20px;
+            .font(1.6,1.8,0.025,@normal,none);
+            padding: 0px;
             font-style:normal;
+            margin: 0px 0px 10px 0px;
         }
         ul{
             margin: 20px 0px;
             list-style: none;
+            margin-top: 10px;
         }
         a{
             .textButtonColor(@teal);
         }
         ul.phones {
-            padding: 20px;
+            margin: 0px !important;
+            padding: 20px 20px 13px 20px;
             background: rgba(0,0,0,0.15);
+            li{
+                display: inline-block;
+                width: 48%;
+                padding: 0px; margin: 0;
+                &:last-child{}
+            }
         }
         ul.outreach{
             padding-left: 20px;
@@ -308,7 +341,21 @@ section.providers{
                     .fa;
                     margin-right: 5px;
                     font-size: 17px;
+                    //margin-left:-20px;
+                    font-size: 31px;
+                    position: absolute;
+                    margin-top: 9px;
+                    opacity: 1;
+                    color: #2c5465;
+                    background: lighten(#2c5465,20%);
+                    height: 27px;
+                    line-height: 28px;
+                    text-align: center;
+                    font-size: 14px;
+                    border-radius: 50%;
+                    width: 27px;
                 }
+                &.phone:before{content:"\f095";}
                 &.email:before{content:"\f0e0";}
                 &.website:before{content:"\f108";}
                 &.facebook:before{content:"\f082";}

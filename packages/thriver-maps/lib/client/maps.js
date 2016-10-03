@@ -99,7 +99,7 @@ initialize = function () {
                 marker.addListener('click', function() {
                     fullMap(false);
                     google.maps.event.trigger(map,'resize');
-                    map.setZoom(11);
+                    map.setZoom(16);
                     map.panTo(marker.getPosition());
 
                     // Show results if the result has an ID
@@ -140,6 +140,8 @@ initialize = function () {
                         closest.coordinates[0],
                         closest.coordinates[1]
                     ));
+
+                    map.setZoom(11);
 
                     // Show results
                     Session.set('currentProvider', closest);
@@ -275,6 +277,7 @@ moveMap = function (county) {
         Session.set('currentProvider', Providers.findOne({ _id: providers[0].id }));
     } else{
         document.getElementById("service-providers").classList.add("full-view");
+        google.maps.event.trigger(map,'resize');
     }
 },
 
