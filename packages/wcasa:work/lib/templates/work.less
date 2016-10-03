@@ -17,6 +17,7 @@ section.work{
         padding-bottom:0px !important;
     }
     h2.sidebarTitle{display: none;}
+    h3{ margin-top: 25px;}
     > .main{
         background-color:transparent;
         //.accelerate;
@@ -30,6 +31,7 @@ section.work{
             //Truncation Gradient
             .backToTopWork{
                 .buttonColor(@teal);
+                color: @white !important;
 
             }
             &:after{
@@ -57,10 +59,10 @@ section.work{
         box-shadow: 0 0 5px @blue inset;
         padding: 5px !important;
     }
-    .main .workNav > ul li.new-section a { color: @orange; }
-    .main .workNav > ul li.new-section a:hover { color: @orange; }
-    .main .workNav > ul > li.new-section h2 a { background: @orange; }
-
+    //.main .workNav > ul li.new-section a { color: @orange; }
+    //.main .workNav > ul li.new-section a:hover { color: @orange; }
+    //.main .workNav > ul > li.new-section h2 a { background: @orange; }
+    .workNav .new-section{white-space: nowrap;}
     @media @mobile{opacity: 1 !important;}
     .workContent, .workNav, .workTertiary{
         display: block;
@@ -89,7 +91,7 @@ section.work .sa details{
         position: absolute;
         right: 0;
         display: block;
-        color: @orange;
+        //color: @orange;
         box-shadow: none;
         font-size: 20px;
     }
@@ -124,7 +126,7 @@ section.work .sa details{
             //color: @white;
             //border-bottom: 2px solid darken(@white, 10%);
             padding: 0px 0px 0px 0px;
-            color: @orange;
+            //color: @orange;
         }
 
         // Admin controls
@@ -133,7 +135,7 @@ section.work .sa details{
             height: 300px;
         }
         button {
-            background: @orange;
+            //background: @orange;
             display: inline-block;
         }
 
@@ -273,7 +275,9 @@ section.work .workNav > ul{
             font-weight: @light;
             .buttonColor(#4b96b6);
             text-indent: 4px;
-            white-space: nowrap;
+            //white-space: nowrap;
+            font-weight: 500;
+            font-size: 17px;
             padding: 20px;
             @media @mobile{
                 padding:20px 15px;
@@ -407,7 +411,7 @@ section.work .workNav > ul{
                 //border-bottom: 2px solid @gray;
                 //border-bottom: 2px solid rgba(255,255,255,0.15);
             }
-            .fa{display: none;}
+            //*.fa{display: none;}
             &:last-child{
                 margin:0px;
             }
@@ -417,6 +421,7 @@ section.work .workNav > ul{
             &:after {
                 pointer-events: none;
                 .trans(all 250ms ease);
+
             }
             h2 {
                 text-align: left;
@@ -598,17 +603,17 @@ section.work .main.container{
             background: transparent;
             //color: @white;
             //padding: 12px 21px 0px 21px;
+            border-bottom: 2px solid #dce8e8;
             @media @mobile{padding: 20px;}
             h2{
                 margin: 0px;
                 border: none;
                 //color: @teal;
                 color: @navy;
-                border-bottom: 2px solid lighten(@lightBlue, 39%);
+                display: inline-block;
                 padding-bottom: 12px;
                 .font(2.8,3.2,0.025,@light,none);
                 @media @mobile{.font(2.4,2.4,0.1,@light,none);}
-                border-bottom: 2px solid #dce8e8;
                 color: #062031;
                 padding: 0px 10px 10px 0px;
                 margin-bottom: 10px;
@@ -635,6 +640,25 @@ section.work .main.container{
                 display: none;
                 @media @mobile{
                     display: none;
+                }
+            }
+            button{
+                font-size: 16px;
+                //color: @orange;
+                cursor: pointer;
+                border-radius: 50%;
+                -webkit-border-radius:50%;
+                background: @orange;
+                color: #fff;
+                height: 24px;
+                width: 24px;
+                text-align: center;
+                line-height: 25px;
+                padding: 0px;
+                margin-right: 5px;
+                &:hover{
+                    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+                    -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
                 }
             }
         }
@@ -669,6 +693,14 @@ section.work .main.container{
                 //padding-right: 40px;
                 @media @mobile{padding-right: 0px;}
                 *:first-child{margin-top: 0px;}
+                p, li, &{
+                    font-size: 13px;
+                    line-height: 23px;
+                    font-weight: 500;
+                }
+                ul{
+                    margin-bottom: 25px;
+                }
             }
             .workTertiary{
                 //display: none !important;
@@ -681,7 +713,7 @@ section.work .main.container{
                 //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                 border-bottom: 2px solid #dce8e8;
                 margin: 0px 0px 15px 0px;
-                padding: 0px 0px 9px 0px;
+                padding: 10px 0px 9px 0px;
                 .title{
                     display: inline-block;
                     padding: 0px 0px 5px 0px;
@@ -693,7 +725,7 @@ section.work .main.container{
                 }
                 ul{
                     margin: 0px;
-                    .columns(70px,3,30px);
+                    .columns(70px,2,30px);
                     li{
                         margin: 0px;
                         padding: 0px;
@@ -718,6 +750,7 @@ section.work .main.container{
                         margin-left: -12px;
                         font-size: 12px;
                         font-weight: 100;
+                        opacity: 0.3;
                     }
                     a{
                         padding: 5px 0px 6px 15px;

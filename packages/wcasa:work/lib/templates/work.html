@@ -55,7 +55,7 @@
                 <li data-id="{{this}}"><a href="{{anchor this}}">{{tabName this}}</a></li>
             {{/each}}
             {{#if isAdmin}}
-                <li class="new-section"><a href="#">Add New Page</a></li>
+                <li class="new-section"><a href="#"><span class="fa">&#xf055;</span> Section</a></li>
             {{/if}}
         </ul>
     </li>
@@ -63,9 +63,7 @@
 
 <template name="workListItemAdmin">
     <li class="new-section">
-        <h2>
-            <a class="toggle" href="#"><i class="icon fa"></i> Add New Page <span class="fa up">&#xf138;</span><span class="fa down">&#xf13a;</span></a>
-        </h2>
+        <a class="toggle" href="#"><span class="fa">&#xf055;</span> Section</a>
     </li>
 </template>
 
