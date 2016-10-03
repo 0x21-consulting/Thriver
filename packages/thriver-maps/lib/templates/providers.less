@@ -339,7 +339,9 @@ section.providers{
         }
         ul.outreach{
             padding-left: 20px;
-            @media @mobile{ margin-top: 0px;}
+            @media (max-width:1000px){
+                padding-bottom: 20px;
+            }
             li{
                 color:@white;
                 line-height: 20px;
@@ -521,6 +523,8 @@ section.providers{
                 padding: 0px;
              }
              ul.outreach{ margin-bottom:-10px; padding: 0px;}
+             @media (max-width:1000px){ ul.outreach{ padding-bottom: 20px;}}
+             @media @mobile{ ul.outreach{ margin-top: 0px; padding-bottom: 0px; } }
          }
     }
 }
