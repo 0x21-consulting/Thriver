@@ -58,7 +58,9 @@ Thriver.history.updateLocation = function () {
     // We have to regenerate this every time in case some elements
     // grow or shrink in size
     var coordinates = [],
-        elements = Thriver.history.registry.find().fetch(),
+        // Don't include special-access sections, since they're not visible on page
+        elements = Thriver.history.registry.find({ 
+            accessFunction: { $exists: false } }).fetch(),
         i, j, k, l,
         links = document.querySelectorAll('nav.mainNav a'), link;
 
