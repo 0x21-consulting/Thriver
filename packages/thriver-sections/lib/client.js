@@ -35,13 +35,17 @@ Thriver.sections.generateId = function (name) {
     // Is the name an empty string?
     removeName = !name.length;
 
-    // Make all lower case, then replace spaces with hyphens
-    name = name.toLowerCase().trim().replace(/ /g, '-').
+    // Make all lower case and remove beginning and ending spaces
+    name = name.toLowerCase().trim().
+
+    // Validate URI doesn't include improper characters
+    replace(/[^a-z0-9-\s]/g, '').
+
+    // Replace all spaces with dashes
+    replace(/\s+/g, '-').
 
     // anchors can't begin with numbers or hyphens
     replace(/^[\d-]*/g, '');
-
-    // TODO: Validate URI doesn't include improper characters?
 
     if (removeName || name.length > 0)
         return name;
