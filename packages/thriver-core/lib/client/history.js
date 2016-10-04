@@ -65,18 +65,21 @@ Thriver.history.updateLocation = function () {
         links = document.querySelectorAll('nav.mainNav a'), link;
 
     // For each registered section, get its Y coordinate
-    for (i = 0, j = elements.length; i < j; ++i)
+    for (i = 0, j = elements.length; i < j; ++i) {
         elements[i].y = document.querySelector('#' + elements[i].element).offsetTop;
+        elements[i].h = document.querySelector('#' + elements[i].element).offsetHeight;
+    }
 
     // For masthead and everything before first registered section
-    elements.unshift({ element: '', y: 0, currentPath: '' });
+    elements.unshift({ element: '', y: 0, h: elements[0].y, currentPath: '' });
 
     // Does the current scroll position match with any element?
     for (i = 0, j = elements.length; i < j; ++i) {
         if (i !== j - 1)    // if this isn't the last element
-            // 125px offset to take into account nav elements on their own canvas
-            if (window.scrollY > elements[i].y - 125)
-                if (window.scrollY > elements[i + 1].y - 125)
+            // If the section height minus the portion hidden off the screen is more
+            // than half the height of the visible area, we're good.  Otherwise,
+            // try the next section.
+            if ( (elements[i].h - (window.scrollY - elements[i].y) ) < (window.innerHeight / 2) )
                     continue;
 
         // Update URL/location bar
