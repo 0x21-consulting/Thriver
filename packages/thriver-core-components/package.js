@@ -32,6 +32,7 @@ Package.onUse(function (api) {
         'lib/component-top/top.html',
         
         // Styles
+        'lib/component-alert/alerts.less',
         'lib/component-header/header.less',
         'lib/component-header/mobile-menu.less',
         'lib/component-header/utility.less',

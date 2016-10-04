@@ -2,7 +2,8 @@
     <form>
         {{#each items}}
             <label for ="{{id}}">{{title}}</label>
-            <input id="{{id}}" type="{{type}}" name="{{#if equals id 'repeatPasswordReg'}}repeat{{else}}{{type}}{{/if}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
+            <input id="{{id}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" 
+                {{disabled}} {{required}} pattern="{{pattern}}" />
         {{/each}}
         <input type="submit" name="submitButton" value="{{submitValue}}" disabled />
         <!--These messages really shouldn't be in this template-->

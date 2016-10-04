@@ -1,4 +1,19 @@
 /**
+ * @summary Set mail environmental settings
+ * @example smtp://username:password@example.com:587
+ */
+Meteor.startup( () => {
+    console.log(Thriver.settings.collection.find().fetch());
+    let url = 'smtp://' +
+        encodeURIComponent(Thriver.settings.get('mail').username) + ':' +
+                           Thriver.settings.get('mail').password +
+        '@' +              Thriver.settings.get('mail').host      +
+        ':' +              Thriver.settings.get('mail').port;
+    console.log('url:', url);
+    process.env.MAIL_URL = url;
+});
+
+/**
  * The Organizations collection
  */
 Organizations = new Mongo.Collection('organizations');
@@ -10,8 +25,7 @@ Meteor.methods({
      *   @param {String} id - Meteor user ID
      */
     sendVerificationEmail: function (id) {
-        // Mutual suspicion
-        id = '' + id;
+        check(id, String);
         
         // Send email
         Accounts.sendVerificationEmail(id);
@@ -28,8 +42,8 @@ Meteor.methods({
      *   @param {Function} callback
      */
     assignOrganization: function (id, callback) {
-        // Mutual suspician
-        id = '' + id;
+        check(id, String);
+        check(callback, Function);
         
         // Get user based on verification token
         var matches, user = Meteor.users.find({ '_id': id }, { 
@@ -91,9 +105,14 @@ Accounts.emailTemplates.from     = 'WCASA <noreply@wcasa.org>';
  * Verify Email details
  */
 Accounts.emailTemplates.verifyEmail.subject = function (user) {
+    check(user, Object);
+
     return 'Verify your email address for WCASA';
 };
 Accounts.emailTemplates.verifyEmail.text = function (user, url) {
+    check(user, Object);
+    check(url, String);
+
     return 'Hello ' + user.profile.firstname + '!\n\n' +
         'To verify your account email, simply click the link below.\n\n' + 
         url + '\n\n' + 'If you weren\'t expecting this email, simply delete it.\n\n' + 

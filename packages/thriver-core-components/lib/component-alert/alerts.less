@@ -1,0 +1,49 @@
+@import "{thriver:core-styles}/lib/index.less";
+
+figure.alert{
+    position: fixed;
+    width: 100%;
+    bottom: -72px;
+    height: 72px;
+    z-index: 100;
+    background-color: @orange;
+    text-align: center;
+    will-change:opacity,transform;
+    //.transition2(transform,@canvasDuration,@canvasEase,0ms,opacity,@canvasDuration,@canvasEase,0ms);
+    .opacity(0);
+    //.translate(0px,0px);
+    .shadow(closeUp);
+    &.notification{
+        background-color: @teal;
+    }
+    &.important{
+        background-color: darken(@orange, 7%);
+    }
+    figcaption{
+        color: @white;
+        .font(1.4,1.9,0.025,@normal,none);
+        padding: 27px 0px;
+        white-space: nowrap;
+        span.closeAlert{
+            position: absolute;
+            top: 27px;
+            right: 10px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            color: @white;
+            background-color: @black;
+            background-color: rgba(0,0,0,0.1);
+            text-align: center;
+            .font(1.4,1.6,0,@light,none);
+            .borderRadius(50%);
+            &:hover{
+                background-color: rgba(0,0,0,0.3);
+            }
+        }
+    }
+    &.active{
+        //.translate(0px, -72px);
+        .opacity(1);
+    }
+}

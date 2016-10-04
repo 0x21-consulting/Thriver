@@ -1,7 +1,7 @@
 Meteor.methods({
     isAdmin: function () {
         // Return whether or not the logged-in user is an administrator
-        return Meteor.user()? Meteor.user().admin : false;
+        return Meteor.user() && Meteor.user().admin? true : false;
     },
     
     /**

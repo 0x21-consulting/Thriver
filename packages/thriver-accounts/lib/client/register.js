@@ -11,24 +11,36 @@ Template.register.helpers({
     items: [{
         title: 'Name',
         id: 'nameReg',
-        type: 'name',
+        name: 'name',
+        type: 'text',
         required: 'required',
         placeholder: 'Name'
     },{
         title: 'Email Address',
         id: 'emailReg',
+        name: 'email',
         type: 'email',
         required: 'required',
         placeholder: 'Email'
     },{
+        title: 'ZIP Code',
+        id: 'zip',
+        name: 'zip',
+        type: 'text',
+        required: 'required',
+        placeholder: 'ZIP Code',
+        pattern: '\\d{5}(-?\\d{4})?'
+    },{
         title: 'Password',
-        id: 'passwordReg',
+        id: 'password',
+        name: 'password',
         type: 'password',
         required: 'required',
         placeholder: 'Password'
     },{
         title: 'Repeat Password',
-        id: 'repeatPasswordReg',
+        id: 'repeatPassword',
+        name: 'repeat',
         type: 'password',
         required: 'required',
         placeholder: 'Repeat Password'
@@ -43,8 +55,7 @@ Template.register.events({
      *   @param {$.Event} - Form submission event
      */
     'submit form': function (event) {
-        if (! (event instanceof $.Event))
-            return;
+        check(event, $.Event);
 
         // Prevent navigation
         event.preventDefault(); event.stopPropagation();
@@ -53,6 +64,7 @@ Template.register.events({
         var name     = event.target.name.value,
             email    = event.target.email.value,
             password = event.target.password.value,
+            zip      = event.target.zip.value,
             i, j,
 
         // Handle login errors
@@ -77,6 +89,7 @@ Template.register.events({
                 // Name
                 firstname: name.replace(/^(.+)\s.+/, '$1'),
                 lastname : name.replace(/^.+\s(.+)/, '$1'),
+                zip: zip,
 
                 // Email subscriptions by default
                 subscriptions: {
@@ -112,24 +125,25 @@ Template.register.events({
      *   @param {$.Event} event - Event received from keyup event
      */
     'keyup [name="repeat"]': function (event) {
-        if (! (event instanceof $.Event) )
-            return;
+        check(event, $.Event);
 
         var parent   = event.target.parentElement,
-            password = parent.parentElement['password'];
+            password = parent['password'];
 
         if (password instanceof Element)
             if (password.value === event.target.value) {
                 // Let user know passwords match
                 parent.classList.remove('noMatch');
+
                 // Allow form submit now
-                parent.parentElement['submitButton'].disabled = false;
+                parent['submitButton'].disabled = false;
                 return;
             }
 
         // By default indicate there's no match
         parent.classList.add('noMatch');
+
         // And prevent the form from submitting until they do match
-        parent.parentElement['submitButton'].disabled = true;
+        parent['submitButton'].disabled = true;
     }
 });
