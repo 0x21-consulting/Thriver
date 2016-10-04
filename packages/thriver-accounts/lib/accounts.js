@@ -4,13 +4,17 @@
  */
 Meteor.startup( () => {
     console.log(Thriver.settings.collection.find().fetch());
-    let url = 'smtp://' +
-        encodeURIComponent(Thriver.settings.get('mail').username) + ':' +
-                           Thriver.settings.get('mail').password +
-        '@' +              Thriver.settings.get('mail').host      +
-        ':' +              Thriver.settings.get('mail').port;
-    console.log('url:', url);
-    process.env.MAIL_URL = url;
+    let mail = Thriver.settings.get('mail'), url;
+
+    if (mail instanceof Object) {
+        url = 'smtp://' +
+            encodeURIComponent(mail.username)
+            + ':' +            mail.password
+            + '@' +            mail.host
+            + ':' +            mail.port;
+        console.log('url:', url);
+        process.env.MAIL_URL = url;
+    }
 });
 
 /**
