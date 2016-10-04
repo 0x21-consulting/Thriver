@@ -23,15 +23,18 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     },
     lastname: {
         type: String,
-        optional: false
+        optional: false,
+        label: 'Last Name'
     },
     address1: {
         type: String,
-        optional: true
+        optional: true,
+        label: 'Address'
     },
     address2: {
         type: String,
-        optional: true
+        optional: true,
+        label: ' '
     },
     city: {
         type: String,
@@ -49,7 +52,8 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     zip: {
         type: String,
         regEx: SimpleSchema.RegEx.ZipCode,
-        optional: false
+        optional: false,
+        label: 'ZIP Code'
     },
     telephone: {
         type: String,
@@ -58,49 +62,130 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     },
 
     /** Event Considerations */
-    diet: {
-        type: [String],
+    events: {
+        type: Object,
+        optional: false,
+        defaultValue: {}
+    },
+
+    /** Dietary Restrictions */
+    'events.diet': {
+        type: Object,
+        optional: false,
+        defaultValue: {},
+        label: 'I am a:'
+    },
+    /** Other restrictions */
+    'events.diet.glutenFree': {
+        type: Boolean,
         optional: true
     },
-    accommodations: {
-        type: String,
+    'events.diet.lactose': {
+        type: Boolean,
+        optional: true,
+        label: 'Lactose Intollerant'
+    },
+    'events.diet.ovo': {
+        type: Boolean,
         optional: true
     },
-    emergencyName: {
-        type: String,
+    'events.diet.lacto': {
+        type: Boolean,
         optional: true
     },
-    emergencyRelationship: {
+    'events.diet.arian': {
         type: String,
-        allowedValues: ['Parent','Child','Sibling','Partner','Relative','Other'],
+        optional: true,
+        allowedValues: ['Vegan', 'Vegetarian', 'Pescetarian'],
+        label: ' '
+    },
+
+    /** Allergens */
+    'events.diet.allergies': {
+        type: Object,
+        optional: false,
+        defaultValue: {},
+        label: 'Food Allergies'
+    },
+    'events.diet.allergies.peanut': {
+        type: Boolean,
         optional: true
     },
-    emergencyTelephone: {
-        type: String,
-        regEx: /(\+\s*?\d{1,3}\s*?)?[()-\d\s]{10,}/,
+    'events.diet.allergies.milk': {
+        type: Boolean,
+        optional: true
+    },
+    'events.diet.allergies.egg': {
+        type: Boolean,
+        optional: true
+    },
+    'events.diet.allergies.wheat': {
+        type: Boolean,
+        optional: true
+    },
+    'events.diet.allergies.soy': {
+        type: Boolean,
+        optional: true
+    },
+    'events.diet.allergies.fish': {
+        type: Boolean,
+        optional: true
+    },
+    'events.diet.allergies.shellfish': {
+        type: Boolean,
         optional: true
     },
 
-    /** Subscriptions */
-    subscriptions: {
-        type: Thriver.accounts.schema.subscriptions,
-        optional: false
+    /** Event requests or accommodations */
+    'events.accommodations': {
+        type: String,
+        optional: true,
+        label: 'Please list any accommodations requested for events you attend',
+        autoform: {
+            rows: 5
+        }
+    },
+
+    /** Emergency Contact */
+    'events.emergencyName': {
+        type: String,
+        optional: true,
+        label: 'Emergency Contact Name'
+    },
+    'events.emergencyRelationship': {
+        type: String,
+        allowedValues: ['Parent','Child','Sibling','Partner','Relative','Other'],
+        optional: true,
+        label: 'Emergency Contact Relation'
+    },
+    'events.emergencyTelephone': {
+        type: String,
+        regEx: /(\+\s*?\d{1,3}\s*?)?[()-\d\s]{10,}/,
+        optional: true,
+        label: 'Emergency Contact Number'
     },
 
     /** Registered Events */
-    events: {
+    'events.registeredEvents': {
         type: Array,
         defaultValue: [],
         optional: false
     },
-    'events.$': {
+    'events.registeredEvents.$': {
         type: Object
     },
-    'events.$.id': {
+    'events.registeredEvents.$.id': {
         type: Mongo.ObjectID,
         optional: false
     },
     // an Events object could have any number of optional fields
+
+    /** Subscriptions */
+    subscriptions: {
+        type: Thriver.accounts.schema.subscriptions,
+        optional: false,
+        defaultValue: {}
+    },
 
     /** Online */
     online: {

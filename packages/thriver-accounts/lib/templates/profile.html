@@ -7,8 +7,7 @@
 		{{/each}}
         <input type="submit" value="{{submitValue}}">-->
 
-        {{#autoForm collection="Meteor.users" id="updateProfile" doc=this type="update"}}
-            {{> afQuickField name="profile.firstname"}}
-        {{/autoForm}}
+        {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update" 
+            omitFields=omitFields fields="profile" }}
     </form>
 </template>

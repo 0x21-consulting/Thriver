@@ -95,3 +95,27 @@ Template.profile.onRendered(function () {
     
     console.debug(result);
 });
+
+// Helpers
+Template.profile.helpers({
+    /**
+     * @summary Pass user context to profile form
+     * @function
+     * @returns {Object}
+     */
+    doc: function () {
+        return Meteor.user();
+    },
+    /**
+     * @summary Don't include the following fields in the form
+     * @function
+     * @returns {String[]}
+     */
+    omitFields: function () {
+        return [
+            'profile.subscriptions',
+            'profile.events.registeredEvents',
+            'profile.online'
+        ];
+    }
+});
