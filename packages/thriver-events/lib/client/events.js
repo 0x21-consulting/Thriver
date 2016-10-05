@@ -161,15 +161,11 @@ Template.events.helpers({
         // No slide this month
 
         // Are there any future events?
-        nextMonth = Thriver.calendar.thisMonth.get() + 1;
         events = Thriver.events.collection.find({
             start: {
                 $gt: new Date(
-                    // is this next year?
-                    nextMonth > 11? Thriver.calendar.thisYear.get() :
-                    Thriver.calendar.thisYear.get() + 1,
-                    // Next month
-                    nextMonth % 12)
+                    Thriver.calendar.thisYear.get(),
+                    Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate() )
             }
         });
         if (!events.count()) noFutureEvents = true;
@@ -188,7 +184,7 @@ Template.events.helpers({
 
         // Return that slide
         return [{
-            month         : Thriver.calendar.thisMonth.get(),
+            month         : Thriver.calendar.months[ Thriver.calendar.thisMonth.get() ],
             year          : Thriver.calendar.thisYear.get(),
             noEvents      : true,
             noFutureEvents: noFutureEvents,
