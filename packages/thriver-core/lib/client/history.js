@@ -151,14 +151,17 @@ Thriver.history.navigate = function (path) {
     // If there's no path, allow scroll to top
     if (!path.length) Thriver.history.smoothScroll('/');
 
-    /**
-     * @summary Get registered element
-     * @type {Object}
-     */
-    var location = Thriver.history.registry.findOne({ element: path[0] });
+    // Navigate to the appropriate element, once it exists
+    // TODO:  Could there be an infinite loop if the element doesn't exist?
+    Tracker.autorun(function (c) {
+        /**
+         * @summary Get registered element
+         * @type {Object}
+         */
+        var location = Thriver.history.registry.findOne({ element: path[0] });
+
+        if (location) c.stop(); else return;
     
-    // Navigate to the appropriate element, if it exists
-    if (location) {
         // If this has a particular function used to access this component
         if (location.accessFunction instanceof Function)
             location.accessFunction( location.accessData );
@@ -172,7 +175,7 @@ Thriver.history.navigate = function (path) {
         // Now, pass the rest of the path along to the callback function
         if (location.callback instanceof Function)
             location.callback( path.slice(1) );
-    }
+    });
 };
 
 /**
@@ -181,11 +184,11 @@ Thriver.history.navigate = function (path) {
  *   @param {String} path - Path to navigate to
  * @returns {Function}
  */
-var onLoadNavigate = function (path) {
+/*var onLoadNavigate = function (path) {
     return function () {
         Thriver.history.navigate(path);
     };
-};
+};*/
 
 // Manage Updating the Browser's Location bar, as well as reacting to changes
 // in the location bar, smooth scrolling to the proper location, then passing
@@ -230,7 +233,8 @@ Template.canvas.onRendered(function () {
 
     // Wait a couple seconds for the page to render before navigating to the proper link
     // TODO: Is there a better way to do this?
-    setTimeout(onLoadNavigate(path), 3000);
+    //setTimeout(onLoadNavigate(path), 3000);
+    Thriver.history.navigate(path);
 });
 
 /**
