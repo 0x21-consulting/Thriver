@@ -456,6 +456,15 @@ Template.events.events({
         $(".listViewEvents").removeClass("active");
     },
 
+    // Toggle Search Results
+    'keyup #eventSearch': function (event) {
+        if (event.target.value){
+            document.querySelector(".searchResultsList").classList.add("active");
+        } else{
+            document.querySelector(".searchResultsList").classList.remove("active");
+        }
+    },
+
     /**
      * Switch to next month
      * @method
