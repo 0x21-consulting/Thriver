@@ -40,7 +40,30 @@
                         <ul class="slides" id="slidesList">
                             {{#if events}}
                                 {{#each events}}
-                                    {{> eventSlide}}
+                                    {{#if noEvents}}
+                                        <li class="eventSlidez">
+                                            <div class="eventContainer">
+                                                <div class="inner">
+                                                    <header>
+                                                        <p class="eventDate">September 2016</p>
+                                                    </header>
+                                                    <div class="main">
+                                                        <h2>
+                                                            {{#if noFutureEvents}}
+                                                                nofutureevents
+                                                            {{/if}}
+                                                            {{#if noPastEvents}}
+                                                                nopastevents
+                                                            {{/if}}
+                                                            no events
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {{else}}
+                                        {{> eventSlide}}
+                                    {{/if}}
                                 {{/each}}
                             {{/if}}
                             <!--<li class="no-events-this-month eventSlide">
