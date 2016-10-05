@@ -213,6 +213,24 @@ section.work .workNav > ul{
         //min-height: 228px;
         .borderRadius(2px);
         overflow: hidden;
+        @media (min-width:1101px){
+            &:nth-child(2){ margin-left: 0px; }
+            &:nth-child(5){ margin-right: 0px; }
+            &:nth-child(4n + 5){ margin-right: 0px; }
+            &:nth-child(6){ margin-left: 0px; }
+            &:nth-child(4n + 6){ margin-left: 0px; }
+        }
+        @media (max-width:1100px) and (min-width:866px){
+            &:nth-child(2){ margin-left: 0px; }
+            &:nth-child(4){ margin-right: 0px; }
+            &:nth-child(3n + 4){ margin-right: 0px; }
+            &:nth-child(5){ margin-left: 0px; }
+            &:nth-child(3n + 5){ margin-left: 0px; }
+        }
+        @media (max-width:865px) and (min-width:768px){
+            &:nth-child(even){ margin-left: 0px; }
+            &:nth-child(odd){ margin-right: 0px; }
+        }
         @media @mobile{
             width:100%;
             margin: 0px;
@@ -895,19 +913,7 @@ body.workBack section.work > .main{
 }
 
 
-section.work .workNav > ul > li:first-child{
-    margin-left: 25px;
-}
 
-section.work .workNav > ul > li:nth-child(3){
-    margin-right: 25px;
-}
-
-
-body.workActive section.work .workNav > ul > li:first-child, section.work .workNav > ul > li:nth-child(3){
-    margin-left: 0px;
-    margin-right: 0px;
-}
 
 body.workFadeIn section.work .workNav > ul > li{
     //display: none;
