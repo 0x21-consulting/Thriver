@@ -206,6 +206,34 @@ Template.workContent.events({
     }
 });
 
+var smoothScroll = function (event) {
+    check(event, Event);
+
+    // Prevent link from activating
+    event.preventDefault();
+
+    // Get position of element
+    var element = document.querySelector(this.hash),
+        offsetTop = 0, parent;
+
+    // If anchor exists (and why shouldn't it?)
+    if (element instanceof Element) {
+        // Active Read More
+        event.path[7].querySelector('footer.truncate button').click();
+
+        // Aggregate offset top
+        while (element.offsetParent) {
+            offsetTop += element.offsetTop;
+            element    = element.offsetParent;
+        }
+
+        // Then animate scroll
+        // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
+        $('body,html').stop(true, true).
+            animate({ scrollTop: offsetTop - 130 }, 750);
+    }
+};
+
 /**
  * Dynamically Generate Tertiary menu
  * @method
@@ -213,7 +241,8 @@ Template.workContent.events({
 Template.workContent.onRendered(function () {
     var that = this;
     Deps.autorun(function (c) {
-        var tertiary = that.firstNode.querySelector('.workTertiary'),
+        var //workId   = that.firstNode.parentElement.parentElement.parentElement.id,
+            tertiary = that.firstNode.querySelector('.workTertiary'),
             content  = tertiary.parentElement.querySelectorAll('h3'),
             ul       = document.createElement('ul'),
             li, a, i = 0, j = content.length;
@@ -235,7 +264,10 @@ Template.workContent.onRendered(function () {
 
             // Create link details
             a.href = '#' + content[i].id;
+                //'/' + Thriver.history.registry.findOne({ element: workId }).currentPath +
+                //'/' + content[i].id;
             a.textContent = content[i].textContent;
+            a.addEventListener('click', smoothScroll);
 
             // Add elements
             ul.appendChild(li).appendChild(a);

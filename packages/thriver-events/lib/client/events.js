@@ -132,7 +132,10 @@ Template.events.helpers({
      * @returns {string[]}
      */
     events: function () {
-        var events = Thriver.events.collection.find({
+        var nextMonth, noPastEvents, noFutureEvents,
+
+        // Get all events that start or end in this month
+        events = Thriver.events.collection.find({
             $or: [{
                 start: {
                     $gte: new Date( Thriver.calendar.thisYear.get(),
@@ -150,9 +153,47 @@ Template.events.helpers({
         }, { sort: { start: 1 } });
 
         // Update total for slides
-        slideTotal.set( events.count() );
+        if (events.count()) {
+            slideTotal.set( events.count() );
+            return events;
+        }
 
-        return events;
+        // No slide this month
+
+        // Are there any future events?
+        nextMonth = Thriver.calendar.thisMonth.get() + 1;
+        events = Thriver.events.collection.find({
+            start: {
+                $gt: new Date(
+                    // is this next year?
+                    nextMonth > 11? Thriver.calendar.thisYear.get() :
+                    Thriver.calendar.thisYear.get() + 1,
+                    // Next month
+                    nextMonth % 12)
+            }
+        });
+        if (!events.count()) noFutureEvents = true;
+
+        // Are there any past events?
+        events = Thriver.events.collection.find({
+            end: {
+                $lt: new Date( Thriver.calendar.thisYear.get(),
+                    Thriver.calendar.thisMonth.get() )
+            }
+        });
+        if (!events.count()) noPastEvents = true;
+
+        // Now we only have one slide
+        slideTotal.set(1);
+
+        // Return that slide
+        return [{
+            month         : Thriver.calendar.thisMonth.get(),
+            year          : Thriver.calendar.thisYear.get(),
+            noEvents      : true,
+            noFutureEvents: noFutureEvents,
+            noPastEvents  : noPastEvents
+        }];
     }
 });
 
