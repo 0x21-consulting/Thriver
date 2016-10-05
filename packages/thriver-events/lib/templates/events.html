@@ -41,22 +41,28 @@
                             {{#if events}}
                                 {{#each events}}
                                     {{#if noEvents}}
-                                        <li class="eventSlide">
+                                        <li class="no-events-this-month eventSlide">
                                             <div class="eventContainer">
                                                 <div class="inner">
                                                     <header>
-                                                        <p class="eventDate">September 2016</p>
+                                                        <p class="eventDate">{{month}} {{year}}</p>
                                                     </header>
                                                     <div class="main">
-                                                        <h2>
+                                                        <div class="icon-main">
+                                                            <i class="fa">&#xf273;</i>
+                                                        </div>
+                                                        <h2>{{month}} {{year}}</h2>
+                                                        <p>
                                                             {{#if noFutureEvents}}
-                                                                nofutureevents
+                                                                No More Events Listed.
+                                                            {{else}}
+                                                                {{#if noPastEvents}}
+                                                                    No Previous Events Listed.
+                                                                {{else}}
+                                                                    No Events This Month.
+                                                                {{/if}}
                                                             {{/if}}
-                                                            {{#if noPastEvents}}
-                                                                nopastevents
-                                                            {{/if}}
-                                                            no events
-                                                        </h2>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,11 +72,6 @@
                                     {{/if}}
                                 {{/each}}
                             {{/if}}
-                            <!--<li class="no-events-this-month eventSlide">
-                                <i class="fa">&#xf273;</i>
-                                <h2>October 2016</h2>
-                                <p>No events this month.</p>
-                            </li>-->
                         </ul>
                     </div>
                     <button class="sliderNext fa">&#xf054;</button>
