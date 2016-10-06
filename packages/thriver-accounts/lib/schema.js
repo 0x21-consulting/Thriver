@@ -10,6 +10,55 @@ Thriver.accounts = {};
  */
 Thriver.accounts.schema = {};
 
+/** 
+ * @summary Subscriptions Schema
+ * @type {SimpleSchema}
+ */
+Thriver.accounts.schema.subscriptions = new SimpleSchema({
+    /** Newsletters */
+    pressReleases: {
+        type: Boolean,
+        defaultValue: true,
+        optional: false
+    },
+    actionAlerts: {
+        type: Boolean,
+        defaultValue: true,
+        optional: false
+    },
+    newsletter: {
+        type: Boolean,
+        defaultValue: true,
+        optional: false
+    },
+    /** Listservs */
+    expertWitness: {
+        type: Boolean,
+        defaultValue: false,
+        optional: false
+    },
+    campusSA: {
+        type: Boolean,
+        defaultValue: false,
+        optional: false
+    },
+    saAdvocates: {
+        type: Boolean,
+        defaultValue: false,
+        optional: false
+    },
+    saTaskForce: {
+        type: Boolean,
+        defaultValue: false,
+        optional: false
+    },
+    saPrevention: {
+        type: Boolean,
+        defaultValue: false,
+        optional: false
+    }
+});
+
 /**
  * @summary Profile Schema
  * @type {SimpleSchema}
@@ -183,63 +232,13 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     /** Subscriptions */
     subscriptions: {
         type: Thriver.accounts.schema.subscriptions,
-        optional: false,
-        defaultValue: {}
+        optional: false
     },
 
     /** Online */
     online: {
         type: Boolean,
         optional: true
-    }
-});
-
-/** 
- * @summary Subscriptions Schema
- * @type {SimpleSchema}
- */
-Thriver.accounts.schema.subscriptions = new SimpleSchema({
-    /** Newsletters */
-    pressReleases: {
-        type: Boolean,
-        defaultValue: true,
-        optional: false
-    },
-    actionAlerts: {
-        type: Boolean,
-        defaultValue: true,
-        optional: false
-    },
-    newsletter: {
-        type: Boolean,
-        defaultValue: true,
-        optional: false
-    },
-    /** Listservs */
-    expertWitness: {
-        type: Boolean,
-        defaultValue: false,
-        optional: false
-    },
-    campusSA: {
-        type: Boolean,
-        defaultValue: false,
-        optional: false
-    },
-    saAdvocates: {
-        type: Boolean,
-        defaultValue: false,
-        optional: false
-    },
-    saTaskForce: {
-        type: Boolean,
-        defaultValue: false,
-        optional: false
-    },
-    saPrevention: {
-        type: Boolean,
-        defaultValue: false,
-        optional: false
     }
 });
 
