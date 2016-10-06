@@ -21,6 +21,10 @@ closeForm = function (event) {
     event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
 };
 
+//debug
+Thriver.currentSlide = currentSlide;
+Thriver.slideTotal   = slideTotal;
+
 /** A list of all of today's events */
 Thriver.events.sameDayEvents = [];
 
@@ -100,17 +104,18 @@ Thriver.events.getThisMonthEvents = function () {
 Thriver.events.slide = function (position) {
     check(position, Number);
 
+    var slides = document.querySelector('.slides');
+
     // Set current slide
     currentSlide.set(position);
 
     // Smooth slide to it
-    document.querySelector('.slides').style.webkitTransform =
-        'translate(-' + position + '00% ,0px)';
+    if (slides)
+        slides.style.webkitTransform = 'translate(-' + position + '00% ,0px)';
 };
 
 // Events helpers
 Template.events.helpers({
-
     //Temp Future/Past Content
     items: [{
         //Need to find away to get background images in here
@@ -155,6 +160,7 @@ Template.events.helpers({
         // Update total for slides
         if (events.count()) {
             slideTotal.set( events.count() );
+            Thriver.events.slide(0);
             return events;
         }
 
@@ -183,6 +189,7 @@ Template.events.helpers({
         slideTotal.set(1);
 
         // Return that slide
+        Thriver.events.slide(0);
         return [{
             month         : Thriver.calendar.months[ Thriver.calendar.thisMonth.get() ],
             year          : Thriver.calendar.thisYear.get(),
@@ -448,17 +455,8 @@ Template.events.events({
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
-    },
-
-    // Toggle Search Results
-    'keyup #eventSearch': function (event) {
-        if (event.target.value){
-            document.querySelector(".searchResultsList").classList.add("active");
-        } else{
-            document.querySelector(".searchResultsList").classList.remove("active");
-        }
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -468,7 +466,6 @@ Template.events.events({
      */
     'click .scroll-next-month, click .nextMonth': function (event) {
         check(event, $.Event);
-
 
         var nextMonth  = Thriver.calendar.thisMonth.get() + 1,
             parentName = document.querySelector('#main > .events').id;
@@ -485,9 +482,22 @@ Template.events.events({
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
+    },
 
+    /**
+     * @summary Search for events
+     * @param {$.Event} event
+     */
+    'keyup #eventSearch': function (event) {
+        check(event, $.Event);
+
+        if (event.target.value){
+            document.querySelector('.searchResultsList').classList.add('active');
+        } else{
+            document.querySelector('.searchResultsList').classList.remove('active');
+        }
     },
 
     /**
@@ -510,8 +520,8 @@ Template.events.events({
         if (admin instanceof Element)
             admin.classList.remove('hide');
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -532,8 +542,8 @@ Template.events.events({
 
         Thriver.events.slide(position);
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -554,8 +564,8 @@ Template.events.events({
 
         Thriver.events.slide(position);
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -571,8 +581,8 @@ Template.events.events({
         // Something to do with Mobile
         calMobileEvent();
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -589,17 +599,17 @@ Template.events.events({
         // Something to do with Mobile
         calMobileEvent();
 
-        $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-        $(".listViewEvents").removeClass("active");
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
     },
 
     'click .listViewEvents': function (event) {
-        if ($(event.target).hasClass("active")){
-            $(".listViewEventsObjectOpen").removeClass("listViewEventsObjectOpen");
-            $(event.target).removeClass("active");
+        if ($(event.target).hasClass('active')){
+            $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+            $(event.target).removeClass('active');
         } else{
-            $(".eventsMain").addClass("listViewEventsObjectOpen");
-            $(event.target).addClass("active");
+            $('.eventsMain').addClass('listViewEventsObjectOpen');
+            $(event.target).addClass('active');
         }
     },
 
