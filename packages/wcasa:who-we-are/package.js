@@ -29,14 +29,19 @@ Package.onUse(function (api) {
         'lib/templates/who.less',
         
         // Helpers and methods
-        'lib/client/who.js'
+        'lib/client/who.js',
+        'lib/client/admin.js'
     ], ['client']);
     
     // Server processing
     api.addFiles([
-        'lib/server.js',
-        'lib/site.js'
+        'lib/server.js'
     ], ['server']);
+
+    // Client and Server
+    api.addFiles([
+        'lib/schema.js'
+    ], ['client', 'server']);
 });
 
 Package.onTest(function (api) {

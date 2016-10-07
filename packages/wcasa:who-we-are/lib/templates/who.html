@@ -19,24 +19,48 @@
 
 <template name="staff">
     <h2>The WCASA Staff</h2>
+    {{#if isAdmin}}
+        <aside class="admin">
+            <button class="fa add">&#xf067;</button>
+        </aside>
+    {{/if}}
     <ul class="clearfix">
         {{#each staff}}
             {{> personStaff}}
         {{/each}}
     </ul>
+    {{#if isAdmin}}
+        <aside class="addPerson hide">
+            <button class="fa close">&#xf057; Close</button>
+            {{> quickForm collection="Thriver.people.collection" id="addStaffPerson" type="method"
+                omitFields="_id" meteormethod="addPerson" }}
+        </aside>
+    {{/if}}
 </template>
 
 <template name="board">
     <h2>Board of Directors</h2>
+    {{#if isAdmin}}
+        <aside class="admin">
+            <button class="fa add" title="Add a person">&#xf067;</button>
+        </aside>
+    {{/if}}
     <ul class="clearfix">
         {{#each board}}
             {{> personBoard}}
         {{/each}}
     </ul>
+    {{#if isAdmin}}
+        <aside class="addPerson hide">
+            <button class="fa close">&#xf057; Close</button>
+            {{> quickForm collection="Thriver.people.collection" id="addBoardPerson" type="method"
+                omitFields="_id" meteormethod="addPerson" }}
+        </aside>
+    {{/if}}
 </template>
 
 <template name="personStaff">
-    <li>
+    <li data-id="{{_id}}">
         {{#if picture}}
             <img src="{{picture}}" alt="{{name}}" />
         {{else}}
@@ -47,15 +71,25 @@
             <h5>{{title}}</h5>
             <a href="mailto:{{email}}">{{email}}</a>
         </div>
+        {{#if isAdmin}}
+            <aside class="admin">
+                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+            </aside>
+        {{/if}}
     </li>
 </template>
 
 <template name="personBoard">
-    <li>
+    <li data-id="{{_id}}">
         <div class="details">
             <h4>{{name}}</h4>
             <h5>{{title}}</h5>
             <a href="mailto:{{email}}">{{email}}</a>
         </div>
+        {{#if isAdmin}}
+            <aside class="admin">
+                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+            </aside>
+        {{/if}}
     </li>
 </template>

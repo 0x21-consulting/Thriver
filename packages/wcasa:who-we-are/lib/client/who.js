@@ -1,5 +1,4 @@
 // Subscriptions
-var People = new Mongo.Collection('people');
 Meteor.subscribe('people');
 
 Template.who.helpers({
@@ -58,13 +57,15 @@ Template.who.helpers({
 
 Template.board.helpers({
     board: function () {
-        return People.find({ boardMember: true }, { sort: { title: -1, name: 1 }});
+        return Thriver.people.collection.find({ 
+            boardMember: true }, { sort: { title: -1, name: 1 }});
     }
 });
 
 Template.staff.helpers({
     staff: function () {
-        return People.find({ boardMember: false }, { sort: { name: 1 }});
+        return Thriver.people.collection.find({ 
+            boardMember: false }, { sort: { name: 1 }});
     }
 });
 

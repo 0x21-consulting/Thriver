@@ -309,3 +309,55 @@ section.who{
         padding-bottom: 0px !important;
     }
 }
+
+/** Admin */
+section.who article[data-id="staff"], section.who article[data-id="board"] {
+    & > aside.admin {
+        margin-top: -50px;
+    }
+
+    ul > li > aside.admin {
+        position: relative;
+        margin-right: 0;
+
+        button {
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    aside.addPerson form {
+        // Add * form styles
+        [data-required="true"] label::after {
+            content: '\f069';
+            font: 10px FontAwesome;
+            color: @orange;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+
+        // Validation error styles
+        span.help-block {
+            color: #f55;
+            font-weight: bold;
+            float: right;
+            margin-top: -53px;
+            margin-right: 10px;
+        }
+    }
+
+    button {
+        background: @teal;
+    }
+
+    button.close {
+        color: @orange;
+        background: transparent;
+        float: right;
+        margin-top: -10px;
+
+        // Appear above label
+        position: relative;
+        z-index: 1;
+    }
+}
