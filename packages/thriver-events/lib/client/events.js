@@ -139,10 +139,9 @@ Template.events.events({
         ]);
 
         // Close any open asides
-        document.querySelector('.listViewEventsObjectOpen').classList.
-            remove('listViewEventsObjectOpen');
-        document.querySelector('.listViewEvents').classList.remove('active');
-        document.querySelector('.searchResultsList').classList.remove('active');
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
+        $('.searchResultsList').removeClass('active');
     },
 
     /**
@@ -169,10 +168,9 @@ Template.events.events({
         ]);
 
         // Close any open asides
-        document.querySelector('.listViewEventsObjectOpen').classList.
-            remove('listViewEventsObjectOpen');
-        document.querySelector('.listViewEvents').classList.remove('active');
-        document.querySelector('.searchResultsList').classList.remove('active');
+        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+        $('.listViewEvents').removeClass('active');
+        $('.searchResultsList').removeClass('active');
     },
 
     /**

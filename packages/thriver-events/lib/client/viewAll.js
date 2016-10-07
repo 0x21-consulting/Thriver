@@ -83,11 +83,16 @@ Template.pastEventsList.helpers({
         let month  = new Date().getMonth(),
             year   = new Date().getFullYear(),
             date   = new Date().getDate(),
+
+            // This month's events
             events = Thriver.events.collection.find({ start: { 
                 $lt : new Date(year, month, date),
-                $gte: new Date(year, month - 1) } }),
+                $gte: new Date(year, month) } },
+            { sort: { start: -1 } }),
 
-            count = events.count(),
+            // Count of all previous events
+            count = Thriver.events.collection.find({ start: {
+                $lt: new Date(year, month, date) }}).count(),
 
             futureEvents = [];
 
@@ -97,9 +102,8 @@ Template.pastEventsList.helpers({
             // If there are no events this month, don't add anything
             if ( events.count() )
                 futureEvents.push({
-                    month : month - 1 < 0? Thriver.calendar.months[11] 
-                          : Thriver.calendar.months[ month - 1 ],
-                    year  : month - 1 < 0? year - 1: year,
+                    month : Thriver.calendar.months[ month ],
+                    year  : year,
                     event: events.fetch()
                 });
 
@@ -109,13 +113,14 @@ Template.pastEventsList.helpers({
 
             // Get new events
             events = Thriver.events.collection.find({ start: {
-                $lt : new Date(year, month),
-                $gte: new Date(year, month - 1) } });
+                $lt : new Date(year, month + 1),
+                $gte: new Date(year, month) } },
+            { sort: { start: -1 } });
 
             // For while loop, in case there are months with no events
             // but still some events in the future at some point
             count = Thriver.events.collection.find({ start: {
-                $lt: new Date(year, month) }}).count();
+                $lt: new Date(year, month + 1) }}).count();
         }
 
         return futureEvents;
@@ -133,11 +138,15 @@ Template.upcomingEventsList.helpers({
         let month  = new Date().getMonth(),
             year   = new Date().getFullYear(),
             date   = new Date().getDate(),
+
+            // This month's events
             events = Thriver.events.collection.find({ start: { 
                 $gte: new Date(year, month, date),
                 $lt : new Date(year, month + 1) } }),
 
-            count = events.count(),
+            // Count of all future events
+            count = Thriver.events.collection.find({ start: {
+                $gte: new Date(year, month) }}).count(),
 
             futureEvents = [];
 
