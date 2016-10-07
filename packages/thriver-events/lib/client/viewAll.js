@@ -47,7 +47,30 @@ let friendly = (start, end) => {
     }
 
     return string;
+},
+
+/**
+ * @summary Navigate to an event
+ * @method
+ *   @param {$.Event} event
+ */
+navigate = (event) => {
+    check(event, $.Event);
+
+    // Do nothing else
+    event.preventDefault();
+
+    // Navigate
+    Thriver.events.navigate(event.currentTarget.dataset.id);
+
+    // Close `View All`
+    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+    $('.listViewEvents').removeClass('active');
 };
+
+/** View All Templates events */
+Template.pastEventsList    .events({ 'click a': navigate });
+Template.upcomingEventsList.events({ 'click a': navigate });
 
 /** Past Events under `View All` helpers */
 Template.pastEventsList.helpers({
