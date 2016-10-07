@@ -5,7 +5,7 @@
  *   @param {Date} end
  * @returns {String}
  */
-let friendly = (start, end) => {
+Template.registerHelper('friendly', (start, end) => {
     check(start, Date);
     check(end, Date);
 
@@ -47,14 +47,14 @@ let friendly = (start, end) => {
     }
 
     return string;
-},
+});
 
 /**
  * @summary Navigate to an event
  * @method
  *   @param {$.Event} event
  */
-navigate = (event) => {
+let navigate = (event) => {
     check(event, $.Event);
 
     // Do nothing else
@@ -119,12 +119,7 @@ Template.pastEventsList.helpers({
         }
 
         return futureEvents;
-    },
-
-    /**
-     * @summary Return a friendly date range for the upcoming events badge
-     */
-    friendly: friendly
+    }
 });
 
 /** Upcoming Events under `View All` helpers */
@@ -173,10 +168,5 @@ Template.upcomingEventsList.helpers({
         }
 
         return futureEvents;
-    },
-
-    /**
-     * @summary Return a friendly date range for the upcoming events badge
-     */
-    friendly: friendly
+    }
 });

@@ -40,6 +40,7 @@ Package.onUse(function (api) {
         'lib/client/events.js',
         'lib/client/helpers.js',
         'lib/client/viewAll.js',
+        'lib/client/search.js',
         'lib/client/history.js',
         'lib/client/admin.js'
     ], ['client']);

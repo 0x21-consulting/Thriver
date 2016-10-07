@@ -27,6 +27,11 @@ Thriver.events.navigate = function (id) {
     var thisEvent  = Thriver.events.collection.findOne({ _id: id }),
         events, parentName, path;
 
+    // Close any open asides
+    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+    $('.listViewEvents').removeClass('active');
+    $('.searchResultsList').removeClass('active');
+
     // Set Month and year based on event Start date
     Thriver.calendar.thisYear .set( thisEvent.start.getFullYear() );
     Thriver.calendar.thisMonth.set( thisEvent.start.getMonth   () );

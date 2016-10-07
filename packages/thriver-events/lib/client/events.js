@@ -100,6 +100,11 @@ Thriver.events.slide = function (position) {
 
     var slides = document.querySelector('.slides');
 
+    // Close any open asides
+    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+    $('.listViewEvents').removeClass('active');
+    $('.searchResultsList').removeClass('active');
+
     // Set current slide
     Thriver.events.currentSlide.set(position);
 
@@ -133,8 +138,11 @@ Template.events.events({
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
 
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
+        // Close any open asides
+        document.querySelector('.listViewEventsObjectOpen').classList.
+            remove('listViewEventsObjectOpen');
+        document.querySelector('.listViewEvents').classList.remove('active');
+        document.querySelector('.searchResultsList').classList.remove('active');
     },
 
     /**
@@ -160,22 +168,11 @@ Template.events.events({
             Thriver.calendar.months[ Thriver.calendar.thisMonth.get()
         ]);
 
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
-    },
-
-    /**
-     * @summary Search for events
-     * @param {$.Event} event
-     */
-    'keyup #eventSearch': function (event) {
-        check(event, $.Event);
-
-        if (event.target.value){
-            document.querySelector('.searchResultsList').classList.add('active');
-        } else{
-            document.querySelector('.searchResultsList').classList.remove('active');
-        }
+        // Close any open asides
+        document.querySelector('.listViewEventsObjectOpen').classList.
+            remove('listViewEventsObjectOpen');
+        document.querySelector('.listViewEvents').classList.remove('active');
+        document.querySelector('.searchResultsList').classList.remove('active');
     },
 
     /**
@@ -195,9 +192,6 @@ Template.events.events({
         }
 
         Thriver.events.slide(position);
-
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -217,9 +211,6 @@ Template.events.events({
         }
 
         Thriver.events.slide(position);
-
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -230,13 +221,10 @@ Template.events.events({
     'click button.eventDate': function (event) {
         check(event, $.Event);
 
-        Thriver.events.navigate( event.target.dataset.id );
+        Thriver.events.navigate( event.currentTarget.dataset.id );
 
         // Something to do with Mobile
         calMobileEvent();
-
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
     },
 
     /**
@@ -248,13 +236,10 @@ Template.events.events({
         check(event, $.Event);
         event.preventDefault();
 
-        Thriver.events.navigate( event.target.dataset.id );
+        Thriver.events.navigate( event.currentTarget.dataset.id );
 
         // Something to do with Mobile
         calMobileEvent();
-
-        $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-        $('.listViewEvents').removeClass('active');
     },
 
     /**
