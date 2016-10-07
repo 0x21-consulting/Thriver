@@ -71,10 +71,6 @@ Template.notifications.helpers({
                 + ( all[i].date.getHours() > 11 ? ' pm' : ' am' );
         }
         
-        // debug
-        console.info('Notifs', notifs);
-        console.info('Alerts', alerts);
-        
         // If no notifications, say so
         if (! all.length)
             return [{ template: 'notificationEmpty' }];

@@ -43,8 +43,6 @@ Template.contact.onRendered(function () {
     Thriver.history.registry.insert({
         element: Thriver.sections.generateId(instanceName),
         /** Handle deep-linking */
-        callback: function (path) {
-            console.debug('Deep-link:', path);
-        }
+        callback: function (path) { }
     });
 });

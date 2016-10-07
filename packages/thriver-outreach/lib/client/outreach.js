@@ -136,8 +136,6 @@ Template.outreach.onRendered(function () {
             // Click anchor to activate page
             if (link instanceof Element)
                 link.click();
-
-            console.debug('Deep-link:', path, data, sections);
         }
     });
 });

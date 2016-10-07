@@ -125,14 +125,6 @@ Template.calendar.helpers({
             // All events this month
             currentEvents = Thriver.events.getThisMonthEvents();
 
-        console.debug('Events\n',
-            'Greater than', new Date( Thriver.calendar.thisYear.get(),
-                Thriver.calendar.thisMonth.get() ), '\n',
-            'Less than', new Date( Thriver.calendar.thisYear.get(),
-                Thriver.calendar.thisMonth.get(), total ), '\n',
-            currentEvents
-        );
-
         // If today is in the current month and year
         if (today.getMonth() === Thriver.calendar.thisMonth.get() &&
             today.getFullYear() === Thriver.calendar.thisYear.get() ) {
@@ -191,7 +183,6 @@ Template.calendar.helpers({
                     // Add event details
                     // (and convert to array)
                     day.currentEvents = currentEvents[count];
-                    console.info('Day', count, day); //debug
                 }
 
                 // If we have started counting

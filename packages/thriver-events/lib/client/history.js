@@ -69,8 +69,6 @@ Thriver.events.navigate = function (id) {
 Thriver.events.parsePath = function (path) {
     check(path, [String]);
 
-    console.debug('Path:', path);
-
     var isMonth = false;
 
     for (let i = 0; i < path.length; ++i) {

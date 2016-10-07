@@ -181,8 +181,6 @@ Template.aside.onRendered(function () {
         // Otherwise, if there isn't any path, click the first tab for the user
         if (!path.length && tabs.length)
             tabs[0].click();
-
-        console.debug('Deep-link:', path);
     };
 
     // Register each tab
