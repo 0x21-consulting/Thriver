@@ -24,26 +24,29 @@ Template.events.onRendered(function () {
 Thriver.events.navigate = function (id) {
     check(id, String);
 
-    var thisEvent  = Thriver.events.collection.findOne({ _id: id }),
+    var thisEvent = Thriver.events.collection.findOne({ _id: id }),
         events, parentName, path;
+
+    // Set Month and year based on event Start date
+    Thriver.calendar.thisYear .set( thisEvent.start.getFullYear() );
+    Thriver.calendar.thisMonth.set( thisEvent.start.getMonth   () );
 
     // Close any open asides
     $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
     $('.listViewEvents').removeClass('active');
     $('.searchResultsList').removeClass('active');
 
-    // Set Month and year based on event Start date
-    Thriver.calendar.thisYear .set( thisEvent.start.getFullYear() );
-    Thriver.calendar.thisMonth.set( thisEvent.start.getMonth   () );
+    // TODO: We can't be using timers here...
+    setTimeout( () => {
+        // Get all events for this month
+        events = Thriver.events.getThisMonthEvents();
 
-    // Get all events for this month
-    events = Thriver.events.getThisMonthEvents();
-
-    // Navigate to appropriate slide
-    for (let event in events)
-        for (let i = 0; i < events[ event ].length; ++i)
-            if (events[ event ][i]._id === id)
-                Thriver.events.slide( events[ event ][i].position );
+        // Navigate to appropriate slide
+        for (let event in events)
+            for (let i = 0; i < events[ event ].length; ++i)
+                if (events[ event ][i]._id === id)
+                    Thriver.events.slide( events[ event ][i].position );
+    }, 500);
 
     // Determine URI path
     parentName = document.querySelector('#main > .events').id;
