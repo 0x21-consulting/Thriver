@@ -17,7 +17,7 @@ Package.onUse(function (api) {
     
     // Resources
     api.addAssets([
-        
+        'lib/client/avatar.jpg'
     ], ['client']);
     
     // Client processing
