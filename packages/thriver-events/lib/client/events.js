@@ -345,5 +345,20 @@ Template.eventSlide.events({
         }
 
         // TODO:  Add event to profile
+    },
+
+    /**
+     * @summary Navigate on click for Same-Day links
+     * @method
+     *   @param {$.Event} event
+     */
+    'click a[data-id]': (event) => {
+        check(event, $.Event);
+
+        // Do nothing else
+        event.preventDefault();
+
+        // Navigate
+        Thriver.events.navigate(event.currentTarget.dataset.id);
     }
 });

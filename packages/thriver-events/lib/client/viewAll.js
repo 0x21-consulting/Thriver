@@ -62,10 +62,6 @@ let navigate = (event) => {
 
     // Navigate
     Thriver.events.navigate(event.currentTarget.dataset.id);
-
-    // Close `View All`
-    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-    $('.listViewEvents').removeClass('active');
 };
 
 /** View All Templates events */
