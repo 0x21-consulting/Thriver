@@ -38,6 +38,10 @@ Package.onUse(function (api) {
         // Helpers and methods
         'lib/client/calendar.js',
         'lib/client/events.js',
+        'lib/client/helpers.js',
+        'lib/client/viewAll.js',
+        'lib/client/history.js',
+        'lib/client/admin.js'
     ], ['client']);
     
     // Server processing
