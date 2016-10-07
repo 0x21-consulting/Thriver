@@ -255,90 +255,35 @@
 
 
 <template name="pastEventsList">
-    <h2>September 2016</h2>
-    <ul>
-        <li>
-            <a href="#">
-                <span>An Event Title</span>
-                <span class="badge">Sept 16th-18th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Titled Event</span>
-                <span class="badge">Sept 22nd</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Title of an Event</span>
-                <span class="badge">Sept 24th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Another Event</span>
-                <span class="badge">Sept 31st</span>
-            </a>
-        </li>
-    </ul>
+    {{#each pastEvents}}
+        <h2>{{month}} {{year}}</h2>
+        <ul>
+            {{#each event}}
+                <li>
+                    <a href="#">
+                        <span>{{name}}</span>
+                        <span class="badge">{{friendly start end}}</span>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    {{/each}}
 </template>
 
 <template name="upcomingEventsList">
-    <h2>October 2016</h2>
-    <ul>
-        <li>
-            <a href="#">
-                <span>An Event Title</span>
-                <span class="badge">Oct 16th-18th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Titled Event</span>
-                <span class="badge">Oct 22nd</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Title of an Event</span>
-                <span class="badge">Oct 24th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Another Event</span>
-                <span class="badge">Oct 31st</span>
-            </a>
-        </li>
-    </ul>
-    <h2>November 2016</h2>
-    <ul>
-        <li>
-            <a href="#">
-                <span>An Event Title</span>
-                <span class="badge">Nov 16th-18th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Titled Event</span>
-                <span class="badge">Nov 22nd</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Title of an Event</span>
-                <span class="badge">Nov 24th</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span>Another Event</span>
-                <span class="badge">Nov 31st</span>
-            </a>
-        </li>
-    </ul>
+    {{#each upcomingEvents}}
+        <h2>{{month}} {{year}}</h2>
+        <ul>
+            {{#each event}}
+                <li>
+                    <a href="#">
+                        <span>{{name}}</span>
+                        <span class="badge">{{friendly start end}}</span>
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    {{/each}}
 </template>
 
 <template name="searchResultsList">
