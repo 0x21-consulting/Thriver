@@ -7,6 +7,7 @@
     background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 34%,rgba(250,251,251,1) 35%,rgba(97,153,160,0.57) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(252,252,252,1) 34%,rgba(250,251,251,1) 35%,rgba(97,153,160,0.57) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#916199a0',GradientType=0 ); /* IE6-9 */
+    background: #fff;
     @media @mobile{background: #fff;}
     @media (min-width:768px){
         padding-bottom: 60px;
@@ -719,6 +720,8 @@ header.eventsHeader{
 .registration-form{
     //padding: 20px;
     list-style: none;
+    padding-right: 40px;
+    @media (max-width:1000px){ padding-right: 0px;}
     h2{padding: 20px 20px 20px 0px !important;}
     input[type="submit"]{color:#fff !important;}
 }
