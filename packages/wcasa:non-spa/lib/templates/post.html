@@ -29,11 +29,19 @@
                 <h1>{{title}}</h1>
             </header>
             <main class="textBody">
-                {{! We use a conditional here to avoid a Template error
-                    because the data isn't immediately available }}
-                {{#if content}}
-                    {{{markdown content}}}
+                {{#if isAdmin}}
+                    <aside class="admin">
+                        <button class="fa edit" title="Edit Post">&#xf044;</button>
+                    </aside>
                 {{/if}}
+
+                <section data-id="{{_id}}" data-hash="{{hash}}">
+                    {{! We use a conditional here to avoid a Template error
+                        because the data isn't immediately available }}
+                    {{#if content}}
+                        {{{markdown content}}}
+                    {{/if}}
+                </section>
             </main>
             <footer>
                 <p class="hash">###</p>
