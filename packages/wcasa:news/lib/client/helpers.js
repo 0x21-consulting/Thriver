@@ -79,17 +79,18 @@ Template.newsletters.helpers({
         paginate: 'true', //Default is false
         perPage: 10, //if paginate:true, how many before paginate
         style: 'stripes',
-        items: [{
-            title: 'One Webinar',
-            date: new Date('2016-01-01'), //This is temporary
-            friendlyDate: '02/11/29',
-            content: 'lorem ipsum.'
-        },{
-            title: 'One Webinar',
-            date: new Date('2016-01-01'), //This is temporary
-            friendlyDate: '02/11/29',
-            content: 'lorem ipsum.'
-        }],
+        items: function () {
+            return Thriver.newsroom.collection.find({
+                type: 'newsletter',
+                $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
+                    title: Thriver.newsroom.search.get() },{
+                    content: Thriver.newsroom.search.get()
+                }] : [{}]
+            }, {
+                limit: Thriver.newsroom.quantity.get(),
+                sort: { date: -1 }
+            });
+        }
     }]
 });
 
