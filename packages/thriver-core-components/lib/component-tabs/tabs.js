@@ -3,7 +3,7 @@
  * @method
  *   @param {$.Event} event
  */
-var toggleTabs = function (event) {
+var toggleTabs = function (event) {//debugger;
 	check(event, $.Event);
 
 	event.preventDefault();
@@ -22,7 +22,7 @@ var toggleTabs = function (event) {
 		Thriver.util.hide(sections[i], true);
 
 	// Only for non-mobile displays do we make anything active
-	if (window.innerWidth > 767) {
+	//if (window.innerWidth > 767) {
 		// Set link as active
 		Thriver.util.makeActive(event.target, true);
 
@@ -37,7 +37,7 @@ var toggleTabs = function (event) {
 			default:
 				document.querySelector('aside.filter').classList.remove('active-filter');
 		}
-	}
+	//}
 };
 
 Template.body.events({

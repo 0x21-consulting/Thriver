@@ -104,7 +104,46 @@ Thriver.canvas = {
 		Thriver.canvas.closeSidebars();
 	},
 
-	/* ============================================== */
+	/**
+	 * @summary Handle opening and closing of mobile hamburger menu
+	 * @method
+	 *   @param {$.Event} event
+	 */
+	mobileMenu: event => {
+		check(event, $.Event);
+
+		// Close menu if it's currently open
+		if ( event.target.getAttribute('aria-hidden') === 'false' ) {
+			// Hide visible menu items
+			document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').
+				forEach(tab => { tab.setAttribute('aria-expanded', false); });
+
+			// Hide visible sections
+			document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]').
+				forEach(section => { section.setAttribute('aria-hidden', true); });
+
+			// Allow scrolling
+			document.body.classList.remove('noScroll');
+
+			// Hide menu
+			Thriver.util.hide( document.getElementById('mobile-navigation'), true );
+
+			// We're done
+			return false;
+		}
+
+		// Open menu
+
+		// First, prevent body scrolling
+		document.body.classList.add('noScroll');
+
+		// Then make the menu visible
+		Thriver.util.hide( document.getElementById('mobile-navigation'), false );
+	},
+
+	/* ================================================ */
+	/* The following methods are no longer being used.  */
+	/* ================================================ */
 	clearCanvas : function(){
 	    document.body.classList.remove('noScroll');
 	    var canvas = document.getElementById('canvas');
@@ -288,7 +327,7 @@ Template.body.events({
 	//'click [data-canvas-event="close"]': Thriver.canvas.toggleCanvas,
 
 	//Mobile Events
-	//'click [aria-controls][data-toggle=mobile-navigation]': Thriver.canvas.toggleCanvas,
+	'click [aria-controls][data-toggle="mobile-navigation"]': Thriver.canvas.mobileMenu,
 
 	//'click [data-type="main-navigation-item"]': Thriver.canvas.toggleCanvas,
 
