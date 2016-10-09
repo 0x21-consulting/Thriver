@@ -32,23 +32,29 @@ Template.masthead.onRendered(function () {
     //mastheadHeight();
     //Auto Rotate function
     function transitionSlider() {
-        var activeItem = document.querySelector('.masthead menu.tabs > li a[aria-expanded="true"]');
+        let activeItem = document.querySelector('.masthead menu.tabs > li a[aria-expanded="true"]'),
+            menuItems  = document.querySelectorAll('.masthead menu.tabs > li');
 
         // If there is no active item, make the first active
         if (!activeItem)
             document.querySelector('.masthead menu.tabs > li a').
                 setAttribute('aria-expanded', true);
 
-        $( ".masthead menu.tabs > li" ).each(function() {
-            if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':not(:last-child)')){
-                $(this).next().find('a')[0].click();
-                return false;
+        // Set the appropriate item as active
+        for (let i = 0; i < menuItems.length; ++i) {
+            let item = menuItems[i];
+
+            // Look for which item is currently active
+            if (item.children[0].getAttribute('aria-expanded') === 'true') {
+                // If this is the last element
+                if ( (i + 1) === menuItems.length)
+                    menuItems[0].children[0].click();
+                else
+                    menuItems[i + 1].children[0].click();
+                
+                break;
             }
-            if($(this).find('a').attr("aria-expanded") == "true" && $(this).is(':last-child')){
-                $('.masthead menu.tabs > li:first-child a')[0].click();
-                return false;
-            }
-        });
+        };
     }
     setInterval(transitionSlider, 8000);
 
