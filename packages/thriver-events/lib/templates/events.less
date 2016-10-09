@@ -7,6 +7,7 @@
     background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 34%,rgba(250,251,251,1) 35%,rgba(97,153,160,0.57) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom,  rgba(252,252,252,1) 34%,rgba(250,251,251,1) 35%,rgba(97,153,160,0.57) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#916199a0',GradientType=0 ); /* IE6-9 */
+    @media @mobile{background: #fff;}
     @media (min-width:768px){
         padding-bottom: 60px;
     }
@@ -644,9 +645,11 @@ header.eventsHeader{
                 width: auto;
                 background: @teal;
                 color: @white;
+                cursor: pointer;
                 position: relative;
                 left: 18px;
                 width: 84px;
+                @media @mobile{display: none;}
                 &:hover{
                     color: @white;
                     box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
@@ -713,8 +716,14 @@ header.eventsHeader{
 }
 
 
-.registration-form{list-style: none; h2{padding-top: 20px !important;}}
-
+.registration-form{
+    //padding: 20px;
+    list-style: none;
+    h2{padding: 20px 20px 20px 0px !important;}
+    input[type="submit"]{color:#fff !important;}
+}
+.actions { @media (max-width:1000px){ padding-right: 40px !important; } }
+.actions { @media @mobile{padding:0px 20px 20px 20px !important; margin: 0px !important; } }
 
 //Upcoming Events
 ul.upcomingEvents{
@@ -857,8 +866,13 @@ section.events{
         padding: 20px;
     }
     #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide aside.otherEvents, #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide p.eventDate{
-        text-align: left;
+        //text-align: left;
     }
+    header.eventsHeader ul li.listViewEvents{
+        position: static;
+        float: right;
+    }
+    header.eventsHeader ul li.search{width: 300px;}
     #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide .main{ padding: 20px 70px; }
 }
 
@@ -1014,4 +1028,9 @@ li.addEvent {
         //cursor: not-allowed;
         //pointer-events: none;
     }
+}
+
+li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
+    color: @white;
+    padding-left: 20px;
 }
