@@ -110,6 +110,16 @@
             <div class="inner">
                 <header>
                     <p class="eventDate">{{startDate}}</p>
+                </header>
+                <div class="main">
+                    <h2>{{name}}
+                        {{#if isAdmin}}
+                            <aside class="adminControls">
+                                <span class="fa edit" title="Edit Event">&#xf044;</span>
+                                <span class="fa delete" title="Delete Event">&#xf014;</span>
+                            </aside>
+                        {{/if}}
+                    </h2>
                     {{ #if numberSameDayEvents }}
                         <aside class="otherEvents">
                         {{ #if isSingular }}
@@ -124,16 +134,6 @@
                             </ul>
                         </aside>
                     {{/if}}
-                </header>
-                <div class="main">
-                    <h2>{{name}}
-                        {{#if isAdmin}}
-                            <aside class="adminControls">
-                                <span class="fa edit" title="Edit Event">&#xf044;</span>
-                                <span class="fa delete" title="Delete Event">&#xf014;</span>
-                            </aside>
-                        {{/if}}
-                    </h2>
                     <p class="excerpt">
                         <b>{{startTime}}{{endTime}}: {{{ address }}}</b>
                     </p>
