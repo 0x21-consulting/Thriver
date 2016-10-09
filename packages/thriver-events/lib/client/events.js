@@ -365,7 +365,7 @@ Template.eventSlide.events({
     'click li.register': function (event) {
         check(event, $.Event);
 
-        var a;
+        let a, registrationForm;
 
         // If this is a third-party register link, navigate to it
         if (this.registerUrl) {
@@ -378,24 +378,35 @@ Template.eventSlide.events({
 
             a.click();
             a.remove();
-        } else{
-            var el = `
-                <li class="registration-form">
-                    <h2>Event Registration</h2>
-                    <form>
-                        <label for="name">Name</label>
-                        <input type="text" name="name" />
-                        <label for="email">Email</label>
-                        <input type="text" name="email" />
-                        <input type="submit" value="Register" />
-                    </form>
-                </li>`
-            ;
-            $(event.target).parent().append(el); // add it to the div
-            $(event.target).remove();
-        }
+        } else {
+            // Find registration form
+            registrationForm = event.target.parentElement.
+                querySelector('.registration-form');
 
-        // TODO:  Add event to profile
+            // Show registration form if it has any fields
+            if ( registrationForm.querySelector('label') ) {
+                registrationForm.classList.remove('hide');
+
+                // Remove Register button
+                event.target.remove();
+
+                return false;
+            }
+
+            // No registration form, so just register user
+            Meteor.call('registerEvent', registrationForm.dataset.id);
+        }
+    },
+
+    /**
+     * @summary Handle registration form submission
+     * @method
+     *   @param {$.Event} event
+     */
+    'click li.registrationForm': event => {
+        check(event, $.Event);
+
+        debugger;
     },
 
     /**

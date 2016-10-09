@@ -66,5 +66,31 @@ Meteor.methods({
         Thriver.events.collection.remove({ _id: event }, function (error, id) {
             if (error) throw new Meteor.Error(error);
         });
+    },
+
+    /**
+     * @summary Register for an event
+     * @method
+     *   @param {String} event   - Event to register for
+     *   @param {Object} details - Individual event details
+     */
+    registerEvent: (event, details) => {
+        let id = Meteor.userId();
+
+        check(event, String);
+        check(details, Match.Maybe(Object) );
+        check(id, String);  // make audit-argument-checks happy
+
+        // User must be logged in to register for an event
+        if ( !id )
+            throw new Meteor.Error('You must be logged in to register for an event.');
+        
+        // Update user profile
+        Meteor.users.update({ _id: id }, { $push: {
+            'profile.events.registeredEvents': {
+                id: event,
+                details: details
+            }
+        }});
     }
 });
