@@ -186,6 +186,10 @@ Template.events.events({
         rangeControl();
     },
 
+    'click .listViewEventsObject a': function (event) {
+        rangeControl();
+    },
+
     /**
      * Switch to next month
      * @method
@@ -268,6 +272,7 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
+        rangeControl();
     },
 
     /**
@@ -283,6 +288,7 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
+        rangeControl();
     },
 
     /**
