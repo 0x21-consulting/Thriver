@@ -188,10 +188,13 @@
                 transition: opacity 350ms @easeDefault 0ms, transform 350ms @easeDefault 0ms;
                 padding: 0px 23px;
                 //.translate(0px,0px);
-                .opacity(0.3);
+                .opacity(0.5);
                 &:hover{
                     //.translate(-5px,0px);
-                    .opacity(0.5);
+                    .opacity(0.75);
+                }
+                &[disabled], &[disabled]:hover{
+                    opacity: 0.25;
                 }
                 z-index: 3;
                 .shadowNone;
@@ -523,20 +526,24 @@
                 }
             }
         }
-        &.monthPaginate{
-            float: none;
-            cursor: pointer;
-            padding: 10px 30px 10px 5px;
-            padding: 0px;
-            float: right;
-            &:first-child{
-                float: left;
-                //padding: 10px 5px 10px 30px;
-            }
-            &:hover{
-                color: #ffee2f;
-            }
+    }
+    button.monthPaginate{
+        float: none;
+        cursor: pointer;
+        padding: 0px;
+        float: right;
+        line-height: 28px;
+        padding: 0px 10px 0px 0px;
+        &:first-child{
+            float: left;
+            padding: 0px 0px 0px 10px;
         }
+        &:hover{
+            color: #ffee2f;
+            box-shadow: none;
+            -webkit-box-shadow:none;
+        }
+        &[disabled]{cursor: not-allowed;}
     }
 }
 
@@ -602,13 +609,24 @@ header.eventsHeader{
         li{
             display: inline-block;
             list-style:none;
-            cursor: pointer;
             line-height:50px;
             margin: 0px;
             padding: 0px 20px;
             width: 130px;
             white-space: nowrap;
             position: relative;
+            button{
+                .rw;
+                color: darken(#7d9698, 15%);
+                line-height:50px;
+                margin: 0px;
+                padding: 0px;
+                &:hover, &:focus{
+                    box-shadow:none;
+                    -webkit-box-shadow:none;
+                    color: darken(#7d9698, 25%);
+                }
+            }
             &.search{
                 width: 165px;
                 //float: right;
@@ -987,5 +1005,13 @@ li.addEvent {
     &:hover{
         box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
         -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+    }
+}
+
+//Slide Range controller
+.event-control-next, .event-control-prev{
+    &[disabled="disabled"]{
+        //cursor: not-allowed;
+        //pointer-events: none;
     }
 }

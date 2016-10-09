@@ -25,9 +25,15 @@
                 <header class="eventsHeader">
                     <ul>
                         <li class="scroll-prev-month preventSelect">
-                            <span class="fa">&#xf137;</span> {{lastMonth}}</li>
-                        <li class="scroll-next-month preventSelect">{{nextMonth}}
-                            <span class="fa">&#xf138;</span></li>
+                            <button class="event-control-prev">
+                                <span class="fa">&#xf137;</span> {{lastMonth}}
+                            </button>
+                        </li>
+                        <li class="scroll-next-month preventSelect">
+                            <button class="event-control-next">
+                                {{nextMonth}} <span class="fa">&#xf138;</span>
+                            </button>
+                        </li>
                         <li class="search">
                             <span class="fa">&#xf002;</span><input id="eventSearch" type="search">
                             {{>searchResultsList}}
@@ -38,13 +44,13 @@
                     </ul>
                 </header>
                 <div class="eventsSlider">
-                    <button class="sliderPrev fa">&#xf053;</button>
+                    <button class="sliderPrev fa event-control-prev">&#xf053;</button>
                     <div class="slideScroller">
                         <ul class="slides" id="slidesList">
                             {{#if events}}
                                 {{#each events}}
                                     {{#if noEvents}}
-                                        <li class="no-events-this-month eventSlide">
+                                        <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
                                             <div class="eventContainer">
                                                 <div class="inner">
                                                     <header>
@@ -77,7 +83,7 @@
                             {{/if}}
                         </ul>
                     </div>
-                    <button class="sliderNext fa">&#xf054;</button>
+                    <button class="sliderNext fa event-control-next">&#xf054;</button>
                 </div>
                 <article class="listViewEventsObject">
                     {{#each items}}
@@ -220,9 +226,9 @@
 <template name="calendar">
     <div id="calendar" class="calendar">
         <h2>
-            <span class="fa prevMonth monthPaginate">&#xf0d9;</span>
+            <button class="fa prevMonth monthPaginate event-control-prev" role="button" type="button">&#xf0d9;</button>
             {{getMonth}} {{getYear}}
-            <span class="fa nextMonth monthPaginate">&#xf0da;</span>
+            <button class="fa nextMonth monthPaginate event-control-next" role="button">&#xf0da;</button>
         </h2>
         <!--Days-->
         <span class="weekday">S</span>

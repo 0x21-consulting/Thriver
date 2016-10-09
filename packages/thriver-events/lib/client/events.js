@@ -105,6 +105,9 @@ Thriver.events.slide = function (position) {
     $('.listViewEvents').removeClass('active');
     $('.searchResultsList').removeClass('active');
 
+    //Disable next/prev if at end/start of line
+    //calendarRange();
+
     // Set current slide
     Thriver.events.currentSlide.set(position);
 
@@ -113,6 +116,43 @@ Thriver.events.slide = function (position) {
         slides.style.webkitTransform = 'translate(-' + position + '00% ,0px)';
 };
 
+
+// Range Control (Prevent User from navigationg out of event range)
+// Currently fires on ['click .scroll-prev-month, click .prevMonth', 'click .scroll-next-month, click .nextMonth']
+// TODO:  Instead of settimeout lets callback after slides are loaded into View
+function rangeControl(){
+    setTimeout(function () {
+        var slide = document.querySelectorAll('.eventSlide');
+        var eventSlider = document.querySelector(".eventsContainer");
+        var controlsPrev = document.querySelectorAll(".event-control-prev");
+        var controlsNext = document.querySelectorAll(".event-control-next");
+        if (controlsPrev[0].hasAttribute("disabled")){
+                controlsPrev.forEach(function (el) {
+                    el.removeAttribute("disabled");
+                });
+        }
+        if (controlsNext[0].hasAttribute("disabled")){
+                controlsNext.forEach(function (el) {
+                    el.removeAttribute("disabled");
+                });
+        }
+
+        if (slide.length == 1){
+            if (slide[0].classList.contains("no-past-events")){
+                controlsPrev.forEach(function (el) {
+                    el.setAttribute("disabled", "disabled");
+                });
+            } else if(slide[0].classList.contains("no-future-events")){
+                controlsNext.forEach(function (el) {
+                    el.setAttribute("disabled", "disabled");
+                });
+            }
+        }
+    }, 100);
+}
+
+
+
 // Events template events
 Template.events.events({
     /**
@@ -120,7 +160,7 @@ Template.events.events({
      * @method
      *   @param {$.Event} event
      */
-    'click .scroll-prev-month, click .prevMonth': function (event) {
+    'click .scroll-prev-month button, click .prevMonth': function (event) {
         check(event, $.Event);
 
         var lastMonth  = Thriver.calendar.thisMonth.get() - 1,
@@ -142,6 +182,8 @@ Template.events.events({
         $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
         $('.listViewEvents').removeClass('active');
         $('.searchResultsList').removeClass('active');
+
+        rangeControl();
     },
 
     /**
@@ -149,7 +191,7 @@ Template.events.events({
      * @method
      *   @param {$.Event} event
      */
-    'click .scroll-next-month, click .nextMonth': function (event) {
+    'click .scroll-next-month button, click .nextMonth': function (event) {
         check(event, $.Event);
 
         var nextMonth  = Thriver.calendar.thisMonth.get() + 1,
@@ -171,6 +213,8 @@ Template.events.events({
         $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
         $('.listViewEvents').removeClass('active');
         $('.searchResultsList').removeClass('active');
+
+        rangeControl();
     },
 
     /**
@@ -209,6 +253,7 @@ Template.events.events({
         }
 
         Thriver.events.slide(position);
+
     },
 
     /**
@@ -362,3 +407,8 @@ Template.eventSlide.events({
         Thriver.events.navigate(event.currentTarget.dataset.id);
     }
 });
+
+
+Template.events.rendered = function(){
+  rangeControl(); //Should be fired after first set of events load complete
+};
