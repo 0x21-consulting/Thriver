@@ -3,7 +3,7 @@
  * @method
  *   @param {$.Event} event
  */
-var toggleTabs = function (event) {//debugger;
+var toggleTabs = function (event) {
 	check(event, $.Event);
 
 	event.preventDefault();
@@ -20,24 +20,21 @@ var toggleTabs = function (event) {//debugger;
 	// Hide all sections
 	for (let i = 0; i < sections.length; ++i)
 		Thriver.util.hide(sections[i], true);
+        
+    // Set link as active
+    Thriver.util.makeActive(event.target, true);
 
-	// Only for non-mobile displays do we make anything active
-	//if (window.innerWidth > 767) {
-		// Set link as active
-		Thriver.util.makeActive(event.target, true);
+    // Set section as active
+    Thriver.util.hide( menu.parentElement.querySelector('article[data-id="' + 
+        event.target.dataset.id + '"]'), false);
 
-		// Set section as active
-		Thriver.util.hide( menu.parentElement.querySelector('article[data-id="' + 
-			event.target.dataset.id + '"]'), false);
-
-		// Special case for Library??  Why??
-		switch ( event.target.getAttribute('aria-controls') ) {
-			case '#library':
-				document.querySelector('aside.filter').classList.add('active-filter'); break;
-			default:
-				document.querySelector('aside.filter').classList.remove('active-filter');
-		}
-	//}
+    // Special case for Library??  Why??
+    switch ( event.target.getAttribute('aria-controls') ) {
+        case '#library':
+            document.querySelector('aside.filter').classList.add('active-filter'); break;
+        default:
+            document.querySelector('aside.filter').classList.remove('active-filter');
+    }
 };
 
 Template.body.events({

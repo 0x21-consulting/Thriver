@@ -1,4 +1,64 @@
+/**
+ * Handler for updating content
+ * @method
+ *   @param {string} oldHash - SHA256 hash of original markdown
+ *     to detect if there was a change
+ */
+let updateContent = function (oldHash) {
+    check(oldHash, String);
+
+    /**
+     * Handler for updating content
+     * @method
+     *   @param {Event} event - Click event passed to handler
+     */
+    return function (event) {
+        check(event, Event);
+
+        event.stopPropagation();
+        event.preventDefault();
+
+        var parent = event.target.parentElement, element;
+
+        // Get section ID
+        var id = this.parentElement.querySelector('section').dataset.id,
+            content = this.parentElement.querySelector('textarea').value,
+            newHash = SHA256(content);
+        
+        // Don't commit if nothing changed
+        if (newHash !== oldHash)
+            Meteor.call('updateNewsContent', id, content);
+
+        // Restore view
+        parent.classList.remove('edit');
+        parent.querySelector('textarea').remove();
+        parent.querySelector(':scope > button').remove();
+    };
+};
+
+/** Helpers */
 Template.post.helpers({
+	/**
+	 * @summary SHA-256 Hash of content for use in change detection
+	 * @function
+	 * @returns {String}
+	 */
+	hash: function () {
+		let content = Thriver.newsroom.collection.findOne({ _id: this._id }, {
+			content: 1 });
+		
+		// Sometimes this helper executes before the collection is ready
+		// If so, just return and wait for the rerun
+		if (!content) return;
+
+		// Get content
+		content = content.content;
+
+		if (content)
+			return SHA256(content);
+		return '';
+	},
+
 	home: {
 		url: '/',
 		text: 'Back to WCASA'
@@ -87,3 +147,38 @@ UI.registerHelper('facebookShareLink', function() {
 UI.registerHelper('googlePlusShareLink', function() {
     return 'https://plus.google.com/share?url=' + window.location.href;
 });*/
+
+/** Bind Post Template events */
+Template.post.events({
+	/**
+	 * @summary Edit a post
+	 * @method
+	 *   @param {$.Event} event
+	 */
+	'click aside.admin button.edit': function (event) {
+		check(event, $.Event);
+
+		// Get section to edit
+        var content = document.body.querySelector(`[data-id="${this._id}"]`),
+            parent  = content.parentElement,
+
+        // Create a textarea element through which to edit markdown
+        textarea = document.createElement('textarea'),
+
+        // Button by which to okay changes and commit to db
+        button = document.createElement('button');
+        button.textContent = 'Save';
+        button.addEventListener('mouseup', 
+            // Pass along hash of existing markdown
+            updateContent(content.dataset.hash));
+
+        // Textarea should get markdown
+        textarea.textContent = Thriver.newsroom.collection.findOne(
+			{ _id: this._id }, { content: 1 }).content;
+
+        // Add textarea but hide preview
+        parent.classList.add('edit');
+        parent.appendChild(textarea);
+        parent.appendChild(button);
+	}
+});

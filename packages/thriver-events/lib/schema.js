@@ -121,6 +121,32 @@ Thriver.events.schema = new SimpleSchema({
         regEx: SimpleSchema.RegEx.Url,
         optional: true,
         label: 'URL for Third-Party Registration Site'
+    },
+
+    /** Special Event Fields for Registration */
+    registrationDetails: {
+        type: Array,
+        defaultValue: [],
+        optional: false,
+        label: 'Add fields for registration details'
+    },
+    'registrationDetails.$': {
+        type: Object
+    },
+    /** Name of field */
+    'registrationDetails.$.name': {
+        type: 'String',
+        optional: false,
+        label: 'Field Name'
+    },
+    /** Type of Field */
+    'registrationDetails.$.type': {
+        type: 'String',
+        optional: false,
+        allowedValues: [
+            'text', 'email', 'yes/no', 'date', 'color', 'textarea'
+        ],
+        defaultValue: 'text'
     }
 });
 Thriver.events.collection.attachSchema(Thriver.events.schema);

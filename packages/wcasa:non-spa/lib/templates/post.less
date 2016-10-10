@@ -99,6 +99,7 @@ section.post{
         .shadow(closeUp);
         @media @1024{padding: 40px;}
         @media @mobile{padding: 20px;}
+        position: relative; // for admin controls positioning
     }
     //footer styles
     footer{
@@ -160,5 +161,35 @@ section.post{
                 a{.textButtonColor(@blue);}
             }
         }
+    }
+}
+
+// Admin styles
+.post aside.admin {
+    position: absolute;
+    right: 15px;
+    margin-top: -25px;
+
+    button {
+        color: @orange;
+        font-size: 20px;
+    }
+}
+.post main.edit {
+    section {
+        display: none;
+    }
+    textarea {
+        width: 100%;
+        height: 300px;
+
+        &:focus {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+    }
+    & > button {
+        background: @teal;
+        display: inline-block;
     }
 }

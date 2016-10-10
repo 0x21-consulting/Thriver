@@ -144,6 +144,31 @@
                 <ul class="actions">
                     <li class="register">Register</li>
                     {{!<li class="details">Read More <span class="fa">&#xf0da;</span></li>}}
+
+                    {{! Registration Form }}
+                    <li class="registration-form hide" data-id="{{_id}}">
+                        <h2>Event Registration</h2>
+                        <form>
+                            {{#each registrationDetails }}
+                                <label>{{name}} 
+                                    {{#if equals type "textarea"}}
+                                        <textarea name="{{name}}" required></textarea>
+                                    {{else}}
+                                        {{#if equals type "yes/no"}}
+                                            <select name="{{name}}" required>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                        {{else}}
+                                            <input type="{{type}}" name="{{name}}" 
+                                                required />
+                                        {{/if}}
+                                    {{/if}}
+                                </label>
+                            {{/each}}
+                            <input type="submit" value="Register" />
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
