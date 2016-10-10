@@ -14,85 +14,87 @@
                 </p>
             </header>
         </div>
-        <div class="eventsContainer">
-            <aside class="eventsSidebar">
-                <h2 class="sidebarHeader">Events Calendar</h2>
-                {{>calendar}}
-                <h2 class="sidebarHeader">Upcoming Events</h2>
-                {{>upcomingEvents}}
-            </aside>
-            <div class="eventsMain main">
-                <header class="eventsHeader">
-                    <ul>
-                        <li class="scroll-prev-month preventSelect">
-                            <button class="event-control-prev">
-                                <span class="fa">&#xf137;</span> {{lastMonth}}
-                            </button>
-                        </li>
-                        <li class="scroll-next-month preventSelect">
-                            <button class="event-control-next">
-                                {{nextMonth}} <span class="fa">&#xf138;</span>
-                            </button>
-                        </li>
-                        <li class="search">
-                            <span class="fa">&#xf002;</span><input id="eventSearch" type="search">
-                            {{>searchResultsList}}
-                        </li>
-                        <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
-                        <li class="mobile back-to-events">
-                            <button><span class="fa">&#xf137;</span> Back to Events</button></li>
-                    </ul>
-                </header>
-                <div class="eventsSlider">
-                    <button class="sliderPrev fa event-control-prev">&#xf053;</button>
-                    <div class="slideScroller">
-                        <ul class="slides" id="slidesList">
-                            {{#if events}}
-                                {{#each events}}
-                                    {{#if noEvents}}
-                                        <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
-                                            <div class="eventContainer">
-                                                <div class="inner">
-                                                    <header>
-                                                        <p class="eventDate">{{month}} {{year}}</p>
-                                                    </header>
-                                                    <div class="main">
-                                                        <div class="icon-main">
-                                                            <i class="fa">&#xf273;</i>
-                                                        </div>
-                                                        <h2>{{month}} {{year}}</h2>
-                                                        <p>
-                                                            {{#if noFutureEvents}}
-                                                                No More Events Listed.
-                                                            {{else}}
-                                                                {{#if noPastEvents}}
-                                                                    No Previous Events Listed.
+        <div class="shadow-box container">
+            <div class="eventsContainer">
+                <aside class="eventsSidebar">
+                    <h2 class="sidebarHeader">Events Calendar</h2>
+                    {{>calendar}}
+                    <h2 class="sidebarHeader">Upcoming Events</h2>
+                    {{>upcomingEvents}}
+                </aside>
+                <div class="eventsMain main">
+                    <header class="eventsHeader">
+                        <ul>
+                            <li class="scroll-prev-month preventSelect">
+                                <button class="event-control-prev">
+                                    <span class="fa">&#xf137;</span> {{lastMonth}}
+                                </button>
+                            </li>
+                            <li class="scroll-next-month preventSelect">
+                                <button class="event-control-next">
+                                    {{nextMonth}} <span class="fa">&#xf138;</span>
+                                </button>
+                            </li>
+                            <li class="search">
+                                <span class="fa">&#xf002;</span><input id="eventSearch" type="search">
+                                {{>searchResultsList}}
+                            </li>
+                            <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
+                            <li class="mobile back-to-events">
+                                <button><span class="fa">&#xf137;</span> Back to Events</button></li>
+                        </ul>
+                    </header>
+                    <div class="eventsSlider">
+                        <button class="sliderPrev fa event-control-prev">&#xf053;</button>
+                        <div class="slideScroller">
+                            <ul class="slides" id="slidesList">
+                                {{#if events}}
+                                    {{#each events}}
+                                        {{#if noEvents}}
+                                            <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
+                                                <div class="eventContainer">
+                                                    <div class="inner">
+                                                        <header>
+                                                            <p class="eventDate">{{month}} {{year}}</p>
+                                                        </header>
+                                                        <div class="main">
+                                                            <div class="icon-main">
+                                                                <i class="fa">&#xf273;</i>
+                                                            </div>
+                                                            <h2>{{month}} {{year}}</h2>
+                                                            <p>
+                                                                {{#if noFutureEvents}}
+                                                                    No More Events Listed.
                                                                 {{else}}
-                                                                    No Events This Month.
+                                                                    {{#if noPastEvents}}
+                                                                        No Previous Events Listed.
+                                                                    {{else}}
+                                                                        No Events This Month.
+                                                                    {{/if}}
                                                                 {{/if}}
-                                                            {{/if}}
-                                                        </p>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    {{else}}
-                                        {{> eventSlide}}
-                                    {{/if}}
-                                {{/each}}
-                            {{/if}}
-                        </ul>
+                                            </li>
+                                        {{else}}
+                                            {{> eventSlide}}
+                                        {{/if}}
+                                    {{/each}}
+                                {{/if}}
+                            </ul>
+                        </div>
+                        <button class="sliderNext fa event-control-next">&#xf054;</button>
                     </div>
-                    <button class="sliderNext fa event-control-next">&#xf054;</button>
+                    <article class="listViewEventsObject">
+                        {{#each items}}
+                            {{>tabs}}
+                        {{/each}}
+                    </article>
+                    {{#if isAdmin}}
+                        {{> eventsAdmin}}
+                    {{/if}}
                 </div>
-                <article class="listViewEventsObject">
-                    {{#each items}}
-                        {{>tabs}}
-                    {{/each}}
-                </article>
-                {{#if isAdmin}}
-                    {{> eventsAdmin}}
-                {{/if}}
             </div>
         </div>
     </section>
