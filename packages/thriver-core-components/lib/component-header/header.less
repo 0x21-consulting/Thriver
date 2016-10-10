@@ -7,17 +7,20 @@ header#menu{
     background-color: @headerBgColor;
     display: table;
     width: 100%;
+    padding-top: 45px;
+    padding-bottom: 5px;
     .boxShadow(0px 0px 3px 0px rgba(0, 0, 0, 0.8));
+    border-bottom: none;
     @media @mobile{display: none;}
     div.brand{
         display: block;
         position: absolute;
-        top: 25px;
-        height: 120px;
+        top: 63px;
+        height: 140px;
         width: 311px;
         left: 50%;
-        .trans(all @durationDefault @easeDefault);
-        .transform(translate(0px,0px));
+        //.trans(all @durationDefault @easeDefault);
+        //.transform(translate(0px,0px));
         margin-left: -155px;
         a, a:active, a:hover, a:focus{
             border: none;
@@ -25,14 +28,17 @@ header#menu{
             .shadowNone !important;
         }
         body.fixedHeader &{
-            .transform(translate(0px,-200px));
-            a{ opacity: 1 !important; }
+            //.transform(translate(0px,-200px));
+           // a{ opacity: 1 !important; }
         }
     }
+    body.fixedHeader &{
+
+    }
     div.brand-small{
-       // display: none;
-       .trans(all @durationDefault @easeDefault 0ms);
-       .transform(translate(0px,-200px));
+        display: none;
+       //.trans(all @durationDefault @easeDefault 0ms);
+       //.transform(translate(0px,-200px));
         list-style: none;
         position: absolute;
         width: 180px;
@@ -40,6 +46,13 @@ header#menu{
         left: 15px;
         margin: 0px;
         top: 22px;
+        list-style: none;
+        position: absolute;
+        width: 180px;
+        height: 33px;
+        left: -5px;
+        margin: 0px;
+        top: 48px;
         a, a:active, a:hover, a:focus{
             border: none;
             .shadowNone !important;
@@ -56,7 +69,7 @@ header#menu{
         padding: 0px;
         > ul{
             padding: 0; margin: 0 auto;
-            .trans(all @durationDefault @easeDefault 0ms);
+            //.trans(all @durationDefault @easeDefault 0ms);
             margin-left: -15px;
             text-align: center;
             display: flex;
@@ -83,7 +96,7 @@ header#menu{
                     padding:16px;
                     margin: 0px 12px 0px 12px;
                     @media @1450{margin: 0px;}
-                    .font(1.4,1.6,0.2,@normal,uppercase);
+                    .font(1.4,1.6,0.1,@normal,uppercase);
                     .color(color,lighten(@navy, 2.5%),none);
                     @media (max-width:1100px){
                         .font(1.4,1.6,0.02,@normal,uppercase);
@@ -138,10 +151,31 @@ header#menu{
 
 //Fixed header
 body.fixedHeader header#menu{
+    .brand{display: none;}
     div.brand-small{
+        display: block;
         .transform(translate(0px,0px));
     }
-    @media (max-width:1200px){
+    padding-top: 45px;
+    padding-bottom: 16px;
+    height: auto;
+    background: fade(@navy,100%);
+    background: #ffffff;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+    nav.mainNav > ul{
+        padding: 0px;
+        justify-content:flex-end;
+        align-items:flex-end;
+        padding-right: 20px;
+    }
+    nav.mainNav > ul li[data-type="main-navigation-item"] a{
+        .font(1.2,1.2,0.05,@normal,uppercase);
+        .color(color,@black,none);
+        padding-bottom: 10px;
+    }
+    li{margin: 0px;}
+    /*@media (max-width:1200px){
         nav.mainNav > ul{
             display: block;
             float: right;
@@ -161,5 +195,5 @@ body.fixedHeader header#menu{
                 width: ~'calc(100% - 20px)';
             }
         }
-    }
+    }*/
 }

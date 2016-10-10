@@ -42,7 +42,7 @@ Thriver.history.smoothScroll = function (path) {
 Thriver.history.smoothScrollEventHandler = function (event) {
     // currentTarget will be an anchor element
     check(event, $.Event);
-    
+
     // Don't allow page to navigate away
     event.preventDefault();
     event.stopPropagation();
@@ -79,7 +79,7 @@ handleHeaderStateChange = function (event) {
 
     // Set a timeout to add the class after one millisecond
     timeout = setTimeout(function () {
-        if ($(document).scrollTop() && $(window).width() > 767){
+        if ($(document).scrollTop() > 300 && $(window).width() > 767){
             document.body.classList.remove('fixedHeaderReturn');
             document.body.classList.add('fixedHeader');
         } else {
