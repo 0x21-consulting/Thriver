@@ -21,7 +21,7 @@ Thriver.history.smoothScroll = function (path) {
     if (!target.length) return;
 
     // Calculate target Y offset
-    offset = target.offset().top - 120;
+    offset = target.offset().top - 96;
 
     // We want to scroll at 750 pixels per second
     speed = Math.abs(posY - offset);
@@ -79,7 +79,7 @@ handleHeaderStateChange = function (event) {
 
     // Set a timeout to add the class after one millisecond
     timeout = setTimeout(function () {
-        if ($(document).scrollTop() > 300 && $(window).width() > 767){
+        if ($(document).scrollTop() > 260 && $(window).width() > 767){
             document.body.classList.remove('fixedHeaderReturn');
             document.body.classList.add('fixedHeader');
         } else {

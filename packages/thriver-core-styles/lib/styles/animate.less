@@ -381,3 +381,17 @@
         .opacity(1);
     }
 }
+
+
+
+// Opening Fixed Header
+.headerOpen{
+    .animation(headerOpen, 1, 250ms, @easeDefault, 0ms);
+    .keyframes(headerOpen;{
+        0% { transform:translate(0px,-100px);}
+        100% { transform:translate(0px,0px);}
+    });
+    @media @mobile{
+        .noAnimation;
+    }
+}
