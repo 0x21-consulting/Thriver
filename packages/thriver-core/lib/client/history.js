@@ -59,7 +59,7 @@ Thriver.history.updateLocation = function () {
     // grow or shrink in size
     var coordinates = [],
         // Don't include special-access sections, since they're not visible on page
-        elements = Thriver.history.registry.find({ 
+        elements = Thriver.history.registry.find({
             accessFunction: { $exists: false } }).fetch(),
         i, j, k, l,
         links = document.querySelectorAll('nav.mainNav a'), link;
@@ -97,7 +97,7 @@ Thriver.history.updateLocation = function () {
             link.classList.add('active');
             //link.blur();
             //This allows the UI to remove unwanted :focus class to last selection
-            $('header.mainHeader nav.mainNav li a').blur();
+            $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
 
         break;
     }
@@ -141,10 +141,10 @@ Thriver.history.update = function (section, path) {
 Thriver.history.navigate = function (path) {
     // Must have a path
     check(path, String);
-    
+
     // Break into constituent parts
     path = path.split(/\//).
-    
+
     // Ignore empties
     filter(function (element) { return element.length != 0; });
 
@@ -161,7 +161,7 @@ Thriver.history.navigate = function (path) {
         var location = Thriver.history.registry.findOne({ element: path[0] });
 
         if (location) c.stop(); else return;
-    
+
         // If this has a particular function used to access this component
         if (location.accessFunction instanceof Function)
             location.accessFunction( location.accessData );
@@ -200,8 +200,8 @@ Template.canvas.onRendered(function () {
      */
     var timeout = 0,
 
-    /** 
-     * @summary When the page reloads, the URI will be overridden based on the 
+    /**
+     * @summary When the page reloads, the URI will be overridden based on the
      *   position while the page is rendering, preventing the client from actually
      *   navigating to the proper location.  Override that change.
      * @type {string}
