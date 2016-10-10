@@ -13,9 +13,10 @@ section#masthead, section.masthead{
     //@media (max-width:945px){ height: 700px;}
     background: lighten(@navy,10%) !important;
     > .container{
-        padding: 40px 40px 40px 40px;
+        //padding: 40px 40px 40px 40px;
+        padding: 0px;
         @media @mobile{
-            padding: 20px;
+            //padding: 20px;
         }
     }
     menu.tabs{
@@ -30,7 +31,7 @@ section#masthead, section.masthead{
             a{
                 justify-content: flex-start;
                 align-items: left;
-                padding: 30px !important;
+                display: block !important; //override standard tab flex behavior
             }
         }
     }
@@ -48,12 +49,13 @@ section#masthead menu.tabs, section.masthead menu.tabs{
     //margin-top: @headerH - 65px;
     position: relative;
     z-index: 3;
-    border-left: 2px solid #fff;
+    border-left: 2px solid #fff; //fallback
+    border-left: 2px solid rgba(255,255,255,0.75);
     padding: 20px 0px 50px 0px;
 }
 section#masthead div.tabs, section.masthead div.tabs{
     >article{
-        padding: 10px 40px 40px 40px;
+        padding: 10px 40px 0px 40px;
         //padding-top: @headerH - 65px;
         .masthead-bg{
             position: absolute;
@@ -175,6 +177,7 @@ section#masthead, section.masthead{
             border-bottom: 2px solid transparent;
             padding:25px 15px 15px 30px;
             .trans(opacity @durationDefault @easeDefault 0ms);
+            width: auto;
             &[aria-expanded="true"]{
                 .opacity(1);
                 //border-bottom: 2px solid @gray;
@@ -212,7 +215,7 @@ section#masthead, section.masthead{
             }
             &[aria-expanded="true"]{
                 &:after{
-                    .opacity(1);
+                    .opacity(0.75);
                     .transform(translate(0px,0px));
                     //background-color: @teal;
                 }
