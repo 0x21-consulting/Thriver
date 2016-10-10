@@ -4,6 +4,7 @@
 #main > section{
     padding: 40px 0px 40px 0px;
     background:#fff;
+    background: lighten(#ecf0f2,6%);
     position: relative;
     margin-top: 0px !important;
     @media (max-width:1100px){
@@ -52,7 +53,8 @@
         &:after{right: -32px;}
     }
     p{
-        border-top: 2px solid lighten(@lightBlue, 49%);
+        //border-top: 2px solid lighten(@lightBlue, 49%);
+        border-top: 2px solid desaturate(lighten(#0d4668,69%),35%);
         color: @navy;
         max-width: 600px;
         display: inline-block;
@@ -93,12 +95,12 @@
         .fa;
         content: "\f107";
         display: block;
-        color: lighten(@lightBlue, 39%);
+        color: desaturate(lighten(#0d4668,69%),35%);
         font-size: 50px;
         line-height: 50px;
         font-weight: 100;
         margin: 0px 0px 8px 0px;
-        opacity: 0.5;
+        opacity: 1;
         @media @mobile{ display: none; }
     }
 }
@@ -109,7 +111,7 @@
 #main > section{
     //.boxShadow(0px,-5px,30px,-15px,0.3);
     .boxShadow(none) !important;
-    border-top: 1px solid darken(@white,15%) !important;
+    //border-top: 1px solid darken(@white,15%) !important;
     //@media (max-width:945px){.shadowNone;}
 }
 
@@ -121,7 +123,7 @@
 
 //Overrides
 #main > section{
-    border-top: 1px solid #e5e5e5;
+    border-top: 2px solid desaturate(lighten(#0d4668,62%),35%);
     &#get-involved{
         border-top: 1px solid #016166;
     }
