@@ -265,71 +265,39 @@ dl{
     dd{color:@z;}
 }
 
-//Shadow
-//https://github.com/zensimilia/less-long-shadow
-#long-shadow {
-    .inline(@color: #CCCCCC, @angle: 45, @size: 10, @flag: 1, @temp: "") when (@size > 0) {
-        @angle360: @angle * (pi() / 180);
-        @x: round(@flag * cos(@angle360));
-        @y: round(@flag * sin(@angle360));
-        @shadow: ~"@{x}px @{y}px 0px @{color}";
-        @close: ~"@{shadow}, @{temp}";
-        @alltogether: ~"@{close} 0px 0px 0px @{color}";
 
-        .loop(@string, @index) when (@index < 1) {
-            text-shadow: @string;
-        }
-
-        .loop(@alltogether, @size - 1);
-        .inline(@color, @angle, @size - 1,@flag + 1, @close);
-    }
-
-    .block(@color: #CCCCCC, @angle: 45, @size: 10, @prefix: 1, @flag: 1, @temp: "") when (@size > 0) {
-        @angle360: @angle * (pi() / 180);
-        @x: round(@flag * cos(@angle360));
-        @y: round(@flag * sin(@angle360));
-        @shadow: ~"@{x}px @{y}px 0px @{color}";
-        @close: ~"@{shadow}, @{temp}";
-        @alltogether: ~"@{close} 0px 0px 0px @{color}";
-
-        .loop(@string, @index) when (@index < 1) {
-            box-shadow: @string;
-        }
-
-        .loopPrefix(@string, @index) when (@index < 1) and (@prefix > 0) {
-            -webkit-box-shadow: @string;
-               -moz-box-shadow: @string;
-        }
-
-        .loop(@alltogether, @size - 1);
-        .loopPrefix(@alltogether, @size - 1);
-        .block(@color, @angle, @size - 1, @prefix, @flag + 1, @close);
-    }
-
-    .svg(@color: #CCCCCC, @angle: 45, @size: 10, @prefix: 1, @flag: 1, @temp: "") when (@size > 0) {
-        @angle360: @angle * (pi() / 180);
-        @x: round(@flag * cos(@angle360));
-        @y: round(@flag * sin(@angle360));
-        @shadow: ~"@{x}px @{y}px 0px @{color}";
-        @close: ~"@{shadow}) drop-shadow(@{temp}";
-        @alltogether: ~"drop-shadow(@{close} 0px 0px 0px @{color})";
-
-        .loop(@string, @index) when (@index < 1) {
-            filter: @string;
-        }
-
-        .loopPrefix(@string, @index) when (@index < 1) and (@prefix > 0) {
-            -webkit-filter: @string;
-        }
-
-        .loop(@alltogether, @size - 1);
-        .loopPrefix(@alltogether, @size - 1);
-        .svg(@color, @angle, @size - 1, @prefix, @flag + 1, @close);
-    }
-}
 
 .shadow-box{
     padding: 0px !important;
-    #long-shadow.block(desaturate(lighten(#0d4668,77%),35%), 45, 500); // For container
+    //box-shadow:0 -1px 0 #e0e0e0,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
     //box-shadow:none !important;
+  	position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    &:before, &:after{
+        content:"";
+        position:absolute;
+        z-index:0;
+        -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+        -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+        box-shadow:0 0 20px rgba(0,0,0,0.8);
+        top:50%;
+        bottom:0;
+        left:10px;
+        right:10px;
+        -moz-border-radius:100px / 10px;
+        border-radius:100px / 10px;
+    }
+    &:after {
+        right:10px;
+        left:auto;
+        -webkit-transform:skew(8deg) rotate(3deg);
+        -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+        -o-transform:skew(8deg) rotate(3deg);
+        transform:skew(8deg) rotate(3deg);
+    }
 }
+
+.shadow-box{padding: 0px !important;}
