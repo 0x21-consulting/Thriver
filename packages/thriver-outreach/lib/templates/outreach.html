@@ -8,10 +8,12 @@
                 <h1>{{headline}}</h1>
                 {{{content}}}
             </header>
-            <div class="container tab-box">
-                {{#each sections}}
-                    {{> tabs}}
-                {{/each}}
+            <div class="container">
+                <div class="tab-box shadow-box">
+                    {{#each sections}}
+                        {{> tabs}}
+                    {{/each}}
+                </div>
             </div>
         </div>
     </section>

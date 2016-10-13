@@ -7,6 +7,9 @@
         padding-bottom: 0px;
         >div header{padding-bottom: 0px;}
     }
+    div.tabs.left>article{
+        min-height: 300px;
+    }
     .action-alert-link{
         margin-bottom: 20px;
         background:@teal;
@@ -159,14 +162,15 @@
         -webkit-box-shadow:0px -3px 5px 0px rgba(0, 0, 0, 0.2);
         //transform-origin:
         margin:0px !important;
-        padding: 30px 15px;
+        padding: 40px;
+        > section{padding: 10px;}
         > h2{
             border-bottom: 2px solid #dce8e8;
             color: #062031;
             font-size: 28px;
             line-height: 32px;
             font-weight: 100;
-            padding: 0px 10px 10px 0px;
+            padding: 0px 10px 20px 0px;
             margin-bottom: 10px;
             text-align: center;
             @media @mobile{
@@ -177,7 +181,8 @@
             .borderRadius(2px);
             //overflow: hidden;
             margin-bottom:10px;
-            background-color: lighten(@gray,5%);
+            //background-color: lighten(@gray,5%);
+            background: #fff;
             .inner{padding: 0px !important;}
             p{
                 color: @black !important; //override tabs default
@@ -186,7 +191,7 @@
             summary{
                 padding: 15px;
                 display: block;
-                .buttonColor(saturate(@blue, 30%)) !important;
+                .buttonColor(darken(@blueGray, 0%)) !important;
                 .shadow(far);
                 .down{display: none;}
                 .up{display: inline;}
@@ -194,9 +199,11 @@
                 color:@white !important;
                 .transition(background-color,300ms,ease,0ms);
                 h1{color:@white !important;}
+                cursor: pointer;
                 &:hover{
                     //background-color: @teal;
                     h4{color: @white;}
+                    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.15);
                 }
             }
             div{
@@ -311,3 +318,13 @@ section.mainSection.outreach > div > header p {
 }
 
 section.outreach div.container div.tabs { clear: both; }
+section.outreach{
+    .shadow-box{
+        &:after, &:before{
+            z-index: -1;
+        }
+    }
+    [data-list-type="article"] .inner article{
+        padding: 15px;
+    }
+}
