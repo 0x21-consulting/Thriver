@@ -39,6 +39,9 @@
             {{#each tabs}}
                 {{> workListItem id=this}}
             {{/each}}
+            <li class="backToTopWork">
+                <button class="backToTopWork">Back to Top of Article<span class="fa">&#xf0d8;</span></button>
+            </li>
             {{#if isAdmin}}
                 {{> workListItemAdmin}}
             {{/if}}
@@ -107,7 +110,6 @@
                     {{{markdown data.content}}}
                 </div>
                 <hr>
-                <button class="backToTopWork">Back to Top of Article<span class="fa">&#xf0d8;</span></button>
             </div>
         </div>
         <footer class="truncate">

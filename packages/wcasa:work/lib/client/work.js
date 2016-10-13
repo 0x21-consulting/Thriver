@@ -169,7 +169,10 @@ Template.aboutSA.helpers({
 Template.workNav.events({
     'click h2': changeTabs,
     'click li > ul > li > a': changeTabs,
-
+    'click button.backToTopWork': function (event) {
+        offset = $('[id="what-we-do"]').offset().top + 228;
+        $('body').animate({ scrollTop: offset }, 750);
+    },
     /**
      * @summary Navigate back to Index
      * @method
@@ -195,10 +198,6 @@ Template.workContent.events({
         $("body").addClass("workReadingAnimate");
         $("body").removeClass("workReadingAnimate");
         $("body").addClass("workReading");
-    },
-    'click button.backToTopWork': function (event) {
-        offset = $('[id="what-we-do"]').offset().top + 228;
-        $('body').animate({ scrollTop: offset }, 750);
     },
     'click .backToPrevious': function (event) {
         document.body.classList.remove('mobile-article-open');
