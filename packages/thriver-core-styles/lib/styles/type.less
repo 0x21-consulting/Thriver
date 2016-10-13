@@ -23,14 +23,19 @@ body{
     -moz-osx-font-smoothing: grayscale;
     .rw;
     .font(@baseFS,@baseLH,0,@light,none);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
 }
 
 p,body{
-    .font(1.4,2.3,0.035,@light,none);
+    .font(1.3,2.3,0,@light,none);
+    color: @black;
+
 }
 //Text Globals: Defaults
 h1,h2,h3,h4,h5,p{
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 20px 0px;
     color: @black;
     clear: both;
 }
