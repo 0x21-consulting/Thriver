@@ -12,10 +12,10 @@
                     service provider programs and other organizations <br>
                     working to end sexual violence.
                 </p>
+                <div class="sa container">
+                    {{>aboutSA}}
+                </div>
             </header>
-        </div>
-        <div class="sa container">
-            {{>aboutSA}}
         </div>
         <div class="main container">
             <div class="shadow-box container">
@@ -135,7 +135,7 @@
         {{#if isAdmin}}
             <button class="fa edit" title="Edit Section">&#xf044;</button>
         {{/if}}
-        <section>
+        <section class="shadow-box">
             <section data-hash="{{hash}}">{{{ markdown data.aboutSA }}}</section>
         </section>
         <!--<div>

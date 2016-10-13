@@ -116,43 +116,6 @@ Thriver.events.slide = function (position) {
         slides.style.webkitTransform = 'translate(-' + position + '00% ,0px)';
 };
 
-
-// Range Control (Prevent User from navigationg out of event range)
-// Currently fires on ['click .scroll-prev-month, click .prevMonth', 'click .scroll-next-month, click .nextMonth']
-// TODO:  Instead of settimeout lets callback after slides are loaded into View
-function rangeControl(){
-    setTimeout(function () {
-        var slide = document.querySelectorAll('.eventSlide');
-        var eventSlider = document.querySelector(".eventsContainer");
-        var controlsPrev = document.querySelectorAll(".event-control-prev");
-        var controlsNext = document.querySelectorAll(".event-control-next");
-        if (controlsPrev[0].hasAttribute("disabled")){
-                controlsPrev.forEach(function (el) {
-                    el.removeAttribute("disabled");
-                });
-        }
-        if (controlsNext[0].hasAttribute("disabled")){
-                controlsNext.forEach(function (el) {
-                    el.removeAttribute("disabled");
-                });
-        }
-
-        if (slide.length == 1){
-            if (slide[0].classList.contains("no-past-events")){
-                controlsPrev.forEach(function (el) {
-                    el.setAttribute("disabled", "disabled");
-                });
-            } else if(slide[0].classList.contains("no-future-events")){
-                controlsNext.forEach(function (el) {
-                    el.setAttribute("disabled", "disabled");
-                });
-            }
-        }
-    }, 100);
-}
-
-
-
 // Events template events
 Template.events.events({
     /**
@@ -183,11 +146,6 @@ Template.events.events({
         $('.listViewEvents').removeClass('active');
         $('.searchResultsList').removeClass('active');
 
-        rangeControl();
-    },
-
-    'click .listViewEventsObject a': function (event) {
-        rangeControl();
     },
 
     /**
@@ -218,7 +176,6 @@ Template.events.events({
         $('.listViewEvents').removeClass('active');
         $('.searchResultsList').removeClass('active');
 
-        rangeControl();
     },
 
     /**
@@ -272,7 +229,6 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
-        rangeControl();
     },
 
     /**
@@ -288,7 +244,6 @@ Template.events.events({
 
         // Something to do with Mobile
         calMobileEvent();
-        rangeControl();
     },
 
     /**
@@ -424,8 +379,3 @@ Template.eventSlide.events({
         Thriver.events.navigate(event.currentTarget.dataset.id);
     }
 });
-
-
-Template.events.rendered = function(){
-  rangeControl(); //Should be fired after first set of events load complete
-};

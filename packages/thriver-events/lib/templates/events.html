@@ -25,13 +25,13 @@
                 <div class="eventsMain main">
                     <header class="eventsHeader">
                         <ul>
-                            <li class="scroll-prev-month preventSelect">
+                            <li class="preventSelect event-control-prev" {{disabled}}>
                                 <button class="event-control-prev">
                                     <span class="fa">&#xf137;</span> {{lastMonth}}
                                 </button>
                             </li>
-                            <li class="scroll-next-month preventSelect">
-                                <button class="event-control-next">
+                            <li class="preventSelect event-control-prev" {{disabled}}>
+                                <button class="event-control-next" {{disabled}}>
                                     {{nextMonth}} <span class="fa">&#xf138;</span>
                                 </button>
                             </li>
@@ -45,7 +45,7 @@
                         </ul>
                     </header>
                     <div class="eventsSlider">
-                        <button class="sliderPrev fa event-control-prev">&#xf053;</button>
+                        <button class="sliderPrev fa event-control-prev" {{disabled}}>&#xf053;</button>
                         <div class="slideScroller">
                             <ul class="slides" id="slidesList">
                                 {{#if events}}
@@ -84,7 +84,7 @@
                                 {{/if}}
                             </ul>
                         </div>
-                        <button class="sliderNext fa event-control-next">&#xf054;</button>
+                        <button class="sliderNext fa event-control-next" {{disabled}}>&#xf054;</button>
                     </div>
                     <article class="listViewEventsObject">
                         {{#each items}}
@@ -150,7 +150,7 @@
                         <h2>Event Registration</h2>
                         <form>
                             {{#each registrationDetails }}
-                                <label>{{name}} 
+                                <label>{{name}}
                                     {{#if equals type "textarea"}}
                                         <textarea name="{{name}}" required></textarea>
                                     {{else}}
@@ -160,7 +160,7 @@
                                                 <option value="no">No</option>
                                             </select>
                                         {{else}}
-                                            <input type="{{type}}" name="{{name}}" 
+                                            <input type="{{type}}" name="{{name}}"
                                                 required />
                                         {{/if}}
                                     {{/if}}
@@ -253,9 +253,9 @@
 <template name="calendar">
     <div id="calendar" class="calendar">
         <h2>
-            <button class="fa prevMonth monthPaginate event-control-prev" role="button" type="button">&#xf0d9;</button>
+            <button class="fa prevMonth monthPaginate event-control-prev" {{disabled}} role="button" type="button">&#xf0d9;</button>
             {{getMonth}} {{getYear}}
-            <button class="fa nextMonth monthPaginate event-control-next" role="button">&#xf0da;</button>
+            <button class="fa nextMonth monthPaginate event-control-next" {{disabled}} role="button">&#xf0da;</button>
         </h2>
         <!--Days-->
         <span class="weekday">S</span>
