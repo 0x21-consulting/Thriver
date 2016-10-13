@@ -7,7 +7,7 @@ var changeTabs = function (event) {
     check(event, $.Event);
 
     event.stopPropagation(); event.preventDefault();
-    
+
     var parent  = document.querySelector('section.mainSection.work'),
         active  = parent.querySelectorAll('.active'),
         target  = event.currentTarget.parentElement,
@@ -78,18 +78,18 @@ var changeTabs = function (event) {
  */
 getValue = function (field) {
     check(field, String);                // Must be a String
-    
+
     // Meteor template helpers expect a function with a single variable
     return function (id) {
         check(id, Match.Maybe(String));  // String or undefined
-        
+
         var result;
         id = id || this.id || this._id;
-        
+
         if (!id) return '';
-        
+
         result = Thriver.sections.get( id, [field] );
-        
+
         if (result)
             return result[field];
         else
@@ -124,7 +124,7 @@ Template.workListItem.helpers({
     anchor:   function () {
         //console.debug('parent data', Template.parentData());
         //debugger;
-        //return Thriver.sections.generateId( getValue('name')( 
+        //return Thriver.sections.generateId( getValue('name')(
         //    this instanceof String? this.toString() : this.id ) );
 
         // TODO: Create true anchor refs
@@ -192,10 +192,9 @@ Template.workNav.events({
 Template.workContent.events({
     'click footer.truncate button': function (event) {
         event.preventDefault();
-        $("body").addClass("workReadingAnimate").delay(2000).queue(function(){
-            $("body").removeClass("workReadingAnimate").dequeue();
-            $("body").addClass("workReading").dequeue();
-        });
+        $("body").addClass("workReadingAnimate");
+        $("body").removeClass("workReadingAnimate");
+        $("body").addClass("workReading");
     },
     'click button.backToTopWork': function (event) {
         offset = $('[id="what-we-do"]').offset().top + 228;
