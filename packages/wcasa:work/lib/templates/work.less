@@ -492,7 +492,7 @@ section.work .workNav > ul{
             }
             ul{
                 .opacity(0);
-                transition: max-height 300ms @easeDefault 100ms, opacity 200ms linear 0ms !important;
+                //transition: max-height 300ms @easeDefault 100ms, opacity 200ms linear 0ms !important;
             }
             &.active{
                 h2:after{
@@ -501,7 +501,7 @@ section.work .workNav > ul{
                     //background-color: @teal;
                 }
                 ul{
-                    animation: workaccordion 1000ms 0ms 1 @easeDefault alternate;
+                    //animation: workaccordion 1000ms 0ms 1 @easeDefault alternate;
                     .opacity(1);
                 }
             }
@@ -588,7 +588,7 @@ section.work .workNav > ul{
                 }
                 > ul{
                     //background-color: @navy;
-                    max-height: 9999px;
+                    height: auto;
                     .trans(all @durationDefault @easeDefault 0ms);
                     > li > a{
                         color: @white;
@@ -889,7 +889,7 @@ section.work > .main .workTextContainer{
 }
 .workReadingAnimate{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
-    section.work > .main .workTextContainer{max-height: 9999px;}
+    section.work > .main .workTextContainer{height: auto;}
 }
 
 
@@ -907,7 +907,7 @@ body section.work > .main{
 body.workActive section.work > .main{
     .trans(opacity @durationDefault @easeDefault 0ms);
     //.accelerate;
-    will-change:opacity,transform;
+    //will-change:opacity,transform;
     overflow: hidden;
     transform-origin: 50% 25%;
     //max-width: 1016px;
@@ -926,7 +926,7 @@ body section.work > .main{
 
 //Work Out
 body.workFadeIn section.work > .main{
-        will-change:opacity,transform;
+        //will-change:opacity,transform;
         animation: workfadein 350ms 0ms 1 cubic-bezier(0.860, 0.000, 0.070, 1.000) alternate;
 }
 
@@ -1207,12 +1207,14 @@ section.work{
 
 
 .workActive section.work{
+    .sticky, .main, .shadow-box{position: static;}
     .workNav > ul{
         &:before, &:after{ display: none; }
     }
 }
 
 #main > section.work{
+    .main{position: static !important;}
     border-top: 2px solid #fff;
     details section{padding: 30px; margin-bottom: 20px; background: #fff;}
     details .shadow-box:before, details .shadow-box:after{z-index: -1;}
