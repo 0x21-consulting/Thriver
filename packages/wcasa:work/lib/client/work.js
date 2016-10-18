@@ -318,6 +318,12 @@ var changeTabs = function (event) {
         setTimeout(function () {
             document.body.classList.remove('workFadeIn');
             document.body.classList.add('workActive');
+            // Sticky Initialization
+            sticky();
+            $(".sticky").stick_in_parent({
+                parent: $(".work .main"),
+                offset_top: 100
+            });
         }, 250);
     }
 },
@@ -449,15 +455,10 @@ Template.workNav.events({
 Template.workContent.events({
     'click footer.truncate button': function (event) {
         event.preventDefault();
-        $("body").addClass("workReadingAnimate");
-        $("body").removeClass("workReadingAnimate");
+        //$("body").addClass("workReadingAnimate");
+        //$("body").removeClass("workReadingAnimate");
         $("body").addClass("workReading");
-        // Sticky Initialization
-        sticky();
-        $(".sticky").stick_in_parent({
-            parent: $(".work .main"),
-            offset_top: 100
-        });
+        $(".sticky").trigger("sticky_kit:recalc");
     },
     'click .backToPrevious': function (event) {
         document.body.classList.remove('mobile-article-open');

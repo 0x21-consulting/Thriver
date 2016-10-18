@@ -536,6 +536,9 @@ section.work .workNav > ul{
             }
             .icon{margin: 0px 20px 0px 5px;}
             .icon{display: none;}
+            &.active > ul{
+                max-height: 9999px;
+            }
             > ul{
                 max-height: 0px;
                 padding: 0px;
@@ -887,8 +890,8 @@ body.workActive section.work .main.container{
 
 section.work > .main{overflow: visible;}
 section.work > .main .workTextContainer{
-    will-change:min-height;
-    .trans(max-height 500ms ease 0ms);
+    //will-change:min-height;
+    //.trans(max-height 500ms ease 0ms);
 }
 .workReadingAnimate{
     .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
