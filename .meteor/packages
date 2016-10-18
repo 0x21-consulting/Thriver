@@ -9,12 +9,12 @@ mobile-experience@1.0.4
 session@1.1.6
 jquery@1.11.9
 tracker@1.1.0
-logging@1.1.15
+logging@1.1.15_1
 reload@1.1.10
 random@1.0.10
 ejson@1.0.12
-standard-minifier-css@1.2.0
-standard-minifier-js@1.2.0
+standard-minifier-css@1.2.0_1
+standard-minifier-js@1.2.0_1
 tinytest@1.0.11
 thriver:core
 thriver:escape
