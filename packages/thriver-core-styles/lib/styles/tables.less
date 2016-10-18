@@ -15,10 +15,19 @@
 table {
     width: 100%;
     text-align: left;
-    .tableColor(@gray,@orange,@white);
+    //.tableColor(@gray,@orange,@white);
     //.shadow(far);
     margin: 10px 0px;
+    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+    border: 1px solid @gray;
+    line-height: 18px;
+    letter-spacing: 0px;
     th, td{
         padding: 10px;
+    }
+    th{
+        font-weight: 500;
+        border-bottom: 1px solid @gray;
     }
 }

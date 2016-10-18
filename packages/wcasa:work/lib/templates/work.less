@@ -32,11 +32,6 @@ section.work{
             overflow: hidden;
             //.accelerate;
             //Truncation Gradient
-            .backToTopWork{
-                .buttonColor(@teal);
-                color: @white !important;
-
-            }
             &:after{
                 content: '';
                 display: block;
@@ -186,6 +181,13 @@ section.work .sa details{
 }
 //Nav Landing
 section.work .workNav{width: 100%;}
+section.work .workNav{
+    .backToTopWork{
+        display: none;
+        .buttonColor(@teal);
+        color: @white !important;
+    }
+}
 section.work .workNav > ul{
     margin: 0px;
     .clearfix;
@@ -370,6 +372,7 @@ section.work .workNav > ul{
         padding:20px;
         width:200px;
     }
+    .backToTopWork{display: block;}
     h2.sidebarTitle{
         display: block;
         font-size: 18px;
@@ -613,7 +616,7 @@ section.work .main.container{
     padding: 0px 0px !important;
     margin-top: 8px;
     @media (max-width:1180px){
-        margin-bottom: 40px !important;
+        //margin-bottom: 40px !important;
     }
     @media (max-width:945px){
         margin:0px !important;
@@ -1210,6 +1213,9 @@ section.work{
     .sticky, .main, .shadow-box{position: static;}
     .workNav > ul{
         &:before, &:after{ display: none; }
+    }
+    .shadow-box{
+        &:after,&:before{display: none;}
     }
 }
 
