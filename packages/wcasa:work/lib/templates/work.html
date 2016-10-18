@@ -29,24 +29,26 @@
 
 <!--Nav-->
 <template name="workNav">
-    <menu class="workNav sticky">
-        <h2 class="sidebarTitle">Areas of Interest</h2>
-        <ul>
-            <li class="backToIndexWork">
-                <a href="#" class="backToIndexWorkA">
-                    <span class="fa">&#xf137;</span> Back to Index</a>
-            </li>
-            {{#each tabs}}
-                {{> workListItem id=this}}
-            {{/each}}
-            <li class="backToTopWork">
-                <button class="backToTopWork">Back to Top of Article<span class="fa">&#xf0d8;</span></button>
-            </li>
-            {{#if isAdmin}}
-                {{> workListItemAdmin}}
-            {{/if}}
-        </ul>
-    </menu>
+    <div>
+        <menu class="workNav sticky">
+            <h2 class="sidebarTitle">Areas of Interest</h2>
+            <ul>
+                <li class="backToIndexWork">
+                    <a href="#" class="backToIndexWorkA">
+                        <span class="fa">&#xf137;</span> Back to Index</a>
+                </li>
+                {{#each tabs}}
+                    {{> workListItem id=this}}
+                {{/each}}
+                <li class="backToTopWork">
+                    <button class="backToTopWork">Back to Top of Article<span class="fa">&#xf0d8;</span></button>
+                </li>
+                {{#if isAdmin}}
+                    {{> workListItemAdmin}}
+                {{/if}}
+            </ul>
+        </menu>
+    </div>
 </template>
 
 <template name="workListItem">
