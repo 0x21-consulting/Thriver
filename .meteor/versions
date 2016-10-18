@@ -35,6 +35,7 @@ ecmascript-runtime@0.3.14
 ejson@1.0.12
 email@1.1.17
 fastclick@1.0.12
+force-ssl@1.0.12
 fortawesome:fontawesome@4.5.0
 geojson-utils@1.0.9
 gwendall:body-events@0.1.6
