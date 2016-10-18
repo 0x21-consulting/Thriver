@@ -30,6 +30,7 @@ Package.onUse(function (api) {
         'lib/templates/work.less',
         
         // Helpers and methods
+        'lib/client/sticky.js',
         'lib/client/work.js',
 
         // Administration
