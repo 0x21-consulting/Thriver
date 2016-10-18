@@ -318,8 +318,7 @@ var changeTabs = function (event) {
         setTimeout(function () {
             document.body.classList.remove('workFadeIn');
             document.body.classList.add('workActive');
-            // Sticky Initialization
-            sticky();
+
             $(".sticky").stick_in_parent({
                 parent: $(".work .main"),
                 offset_top: 100

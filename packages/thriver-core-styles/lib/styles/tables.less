@@ -15,7 +15,7 @@
 table {
     width: 100%;
     text-align: left;
-    //.tableColor(@gray,@orange,@white);
+    .tableColor(lighten(@gray, 5%), @gray, @black);
     //.shadow(far);
     margin: 10px 0px;
     box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
@@ -28,6 +28,13 @@ table {
     }
     th{
         font-weight: 500;
+        border-bottom: 2px solid @gray;
+    }
+    td{
         border-bottom: 1px solid @gray;
+    }
+    thead{}
+    table tr{
+
     }
 }
