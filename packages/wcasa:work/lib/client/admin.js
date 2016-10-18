@@ -90,7 +90,7 @@ Template.workNav.events({
             elems  = parent.querySelectorAll('li[data-id]');
         } else {
             // Top-level page; get ID for work section
-            parent = event.delegateTarget.parentElement;
+            parent = event.delegateTarget.parentElement.parentElement;
             elems  = parent.querySelectorAll('menu.workNav > ul > li[data-id]');
         }
 
