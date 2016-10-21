@@ -54,7 +54,7 @@ Template.outreach.events({
 
         // Get path
         var section = event.target.parentElement.parentElement.
-                parentElement.parentElement.parentElement,
+                parentElement.parentElement.parentElement.parentElement,
             path    = section.id + '/' + Thriver.sections.generateId(event.target.textContent);
 
         // Update history
