@@ -13,6 +13,7 @@ section.work{
     //background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 38%,rgba(242,242,242,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     //background-size: 110%;
+    overflow: visible !important;
     @media @mobile{
         .shadowNone !important;
         padding-bottom:0px !important;
@@ -60,7 +61,7 @@ section.work{
     //.main .workNav > ul li.new-section a { color: @orange; }
     //.main .workNav > ul li.new-section a:hover { color: @orange; }
     //.main .workNav > ul > li.new-section h2 a { background: @orange; }
-    .workNav .new-section{white-space: nowrap;}
+    .workNav .new-section{white-space: nowrap; a{color: @teal !important;}}
     @media @mobile{opacity: 1 !important;}
     .workContent, .workNav, .workTertiary{
         display: block;
@@ -1246,4 +1247,21 @@ p.glossary {
     margin: 0px;
     padding-top: 6px;
     padding-left: 16px;
+}
+
+
+section.work .workNav .backToTopWork + li.new-section {
+    width: 100% !important;
+    padding: 0px !important;
+    background: @teal;
+    padding-right: 3px !important; //odd
+    a{
+        display: block;
+        cursor: pointer;
+        background: @teal;
+        text-align: center !important;
+        color: #fff !important;
+        display: block;
+        padding: 5px;
+    }
 }
