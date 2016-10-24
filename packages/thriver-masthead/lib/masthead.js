@@ -51,7 +51,7 @@ Template.masthead.onRendered(function () {
                     menuItems[0].children[0].click();
                 else
                     menuItems[i + 1].children[0].click();
-                
+
                 break;
             }
         };
@@ -65,4 +65,5 @@ Template.masthead.onRendered(function () {
         clearInterval(sliderTimer);
         sliderTimer = setInterval(transitionSlider, 8000);
     });*/
+    alert($('[data-id="mastheadSlideC"]').get(0).height);
 });
