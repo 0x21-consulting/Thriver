@@ -88,9 +88,11 @@ const handleHeaderStateChange = () => {
 
     // Back to Top
     // TODO(eoghantadhg): move this into appropriate module
-    if (document.body.scrollTop > 1000 && window.innerWidth > 767) {
-      document.getElementById('back-to-top').classList.add('active');
-    } else document.getElementById('back-to-top').classList.remove('active');
+    if (document.getElementById('back-to-top')) {
+      if (document.body.scrollTop > 1000 && window.innerWidth > 767) {
+        document.getElementById('back-to-top').classList.add('active');
+      } else document.getElementById('back-to-top').classList.remove('active');
+    }
   }, 1);
 };
 
