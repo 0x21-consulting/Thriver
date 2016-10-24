@@ -91,6 +91,10 @@ const changeTabs = (event) => {
       });
     }, 250);
   }
+
+  // Scroll to top of work on change tabs
+  const offset = $('.work').offset().top + 228;
+  $('body').aniamte({ scrollTop: offset }, 750);
 };
 
 // Tabs
@@ -181,6 +185,10 @@ Template.workNav.events({
     setTimeout(() =>
       document.body.classList.remove('workActive', 'workReading', 'workFadeOut')
     , 200);
+
+    // Scroll to top of work on change tabs
+    const offset = $('.work').offset().top + 228;
+    $('body').animate({ scrollTop: offset }, 750);
   },
 });
 
