@@ -125,6 +125,10 @@ section#masthead div.tabs, section.masthead div.tabs{
 
 section#masthead, section.masthead{
     color:@white;
+    height: 375px;
+    @media (max-width:990px){
+        height: 490px;
+    }
     h1,p, a.cta{
         color: @white;
     }
@@ -144,7 +148,7 @@ section#masthead, section.masthead{
         }
     }
     p{
-    .font(1.6,3.0,0.025,@normal,none);
+    .font(1.4,2.0,0,@normal,none);
     @media @mobile{
         .font(1.4,1.9,0.025,@normal,none);
     }
