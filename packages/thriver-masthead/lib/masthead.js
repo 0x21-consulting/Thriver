@@ -65,5 +65,4 @@ Template.masthead.onRendered(function () {
         clearInterval(sliderTimer);
         sliderTimer = setInterval(transitionSlider, 8000);
     });*/
-    alert($('[data-id="mastheadSlideC"]').get(0).height);
 });
