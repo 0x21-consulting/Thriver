@@ -28,7 +28,7 @@ section.work{
         //.flex;
         .workTextContainer{
             width: 620px;
-            min-height: 646px;
+            min-height: 744px;
             max-height: 646px;
             overflow: hidden;
             //.accelerate;
@@ -62,6 +62,7 @@ section.work{
     //.main .workNav > ul li.new-section a:hover { color: @orange; }
     //.main .workNav > ul > li.new-section h2 a { background: @orange; }
     .workNav .new-section{white-space: nowrap; a{color: @teal !important;}}
+    .workActive & .workNav .new-section{a{color: lighten(@teal,50%) !important;}}
     @media @mobile{opacity: 1 !important;}
     .workContent, .workNav, .workTertiary{
         display: block;
@@ -185,8 +186,30 @@ section.work .workNav{width: 100%;}
 section.work .workNav{
     .backToTopWork{
         display: none;
-        .buttonColor(@teal);
-        color: @white !important;
+        button{
+            .rw;
+            display: none;
+            padding: 6px 0px 15px 0px;
+            margin: 0px;
+            text-indent: 0px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            font-weight: @normal;
+            font-size: 14px;
+            font-size: 1.4rem;
+            line-height: 14px;
+            line-height: 1.4rem;
+            letter-spacing: 0.25px;
+            letter-spacing: 0.025rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            &:focus{box-shadow: none;}
+            &:hover{opacity: 1;}
+        }
+        &:hover{
+            box-shadow: none;
+            -webkit-box-shadow:none;
+        }
     }
 }
 section.work .workNav > ul{
@@ -404,8 +427,11 @@ section.work .workNav > ul{
             padding: 6px 0px 15px 0px;
             margin: 0px;
             text-indent: 0px;
-            .opacity(0.5);
+            .opacity(0.6);
             &:focus{ .shadowNone; }
+        }
+        a.backToIndexWorkA{
+            .opacity(0.8);
         }
         @media @1024{width:220px;}
         @media (max-width:945px){
@@ -521,6 +547,7 @@ section.work .workNav > ul{
                     top: -2px;
                     margin-left: 5px;
                     font-size: 14px;
+                    display: none;
                 }
             }
             .icon, > a{
@@ -1250,7 +1277,7 @@ p.glossary {
 }
 
 
-section.work .workNav .backToTopWork + li.new-section {
+section.work .workNav > ul > li.new-section {
     width: 100% !important;
     padding: 0px !important;
     background: @teal;
@@ -1264,4 +1291,17 @@ section.work .workNav .backToTopWork + li.new-section {
         display: block;
         padding: 5px;
     }
+    .workActive &{
+        padding: 12px 0px !important;
+        background:rgba(0,0,0,0.1) !important;
+        a{
+            text-align: left;
+            text-indent: 20px;
+            display: inline;
+            &:after{display: none;}
+            color: lighten(@teal,50%) !important;
+            background: transparent;
+        }
+    }
+
 }
