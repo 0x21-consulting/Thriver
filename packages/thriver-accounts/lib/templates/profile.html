@@ -7,7 +7,7 @@
 		{{/each}}
         <input type="submit" value="{{submitValue}}">-->
 
-        {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update" 
-            omitFields=omitFields fields="profile" }}
+        {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update"
+            omitFields=omitFields fields="profile" template="series" }}
     </form>
 </template>

@@ -1,0 +1,17 @@
+<template name="afObjectField_series">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{afFieldLabelText name=this.atts.name}}</h3>
+    </div>
+    <div class="panel-body">
+      {{#if afFieldIsInvalid name=this.atts.name autoform=this.autoform}}
+      <span class="help-block">{{{afFieldMessage name=this.atts.name autoform=this.autoform}}}</span>
+      {{/if}}
+      {{#each afFieldNames name=this.atts.name fields=this.atts.fields omitFields=this.atts.omitFields}}
+        {{#with getOptions ../atts.name this}}
+        {{> afQuickField name=.. options=this}}
+        {{/with}}
+      {{/each}}
+    </div>
+  </div>
+</template>
