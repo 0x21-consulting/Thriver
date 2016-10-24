@@ -71,6 +71,21 @@ nav.utility{
                 &:before, &:after{display: block;}
             }
         }
+        &[data-notification].notification{
+            &:after{
+                content:attr(data-notification);
+                position: absolute;
+                right: 5px; top: 5px;
+                width: 15px; height: 15px; line-height: 14px;
+                text-align: center;
+                font-size: 10px;
+                font-weight: @bold;
+                background: @orange;
+                color: @white;
+                border-radius: 50%; -webkit-border-radius: 50%;
+            }
+            &[aria-expanded="true"]:after{ display: none;}
+        }
     }
 }
 
