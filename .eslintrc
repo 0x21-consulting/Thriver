@@ -22,7 +22,8 @@
   "globals": {
     "Thriver": true,
     "SimpleSchema": true,
-    "Marked": true
+    "Marked": true,
+    "SHA256": true
   },
 
   "rules": {
