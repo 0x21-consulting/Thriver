@@ -21,7 +21,8 @@
 
   "globals": {
     "Thriver": true,
-    "SimpleSchema": true
+    "SimpleSchema": true,
+    "Marked": true
   },
 
   "rules": {

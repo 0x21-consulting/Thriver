@@ -1,52 +1,62 @@
-//UI Helper Functions
+// UI Helper Functions
 Thriver.util = {
-    //Add Class
-    addClass : function (element, className) {
-        check(element, Element);
-        check(className, String);
+  // Add Class
+  addClass: (element, className) => {
+    check(element, Element);
+    check(className, String);
 
-        element.classList.add(className);
-    },
-    //Remove Class
-    removeClass : function (element, className) {
-        check(element, Element);
-        check(className, String);
+    element.classList.add(className);
+  },
 
-        element.classList.remove(className);
-    },
-    //Remove Class (by Prefix)
-    removeClassByPrefix : function (element, prefix) {
-        check(element, Element);
-        check(prefix, String);
+  // Remove Class
+  removeClass: (element, className) => {
+    check(element, Element);
+    check(className, String);
 
-        var regx = new RegExp('\\b' + prefix + '.*?\\b', 'g');
-        element.className = element.className.replace(regx, '');
-        return element;
-    },
-    hide : function (element, state) {
-        check(element, Element);
-        check(state, Match.Maybe(Boolean) );
+    element.classList.remove(className);
+  },
 
-        if (state === false)
-            element.setAttribute('aria-hidden', 'false');
-        else
-            element.setAttribute('aria-hidden', 'true');  
-    },
-    makeActive : function (element, state) {
-        check(element, Element);
-        check(state, Match.Maybe(Boolean) );
+  // Remove Class (by Prefix)
+  removeClassByPrefix: (element, prefix) => {
+    check(element, Element);
+    check(prefix, String);
 
-        if (state === false)
-            element.setAttribute('aria-expanded', 'false');  
-        else
-            element.setAttribute('aria-expanded', 'true');
-    },
-    findAncestor : function (element, className) {
-        check(element, Element);
-        check(className, String);
+    const regx = new RegExp(`\\b${prefix}.*?\\b`, 'g');
 
-        // TODO: Infinite loop possibility here?
-        while ((element = element.parentElement) && !element.classList.contains(className));
-        return element;
+    const newElement = element;
+    newElement.className = newElement.className.replace(regx, '');
+    return newElement;
+  },
+
+  hide: (element, state) => {
+    check(element, Element);
+    check(state, Match.Maybe(Boolean));
+
+    if (state === false) element.setAttribute('aria-hidden', 'false');
+    else element.setAttribute('aria-hidden', 'true');
+  },
+
+  makeActive: (element, state) => {
+    check(element, Element);
+    check(state, Match.Maybe(Boolean));
+
+    if (state === false) element.setAttribute('aria-expanded', 'false');
+    else element.setAttribute('aria-expanded', 'true');
+  },
+
+  findAncestor: (element, className) => {
+    check(element, Element);
+    check(className, String);
+
+    let currentElement = element;
+
+    // Loop through ancestors until element with class is found
+    while (currentElement instanceof Element) {
+      if (currentElement.classList.contains(className)) break;
+
+      currentElement = element.parentElement;
     }
+
+    return currentElement;
+  },
 };

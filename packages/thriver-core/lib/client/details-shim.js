@@ -16,79 +16,80 @@
  * @param Details details element to shim
  * @returns {boolean} false on error
  */
-function details_shim(Details) {
-    // For backward compatibility, if no DOM Element is sent, call init()
-    if (!Details || !('nodeType' in Details) || !('tagName' in Details)) {
-        return details_shim.init();
-    }
+function detailsShim(Details) {
+  // For backward compatibility, if no DOM Element is sent, call init()
+  if (!Details || !('nodeType' in Details) || !('tagName' in Details)) {
+    return detailsShim.init();
+  }
 
-    var Summary;
-    // If we were passed a details tag, find its summary tag
-    if ('details' == Details.tagName.toLowerCase()) {
-        // Assume first found summary tag is the corresponding summary tag
-        Summary = Details.getElementsByTagName('summary')[0];
+  let Summary;
+  let details = Details;
 
-    // If we were passed a summary tag, find its details tag
-    } else if (!!Details.parentNode
-        && 'summary' == Details.tagName.toLowerCase()
-    ) {
-        Summary = Details;
-        Details = Summary.parentNode;
-    } else {
+  // If we were passed a details tag, find its summary tag
+  if (details.tagName.toLowerCase() === 'details') {
+    // Assume first found summary tag is the corresponding summary tag
+    Summary = details.getElementsByTagName('summary')[0];
+
+  // If we were passed a summary tag, find its details tag
+  } else if (!!details.parentNode && details.tagName.toLowerCase() === 'summary') {
+    Summary = details;
+    details = Summary.parentNode;
+  } else {
         // An invalid parameter was passed for Details
-        return false;
+    return false;
+  }
+
+  // If the details tag is natively supported or already shimmed
+  if (typeof details.open === 'boolean') {
+    // If native, remove custom classes
+    if (!details.getAttribute('data-open')) {
+      details.className = details.className
+        .replace(/\bdetails_shim_open\b|\bdetails_shim_closed\b/g, ' ');
     }
+    return false;
+  }
 
-    // If the details tag is natively supported or already shimmed
-    if ('boolean' == typeof Details.open) {
-        // If native, remove custom classes
-        if (!Details.getAttribute('data-open')) {
-            Details.className = Details.className
-                .replace(/\bdetails_shim_open\b|\bdetails_shim_closed\b/g, ' ');
-        }
-        return false;
-    }
+  // Set initial class according to `open` attribute
+  let state = details.outerHTML
+    // OR older firefox doesn't have .outerHTML
+    || new XMLSerializer().serializeToString(details);
 
-    // Set initial class according to `open` attribute
-    var state = Details.outerHTML
-        // OR older firefox doesn't have .outerHTML
-        || new XMLSerializer().serializeToString(Details);
-    state = state.substring(0, state.indexOf('>'));
-    // Read: There is an open attribute, and it's not explicitly empty
-    state = (-1 != state.indexOf('open') && -1 == state.indexOf('open=""'))
-        ? 'open'
-        : 'closed'
-    ;
-    Details.setAttribute('data-open', state);
-    Details.className += ' details_shim_' + state;
+  state = state.substring(0, state.indexOf('>'));
 
-    // Add onclick handler to toggle visibility class
-    Summary.addEventListener
-        ? Summary.addEventListener('click', function() { details_shim.toggle(Details); })
-        : Summary.attachEvent && Summary.attachEvent('onclick', function() { details_shim.toggle(Details); })
-    ;
+  // Read: There is an open attribute, and it's not explicitly empty
+  state = (state.indexOf('open') !== -1 && state.indexOf('open=""') === -1)
+    ? 'open'
+    : 'closed'
+  ;
+  details.setAttribute('data-open', state);
+  details.classList.add(`details_shim_${state}`);
 
-    Object.defineProperty(Details, 'open', {
-        get: function() {
-            return 'open' == this.getAttribute('data-open');
-        },
-        set: function(state) {
-            details_shim.toggle(this, state);
-        }
-    });
+  // Add onclick handler to toggle visibility class
+  if (Summary.addEventListener instanceof Function) {
+    Summary.addEventListener('click', () => detailsShim.toggle(details));
+  } else if (Summary.attachEvent instanceof Function) {
+    Summary.attachEvent('onclick', () => detailsShim.toggle(details));
+  }
 
-    // wrap text nodes in span to expose them to css
-    for (var j = 0; j < Details.childNodes.length; j++) {
-        if (Details.childNodes[j].nodeType == 3
-            && /[^\s]/.test(Details.childNodes[j].data)
+  Object.defineProperty(details, 'open', {
+    get: () => this.getAttribute('data-open') === 'open',
+    set: newState => detailsShim.toggle(this, newState),
+  });
+
+  // wrap text nodes in span to expose them to css
+  for (let j = 0; j < details.childNodes.length; j += 1) {
+    if (details.childNodes[j].nodeType === 3
+            && /[^\s]/.test(details.childNodes[j].data)
             ) {
-            var span = document.createElement('span');
-            var text = Details.childNodes[j];
-            Details.insertBefore(span, text);
-            Details.removeChild(text);
-            span.appendChild(text);
-        }
+      const span = document.createElement('span');
+      const text = details.childNodes[j];
+      details.insertBefore(span, text);
+      details.removeChild(text);
+      span.appendChild(text);
     }
+  }
+
+  return false;
 } // details_shim()
 
 /**
@@ -96,43 +97,39 @@ function details_shim(Details) {
  * @param Details The <details> tag to toggle
  * @param state   Optional override state
  */
-details_shim.toggle = function(Details, state) {
-    // If state was not passed, seek current state
-    if ('undefined' === typeof state) {
-        // new state
-        state = Details.getAttribute('data-open') == 'open'
-            ? 'closed'
-            : 'open'
-        ;
-    } else {
-        // Sanitize the input, expect boolean, force string
-        // Expecting boolean means even 'closed' will result in an open
-        // This is the behavior of the natively supportive browsers
-        state = !!state ? 'open' : 'closed';
-    }
+detailsShim.toggle = (Details, state) => {
+  let newState;
 
-    Details.setAttribute('data-open', state);
-    // replace previous open/close class
-    Details.className = Details.className
-        .replace(/\bdetails_shim_open\b|\bdetails_shim_closed\b/g, ' ')
-        + ' details_shim_' + state;
+  // If state was not passed, seek current state
+  if (typeof state === 'undefined') {
+    // new state
+    newState = Details.getAttribute('data-open') === 'open'
+        ? 'closed'
+        : 'open'
+    ;
+  } else {
+    // Sanitize the input, expect boolean, force string
+    // Expecting boolean means even 'closed' will result in an open
+    // This is the behavior of the natively supportive browsers
+    newState = state ? 'open' : 'closed';
+  }
+
+  Details.setAttribute('data-open', newState);
+
+  // replace previous open/close class
+  Details.classList.remove('details_shim_open', 'details_shim_closed');
+  Details.classList.add(`details_shim_${state}`);
 };
 
 /**
  * Run details_shim() on each details tag
  */
 window.details_shim = {};
-window.details_shim.init = function() {
-    // Because <details> must include a <summary>,
-    //  collecting <summary> tags collects *valid* <details> tags
-    var Summaries = document.getElementsByTagName('summary');
-    for (var i = 0; i < Summaries.length; i++) {
-        details_shim(Summaries[i]);
-    }
+window.details_shim.init = () => {
+  // Because <details> must include a <summary>,
+  //  collecting <summary> tags collects *valid* <details> tags
+  const Summaries = document.getElementsByTagName('summary');
+  for (let i = 0; i < Summaries.length; i += 1) {
+    detailsShim(Summaries[i]);
+  }
 };
-
-// Run details_shim.init() when the page loads
-/*window.addEventListener
-    ? window.addEventListener('load', details_shim.init, false)
-    : window.attachEvent && window.attachEvent('onload', details_shim.init)
-;*/
