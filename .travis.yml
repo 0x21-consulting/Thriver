@@ -1,0 +1,12 @@
+language: node_js
+node_js: "4.1.1"
+
+install:
+    # install meteor
+    - "curl https://install.meteor.com | /bin/sh"
+
+    # install spacejam for testing packages
+    - "npm install -g spacejam"
+
+script:
+    - "spacejam test-packages"
