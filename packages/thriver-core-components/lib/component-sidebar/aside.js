@@ -147,7 +147,7 @@ Template.aside.events({
         var section = event.target.parentElement.parentElement.parentElement.
                 parentElement.parentElement,
             path    = section.id + '/' + Thriver.sections.generateId(event.target.textContent);
-        
+
         // Update history
         Thriver.history.update(section.id, path);
     }
@@ -179,8 +179,8 @@ Template.aside.onRendered(function () {
                 tabs[i].click();
 
         // Otherwise, if there isn't any path, click the first tab for the user
-        if (!path.length && tabs.length)
-            tabs[0].click();
+        //if (!path.length && tabs.length)
+            //tabs[0].click();
     };
 
     // Register each tab
