@@ -9,6 +9,11 @@
     }
     div.tabs.left>article{
         min-height: 300px;
+        @media @mobile{
+            padding: 30px 20px;
+            > section{padding: 0px;}
+            [data-list-type="article"] .inner article{padding: 20px 10px;}
+        }
     }
     .action-alert-link{
         margin-bottom: 20px;
