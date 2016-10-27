@@ -14,4 +14,4 @@ before_install:
     - "npm install -g spacejam"
 
 script:
-    - "spacejam test-packages ./"
+    #- "spacejam test-packages ./"
