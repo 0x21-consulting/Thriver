@@ -43,6 +43,7 @@
         //flex:1.1;
         width: 300px;
         min-height: 650px;
+        @media @mobile{ min-height: 0px; }
         background-color: darken(@teal,0.5%);
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b5c2+0,00b3c6+100 */
         background: rgb(0,181,194); /* Old browsers */
@@ -254,6 +255,7 @@
                                 padding: 0px;
                                 background-color: @white;
                                 min-height: 600px;
+                                @media @mobile{ min-height: 0px; }
                                 //.shadow(far);
                                 //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                                 //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -784,19 +786,15 @@ ul.upcomingEvents{
         display: block;
         padding: 10px;
         .borderRadius(2px);
-        //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        //-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        //.borderRadius(2px);
-
-            &:hover{
-                color: @white;
-                background: darken(@teal, 6%);
-            }
-            &:active{
-                //color: darken(@yellow, 10%);
-                //border-color:darken(@yellow, 10%);
-            }
+        &:hover{
+            color: @white;
+            background: darken(@teal, 6%);
+        }
+        @media @mobile{
+            padding: 20px;
+        }
     }
+    @media @mobile{ h3 + ul.actions{display: none;}}
     > li:nth-child(even) h3 a{
         background-color: darken(@teal,5%);
         &:hover{
