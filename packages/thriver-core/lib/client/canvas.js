@@ -112,7 +112,7 @@ Thriver.canvas = {
 	mobileMenu: event => {
 		check(event, $.Event);
 
-		// Close menu if it's currently open
+		// Close Menu and Back Button Feature
 		if ( event.target.getAttribute('aria-expanded') === 'true' ) {
 			// Hide visible menu items
 			document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').

@@ -16,16 +16,16 @@ var toggleTabs = function (event) {
 	// Remove active state from all links
 	for (let i = 0; i < links.length; ++i)
 		Thriver.util.makeActive(links[i], false);
-	
+
 	// Hide all sections
 	for (let i = 0; i < sections.length; ++i)
 		Thriver.util.hide(sections[i], true);
-        
+
     // Set link as active
     Thriver.util.makeActive(event.target, true);
 
     // Set section as active
-    Thriver.util.hide( menu.parentElement.querySelector('article[data-id="' + 
+    Thriver.util.hide( menu.parentElement.querySelector('article[data-id="' +
         event.target.dataset.id + '"]'), false);
 
     // Special case for Library??  Why??
@@ -47,6 +47,25 @@ Template.body.events({
  * @method
  */
 Template.tabs.onRendered(function () {
+
+    //Deselect all active tabs if on mobile
+    if (window.innerWidth < 768){
+
+        // Tabs vars
+        var tabAnchors = document.querySelectorAll('menu.tabs > li > a'),
+            tabs       = document.querySelectorAll('div.tabs > article');
+
+        // Remove expanded from all tab anchors
+        for (let i = 0; i < tabAnchors.length; ++i)
+            Thriver.util.makeActive(tabAnchors[i], false);
+
+        // Add hidden state to all tabs
+        for (let i = 0; i < tabs.length; ++i)
+            Thriver.util.hide(tabs[i], true);
+
+    }
+
+    // I don't believe this is doing anything'
 	var toggleMenus;
 
 	if (window.innerWidth > 767)
@@ -79,7 +98,7 @@ var handler = function (event) {
     // Get section ID
     id = this.parentElement.dataset.id;
     name = this.textContent;
-    
+
     // Remove editability
     this.contentEditable = false;
 
@@ -116,7 +135,7 @@ updateSectionContent = function (oldHash) {
         id = parent.dataset.id,
 		content = parent.querySelector('textarea').value,
 		newHash = SHA256(content);
-        
+
         // Don't commit if nothing changed
         if (newHash !== oldHash)
             Meteor.call('updateSectionData', id, { content: content });
@@ -184,9 +203,9 @@ Template.tabs.events({
         event.stopPropagation();
 
         // Get Nav link
-        link = event.delegateTarget.parentElement.querySelector('menu [data-id="' 
+        link = event.delegateTarget.parentElement.querySelector('menu [data-id="'
             + this.id + '"]').parentElement.parentElement;
-        
+
         // If the nav link has a parent with an ID, this is a tab
         if (link.dataset.id)
             parent = link.dataset.id;
@@ -197,7 +216,7 @@ Template.tabs.events({
         // Warn
         if ( !window.confirm('Are you sure you want to delete this section?') )
             return;
-        
+
         // First, remove reference to parent element
         // first parameter is parent ID, second this ID
         Meteor.call('removeChild', parent, this.id);
@@ -228,7 +247,7 @@ Template.tabs.events({
         // Button by which to okay changes and commit to db
         button = document.createElement('button');
         button.textContent = 'Save';
-        button.addEventListener('mouseup', 
+        button.addEventListener('mouseup',
             // Pass along hash of existing markdown
             updateSectionContent(content.dataset.hash));
 
