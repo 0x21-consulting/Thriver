@@ -64,30 +64,34 @@ Thriver.events.navigate = (id) => {
 Thriver.events.parsePath = (path) => {
   check(path, [String]);
 
-  let isMonth = false;
+  /**
+   * @summary Return whether a string is a valid month
+   * @function
+   *   @param {String} month
+   *   @param {Number} index
+   */
+  const isMonth = i =>
+    (month, index) => {
+      if (month.toLowerCase() === path[i].toLowerCase()) {
+        Thriver.calendar.thisMonth.set(index);
+        return true;
+      }
+      return false;
+    };
 
   for (let i = 0; i < path.length; i += 1) {
     // Year
     if (path[i].match(/^\d{4}$/)) {
       Thriver.calendar.thisYear.set(Number(path[i]));
-      continue;
     }
     // Specific event ID
     if (path[i].match(/^[a-z0-9]{17}$/i)) {
       Thriver.events.navigate(path[i]);
-      continue;
     }
 
     // Check for month
-    Thriver.calendar.months.forEach((month, index) => {
-      if (month.toLowerCase() === path[i].toLowerCase()) {
-        Thriver.calendar.thisMonth.set(index);
-        isMonth = true;
-      }
-    });
+    Thriver.calendar.months.forEach(isMonth(i));
 
-    if (isMonth) continue;
-
-    // Check for event title
+    // TODO(micchickenburger): Check for event title
   }
 };

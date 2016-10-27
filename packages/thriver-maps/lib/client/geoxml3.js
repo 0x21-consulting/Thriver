@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * @fileOverview Renders KML on the Google Maps JavaScript API Version 3
  * @name GeoXML3
