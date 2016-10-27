@@ -51,7 +51,7 @@ Template.masthead.onRendered(function () {
                     menuItems[0].children[0].click();
                 else
                     menuItems[i + 1].children[0].click();
-                
+
                 break;
             }
         };
