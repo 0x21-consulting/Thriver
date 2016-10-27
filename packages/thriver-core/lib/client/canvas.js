@@ -24,17 +24,17 @@ Thriver.canvas = {
 		// Get all sidebars and links that happen to be open
 		let sidebars = document.querySelectorAll('.sidebar[aria-hidden="false"]'),
 			links    = document.querySelectorAll('a[data-toggle="canvas"][aria-expanded="true"]');
-		
+
 		// Close all sidebars
 		for (let i = 0; i < sidebars.length; ++i)
 			Thriver.util.hide( sidebars[i] );
-		
+
 		// Reset links
 		for (let i = 0; i < links.length; ++i) {
 			Thriver.util.makeActive( links[i], false );
 			links[i].removeEventListener('click', Thriver.canvas.handleCloseButton);
 		}
-		
+
 		// Remove overlay
 		Thriver.canvas.removeOverlay();
 	},
@@ -113,7 +113,7 @@ Thriver.canvas = {
 		check(event, $.Event);
 
 		// Close menu if it's currently open
-		if ( event.target.getAttribute('aria-hidden') === 'false' ) {
+		if ( event.target.getAttribute('aria-expanded') === 'true' ) {
 			// Hide visible menu items
 			document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').
 				forEach(tab => { tab.setAttribute('aria-expanded', false); });
@@ -128,18 +128,32 @@ Thriver.canvas = {
 			// Hide menu
 			Thriver.util.hide( document.getElementById('mobile-navigation'), true );
 
+			// Remove Expanded From Toggle
+			Thriver.util.makeActive( document.getElementById("mobile-toggle"), false );
+
 			// We're done
 			return false;
 		}
 
 		// Open menu
 
+		// Set Toggle to Expanded
+		Thriver.util.makeActive( document.getElementById("mobile-toggle"), true );
 		// First, prevent body scrolling
 		document.body.classList.add('noScroll');
 
 		// Then make the menu visible
 		Thriver.util.hide( document.getElementById('mobile-navigation'), false );
 	},
+
+
+
+
+
+
+
+
+
 
 	/* ================================================ */
 	/* The following methods are no longer being used.  */
