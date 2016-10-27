@@ -144,9 +144,6 @@ Template.aside.onRendered(() => {
     for (let i = 0; i < tabs.length; i += 1) {
       if (path[0] === tabs[i].dataset.id) tabs[i].click();
     }
-
-    // Otherwise, if there isn't any path, click the first tab for the user
-    if (!path.length && tabs.length) tabs[0].click();
   };
 
   // Register each tab
