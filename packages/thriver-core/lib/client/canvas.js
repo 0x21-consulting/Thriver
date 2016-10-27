@@ -111,7 +111,7 @@ Thriver.canvas = {
     check(event, $.Event);
 
     // Close menu if it's currently open
-    if (event.target.getAttribute('aria-hidden') === 'false') {
+    if (event.target.getAttribute('aria-expanded') === 'true') {
       // Hide visible menu items
       document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]')
         .forEach(tab => tab.setAttribute('aria-expanded', false));
@@ -126,13 +126,19 @@ Thriver.canvas = {
       // Hide menu
       Thriver.util.hide(document.getElementById('mobile-navigation'), true);
 
+      // Remove `expanded` attribute from Toggle
+      Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
+
       // We're done
       return false;
     }
 
     // Open menu
 
-    // First, prevent body scrolling
+    // Set Toggle to Expanded
+    Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
+
+    // Prevent body scrolling
     document.body.classList.add('noScroll');
 
     // Then make the menu visible
