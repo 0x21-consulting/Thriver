@@ -114,25 +114,45 @@ Thriver.canvas = {
 
 		// Close Menu and Back Button Feature
 		if ( event.target.getAttribute('aria-expanded') === 'true' ) {
-			// Hide visible menu items
-			document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').
-				forEach(tab => { tab.setAttribute('aria-expanded', false); });
 
-			// Hide visible sections
-			document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]').
-				forEach(section => { section.setAttribute('aria-hidden', true); });
+			//If tabs are open
+			if (document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').length > 0){
+				console.log('ca');
+				// Remove expand from tab anchor
+				document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]').
+					forEach(tabAnchor => { tabAnchor.setAttribute('aria-expanded', false); });
 
-			// Allow scrolling
-			document.body.classList.remove('noScroll');
+				//Hide active tab
+				document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]').
+					forEach(tabArticle => { tabArticle.setAttribute('aria-hidden', true); });
 
-			// Hide menu
-			Thriver.util.hide( document.getElementById('mobile-navigation'), true );
+				return;
+			}
+			// Close Sidebar if currently visible
+			else if (document.getElementById("canvas").getAttribute("data-canvas-state") === "open"){
+				Thriver.canvas.closeSidebars();
 
-			// Remove Expanded From Toggle
-			Thriver.util.makeActive( document.getElementById("mobile-toggle"), false );
+				return;
+			}
+			else{
 
-			// We're done
-			return false;
+				// Hide visible sections
+				document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]').
+					forEach(section => { section.setAttribute('aria-hidden', true); });
+
+				// Allow scrolling
+				document.body.classList.remove('noScroll');
+
+				// Hide menu
+				Thriver.util.hide( document.getElementById('mobile-navigation'), true );
+
+				// Remove Expanded From Toggle
+				Thriver.util.makeActive( document.getElementById("mobile-toggle"), false );
+
+				// We're done
+				return false;
+
+			}
 		}
 
 		// Open menu
