@@ -17,8 +17,12 @@ section.work{
     @media @mobile{
         .shadowNone !important;
         padding-bottom:0px !important;
+        header h1{margin-top: 20px !important;}
     }
-    .markdown{padding-right: 80px;}
+    .markdown{
+        padding-right: 80px;
+        @media @mobile{padding: 0px;}
+    }
     .workNav{position: relative;}
     h2.sidebarTitle{display: none;}
     h3{ margin-top: 25px;}
@@ -73,7 +77,7 @@ section.work{
 
 
 //About SA
-@media @mobile{section.work .sa.container{margin-bottom:40px; margin-top:40px;}}
+@media @mobile{section.work .sa.container{margin-bottom:0px; margin-top:40px;}}
 section.work .sa details{
     text-align: center;
     margin: -26px 0px 0px 0px;
@@ -387,7 +391,7 @@ section.work .workNav > ul{
     li a:hover{text-decoration: underline;}
     //li h2 a{background-color: rgba(6,33,49,0.2) !important;color: @white !important;}
     li h2 a{color: @white !important;text-decoration: none !important;}
-
+    li h2{padding-bottom: 0px !important;}
 
 }
 
@@ -401,7 +405,7 @@ section.work .workNav > ul{
         padding:20px;
         width:200px;
     }
-    .backToTopWork{display: block;}
+    .backToTopWork{display: block; @media @mobile{display: none;}}
     h2.sidebarTitle{
         display: block;
         font-size: 18px;
@@ -873,6 +877,9 @@ section.work .main.container{
                     font-size: 12px;
                 }
             }
+            @media @mobile{
+                margin-left: -65px !important;
+            }
         }
     }
 }
@@ -1086,6 +1093,7 @@ section.work .workContent article.active{
                     background: rgba(0,0,0,0.1) !important;
                     opacity: 1;
                     margin-bottom: 20px;
+                    @media @mobile{display: block;}
                 }
             }
         }
@@ -1144,6 +1152,9 @@ main section.work h2.sidebarTitle{
     border-bottom: 2px solid #eee;
     margin: 20px 40px;
     padding-bottom: 10px;
+    @media @mobile{
+        border: none;
+    }
 }
 
 @media @mobile{
@@ -1259,6 +1270,7 @@ section.work{
     .main{position: relative;} //Helps position sticky work nav
     border-top: 2px solid #fff;
     details section{padding: 30px; margin-bottom: 20px; background: #fff;}
+    @media @mobile{ details section{ padding: 20px;}}
     details .shadow-box:before, details .shadow-box:after{z-index: -1;}
     >div > header details section p{
         max-width: 9999px !important; //header override
@@ -1267,6 +1279,7 @@ section.work{
         text-transform: none !important;
         text-align: left;
         margin-bottom: 20px;
+        @media @mobile{margin-left:0px; margin-right: 0px;}
     }
     @media (max-width:865px){
         .shadow-box:before, .shadow-box:after{ display: none;}
@@ -1314,3 +1327,6 @@ section.work .workNav > ul > li.new-section {
     }
 
 }
+
+@media @mobile{ .workActive section.work .workNav > ul > li.backToIndexWork a{display: block !important;} }
+.mobile-article-open.workActive.workReading section.work .workContent{ @media @mobile{height: auto !important;}}
