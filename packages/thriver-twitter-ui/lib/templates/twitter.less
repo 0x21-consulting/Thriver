@@ -4,9 +4,13 @@ section#twitter{
     h2 a{font-weight: @normal;}
     .twitterElement {
         padding: 30px;
-        @media @mobile{padding: 20px;}
         background-color:@blueGray;
         .shadow(close);
+        @media @mobile{
+            padding: 10px;
+            box-shadow: none;
+            -webkit-box-shadow:none;
+        }
     }
     iframe{
         height: 100%;

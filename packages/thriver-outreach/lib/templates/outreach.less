@@ -9,6 +9,12 @@
     }
     div.tabs.left>article{
         min-height: 300px;
+        @media @mobile{
+            padding: 30px 20px;
+            min-height: 0px;
+            > section{padding: 0px;}
+            [data-list-type="article"] .inner article{padding: 20px 10px;}
+        }
     }
     .action-alert-link{
         margin-bottom: 20px;
@@ -278,6 +284,12 @@
                 li{list-style: none;}
             }
         }
+    }
+    @media (max-width:830px){
+        padding-bottom: 0px;
+        .container{ padding: 0px; }
+        .tab-box{ max-width: 9999px;}
+        div.tabs.left > article{ box-shadow: none; -webkit-box-shadow:none; max-width: 9999px; }
     }
 }
 

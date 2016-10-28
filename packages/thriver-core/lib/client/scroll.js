@@ -94,7 +94,8 @@ handleHeaderStateChange = function (event) {
         if ($(document).scrollTop() > 1000 && $(window).width() > 767)
             document.getElementById("back-to-top").classList.add('active');
         else
-            document.getElementById("back-to-top").classList.remove('active');
+            if(document.getElementById("back-to-top"))
+                document.getElementById("back-to-top").classList.remove('active');
     }, 1);
 };
 

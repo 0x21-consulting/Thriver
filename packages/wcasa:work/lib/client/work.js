@@ -70,6 +70,10 @@ var changeTabs = function (event) {
             });
         }, 250);
     }
+    //Scroll to top of work on change tabs
+    // TODO: Use smoothScroll
+    offset = $('[id="what-we-do"]').offset().top + 228;
+    $('body').animate({ scrollTop: offset }, 750);
 },
 
 /**
@@ -174,6 +178,7 @@ Template.workNav.events({
     'click h2': changeTabs,
     'click li > ul > li > a': changeTabs,
     'click button.backToTopWork': function (event) {
+        // TODO: Use smoothScroll
         offset = $('[id="what-we-do"]').offset().top + 228;
         $('body').animate({ scrollTop: offset }, 750);
     },
@@ -192,6 +197,11 @@ Template.workNav.events({
         setTimeout(function () {
             document.body.classList.remove('workActive', 'workReading', 'workFadeOut');
         }, 200);
+
+        //Scroll to top of work on change tabs
+        // TODO: Use smoothScroll
+        offset = $('[id="what-we-do"]').offset().top + 228;
+        $('body').animate({ scrollTop: offset }, 750);
     }
 });
 

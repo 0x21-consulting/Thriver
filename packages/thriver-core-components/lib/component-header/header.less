@@ -6,6 +6,7 @@
 
 header#menu{
     background-color: @headerBgColor;
+    position: relative;
     display: table;
     width: 100%;
     padding-top: 45px;
@@ -34,7 +35,7 @@ header#menu{
         }
     }
     body.fixedHeader &{
-
+        position: fixed;
     }
     div.brand-small{
         display: none;
@@ -76,10 +77,6 @@ header#menu{
             display: flex;
             align-items: center;
             justify-content: center;
-            @media (max-width:1100px){
-                //align-items: flex-end;
-                //justify-content: initial;
-            }
             width:100%;
             padding-bottom: 10px;
             li[data-type="main-navigation-item"]{
@@ -170,6 +167,10 @@ body.fixedHeader header#menu{
         justify-content:flex-end;
         align-items:flex-end;
         padding-right: 20px;
+        @media (max-width:900px){
+            width: 76%;
+            float: right;
+        }
     }
     nav.mainNav > ul li[data-type="main-navigation-item"] a{
         .font(1.2,1.2,0,@normal,uppercase);
