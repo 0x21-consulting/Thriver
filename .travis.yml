@@ -11,7 +11,7 @@ before_install:
     - export PATH="$HOME/.meteor:$PATH"
 
     # install spacejam for testing packages
-    - "npm install -g spacejam"
+    #- "npm install -g spacejam"
 
 #script:
     #- "spacejam test-packages ./"
