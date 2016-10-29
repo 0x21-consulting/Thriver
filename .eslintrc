@@ -26,7 +26,8 @@
     "SHA256": true,
     "google": true,
     "geoXML3": true,
-    "AutoForm": true
+    "AutoForm": true,
+    "details_shim": true
   },
 
   "rules": {

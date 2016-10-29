@@ -46,7 +46,6 @@ Package.onUse((api) => {
 
     // Client scripts
     'lib/client/shims.js',
-    'lib/client/details-shim.js',
     'lib/client/marked.js',
     'lib/client/markdown.js',
     'lib/client/history.js',

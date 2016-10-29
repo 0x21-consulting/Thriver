@@ -13,3 +13,16 @@
  *  @returns {undefined}
  */
 Array.prototype.find||(Array.prototype.find=function(a){if(null==this)throw new Meteor.Error("Array.prototype.find called on null or undefined");if("function"!=typeof a)throw new Meteor.Error("predicate must be a function");for(var e,b=Object(this),c=b.length>>>0,d=arguments[1],f=0;f<c;++f)if(e=b[f],a.call(d,e,f,b))return e});
+
+/**
+ * details-shim.js
+ * A pure JavaScript (no dependencies) solution to make HTML5
+ *  Details/Summary tags work in unsupportive browsers
+ *
+ * Copyright (c) 2013 Tyler Uebele
+ * Released under the MIT license.  See included LICENSE.txt
+ *  or http://opensource.org/licenses/MIT
+ *
+ * latest version available at https://github.com/tyleruebele/details-shim
+ */
+function detailsShim(a){if(!(a&&"nodeType"in a&&"tagName"in a))return detailsShim.init();let b,c=a;if("details"===c.tagName.toLowerCase())b=c.getElementsByTagName("summary")[0];else{if(!c.parentNode||"summary"!==c.tagName.toLowerCase())return!1;b=c,c=b.parentNode}if("boolean"==typeof c.open)return c.getAttribute("data-open")||(c.className=c.className.replace(/\bdetails_shim_open\b|\bdetails_shim_closed\b/g," ")),!1;let d=c.outerHTML||(new XMLSerializer).serializeToString(c);d=d.substring(0,d.indexOf(">")),d=d.indexOf("open")!==-1&&d.indexOf('open=""')===-1?"open":"closed",c.setAttribute("data-open",d),c.classList.add(`details_shim_${d}`),b.addEventListener instanceof Function?b.addEventListener("click",()=>detailsShim.toggle(c)):b.attachEvent instanceof Function&&b.attachEvent("onclick",()=>detailsShim.toggle(c)),Object.defineProperty(c,"open",{get:()=>"open"===this.getAttribute("data-open"),set:a=>detailsShim.toggle(this,a)});for(let e=0;e<c.childNodes.length;e+=1)if(3===c.childNodes[e].nodeType&&/[^\s]/.test(c.childNodes[e].data)){const a=document.createElement("span"),b=c.childNodes[e];c.insertBefore(a,b),c.removeChild(b),a.appendChild(b)}return!1}detailsShim.toggle=((a,b)=>{let c;c="undefined"==typeof b?"open"===a.getAttribute("data-open")?"closed":"open":b?"open":"closed",a.setAttribute("data-open",c),a.classList.remove("details_shim_open","details_shim_closed"),a.classList.add(`details_shim_${b}`)}),window.details_shim={},window.details_shim.init=(()=>{const a=document.getElementsByTagName("summary");for(let b=0;b<a.length;b+=1)detailsShim(a[b])});
