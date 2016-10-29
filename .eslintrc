@@ -25,7 +25,8 @@
     "Marked": true,
     "SHA256": true,
     "google": true,
-    "geoXML3": true
+    "geoXML3": true,
+    "AutoForm": true
   },
 
   "rules": {
