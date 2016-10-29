@@ -16,7 +16,7 @@ before_install:
     # install spacejam for testing packages
     #- "npm install -g spacejam"
 
-#script:
+script:
     # lint time!
     - "meteor npm run lint"
 
