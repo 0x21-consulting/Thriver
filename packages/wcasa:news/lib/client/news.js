@@ -9,14 +9,14 @@ Thriver.newsroom.search = new ReactiveVar();
  * @method
  *   @param {Event} event
  */
-let handleSearch = function (event) {
-    var value = event.target.value;
-    
-    // If field is empty, clear reactive search variable
-    if (value.length === 0) search.set();
-    
-    // Otherwise, create RegExp for searching fields
-    else search.set(new RegExp('.*' + value + '.*', 'gi') );
+const handleSearch = (event) => {
+  const value = event.target.value;
+
+  // If field is empty, clear reactive search variable
+  if (value.length === 0) Thriver.newsroom.search.set();
+
+  // Otherwise, create RegExp for searching fields
+  else Thriver.newsroom.search.set(new RegExp(`.*${value}.*`, 'gi'));
 };
 
 // Subscriptions
@@ -27,63 +27,64 @@ Meteor.subscribe('newsletters');
 
 // Events
 Template.aside.events({
-    /**
-     * @summary Load More
-     * @method
-     *   @param {$.Event} event
-     */
-    'click li.loadMore button': function (event) {
-        check(event, $.Event);
-        check(event.target, Element)
+  /**
+   * @summary Load More
+   * @method
+   *   @param {$.Event} event
+   */
+  'click li.loadMore button': (event) => {
+    check(event, $.Event);
+    check(event.target, Element);
 
-        // Get all results
-        Thriver.newsroom.quantity.set(0);
-        
-        // Hide "Load More Results" button
-        event.target.classList.add('hide');
-    },
-    
-    // Search field
-    'keyup  #searchNews, search #searchNews': handleSearch,
-    
-    /**
-     * @summary Prevent form submission
-     * @method
-     *   @param {$.Event} event
-     */
-    'submit form#searchNewsForm': function (event) {
-        check(event, $.Event);
+    // Get all results
+    Thriver.newsroom.quantity.set(0);
 
-        // Prevent form submission
-        event.preventDefault();
-    },
+    // Hide "Load More Results" button
+    event.target.classList.add('hide');
+  },
 
-    /** 
-     * @summary Show Add Newsroom Item form
-     * @method
-     *   @param {$.Event} event
-     */
-    'click aside.admin button.add': function (event) {
-        check(event, $.Event);
+  // Search field
+  'keyup  #searchNews, search #searchNews': handleSearch,
 
-        // Show form
-        document.querySelector('#newsForm').classList.remove('hide');
-    }
+  /**
+   * @summary Prevent form submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#searchNewsForm': (event) => {
+    check(event, $.Event);
+
+    // Prevent form submission
+    event.preventDefault();
+  },
+
+  /**
+   * @summary Show Add Newsroom Item form
+   * @method
+   *   @param {$.Event} event
+   */
+  'click aside.admin button.add': (event) => {
+    check(event, $.Event);
+
+    // Show form
+    document.querySelector('#newsForm').classList.remove('hide');
+  },
 });
 
 // Administrative events
 Template.list.events({
-    /**
-     * @summary Delete a newsroom item
-     * @method
-     *   @param {$.Event} event
-     */
-    'click article[role="document"] aside.admin button.delete': function (event) {
-        check(event, $.Event);
+  /**
+   * @summary Delete a newsroom item
+   * @method
+   *   @param {$.Event} event
+   */
+  'click article[role="document"] aside.admin button.delete': (event) => {
+    check(event, $.Event);
 
-        event.stopPropagation(); console.debug(this)
+    event.stopPropagation();
 
-        if ( confirm('Are you sure you want to delete this Newsroom Item?') )
-            Meteor.call('deleteNewsItem', this._id);
+    if (confirm('Are you sure you want to delete this Newsroom Item?')) {
+      Meteor.call('deleteNewsItem', Template.instance().data._id);
     }
+  },
 });
