@@ -20,6 +20,9 @@ Package.onUse((api) => {
     'lib/client/data/wisconsin_counties.kml',
   ], ['client']);
 
+  // Schema
+  api.addFiles('lib/schema.js', ['server', 'client']);
+
   // Server processing
   api.addFiles([
     'lib/providers.js',

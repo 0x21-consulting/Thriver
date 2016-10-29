@@ -15,15 +15,17 @@
   },
 
   "extends": [
-    "airbnb",
-    "plugin:meteor/recommended"
+    "airbnb"
+    //"plugin:meteor/recommended"
   ],
 
   "globals": {
     "Thriver": true,
     "SimpleSchema": true,
     "Marked": true,
-    "SHA256": true
+    "SHA256": true,
+    "google": true,
+    "geoXML3": true
   },
 
   "rules": {
