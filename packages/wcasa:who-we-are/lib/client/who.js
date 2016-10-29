@@ -14,7 +14,7 @@ Template.who.helpers({
    * @returns {Object}
    */
   sections: () => {
-    const children = Thriver.sections.get(Template.instance()._id, ['children']).children;
+    const children = Thriver.sections.get(Template.instance().data._id, ['children']).children;
     const tabs = [];
 
     // Populate tabs in the format desired

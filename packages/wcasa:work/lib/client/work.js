@@ -7,15 +7,15 @@
  *   @returns {string}
  */
 const getValue = (field) => {
-  check(field, String);                // Must be a String
+  check(field, String); // Must be a String
 
   // Meteor template helpers expect a function with a single variable
-  return () => {
-    const id = Template.instance().data.id || Template.instance().data._id;
+  return (id) => {
+    const thisId = id || Template.instance().data.id || Template.instance().data._id;
 
-    if (!id) return '';
+    if (!thisId) return '';
 
-    const result = Thriver.sections.get(id, [field]);
+    const result = Thriver.sections.get(thisId, [field]);
 
     if (result) return result[field];
 
@@ -289,16 +289,20 @@ Template.work.onRendered(() => {
         for (let i = 0; i < children.length; i += 1) {
           // Get section name
           const section = Thriver.sections.get(children[i], ['name']);
-          let name = section.name;
 
-          // Then sanitize section name
-          name = Thriver.sections.generateId(name);
+          // Do nothing if the section doesn't exist
+          if (section) {
+            let name = section.name;
 
-          // Add to link list and Recurse
-          sections[name] = getChildren(children[i]);
+            // Then sanitize section name
+            name = Thriver.sections.generateId(name);
 
-          // Add ID to list as well
-          sections[name]._id = section._id;
+            // Add to link list and Recurse
+            sections[name] = getChildren(children[i]);
+
+            // Add ID to list as well
+            sections[name]._id = section._id;
+          }
         }
 
         return sections;
