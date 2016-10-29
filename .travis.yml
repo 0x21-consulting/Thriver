@@ -1,0 +1,17 @@
+sudo: false
+
+language: node_js
+node_js: "4.1.1"
+
+before_install:
+    # install meteor
+    - "curl https://install.meteor.com | /bin/sh"
+
+    # because no sudo
+    - export PATH="$HOME/.meteor:$PATH"
+
+    # install spacejam for testing packages
+    #- "npm install -g spacejam"
+
+#script:
+    #- "spacejam test-packages ./"
