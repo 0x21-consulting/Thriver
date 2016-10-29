@@ -1,39 +1,38 @@
 Package.describe({
-    name: 'thriver:masthead',
-    version: '0.0.1-teal',
-    summary: 'Masthead component for Thriver CMS',
-    git: 'https://github.com/enove/Thriver.git',
-    documentation: 'README.md'
+  name: 'thriver:masthead',
+  version: '0.0.1-teal',
+  summary: 'Masthead component for Thriver CMS',
+  git: 'https://github.com/enove/Thriver.git',
+  documentation: 'README.md',
 });
 
-Package.onUse(function (api) {
-    api.versionsFrom('METEOR@1.0');
-    api.use([
-        'thriver:core',
-        'thriver:core-styles'
-    ]);
+Package.onUse((api) => {
+  api.versionsFrom('METEOR@1.0');
+  api.use([
+    'thriver:core',
+    'thriver:core-styles',
+  ]);
 
-    // Resources
-    api.addAssets([
+  // Resources
+  api.addAssets([
 
-    ], ['client']);
+  ], ['client']);
 
-    api.addFiles([
-        // Templates
-        'lib/templates/masthead.html',
+  api.addFiles([
+    // Templates
+    'lib/templates/masthead.html',
 
-        // Styles
-        'lib/templates/masthead.less',
+    // Styles
+    'lib/templates/masthead.less',
 
-        // Helpers and methods
-        'lib/masthead.js',
-    ], ['client']);
-
+    // Helpers and methods
+    'lib/masthead.js',
+  ], ['client']);
 });
 
-Package.onTest(function (api) {
-    api.use('ecmascript');
-    api.use('tinytest');
-    api.use('thriver:masthead');
-    api.mainModule('masthead-tests.js');
+Package.onTest((api) => {
+  api.use('ecmascript');
+  api.use('tinytest');
+  api.use('thriver:masthead');
+  // api.mainModule('masthead-tests.js');
 });
