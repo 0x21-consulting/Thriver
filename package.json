@@ -1,8 +1,15 @@
 {
   "name": "thriver-cms",
   "version": "0.0.1",
+  "description": "A free and open-source Content Management System for Non-Profit Organizations",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enove/Thriver.git"
+  },
+  "license": "MIT",
+
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint packages/"
   },
   
   "dependencies": {
