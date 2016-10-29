@@ -10,8 +10,14 @@ before_install:
     # because no sudo
     - export PATH="$HOME/.meteor:$PATH"
 
+    # install eslint and related packages for linting
+    - "meteor npm install babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-meteor eslint-plugin-react eslint-plugin-jsx-a11y eslint-import-resolver-meteor eslint"
+
     # install spacejam for testing packages
     #- "npm install -g spacejam"
 
 #script:
+    # lint time!
+    - "meteor npm run lint"
+
     #- "spacejam test-packages ./"
