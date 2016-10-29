@@ -162,11 +162,12 @@ AutoForm.addHooks(['addStaffPerson', 'addBoardPerson'], { before: {
     return doc;
   },
 },
-after: {
-  /** Close form after submission */
-  method: function () { // eslint-disable-line object-shorthand,func-names
-    // Can't use lambda expression because of `this` context
-    const button = this.event.target.parentElement.querySelector('button.close');
-    if (button instanceof Element) button.click();
+  after: {
+    /** Close form after submission */
+    method: function () { // eslint-disable-line object-shorthand,func-names
+      // Can't use lambda expression because of `this` context
+      const button = this.event.target.parentElement.querySelector('button.close');
+      if (button instanceof Element) button.click();
+    },
   },
-} });
+});

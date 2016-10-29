@@ -1,0 +1,29 @@
+sudo: required
+
+language: node_js
+node_js: "4.1.1"
+
+before_install:
+  # install meteor
+  - "curl -L https://git.io/ejPSng | /bin/sh"
+
+  # install spacejam for testing packages
+  #- "npm install -g spacejam"
+
+env:
+  - CXX=g++-4.8
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+services: mongodb
+
+script:
+  # lint time!
+  - meteor npm run lint
+
+  #- "spacejam test-packages ./"

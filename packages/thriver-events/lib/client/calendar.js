@@ -5,10 +5,8 @@
 Thriver.calendar = {};
 
 // TODO(micchickenburger): This should be internationalized
-Thriver.calendar.months =
-  ['January', 'February', 'March', 'April',
-   'May', 'June', 'July', 'August',
-   'September', 'October', 'November', 'December'];
+Thriver.calendar.months = ['January', 'February', 'March', 'April',
+  'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 // Current month and year
 Thriver.calendar.thisMonth = new ReactiveVar(new Date().getMonth());
