@@ -64,7 +64,7 @@
                 <header>
                     <h2>{{name}}</h2>
                     <address>{{address}}</address>
-                    <p class="county-served">Counties Served: {{providerCounties}}</p>
+                    <p class="county-served">Counties Served: {{providerCounties this}}</p>
                     <p class="crisis-line"><span class="fa">&#xf06a;</span><strong>Crisis Line:</strong> {{crisis}}</p>
                 </header>
                 <div class="main">
@@ -124,7 +124,7 @@
     <li>
         <div class="pad">
             <b>{{name}}</b><br>
-            {{counties}}
+            {{counties this}}
         </div>
     </li>
 </template>

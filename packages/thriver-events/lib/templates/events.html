@@ -111,7 +111,7 @@
         <div class="eventContainer">
             <div class="inner">
                 <header>
-                    <p class="eventDate">{{startDate}}</p>
+                    <p class="eventDate">{{startDate this}}</p>
                 </header>
                 <div class="main">
                     <h2>{{name}}
@@ -122,12 +122,12 @@
                             </aside>
                         {{/if}}
                     </h2>
-                    {{ #if numberSameDayEvents }}
+                    {{ #if numberSameDayEvents this }}
                         <aside class="otherEvents">
                         {{ #if isSingular }}
                             There is one other event on this date:
                         {{ else }}
-                            There are {{ numberSameDayEvents }} other events on this date:
+                            There are {{ numberSameDayEvents this }} other events on this date:
                         {{/if}}
                             <ul>
                                 {{#each sameDayEvents}}
@@ -137,7 +137,7 @@
                         </aside>
                     {{/if}}
                     <p class="excerpt">
-                        <b>{{startTime}}{{endTime}}: {{{ address }}}</b>
+                        <b>{{startTime this}}{{endTime this}}: {{{ address this }}}</b>
                     </p>
                     {{{ markdown description }}}
                 </div>
@@ -200,7 +200,7 @@
     <li>
         <h3>
             <a class="eventDate" href="#" data-id="{{_id}}">
-             {{ friendlyDate }} &mdash; <span>{{ name }}</span>
+             {{ friendlyDate this }} &mdash; <span>{{ name }}</span>
             </a>
         </h3>
         <ul class="actions">

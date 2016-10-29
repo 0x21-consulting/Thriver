@@ -1,12 +1,6 @@
 <template name="profile">
     <header><h2>{{heading}}</h2></header>
     <form>
-		<!--{{#each items}}
-			<label for ="{{id}}">{{title}}</label>
-			<input id="{{id}}" type="{{type}}" name="{{id}}" value="{{value}}" {{disabled}} {{required}} />
-		{{/each}}
-        <input type="submit" value="{{submitValue}}">-->
-
         {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update" 
             omitFields=omitFields fields="profile" }}
     </form>

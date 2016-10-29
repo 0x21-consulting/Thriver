@@ -3,60 +3,41 @@
  * @method
  *   @param {$.Event} event
  */
-var toggleTabs = function (event) {
-	check(event, $.Event);
+const toggleTabs = (event) => {
+  check(event, $.Event);
 
-	event.preventDefault();
+  event.preventDefault();
 
-	// Tabs Variables
-	var menu     = event.target.parentNode.parentNode,
-		links    = menu.querySelectorAll('[aria-controls][data-toggle=tabs]'),
-		sections = menu.parentNode.querySelectorAll('div.tabs [aria-hidden]');
+  // Tabs Variables
+  const menu = event.target.parentNode.parentNode;
+  const links = menu.querySelectorAll('[aria-controls][data-toggle=tabs]');
+  const sections = menu.parentNode.querySelectorAll('div.tabs [aria-hidden]');
 
-	// Remove active state from all links
-	for (let i = 0; i < links.length; ++i)
-		Thriver.util.makeActive(links[i], false);
-	
-	// Hide all sections
-	for (let i = 0; i < sections.length; ++i)
-		Thriver.util.hide(sections[i], true);
-        
-    // Set link as active
-    Thriver.util.makeActive(event.target, true);
+  // Remove active state from all links
+  for (let i = 0; i < links.length; i += 1) Thriver.util.makeActive(links[i], false);
 
-    // Set section as active
-    Thriver.util.hide( menu.parentElement.querySelector('article[data-id="' + 
-        event.target.dataset.id + '"]'), false);
+  // Hide all sections
+  for (let i = 0; i < sections.length; i += 1) Thriver.util.hide(sections[i], true);
 
-    // Special case for Library??  Why??
-    switch ( event.target.getAttribute('aria-controls') ) {
-        case '#library':
-            document.querySelector('aside.filter').classList.add('active-filter'); break;
-        default:
-            document.querySelector('aside.filter').classList.remove('active-filter');
-    }
+  // Set link as active
+  Thriver.util.makeActive(event.target, true);
+
+  // Set section as active
+  Thriver.util.hide(menu.parentElement
+    .querySelector(`article[data-id="${event.target.dataset.id}"]`), false);
+
+  // Special case for Library??  Why??
+  switch (event.target.getAttribute('aria-controls')) {
+    case '#library':
+      document.querySelector('aside.filter').classList.add('active-filter'); break;
+    default:
+      document.querySelector('aside.filter').classList.remove('active-filter');
+  }
 };
 
 Template.body.events({
-    //Tabs
-    'click [data-toggle=tabs]': toggleTabs
-});
-
-/**
- * @summary On Render, click first menu item
- * @method
- */
-Template.tabs.onRendered(function () {
-	var toggleMenus;
-
-	if (window.innerWidth > 767)
-		toggleMenus = document.querySelectorAll('menu.tabs');
-	if (window.innerWidth < 768)
-		toggleMenus = document.querySelectorAll('#main #masthead menu.tabs');
-
-	// For each toggle menu, select the first one
-	//for (let i = 0; i < toggleMenus.length; ++i)
-	//	toggleMenus[i].querySelector('[data-toggle="tabs"]').click();
+  // Tabs
+  'click [data-toggle=tabs]': toggleTabs,
 });
 
 /**
@@ -64,31 +45,37 @@ Template.tabs.onRendered(function () {
  * @method
  *   @param {Event} event - KeyboardEvent passed to handler
  */
-var handler = function (event) {
-    var id, name;
+const handler = (event) => {
+  check(event, Event);
 
-    check(event, Event);
-    event.stopPropagation();
+  event.stopPropagation();
 
-    if (event.which)
-        if (event.which === 13) {
-            this.blur();
-            return false;
-        } else return;
+  const target = event.target;
 
-    // Get section ID
-    id = this.parentElement.dataset.id;
-    name = this.textContent;
-    
-    // Remove editability
-    this.contentEditable = false;
-
-    // Add to db
-    if ( this.dataset.hash !== SHA256(name) ) {
-        this.textContent = '';
-        Meteor.call('updateSectionName', id, name);
+  if (event.which) {
+    if (event.which === 13) {
+      target.blur();
+      return false;
     }
-},
+
+    return false;
+  }
+
+  // Get section ID
+  const id = this.parentElement.dataset.id;
+  const name = this.textContent;
+
+  // Remove editability
+  target.contentEditable = false;
+
+  // Add to db
+  if (target.dataset.hash !== SHA256(name)) {
+    target.textContent = '';
+    Meteor.call('updateSectionName', id, name);
+  }
+
+  return false;
+};
 
 /**
  * Handler for updating section content
@@ -96,148 +83,147 @@ var handler = function (event) {
  *   @param {string} oldHash - SHA256 hash of original markdown
  *     to detect if there was a change
  */
-updateSectionContent = function (oldHash) {
-    check(oldHash, String);
+const updateSectionContent = (oldHash) => {
+  check(oldHash, String);
 
-    /**
-     * Handler for updating section content
-     * @method
-     *   @param {Event} event - Click event passed to handler
-     */
-    return function (event) {
-        check(event, Event);
+  /**
+   * Handler for updating section content
+   * @method
+   *   @param {Event} event - Click event passed to handler
+   */
+  return (event) => {
+    check(event, Event);
 
-        event.stopPropagation();
-        event.preventDefault();
+    event.stopPropagation();
+    event.preventDefault();
 
-        var parent = event.target.parentElement, element,
+    const parent = event.target.parentElement;
 
-        // Get section ID
-        id = parent.dataset.id,
-		content = parent.querySelector('textarea').value,
-		newHash = SHA256(content);
-        
-        // Don't commit if nothing changed
-        if (newHash !== oldHash)
-            Meteor.call('updateSectionData', id, { content: content });
+    // Get section ID
+    const id = parent.dataset.id;
+    const content = parent.querySelector('textarea').value;
+    const newHash = SHA256(content);
 
-        // Restore view
-        parent.classList.remove('edit');
-        parent.querySelector('textarea').remove();
-        parent.querySelector(':scope > button').remove();
-    };
+    // Don't commit if nothing changed
+    if (newHash !== oldHash) Meteor.call('updateSectionData', id, { content });
+
+    // Restore view
+    parent.classList.remove('edit');
+    parent.querySelector('textarea').remove();
+    parent.querySelector(':scope > button').remove();
+  };
 };
 
 // Administrative bindings
 Template.tabs.events({
-    /**
-     * @summary Add a list item
-     * @method
-     *   @param {$.Event} event
-     */
-    'click [editable!="false"] button.add': function (event) {
-        check(event, $.Event);
+  /**
+   * @summary Add a list item
+   * @method
+   *   @param {$.Event} event
+   */
+  'click [editable!="false"] button.add': (event) => {
+    check(event, $.Event);
 
-        event.preventDefault();
+    event.preventDefault();
 
-        var id = event.target.parentElement.parentElement.dataset.id;
+    const id = event.target.parentElement.parentElement.dataset.id;
 
-        Meteor.call('addOpportunity', id, {
-            title: 'New Opportunity',
-            content: ''
-        });
-    },
+    Meteor.call('addOpportunity', id, {
+      title: 'New Opportunity',
+      content: '',
+    });
+  },
 
-    /**
-     * Edit section name
-     * @method
-     *   @param {$.Event} event - jQuery Event handle
-     */
-    'click [editable!="false"] h2': function (event) {
-        check(event, $.Event);
+  /**
+   * Edit section name
+   * @method
+   *   @param {$.Event} event - jQuery Event handle
+   */
+  'click [editable!="false"] h2': (event) => {
+    check(event, $.Event);
 
-        event.preventDefault();
-        event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
-        // Make content editable to allow user to change
-        event.target.contentEditable = true;
+    const target = event.target;
 
-        // Calculate SHA hash to detect whether a change was made
-        event.target.dataset.hash = SHA256(event.target.textContent);
+    // Make content editable to allow user to change
+    target.contentEditable = true;
 
-        // On blur or on enter, submit name change
-        event.target.addEventListener('blur',  handler);
-        event.target.addEventListener('keypress', handler);
-    },
+    // Calculate SHA hash to detect whether a change was made
+    target.dataset.hash = SHA256(target.textContent);
 
-    /**
-     * Delete a section
-     * @method
-     *   @param {$.Event} event - jQuery Event handle
-     */
-    'click div.tabs > article[editable!="false"] > aside.admin > button.delete': function (event) {
-        var link, parent;
+    // On blur or on enter, submit name change
+    event.target.addEventListener('blur', handler);
+    event.target.addEventListener('keypress', handler);
+  },
 
-        check(event, $.Event);
+  /**
+   * Delete a section
+   * @method
+   *   @param {$.Event} event - jQuery Event handle
+   */
+  'click div.tabs > article[editable!="false"] > aside.admin > button.delete': (event) => {
+    check(event, $.Event);
 
-        event.preventDefault();
-        event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
-        // Get Nav link
-        link = event.delegateTarget.parentElement.querySelector('menu [data-id="' 
-            + this.id + '"]').parentElement.parentElement;
-        
-        // If the nav link has a parent with an ID, this is a tab
-        if (link.dataset.id)
-            parent = link.dataset.id;
-        else
-            // Otherwise parent is just the work section
-            parent = event.delegateTarget.parentElement.parentElement.dataset.id;
+    // Get Nav link
+    const link = event.delegateTarget.parentElement
+      .querySelector(`menu [data-id="${this.id}"]`).parentElement.parentElement;
 
-        // Warn
-        if ( !window.confirm('Are you sure you want to delete this section?') )
-            return;
-        
-        // First, remove reference to parent element
-        // first parameter is parent ID, second this ID
-        Meteor.call('removeChild', parent, this.id);
+    let parent;
 
-        // Then delete this section
-        Meteor.call('deleteSection', this.id);
-    },
+    // If the nav link has a parent with an ID, this is a tab
+    if (link.dataset.id) parent = link.dataset.id;
 
-    /**
-     * Edit section markdown
-     * @method
-     *   @param {$.Event} event - jQuery event handler
-     */
-    'click [editable!="false"] button.edit': function (event) {
-        check(event, $.Event);
+    // Otherwise parent is just the work section
+    else parent = event.delegateTarget.parentElement.parentElement.dataset.id;
 
-        event.preventDefault();
-        event.stopPropagation();
+    // Warn
+    if (!window.confirm('Are you sure you want to delete this section?')) return;
 
-        // Get section to edit
-        var section = event.delegateTarget.querySelector('article[aria-hidden="false"]'),
-            content = section.querySelector(':scope section'),
-            parent  = content.parentElement,
+    // First, remove reference to parent element
+    // first parameter is parent ID, second this ID
+    Meteor.call('removeChild', parent, this.id);
 
-        // Create a textarea element through which to edit markdown
-        textarea = document.createElement('textarea'),
+    // Then delete this section
+    Meteor.call('deleteSection', this.id);
+  },
 
-        // Button by which to okay changes and commit to db
-        button = document.createElement('button');
-        button.textContent = 'Save';
-        button.addEventListener('mouseup', 
-            // Pass along hash of existing markdown
-            updateSectionContent(content.dataset.hash));
+  /**
+   * Edit section markdown
+   * @method
+   *   @param {$.Event} event - jQuery event handler
+   */
+  'click [editable!="false"] button.edit': (event) => {
+    check(event, $.Event);
 
-        // Textarea should get markdown
-        textarea.textContent = Thriver.sections.get(this.id, ['data']).data.content;
+    event.preventDefault();
+    event.stopPropagation();
 
-        // Add textarea but hide preview
-        parent.classList.add('edit');
-        parent.appendChild(textarea);
-        parent.appendChild(button);
-    }
+    // Get section to edit
+    const section = event.delegateTarget.querySelector('article[aria-hidden="false"]');
+    const content = section.querySelector(':scope section');
+    const parent = content.parentElement;
+
+    // Create a textarea element through which to edit markdown
+    const textarea = document.createElement('textarea');
+
+    // Button by which to okay changes and commit to db
+    const button = document.createElement('button');
+    button.textContent = 'Save';
+    button.addEventListener('mouseup',
+      // Pass along hash of existing markdown
+      updateSectionContent(content.dataset.hash));
+
+    // Textarea should get markdown
+    textarea.textContent = Thriver.sections.get(event.target.id, ['data']).data.content;
+
+    // Add textarea but hide preview
+    parent.classList.add('edit');
+    parent.appendChild(textarea);
+    parent.appendChild(button);
+  },
 });

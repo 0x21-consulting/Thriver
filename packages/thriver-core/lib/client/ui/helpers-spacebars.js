@@ -1,18 +1,9 @@
-//Spacebars helpers for particular template actions/controls
-//Value equals
-Template.registerHelper('equals', function (a, b) {
-    return a === b;
-});
+// Spacebars helpers for particular template actions/controls
+// Value equals
+Template.registerHelper('equals', (a, b) => a === b);
 
-//Value equals or...
-Template.registerHelper("equals_or", function(param, arr) {
-    arr = arr.split(",");
-    if (arr.indexOf(param) !== -1) {
-        return true;
-    } else {
-        return false;
-    }
-});
+// Value equals or...
+Template.registerHelper('equals_or', (param, arr) => arr.split(',').indexOf(param) !== -1);
 
 /**
  * @summary Produce a Friendly Date string
@@ -21,20 +12,17 @@ Template.registerHelper("equals_or", function(param, arr) {
  * @returns {String}
  */
 Template.registerHelper('friendlyDate', (date) => {
-    // If string, convert to date
-    if ( !(date instanceof Date) )
-        date = new Date(date);
+  // If string, convert to date
+  const newDate = date instanceof Date ? date : new Date(date);
 
-    check(date, Date);
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+    'Friday', 'Saturday', 'Sunday'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'December'];
 
-    var days   = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                    'Friday', 'Saturday', 'Sunday'],
-        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-                    'August', 'September', 'October', 'November', 'December'];
-
-    // Create friendly date string
-    return days[date.getDay()] + ', ' + date.getDate() + ' ' +
-        months[date.getMonth()] + ' ' + date.getFullYear();
+  // Create friendly date string
+  return `${days[newDate.getDay()]}, ${newDate.getDate()} ${months[newDate.getMonth()]} \
+    ${newDate.getFullYear()}`;
 });
 
 /**
@@ -43,18 +31,15 @@ Template.registerHelper('friendlyDate', (date) => {
  *   @param {Date} date
  * @returns {String}
  */
- Template.registerHelper('ISODate', (date) => {
-    // If string, convert to date
-    if ( !(date instanceof Date) )
-        date = new Date(date);
+Template.registerHelper('ISODate', (date) => {
+  // If string, convert to date
+  const newDate = date instanceof Date ? date : new Date(date);
 
-    check(date, Date);
-
-    return date.toISOString();
+  return newDate.toISOString();
 });
 
-
 // debug
-Template.registerHelper('debug', function (stuff) {
-    console.debug(stuff);
+// TODO(micchickenburger): Remove for production
+Template.registerHelper('debug', (stuff) => {
+  console.debug(stuff);
 });
