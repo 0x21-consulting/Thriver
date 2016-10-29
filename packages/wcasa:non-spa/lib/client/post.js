@@ -4,181 +4,142 @@
  *   @param {string} oldHash - SHA256 hash of original markdown
  *     to detect if there was a change
  */
-let updateContent = function (oldHash) {
-    check(oldHash, String);
+const updateContent = (oldHash) => {
+  check(oldHash, String);
 
-    /**
-     * Handler for updating content
-     * @method
-     *   @param {Event} event - Click event passed to handler
-     */
-    return function (event) {
-        check(event, Event);
+  /**
+   * Handler for updating content
+   * @method
+   *   @param {Event} event - Click event passed to handler
+   */
+  return (event) => {
+    check(event, Event);
 
-        event.stopPropagation();
-        event.preventDefault();
+    event.stopPropagation();
+    event.preventDefault();
 
-        var parent = event.target.parentElement, element;
+    const parent = event.target.parentElement;
 
-        // Get section ID
-        var id = this.parentElement.querySelector('section').dataset.id,
-            content = this.parentElement.querySelector('textarea').value,
-            newHash = SHA256(content);
-        
-        // Don't commit if nothing changed
-        if (newHash !== oldHash)
-            Meteor.call('updateNewsContent', id, content);
+    // Get section ID
+    const id = event.target.parentElement.querySelector('section').dataset.id;
+    const content = this.parentElement.querySelector('textarea').value;
+    const newHash = SHA256(content);
 
-        // Restore view
-        parent.classList.remove('edit');
-        parent.querySelector('textarea').remove();
-        parent.querySelector(':scope > button').remove();
-    };
+    // Don't commit if nothing changed
+    if (newHash !== oldHash) Meteor.call('updateNewsContent', id, content);
+
+    // Restore view
+    parent.classList.remove('edit');
+    parent.querySelector('textarea').remove();
+    parent.querySelector(':scope > button').remove();
+  };
 };
 
 /** Helpers */
 Template.post.helpers({
-	/**
-	 * @summary SHA-256 Hash of content for use in change detection
-	 * @function
-	 * @returns {String}
-	 */
-	hash: function () {
-		let content = Thriver.newsroom.collection.findOne({ _id: this._id }, {
-			content: 1 });
-		
-		// Sometimes this helper executes before the collection is ready
-		// If so, just return and wait for the rerun
-		if (!content) return;
+  /**
+   * @summary SHA-256 Hash of content for use in change detection
+   * @function
+   * @returns {String}
+   */
+  hash: () => {
+    let content = Thriver.newsroom.collection.findOne({ _id: this._id }, {
+      content: 1 });
 
-		// Get content
-		content = content.content;
+    // Sometimes this helper executes before the collection is ready
+    // If so, just return and wait for the rerun
+    if (!content) return '';
 
-		if (content)
-			return SHA256(content);
-		return '';
-	},
+    // Get content
+    content = content.content;
 
-	home: {
-		url: '/',
-		text: 'Back to WCASA'
-	},
-	share : [{
-		title: 'Tweet',
-		icon: '&#xf099;',
-		url: 'https://twitter.com/intent/tweet?url=' + window.location.href
-	},{
-		title : 'Share on Facebook',
-		icon: '&#xf082;',
-		url: 'https://www.facebook.com/sharer/sharer.php?&u=' + window.location.href
-	},{
-		title: 'Share on Google+',
-		icon: '&#xf0d5;',
-		url: 'https://plus.google.com/share?url=' + window.location.href
-	},{
-		title: 'Print',
-		icon: '&#xf02f;',
-		print: true,
-		url: '#'
-	}],
-	testData : {
-		title: 'Bill Targets Transgendered Students',
-		id: 'post1',
-		category: 'news',
-		logos: [{
-			title: 'WCASA',
-			src: '/lib/img/wisconsin-coalition-against-sexual-assault.png',
-			url: 'http://www.wcasa.org'
-		},{
-			title: 'EDAW',
-			src: '/lib/img/edaw.png',
-			url: 'http://www.endabusewi.org/'
-		}],
-		content: ' <p>The purpose of this HTML is to accomodate all types of content entry by administrator. All of the containing content styles are applied to any parent element containing the class, "textBody".</p><hr> <h1>Heading 1</h1> <h2>Heading 2</h2> <h3>Heading 3</h3> <h4>Heading 4</h4> <h5>Heading 5</h5> <hr> <h2>Paragraph and Inline/Misc Elements – b, strong, img, map, object, sub, sup, cite, anchor, emphasis, bold, underline, blockquote.</h2> <p> Lorem ipsum dolor sit amet, <a href="#" title="test link">test link</a> adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. </p><p> Lorem <sup>superscript</sup> dolor <sub>subscript</sub> amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. <cite>cite</cite>. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, <a href="#">gravida vehicula</a>, nisl. Praesent mattis, <b>massa quis luctus</b> fermentum, <strong>turpis mi volutpat justo,</strong> eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. <em>Suspendisse quam sem</em>, consequat at, <u>commodo vitae</u>, feugiat in, nunc. Morbi imperdiet augue quis tellus. <img src="lib/img.jpg" alt=""/> Neu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. </p><blockquote> <p> "An app in the making" <br>-Unknown </p></blockquote> <hr> <h2>List Types</h2> <h3>Definition List</h3> <dl> <dt>Definition List Title</dt> <dd>This is a definition list division.</dd> </dl> <h3>Ordered List</h3> <ol> <li>List Item 1</li><li>List Item 2</li><li>List Item 3</li></ol> <h3>Unordered List</h3> <ul> <li>List Item 1</li><li>List Item 2 <ul> <li>List inner a</li><li>List inner b</li><li>List inner c</li></ul> </li><li>List Item 3</li></ul> <hr> <h2>Forms</h2> <form> <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. </p><label for="text_field">Text Field:</label> <input type="text" id="text_field"> <label for="text_area">Text Area:</label> <textarea id="text_area"></textarea> <label for="select_element">Select Element:</label> <select name="select_element"> <option value="1">Option 1</option> <option value="2">Option 2</option> <option value="3">Option 3</option> </select> <h3>A selection</h3> <input id="radio1" type="radio" name="amount" value="25"/> <label for="radio1" class="radio">$25</label> <input id="radio2" type="radio" name="amount" value="50"/> <label for="radio2" class="radio">$50</label> <input id="radio3" type="radio" name="amount" value="100" checked/> <label for="radio3" class="radio">$100</label> <input id="radio4" type="radio" name="amount" value="200"/> <label for="radio4" class="radio">$200</label> <h3>Another Selection</h3> <input id="check1" type="checkbox" name="amount" value="25"/> <label for="check1">$25</label> <input id="check2" type="checkbox" name="amount" value="50"/> <label for="check2">$50</label> <input id="check3" type="checkbox" name="amount" value="75"/> <label for="check3">$75</label> <label for="file">File Input:</label> <input type="file" class="file" name="file"> <input class="button" type="reset" value="Clear"> <input class="button" type="submit" value="Submit"> </form> <hr> <h2>Tables</h2> <table> <tbody> <tr> <th>Table Header 1</th> <th>Table Header 2</th> <th>Table Header 3</th> </tr><tr> <td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr> <td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr> <td>Division 1</td><td>Division 2</td><td>Division 3</td></tr></tbody> </table>'
-	},
-	footer : {
-		media : {
-			title: 'Media Contacts',
-			contact: [{
-				name: 'Dominic Holt',
-				org: 'WCASA',
-				phone: '608-257-1516',
-				phoneExt: '113',
-				email: 'dominich@wcasa.org'
-			}/*,{
-				name: 'Tony Gibart',
-				org: 'EDAW',
-				phone: '608-237-3452',
-				email: 'tonyg@endabusewi.org'
-			}*/]
-		},
-		about: [/*{
-			content: '<p>End Domestic Abuse Wisconsin (<a href="www.endabusewi.org" target="_blank">www.endabusewi.org</a>) is the leading voice for victims of domestic abuse in Wisconsin. At End Domestic Abuse Wisconsin, we educate shelter and program volunteers and advocates, law enforcement, legislators, and community members to provide safety and support to survivors. We strive to shift Wisconsin from the attitudes and beliefs that cause domestic violence to values of mutual respect and equality, and we partner with communities in the effort to prevent and end domestic abuse.</p>'
-		},*/{
-			content: '<p>The Wisconsin Coalition Against Sexual Assault (WCASA, <a href="www.wcasa.org" target="_blank">www.wcasa.org</a>) is a membership agency comprised of organizations and individuals working to end sexual violence in Wisconsin. Among these are the 51 sexual assault service provider agencies throughout the state that offer support, advocacy and information to survivors of sexual assault and their families. WCASA works to ensure that every survivor in Wisconsin gets the support and care they need. WCASA also works to create the social change necessary to ensure a future where no child, woman or man is ever sexually violated again.</p>'
-		}],
-		social : [{
-			id: 'Twitter',
-			icon: '&#xf099;',
-			url: 'https://twitter.com/wcasa_org'
-		},{
-			id: 'Facebook',
-			icon: '&#xf082;',
-			url: 'https://www.facebook.com/wcasa'
-		},{
-			id: 'YouTube',
-			icon: '&#xf16a;',
-			url: 'https://www.youtube.com/user/WCASAVPCC'				
-		}]
-	}
+    if (content) return SHA256(content);
+
+    return '';
+  },
+
+  home: {
+    url: '/',
+    text: 'Back to WCASA',
+  },
+  share: [{
+    title: 'Tweet',
+    icon: '&#xf099;',
+    url: `https://twitter.com/intent/tweet?url=${window.location.href}`,
+  }, {
+    title: 'Share on Facebook',
+    icon: '&#xf082;',
+    url: `https://www.facebook.com/sharer/sharer.php?&u=${window.location.href}`,
+  }, {
+    title: 'Share on Google+',
+    icon: '&#xf0d5;',
+    url: `https://plus.google.com/share?url=${window.location.href}`,
+  }, {
+    title: 'Print',
+    icon: '&#xf02f;',
+    print: true,
+    url: '#',
+  }],
+  footer: {
+    media: {
+      title: 'Media Contacts',
+      contact: [{
+        name: 'Dominic Holt',
+        org: 'WCASA',
+        phone: '608-257-1516',
+        phoneExt: '113',
+        email: 'dominich@wcasa.org',
+      }],
+    },
+    about: [],
+    social: [{
+      id: 'Twitter',
+      icon: '&#xf099;',
+      url: 'https://twitter.com/wcasa_org',
+    }, {
+      id: 'Facebook',
+      icon: '&#xf082;',
+      url: 'https://www.facebook.com/wcasa',
+    }, {
+      id: 'YouTube',
+      icon: '&#xf16a;',
+      url: 'https://www.youtube.com/user/WCASAVPCC',
+    }],
+  },
 });
-
-//Fallback shares
-//http://justmeteor.com/blog/implement-your-own-social-share-buttons/
-//Will not work locally
-/*UI.registerHelper('twitterShareLink', function() {
-    return 'https://twitter.com/intent/tweet?url=' + window.location.href + '&text=' + document.title;
-});
-
-UI.registerHelper('facebookShareLink', function() {
-    return 'https://www.facebook.com/sharer/sharer.php?&u=' + window.location.href;
-});
-
-UI.registerHelper('googlePlusShareLink', function() {
-    return 'https://plus.google.com/share?url=' + window.location.href;
-});*/
 
 /** Bind Post Template events */
 Template.post.events({
-	/**
-	 * @summary Edit a post
-	 * @method
-	 *   @param {$.Event} event
-	 */
-	'click aside.admin button.edit': function (event) {
-		check(event, $.Event);
+  /**
+   * @summary Edit a post
+   * @method
+   *   @param {$.Event} event
+   */
+  'click aside.admin button.edit': (event) => {
+    check(event, $.Event);
 
-		// Get section to edit
-        var content = document.body.querySelector(`[data-id="${this._id}"]`),
-            parent  = content.parentElement,
+    // Get section to edit
+    const data = Template.instance().data;
+    const content = document.body.querySelector(`[data-id="${data._id}"]`);
+    const parent = content.parentElement;
 
-        // Create a textarea element through which to edit markdown
-        textarea = document.createElement('textarea'),
+    // Create a textarea element through which to edit markdown
+    const textarea = document.createElement('textarea');
 
-        // Button by which to okay changes and commit to db
-        button = document.createElement('button');
-        button.textContent = 'Save';
-        button.addEventListener('mouseup', 
-            // Pass along hash of existing markdown
-            updateContent(content.dataset.hash));
+    // Button by which to okay changes and commit to db
+    const button = document.createElement('button');
+    button.textContent = 'Save';
+    button.addEventListener('mouseup',
+      // Pass along hash of existing markdown
+      updateContent(content.dataset.hash));
 
-        // Textarea should get markdown
-        textarea.textContent = Thriver.newsroom.collection.findOne(
-			{ _id: this._id }, { content: 1 }).content;
+    // Textarea should get markdown
+    textarea.textContent = Thriver.newsroom.collection.findOne(
+      { _id: data._id }, { content: 1 }).content;
 
-        // Add textarea but hide preview
-        parent.classList.add('edit');
-        parent.appendChild(textarea);
-        parent.appendChild(button);
-	}
+    // Add textarea but hide preview
+    parent.classList.add('edit');
+    parent.appendChild(textarea);
+    parent.appendChild(button);
+  },
 });

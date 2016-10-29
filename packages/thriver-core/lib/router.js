@@ -13,7 +13,8 @@ Router.route('action-alert', {
   /**
    * @summary Data to pass to template
    */
-  data: () => {
+  data: function () { // eslint-disable-line object-shorthand,func-names
+    // Can't use lambda expression because of `this` context
     if (!this.ready()) return undefined;
 
     let item;
@@ -44,7 +45,8 @@ Router.route('action-alert', {
   /**
    * @summary Render template
    */
-  action: () => {
+  action: function () { // eslint-disable-line object-shorthand,func-names
+    // Can't use lambda expression because of `this` context
     if (this.ready()) this.render();
   },
 });
@@ -64,7 +66,8 @@ Router.route('press-release', {
   /**
    * @summary Data to pass to template
    */
-  data: () => {
+  data: function () { // eslint-disable-line object-shorthand,func-names
+    // Can't use lambda expression because of `this` context
     if (!this.ready()) return undefined;
 
     let item;
@@ -95,7 +98,8 @@ Router.route('press-release', {
   /**
    * @summary Render template
    */
-  action: () => {
+  action: function () { // eslint-disable-line object-shorthand,func-names
+    // Can't use lambda expression because of `this` context
     if (this.ready()) this.render();
   },
 });
