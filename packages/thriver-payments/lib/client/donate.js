@@ -116,7 +116,7 @@ Template.donate.events({
               switch (details[i].issue) {
                 case 'Invalid expiration (cannot be in the past)':
                   donateException(form.year,
-                                        'Expiration date cannot be in the past');
+                    'Expiration date cannot be in the past');
                   break;
                 case 'The credit card number is not valid for the specified credit card type':
                 case 'Value is invalid':
@@ -134,7 +134,7 @@ Template.donate.events({
                   break;
                 case 'Amount cannot be zero':
                   donateException(form.querySelector('#customAmt'),
-                                        'Donation amount must be greater than zero');
+                    'Donation amount must be greater than zero');
                   break;
                 case 'The cvv2 length is invalid for the specified credit card type':
                   donateException(form.cvv2, 'Invalid CVV2 Code');
