@@ -88,7 +88,7 @@ Template.pastEventsList.helpers({
 
     // Count of all previous events
     let count = Thriver.events.collection.find({ start: {
-      $lt: new Date(year, month, date) }}).count();
+      $lt: new Date(year, month, date) } }).count();
 
     const futureEvents = [];
 
@@ -143,7 +143,7 @@ Template.upcomingEventsList.helpers({
 
     // Count of all future events
     let count = Thriver.events.collection.find({ start: {
-      $gte: new Date(year, month) }}).count();
+      $gte: new Date(year, month) } }).count();
 
     const futureEvents = [];
 

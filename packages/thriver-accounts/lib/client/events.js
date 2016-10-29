@@ -21,7 +21,7 @@ Template.eventsRegistered.helpers({
     title: '"Events of Some other Events',
     // Ideally used for moving the focus of the UI to actual
     // event item in learning center.
-    id: 'event1025', 
+    id: 'event1025',
     dateTime: '2008-02-14 20:00',
     friendlyDate: 'November 22, 2015',
   }],
