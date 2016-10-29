@@ -1,23 +1,32 @@
-sudo: false
+sudo: required
 
 language: node_js
-node_js: "4.1.1"
+node_js: "0.12"
 
 before_install:
-    # install meteor
-    - "curl https://install.meteor.com | /bin/sh"
+  # install meteor
+  - "curl -L https://git.io/ejPSng | /bin/sh"
 
-    # because no sudo
-    - export PATH="$HOME/.meteor:$PATH"
+  # install eslint and related packages for linting
+  - "meteor npm install babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-meteor eslint-plugin-react eslint-plugin-jsx-a11y eslint-import-resolver-meteor eslint"
 
-    # install eslint and related packages for linting
-    - "meteor npm install babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-meteor eslint-plugin-react eslint-plugin-jsx-a11y eslint-import-resolver-meteor eslint"
+  # install spacejam for testing packages
+  #- "npm install -g spacejam"
 
-    # install spacejam for testing packages
-    #- "npm install -g spacejam"
+env:
+  - CXX=g++-4.8
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+services: mongodb
 
 script:
-    # lint time!
-    - "meteor npm run lint"
+  # lint time!
+  - meteor npm run lint
 
-    #- "spacejam test-packages ./"
+  #- "spacejam test-packages ./"
