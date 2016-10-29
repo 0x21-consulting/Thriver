@@ -69,8 +69,7 @@ Template.subscriptions.helpers({
 
         return false;
       },
-    },
-        ],
+    }],
   }, {
     heading: 'Mailing Lists (Listservs)',
     items: [{
