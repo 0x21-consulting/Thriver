@@ -7,9 +7,6 @@ before_install:
   # install meteor
   - "curl -L https://git.io/ejPSng | /bin/sh"
 
-  # install eslint and related packages for linting
-  - "meteor npm install babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-meteor eslint-plugin-react eslint-plugin-jsx-a11y eslint-import-resolver-meteor eslint"
-
   # install spacejam for testing packages
   #- "npm install -g spacejam"
 
