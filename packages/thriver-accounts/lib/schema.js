@@ -1,4 +1,16 @@
 /**
+ * @summary Notifications namespace
+ * @namespace Thriver.notifications
+ */
+Thriver.notifications = {};
+
+/**
+ * @summary Notifications collection
+ * @type {Mongo.Collection}
+ */
+Thriver.notifications.collection = new Mongo.Collection('notifications');
+
+/**
  * @summary Profile namespace
  * @namespace Thriver.accounts
  */

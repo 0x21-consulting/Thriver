@@ -1,6 +1,3 @@
-// Notifications
-const Notifications = new Mongo.Collection('notifications');
-
 // Structure
 //   _id         {string}      auto_incr
 //   template    {string}
@@ -14,10 +11,10 @@ const Notifications = new Mongo.Collection('notifications');
 //   templateRenewal        renewal notice
 
 // Publish notifications
-Meteor.publish('notifications', function () {
+Meteor.publish('notifications', () => {
   // If the user is logged in
   if (this.userId) {
-    return Notifications.find({ userId: this.userId });
+    return Thriver.notifications.collection.find({ userId: this.userId });
   }
 
   // Not logged in
@@ -45,7 +42,7 @@ Meteor.methods({
     check(text, String);
 
     // Add notification
-    Notifications.insert({
+    Thriver.notifications.collection.insert({
       template,
       text,
       href,

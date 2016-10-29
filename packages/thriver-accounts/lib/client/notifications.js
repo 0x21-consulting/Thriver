@@ -1,18 +1,16 @@
 // Subscribe to notifications
 Meteor.subscribe('notifications');
 
-// Create collection of notifications subscribed
-const Notifications = new Mongo.Collection('notifications');
-
 // Number of notifications
-const count = new ReactiveVar(0);
+Thriver.notifications.count = new ReactiveVar(0);
 
 // Update page title with notifications count
 const updateTitle = () => {
   const title = 'WCASA | Wisconsin Coalition Against Sexual Assault';
 
-  if (count.get() > 0) document.title = `(${count.get()}) - ${title}`;
-  else document.title = title;
+  if (Thriver.notifications.count.get() > 0) {
+    document.title = `(${Thriver.notifications.count.get()}) - ${title}`;
+  } else document.title = title;
 };
 
 // Notification helpers
@@ -23,7 +21,7 @@ Template.notifications.helpers({
   // Return all notifications
   notifications: () => {
     // Notifications from db (manually issued)
-    const notifs = Notifications.find({}).fetch();
+    const notifs = Thriver.notifications.collection.find({}).fetch();
 
     // Ation alerts since last login
     const alerts = Thriver.newsroom.collection.find(
@@ -41,7 +39,7 @@ Template.notifications.helpers({
       'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // Update total count
-    count.set(all.length);
+    Thriver.notifications.count.set(all.length);
 
     // Update title
     updateTitle();
