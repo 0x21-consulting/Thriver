@@ -1,5 +1,5 @@
-@import "{thriver:core-styles}/lib/index.less";
-@import "{thriver:core-styles}/lib/styles/animate.less";
+@import (reference) "{thriver:core-styles}/lib/index.less";
+@import (reference) "{thriver:core-styles}/lib/styles/animate.import.less";
 
 //Setup
 @backgroundWork: saturate(@blue, 10%);
@@ -820,7 +820,7 @@ section.work .main.container{
             .opacity(1);
             visibility: visible;
             .transform(translate(0px,0px));
-            transition: visibility 0ms linear 300ms, opacity 300ms ease 0ms);
+            transition: visibility 0ms linear 300ms, opacity 300ms ease 0ms;
             //.shadow(closeUp);
             width: 140px;
             left: 50%;
