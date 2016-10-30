@@ -17,6 +17,7 @@ Template.sectionAdmin.events({
 
       // Replace all concatenating symbols with a space, then convert to array
       const title = name.replace(/[-_+]/g, ' ').split(' ');
+      const newTitle = [];
 
       // Capitalize words based on title rules
       title.forEach((word, index) => {
@@ -36,17 +37,17 @@ Template.sectionAdmin.events({
           'thruout', 'till', 'times', 'to', 'toward', 'towards', 'under', 'underneath',
           'unlike', 'until', 'unto', 'up', 'upon', 'versus', 'vs.', 'v.', 'via', 'vice',
           'with', 'within', 'without', 'worth', 'and', 'the']
-        .find(element => title[word].toLowerCase() === element);
+        .find(element => word.toLowerCase() === element);
 
         // If this isn't the first word, and it's a specialCase, keep lowercase
         // Note: Even though word contains the value of a number, its type is string
         if (index && specialCase) return;
 
-        title[word] = title[word].charAt(0).toUpperCase() + title[word].slice(1);
+        newTitle.push(word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
       });
 
       // Return capitalized filename
-      return title.join(' ');
+      return newTitle.join(' ');
     };
 
     // Grep name from text field

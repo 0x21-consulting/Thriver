@@ -139,16 +139,16 @@ Template.workContent.events({
    * @method
    *   @param {$.Event} event - jQuery Event handle
    */
-  'click header button.delete': (event) => {
+  'click header button.delete': function (event) {
+    // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
     event.preventDefault();
     event.stopPropagation();
 
     // Get Nav link
-    const target = event.target;
     const link = event.delegateTarget.parentElement.querySelector(
-      `menu [data-id="${target.id}"]`).parentElement.parentElement;
+      `menu [data-id="${this.id}"]`).parentElement.parentElement;
 
     let parent;
 
@@ -164,10 +164,10 @@ Template.workContent.events({
 
     // First, remove reference to parent element
     // first parameter is parent ID, second this ID
-    Meteor.call('removeChild', parent, target.id);
+    Meteor.call('removeChild', parent, this.id);
 
     // Then delete this section
-    Meteor.call('deleteSection', target.id);
+    Meteor.call('deleteSection', this.id);
   },
 
   /**
@@ -175,15 +175,15 @@ Template.workContent.events({
    * @method
    *   @param {$.Event} event - jQuery event handler
    */
-  'click header button.edit': (event) => {
+  'click header button.edit': function (event) {
+    // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
     event.preventDefault();
     event.stopPropagation();
 
     // Get section to edit
-    const target = event.target;
-    const section = event.delegateTarget.querySelector(`[data-id="${target.id}"]`);
+    const section = event.delegateTarget.querySelector(`[data-id="${this.id}"]`);
     const content = section.querySelector('.workTextContainer');
     const parent = content.parentElement;
 
@@ -199,7 +199,7 @@ Template.workContent.events({
       updateSectionContent(content.dataset.hash));
 
     // Textarea should get markdown
-    textarea.textContent = Thriver.sections.get(target.id, ['data']).data.content;
+    textarea.textContent = Thriver.sections.get(this.id, ['data']).data.content;
 
     // Add textarea but hide preview
     parent.classList.add('edit');

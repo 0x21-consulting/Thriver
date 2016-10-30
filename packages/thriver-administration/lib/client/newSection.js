@@ -7,7 +7,7 @@ const getOffsetTop = (element) => {
   let offsetTop = 0;
   let currentElement = element;
 
-  while (element) {
+  while (currentElement) {
     offsetTop += element.offsetTop;
     currentElement = currentElement.parentElement;
   }
@@ -52,7 +52,7 @@ const setTemplate = () => {
 
   // Add new section to database
   // @params { verb, template, index, parent }
-  Meteor.call('addSection', this.dataset.template, index, parent);
+  Meteor.call('addSection', event.target.dataset.template, index, parent);
 
   // Update sibling section order (only siblings which come after)
   // @params { verb, sectionId, newIndex}
@@ -192,18 +192,18 @@ const placeholder = (event) => {
   // More useful
   const oEvent = event.originalEvent;
 
-    // Determine whether to place the placeholder before or after the target
-    // NOTE: This technically could break HTML standards!!!
-    //       This is because a <section> element cannot be a child of <ul>
-    //       However, the use is small and impact null.
+  // Determine whether to place the placeholder before or after the target
+  // NOTE: This technically could break HTML standards!!!
+  //       This is because a <section> element cannot be a child of <ul>
+  //       However, the use is small and impact null.
   if (oEvent.pageY > target.offsetTop
       && oEvent.pageY < (offsetTop + target.offsetHeight)) {
     // If mouse is over top half of element
-    if (event.pageY < (offsetTop + (target.offsetHeight / 2))) {
+    if (oEvent.pageY < (offsetTop + (target.offsetHeight / 2))) {
       target.parentElement.insertBefore(section, target);
 
     // Otherwise, if mouse is over bottom half of element
-    } else if (event.pageY > (offsetTop + (target.offsetHeight / 2))) {
+    } else if (oEvent.pageY > (offsetTop + (target.offsetHeight / 2))) {
       target.parentElement.insertBefore(section, target.nextElementSibling);
     }
   }
