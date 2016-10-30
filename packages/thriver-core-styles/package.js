@@ -10,7 +10,7 @@ Package.onUse((api) => {
   api.versionsFrom('METEOR@1.0');
 
   const packages = [
-    'less@=2.6.0',    // LessCSS Support
+    'less',    // LessCSS Support
     'fortawesome:fontawesome',
   ];
 
@@ -27,18 +27,18 @@ Package.onUse((api) => {
 
     // Styles
     'lib/vendor/details-shim.less',
-    'lib/styles/animate.less',
-    'lib/styles/buttons.less',
-    'lib/styles/context.less',
-    'lib/styles/fonts.less',
-    'lib/styles/forms.less',
-    'lib/styles/helpers.less',
-    'lib/styles/icons.less',
-    'lib/styles/print.less',
-    'lib/styles/reset.less',
-    'lib/styles/scroll.less',
-    'lib/styles/tables.less',
-    'lib/styles/type.less',
+    'lib/styles/animate.import.less',
+    'lib/styles/buttons.import.less',
+    'lib/styles/context.import.less',
+    'lib/styles/fonts.import.less',
+    'lib/styles/forms.import.less',
+    'lib/styles/helpers.import.less',
+    'lib/styles/icons.import.less',
+    'lib/styles/print.import.less',
+    'lib/styles/reset.import.less',
+    'lib/styles/scroll.import.less',
+    'lib/styles/tables.import.less',
+    'lib/styles/type.import.less',
   ], ['client']);
 });
 
