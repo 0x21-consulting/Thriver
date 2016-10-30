@@ -96,14 +96,14 @@ Template.calendar.helpers({
    * @function
    * @returns {string}
    */
-  getMonth: Thriver.calendar.months[Thriver.calendar.thisMonth.get()],
+  getMonth: () => Thriver.calendar.months[Thriver.calendar.thisMonth.get()],
 
   /**
    * Return current year
    * @function
    * @returns {number}
    */
-  getYear: Thriver.calendar.thisYear.get(),
+  getYear: () => Thriver.calendar.thisYear.get(),
 
   /**
    * Return weeks and days in the month
