@@ -83,10 +83,11 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click aside.admin button.oppDelete': (event) => {
+  'click aside.admin button.oppDelete': function (event) {
+    // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
-    const id = event.delegateTarget.parentElement.dataset.id;
+    const id = Template.parentData().id;
 
     if (confirm('Are you sure you want to delete this opportunity?')) {
       Meteor.call('deleteOpportunity', id, this.id);
@@ -98,12 +99,12 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click aside.admin button.oppEdit': (event) => {
+  'click aside.admin button.oppEdit': function (event) {
+    // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
     // Get section to Edit
-    const target = event.target;
-    const section = event.delegateTarget.querySelector(`article[data-id="${target.id}"]`);
+    const section = event.delegateTarget.querySelector(`article[data-id="${this.id}"]`);
     const content = section.querySelector('div.inner');
     const parent = content.parentElement;
     const parentID = event.delegateTarget.parentElement.dataset.id;
@@ -115,7 +116,8 @@ Template.list.events({
     // Button by which to okay changes and commit to db
     const button = document.createElement('button');
     button.textContent = 'Save';
-    button.addEventListener('mouseup', updateSectionContent(SHA256(this.content), parentID, this.id));
+    button.addEventListener('mouseup',
+      updateSectionContent(SHA256(this.content), parentID, this.id));
 
     // Textarea should get markdown
     for (let i = 0; i < data.length; i += 1) {

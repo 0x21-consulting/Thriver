@@ -79,8 +79,11 @@ Template.outreach.events({
  */
 Template.outreach.onRendered(() => {
   // Get db ID from current instance
-  const instanceName = Template.instance().data.name;
-  const data = Template.instance().data;
+  const data = Template.currentData();
+  const instanceName = data.name;
+
+  // History can't work unless the section has a name
+  if (!data.name) return;
 
   // Register
   Thriver.history.registry.insert({
@@ -97,16 +100,19 @@ Template.outreach.onRendered(() => {
         for (let i = 0; i < children.length; i += 1) {
           // Get section name
           const section = Thriver.sections.get(children[i], ['name']);
-          let name = section.name;
 
-          // Then sanitize section name
-          name = Thriver.sections.generateId(name);
+          if (section) {
+            let name = section.name;
 
-          // Add to link list and Recurse
-          sections[name] = getChildren(children[i]);
+            // Then sanitize section name
+            name = Thriver.sections.generateId(name);
 
-          // Add ID to list as well
-          sections[name]._id = section._id;
+            // Add to link list and Recurse
+            sections[name] = getChildren(children[i]);
+
+            // Add ID to list as well
+            sections[name]._id = section._id;
+          }
         }
 
         return sections;
