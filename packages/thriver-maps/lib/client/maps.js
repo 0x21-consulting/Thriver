@@ -43,7 +43,7 @@ const initialize = () => {
     // Attributes
     fillColor,
     fillOpacity: 1,
-    scale: 0.9,
+    scale: 0.6,
     strokeWeight: 2,
     strokeColor,
 
