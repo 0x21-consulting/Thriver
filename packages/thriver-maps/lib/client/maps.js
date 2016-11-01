@@ -188,7 +188,7 @@ initialize = function () {
             // Attributes
             fillColor   : fillColor,
             fillOpacity : 1,
-            scale       : 0.9,
+            scale       : 0.6,
             //shape     : shape,
             strokeWeight: 2,
             strokeColor : strokeColor,
