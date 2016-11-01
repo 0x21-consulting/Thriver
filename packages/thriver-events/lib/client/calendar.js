@@ -156,7 +156,7 @@ Template.calendar.helpers({
                     day.date = count;
 
                 // If today or this week, add special styles
-                if (day.date === thisWeek)
+                if (day.date === thisWeek && !day.notCurrent)
                     day.currentWeekStart = 'currentWeekStart';
                 if (day.date === thisDay)
                     day.today = 'today';
@@ -169,6 +169,7 @@ Template.calendar.helpers({
                     day.date = count - total;
                     ++count;
                 }
+
                 // If there are events this day
                 if (currentEvents[count] instanceof Array) {
                     day.hasEvent = 'hasEvent';
@@ -202,9 +203,3 @@ Template.calendar.helpers({
         return weeks;
     }
 });
-
-/*
-Template.images.rendered = function(){
-    // Remove Current Week from "Not Current"
-    $('.notCurrent').removeClass("currentWeekStart");
-};*/
