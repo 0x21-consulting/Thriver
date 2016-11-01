@@ -10,7 +10,7 @@ Thriver.accounts = {};
  */
 Thriver.accounts.schema = {};
 
-/** 
+/**
  * @summary Subscriptions Schema
  * @type {SimpleSchema}
  */
@@ -96,7 +96,10 @@ Thriver.accounts.schema.profile = new SimpleSchema({
             'MO','MT','NE','NH','NV','NJ','NM','NY','NC','ND','OH','OK','OR',
             'PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY',
             'AS','DC','GU','MP','PR','VI' ],
-        optional: true
+        optional: true,
+        autoform: {
+            template: "thriver_select",
+        }
     },
     zip: {
         type: String,
@@ -122,31 +125,34 @@ Thriver.accounts.schema.profile = new SimpleSchema({
         type: Object,
         optional: false,
         defaultValue: {},
-        label: 'I am a:'
+        label: 'I am a:',
     },
     /** Other restrictions */
     'events.diet.glutenFree': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.lactose': {
         type: Boolean,
         optional: true,
-        label: 'Lactose Intollerant'
+        label: 'Lactose Intollerant',
     },
     'events.diet.ovo': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.lacto': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.arian': {
         type: String,
         optional: true,
         allowedValues: ['Vegan', 'Vegetarian', 'Pescetarian'],
-        label: ' '
+        label: ' ',
+        autoform: {
+            template: "thriver_select",
+        }
     },
 
     /** Allergens */
@@ -154,35 +160,36 @@ Thriver.accounts.schema.profile = new SimpleSchema({
         type: Object,
         optional: false,
         defaultValue: {},
-        label: 'Food Allergies'
+        label: 'Food Allergies',
+
     },
     'events.diet.allergies.peanut': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.milk': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.egg': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.wheat': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.soy': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.fish': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
     'events.diet.allergies.shellfish': {
         type: Boolean,
-        optional: true
+        optional: true,
     },
 
     /** Event requests or accommodations */
@@ -205,7 +212,10 @@ Thriver.accounts.schema.profile = new SimpleSchema({
         type: String,
         allowedValues: ['Parent','Child','Sibling','Partner','Relative','Other'],
         optional: true,
-        label: 'Emergency Contact Relation'
+        label: 'Emergency Contact Relation',
+        autoform: {
+            template: "thriver_select",
+        }
     },
     'events.emergencyTelephone': {
         type: String,
@@ -242,7 +252,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     }
 });
 
-/** 
+/**
  * @summary User Schema
  * @type {SimpleSchema}
  */

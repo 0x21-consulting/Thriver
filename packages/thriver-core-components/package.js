@@ -8,18 +8,18 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('METEOR@1.0');
-    
+
     // Dependencies
     api.use([
         'thriver:core',
         'thriver:core-styles'
     ]);
-    
+
     // Resources
     api.addAssets([
-        
+
     ], ['client']);
-    
+
     // Client processing
     api.addFiles([
         // Templates
@@ -30,7 +30,8 @@ Package.onUse(function (api) {
         'lib/component-sidebar/aside.html',
         'lib/component-tabs/tabs.html',
         'lib/component-top/top.html',
-        
+        'lib/component-form/form.html',
+
         // Styles
         'lib/component-alert/alerts.less',
         'lib/component-header/header.less',
@@ -41,7 +42,7 @@ Package.onUse(function (api) {
         'lib/component-sidebar/sidebars.less',
         'lib/component-tabs/tabs.less',
         'lib/component-top/top.less',
-        
+
         // Helpers and methods
         'lib/component-alert/alerts.js',
         'lib/component-help/help.js',
@@ -51,12 +52,13 @@ Package.onUse(function (api) {
         'lib/component-sidebar/aside.js',
         'lib/component-tabs/tabs.js',
         'lib/component-tabs/admin.js',
-        'lib/component-top/top.js'
+        'lib/component-top/top.js',
+        'lib/component-form/form.js',
     ], ['client']);
-    
+
     // Server processing
     api.addFiles([
-        
+
     ], ['server']);
 });
 
