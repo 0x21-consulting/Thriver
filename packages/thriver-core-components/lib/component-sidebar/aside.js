@@ -179,8 +179,9 @@ Template.aside.onRendered(function () {
                 tabs[i].click();
 
         // Otherwise, if there isn't any path, click the first tab for the user
-        //if (!path.length && tabs.length)
-            //tabs[0].click();
+        if (!path.length && tabs.length)
+            if (screen.width > 767)
+                tabs[0].click();
     };
 
     // Register each tab
