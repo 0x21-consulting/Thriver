@@ -1,17 +1,24 @@
-<template name="afObjectField_series">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{afFieldLabelText name=this.atts.name}}</h3>
+<template name="afSelect_thriver_select">
+    <div class="styledSelect fullBlockMob">
+        <label>{{this.name}}</label>
+        <select {{this.atts}}>
+          {{#each this.items}}
+            {{#if this.optgroup}}
+              <optgroup label="{{this.optgroup}}">
+              {{#each this.items}}
+              <option {{afSelectOptionAtts}}>{{this.label}}</option>
+              {{/each}}
+              </optgroup>
+            {{else}}
+              <option {{afSelectOptionAtts}}>{{this.label}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
     </div>
-    <div class="panel-body">
-      {{#if afFieldIsInvalid name=this.atts.name autoform=this.autoform}}
-      <span class="help-block">{{{afFieldMessage name=this.atts.name autoform=this.autoform}}}</span>
-      {{/if}}
-      {{#each afFieldNames name=this.atts.name fields=this.atts.fields omitFields=this.atts.omitFields}}
-        {{#with getOptions ../atts.name this}}
-        {{> afQuickField name=.. options=this}}
-        {{/with}}
-      {{/each}}
-    </div>
-  </div>
+</template>
+
+
+<template name="afCheckbox_thriver_checkbox">
+      <input type="checkbox" id="{{afFieldLabelText name=this.name}}" value="true" class="checkbox">
+      <label for="{{afFieldLabelText name=this.name}}" class="checkbox">{{afFieldLabelText name=this.name}}</label>
 </template>

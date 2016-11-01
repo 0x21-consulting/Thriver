@@ -76,6 +76,7 @@ Thriver.accounts.schema.subscriptions = new SimpleSchema({
  * @type {SimpleSchema}
  */
 Thriver.accounts.schema.profile = new SimpleSchema({
+<<<<<<< 7a4d7a238ad61ae71d58bd96983d142598c9dd31
   /** Personal Details */
   firstname: {
     type: String,
@@ -121,6 +122,56 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     regEx: /(\+\s*?\d{1,3}\s*?)?[()-\d\s]{10,}/,
     optional: true,
   },
+=======
+    /** Personal Details */
+    firstname: {
+        type: String,
+        optional: false,
+        label: 'First Name'
+    },
+    lastname: {
+        type: String,
+        optional: false,
+        label: 'Last Name'
+    },
+    address1: {
+        type: String,
+        optional: true,
+        label: 'Address'
+    },
+    address2: {
+        type: String,
+        optional: true,
+        label: ' '
+    },
+    city: {
+        type: String,
+        optional: true
+    },
+    state: {
+        type: String,
+        allowedValues: [ 'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
+            'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MS',
+            'MO','MT','NE','NH','NV','NJ','NM','NY','NC','ND','OH','OK','OR',
+            'PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY',
+            'AS','DC','GU','MP','PR','VI' ],
+        optional: true,
+        autoform: {
+            template: "thriver_select",
+        }
+    },
+    zip: {
+        type: String,
+        regEx: SimpleSchema.RegEx.ZipCode,
+        optional: false,
+        label: 'ZIP Code'
+    },
+    telephone: {
+        type: String,
+        regEx: /(\+\s*?\d{1,3}\s*?)?[()-\d\s]{10,}/,
+        optional: true
+    },
+>>>>>>> Added styles and attributions to profile form schema, form LESS and built out custom select template for autoform.
 
   /** Event Considerations */
   events: {
@@ -129,6 +180,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     defaultValue: {},
   },
 
+<<<<<<< 7a4d7a238ad61ae71d58bd96983d142598c9dd31
   /** Dietary Restrictions */
   'events.diet': {
     type: Object,
@@ -196,6 +248,79 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+=======
+    /** Dietary Restrictions */
+    'events.diet': {
+        type: Object,
+        optional: false,
+        defaultValue: {},
+        label: 'I am a:',
+    },
+    /** Other restrictions */
+    'events.diet.glutenFree': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.lactose': {
+        type: Boolean,
+        optional: true,
+        label: 'Lactose Intollerant',
+    },
+    'events.diet.ovo': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.lacto': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.arian': {
+        type: String,
+        optional: true,
+        allowedValues: ['Vegan', 'Vegetarian', 'Pescetarian'],
+        label: ' ',
+        autoform: {
+            template: "thriver_select",
+        }
+    },
+
+    /** Allergens */
+    'events.diet.allergies': {
+        type: Object,
+        optional: false,
+        defaultValue: {},
+        label: 'Food Allergies',
+
+    },
+    'events.diet.allergies.peanut': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.milk': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.egg': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.wheat': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.soy': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.fish': {
+        type: Boolean,
+        optional: true,
+    },
+    'events.diet.allergies.shellfish': {
+        type: Boolean,
+        optional: true,
+    },
+>>>>>>> Added styles and attributions to profile form schema, form LESS and built out custom select template for autoform.
 
   /** Event requests or accommodations */
   'events.accommodations': {
@@ -207,6 +332,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     },
   },
 
+<<<<<<< 7a4d7a238ad61ae71d58bd96983d142598c9dd31
   /** Emergency Contact */
   'events.emergencyName': {
     type: String,
@@ -225,6 +351,29 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     optional: true,
     label: 'Emergency Contact Number',
   },
+=======
+    /** Emergency Contact */
+    'events.emergencyName': {
+        type: String,
+        optional: true,
+        label: 'Emergency Contact Name'
+    },
+    'events.emergencyRelationship': {
+        type: String,
+        allowedValues: ['Parent','Child','Sibling','Partner','Relative','Other'],
+        optional: true,
+        label: 'Emergency Contact Relation',
+        autoform: {
+            template: "thriver_select",
+        }
+    },
+    'events.emergencyTelephone': {
+        type: String,
+        regEx: /(\+\s*?\d{1,3}\s*?)?[()-\d\s]{10,}/,
+        optional: true,
+        label: 'Emergency Contact Number'
+    },
+>>>>>>> Added styles and attributions to profile form schema, form LESS and built out custom select template for autoform.
 
   /** Registered Events */
   'events.registeredEvents': {
