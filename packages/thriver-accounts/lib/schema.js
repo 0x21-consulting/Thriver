@@ -109,9 +109,9 @@ Thriver.accounts.schema.profile = new SimpleSchema({
       'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
       'AS', 'DC', 'GU', 'MP', 'PR', 'VI'],
     optional: true,
-      autoform: {
-        template: 'thriver_select',
-      }
+    autoform: {
+      template: 'thriver_select',
+    },
   },
   zip: {
     type: String,
@@ -164,7 +164,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     label: ' ',
     autoform: {
       template: 'thriver_select',
-    }
+    },
   },
 
   /** Allergens */
@@ -226,7 +226,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     label: 'Emergency Contact Relation',
     autoform: {
       template: 'thriver_select',
-    }
+    },
   },
   'events.emergencyTelephone': {
     type: String,
