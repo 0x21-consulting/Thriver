@@ -3,15 +3,15 @@ Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
     tabs: [{ // If sidebar has tabs: use this property
-      title: 'April is Sexual Assault Awareness Month',
+      title: 'Welcome to the new site!',
       id: 'mastheadSlideA', // These are for aria-controls
       template: 'slideA', // This could really just be an editable content area instead of unique templates
     }, {
-      title: 'Join the WCASA team in making a big difference',
+      title: 'What does this site do?',
       id: 'mastheadSlideB',
       template: 'slideB',
     }, {
-      title: 'Training Institute Conference',
+      title: 'November 2016 Voice Newsletter: To Honor Them, Act',
       id: 'mastheadSlideC',
       template: 'slideC',
     }],
