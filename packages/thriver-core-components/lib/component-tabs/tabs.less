@@ -176,6 +176,7 @@ div.tabs.left{background: #fff;}
                 margin: 0px !important;
                 border: none !important;
                 position: relative;
+                display: block;
                 >a{
                     padding: 20px 15px;
                     font-weight: 600;
@@ -183,34 +184,37 @@ div.tabs.left{background: #fff;}
                     line-height: 20px;
                     opacity: 1 !important;
                     position: relative;
+                    width: auto;
                     &:after{display: none;}
+                    &:before{
+                        content: "\f054";
+                        .fa;
+                        display: inline-block;
+                        color: #fff;
+                        color: rgba(255,255,255,0.9);
+                        position: static;
+                        //background: rgba(0,0,0,0.2);
+                        width: 40px;
+                        text-align: center;
+                        height: 40px;
+                        position: absolute;
+                        right: 10px;
+                        left: inherit;
+                        top: 10px;
+                        border-radius: 50%;
+                        line-height: 40px;
+                        font-weight: 500;
+                    }
                     &[aria-expanded="true"]{
                         background:@teal;
                         &:before{
-                            content: 'x';
-                            display: inline-block;
-                            color: #fff;
-                            color: rgba(255,255,255,0.9);
-                            position: static;
-                            background: darken(@teal,5%);
-                            width: 40px;
-                            text-align: center;
-                            height: 40px;
-                            position: absolute;
-                            right: 10px;
-                            left: inherit;
-                            top: 10px;
-                            border-radius: 50%;
-                            line-height: 40px;
-                            font-weight: 500;
-                            font-family: sans-serif;
+                            content: "\f078";
+                            background: darken(@teal, 3.5%);
+                            line-height: 38px;
                         }
                     }
                 }
             }
-        }
-        menu.tabs.left{
-            >li >a[aria-expanded="true"]:before{ right: 40px; }
         }
     }
 }
@@ -268,5 +272,9 @@ menu.tabs li.new-section > a, .new-section.tab-style > a{
     &:after{display: none;}
     opacity: 0.7;
     &:hover{background: @teal !important; opacity: 1; box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);}
-    @media @mobile{ background: @teal !important; }
+    @media @mobile{
+        background: @teal !important;
+        padding: 20px 25px;
+        background: @orange !important;
+    }
 }

@@ -30,6 +30,7 @@ Package.onUse((api) => {
     'lib/component-sidebar/aside.html',
     'lib/component-tabs/tabs.html',
     'lib/component-top/top.html',
+    'lib/component-form/form.html',
 
     // Styles
     'lib/component-alert/alerts.less',
@@ -51,6 +52,7 @@ Package.onUse((api) => {
     'lib/component-tabs/tabs.js',
     'lib/component-tabs/admin.js',
     'lib/component-top/top.js',
+    'lib/component-form/form.js',
   ], ['client']);
 
   // Server processing

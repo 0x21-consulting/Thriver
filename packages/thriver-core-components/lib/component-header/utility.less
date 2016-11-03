@@ -33,6 +33,7 @@ nav.utility{
     li.more{
         figure[aria-hidden="true"]{ display: none;}
         figure[aria-hidden="false"]{display: block !important;}
+        figure[aria-hidden="false"]{display: none !important;} // Temp hide the hotline modal
     }
     ul > li> a{
         &[href="/"], &[href="/register"]{
@@ -70,6 +71,21 @@ nav.utility{
             &[href="/notifications"], &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
                 &:before, &:after{display: block;}
             }
+        }
+        &[data-notification].notificationAlert{
+            &:after{
+                content:attr(data-notification);
+                position: absolute;
+                right: 5px; top: 5px;
+                width: 15px; height: 15px; line-height: 14px;
+                text-align: center;
+                font-size: 10px;
+                font-weight: @bold;
+                background: @orange;
+                color: @white;
+                border-radius: 50%; -webkit-border-radius: 50%;
+            }
+            &[aria-expanded="true"]:after{ display: none;}
         }
     }
 }
