@@ -94,7 +94,7 @@ const changeTabs = (event) => {
 
   // Scroll to top of work on change tabs
   const offset = $('.work').offset().top + 228;
-  $('body').aniamte({ scrollTop: offset }, 750);
+  $('body').animate({ scrollTop: offset }, 750);
 };
 
 // Tabs
