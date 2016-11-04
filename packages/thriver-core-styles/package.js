@@ -10,7 +10,7 @@ Package.onUse((api) => {
   api.versionsFrom('METEOR@1.0');
 
   const packages = [
-    'less',    // LessCSS Support
+    'less@2.7.6',    // LessCSS Support
     'fortawesome:fontawesome',
   ];
 
