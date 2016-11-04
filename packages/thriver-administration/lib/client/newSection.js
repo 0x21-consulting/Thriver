@@ -8,7 +8,7 @@ const getOffsetTop = (element) => {
   let currentElement = element;
 
   while (currentElement) {
-    offsetTop += element.offsetTop;
+    offsetTop += currentElement.offsetTop;
     currentElement = currentElement.parentElement;
   }
 
