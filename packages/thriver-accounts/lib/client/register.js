@@ -115,7 +115,7 @@ Template.register.events({
 
           // Notify user to check email
           document.querySelector('section#register form').classList.add('hide');
-          document.querySelector('section#register p').classList.remove('hide');
+          document.querySelector('section#register p.register-success').classList.remove('hide');
         });
       });
   },
