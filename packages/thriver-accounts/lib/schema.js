@@ -245,7 +245,7 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     type: Object,
   },
   'events.registeredEvents.$.id': {
-    type: Mongo.ObjectID,
+    type: String,
     optional: false,
   },
   // an Events object could have any number of optional fields

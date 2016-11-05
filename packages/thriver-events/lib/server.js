@@ -70,11 +70,10 @@ Meteor.methods({
    *   @param {Object} details - Individual event details
    */
   registerEvent: (event, details) => {
-    const id = Meteor.userId();
-
     check(event, String);
     check(details, Match.Maybe(Object));
-    check(id, String);  // make audit-argument-checks happy
+
+    const id = Meteor.userId();
 
     // User must be logged in to register for an event
     if (!id) throw new Meteor.Error('You must be logged in to register for an event.');
