@@ -43,6 +43,7 @@ Package.onUse((api) => {
     // Templates
     'lib/templates/head.html',
     'lib/templates/canvas.html',
+    'lib/templates/browseHappy.html',
 
     // Client scripts
     'lib/client/shims.js',

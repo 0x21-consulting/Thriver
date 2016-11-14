@@ -1,0 +1,26 @@
+.browsehappy {
+	display:block;
+    position: relative;
+	width:100%;
+    z-index: 27;
+	font-size: 16px;
+	line-height: 16px;
+	color: @gray;
+    background: lighten(@gray,5%);
+    background: lighten(@orange,2.5%);
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow:  0px 2px 2px 0px rgba(0,0,0,0.15);
+    .inner{ display: block; padding: 57px 20px 20px 20px; }
+    span, a{ color: @white; }
+    & + #canvas{ margin-top: -60px; }
+    a{ font-weight: bold; text-decoration: underline;}
+    @media @mobile{
+        position: fixed;
+        margin: 0px;
+        text-align: left;
+        .inner{ padding: 20px; }
+        & + #canvas {margin-top: 0px;}
+    }
+}
