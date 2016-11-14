@@ -86,4 +86,23 @@ Meteor.methods({
       },
     } });
   },
+
+  /**
+   * @summary Unregister for an event
+   * @method
+   *   @param {String} event - Event to unregister from
+   */
+  unregisterEvent: (event) => {
+    check(event, String);
+
+    const id = Meteor.userId();
+
+    // User must be logged in to unregister from an event
+    if (!id) throw new Meteor.Error('You must be logged in to register for an event.');
+
+    // Update user profile
+    Meteor.users.update({ _id: id }, { $pull: {
+      'profile.events.registeredEvents.$.id': event,
+    } });
+  },
 });

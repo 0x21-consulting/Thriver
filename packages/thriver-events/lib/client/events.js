@@ -342,11 +342,22 @@ Template.eventSlide.events({
     // TODO(micchickenburger): Complete event registration
   },
 
-    /**
-     * @summary Navigate on click for Same-Day links
-     * @method
-     *   @param {$.Event} event
-     */
+  /**
+   * @summary Unregister for an event
+   * @method
+   *   @param {$.Event}
+   */
+  'click li.unregister': (event) => {
+    check(event, $.Event);
+
+    Meteor.call('unregisterEvent', Template.currentData()._id);
+  },
+
+  /**
+   * @summary Navigate on click for Same-Day links
+   * @method
+   *   @param {$.Event} event
+   */
   'click a[data-id]': (event) => {
     check(event, $.Event);
 
