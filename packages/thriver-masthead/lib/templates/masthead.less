@@ -126,9 +126,28 @@ section#masthead div.tabs, section.masthead div.tabs{
 
 section#masthead, section.masthead{
     color:@white;
-    height: 375px;
-    @media (max-width:990px){
-        height: 490px;
+    &, > .container, div.tabs{
+        height: 445px;
+        padding: 0px;
+        @media (max-width:990px){
+            height: 500px;
+        }
+    }
+    div.tabs{
+        display: table;
+        > article{
+            &[aria-hidden="false"]{
+                display: table-cell;
+                vertical-align: middle;
+                width: 100%;
+            }
+        }
+
+    }
+    menu.tabs{
+        margin-top: 20px;
+        padding-top: 100px;
+        height: 285px;
     }
     h1,p, a.cta{
         color: @white;
@@ -140,7 +159,7 @@ section#masthead, section.masthead{
         padding: 20px;
     }
     h1{
-        margin: 0px;
+        margin: 0px 0px 20px 0px;
         .font(3.6,4.2,0.15,@bold,uppercase);
         @media @mobile{
             .font(2.6,3.2,0.15,@bold,uppercase);
@@ -148,15 +167,19 @@ section#masthead, section.masthead{
             padding-top: 0px !important; //override tabs
         }
     }
-    p{
-    .font(1.4,2.0,0,@normal,none);
+    p, li{
+    .font(1.4,2.5,0,@normal,none);
     @media @mobile{
         .font(1.4,1.9,0.025,@normal,none);
     }
     }
     ul{margin-left: 0px;}
-    li{
+    article li{
+        display: inline;
+        margin: 0;
         list-style: none;
+        &:after{ content:", "; }
+        &:last-child:after{content: "";}
     }
     a{cursor: pointer;}
 }
