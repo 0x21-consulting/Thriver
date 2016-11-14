@@ -5,3 +5,4 @@ db.coffee
 db.tar.bz2
 dump
 settings.json
+node_modules
