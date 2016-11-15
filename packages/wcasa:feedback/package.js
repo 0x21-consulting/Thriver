@@ -29,9 +29,12 @@ Package.onUse((api) => {
 
   // Server
   api.addFiles(['lib/server.js'], ['server']);
+<<<<<<< eb233c9491142f69284ddd6b01c3f06caaff5f41
 
   // Schema
   api.addFiles(['lib/schema.js'], ['client', 'server']);
+=======
+>>>>>>> Created feedback package, feedback icon, and feedback form.
 });
 
 Package.onTest((api) => {
