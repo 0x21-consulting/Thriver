@@ -25,7 +25,7 @@ Template.eventsRegistered.helpers({
                 title: event.name,
                 dateTime: event.start.toISOString(),
                 href: `/events/${event.start.getFullYear()}/${Thriver.calendar
-                  .months[event.start.getMonth()]}/`,
+                  .months[event.start.getMonth()]}/${Thriver.sections.generateId(event.name)}/`,
               });
             }
           }
