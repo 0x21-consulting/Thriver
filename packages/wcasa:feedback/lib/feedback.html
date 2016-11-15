@@ -10,3 +10,20 @@
     <button class="close">Close</button>
   </form>
 </template>
+
+<template name="feedbackAdmin">
+  <section id="feedbackAdmin" class="hide">
+    {{#if isAdmin}}
+      {{#each feedbackItem}}
+        <div>
+          <p class="user">Reported by <strong>{{reporter}}</strong></p>
+          <p class="element">{{path}}</p>
+          <p class="comments">{{comments}}</p>
+        </div>
+      {{/each}}
+    {{else}}
+      <p>Only administrators may view site feedback.</p>
+    {{/if}}
+    <button class="close fa">Close</button>
+  </section>
+</template>

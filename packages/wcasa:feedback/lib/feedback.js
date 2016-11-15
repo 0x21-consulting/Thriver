@@ -1,3 +1,6 @@
+// Subscribe to feedback
+Meteor.subscribe('feedback');
+
 Template.feedback.events({
   /**
    * @summary Show form
@@ -141,4 +144,42 @@ Template.feedback.events({
     document.querySelector('#feedback').classList.add('hide');
     document.querySelector('#showFeedbackForm').classList.remove('hide');
   },
+});
+
+Template.feedbackAdmin.helpers({
+  /**
+   * @summary Return all feedback items
+   * @function
+   * @returns {Mongo.Collection}
+   */
+  feedbackItem: () => Thriver.feedback.collection.find(),
+
+  /**
+   * @summary User who reported feedback
+   * @function
+   * @returns {string}
+   */
+  reporter: () => {
+    const data = Template.currentData();
+
+    // TODO(micchickenburger): Display useful name
+    return data.userId;
+  },
+});
+
+Template.feedbackAdmin.events({
+  /**
+   * @summary Close feedback
+   * @method
+   */
+  'click button.close': () => document.querySelector('#feedbackAdmin').classList.add('hide'),
+});
+
+Template.admin.events({
+  /**
+   * @summary Show feedback
+   * @method
+   */
+  'click #viewFeedback': () => document.querySelector('#feedbackAdmin')
+    .classList.remove('hide'),
 });
