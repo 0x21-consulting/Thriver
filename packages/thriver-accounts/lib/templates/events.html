@@ -1,26 +1,29 @@
 <template name="eventsRegistered">
-    <header><h2>{{heading}}</h2></header>
-    <ul class="eventsMenu stripes">
-        {{#if events}}
-          {{#each events}}
-            <li class="eventsRegistered">
-                <div class="inner-container">
-                    <time class="dateMeta" datetime="{{dateTime}}">{{friendlyDate dateTime}}</time>
-                    <h4 class="text"><a href="#{{id}}">{{title}}</a></h4>
-                    <button class="viewEvent" data-action="details" aria-label="{{detailsButtonAria}}">{{detailsButton}}</button>
-                    <button class="unregister" data-action="eventUnregister" aria-label="{{unregisterButtonAria}}">{{unregisterButton}}</button>
-                    <!--If unregister=true{
-                        <p class="event">
-                            You have been unregistered for event.
-                            <button type="button" data-type="undo">Undo</button>
-                        </p>
-                    }-->
-                </div>
-            </li>
-          {{/each}}
-        {{else}}
-          <li class="none">{{none}}</li>
-        {{/if}}
-          <li><button class="viewEvents redirectButton" data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
-    </ul>
+  <header><h2>{{heading}}</h2></header>
+  <ul class="eventsMenu stripes">
+    {{#if events}}
+      {{#each events}}
+        <li class="eventsRegistered">
+          <div class="inner-container">
+            <time class="dateMeta" datetime="{{dateTime}}">{{friendlyDate dateTime}}</time>
+            <h4 class="text"><a href="{{href}}">{{title}}</a></h4>
+            <button class="viewEvent" data-action="details" aria-label="{{detailsButtonAria}}">
+              <a href="{{href}}">{{detailsButton}}</a>
+            </button>
+              
+            <button class="unregister" data-action="eventUnregister" aria-label="{{unregisterButtonAria}}">{{unregisterButton}}</button>
+            <!--If unregister=true{
+                <p class="event">
+                    You have been unregistered for event.
+                    <button type="button" data-type="undo">Undo</button>
+                </p>
+            }-->
+          </div>
+        </li>
+      {{/each}}
+    {{else}}
+      <li class="none">{{none}}</li>
+    {{/if}}
+    <li><button class="viewEvents redirectButton" data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
+  </ul>
 </template>

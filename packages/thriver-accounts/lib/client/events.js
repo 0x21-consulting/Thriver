@@ -9,41 +9,28 @@ Template.eventsRegistered.helpers({
     const eventsArray = [];
 
     if (id) {
-      // If the users has any registered events in their profile
+      // If the user has any registered events in their profile
       if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.events) {
         // Get those events
         const events = Meteor.user().profile.events.registeredEvents;
 
-
         if (events instanceof Array && events.length) {
           for (let i = 0; i < events.length; i += 1) {
             // Grab event from collection
-            const event = Thriver.events.collection.find({ _id: events[i].id });
-
-            // Start without time
-            let date = `${Thriver.calendar.months[event.start.getMonth]} ${
-              event.start.getDate()}, ${event.start.getFullYear()}`;
-
-            // Include time for same-day events
-            if (event.start.toDateString() === event.end.toDateString()) {
-              date += ` ${event.start.getHours() < 10 ? `0${event.start.getHours()}` :
-                event.start.getHours()}:${event.start.getMinutes() < 10 ?
-                  `0${event.start.getMinutes()}` : event.start.getMinutes()}`;
-            }
+            const event = Thriver.events.collection.findOne({ _id: events[i].id });
 
             eventsArray.push({
               id: events[i].id,
               title: event.name,
               dateTime: event.start.toISOString(),
-              blaDate: date,
               href: `/events/${event.start.getFullYear()}/${Thriver.calendar
-                .months[event.start.getMonth]}/`,
+                .months[event.start.getMonth()]}/`,
             });
           }
         }
       }
     }
-    console.debug('Events', eventsArray);
+
     return eventsArray || [];
   },
 
