@@ -19,13 +19,15 @@ Template.eventsRegistered.helpers({
             // Grab event from collection
             const event = Thriver.events.collection.findOne({ _id: events[i].id });
 
-            eventsArray.push({
-              id: events[i].id,
-              title: event.name,
-              dateTime: event.start.toISOString(),
-              href: `/events/${event.start.getFullYear()}/${Thriver.calendar
-                .months[event.start.getMonth()]}/`,
-            });
+            if (event) {
+              eventsArray.push({
+                id: events[i].id,
+                title: event.name,
+                dateTime: event.start.toISOString(),
+                href: `/events/${event.start.getFullYear()}/${Thriver.calendar
+                  .months[event.start.getMonth()]}/`,
+              });
+            }
           }
         }
       }
