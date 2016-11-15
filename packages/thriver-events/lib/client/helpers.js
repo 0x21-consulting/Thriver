@@ -215,7 +215,7 @@ Template.eventSlide.helpers({
     if (id) {
       if (Meteor.user().profile && Meteor.user().profile.events) {
         const events = Meteor.user().profile.events.registeredEvents;
-        if (events.every(event => event.id === template._id)) {
+        if (events.length && events.every(event => event.id === template._id)) {
           return 'actionRegistered';
         }
       }
