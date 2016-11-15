@@ -72,3 +72,34 @@
     padding: 10px;
   }
 }
+
+#feedbackAdmin {
+  position: fixed;
+  z-index: 99;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  background: #fff;
+  box-shadow: 2px 2px 20px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 0 20px;
+
+  div { margin: 20px 0; }
+
+  p {
+    margin: 0;
+
+    &.element {
+      font: 11px consolas, monospace;
+      color: #555;
+    }
+
+    &.comments { font-style: italic; }
+  }
+
+  button.close {
+    margin-bottom: 20px;
+    background: @orange;
+    font-weight: 700;
+  }
+}
