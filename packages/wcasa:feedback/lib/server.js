@@ -3,14 +3,13 @@
  * @method
  */
 
-Meteor.publish('feedback', () => {
-  // Check authorization
-  if (!Meteor.userId() || !Meteor.user().admin) {
-    throw new Meteor.Error('not-authorized');
+Meteor.publish('feedback', function () {
+  // Publish
+  if (this.userId && Meteor.users.findOne({ _id: this.userId }).admin) {
+    return Thriver.feedback.collection.find();
   }
 
-  // Publish
-  return Thriver.feedback.collection.find();
+  return [];
 });
 
 Meteor.methods({
