@@ -29,12 +29,18 @@ Package.onUse((api) => {
 
   // Server
   api.addFiles(['lib/server.js'], ['server']);
+<<<<<<< 552e97182737d33feb113b04edbf2edb36ed1386
 <<<<<<< eb233c9491142f69284ddd6b01c3f06caaff5f41
 
   // Schema
   api.addFiles(['lib/schema.js'], ['client', 'server']);
 =======
 >>>>>>> Created feedback package, feedback icon, and feedback form.
+=======
+
+  // Schema
+  api.addFiles(['lib/schema.js'], ['client', 'server']);
+>>>>>>> Created feedback schema, collection, namespace, publish method, and add method. Allows for submitting comments and pairing them with an element on the page.
 });
 
 Package.onTest((api) => {

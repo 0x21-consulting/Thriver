@@ -2,13 +2,15 @@
  * @summary Publish feedback to admin interface
  * @method
  */
-Meteor.publish('feedback', function () {
-  // Publish
-  if (this.userId && Meteor.users.findOne({ _id: this.userId }).admin) {
-    return Thriver.feedback.collection.find();
+
+Meteor.publish('feedback', () => {
+  // Check authorization
+  if (!Meteor.userId() || !Meteor.user().admin) {
+    throw new Meteor.Error('not-authorized');
   }
 
-  return [];
+  // Publish
+  return Thriver.feedback.collection.find();
 });
 
 Meteor.methods({
