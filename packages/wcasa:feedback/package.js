@@ -29,6 +29,9 @@ Package.onUse((api) => {
 
   // Server
   api.addFiles(['lib/server.js'], ['server']);
+
+  // Schema
+  api.addFiles(['lib/schema.js'], ['client', 'server']);
 });
 
 Package.onTest((api) => {

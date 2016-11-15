@@ -53,3 +53,20 @@
     height: 50px;
   }
 }
+
+.feedbackHover {
+  box-shadow: 0 0 50px 5px rgba(0, 183, 197, 0.5) inset;
+  border: 3px dashed rgb(0, 183, 197);
+}
+
+#selectElement {
+  &::after {
+    content: attr(data-element);
+    font: 11px consolas, monospace;
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    background: #333;
+    padding: 10px;
+  }
+}
