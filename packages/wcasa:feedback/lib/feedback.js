@@ -127,4 +127,18 @@ Template.feedback.events({
         document.querySelector('#showFeedbackForm').classList.remove('hide');
       });
   },
+
+  /**
+   * @summary Close feedback form
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #feedback button.close': (event) => {
+    check(event, $.Event);
+    event.preventDefault();
+
+    // Hide form and show button
+    document.querySelector('#feedback').classList.add('hide');
+    document.querySelector('#showFeedbackForm').classList.remove('hide');
+  },
 });
