@@ -202,6 +202,29 @@ Template.eventSlide.helpers({
    * @returns {Boolean}
    */
   isSingular: !(Thriver.events.sameDayEvents.length > 1),
+
+  /**
+   * @summary Determine which Register Button to Show
+   * @function
+   * @returns {String}
+   */
+  registerTemplate: () => {
+    const id = Meteor.userId();
+    const template = Template.currentData();
+
+    if (id) {
+      if (Meteor.user().profile && Meteor.user().profile.events) {
+        const events = Meteor.user().profile.events.registeredEvents;
+        if (events.length && events.every(event => event.id === template._id)) {
+          return 'actionRegistered';
+        }
+      }
+
+      return 'actionNotRegistered';
+    }
+
+    return 'actionNotLoggedIn';
+  },
 });
 
 // Events helpers

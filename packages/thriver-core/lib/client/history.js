@@ -167,6 +167,9 @@ Thriver.history.navigate = (path) => {
     if (location.accessFunction instanceof Function) {
       location.accessFunction(location.accessData);
     } else {
+      // Close sidebars because all sidebars would have accessFunction
+      Thriver.canvas.closeSidebars();
+
       // Smooth scroll to element
       Thriver.history.smoothScroll(location.element);
     }
