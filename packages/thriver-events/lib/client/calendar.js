@@ -96,14 +96,14 @@ Template.calendar.helpers({
    * @function
    * @returns {string}
    */
-  getMonth: Thriver.calendar.months[Thriver.calendar.thisMonth.get()],
+  getMonth: () => Thriver.calendar.months[Thriver.calendar.thisMonth.get()],
 
   /**
    * Return current year
    * @function
    * @returns {number}
    */
-  getYear: Thriver.calendar.thisYear.get(),
+  getYear: () => Thriver.calendar.thisYear.get(),
 
   /**
    * Return weeks and days in the month
@@ -162,7 +162,7 @@ Template.calendar.helpers({
         if (count && count <= total) day.date = count;
 
         // If today or this week, add special styles
-        if (day.date === thisWeek) day.currentWeekStart = 'currentWeekStart';
+        if (day.date === thisWeek && i === 0) day.currentWeekStart = 'currentWeekStart';
         if (day.date === thisDay) day.today = 'today';
 
         // If we finished counting (next month's days)

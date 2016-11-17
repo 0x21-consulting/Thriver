@@ -22,12 +22,13 @@ Template.signin.events({
     event.preventDefault();
     event.stopPropagation();
 
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
     // Handle login errors
     const handleError = (message) => {
-      const error = event.target.querySelector('#login-error');
+      const error = form.querySelector('#login-error');
 
       // Show error element
       error.classList.remove('hide');
@@ -49,9 +50,11 @@ Template.signin.events({
           default:
             handleError('An unknown error has occurred.');
         }
+        return;
       }
 
-      // Close sidebars
+      // Close sidebars and reset form
+      form.reset();
       Thriver.canvas.closeSidebars();
     });
   },

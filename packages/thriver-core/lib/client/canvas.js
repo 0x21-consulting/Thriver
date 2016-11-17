@@ -65,26 +65,38 @@ Thriver.canvas = {
     // First, close any open sidebars
     Thriver.canvas.closeSidebars();
 
-    // Get canvas and sidebars
-    const element = document.querySelector(data.element);
-    const canvas = document.querySelector('#canvas');
-    const sidebar = document.querySelector(`#${element.getAttribute('aria-controls')}.sidebar`);
+    // Wait for element to render
+    const render = () => {
+      // Get canvas and sidebars
+      const element = document.querySelector(data.element);
 
-    // Open Overlay
-    Thriver.canvas.addOverlay();
+      // Can't open a sidebar that doesn't exist
+      if (!(element instanceof Element)) {
+        Meteor.defer(render);
+        return;
+      }
 
-    // Make link active
-    Thriver.util.makeActive(element);
+      const canvas = document.querySelector('#canvas');
+      const sidebar = document.querySelector(`#${element.getAttribute('aria-controls')}.sidebar`);
 
-    // Make sidebar active
-    Thriver.util.hide(sidebar, false);
+      // Open Overlay
+      Thriver.canvas.addOverlay();
 
-    // Set width
-    canvas.dataset.canvasWidth = sidebar.dataset.width;
-    canvas.dataset.canvasPosition = sidebar.dataset.position;
+      // Make link active
+      Thriver.util.makeActive(element);
 
-    // Bind closure
-    element.addEventListener('click', Thriver.canvas.handleCloseButton);
+      // Make sidebar active
+      Thriver.util.hide(sidebar, false);
+
+      // Set width
+      canvas.dataset.canvasWidth = sidebar.dataset.width;
+      canvas.dataset.canvasPosition = sidebar.dataset.position;
+
+      // Bind closure
+      element.addEventListener('click', Thriver.canvas.handleCloseButton);
+    };
+
+    render();
   },
 
   /**

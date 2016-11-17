@@ -142,8 +142,7 @@
                     {{{ markdown description }}}
                 </div>
                 <ul class="actions">
-                    <li class="register">Register</li>
-                    {{!<li class="details">Read More <span class="fa">&#xf0da;</span></li>}}
+                    {{> Template.dynamic template=registerTemplate}}
 
                     {{! Registration Form }}
                     <li class="registration-form hide" data-id="{{_id}}">
@@ -216,12 +215,12 @@
 <template name="actionRegistered">
     <li class="registered info">You are currently registered for this event.</li>
     <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
-    <li class="unregister action"><a href="#">Unregister</a></li>
+    <li class="unregister action">Unregister</li>
 </template>
 
 <template name="actionNotRegistered">
     <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
-    <li class="register action"><a href="#">Register</a></li>
+    <li class="register action">Register</li>
 </template>
 
 <template name="actionUnregisterPrompt">
@@ -234,7 +233,7 @@
 
 <template name="actionNotLoggedIn">
     <li class="notAccount info">
-        <a href="#" class="login">Login</a> or <a href="#" class="create">Create an Account</a> to register for this event.
+        <a href="/sign-in" class="login">Login</a> or <a href="/register" class="create">Create an Account</a> to register for this event.
     </li>
     <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
 </template>

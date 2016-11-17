@@ -117,6 +117,9 @@ Template.register.events({
           document.querySelector('section#register form').classList.add('hide');
           document.querySelector('section#register p.register-success').classList.remove('hide');
         });
+
+        // Close sidebar
+        Thriver.canvas.closeSidebars();
       });
   },
 

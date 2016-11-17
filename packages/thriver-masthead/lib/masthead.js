@@ -11,7 +11,7 @@ Template.masthead.helpers({
       id: 'mastheadSlideB',
       template: 'slideB',
     }, {
-      title: 'November 2016 Voice Newsletter: To Honor Them, Act',
+      title: 'November 2016 Voice Newsletter',
       id: 'mastheadSlideC',
       template: 'slideC',
     }],
@@ -45,7 +45,7 @@ Template.masthead.onRendered(() => {
     }
   };
 
-  setInterval(transitionSlider, 8000);
+  setInterval(transitionSlider, 15000);
 
   // Start
   transitionSlider();

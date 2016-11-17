@@ -267,22 +267,6 @@ Template.events.events({
     event.preventDefault();
     // Append template:actionUnregisterPrompt to top of ul.actions
   },
-  'click .notAccount a.login': (event) => {
-    check(event, $.Event);
-    event.preventDefault();
-
-    document.body.classList.add('leftSmall');
-    document.querySelector('nav.utility li.login').classList.add('active');
-    document.querySelector('aside.sidebar section.login').classList.add('active');
-  },
-  'click .notAccount a.create': (event) => {
-    check(event, $.Event);
-    event.preventDefault();
-
-    document.body.classList.add('leftSmall');
-    document.querySelector('nav.utility li.register').classList.add('active');
-    document.querySelector('aside.sidebar section.register').classList.add('active');
-  },
   'click span.truncated': (event) => {
     check(event, $.Event);
     $(event.currentTarget).parent().parent().parent()
@@ -358,11 +342,22 @@ Template.eventSlide.events({
     // TODO(micchickenburger): Complete event registration
   },
 
-    /**
-     * @summary Navigate on click for Same-Day links
-     * @method
-     *   @param {$.Event} event
-     */
+  /**
+   * @summary Unregister for an event
+   * @method
+   *   @param {$.Event}
+   */
+  'click li.unregister': (event) => {
+    check(event, $.Event);
+
+    Meteor.call('unregisterEvent', Template.currentData()._id);
+  },
+
+  /**
+   * @summary Navigate on click for Same-Day links
+   * @method
+   *   @param {$.Event} event
+   */
   'click a[data-id]': (event) => {
     check(event, $.Event);
 

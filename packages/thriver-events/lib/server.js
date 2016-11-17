@@ -70,11 +70,10 @@ Meteor.methods({
    *   @param {Object} details - Individual event details
    */
   registerEvent: (event, details) => {
-    const id = Meteor.userId();
-
     check(event, String);
     check(details, Match.Maybe(Object));
-    check(id, String);  // make audit-argument-checks happy
+
+    const id = Meteor.userId();
 
     // User must be logged in to register for an event
     if (!id) throw new Meteor.Error('You must be logged in to register for an event.');
@@ -85,6 +84,25 @@ Meteor.methods({
         id: event,
         details,
       },
+    } });
+  },
+
+  /**
+   * @summary Unregister for an event
+   * @method
+   *   @param {String} event - Event to unregister from
+   */
+  unregisterEvent: (event) => {
+    check(event, String);
+
+    const id = Meteor.userId();
+
+    // User must be logged in to unregister from an event
+    if (!id) throw new Meteor.Error('You must be logged in to unregister from an event.');
+
+    // Update user profile
+    Meteor.users.update({ _id: id }, { $pull: {
+      'profile.events.registeredEvents': { id: event },
     } });
   },
 });

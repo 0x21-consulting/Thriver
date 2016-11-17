@@ -137,18 +137,30 @@ Template.aside.onRendered(() => {
   const deepLinkCallback = (path) => {
     check(path, [String]);
 
-    const id = aside.querySelector('section[aria-hidden="false"]').id;
-    const tabs = document.querySelectorAll(`#${id} menu.tabs > li > a`);
+    // Wait for element to exist
+    const render = () => {
+      const section = aside.querySelector('section[aria-hidden="false"]');
 
-    // Find tab, then click it
-    for (let i = 0; i < tabs.length; i += 1) {
-      if (path[0] === tabs[i].dataset.id) tabs[i].click();
-    }
+      if (!(section instanceof Element)) {
+        Meteor.defer(render);
+        return;
+      }
 
-    // Otherwise, if there isn't any path, click the first tab for the user
-    if (!path.length && tabs.length) {
-      if (screen.width > 767) tabs[0].click();
-    }
+      const id = section.id;
+      const tabs = document.querySelectorAll(`#${id} menu.tabs > li > a`);
+
+      // Find tab, then click it
+      for (let i = 0; i < tabs.length; i += 1) {
+        if (path[0] === tabs[i].dataset.id) tabs[i].click();
+      }
+
+      // Otherwise, if there isn't any path, click the first tab for the user
+      if (!path.length && tabs.length) {
+        if (screen.width > 767) tabs[0].click();
+      }
+    };
+
+    render();
   };
 
   // Register each tab

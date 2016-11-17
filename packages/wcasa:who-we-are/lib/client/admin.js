@@ -154,7 +154,8 @@ AutoForm.addHooks(['addStaffPerson', 'addBoardPerson'], { before: {
 
         // Let form submit continue asynchronously
         that.result(doc);
-      }); }(file.type));
+      });
+    }(file.type));
 
     // Read in file as an Array Buffer
     reader.readAsArrayBuffer(file);
