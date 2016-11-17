@@ -97,5 +97,10 @@ ul, ol{
         // Images can be floated left/right by starting the alt tag with "left" or "right"
         &[class^="right:"] { float: right; padding: 0px 0px 15px 15px; }
         &[alt^="left:"] { float: left; padding: 0px 15px 15px 0px; }
+        &[alt^="center:"]{
+            display: block;
+            margin: 0 auto;
+            float: none;
+        }
     }
 }
