@@ -1,6 +1,4 @@
-//@import "../index.less";
-
-//Base font-size,line-height,letter-spacing
+// Base font-size,line-height,letter-spacing
 @baseFS: 1.6;
 @baseLH: 2.2;
 @baseLS: 0.025;
@@ -16,7 +14,7 @@
     text-transform: @fontStyle;
 }
 
-//Initialize rems
+// Initialize rems
 html{font-size: 62.5%;}
 body{
     -webkit-font-smoothing: antialiased;
@@ -33,14 +31,15 @@ p,body{
     color: @black;
 
 }
-//Text Globals: Defaults
+// Text Globals: Defaults
+h1,h2{ clear: both; }
 h1,h2,h3,h4,h5,p{
     margin: 0px 0px 20px 0px;
     color: @black;
-    clear: both;
 }
-//Text Globals: Headings
-h1{ //Should rarely be used as most content areas are children of predefined H1s
+
+// Text Globals: Headings
+h1{ // Should rarely be used as most content areas are children of predefined H1s
     .font(3.8,3.8,0.025,@normal,uppercase);
     color: @navy;
 }
@@ -52,7 +51,7 @@ h5{.font(1.6,1.6,0,@bold,none);}
 @media @mobile{
     main h2{.font(2.0,2.5,0.025,@bold,none) !important; padding-bottom: 5px !important;}
 }
-//Text Globals: Basic Elements
+// Text Globals: Basic Elements
 a{
     .textButtonColor(saturate(@blue, 60%));
     font-weight: @normal;
@@ -68,10 +67,13 @@ hr {
     margin: 20px 0px 20px 0px;
     clear: both;
 }
+
+// Image defaults
 img{
     max-width: 100%;
 }
-//Text Globals: Lists
+
+// Text Globals: Lists
 ul, ol{
     margin: 10px 0px 10px 20px;
     > li{
@@ -81,6 +83,22 @@ ul, ol{
         }
         > ul{
             margin: 10px 0px 0px 20px;
+        }
+    }
+}
+
+// Markdown
+.markdown{
+    p{float: none;}
+    // Image defaults
+    img{
+        // Images can be floated left/right by starting the alt tag with "left" or "right"
+        &[class^="right:"] { float: right; padding: 0px 0px 15px 15px; }
+        &[alt^="left:"] { float: left; padding: 0px 15px 15px 0px; }
+        &[alt^="center:"]{
+            display: block;
+            margin: 0 auto;
+            float: none;
         }
     }
 }
