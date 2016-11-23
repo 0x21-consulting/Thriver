@@ -23,6 +23,7 @@ const checkAdmin = () => {
  * @returns {boolean}
  */
 const getAdmin = () => isAdmin.get();
+Thriver.isAdmin = getAdmin;
 
 // Pass admin state to templates
 Template.registerHelper('isAdmin', getAdmin);
