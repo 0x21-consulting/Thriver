@@ -1,22 +1,25 @@
 <template name="canvas">
-    {{> browseHappy}}
-    <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
-        {{> utility}}
-        {{> navigation}}
-        {{> navigationMobile}}
-        <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
-            {{data}}
-            {{#each sections}}
-                {{> Template.dynamic template=template}}
-            {{/each}}
-            {{>top}}
-        </main>
-        {{> aside}}
-        <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
-        <!--Unseen templates: {"post","help","alerts"}-->
-    </div>
-    {{#if isAdmin}}
-        {{>admin}}
-    {{/if}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  {{> browseHappy}}
+  <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
+    {{> utility}}
+    {{> navigation}}
+    {{> navigationMobile}}
+    <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
+      {{data}}
+      {{#each sections}}
+        {{> Template.dynamic template=template}}
+      {{/each}}
+      {{>top}}
+    </main>
+    {{> aside}}
+    <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
+  </div>
+  {{#if currentUser}}
+    {{> feedback}}
+  {{/if}}
+  {{#if isAdmin}}
+    {{> admin}}
+    {{> feedbackAdmin}}
+  {{/if}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 </template>

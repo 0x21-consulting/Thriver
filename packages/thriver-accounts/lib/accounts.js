@@ -118,6 +118,6 @@ Accounts.emailTemplates.verifyEmail.text = (user, url) => {
 
   return `Hello ${user.profile.firstname}!\n\n` +
     `To verify your account email, simply click the link below.\n\n${url}\n\n` +
-    `If you weren't expecting this email, simply delete it.\n\n` +
-    `Thanks!\n\nAll of us at WCASA`;
+    'If you weren\'t expecting this email, simply delete it.\n\n' +
+    'Thanks!\n\nAll of us at WCASA';
 };
