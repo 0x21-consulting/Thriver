@@ -11,7 +11,7 @@ Template.masthead.helpers({
       id: 'mastheadSlideB',
       template: 'slideB',
     }, {
-      title: 'November 2016 Voice Newsletter',
+      title: 'The Movement is Bigger than WCASA',
       id: 'mastheadSlideC',
       template: 'slideC',
     }],
