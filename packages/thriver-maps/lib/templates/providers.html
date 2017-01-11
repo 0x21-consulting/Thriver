@@ -39,7 +39,7 @@
                     <button class="pdf button"><span class="fa">&#xf1c1;</span> PDF</button>
                 </div>
                 {{#if isAdmin}}
-                    <button class="admin button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
+                    <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
                 {{/if}}
             </form>
         </div>
@@ -106,6 +106,7 @@
                 </div>
             </div>
         {{/with}}
+        {{> addProvider}}
     </article>
 </template>
 
