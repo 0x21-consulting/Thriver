@@ -524,6 +524,42 @@ section.providers div.providerSearch button.addProvider.button {
     background: @teal;
     margin-left: -23px;
 }
+section.addProvider header button.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: @teal;
+}
+#providerForm {
+    margin: 10px;
+    height: 600px;
+    overflow: auto;
+}
+#providerForm label {
+    color: #fff;
+    font-weight: normal;
+}
+
+// Add Provider form styles
+#providerForm [data-required="true"] label::after {
+    content: '\f069';
+    font: 10px FontAwesome;
+    color: @orange;
+    margin-left: 5px;
+}
+.glyphicon::after { font: 12px FontAwesome; }
+.glyphicon-plus::after  { content: '\f067'; }
+.glyphicon-minus::after { content: '\f068'; }
+#providerForm button { background: @teal; }
+#providerForm li { list-style-type: none; }
+#providerForm span.help-block {
+    color: #f55;
+    font-weight: bold;
+    float: right;
+    margin-top: -53px;
+    margin-right: 10px;
+}
+
 div.mapTool article.details aside.adminControls {
     position: absolute;
     width: auto;

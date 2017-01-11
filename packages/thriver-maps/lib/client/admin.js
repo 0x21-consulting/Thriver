@@ -11,6 +11,10 @@ const closeForm = (event) => {
 
   // Close add Provider Form
   event.delegateTarget.querySelector('section.addProvider').classList.add('hide');
+
+  // Show inner again
+  event.delegateTarget.querySelector('section.addProvider .inner').classList
+    .remove('hide');
 };
 
 /** Admin events */
@@ -39,11 +43,14 @@ Template.providers.events({
     activeProvider.set(null);
 
     const popout = event.target.parentElement.parentElement.parentElement;
-    const admin = event.target.parentElement.parentElement.parentElement
+    const form = event.target.parentElement.parentElement.parentElement
       .querySelector('section.addProvider');
+    const inner = event.target.parentElement.parentElement.parentElement
+      .querySelector('.inner');
 
     if (popout instanceof Element) popout.classList.remove('full-view');
-    if (admin instanceof Element) admin.classList.remove('hide');
+    if (form instanceof Element) form.classList.remove('hide');
+    if (inner instanceof Element) inner.classList.add('hide');
   },
 });
 
