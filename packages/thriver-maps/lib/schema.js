@@ -86,3 +86,4 @@ Thriver.providers.schema = new SimpleSchema({
     label: 'Twitter Feed URL',
   },
 });
+Thriver.providers.collection.attachSchema(Thriver.providers.schema);

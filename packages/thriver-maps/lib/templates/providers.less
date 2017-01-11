@@ -10,7 +10,6 @@ section.providers{
         background: @navy;
         position: relative;
         vertical-align: top;
-        //.shadow(closeLeft);
         &:before{
             content:"\f0d9";
             .fa;
@@ -29,7 +28,6 @@ section.providers{
             .fa{color: @orange; margin-right: 5px;}
         }
         .main{
-            //background-color: @navy;
             padding: 40px;
         }
         h2{
@@ -40,7 +38,6 @@ section.providers{
         }
         address{
             font-style: normal;
-            //font-weight: 700;
             font-size: 17px;
             margin: 15px 0px;
             display: block;
@@ -52,7 +49,6 @@ section.providers{
                 line-height: 16px;
                 letter-spacing: 0.5px;
                 a{
-                    //color: @teal;
                     font-weight: 800;
                 }
                 &:before{
@@ -124,19 +120,15 @@ section.providers{
     padding-bottom: 0px;
     background-color: darken(@white, 1%);
     .providerSearch{
-        //max-width: 700px;
         margin: 0 auto;
         padding: 0px 0px 20px 0px;
         text-align: center;
         .boxShadow(none);
-        //border-bottom: 1px solid darken(@white, 30%);
-        //border-bottom: 2px solid #e2edf3;
         position: relative;
         z-index: 9;
         form{
             margin-top: -10px;
             div, button{
-                //width: 49%;
                 display: inline-block;
                 margin: 0px;
                 text-align: left;
@@ -146,7 +138,6 @@ section.providers{
                 }
             }
             button{
-                //text-align: center;
                 width: auto;
             }
             label, input{
@@ -160,7 +151,6 @@ section.providers{
                     box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.1);
                     -webkit-box-shadow: 2px 2px 3px 1px rgba(0,0,0,0.1);
                 }
-                //width: 218px;
                 float: none;
                 &:focus, input:focus{
                     background-color: darken(@orange, 5%);
@@ -199,11 +189,6 @@ section.providers{
                     background: @teal;
                     margin-left: -15px;
                 }
-                &:nth-child(4){
-                    background: @bodyBgColor;
-                    margin-left: -5px;
-                    @media @mobile{display: none;}
-                }
                 @media @mobile{
                     width: 50%;
                     text-align: center;
@@ -229,7 +214,6 @@ section.providers{
     figure.map{
         #mapCanvas{
             height: 100%;
-            //@media @mobile{pointer-events: none;}
         }
         // Map popups
         p.providerTitle {
@@ -275,8 +259,6 @@ section.providers{
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c5465', endColorstr='#1a2c3d',GradientType=1 ); /* IE6-9 */
         position: relative;
         vertical-align: top;
-        //box-shadow: -11px 0px 5px -6px rgba(0, 0, 0, 0.2);
-        //-webkit-box-shadow:-11px 0px 5px -6px rgba(0, 0, 0, 0.2);
         color: @white;
         p{
             color: @white;
@@ -285,7 +267,6 @@ section.providers{
             margin-bottom: 0px;
         }
         h2{
-            //border-bottom: 2px solid #dce8e8;
             color: @white;
             font-size: 28px;
             line-height: 32px;
@@ -403,34 +384,16 @@ section.providers{
             padding: 40px;
         }
         .main{
-            //background-color: @navy;
             padding: 20px;
         }
     }
 }
 
-/*
-.providersList{
-    position: absolute;
-    width: 90vw;
-    right: 5vw;
-    height: 560px;
-    top: 0px;
-    background-color: @blue;
-    .translate(0px,0px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}*/
-
-
-
 .providersList{
     padding: 20px;
     @media @mobile{padding: 20px 10px;}
-    //height: 540px;
     ul{
         .columns(5,100px,20px);
-        //height: 400px;
         padding-bottom: 0px;
         @media @mobile{
             -webkit-columns: initial;
@@ -492,19 +455,12 @@ section.providers{
 
 }
 
-.providers article{
-    //will-change:width;
-   // .transition(width,@canvasDuration,@canvasEase,0ms);
-}
-
 .mapView{
     display: block;
     .buttonColor(@teal);
     margin: 0 auto;
 
 }
-
-
 
 //Responsive Styles
 @media (max-width:1000px){
@@ -561,4 +517,34 @@ section.providers{
 
 .providersListOpen figure.map {
     display: none !important;
+}
+
+// Admin Styles
+section.providers div.providerSearch button.admin.button {
+    background: @teal;
+    margin-left: -23px;
+}
+div.mapTool article.details aside.adminControls {
+    position: absolute;
+    width: auto;
+    right: 5px;
+    top: 20px;
+
+    span.fa {
+        font-size: 16px;
+        color: #fff;
+        background: @teal;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        padding: 0;
+        margin-right: 5px;
+        line-height: 25px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+    }
+    span.delete {
+        background: @orange;
+    }
 }
