@@ -13,8 +13,7 @@ const closeForm = (event) => {
   event.delegateTarget.querySelector('section.addProvider').classList.add('hide');
 
   // Show inner again
-  event.delegateTarget.querySelector('section.addProvider .inner').classList
-    .remove('hide');
+  event.delegateTarget.querySelector('div.inner').classList.remove('hide');
 };
 
 /** Admin events */
@@ -55,7 +54,7 @@ Template.providers.events({
 });
 
 /** Admin Helpers */
-Template.eventsAdmin.helpers({
+Template.addProvider.helpers({
   /**
    * @summary Meteor Method to call on submit
    * @function
@@ -102,7 +101,9 @@ Template.provider.events({
     check(event, $.Event);
 
     if (confirm('Are you sure you want to delete this provicer?')) {
-      Meteor.call('deleteProvider', Blaze.getData()._id);
+      Meteor.call('deleteProvider', Session.get('currentProvider')._id);
+      // Close side pane and show whole map
+      document.querySelector('.mapView').click();
     }
   },
 });

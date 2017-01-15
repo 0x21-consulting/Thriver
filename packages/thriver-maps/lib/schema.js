@@ -11,6 +11,12 @@ Thriver.providers = {};
 Thriver.providers.collection = new Mongo.Collection('providers');
 Thriver.providers.counties = new Mongo.Collection('counties');
 
+// Create custom validation messages
+SimpleSchema.messages({
+  invalidLatitude: 'Latitude must be between 42.5 and 47.083',
+  invalidLongitude: 'Longitude must be between -86.767 and -92.883',
+});
+
 /**
  * @summary Providers Schema
  * @type {SimpleSchema}
@@ -33,7 +39,27 @@ Thriver.providers.schema = new SimpleSchema({
   counties: {
     type: [String],
     defaultValue: [],
+    allowedValues: [
+      'Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown',
+      'Buffalo', 'Burnett', 'Calumet', 'Chippewa', 'Clark',
+      'Columbia', 'Crawford', 'Dane', 'Dodge', 'Door',
+      'Douglas', 'Dunn', 'Eau Claire', 'Florence', 'Fond Du Lac',
+      'Forest', 'Grant', 'Green', 'Green Lake', 'Iowa',
+      'Iron', 'Jackson', 'Jefferson', 'Juneau', 'Kenosha',
+      'Kewaunee', 'La Crosse', 'Lafayette', 'Langlade', 'Lincoln',
+      'Manitowoc', 'Marathon', 'Marinette', 'Marquette', 'Menominee',
+      'Milwaukee', 'Monroe', 'Oconto', 'Oneida', 'Outagamie',
+      'Ozaukee', 'Pepin', 'Pierce', 'Polk', 'Portage',
+      'Price', 'Racine', 'Richland', 'Rock', 'Rusk',
+      'Saint Croix', 'Sauk', 'Sawyer', 'Shawano', 'Sheboygan',
+      'Taylor', 'Trempealeau', 'Vernon', 'Vilas', 'Walworth',
+      'Washburn', 'Washington', 'Waukesha', 'Waupaca', 'Waushara',
+      'Winnebago', 'Wood',
+    ],
     label: 'Counties Served by Provider',
+    autoform: {
+      type: 'select-checkbox',
+    },
   },
   /** Provider's Address */
   address: {
@@ -44,7 +70,6 @@ Thriver.providers.schema = new SimpleSchema({
   coordinates: {
     type: [Number],
     optional: false,
-    defaultValue: [0, 0],
     minCount: 2,
     maxCount: 2,
     label: 'Latitude and Longitude',
@@ -53,6 +78,25 @@ Thriver.providers.schema = new SimpleSchema({
     type: Number,
     decimal: true,
     optional: false,
+    custom: function () { // eslint-disable-line object-shorthand,func-names
+      const index = parseInt(this.key.substr(this.key.length - 1), 10);
+
+      // Latitude
+      if (index === 0) {
+        if (this.value < 42.5 || this.value > 47.083) {
+          return 'invalidLatitude';
+        }
+      }
+
+      // Longitude
+      if (index === 1) {
+        if (this.value > -86.767 || this.value < -92.883) {
+          return 'invalidLongitude';
+        }
+      }
+
+      return true;
+    },
   },
   /** Provider Main Phone Number */
   phone: {
@@ -60,6 +104,9 @@ Thriver.providers.schema = new SimpleSchema({
     optional: false,
     regEx: /^\(\d{3}\) \d{3}\-\d{4}.*/,
     label: 'Main Phone Number',
+    autoform: {
+      placeholder: '(123) 456-7890',
+    },
   },
   /** Crisis Phone Number */
   crisis: {
@@ -67,6 +114,9 @@ Thriver.providers.schema = new SimpleSchema({
     optional: false,
     regEx: /^\(\d{3}\) \d{3}\-\d{4}.*/,
     label: '24-hr Crisis Phone Number',
+    autoform: {
+      placeholder: '(123) 456-7890',
+    },
   },
   /** Contact email address */
   email: {

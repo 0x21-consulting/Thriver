@@ -4,7 +4,7 @@
 section.providers{
     z-index: 1;
     position: relative;
-    label{display: block !important;}
+    label{display: block}
     article.details{
         width: 700px;
         background: @navy;
@@ -534,6 +534,21 @@ section.addProvider header button.close {
     margin: 10px;
     height: 600px;
     overflow: auto;
+
+    div.af-checkbox-group {
+        columns: 3;
+    }
+    div.checkbox label {
+        display: inline;
+
+        input {
+            display: initial;
+            -webkit-appearance: checkbox;
+        }
+        &::after {
+            content: '';
+        }
+    }
 }
 #providerForm label {
     color: #fff;
