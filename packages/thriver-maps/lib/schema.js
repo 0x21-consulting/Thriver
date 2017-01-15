@@ -65,6 +65,10 @@ Thriver.providers.schema = new SimpleSchema({
   address: {
     type: String,
     optional: false,
+    autoform: {
+      type: 'textarea',
+      rows: 4,
+    },
   },
   /** Coordinates of Provider Location */
   coordinates: {

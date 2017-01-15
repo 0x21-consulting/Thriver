@@ -82,14 +82,16 @@ Template.provider.events({
 
     // Set form type to Update
     formMethod.set('updateProvider');
-    activeProvider.set(Blaze.getData());
+    activeProvider.set(Session.get('currentProvider'));
 
     // Hide Slider and show admin interface
-    const eventsSlider = event.delegateTarget.parentElement.parentElement;
+    const popout = event.delegateTarget.parentElement;
+    const form = event.delegateTarget.querySelector('section.addProvider');
+    const inner = event.delegateTarget.querySelector('.inner');
 
-    eventsSlider.classList.add('hide');
-    eventsSlider.parentElement.querySelector('section.addEvent')
-      .classList.remove('hide');
+    if (popout instanceof Element) popout.classList.remove('full-view');
+    if (form instanceof Element) form.classList.remove('hide');
+    if (inner instanceof Element) inner.classList.add('hide');
   },
 
   /**

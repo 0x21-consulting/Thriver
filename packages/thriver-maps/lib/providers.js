@@ -55,4 +55,23 @@ Meteor.methods({
       if (error) throw new Meteor.Error(error);
     });
   },
+
+  /**
+   * @summary Update a Provider
+   * @method
+   *   @param {Object} provicer - Provider to modify
+   */
+  updateProvider: (provider) => {
+    // Check authorization
+    if (!Meteor.userId() || !Meteor.user().admin) throw new Meteor.Error('not-authorized');
+
+    // Parameter checks
+    check(provider, Object);
+    console.log(provider);
+    // Perform update
+    Thriver.providers.collection.update({ _id: provider._id }, { $set: provider },
+      (error) => {
+        if (error) throw new Meteor.Error(error);
+      });
+  },
 });
