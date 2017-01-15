@@ -82,7 +82,7 @@ Template.provider.events({
 
     // Set form type to Update
     formMethod.set('updateProvider');
-    activeProvider.set(Session.get('currentProvider'));
+    activeProvider.set(Thriver.providers.active.get());
 
     // Hide Slider and show admin interface
     const popout = event.delegateTarget.parentElement;
@@ -103,9 +103,13 @@ Template.provider.events({
     check(event, $.Event);
 
     if (confirm('Are you sure you want to delete this provicer?')) {
-      Meteor.call('deleteProvider', Session.get('currentProvider')._id);
+      Meteor.call('deleteProvider', Thriver.providers.active.get()._id);
+
       // Close side pane and show whole map
       document.querySelector('.mapView').click();
+
+      // Unset current provider
+      Thriver.providers.current.set(null);
     }
   },
 });
