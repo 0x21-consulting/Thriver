@@ -1,0 +1,10 @@
+<template name="addProvider">
+    <section class="hide addProvider">
+        <header>
+            <h2>Add a Provider</h2>
+            <button class="fa close">&#xf057; Close</button>
+        </header>
+        {{> quickForm collection="Thriver.providers.collection" id="providerForm" 
+            meteormethod=method type="method" doc=doc }}
+    </section>
+</template>

@@ -35,6 +35,7 @@ Package.onUse((api) => {
 
     // Templates
     'lib/templates/providers.html',
+    'lib/templates/admin.html',
 
     // Styles
     'lib/templates/providers.less',
@@ -42,7 +43,7 @@ Package.onUse((api) => {
     // Helpers and methods
     'lib/client/providers.js',
     'lib/client/maps.js',
-
+    'lib/client/admin.js',
   ], ['client']);
 });
 

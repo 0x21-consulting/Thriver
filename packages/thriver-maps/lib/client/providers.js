@@ -1,6 +1,12 @@
 // Subscriptions
 Meteor.subscribe('providers');
 
+/**
+ * @summary Keep track of active provider
+ * @type {ReactiveVar}
+ */
+Thriver.providers.active = new ReactiveVar(null);
+
 // Counties and other provider data
 Template.providers.helpers({
   // All counties (for dropdown list)
@@ -23,7 +29,7 @@ Template.providers.helpers({
 Template.provider.helpers({
   // The current provider
   currentProvider: () =>
-    Session.get('currentProvider'),
+    Thriver.providers.active.get(),
 
   // Current provider's counties served
   providerCounties: data =>

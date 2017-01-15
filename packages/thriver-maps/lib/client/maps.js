@@ -81,13 +81,6 @@ const initialize = () => {
   const init = () => {
     const mapElement = document.querySelector('#mapCanvas');
 
-    // Reset map
-    const handleLocationError = () => {
-      document.getElementById('service-providers').classList.add('full-view');
-      if (map.getZoom() > 0) map.setZoom(7);
-      map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
-    };
-
     // Map options
     const options = {
       scrollwheel: false,
@@ -173,15 +166,14 @@ const initialize = () => {
 
           // Show results if the result has an ID
           if (this.id) {
-            Session.set('currentProvider',
-              Thriver.providers.collection.findOne({ _id: this.id }));
+            Thriver.providers.active.set(Thriver.providers.collection
+              .findOne({ _id: this.id }));
           }
         });
       });
 
       // Stop
       c.stop();
-      const infoWindow = new google.maps.InfoWindow({ map });
 
       // Geolocation
       if (navigator.geolocation) {
@@ -215,12 +207,8 @@ const initialize = () => {
           map.setZoom(11);
 
           // Show results
-          Session.set('currentProvider', closest);
-        }, () => {
-          handleLocationError(true, infoWindow, map.getCenter());
+          Thriver.providers.active.set(closest);
         });
-      } else {
-        handleLocationError(false, infoWindow, map.getCenter());
       }
     });
 
@@ -293,8 +281,8 @@ const moveMap = (county) => {
 
   // If there was only one result, click on it for the user
   if (providers.length === 1) {
-    Session.set('currentProvider',
-      Thriver.providers.collection.findOne({ _id: providers[0].id }));
+    Thriver.providers.active.set(Thriver.providers.collection
+      .findOne({ _id: providers[0].id }));
   } else {
     document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(map, 'resize');
@@ -408,8 +396,8 @@ Template.providerListViewItem.events({
     const data = Template.instance().data;
 
     // Update info section
-    Session.set('currentProvider',
-      Thriver.providers.collection.findOne({ _id: data._id }));
+    Thriver.providers.active.set(Thriver.providers.collection
+      .findOne({ _id: data._id }));
 
     // Update map
     map.panTo(new google.maps.LatLng(

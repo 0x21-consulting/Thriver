@@ -38,9 +38,11 @@
                     <button class="seeAllProviders button"><span class="fa">&#xf03a;</span> List</button>
                     <button class="pdf button"><span class="fa">&#xf1c1;</span> PDF</button>
                 </div>
+                {{#if isAdmin}}
+                    <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
+                {{/if}}
             </form>
         </div>
-
 
         <div class="main mapTool">
             <figure class="map">
@@ -52,25 +54,24 @@
     </section>
 </template>
 
-
-
-<!--Legacy Meteor Data for Provider Data-->
 <template name="provider">
     <article class="locationDetails details">
-        <!--{{> provider}}-->
-        {{>providersList}}
+        {{> providersList}}
         {{#with currentProvider}}
             <div class="inner">
                 <header>
                     <h2>{{name}}</h2>
                     <address>{{address}}</address>
                     <p class="county-served">Counties Served: {{providerCounties this}}</p>
-                    <p class="crisis-line"><span class="fa">&#xf06a;</span><strong>Crisis Line:</strong> {{crisis}}</p>
+                    <p class="crisis-line"><span class="fa">&#xf06a;</span><strong>24-Hour Crisis Line:</strong> {{crisis}}</p>
+                    {{#if isAdmin}}
+                        <aside class="adminControls">
+                            <span class="fa edit" title="Edit Provider">&#xf044;</span>
+                            <span class="fa delete" title="Delete Provider">&#xf014;</span>
+                        </aside>
+                    {{/if}}
                 </header>
                 <div class="main">
-                    <!--<ul class="phones">
-                        <li class="crisis"><strong>Crisis:</strong> {{crisis}}</li>
-                    </ul>-->
                     <ul class="outreach">
                         {{#if phone}}
                             <li class="phone">
@@ -104,6 +105,7 @@
                 </div>
             </div>
         {{/with}}
+        {{> addProvider}}
     </article>
 </template>
 
