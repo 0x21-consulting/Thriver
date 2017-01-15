@@ -106,7 +106,7 @@ Thriver.providers.schema = new SimpleSchema({
   phone: {
     type: String,
     optional: false,
-    regEx: /^\(\d{3}\) \d{3}\-\d{4}.*/,
+    regEx: /^\(\d{3}\) \d{3}-\d{4}.*/,
     label: 'Main Phone Number',
     autoform: {
       placeholder: '(123) 456-7890',
@@ -116,7 +116,7 @@ Thriver.providers.schema = new SimpleSchema({
   crisis: {
     type: String,
     optional: false,
-    regEx: /^\(\d{3}\) \d{3}\-\d{4}.*/,
+    regEx: /^\(\d{3}\) \d{3}-\d{4}.*/,
     label: '24-hr Crisis Phone Number',
     autoform: {
       placeholder: '(123) 456-7890',

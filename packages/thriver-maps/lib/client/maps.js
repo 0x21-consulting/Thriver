@@ -81,13 +81,6 @@ const initialize = () => {
   const init = () => {
     const mapElement = document.querySelector('#mapCanvas');
 
-    // Reset map
-    const handleLocationError = () => {
-      document.getElementById('service-providers').classList.add('full-view');
-      if (map.getZoom() > 0) map.setZoom(7);
-      map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
-    };
-
     // Map options
     const options = {
       scrollwheel: false,
