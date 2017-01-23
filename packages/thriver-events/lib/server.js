@@ -1,6 +1,18 @@
 // Publish events
 Meteor.publish('events', () => Thriver.events.collection.find({}));
 
+// Publish Registrations
+Meteor.publish('registrations', (eventId) => {
+  // Check authorization
+  if (!Meteor.userId() || Meteor.user().admin) throw new Meteor.Error('not-authorized');
+
+  // Parameter checks
+  check(eventId, String);
+
+  // Get all users who are subscribed to this event
+  Meteor.users.find();
+});
+
 Meteor.methods({
   /**
    * @summary Insert new Event into Database

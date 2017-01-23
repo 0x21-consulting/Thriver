@@ -6,3 +6,15 @@
             meteormethod=method type="method" doc=doc }}
     </section>
 </template>
+
+<template name="viewRegistrations">
+    <section class="viewRegistrations hide">
+        <h3>Registered Participants</h3>
+        <button class="fa close">&#xf057; Close</button>
+        <ul>
+          {{#each registrant}}
+            <li data-id="{{_id}}">{{profile.firstname}} {{profile.lastname}}</li>
+          {{/each}}
+        </ul>
+    </section>
+</template>

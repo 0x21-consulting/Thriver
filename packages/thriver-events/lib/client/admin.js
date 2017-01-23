@@ -99,4 +99,32 @@ Template.eventSlide.events({
       Meteor.call('deleteEvent', Blaze.getData()._id);
     }
   },
+
+  /**
+   * @summary View Registrations
+   * @method
+   *   @param {$.Event} event
+   */
+  'click li.viewRegistrations': (event) => {
+    check(event, $.Event);
+
+    // Hide slider and show Registrations
+    const eventsSlider = event.delegateTarget.parentElement.parentElement;
+
+    eventsSlider.classList.add('hide');
+    eventsSlider.parentElement.querySelector('section.viewRegistrations')
+      .classList.remove('hide');
+  },
+});
+
+/** Event Registration Admin Helpers */
+Template.viewRegistrations.helpers({
+  /**
+   * @summary Registrant details
+   * @function
+   * @returns {[Meteor.Profile]}
+   */
+  registrant: () => {
+
+  },
 });
