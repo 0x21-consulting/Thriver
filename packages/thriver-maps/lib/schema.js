@@ -102,38 +102,113 @@ Thriver.providers.schema = new SimpleSchema({
       return true;
     },
   },
+
   /** Provider Main Phone Number */
-  phone: {
+  phones: {
+    type: [Object],
+    optional: false,
+    defaultValue: [],
+  },
+  'phones.$': {
+    type: Object,
+    optional: false,
+  },
+  'phones.$.number': {
     type: String,
     optional: false,
-    regEx: /^\(\d{3}\) \d{3}-\d{4}.*/,
     label: 'Main Phone Number',
+    autoValue: function () { //eslint-disable-line
+      // can't use arrow function because of `this` context
+      return this.value.replace(/[^\d]/g, '');
+    },
     autoform: {
-      placeholder: '(123) 456-7890',
+      type: 'tel',
+      placeholder: '+1 (123) 456-7890',
     },
   },
-  /** Crisis Phone Number */
-  crisis: {
-    type: String,
-    optional: false,
-    regEx: /^\(\d{3}\) \d{3}-\d{4}.*/,
-    label: '24-hr Crisis Phone Number',
-    autoform: {
-      placeholder: '(123) 456-7890',
-    },
-  },
-  /** Contact email address */
-  email: {
+  'phones.$.description': {
     type: String,
     optional: true,
-    regEx: SimpleSchema.RegEx.Email,
   },
+  'phones.$.tty': {
+    type: Boolean,
+    optional: true,
+    label: 'Is this number TTY-enabled?',
+    autoform: {
+      type: 'boolean-radios',
+    },
+  },
+  'phones.$.ext': {
+    type: Number,
+    optional: true,
+    decimal: false,
+  },
+
+  /** Crisis Phone Number */
+  crisis: {
+    type: Object,
+    optional: false,
+    defaultValue: {},
+  },
+  'crisis.number': {
+    type: String,
+    optional: false,
+    label: '24-hr Crisis Phone Number',
+    autoValue: function () { //eslint-disable-line
+      // can't use arrow function because of `this` context
+      return this.value.replace(/[^\d]/g, '');
+    },
+    autoform: {
+      type: 'tel',
+      placeholder: '+1 (123) 456-7890',
+    },
+  },
+  'crisis.tty': {
+    type: Boolean,
+    optional: true,
+    label: 'Is this number TTY-enabled?',
+    autoform: {
+      type: 'boolean-radios',
+    },
+  },
+  'crisis.ext': {
+    type: Number,
+    optional: true,
+    decimal: false,
+  },
+
+  /** Contact email address */
+  emails: {
+    type: [Object],
+    optional: false,
+    defaultValue: [],
+  },
+  'emails.$': {
+    type: Object,
+    optional: true,
+  },
+  'emails.$.address': {
+    type: String,
+    optional: false,
+    regEx: SimpleSchema.RegEx.Email,
+    autoform: {
+      type: 'email',
+    },
+  },
+  'emails.$.description': {
+    type: String,
+    optional: true,
+  },
+
   /** Website */
   website: {
     type: String,
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
     label: 'Website URL',
+    autoform: {
+      type: 'url',
+    },
   },
   /** Facebook link */
   facebook: {
@@ -141,6 +216,9 @@ Thriver.providers.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
     label: 'Facebook Page URL',
+    autoform: {
+      type: 'url',
+    },
   },
   /** Twitter feed */
   twitter: {
@@ -148,6 +226,30 @@ Thriver.providers.schema = new SimpleSchema({
     optional: true,
     regEx: SimpleSchema.RegEx.Url,
     label: 'Twitter Feed URL',
+    autoform: {
+      type: 'url',
+    },
+  },
+
+  /** Notes */
+  notes: {
+    type: String,
+    optional: true,
+    autoform: {
+      type: 'textarea',
+      rows: 6,
+    },
+  },
+
+  /** Parent Location, if this is a satellite office */
+  parent: {
+    type: String,
+    optional: true,
+    label: 'If this is a satellite office, select the Parent Location:',
+    autoform: {
+      options: () => Thriver.providers.collection.find().map(provider =>
+        ({ label: provider.name, value: provider._id })),
+    },
   },
 });
 Thriver.providers.collection.attachSchema(Thriver.providers.schema);

@@ -26,6 +26,15 @@ section.providers{
         .crisis-line{
             margin-top:10px;
             .fa{color: @orange; margin-right: 5px;}
+
+            &::after {
+              content: attr(data-tty);
+              background: @teal;
+              border-radius: 5px;
+              padding: 3px;
+              font-size: 10px;
+              font-weight: bold;
+            }
         }
         .main{
             padding: 40px;
@@ -294,7 +303,8 @@ section.providers{
             }
         }
         address{
-            .font(1.6,1.8,0.025,@normal,none);
+            .font(1.6,2,0.025,@normal,none);
+            white-space: pre-wrap;
             padding: 0px;
             font-style:normal;
             margin: 0px 0px 10px 0px;
@@ -355,6 +365,15 @@ section.providers{
                     width: 27px;
                 }
                 &.phone:before{content:"\f095";}
+                &.phone a::after {
+                  content: attr(data-tty);
+                  background: @teal;
+                  border-radius: 5px;
+                  padding: 3px;
+                  font-size: 10px;
+                  font-weight: bold;
+                  margin-left: 5px;
+                }
                 &.email:before{content:"\f0e0";}
                 &.website:before{content:"\f108";}
                 &.facebook:before{content:"\f082";}
@@ -366,6 +385,10 @@ section.providers{
                     }
                 }
             }
+        }
+        p.notes,
+        p.other-offices {
+          margin: 15px 0;
         }
         &:before{
             content: '';
@@ -531,9 +554,9 @@ section.addProvider header button.close {
     background: @teal;
 }
 #providerForm {
-    margin: 10px;
+    padding: 10px 0 0 10px;
     height: 600px;
-    overflow: auto;
+    overflow-y: auto;
 
     div.af-checkbox-group {
         columns: 3;
@@ -552,6 +575,30 @@ section.addProvider header button.close {
     textarea {
       min-height: 0;
     }
+
+    div.radio input {
+      -webkit-appearance: radio;
+      display: inline;
+    }
+
+    div.panel h3.panel-title {
+      margin: initial;
+    }
+
+    select {
+      -webkit-appearance: menulist;
+      margin: 10px 0 25px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"] { height: 18px; }
+
+    .form-group { margin-right: 10px; }
+
+    .list-group-item.autoform-array-item .autoform-remove-item-wrap { padding-right: 10px; }
 }
 #providerForm label {
     color: #fff;

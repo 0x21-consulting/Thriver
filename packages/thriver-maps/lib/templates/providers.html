@@ -63,7 +63,11 @@
                     <h2>{{name}}</h2>
                     <address>{{address}}</address>
                     <p class="county-served">Counties Served: {{providerCounties this}}</p>
-                    <p class="crisis-line"><span class="fa">&#xf06a;</span><strong>24-Hour Crisis Line:</strong> {{crisis}}</p>
+                    <p class="crisis-line" data-tty="{{#if crisis.tty}}TTY{{/if}}">
+                        <span class="fa">&#xf06a;</span>
+                        <strong>24-Hour Crisis Line:</strong> 
+                        <a href="tel:{{crisis.number}}{{#if crisis.ext}};ext={{crisis.ext}}{{/if}}">{{friendlyNumber crisis.number}} {{#if crisis.ext}}x{{crisis.ext}}{{/if}}</a>
+                    </p>
                     {{#if isAdmin}}
                         <aside class="adminControls">
                             <span class="fa edit" title="Edit Provider">&#xf044;</span>
@@ -73,18 +77,18 @@
                 </header>
                 <div class="main">
                     <ul class="outreach">
-                        {{#if phone}}
+                        {{#each phones}}
                             <li class="phone">
-                                <h3>Phone</h3>
-                                <span>{{phone}}</span>
+                                <h3>Phone{{#if description}} - {{description}}{{/if}}</h3>
+                                <a href="tel:{{number}}{{#if ext}};ext={{ext}}{{/if}}" data-tty="{{#if tty}}TTY{{/if}}">{{friendlyNumber number}} {{#if ext}}x{{ext}}{{/if}}</a>
                             </li>
-                        {{/if}}
-                        {{#if email}}
+                        {{/each}}
+                        {{#each emails}}
                             <li class="email">
-                                <h3>Email</h3>
-                                <a href="mailto:{{email}}">{{email}}</a>
+                                <h3>Email{{#if description}} - {{description}}{{/if}}</h3>
+                                <a href="mailto:{{address}}">{{address}}</a>
                             </li>
-                        {{/if}}
+                        {{/each}}
                         {{#if website}}
                             <li class="website">
                                 <h3>Website</h3>
@@ -98,9 +102,22 @@
                             </li>
                         {{/if}}
                         {{#if twitter}}
-                            <li class="twitter"><a href="#" target="_blank">{{twitter}}</a></li>
+                            <li class="twitter">
+                                <h3>Twitter</h3>
+                                <a href="{{twitter}}" target="_blank">{{name}} on Twitter</a>
+                            </li>
                         {{/if}}
                     </ul>
+                    {{#if notes}}
+                        <p class="notes">{{notes}}</p>
+                    {{/if}}
+                    {{#if getOtherOffices this}}
+                        <p class="other-offices">This provider also has the following offices: 
+                            <ul>{{#each getOtherOffices this}}
+                                <li><a href="{{uri name}}">{{name}}</a></li>
+                            {{/each}}</ul>
+                        </p>
+                    {{/if}}
                     <!--<button class="cta button-aqua">Jobs &amp; More</button>-->
                 </div>
             </div>

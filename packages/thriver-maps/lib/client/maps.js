@@ -3,7 +3,7 @@ Meteor.subscribe('providers');
 Meteor.subscribe('counties');
 
 // Map handler
-let map = {};
+Thriver.map = {};
 
 // Close Map Search
 Thriver.providers.closeMapSearch = () => {
@@ -21,8 +21,8 @@ Thriver.providers.openDetails = () =>
 const fullMap = (condition) => {
   if (condition === true) {
     document.getElementById('service-providers').classList.add('full-view');
-    if (map.getZoom() > 0) map.setZoom(7);
-    map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
+    if (Thriver.map.getZoom() > 0) Thriver.map.setZoom(7);
+    Thriver.map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
   } else {
     document.getElementById('service-providers').classList.remove('full-view');
   }
@@ -30,7 +30,7 @@ const fullMap = (condition) => {
 
 // Hide info label on mouseout
 const hideLabel = () => {
-  if (map.infowindow) map.infowindow.close();
+  if (Thriver.map.infowindow) Thriver.map.infowindow.close();
 };
 
 // Initialize Google Maps API
@@ -66,15 +66,15 @@ const initialize = () => {
   // NOTE: Can't use lambda expression because of `this` context
   const displayLabel = function () {
     // Close any existing infowindow
-    if (map.infowindow) map.infowindow.close();
+    if (Thriver.map.infowindow) Thriver.map.infowindow.close();
 
     // Create new infowindow
-    map.infowindow = new google.maps.InfoWindow({
+    Thriver.map.infowindow = new google.maps.InfoWindow({
       content: `<p class="providerTitle">${this.title}</p>`,
     });
 
     // Open new infowindow
-    map.infowindow.open(this.get('map'), this);
+    Thriver.map.infowindow.open(this.get('map'), this);
   };
 
   // Map Initialization function
@@ -96,17 +96,17 @@ const initialize = () => {
     };
 
     // Map instance
-    map = new google.maps.Map(mapElement, options);
+    Thriver.map = new google.maps.Map(mapElement, options);
 
     // County Layer
     const countyLayer = new geoXML3.parser({
-      map,
-      suppressInfoWindows: true,
+      map: Thriver.map,
+      suppressInfoWindows: false,
     });
     countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
 
     // Map Options
-    map.set('styles', [{
+    Thriver.map.set('styles', [{
       featureType: 'poi',
       elementType: 'labels',
       stylers: [{ visibility: 'off' }],
@@ -154,15 +154,15 @@ const initialize = () => {
         google.maps.event.addListener(marker, 'mouseover', displayLabel);
 
         // Add to map
-        marker.setMap(map);
+        marker.setMap(Thriver.map);
 
         // Click Marker
         // NOTE: Can't use lambda expression because of `this` context
         marker.addListener('click', function () {
           fullMap(false);
-          google.maps.event.trigger(map, 'resize');
-          map.setZoom(16);
-          map.panTo(marker.getPosition());
+          google.maps.event.trigger(Thriver.map, 'resize');
+          Thriver.map.setZoom(14);
+          Thriver.map.panTo(marker.getPosition());
 
           // Show results if the result has an ID
           if (this.id) {
@@ -199,12 +199,12 @@ const initialize = () => {
           const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
 
           // Center on it
-          map.panTo(new google.maps.LatLng(
+          Thriver.map.panTo(new google.maps.LatLng(
               closest.coordinates[0],
               closest.coordinates[1]
           ));
 
-          map.setZoom(11);
+          Thriver.map.setZoom(11);
 
           // Show results
           Thriver.providers.active.set(closest);
@@ -226,14 +226,16 @@ const initialize = () => {
       google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
       // Add to map
-      marker.setMap(map);
+      marker.setMap(Thriver.map);
     }());
   };
 
   // Create maps API script
+  const googleApiKey = Thriver.settings.get('googleMapsApiKey');
   const script = document.createElement('script');
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-    '&libraries=geometry&callback=initializeMap';
+  script.src = `https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&callback=initializeMap&key=${googleApiKey}`;
+  script.async = true;
+  script.defer = true;
   document.body.appendChild(script);
 
   // Maps API will look for initialize script in global scope
@@ -274,7 +276,7 @@ const moveMap = (county) => {
     providers[providers.length - 1].coordinates[1]];
 
   // Bounds
-  map.fitBounds(new google.maps.LatLngBounds(
+  Thriver.map.fitBounds(new google.maps.LatLngBounds(
       new google.maps.LatLng(x[1], y[1]), // Southwest
       new google.maps.LatLng(x[0], y[0])  // to Northeast
   ));
@@ -285,7 +287,7 @@ const moveMap = (county) => {
       .findOne({ _id: providers[0].id }));
   } else {
     document.getElementById('service-providers').classList.add('full-view');
-    google.maps.event.trigger(map, 'resize');
+    google.maps.event.trigger(Thriver.map, 'resize');
   }
 };
 
@@ -308,7 +310,7 @@ const outlineCounty = () =>
   // County Data
   new google.maps.KmlLayer({
     url: '/packages/$USER_$PACKAGENAME/lib/client/data/wisconsin_counties.kml',
-    map,
+    map: Thriver.map,
   });
 
 Template.providers.onRendered(initialize);
@@ -336,7 +338,7 @@ Template.providers.events({
     document.body.classList.remove('providersListOpen');
     document.getElementById('service-providers').classList.add('full-view');
 
-    google.maps.event.trigger(map, 'resize');
+    google.maps.event.trigger(Thriver.map, 'resize');
 
     hideLabel();
     fullMap(true);
@@ -349,7 +351,7 @@ Template.providers.events({
     document.body.classList.remove('providersListOpen');
     document.getElementById('service-providers').classList.add('full-view');
 
-    google.maps.event.trigger(map, 'resize');
+    google.maps.event.trigger(Thriver.map, 'resize');
 
     hideLabel();
     fullMap(true);
@@ -376,7 +378,7 @@ Template.providers.events({
 
       // Close search field
       Thriver.providers.closeMapSearch();
-      google.maps.event.trigger(map, 'resize');
+      google.maps.event.trigger(Thriver.map, 'resize');
     }
   },
 });
@@ -386,27 +388,29 @@ Template.providers.events({
  * @method
  *   @param {$.Event} event - jQuery event passed to handler
  */
+const followProviderLink = (event) => {
+  check(event, $.Event);
+
+  event.stopPropagation();
+  event.preventDefault();
+
+  const data = Template.instance().data;
+
+  // Update info section
+  Thriver.providers.active.set(Thriver.providers.collection
+    .findOne({ _id: data._id }));
+
+  // Update map
+  Thriver.map.panTo(new google.maps.LatLng(
+      data.coordinates[0],
+      data.coordinates[1]
+  ));
+  Thriver.map.setZoom(13);
+
+  // Close providers section
+  document.body.classList.remove('providersListOpen');
+};
+
 Template.providerListViewItem.events({
-  'click div.pad': (event) => {
-    check(event, $.Event);
-
-    event.stopPropagation();
-    event.preventDefault();
-
-    const data = Template.instance().data;
-
-    // Update info section
-    Thriver.providers.active.set(Thriver.providers.collection
-      .findOne({ _id: data._id }));
-
-    // Update map
-    map.panTo(new google.maps.LatLng(
-        data.coordinates[0],
-        data.coordinates[1]
-    ));
-    map.setZoom(11);
-
-    // Close providers section
-    document.body.classList.remove('providersListOpen');
-  },
+  'click div.pad': followProviderLink,
 });

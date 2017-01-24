@@ -34,6 +34,54 @@ Template.provider.helpers({
   // Current provider's counties served
   providerCounties: data =>
     data.counties.join(', '),
+
+  /**
+   * @summary Get all linked offices
+   * @function
+   *   @param {Object} data
+   * @returns {[Object]}
+   */
+  getOtherOffices: (data) => {
+    const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
+    const siblings = Thriver.providers.collection.find(
+      { parent: data.parent }, { name: 1 }).map((doc) => {
+        if (data._id !== doc._id) return doc;
+        return undefined;
+      });
+
+    siblings.push(parent);
+
+    // Children, in the case of parents
+    Thriver.providers.collection.find({ parent: data._id }).map(doc => siblings.push(doc));
+
+    return siblings;
+  },
+
+  /**
+   * @summary Return friendly URI
+   * @function
+   *   @param {String} name
+   * @returns {String}
+   */
+  uri: name => `/service-providers/${Thriver.sections.generateId(name)}`,
+
+  /**
+   * @summary Create friendly phone number
+   * @function
+   *   @param {Number} phoneNumber - Phone number
+   * @returns {String}
+   */
+  friendlyNumber: (phoneNumber) => {
+    const num = `${phoneNumber}`;
+
+    // Yes, we're only supporting US/Canada numbers
+    if (num.length === 10) return `(${num.substr(0, 3)}) ${num.substr(3, 3)}-${num.substr(6)}`;
+    if (num.length === 11) {
+      return `+${num.substr(0, 1)} (${num.substr(1, 3)}) ${num.substr(4, 3)}-${num.substr(7)}`;
+    }
+
+    return phoneNumber;
+  },
 });
 
 /**
@@ -87,6 +135,31 @@ Template.providers.onRendered(() => {
     element: Thriver.sections.generateId(instanceName),
 
     /** Handle deep-linking */
-    callback: path => path,
+    callback: (path) => {
+      // If there's no path, there's nothing to do
+      if (!path.length) return;
+
+      // Wait for collection and google API to become available
+      Deps.autorun((c) => {
+        if (!google) return;
+
+        // Find provider, if one with this name exists
+        Thriver.providers.collection.find().forEach((doc) => {
+          if (path[0] === Thriver.sections.generateId(doc.name)) {
+            // Set provider as active
+            Thriver.providers.active.set(doc);
+
+            // Update map
+            Thriver.map.panTo(new google.maps.LatLng(
+              doc.coordinates[0],
+              doc.coordinates[1]
+            ));
+            Thriver.map.setZoom(13);
+          }
+        });
+
+        c.stop();
+      });
+    },
   });
 });
