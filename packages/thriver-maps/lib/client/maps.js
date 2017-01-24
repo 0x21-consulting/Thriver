@@ -231,9 +231,11 @@ const initialize = () => {
   };
 
   // Create maps API script
+  const googleApiKey = Thriver.settings.get('googleMapsApiKey');
   const script = document.createElement('script');
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-    '&libraries=geometry&callback=initializeMap';
+  script.src = `https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&callback=initializeMap&key=${googleApiKey}`;
+  script.async = true;
+  script.defer = true;
   document.body.appendChild(script);
 
   // Maps API will look for initialize script in global scope
