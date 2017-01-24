@@ -51,6 +51,9 @@ Template.provider.helpers({
 
     siblings.push(parent);
 
+    // Children, in the case of parents
+    Thriver.providers.collection.find({ parent: data._id }).map(doc => siblings.push(doc));
+
     return siblings;
   },
 

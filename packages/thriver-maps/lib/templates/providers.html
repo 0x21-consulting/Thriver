@@ -111,7 +111,7 @@
                     {{#if notes}}
                         <p class="notes">{{notes}}</p>
                     {{/if}}
-                    {{#if parent}}
+                    {{#if getOtherOffices this}}
                         <p class="other-offices">This provider also has the following offices: 
                             <ul>{{#each getOtherOffices this}}
                                 <li><a href="{{uri name}}">{{name}}</a></li>
