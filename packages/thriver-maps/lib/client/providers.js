@@ -34,6 +34,51 @@ Template.provider.helpers({
   // Current provider's counties served
   providerCounties: data =>
     data.counties.join(', '),
+
+  /**
+   * @summary Get all linked offices
+   * @function
+   *   @param {Object} data
+   * @returns {[Object]}
+   */
+  getOtherOffices: (data) => {
+    const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
+    const siblings = Thriver.providers.collection.find(
+      { parent: data.parent }, { name: 1 }).map((doc) => {
+        if (data._id !== doc._id) return doc;
+        return undefined;
+      });
+
+    siblings.push(parent);
+
+    return siblings;
+  },
+
+  /**
+   * @summary Return friendly URI
+   * @function
+   *   @param {String} name
+   * @returns {String}
+   */
+  uri: name => `/service-providers/${Thriver.sections.generateId(name)}`,
+
+  /**
+   * @summary Create friendly phone number
+   * @function
+   *   @param {Number} phoneNumber - Phone number
+   * @returns {String}
+   */
+  friendlyNumber: (phoneNumber) => {
+    const num = `${phoneNumber}`;
+
+    // Yes, we're only supporting US/Canada numbers
+    if (num.length === 10) return `(${num.substr(0, 3)}) ${num.substr(3, 3)}-${num.substr(6)}`;
+    if (num.length === 11) {
+      return `+${num.substr(0, 1)} (${num.substr(1, 3)}) ${num.substr(4, 3)}-${num.substr(7)}`;
+    }
+
+    return phoneNumber;
+  },
 });
 
 /**
