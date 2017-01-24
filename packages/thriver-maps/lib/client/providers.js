@@ -135,6 +135,31 @@ Template.providers.onRendered(() => {
     element: Thriver.sections.generateId(instanceName),
 
     /** Handle deep-linking */
-    callback: path => path,
+    callback: (path) => {
+      // If there's no path, there's nothing to do
+      if (!path.length) return;
+
+      // Wait for collection and google API to become available
+      Deps.autorun((c) => {
+        if (!google) return;
+
+        // Find provider, if one with this name exists
+        Thriver.providers.collection.find().forEach((doc) => {
+          if (path[0] === Thriver.sections.generateId(doc.name)) {
+            // Set provider as active
+            Thriver.providers.active.set(doc);
+
+            // Update map
+            Thriver.map.panTo(new google.maps.LatLng(
+              doc.coordinates[0],
+              doc.coordinates[1]
+            ));
+            Thriver.map.setZoom(13);
+          }
+        });
+
+        c.stop();
+      });
+    },
   });
 });
