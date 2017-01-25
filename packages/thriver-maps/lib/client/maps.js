@@ -162,9 +162,12 @@ const initialize = () => {
         // Click Marker
         // NOTE: Can't use lambda expression because of `this` context
         marker.addListener('click', function () {
-          fullMap(false);
+          // Show details pane
+          document.getElementById('service-providers').classList.remove('full-view');
           google.maps.event.trigger(Thriver.map, 'resize');
-          Thriver.map.setZoom(14);
+
+          // Appropriate zoom level
+          Thriver.map.setZoom(11);
           Thriver.map.panTo(marker.getPosition());
 
           // Show results if the result has an ID
@@ -282,12 +285,6 @@ const moveMap = (county) => {
   y = [providers[0].coordinates.lon,
     providers[providers.length - 1].coordinates.lon];
 
-  // Bounds
-  Thriver.map.fitBounds(new google.maps.LatLngBounds(
-    new google.maps.LatLng(x[1], y[1]), // Southwest
-    new google.maps.LatLng(x[0], y[0])  // to Northeast
-  ));
-
   // If there was only one result, click on it for the user
   if (providers.length === 1) {
     Thriver.providers.active.set(Thriver.providers.collection
@@ -296,6 +293,12 @@ const moveMap = (county) => {
     document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(Thriver.map, 'resize');
   }
+
+  // Bounds
+  Thriver.map.fitBounds(new google.maps.LatLngBounds(
+    new google.maps.LatLng(x[1], y[1]), // Southwest
+    new google.maps.LatLng(x[0], y[0])  // to Northeast
+  ));
 };
 
 // Get county from ZIP code number
@@ -313,13 +316,6 @@ const getCounty = (zip) => {
   moveMap(county.name);
 };
 
-const outlineCounty = () =>
-  // County Data
-  new google.maps.KmlLayer({
-    url: '/packages/$USER_$PACKAGENAME/lib/client/data/wisconsin_counties.kml',
-    map: Thriver.map,
-  });
-
 Template.providers.onRendered(initialize);
 
 Template.providers.events({
@@ -331,7 +327,6 @@ Template.providers.events({
     check(name, String);
 
     moveMap(name);
-    outlineCounty();
 
     // Close search field
     Thriver.providers.closeMapSearch();
