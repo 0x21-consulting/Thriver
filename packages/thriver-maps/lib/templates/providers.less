@@ -27,7 +27,7 @@ section.providers{
             margin-top:10px;
             .fa{color: @orange; margin-right: 5px;}
 
-            &::after {
+            &[data-tty="TTY"]::after {
               content: attr(data-tty);
               background: @teal;
               border-radius: 5px;
