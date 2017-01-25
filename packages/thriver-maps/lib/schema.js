@@ -246,8 +246,26 @@ Thriver.providers.schema = new SimpleSchema({
     optional: true,
     label: 'If this is a satellite office, select the Parent Location:',
     autoform: {
-      options: () => Thriver.providers.collection.find().map(provider =>
-        ({ label: provider.name, value: provider._id })),
+      options: () => {
+        const parents = [];
+
+        Thriver.providers.collection.find().forEach((provider) => {
+          if (Thriver.providers.active.get()) {
+            if (provider._id !== Thriver.providers.active.get()._id) {
+              parents.push({ label: provider.name, value: provider._id });
+            }
+          }
+        });
+
+        return parents;
+      },
+    },
+    autoValue: function () { // eslint-disable-line
+      // AutoForm won't pass undefined or empty string values for update
+      // So we'll just use null instead to ensure parent can be unset,
+      // not just changed to something else
+      if (this.value === undefined) return null;
+      return this.value;
     },
   },
 });

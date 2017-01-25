@@ -346,12 +346,7 @@ Template.providers.events({
     event.preventDefault();
 
     document.body.classList.remove('providersListOpen');
-    document.getElementById('service-providers').classList.add('full-view');
-
-    google.maps.event.trigger(Thriver.map, 'resize');
-
     hideLabel();
-    fullMap(true);
   },
 
   'click .fullMap': (event) => {
@@ -422,15 +417,17 @@ const followProviderLink = (event) => {
   Thriver.providers.active.set(Thriver.providers.collection
     .findOne({ _id: data._id }));
 
+  // Close providers section
+  document.body.classList.remove('providersListOpen');
+
   // Update map
+  document.getElementById('service-providers').classList.remove('full-view');
+  google.maps.event.trigger(Thriver.map, 'resize');
   Thriver.map.panTo(new google.maps.LatLng(
     data.coordinates.lat,
     data.coordinates.lon
   ));
   Thriver.map.setZoom(13);
-
-  // Close providers section
-  document.body.classList.remove('providersListOpen');
 };
 
 Template.providerListViewItem.events({
