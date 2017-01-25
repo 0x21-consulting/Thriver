@@ -129,6 +129,9 @@ const initialize = () => {
 
     // Wait for collection to become available before acting on it
     Deps.autorun((c) => {
+      // Show the full map by default
+      fullMap(true);
+
       // Get all providers' IDs, names, and coordinates
       const providers = Thriver.providers.collection.find({}, { name: 1, coordinates: 1 });
 
@@ -138,8 +141,8 @@ const initialize = () => {
       // Create map markers for each provider
       providers.forEach((provider) => {
         const marker = new google.maps.Marker({
-          position: new google.maps.LatLng(provider.coordinates[0],
-            provider.coordinates[1]),
+          position: new google.maps.LatLng(provider.coordinates.lat,
+            provider.coordinates.lon),
           icon: createPin('#00b7c5', '#004146'),
           animation: google.maps.Animation.DROP,
           title: provider.name,
@@ -185,8 +188,8 @@ const initialize = () => {
               const distance = google.maps.geometry.spherical.computeDistanceBetween(
                 new google.maps.LatLng(position.coords.latitude,
                   position.coords.longitude),
-                new google.maps.LatLng(provider.coordinates[0],
-                  provider.coordinates[1])
+                new google.maps.LatLng(provider.coordinates.lat,
+                  provider.coordinates.lon)
               );
 
               return { id: provider._id, distance };
@@ -200,14 +203,15 @@ const initialize = () => {
 
           // Center on it
           Thriver.map.panTo(new google.maps.LatLng(
-              closest.coordinates[0],
-              closest.coordinates[1]
+            closest.coordinates.lat,
+            closest.coordinates.lon
           ));
 
           Thriver.map.setZoom(11);
 
           // Show results
           Thriver.providers.active.set(closest);
+          fullMap(false);
         });
       }
     });
@@ -263,22 +267,22 @@ const moveMap = (county) => {
   // Calculate bounding box
   // Determine lowest and highest Lat values
   providers.sort((a, b) =>
-    b.coordinates[0] - a.coordinates[0]);
+    b.coordinates.lat - a.coordinates.lat);
 
-  x = [providers[0].coordinates[0],
-    providers[providers.length - 1].coordinates[0]];
+  x = [providers[0].coordinates.lat,
+    providers[providers.length - 1].coordinates.lat];
 
   // Determine lowest and highest Lon values
   providers.sort((a, b) =>
-    b.coordinates[1] - a.coordinates[1]);
+    b.coordinates.lon - a.coordinates.lon);
 
-  y = [providers[0].coordinates[1],
-    providers[providers.length - 1].coordinates[1]];
+  y = [providers[0].coordinates.lon,
+    providers[providers.length - 1].coordinates.lon];
 
   // Bounds
   Thriver.map.fitBounds(new google.maps.LatLngBounds(
-      new google.maps.LatLng(x[1], y[1]), // Southwest
-      new google.maps.LatLng(x[0], y[0])  // to Northeast
+    new google.maps.LatLng(x[1], y[1]), // Southwest
+    new google.maps.LatLng(x[0], y[0])  // to Northeast
   ));
 
   // If there was only one result, click on it for the user
@@ -402,8 +406,8 @@ const followProviderLink = (event) => {
 
   // Update map
   Thriver.map.panTo(new google.maps.LatLng(
-      data.coordinates[0],
-      data.coordinates[1]
+    data.coordinates.lat,
+    data.coordinates.lon
   ));
   Thriver.map.setZoom(13);
 

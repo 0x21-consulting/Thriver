@@ -72,35 +72,34 @@ Thriver.providers.schema = new SimpleSchema({
   },
   /** Coordinates of Provider Location */
   coordinates: {
-    type: [Number],
+    type: Object,
     optional: false,
     minCount: 2,
     maxCount: 2,
-    label: 'Latitude and Longitude',
   },
-  'coordinates.$': {
+  'coordinates.lat': {
     type: Number,
     decimal: true,
     optional: false,
     custom: function () { // eslint-disable-line object-shorthand,func-names
-      const index = parseInt(this.key.substr(this.key.length - 1), 10);
-
-      // Latitude
-      if (index === 0) {
-        if (this.value < 42.5 || this.value > 47.083) {
-          return 'invalidLatitude';
-        }
+      if (this.value < 42.5 || this.value > 47.083) {
+        return 'invalidLatitude';
       }
-
-      // Longitude
-      if (index === 1) {
-        if (this.value > -86.767 || this.value < -92.883) {
-          return 'invalidLongitude';
-        }
-      }
-
       return true;
     },
+    label: 'Latitude',
+  },
+  'coordinates.lon': {
+    type: Number,
+    decimal: true,
+    optional: false,
+    custom: function () { // eslint-disable-line object-shorthand,func-names
+      if (this.value > -86.767 || this.value < -92.883) {
+        return 'invalidLongitude';
+      }
+      return true;
+    },
+    label: 'Longitude',
   },
 
   /** Provider Main Phone Number */
