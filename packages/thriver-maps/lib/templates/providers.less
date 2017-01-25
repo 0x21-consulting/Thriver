@@ -165,6 +165,20 @@ section.providers{
                     background-color: darken(@orange, 5%);
                 }
             }
+            [data-error] input#zip {
+              background: @darkOrange;
+            }
+            [data-error]::after {
+              content: attr(data-error);
+              font: 18px FontAwesome;
+              background-color: transparent;
+              padding: 0;
+              margin-top: -47px;
+              margin-right: 10px;
+              width: 18px;
+              float: right;
+              position: relative;
+            }
             input#zip{
                 width: 100%;
                 background: @blue;

@@ -270,6 +270,9 @@ const moveMap = (county) => {
         name: provider.name,
       }));
 
+  // If there aren't any providers for this county, report that
+  if (!providers.length) return false;
+
   // Calculate bounding box
   // Determine lowest and highest Lat values
   providers.sort((a, b) =>
@@ -289,6 +292,8 @@ const moveMap = (county) => {
   if (providers.length === 1) {
     Thriver.providers.active.set(Thriver.providers.collection
       .findOne({ _id: providers[0].id }));
+    document.getElementById('service-providers').classList.remove('full-view');
+    google.maps.event.trigger(Thriver.map, 'resize');
   } else {
     document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(Thriver.map, 'resize');
@@ -299,6 +304,8 @@ const moveMap = (county) => {
     new google.maps.LatLng(x[1], y[1]), // Southwest
     new google.maps.LatLng(x[0], y[0])  // to Northeast
   ));
+
+  return true;
 };
 
 // Get county from ZIP code number
@@ -313,7 +320,8 @@ const getCounty = (zip) => {
     { $elemMatch: { $in: [zip] } } });
 
   // Now get providers that support that county
-  moveMap(county.name);
+  if (!moveMap(county.name)) return false;
+  return true;
 };
 
 Template.providers.onRendered(initialize);
@@ -364,7 +372,14 @@ Template.providers.events({
     // Stop form submission
     event.preventDefault();
 
-    getCounty(event.currentTarget.parentElement.querySelector('#zip').value);
+    const target = event.currentTarget;
+
+    if (!getCounty(target.parentElement.querySelector('#zip').value)) {
+      // No providers for this county
+      target.parentElement.dataset.error = '\uf071';
+      return;
+    }
+    target.parentElement.removeAttribute('data-error');
 
     // Close search field
     Thriver.providers.closeMapSearch();
@@ -373,14 +388,19 @@ Template.providers.events({
 
   // Reaching 5 digits
   'keyup #zip': (event) => {
-    if (event.currentTarget.value.length === 5) {
-      Thriver.providers.openDetails();
-      getCounty(event.currentTarget.value);
-      document.body.classList.remove('providersListOpen');
+    const target = event.currentTarget;
+
+    if (target.value.length === 5) {
+      if (!getCounty(target.value)) {
+        // No providers for this county
+        target.parentElement.dataset.error = '\uf071';
+        return;
+      }
+      target.parentElement.removeAttribute('data-error');
 
       // Close search field
       Thriver.providers.closeMapSearch();
-      google.maps.event.trigger(Thriver.map, 'resize');
+      document.body.classList.remove('providersListOpen');
     }
   },
 });
