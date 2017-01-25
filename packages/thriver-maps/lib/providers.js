@@ -67,7 +67,7 @@ Meteor.methods({
 
     // Parameter checks
     check(provider, Object);
-    console.log(provider);
+
     // Perform update
     Thriver.providers.collection.update({ _id: provider._id }, { $set: provider },
       (error) => {
