@@ -150,8 +150,8 @@ Template.providers.onRendered(() => {
 
               // Update map
               Thriver.map.panTo(new google.maps.LatLng(
-                doc.coordinates[0],
-                doc.coordinates[1]
+                doc.coordinates.lat,
+                doc.coordinates.lon
               ));
               Thriver.map.setZoom(13);
             }
