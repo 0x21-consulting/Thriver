@@ -201,6 +201,10 @@ const initialize = () => {
           // Get closest provider
           const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
 
+          // Show details pane and resize map
+          document.getElementById('service-providers').classList.remove('full-view');
+          google.maps.event.trigger(Thriver.map, 'resize');
+
           // Center on it
           Thriver.map.panTo(new google.maps.LatLng(
             closest.coordinates.lat,
@@ -211,7 +215,6 @@ const initialize = () => {
 
           // Show results
           Thriver.providers.active.set(closest);
-          fullMap(false);
         });
       }
     });
