@@ -250,11 +250,15 @@ Thriver.providers.schema = new SimpleSchema({
         const parents = [];
 
         Thriver.providers.collection.find().forEach((provider) => {
-          if (Thriver.providers.active.get()) {
-            if (provider._id !== Thriver.providers.active.get()._id) {
-              parents.push({ label: provider.name, value: provider._id });
-            }
+          // If we're doing an update
+          if (Thriver.providers.formMethod.get() === 'updateProvider'
+              && Thriver.providers.active.get()) {
+            // and the provider being edited is this provider, skip
+            if (provider._id === Thriver.providers.active.get()._id) return;
           }
+
+          // Otherwise add as a suitable parent
+          parents.push({ label: provider.name, value: provider._id });
         });
 
         return parents;

@@ -42,19 +42,24 @@ Template.provider.helpers({
    * @returns {[Object]}
    */
   getOtherOffices: (data) => {
-    const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
-    const siblings = Thriver.providers.collection.find(
-      { parent: data.parent }, { name: 1 }).map((doc) => {
-        if (data._id !== doc._id) return doc;
-        return undefined;
-      });
+    if (data.parent) {
+      const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
+      const siblings = Thriver.providers.collection.find(
+        { parent: data.parent }, { name: 1 }).map((doc) => {
+          if (data._id !== doc._id) return doc;
+          return undefined;
+        });
 
-    siblings.push(parent);
+      siblings.unshift(parent);
+
+      return siblings;
+    }
 
     // Children, in the case of parents
-    Thriver.providers.collection.find({ parent: data._id }).map(doc => siblings.push(doc));
+    const children = [];
+    Thriver.providers.collection.find({ parent: data._id }).map(doc => children.push(doc));
 
-    return siblings;
+    return children;
   },
 
   /**

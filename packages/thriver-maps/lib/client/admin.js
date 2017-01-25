@@ -1,4 +1,4 @@
-const formMethod = new ReactiveVar('addProvider');
+Thriver.providers.formMethod = new ReactiveVar('addProvider');
 const activeProvider = new ReactiveVar();
 
 /**
@@ -38,7 +38,7 @@ Template.providers.events({
     event.preventDefault();
 
     // Set appropriate form type
-    formMethod.set('addProvider');
+    Thriver.providers.formMethod.set('addProvider');
     activeProvider.set(null);
 
     const popout = event.target.parentElement.parentElement.parentElement;
@@ -60,7 +60,7 @@ Template.addProvider.helpers({
    * @function
    * @returns {String}
    */
-  method: () => formMethod.get(),
+  method: () => Thriver.providers.formMethod.get(),
 
   /**
    * @summary Document context for updates
@@ -81,7 +81,7 @@ Template.provider.events({
     check(event, $.Event);
 
     // Set form type to Update
-    formMethod.set('updateProvider');
+    Thriver.providers.formMethod.set('updateProvider');
     activeProvider.set(Thriver.providers.active.get());
 
     // Hide Slider and show admin interface
