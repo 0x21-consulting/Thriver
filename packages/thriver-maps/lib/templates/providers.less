@@ -27,7 +27,7 @@ section.providers{
             margin-top:10px;
             .fa{color: @orange; margin-right: 5px;}
 
-            &::after {
+            &[data-tty="TTY"]::after {
               content: attr(data-tty);
               background: @teal;
               border-radius: 5px;
@@ -164,6 +164,20 @@ section.providers{
                 &:focus, input:focus{
                     background-color: darken(@orange, 5%);
                 }
+            }
+            [data-error] input#zip {
+              background: @darkOrange;
+            }
+            [data-error]::after {
+              content: attr(data-error);
+              font: 18px FontAwesome;
+              background-color: transparent;
+              padding: 0;
+              margin-top: -47px;
+              margin-right: 10px;
+              width: 18px;
+              float: right;
+              position: relative;
             }
             input#zip{
                 width: 100%;
@@ -365,7 +379,7 @@ section.providers{
                     width: 27px;
                 }
                 &.phone:before{content:"\f095";}
-                &.phone a::after {
+                &.phone a[data-tty="TTY"]::after {
                   content: attr(data-tty);
                   background: @teal;
                   border-radius: 5px;

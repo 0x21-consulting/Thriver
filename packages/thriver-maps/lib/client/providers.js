@@ -42,19 +42,24 @@ Template.provider.helpers({
    * @returns {[Object]}
    */
   getOtherOffices: (data) => {
-    const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
-    const siblings = Thriver.providers.collection.find(
-      { parent: data.parent }, { name: 1 }).map((doc) => {
-        if (data._id !== doc._id) return doc;
-        return undefined;
-      });
+    if (data.parent) {
+      const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
+      const siblings = Thriver.providers.collection.find(
+        { parent: data.parent }, { name: 1 }).map((doc) => {
+          if (data._id !== doc._id) return doc;
+          return undefined;
+        });
 
-    siblings.push(parent);
+      siblings.unshift(parent);
+
+      return siblings;
+    }
 
     // Children, in the case of parents
-    Thriver.providers.collection.find({ parent: data._id }).map(doc => siblings.push(doc));
+    const children = [];
+    Thriver.providers.collection.find({ parent: data._id }).map(doc => children.push(doc));
 
-    return siblings;
+    return children;
   },
 
   /**
@@ -91,7 +96,7 @@ Template.provider.helpers({
  */
 Template.providersList.helpers({
   provider: () =>
-    Thriver.providers.collection.find({}),
+    Thriver.providers.collection.find({ parent: null }),
 });
 
 /**
@@ -141,24 +146,24 @@ Template.providers.onRendered(() => {
 
       // Wait for collection and google API to become available
       Deps.autorun((c) => {
-        if (!google) return;
+        try {
+          // Find provider, if one with this name exists
+          Thriver.providers.collection.find().forEach((doc) => {
+            if (path[0] === Thriver.sections.generateId(doc.name)) {
+              // Set provider as active
+              Thriver.providers.active.set(doc);
 
-        // Find provider, if one with this name exists
-        Thriver.providers.collection.find().forEach((doc) => {
-          if (path[0] === Thriver.sections.generateId(doc.name)) {
-            // Set provider as active
-            Thriver.providers.active.set(doc);
+              // Update map
+              Thriver.map.panTo(new google.maps.LatLng(
+                doc.coordinates.lat,
+                doc.coordinates.lon
+              ));
+              Thriver.map.setZoom(13);
+            }
+          });
 
-            // Update map
-            Thriver.map.panTo(new google.maps.LatLng(
-              doc.coordinates[0],
-              doc.coordinates[1]
-            ));
-            Thriver.map.setZoom(13);
-          }
-        });
-
-        c.stop();
+          c.stop();
+        } catch (error) { /* do nothing */ }
       });
     },
   });

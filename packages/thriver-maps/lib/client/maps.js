@@ -129,6 +129,9 @@ const initialize = () => {
 
     // Wait for collection to become available before acting on it
     Deps.autorun((c) => {
+      // Show the full map by default
+      fullMap(true);
+
       // Get all providers' IDs, names, and coordinates
       const providers = Thriver.providers.collection.find({}, { name: 1, coordinates: 1 });
 
@@ -138,8 +141,8 @@ const initialize = () => {
       // Create map markers for each provider
       providers.forEach((provider) => {
         const marker = new google.maps.Marker({
-          position: new google.maps.LatLng(provider.coordinates[0],
-            provider.coordinates[1]),
+          position: new google.maps.LatLng(provider.coordinates.lat,
+            provider.coordinates.lon),
           icon: createPin('#00b7c5', '#004146'),
           animation: google.maps.Animation.DROP,
           title: provider.name,
@@ -159,9 +162,12 @@ const initialize = () => {
         // Click Marker
         // NOTE: Can't use lambda expression because of `this` context
         marker.addListener('click', function () {
-          fullMap(false);
+          // Show details pane
+          document.getElementById('service-providers').classList.remove('full-view');
           google.maps.event.trigger(Thriver.map, 'resize');
-          Thriver.map.setZoom(14);
+
+          // Appropriate zoom level
+          Thriver.map.setZoom(11);
           Thriver.map.panTo(marker.getPosition());
 
           // Show results if the result has an ID
@@ -185,8 +191,8 @@ const initialize = () => {
               const distance = google.maps.geometry.spherical.computeDistanceBetween(
                 new google.maps.LatLng(position.coords.latitude,
                   position.coords.longitude),
-                new google.maps.LatLng(provider.coordinates[0],
-                  provider.coordinates[1])
+                new google.maps.LatLng(provider.coordinates.lat,
+                  provider.coordinates.lon)
               );
 
               return { id: provider._id, distance };
@@ -198,10 +204,14 @@ const initialize = () => {
           // Get closest provider
           const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
 
+          // Show details pane and resize map
+          document.getElementById('service-providers').classList.remove('full-view');
+          google.maps.event.trigger(Thriver.map, 'resize');
+
           // Center on it
           Thriver.map.panTo(new google.maps.LatLng(
-              closest.coordinates[0],
-              closest.coordinates[1]
+            closest.coordinates.lat,
+            closest.coordinates.lon
           ));
 
           Thriver.map.setZoom(11);
@@ -260,35 +270,42 @@ const moveMap = (county) => {
         name: provider.name,
       }));
 
+  // If there aren't any providers for this county, report that
+  if (!providers.length) return false;
+
   // Calculate bounding box
   // Determine lowest and highest Lat values
   providers.sort((a, b) =>
-    b.coordinates[0] - a.coordinates[0]);
+    b.coordinates.lat - a.coordinates.lat);
 
-  x = [providers[0].coordinates[0],
-    providers[providers.length - 1].coordinates[0]];
+  x = [providers[0].coordinates.lat,
+    providers[providers.length - 1].coordinates.lat];
 
   // Determine lowest and highest Lon values
   providers.sort((a, b) =>
-    b.coordinates[1] - a.coordinates[1]);
+    b.coordinates.lon - a.coordinates.lon);
 
-  y = [providers[0].coordinates[1],
-    providers[providers.length - 1].coordinates[1]];
-
-  // Bounds
-  Thriver.map.fitBounds(new google.maps.LatLngBounds(
-      new google.maps.LatLng(x[1], y[1]), // Southwest
-      new google.maps.LatLng(x[0], y[0])  // to Northeast
-  ));
+  y = [providers[0].coordinates.lon,
+    providers[providers.length - 1].coordinates.lon];
 
   // If there was only one result, click on it for the user
   if (providers.length === 1) {
     Thriver.providers.active.set(Thriver.providers.collection
       .findOne({ _id: providers[0].id }));
+    document.getElementById('service-providers').classList.remove('full-view');
+    google.maps.event.trigger(Thriver.map, 'resize');
   } else {
     document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(Thriver.map, 'resize');
   }
+
+  // Bounds
+  Thriver.map.fitBounds(new google.maps.LatLngBounds(
+    new google.maps.LatLng(x[1], y[1]), // Southwest
+    new google.maps.LatLng(x[0], y[0])  // to Northeast
+  ));
+
+  return true;
 };
 
 // Get county from ZIP code number
@@ -303,15 +320,9 @@ const getCounty = (zip) => {
     { $elemMatch: { $in: [zip] } } });
 
   // Now get providers that support that county
-  moveMap(county.name);
+  if (!moveMap(county.name)) return false;
+  return true;
 };
-
-const outlineCounty = () =>
-  // County Data
-  new google.maps.KmlLayer({
-    url: '/packages/$USER_$PACKAGENAME/lib/client/data/wisconsin_counties.kml',
-    map: Thriver.map,
-  });
 
 Template.providers.onRendered(initialize);
 
@@ -324,7 +335,6 @@ Template.providers.events({
     check(name, String);
 
     moveMap(name);
-    outlineCounty();
 
     // Close search field
     Thriver.providers.closeMapSearch();
@@ -336,12 +346,7 @@ Template.providers.events({
     event.preventDefault();
 
     document.body.classList.remove('providersListOpen');
-    document.getElementById('service-providers').classList.add('full-view');
-
-    google.maps.event.trigger(Thriver.map, 'resize');
-
     hideLabel();
-    fullMap(true);
   },
 
   'click .fullMap': (event) => {
@@ -362,7 +367,14 @@ Template.providers.events({
     // Stop form submission
     event.preventDefault();
 
-    getCounty(event.currentTarget.parentElement.querySelector('#zip').value);
+    const target = event.currentTarget;
+
+    if (!getCounty(target.parentElement.querySelector('#zip').value)) {
+      // No providers for this county
+      target.parentElement.dataset.error = '\uf071';
+      return;
+    }
+    target.parentElement.removeAttribute('data-error');
 
     // Close search field
     Thriver.providers.closeMapSearch();
@@ -371,14 +383,19 @@ Template.providers.events({
 
   // Reaching 5 digits
   'keyup #zip': (event) => {
-    if (event.currentTarget.value.length === 5) {
-      Thriver.providers.openDetails();
-      getCounty(event.currentTarget.value);
-      document.body.classList.remove('providersListOpen');
+    const target = event.currentTarget;
+
+    if (target.value.length === 5) {
+      if (!getCounty(target.value)) {
+        // No providers for this county
+        target.parentElement.dataset.error = '\uf071';
+        return;
+      }
+      target.parentElement.removeAttribute('data-error');
 
       // Close search field
       Thriver.providers.closeMapSearch();
-      google.maps.event.trigger(Thriver.map, 'resize');
+      document.body.classList.remove('providersListOpen');
     }
   },
 });
@@ -400,15 +417,17 @@ const followProviderLink = (event) => {
   Thriver.providers.active.set(Thriver.providers.collection
     .findOne({ _id: data._id }));
 
-  // Update map
-  Thriver.map.panTo(new google.maps.LatLng(
-      data.coordinates[0],
-      data.coordinates[1]
-  ));
-  Thriver.map.setZoom(13);
-
   // Close providers section
   document.body.classList.remove('providersListOpen');
+
+  // Update map
+  document.getElementById('service-providers').classList.remove('full-view');
+  google.maps.event.trigger(Thriver.map, 'resize');
+  Thriver.map.panTo(new google.maps.LatLng(
+    data.coordinates.lat,
+    data.coordinates.lon
+  ));
+  Thriver.map.setZoom(13);
 };
 
 Template.providerListViewItem.events({

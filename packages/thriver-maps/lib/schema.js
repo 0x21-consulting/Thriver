@@ -72,35 +72,34 @@ Thriver.providers.schema = new SimpleSchema({
   },
   /** Coordinates of Provider Location */
   coordinates: {
-    type: [Number],
+    type: Object,
     optional: false,
     minCount: 2,
     maxCount: 2,
-    label: 'Latitude and Longitude',
   },
-  'coordinates.$': {
+  'coordinates.lat': {
     type: Number,
     decimal: true,
     optional: false,
     custom: function () { // eslint-disable-line object-shorthand,func-names
-      const index = parseInt(this.key.substr(this.key.length - 1), 10);
-
-      // Latitude
-      if (index === 0) {
-        if (this.value < 42.5 || this.value > 47.083) {
-          return 'invalidLatitude';
-        }
+      if (this.value < 42.5 || this.value > 47.083) {
+        return 'invalidLatitude';
       }
-
-      // Longitude
-      if (index === 1) {
-        if (this.value > -86.767 || this.value < -92.883) {
-          return 'invalidLongitude';
-        }
-      }
-
       return true;
     },
+    label: 'Latitude',
+  },
+  'coordinates.lon': {
+    type: Number,
+    decimal: true,
+    optional: false,
+    custom: function () { // eslint-disable-line object-shorthand,func-names
+      if (this.value > -86.767 || this.value < -92.883) {
+        return 'invalidLongitude';
+      }
+      return true;
+    },
+    label: 'Longitude',
   },
 
   /** Provider Main Phone Number */
@@ -247,8 +246,30 @@ Thriver.providers.schema = new SimpleSchema({
     optional: true,
     label: 'If this is a satellite office, select the Parent Location:',
     autoform: {
-      options: () => Thriver.providers.collection.find().map(provider =>
-        ({ label: provider.name, value: provider._id })),
+      options: () => {
+        const parents = [];
+
+        Thriver.providers.collection.find().forEach((provider) => {
+          // If we're doing an update
+          if (Thriver.providers.formMethod.get() === 'updateProvider'
+              && Thriver.providers.active.get()) {
+            // and the provider being edited is this provider, skip
+            if (provider._id === Thriver.providers.active.get()._id) return;
+          }
+
+          // Otherwise add as a suitable parent
+          parents.push({ label: provider.name, value: provider._id });
+        });
+
+        return parents;
+      },
+    },
+    autoValue: function () { // eslint-disable-line
+      // AutoForm won't pass undefined or empty string values for update
+      // So we'll just use null instead to ensure parent can be unset,
+      // not just changed to something else
+      if (this.value === undefined) return null;
+      return this.value;
     },
   },
 });
