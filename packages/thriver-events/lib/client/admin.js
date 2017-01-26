@@ -1,5 +1,6 @@
 const formMethod = new ReactiveVar('addEvent');
 const activeEvent = new ReactiveVar();
+Thriver.events.registrations = new Mongo.Collection('registrations');
 
 /**
  * @summary Close Event Add/Update Admin Form
@@ -12,6 +13,8 @@ const closeForm = (event) => {
   // Close add Event Form
   event.delegateTarget.querySelector('.eventsSlider').classList.remove('hide');
   event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
+  event.delegateTarget.querySelector('section.viewRegistrations')
+    .classList.add('hide');
 };
 
 /** Admin events */
@@ -114,6 +117,9 @@ Template.eventSlide.events({
     eventsSlider.classList.add('hide');
     eventsSlider.parentElement.querySelector('section.viewRegistrations')
       .classList.remove('hide');
+
+    // Set active event
+    activeEvent.set(Blaze.getData());
   },
 });
 
@@ -125,6 +131,18 @@ Template.viewRegistrations.helpers({
    * @returns {[Meteor.Profile]}
    */
   registrant: () => {
+    if (activeEvent.get()) {
+      Meteor.subscribe('registrations', activeEvent.get()._id);
 
+      return Thriver.events.registrations.find({});
+    }
+    return [];
   },
+});
+
+Template.viewRegistrations.events({
+  /**
+   * @summary Close Form
+   */
+  'click button.close': closeForm,
 });
