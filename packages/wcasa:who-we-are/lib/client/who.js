@@ -5,8 +5,8 @@ Template.who.helpers({
   /** Section Title */
   headline: 'Who We Are',
 
-  /** Section Title Subtext */
-  content: '<p>WCASA is a membership agency comprised of organizations and <br>individuals working to end sexual violence in Wisconsin. <br>WCASA is made up of it\'s staff, board, volunteers and <br> 51 sexual assault service provider agencies.</p>',
+  /** Count of total service providers */
+  count: () => Thriver.providers.count.get(),
 
   /**
    * @summary Get subsections from db

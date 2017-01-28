@@ -7,6 +7,22 @@ Meteor.subscribe('providers');
  */
 Thriver.providers.active = new ReactiveVar(null);
 
+/**
+ * @summary Keep count of providers at the ready
+ * @type {ReactiveVar}
+ */
+Thriver.providers.count = new ReactiveVar(0);
+
+/**
+ * @summary Update total count of providers`
+ * @method
+ */
+Thriver.providers.collection.find({ parent: null }).observe({
+  added: () => {
+    Thriver.providers.count.set(Thriver.providers.count.get() + 1);
+  },
+});
+
 // Counties and other provider data
 Template.providers.helpers({
   // All counties (for dropdown list)
