@@ -147,20 +147,20 @@
 
                     {{! Registration Form }}
                     <li class="registration-form hide" data-id="{{_id}}">
-                        <h2>Event Registration</h2>
+                        <h3>Event Registration</h3>
                         <form>
                             {{#each registrationDetails }}
                                 <label>{{name}}
                                     {{#if equals type "textarea"}}
-                                        <textarea name="{{name}}" required></textarea>
+                                        <textarea name="{{id}}" required></textarea>
                                     {{else}}
                                         {{#if equals type "yes/no"}}
-                                            <select name="{{name}}" required>
+                                            <select name="{{id}}" required>
                                                 <option value="yes">Yes</option>
                                                 <option value="no">No</option>
                                             </select>
                                         {{else}}
-                                            <input type="{{type}}" name="{{name}}"
+                                            <input type="{{type}}" name="{{id}}"
                                                 required />
                                         {{/if}}
                                     {{/if}}
