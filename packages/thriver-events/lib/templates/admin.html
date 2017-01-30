@@ -32,6 +32,9 @@
               <th>Dietary Restrictions</th>
               <th>Allergens</th>
               <th>Special Accommodations</th>
+              {{#each getSpecialFields}}
+                <th data-id="{{id}}">{{name}}</th>
+              {{/each}}
             </tr>
           </thead>
           {{#each registrant}}
@@ -68,6 +71,9 @@
                 {{#if profile.events.diet.shellfish}}Shellfish{{/if}}
               </td>
               <td>{{profile.events.accommodations}}</td>
+              {{#each getSpecialAnswers profile.events.registeredEvents}}
+                <td data-id="{{id}}">{{value}}</td>
+              {{/each}}
             </tr>
           {{/each}}
         </table>

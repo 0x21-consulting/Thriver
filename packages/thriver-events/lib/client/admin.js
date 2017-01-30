@@ -138,7 +138,52 @@ Template.viewRegistrations.helpers({
     }
     return [];
   },
+
+  /**
+   * @summary Return first email address from user profile
+   * @function
+   *   @param {[Object]} emails
+   * @returns {String}
+   */
   getEmail: emails => emails[0].address,
+
+  /**
+   * @summary Return special event fields
+   * @function
+   * @returns {[String]}
+   */
+  getSpecialFields: () => {
+    if (activeEvent.get()) return activeEvent.get().registrationDetails;
+    return [];
+  },
+
+  /**
+   * @summary Return special event field answers
+   * @function
+   *   @param {[Object]} events
+   * @returns {[String]}
+   */
+  getSpecialAnswers: (events) => {
+    const details = [];
+
+    if (activeEvent.get() && events instanceof Array) {
+      for (let i = 0; i < events.length; i += 1) {
+        if (events[i].id === activeEvent.get()._id) {
+          const entries = Object.entries(events[i].details);
+
+          for (let j = 0; j < entries.length; j += 1) {
+            details.push({
+              id: entries[j][0],
+              value: entries[j][1],
+            });
+          }
+
+          return details;
+        }
+      }
+    }
+    return [];
+  },
 });
 
 Template.viewRegistrations.events({
