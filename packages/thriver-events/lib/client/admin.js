@@ -138,6 +138,7 @@ Template.viewRegistrations.helpers({
     }
     return [];
   },
+  getEmail: emails => emails[0].address,
 });
 
 Template.viewRegistrations.events({

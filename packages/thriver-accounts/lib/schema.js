@@ -87,6 +87,11 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     optional: false,
     label: 'Last Name',
   },
+  title: {
+    type: String,
+    optional: true,
+    label: 'Job Title',
+  },
   address1: {
     type: String,
     optional: true,
