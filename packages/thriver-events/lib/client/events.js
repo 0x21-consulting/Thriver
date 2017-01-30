@@ -37,13 +37,13 @@ Thriver.events.getThisMonthEvents = () => {
       start: {
         $gte: new Date(Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get()),
-        $lt: new Date(Thriver.calendar.thisYear.get(),
+        $lte: new Date(Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get(), total),
       } }, {
         end: {
           $gte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get()),
-          $lt: new Date(Thriver.calendar.thisYear.get(),
+          $lte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get(), total),
         },
       }],

@@ -259,13 +259,13 @@ Template.events.helpers({
         start: {
           $gte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get()),
-          $lt: new Date(Thriver.calendar.thisYear.get(),
+          $lte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
         } }, {
           end: {
             $gte: new Date(Thriver.calendar.thisYear.get(),
               Thriver.calendar.thisMonth.get()),
-            $lt: new Date(Thriver.calendar.thisYear.get(),
+            $lte: new Date(Thriver.calendar.thisYear.get(),
               Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
           },
         }],
