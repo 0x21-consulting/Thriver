@@ -87,6 +87,11 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     optional: false,
     label: 'Last Name',
   },
+  title: {
+    type: String,
+    optional: true,
+    label: 'Job Title',
+  },
   address1: {
     type: String,
     optional: true,
@@ -249,6 +254,11 @@ Thriver.accounts.schema.profile = new SimpleSchema({
     optional: false,
   },
   // an Events object could have any number of optional fields
+  'events.registeredEvents.$.details': {
+    type: Object,
+    optional: true,
+    blackbox: true,
+  },
 
   /** Subscriptions */
   subscriptions: {

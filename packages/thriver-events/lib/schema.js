@@ -128,6 +128,15 @@ Thriver.events.schema = new SimpleSchema({
   'registrationDetails.$': {
     type: Object,
   },
+  /** Field ID */
+  'registrationDetails.$.id': {
+    type: 'String',
+    optional: false,
+    autoValue: () => Random.id(),
+    autoform: {
+      type: 'hidden',
+    },
+  },
   /** Name of field */
   'registrationDetails.$.name': {
     type: 'String',

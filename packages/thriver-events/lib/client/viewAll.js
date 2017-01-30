@@ -7,7 +7,7 @@
  */
 Template.registerHelper('friendly', (start, end) => {
   check(start, Date);
-  check(end, Date);
+  check(end, Match.Maybe(Date));
 
   let string = '';
 
@@ -32,18 +32,20 @@ Template.registerHelper('friendly', (start, end) => {
   string += nth(start.getDate());
 
   // If the event ends on a different day than it starts, create a range
-  if (start.toDateString() !== end.toDateString()) {
-    // Add the hyphen
-    string += '-';
+  if (end instanceof Date) {
+    if (start.toDateString() !== end.toDateString()) {
+      // Add the hyphen
+      string += '-';
 
-    // If year or month differ, then show the month
-    if (start.getFullYear() !== end.getFullYear() ||
-        start.getMonth() !== end.getMonth()) {
-      string += `${Thriver.calendar.months[end.getMonth()].substr(0, 3)} `;
+      // If year or month differ, then show the month
+      if (start.getFullYear() !== end.getFullYear() ||
+          start.getMonth() !== end.getMonth()) {
+        string += `${Thriver.calendar.months[end.getMonth()].substr(0, 3)} `;
+      }
+
+      // Now display the date
+      string += end.getDate() + nth(end.getDate());
     }
-
-    // Now display the date
-    string += end.getDate() + nth(end.getDate());
   }
 
   return string;

@@ -1,6 +1,25 @@
 // Publish events
 Meteor.publish('events', () => Thriver.events.collection.find({}));
 
+// Publish Registrations
+Meteor.publish('registrations', function (eventId) {
+  // Check authorization
+  if (!this.userId || !Meteor.users.findOne({ _id: this.userId }).admin) {
+    throw new Meteor.Error('not-authorized');
+  }
+
+  // Parameter checks
+  check(eventId, String);
+
+  // Get all users who are subscribed to this event
+  Meteor.users.find({ 'profile.events.registeredEvents.id': eventId })
+    .forEach((user) => {
+      this.added('registrations', user._id, user);
+    });
+
+  return this.ready();
+});
+
 Meteor.methods({
   /**
    * @summary Insert new Event into Database

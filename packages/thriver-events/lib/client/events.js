@@ -37,13 +37,13 @@ Thriver.events.getThisMonthEvents = () => {
       start: {
         $gte: new Date(Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get()),
-        $lt: new Date(Thriver.calendar.thisYear.get(),
+        $lte: new Date(Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get(), total),
       } }, {
         end: {
           $gte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get()),
-          $lt: new Date(Thriver.calendar.thisYear.get(),
+          $lte: new Date(Thriver.calendar.thisYear.get(),
             Thriver.calendar.thisMonth.get(), total),
         },
       }],
@@ -319,7 +319,7 @@ Template.eventSlide.events({
         registrationForm.classList.remove('hide');
 
         // Remove Register button
-        event.target.remove();
+        event.target.classList.add('hide');
 
         return false;
       }
@@ -336,10 +336,22 @@ Template.eventSlide.events({
    * @method
    *   @param {$.Event} event
    */
-  'click li.registrationForm': (event) => {
+  'submit li.registration-form form': (event) => {
     check(event, $.Event);
+    event.preventDefault();
 
-    // TODO(micchickenburger): Complete event registration
+    const form = event.target;
+    const attributes = {};
+
+    for (let i = 0; i < form.length - 1; i += 1) attributes[form[i].name] = form[i].value;
+
+    Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
+
+    // Hide registration form
+    form.parentElement.classList.add('hide');
+
+    // Show register button again
+    form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
   },
 
   /**
