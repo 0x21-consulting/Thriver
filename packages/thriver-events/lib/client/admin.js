@@ -144,6 +144,44 @@ Template.viewRegistrations.helpers({
 Template.viewRegistrations.events({
   /**
    * @summary Close Form
+   * @method
    */
   'click button.close': closeForm,
+
+  /**
+   * @summary Download table as CSV
+   * @method
+   *   @param {$.Event} event
+   */
+  'click button.csv': (event) => {
+    check(event, $.Event);
+
+    // Get data
+    let data = '';
+    const rows = event.target.parentElement.querySelectorAll('tr');
+    for (let i = 0; i < rows.length; i += 1) {
+      const cells = rows[i].children;
+      for (let j = 0; j < cells.length; j += 1) {
+        const cell = cells[j].textContent
+          .replace(/\r\n|[\r\n]/g, ' ')
+          .replace(/\s+/g, ' ').trim();
+        data += `${cell},`;
+      }
+      data += '\r\n';
+    }
+
+    // Prepare link
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.classList.add('hide');
+    a.download = 'registrant-list.csv';
+
+    // Add to page and click
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  },
 });
