@@ -66,16 +66,6 @@ Thriver.events.schema = new SimpleSchema({
     optional: false,
     label: 'Location Name',
   },
-  'location.latitude': {
-    type: Number,
-    decimal: true,
-    optional: true,
-  },
-  'location.longitude': {
-    type: Number,
-    decimal: true,
-    optional: true,
-  },
   'location.mapUrl': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
