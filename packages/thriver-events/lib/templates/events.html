@@ -217,14 +217,23 @@
 </template>
 
 <template name="actionRegistered">
+  {{#if pastEvent}}
+    <li class="registered info"><span class="fa">&#xf06a;</span> You were registered for this event.</li>
+    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+  {{else}}
     <li class="registered info"><span class="fa">&#xf06a;</span> You are currently registered for this event.</li>
     <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
     <li class="unregister action">Unregister</li>
+  {{/if}}
 </template>
 
 <template name="actionNotRegistered">
-    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+  <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+  {{#if pastEvent}}
+    <li class="registered info">This event occurred in the past.</li>
+  {{else}}
     <li class="register action">Register</li>
+  {{/if}}
 </template>
 
 <template name="actionUnregisterPrompt">

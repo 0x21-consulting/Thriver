@@ -313,3 +313,18 @@ Template.events.helpers({
     }];
   },
 });
+
+// Don't show registration for events which occur in the past
+const pastEvent = function () {
+  // If there is an end date, has the end date passed?
+  if (this.end) {
+    if (this.end < new Date()) return true;
+
+  // If there is no end date, has the start date passed?
+  } else if (this.start < new Date()) return true;
+
+  return false;
+};
+
+Template.actionRegistered.helpers({ pastEvent });
+Template.actionNotRegistered.helpers({ pastEvent });
