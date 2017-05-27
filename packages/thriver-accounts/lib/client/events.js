@@ -56,4 +56,12 @@ Template.eventsRegistered.events({
   'click button.unregister': function () {
     Meteor.call('unregisterEvent', this.id);
   },
+
+  /**
+   * @summary View all events
+   * @method
+   */
+  'click button.viewEvents': () => {
+    Thriver.history.navigate('/events');
+  },
 });
