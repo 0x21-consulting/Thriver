@@ -58,7 +58,7 @@ Template.searchResultsList.helpers({
     Thriver.events.collection.find({
       // Just search for titles for now
       name: new RegExp(query.get(), 'i'),
-    }, { limit: 5 }),
+    }, { limit: 5, sort: { start: -1 } }),
   /**
    * @summary Determine whether event was in the past
    * @function
