@@ -6,6 +6,8 @@ Package.describe({
   documentation: 'README.md',
 });
 
+Npm.depends({ 'paypal-rest-sdk': '0.6.3' });
+
 Package.onUse((api) => {
   api.versionsFrom('METEOR@1.0');
 
@@ -13,7 +15,6 @@ Package.onUse((api) => {
   api.use([
     'thriver:core',
     'thriver:core-styles',
-    'mrt:paypal@=1.1.1',
   ]);
 
   // Resources
@@ -33,9 +34,14 @@ Package.onUse((api) => {
     'lib/client/donate.js',
   ], ['client']);
 
-    // Server processing
+  // Client & Server processing
   api.addFiles([
+    'lib/paypal.js',
+  ], ['client', 'server']);
 
+  // Server processing
+  api.addFiles([
+    'lib/donate.js',
   ], ['server']);
 });
 
