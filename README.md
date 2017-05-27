@@ -16,7 +16,7 @@ platform.
 Then navigate your web browser to http://localhost:3000/
 
 # License
-Apply is under the MIT License.
+Thriver is under the MIT License.
 
 Copyright 2017 enové
 
