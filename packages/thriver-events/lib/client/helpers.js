@@ -181,10 +181,12 @@ Template.eventSlide.helpers({
     total = Object.keys(events).length;
 
     // Now store as array for other helpers
-    Thriver.events.sameDayEvents = [];
+    const eventsArray = [];
+    Thriver.events.sameDayEvents = new ReactiveVar();
 
     Object.keys(events).forEach(key =>
-      Thriver.events.sameDayEvents.push(events[key]));
+      eventsArray.push(events[key]));
+    Thriver.events.sameDayEvents.set(eventsArray);
 
     return total;
   },
@@ -194,7 +196,7 @@ Template.eventSlide.helpers({
    * @function
    * @returns {Object[]}
    */
-  sameDayEvents: Thriver.events.sameDayEvents,
+  sameDayEvents: () => Thriver.events.sameDayEvents.get(),
 
   /**
    * @summary Return whether sameDayEvents is singular or plural
