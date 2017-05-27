@@ -117,7 +117,12 @@ Template.eventSlide.helpers({
   address: (data) => {
     // If this is a web link
     if (data.location.webinarUrl) {
-      return `<a href="${data.location.webinarUrl}" target="_blank">Online</a>`;
+      if ((data.end instanceof Date && data.end < new Date()) ||
+          (data.start instanceof Date && data.start < new Date())) {
+        // Webinar in the past
+        return `<a href="${data.location.webinarUrl}" target="_blank">View Recorded Webinar</a>`;
+      }
+      return `<a href="${data.location.webinarUrl}" target="_blank">Join Webinar</a>`;
     }
 
     if (data.location.mapUrl) {
