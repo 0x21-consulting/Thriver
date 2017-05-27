@@ -7,14 +7,12 @@
     "url": "https://github.com/enove/Thriver.git"
   },
   "license": "MIT",
-
   "scripts": {
     "lint": "eslint packages/"
   },
-  
   "dependencies": {
+    "bcrypt": "^1.0.2"
   },
-
   "devDependencies": {
     "babel-eslint": "^7.0.0",
     "eslint": "^3.8.1",
