@@ -59,6 +59,7 @@ Template.searchResultsList.helpers({
       // Just search for titles for now
       name: new RegExp(query.get(), 'i'),
     }, { limit: 5, sort: { start: -1 } }),
+
   /**
    * @summary Determine whether event was in the past
    * @function
@@ -71,6 +72,32 @@ Template.searchResultsList.helpers({
     if (start < new Date()) return 'past';
 
     return '';
+  },
+
+  /**
+   * @summary Determine whether event occurred last year
+   * @function
+   *   @param {Date} start
+   * @returns {Boolean}
+   */
+  pastYear: (start) => {
+    check(start, Date);
+
+    if (start.getFullYear() !== (new Date()).getFullYear()) return true;
+
+    return false;
+  },
+
+  /**
+   * @summary Return year if pastYear is true
+   * @function
+   *   @param {Date} start
+   * @returns {number}
+   */
+  year: (start) => {
+    check(start, Date);
+
+    return start.getFullYear();
   },
 });
 

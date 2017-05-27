@@ -337,7 +337,8 @@
             <li class="{{past start}}">
                 <a href="#" data-id="{{_id}}">
                     <span>{{name}}</span>
-                    <span class="badge">{{friendly start end}}</span>
+                    <span class="badge">{{friendly start end}}
+                      {{#if pastYear start}} {{year start}}{{/if}}</span>
                 </a>
             </li>
         {{/each}}
