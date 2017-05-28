@@ -4,6 +4,7 @@ Template.infosheets.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'lc',
     items: () =>
       Thriver.learningCenter.collection.find({
         type: 'infosheet',
@@ -24,6 +25,7 @@ Template.webinars.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'lc',
     items: () =>
       Thriver.learningCenter.collection.find({
         type: 'webinar',

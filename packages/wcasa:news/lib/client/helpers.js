@@ -4,6 +4,7 @@ Template.inTheNews.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: () =>
       Thriver.newsroom.collection.find({
         type: 'inTheNews',
@@ -24,6 +25,7 @@ Template.actionAlerts.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: () => {
       const items = Thriver.newsroom.collection.find({
         type: 'actionAlert',
@@ -52,6 +54,7 @@ Template.press.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: () => {
       const items = Thriver.newsroom.collection.find({
         type: 'pressRelease',
@@ -80,6 +83,7 @@ Template.newsletters.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: () =>
       Thriver.newsroom.collection.find({
         type: 'newsletter',
@@ -101,6 +105,7 @@ Template.pressMediaKits.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: [{
       title: 'Press Kit (2015) (PDF)',
       date: new Date('2016-01-01'), // This is temporary
@@ -122,6 +127,7 @@ Template.annualReports.helpers({
     paginate: 'true', // Default is false
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
+    tag: 'news',
     items: [{
       title: 'Annual Report (2015)(PDF)',
       date: new Date('2016-01-01'), // This is temporary

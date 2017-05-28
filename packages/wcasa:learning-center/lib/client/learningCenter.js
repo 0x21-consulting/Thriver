@@ -30,7 +30,7 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click li.loadMore button': (event) => {
+  'click #learning-center li.loadMore button': (event) => {
     check(event, $.Event);
     check(event.target, Element);
 
@@ -42,7 +42,7 @@ Template.aside.events({
   },
 
   // Search field
-  'keyup  #searchLC, search #searchLC': handleSearch,
+  'keyup #searchLC, search #searchLC': handleSearch,
 
   /**
    * @summary Prevent form submission
@@ -78,13 +78,14 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click article[role="document"] aside.admin button.delete': (event) => {
+  'click [data-tag="lc"] aside.admin button.delete': (event) => {
     check(event, $.Event);
 
     event.stopPropagation();
 
+    const id = event.target.parentElement.parentElement.dataset.id;
     if (confirm('Are you sure you want to delete this Learning Center Item?')) {
-      Meteor.call('deleteLearningCenterItem', Template.instance().data._id);
+      Meteor.call('deleteLearningCenterItem', id);
     }
   },
 });

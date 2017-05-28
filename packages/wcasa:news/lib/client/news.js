@@ -32,7 +32,7 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click li.loadMore button': (event) => {
+  'click #newsroom li.loadMore button': (event) => {
     check(event, $.Event);
     check(event.target, Element);
 
@@ -44,7 +44,7 @@ Template.aside.events({
   },
 
   // Search field
-  'keyup  #searchNews, search #searchNews': handleSearch,
+  'keyup #searchNews, search #searchNews': handleSearch,
 
   /**
    * @summary Prevent form submission
@@ -80,13 +80,14 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click article[role="document"] aside.admin button.delete': (event) => {
+  'click [data-tag="news"] aside.admin button.delete': (event) => {
     check(event, $.Event);
 
     event.stopPropagation();
 
+    const id = event.target.parentElement.parentElement.dataset.id;
     if (confirm('Are you sure you want to delete this Newsroom Item?')) {
-      Meteor.call('deleteNewsItem', Template.instance().data._id);
+      Meteor.call('deleteNewsItem', id);
     }
   },
 });
