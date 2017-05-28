@@ -57,7 +57,7 @@ Template.aside.events({
   },
 
   /**
-   * @summary Show Add Learning Center Item form
+   * @summary Toggle Add Learning Center Item form
    * @method
    *   @param {$.Event} event
    */
@@ -65,7 +65,9 @@ Template.aside.events({
     check(event, $.Event);
 
     // Show form
-    document.querySelector('#LCForm').classList.remove('hide');
+    const form = document.querySelector('#LCForm');
+    if (form.classList.contains('hide')) form.classList.remove('hide');
+    else form.classList.add('hide');
   },
 });
 

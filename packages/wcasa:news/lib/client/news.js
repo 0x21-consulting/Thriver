@@ -59,7 +59,7 @@ Template.aside.events({
   },
 
   /**
-   * @summary Show Add Newsroom Item form
+   * @summary Toggle Add Newsroom Item form
    * @method
    *   @param {$.Event} event
    */
@@ -67,7 +67,9 @@ Template.aside.events({
     check(event, $.Event);
 
     // Show form
-    document.querySelector('#newsForm').classList.remove('hide');
+    const form = document.querySelector('#newsForm');
+    if (form.classList.contains('hide')) form.classList.remove('hide');
+    else form.classList.add('hide');
   },
 });
 
