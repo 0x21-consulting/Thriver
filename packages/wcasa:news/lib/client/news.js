@@ -39,8 +39,9 @@ Template.aside.events({
     // Get all results
     Thriver.newsroom.quantity.set(0);
 
-    // Hide "Load More Results" button
-    event.target.classList.add('hide');
+    // Hide "Load More Results" button for entire section
+    const buttons = document.querySelectorAll('#newsroom li.loadMore button');
+    for (let i = 0; i < buttons.length; i += 1) buttons[i].classList.add('hide');
   },
 
   // Search field
