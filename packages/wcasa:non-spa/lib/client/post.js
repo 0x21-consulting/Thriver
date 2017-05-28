@@ -22,7 +22,7 @@ const updateContent = (oldHash) => {
 
     // Get section ID
     const id = event.target.parentElement.querySelector('section').dataset.id;
-    const content = this.parentElement.querySelector('textarea').value;
+    const content = event.target.parentElement.querySelector('textarea').value;
     const newHash = SHA256(content);
 
     // Don't commit if nothing changed
