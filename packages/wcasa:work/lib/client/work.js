@@ -254,6 +254,10 @@ Template.workContent.onRendered(() => {
     // We're ready now
     c.stop();
 
+    // Show Tertiary Navigation
+    tertiary.classList.remove('hide');
+    tertiary.parentElement.querySelector('.glossary').classList.remove('hide');
+
     for (let i = 0; i < content.length; i += 1) {
       // Create list and anchor elements
       const li = document.createElement('li');
