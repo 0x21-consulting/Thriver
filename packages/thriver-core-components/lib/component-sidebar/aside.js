@@ -59,6 +59,10 @@ Template.aside.helpers({
     class: 'top',
     filterId: 'searchResources',
     tabs: [{
+      title: 'Infosheets',
+      id: 'infosheets',
+      template: 'infosheets',
+    }, {
       title: 'Webinars',
       id: 'webinars',
       template: 'webinars',
