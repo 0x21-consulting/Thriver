@@ -56,8 +56,9 @@ Template.aside.helpers({
     width: 500,
     position: 'right',
     filter: 'true',
+    filterId: 'searchLC',
     class: 'top',
-    filterId: 'searchResources',
+    subhead: 'LCSubHead',
     tabs: [{
       title: 'Infosheets',
       id: 'infosheets',
