@@ -7,20 +7,20 @@
     <header>
       <h1>{{heading}}</h1>
       <ul class="contactInfo">
-        <li>Phone {{phone}}</li>
-        <li>Fax {{fax}}</li>
-        <li><a href="mailto:{{email}}">{{email}}</a></li>
+        <li><span class="fa">&#xf095;</span> <a href="tel://{{phone}}">{{phone}}</a></li>
+        <li><span class="fa">&#xf1ac;</span> <a href="tel://{{fax}}">{{fax}}</a></li>
+        <li><span class="fa">&#xf0e0;</span> <a href="mailto:{{email}}">{{email}}</a></li>
       </ul>
       <p class="address">
         {{addressL1}}<br>
         {{addressL2}}<br>
         <a href="{{mapUrl}}" target="_blank">Map</a>
       </p>
-      <p class="staffReference">
+      <!--<p class="staffReference">
         Contact us using the form below.<br>
         Looking for someone specific?<br>
         Visit our <a id="staffList" href="/who-we-are/wcasa-staff">Staff Section</a>.
-      </p>
+      </p>-->
       </header>
     </div>
     {{> Template.dynamic template=template}}

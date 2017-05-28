@@ -10,18 +10,29 @@ section.contact{
     margin: 0 auto;
   }
   ul.contactInfo, p.address{
+    max-width: 500px;
+    margin: 20px auto 20px auto;
+    li{
+      font-size: 14px;
+      letter-spacing: 0px;
+    }
+    .fa{
+      position: relative;
+      top: 1px;
+      color: darken(@mystic,15%);
+      font-size: 14px;
+      margin-right: 3px;
+    }
     text-align: center;
     font-size: 13px;
     letter-spacing: 1px;
-    text-transform: uppercase;
     color: @navy;
-    margin-left: 0px;
     .os;
     clear:both;
     a{
-      color: @black;
-      text-decoration: underline;
-      &:hover{ color: @teal; }
+      .rw;
+      color: darken(@teal,7.5%);
+      &:hover{ text-decoration: underline; }
     }
     li{
       display: inline-block;
