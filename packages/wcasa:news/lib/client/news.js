@@ -42,6 +42,10 @@ Template.aside.events({
     // Hide "Load More Results" button for entire section
     const buttons = document.querySelectorAll('#newsroom li.loadMore button');
     for (let i = 0; i < buttons.length; i += 1) buttons[i].classList.add('hide');
+
+    // Show "everything" text
+    const texts = document.querySelectorAll('#newsroom .everything');
+    for (let i = 0; i < texts.length; i += 1) texts[i].classList.remove('hide');
   },
 
   // Search field
