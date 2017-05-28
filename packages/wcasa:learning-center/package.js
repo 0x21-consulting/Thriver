@@ -37,8 +37,13 @@ Package.onUse((api) => {
 
   // Server processing
   api.addFiles([
-
+    'lib/server.js',
   ], ['server']);
+
+  // Client and server
+  api.addFiles([
+    'lib/schema.js',
+  ], ['client', 'server']);
 });
 
 Package.onTest((api) => {
