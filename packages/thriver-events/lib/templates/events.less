@@ -239,7 +239,7 @@
                             text-align: center;
                             height: 589px;
                             h2{ text-align: center; border: none; margin-bottom: 0px; }
-                            .fa{
+                            .icon-main .fa{
                                 background: @orange;
                                 border-radius: 50%;
                                 -webkit-border-radius:50%;
@@ -546,9 +546,9 @@ header.eventsHeader{
                     color: darken(#7d9698, 25%);
                 }
             }
-            &.listViewEvents{
+            &.listViewEvents, &.viewToday{
                 width: auto;
-                background: @teal;
+                background: #006691;
                 color: @white;
                 cursor: pointer;
                 position: relative;
@@ -562,13 +562,47 @@ header.eventsHeader{
                 }
                 span.open{display: none;}
                 &.active{
-                    background: darken(@teal,5%);
+                    background: darken(#006691,5%);
                     &, &:hover{
                         box-shadow: inset 2px 2px 2px 0px rgba(0,0,0,0.15);
                         -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0,0,0,0.15);
                     }
                     span{display: none;}
                     span.open{display: inline-block;}
+                }
+            }
+            &.viewToday{
+                width: auto;
+                background: @teal;
+                .tooltip{
+                    display: none;
+                    position: absolute;
+                    background: lighten(@navy,10%);
+                    color: #fff;
+                    font-size: 10px;
+                    padding: 6px;
+                    pointer-events: none;
+                    left: -50px;
+                    top: -30px;
+                    line-height: 10px;
+                    .boxShadow(2px 2px 5px 0px rgba(0,0,0,0.2));
+                    &:after{
+                        content:"";
+                        position: absolute;
+                        bottom: -5px;
+                        left: 50%;
+                        margin-left: -3px;
+                        border-left:5px solid transparent;
+                        border-right: 5px solid transparent;
+                        border-top: 5px solid lighten(@navy,10%);
+                        width:0px;
+                        height: 0px;
+                    }
+                }
+                &:hover{
+                    .tooltip{
+                        display: block;
+                    }
                 }
             }
             .font(1.6,5.0,0.025,@normal,none);

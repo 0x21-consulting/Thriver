@@ -40,6 +40,10 @@
                                 </button>
                             </li>
                             <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
+                            <li class="viewToday">
+                                <span class="fa">&#xf274;</span> Today
+                                <span class="tooltip">See the closest relevant event to today.</span>
+                            </li>
                             <li class="mobile back-to-events">
                                 <button><span class="fa">&#xf137;</span> Back to Events</button></li>
                         </ul>
@@ -65,17 +69,15 @@
                                                             <p>
                                                                 {{#if noFutureEvents}}
                                                                     No more events listed after this date.
-                                                                    <br><a href="#">See next upcoming event</a>
-                                                                    <a href="#">See most recent event</a>
-                                                                    <a href="#">See next</a>
                                                                 {{else}}
                                                                     {{#if noPastEvents}}
                                                                         No previous events listed before this date.
                                                                     {{else}}
                                                                         No Events This Month.
                                                                     {{/if}}
-                                                                    <br><a href="#">See next upcoming events.</a>
                                                                 {{/if}}
+                                                                <!-- If there is a future event from today's date --><br><a href="#">See next upcoming event <span class="fa">&#xf105;</span></a><!-- Endif -->
+                                                                <!-- Show the last past event from today's date' --><br><a href="#">See latest past event <span class="fa">&#xf105;</span></a><!--Endif-->
                                                             </p>
                                                         </div>
                                                     </div>
