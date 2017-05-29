@@ -1,228 +1,253 @@
 @import (reference) "{thriver:core-styles}/lib/index.less";
 
 section.contact{
-    .boxShadow(0px,0px,10px,5px,0.3) !important;
-    position: relative;
-    z-index: 9;
-    background:darken(@white, 0.5%);
-    main{
-        max-width: 655px;
-        margin: 0 auto;
+  .boxShadow(0px,0px,10px,5px,0.3) !important;
+  position: relative;
+  z-index: 9;
+  background:darken(@white, 0.5%);
+  main{
+    max-width: 655px;
+    margin: 0 auto;
+  }
+  .alert{
+    background: darken(@gray,0%);
+    padding: 15px;
+    font-weight: 500;
+    max-width: 510px;
+    margin: 0 auto 30px auto;
+    .fa{
+      position: relative;
+      top: 2px;
+      margin-right: 5px;
+      color: @orange;
+      font-size: 20px;
+    }
+    a:hover{ text-decoration: underline; }
+  }
+  #main > & > div > header p { margin: 10px auto 20px auto; }
+  ul.contactInfo, p.address{
+    max-width: 540px;
+    margin: 20px auto 10px auto;
+    li{
+      font-size: 14px;
+      letter-spacing: 0px;
+    }
+    .fa{
+      position: relative;
+      top: 1px;
+      color: darken(@mystic,15%);
+      font-size: 14px;
+      margin-right: 3px;
+    }
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: @navy;
+    .os;
+    clear:both;
+    a{
+      .rw;
+      color: #006691;
+      &:hover{ text-decoration: underline; }
+    }
+    li{
+      display: inline-block;
+      width: 30%;
+    }
+  }
+  ul.contactInfo{
+    border-top: 2px solid #e2edf3;
+    padding-top: 20px;
+    margin-top: 0px;
+  }
+  p.address{
+    margin-top: 10px;
+    .fa{ margin-left: 7px; }
+  }
+  form{
+    max-width: 540px;
+    margin: 0 auto;
+    margin-top: 20px;
+    ::-webkit-input-placeholder {color: @white;}
+    :-moz-placeholder {color: @white;}
+    ::-moz-placeholder {color: @white;}
+    :-ms-input-placeholder {color: @white;}
+    input, textarea{
+      .rw;
+      background-color: @navy;
+      color: @white;
+      font-size: 18px;
+      font-weight: 400;
+      border: none;
+      margin: 10px 0px 10px 0px;
+      &:hover{
+        background-color: darken(@navy, 1%);
+      }
+      &:focus{
+        outline: none;
+        border: none;
+        background-color: darken(@navy, 3%);
+        .boxShadow(0px,0px,10px,0px,0.4);
+      }
+    }
+    textarea{
+      padding:10px 10px;
+      width: ~'calc(100% - 20px)';
+      height: 150px;
+      margin-bottom: 20px;
+      line-height: 26px;
+      text-transform: none;
+    }
+    input[type=submit]{
+      background-color: @teal;
+      display: block;
+      width: auto;
+      padding: 15px 20px;
+      margin: 0 auto;
+      font-weight: @normal;
+      font-size: 16px;
+      &:hover{ background-color: lighten(@teal, 2.5%); }
+      &:active{
+        background-color: darken(@teal, 2.5%);
+        .boxShadow(none);
+      }
+    }
+  }
+  .footerBrand{
+    text-align: center;
+    margin: 60px 0px;
+    display: none;
+  }
+  .topContainer{ text-align: center; }
+  .top{
+    .buttonColor(lighten(@blueGray, 10%));
+    margin: 0 auto;
+    color: @white;
+    width: auto;
+  }
+  .copyright{
+    color: darken(@gray,70%);
+    .font(1.2,1.2,0.1,@light,none);
+    text-align: center;
+    padding-bottom: 20px;
+    margin-top: 40px;
+  }
+  .formResponse{
+    .boxShadow(2px,2px,9px,0px,0.2);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px 20px 60px 20px;
+    .fa{
+      font-size: 60px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    &.thanksContact{ .fa{ color: @teal; }}
+    &.failureContact{ .fa{ color: @orange; }}
+    p, h3{
+      text-align: center;
+      color: lighten(@black,5%);
+      max-width: 400px;
+      margin: 0 auto;
+      font-weight: 500;
     }
     p{
-        //display: block;
-        //clear:both;
+      color: darken(@gray,45%);
+      line-height: 18px;
+      margin-top: 10px;
     }
-    ul.contactInfo, p.address{
-        text-align: center;
-        font-size: 13px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: @navy;
-        margin-left: 0px;
-        .os;
-        clear:both;
-        a{
-            color: @black;
-            text-decoration: underline;
-            &:hover{
-                color: @teal;
-            }
-        }
-        li{
-            display: inline-block;
-            width: 30%;
-        }
-        @media @mobile{
-            li{
-                display: block;
-                width: 100%;
-            }
-        }
+    h3{
+      font-weight: 600;
+      letter-spacing: 0.075rem;
     }
-    p.address{
-        margin-top: 10px;
-    }
-    form{
-        max-width: 540px;
-        margin: 0 auto;
-        margin-top: 0px;
-        ::-webkit-input-placeholder {color: @white;}
-        :-moz-placeholder {color: @white;}
-        ::-moz-placeholder {color: @white;}
-        :-ms-input-placeholder {color: @white;}
-        @media @mobile{
-            padding: 20px;
-            margin-top: 0px;
-        }
-        input, textarea{
-            .rw;
-            background-color: @navy;
-            color: @white;
-            //text-transform: uppercase;
-            font-size: 18px;
-            font-weight: 100;
-            border: none;
-            margin: 10px 0px 10px 0px;
-            &:hover{
-                background-color: darken(@navy, 1%);
-            }
-            &:focus{
-                outline: none;
-                border: none;
-                background-color: darken(@navy, 3%);
-            }
-            @media @mobile{
-                font-size: 18px;
-            }
-        }
-        textarea{
-            padding:20px 10px;
-            width: ~'calc(100% - 20px)';
-            height: 150px;
-            margin-bottom: 20px;
-            line-height: 26px;
-            text-transform: none;
-        }
-        input[type=submit]{
-            background-color: @orange;
-            display: block;
-            width: auto;
-            padding: 20px;
-            margin: 0 auto;
-            font-weight: @normal;
-            &:hover{
-                background-color: darken(@orange, 5%);
-            }
-            &:active{
-                background-color: darken(@orange, 10%);
-            }
-        }
-    }
-    .footerBrand{
-        text-align: center;
-        margin: 60px 0px;
-        display: none; //temp
-    }
-    .topContainer{
-        text-align: center;
-    }
-    .top{
-        .buttonColor(lighten(@blueGray, 10%));
-        margin: 0 auto;
-        color: @white;
-        //display: block;
-        width: auto;
-        //text-transform: uppercase;
-    }
-    .copyright{
-        //.os;
-        color: darken(@gray,70%);
-        .font(1.2,1.2,0.1,@light,none);
-        text-align: center;
-        padding-bottom: 20px;
-        margin-top: 40px;
-    }
-    .formResponse{
-        text-align: center;
-        margin: 40px 0px 0px 0px;
-        padding: 40px;
-        p, h3{
-            text-align: center;
-            color: @white;
-            max-width: 400px;
-            margin: 0 auto;
-            font-weight: 600;
-        }
-        h3{
-            font-weight: 800;
-        }
-        @media @mobile{
-            padding: 20px;
-            margin: 20px;
-        }
-    }
-    &.thanksContact{
-        background-color: @teal;
-    }
-    &.failureContact{
-        background-color: @orange;
-    }
+  }
+  p.address {
+    border: none !important;
+    padding-bottom: 20px;
+    display: block !important;
+    margin: 0 auto;
+  }
+  label{display: none;}
+  input.button{text-transform: none !important;}
+  p.copyright{
+    margin-bottom: 0px;
+    padding-bottom: 40px;
+  }
+  ul.contactInfo li, p.address li{ margin-bottom: 0px; }
 }
 
-section.contact{
-    @media @mobile{
-        p.staff-reference{
-            border: none !important;
-            padding: 0px !important;
-            margin: 0px !important;
-        }
-    }
-    > div > header p{
-        border-top: none;
-        padding: 0px;
-    }
-    header{
-        ul{
-            border-top: 2px solid #c1cbd1;
-            max-width: 600px;
-            margin: 0 auto !important;
-            padding:15px 0px 5px 0px;
-        }
-    }
-    form{
-        input, textarea{
-            background-color: @blue;
-            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#08273f+0,032d49+100 */
-            background: rgb(8,39,63); /* Old browsers */
-            background: -moz-linear-gradient(-45deg,  rgba(8,39,63,1) 0%, rgba(3,45,73,1) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(-45deg,  rgba(8,39,63,1) 0%,rgba(3,45,73,1) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(135deg,  rgba(8,39,63,1) 0%,rgba(3,45,73,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#08273f', endColorstr='#032d49',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            &:focus{
-                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#062131+0,03263d+100 */
-                background: rgb(6,33,49); /* Old browsers */
-                background: -moz-linear-gradient(-45deg,  rgba(6,33,49,1) 0%, rgba(3,38,61,1) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(-45deg,  rgba(6,33,49,1) 0%,rgba(3,38,61,1) 100%); /* Chrome10-25,Safari5.1-6 */
-                background: linear-gradient(135deg,  rgba(6,33,49,1) 0%,rgba(3,38,61,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#062131', endColorstr='#03263d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            }
-        }
-        input.button{
-            background:none;
-            .buttonColor(@orange);
-        }
-    }
-}
-
-#main section.contact{
+@media @mobile{
+  section.contact{
+    padding: 20px;
     p.address {
-        border: none !important;
-        padding-bottom: 20px;
-        display: block !important;
-        margin: 0 auto;
+      border: none !important;
+      margin: 0px;
+      padding: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
-    label{display: none;}
-    input, textarea{text-transform: uppercase !important;}
-    input.button{text-transform: none !important;}
-    p.copyright{
-        margin-bottom: 0px;
-        padding-bottom: 40px;
+    form{ padding: 20px; margin: 0px; }
+    .alert{
+      margin: 0px 20px;
+      .fa{ display: none; }
+    }
+    & > div > header:after{display:none;}
+    ul.contactInfo{
+      margin: 0px 20px !important;
     }
     ul.contactInfo li, p.address li{
-        margin-bottom: 0px;
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 5px 0px;
     }
-    @media @mobile{
-        padding: 20px;
-        p.address {
-            border: none !important;
-            background: rgba(0,0,0,0.1);
-            margin: 0px;
-            padding: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        form{ padding: 0px;}
-        > div > header:after{display:none;}
+    p.address{
+      margin: 0px 20px !important;
     }
+    p.staffReference{
+      border: none !important;
+      padding: 0px !important;
+      margin: 0px !important;
+    }
+  }
+  & > div > header p{
+    border-top: none;
+    padding: 0px;
+  }
+  header{
+    ul{
+      border-top: 2px solid #c1cbd1;
+      max-width: 600px;
+      margin: 0 auto !important;
+      padding:15px 0px 5px 0px;
+    }
+  }
+  form{
+    padding: 20px;
+    margin-top: 0px;
+    input, textarea{
+      font-size: 18px;
+      background-color: @blue;
+      background: rgb(8,39,63);
+      background: -moz-linear-gradient(-45deg,  rgba(8,39,63,1) 0%, rgba(3,45,73,1) 100%);
+      background: -webkit-linear-gradient(-45deg,  rgba(8,39,63,1) 0%,rgba(3,45,73,1) 100%);
+      background: linear-gradient(135deg,  rgba(8,39,63,1) 0%,rgba(3,45,73,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#08273f', endColorstr='#032d49',GradientType=1 );
+      &:focus{
+        background: rgb(6,33,49);
+        background: -moz-linear-gradient(-45deg,  rgba(6,33,49,1) 0%, rgba(3,38,61,1) 100%);
+        background: -webkit-linear-gradient(-45deg,  rgba(6,33,49,1) 0%,rgba(3,38,61,1) 100%);
+        background: linear-gradient(135deg,  rgba(6,33,49,1) 0%,rgba(3,38,61,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#062131', endColorstr='#03263d',GradientType=1 );
+      }
+    }
+    input.button{
+      background:none;
+      .buttonColor(@orange);
+    }
+    .formResponse{
+      padding: 20px;
+      margin: 20px;
+    }
+  }
 }

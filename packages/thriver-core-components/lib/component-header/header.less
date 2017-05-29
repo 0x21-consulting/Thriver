@@ -17,7 +17,7 @@ header#menu{
     div.brand{
         display: block;
         position: absolute;
-        top: 63px;
+        top: 46px;
         height: 140px;
         width: 311px;
         left: 50%;
@@ -47,14 +47,14 @@ header#menu{
         height: 39px;
         left: 15px;
         margin: 0px;
-        top: 22px;
         list-style: none;
         position: absolute;
         width: 180px;
         height: 33px;
         left: -5px;
         margin: 0px;
-        top: 48px;
+        top: 55px;
+        @media (max-height:750px){ top: 44px; }
         a, a:active, a:hover, a:focus{
             border: none;
             .shadowNone !important;
@@ -155,13 +155,17 @@ body.fixedHeader header#menu{
         display: block;
         .transform(translate(0px,0px));
     }
-    padding-top: 45px;
-    padding-bottom: 16px;
+    padding-top: 51px;
+    padding-bottom: 23px;
+    @media (max-height:750px){
+        padding-top: 40px;
+        padding-bottom: 11px;
+    }
     height: auto;
     background: fade(@navy,100%);
     background: #ffffff;
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
-    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 0 8px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.24) !important;
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.24) !important;
     nav.mainNav > ul{
         padding: 0px;
         justify-content:flex-end;
@@ -173,7 +177,8 @@ body.fixedHeader header#menu{
         }
     }
     nav.mainNav > ul li[data-type="main-navigation-item"] a{
-        .font(1.2,1.2,0,@normal,uppercase);
+        .font(1.3,1.5,0.05,@normal,uppercase);
+        .color(color,desaturate(lighten(@navy, 10%),50%),none);
         //.color(color,@black,none);
         padding-bottom: 10px;
     }

@@ -40,3 +40,4 @@ wcasa:non-spa
 shell-server@0.2.3
 force-ssl@1.0.14
 wcasa:feedback
+email

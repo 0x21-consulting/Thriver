@@ -34,7 +34,7 @@ Package.onUse((api) => {
 
   // Server processing
   api.addFiles([
-
+    'lib/contact.js',
   ], ['server']);
 });
 

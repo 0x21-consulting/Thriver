@@ -1,56 +1,56 @@
 <template name="contact">
-    <section class="contact mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#if isAdmin}}
-            {{> sectionAdmin}}
-        {{/if}}
-        <div class="containerSmall">
-        <header>
-            <h1>{{heading}}</h1>
-            <ul class="contactInfo">
-                <li>Phone {{phone}}</li>
-                <li>Fax {{fax}}</li>
-                <li><a href="mailto:{{email}}">{{email}}</a></li>
-            </ul>
-            <p class="address">
-                {{addressL1}}<br>
-                {{addressL2}}<br>
-                <a href="{{mapUrl}}" target="_blank">Map</a>
-            </p>
-            <p class="staff-reference">
-                Contact us using the form below.<br>
-                Looking for someone specific?<br>
-                Visit our <a id="staff-list" href="/who-we-are/wcasa-staff">Staff Section</a>.
-            </p>
-        </header>
-        </div>
-        <form>
-            {{#each items}}
-                <label for ="{{id}}">{{title}}</label>
-                <input autocomplete="off" id="{{id}}" type="{{type}}" name="{{#if equals id 'repeatPasswordReg'}}repeat{{else}}{{type}}{{/if}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
-            {{/each}}
-            <label for="comments">Comments</label>
-            <textarea id="comments" cols="20" rows="3" name="comments" placeholder="Comments"></textarea>
-            <input autocomplete="off" type="submit" value="{{submitValue}}" class="button" />
-            <p class="hide">{{success}}</p>
-        </form>
-        <div class="footerBrand">
-            <img src="{{imgSrc}}" alt="{{imgAlt}}" />
-        </div>
-        <p class="copyright">&copy; {{copyright}}</p>
-    </section>
+  <section class="contact mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+    {{#if isAdmin}}
+      {{> sectionAdmin}}
+    {{/if}}
+    <div class="containerSmall">
+      <header>
+        <h1>{{heading}}</h1>
+        <ul class="contactInfo">
+          <li><span class="fa">&#xf095;</span> <a href="tel://{{phone}}">{{phone}}</a></li>
+          <li><span class="fa">&#xf1ac;</span> <a href="tel://{{fax}}">{{fax}}</a></li>
+          <li><span class="fa">&#xf0e0;</span> <a href="mailto:{{email}}">{{email}}</a></li>
+        </ul>
+        <p class="address">
+          {{addressL1}}<br>
+          {{addressL2}}
+          <span class="fa">&#xf279;</span> <a href="{{mapUrl}}" target="_blank">Map</a>
+        </p>
+      </header>
+      <p class="alert">
+        <span class="fa">&#xf007;</span> Looking for someone specific? Visit our <a id="staffList" href="/who-we-are/wcasa-staff">Staff Section</a>.
+      </p>
+    </div>
+    {{> Template.dynamic template=template}}
+    <div class="footerBrand">
+      <img src="{{imgSrc}}" alt="{{imgAlt}}" />
+    </div>
+    <p class="copyright">&copy; {{copyright}}</p>
+  </section>
 </template>
 
-<!--Content Templates-->
- <template name="thanksContact">
-    <div class="thanksContact formResponse">
-        <h3>Thanks for reaching out!</h3>
-        <p>An associate will get back in touch with you lorem ipsum ipsum lorem ipsum todor hodor lipsum.</p>
-    </div>
+<template name="contactForm">
+  <form id="contactForm">
+    {{#each items}}
+      <label for ="{{id}}">{{title}}</label>
+      <input autocomplete="off" id="{{id}}" type="{{type}}" name="{{type}}" placeholder="{{placeholder}}" {{disabled}} {{required}} />
+    {{/each}}
+    <label for="comments">Inquiry</label>
+    <textarea id="comments" cols="20" rows="3" name="comments" placeholder="Inquiry" required></textarea>
+    <input autocomplete="off" type="submit" value="{{submitValue}}" class="button" />
+  </form>
 </template>
 
- <template name="failureContact">
-    <div class="failureContact formResponse">
-        <h3>The form submission was unsuccessful!</h3>
-        <p>Please try again later or contact the site administrator for support.</p>
-    </div>
+<template name="thanksContact">
+  <div class="thanksContact formResponse">
+    <h3><span class="fa">&#xf058;</span> Your message has been sent!</h3>
+    <p>Thanks for reaching out, <br>someone will be back in touch shortly.</p>
+  </div>
+</template>
+
+<template name="failureContact">
+  <div class="failureContact formResponse">
+    <h3><span class="fa">&#xf06a;</span> Your message failed to send!</h3>
+    <p>Please try again later or contact the site administrator for support.</p>
+  </div>
 </template>
