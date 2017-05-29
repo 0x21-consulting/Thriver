@@ -245,7 +245,7 @@ Template.aboutSA.events({
 
     const section = event.target.parentElement.querySelector('section > section');
     const parent = section.parentElement;
-    const id = event.target._id;
+    const id = Template.instance().data._id;
 
     // Create a textarea element through which to edit markdown
     const textarea = document.createElement('textarea');
@@ -254,11 +254,11 @@ Template.aboutSA.events({
     const button = document.createElement('button');
 
     button.textContent = 'Save';
-    button.addEventListener('mouseup', () => {
-      check(event, Event);
+    button.addEventListener('mouseup', (eventNew) => {
+      check(eventNew, Event);
 
       // Get section ID
-      const content = event.target.parentElement.querySelector('textarea').value;
+      const content = eventNew.target.parentElement.querySelector('textarea').value;
       const newHash = SHA256(content);
 
       // Don't commit if nothing changed
@@ -269,15 +269,32 @@ Template.aboutSA.events({
       // Restore view
       parent.parentElement.classList.remove('edit');
       parent.querySelector('textarea').remove();
-      parent.querySelector(':scope > button').remove();
+      const buttons = parent.querySelectorAll('button');
+      for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
     });
 
     // Textarea should get markdown
     textarea.textContent = Thriver.sections.get(id, ['data']).data.aboutSA;
 
+    // Cancel button
+    const cancel = document.createElement('button');
+    cancel.textContent = 'Cancel';
+    cancel.addEventListener('mouseup', (eventNew) => {
+      check(eventNew, Event);
+
+      const parentNew = eventNew.target.parentElement;
+      parentNew.parentElement.classList.remove('edit');
+
+      // Remove buttons and textarea
+      parentNew.querySelector('textarea').remove();
+      const buttons = parentNew.querySelectorAll('button');
+      for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
+    });
+
     // Add textarea but hide preview
     parent.parentElement.classList.add('edit');
     parent.appendChild(textarea);
     parent.appendChild(button);
+    parent.appendChild(cancel);
   },
 });

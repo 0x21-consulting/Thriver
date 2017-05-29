@@ -101,9 +101,15 @@ section.work .sa details{
         position: absolute;
         right: 0;
         display: block;
-        //color: @orange;
+        background: @orange;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
         box-shadow: none;
-        font-size: 20px;
+        font-size: 16px;
+        height: 24px;
+        width: 24px;
+        padding: 0;
+        margin: 5px;
     }
 
     &.edit > section > section, &.edit button.edit { display: none; }
@@ -141,12 +147,15 @@ section.work .sa details{
 
         // Admin controls
         textarea {
-            width: 100%;
+            width: 98%;
             height: 300px;
+            margin: 5px;
+            margin-bottom: 0;
         }
         button {
-            //background: @orange;
+            background: @orange;
             display: inline-block;
+            margin: 5px;
         }
 
         @media (max-width:945px){
@@ -1182,7 +1191,9 @@ h2.workContentAdmin {
     min-height: 31px; // in case there's no text
 }
 section.workContent article button {
-    color: #0d4668;
+    color: #fff;
+    background: @orange;
+    margin-right: 5px;
 }
 section.workContent textarea {
     width: 100%;
