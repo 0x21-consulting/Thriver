@@ -159,8 +159,6 @@ AutoForm.addHooks(['addStaffPerson', 'addBoardPerson'], { before: {
 
     // Read in file as an Array Buffer
     reader.readAsArrayBuffer(file);
-
-    return doc;
   },
 },
   after: {
