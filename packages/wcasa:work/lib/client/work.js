@@ -98,7 +98,7 @@ const changeTabs = (event) => {
   }
 
   // Scroll to top of work on change tabs
-  const offset = $('.work').offset().top + 228;
+  const offset = $('.work .main.container').offset().top - 125;
   $('body').animate({ scrollTop: offset }, 750);
 
   // Calculate height of article content to determine
