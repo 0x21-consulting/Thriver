@@ -64,13 +64,17 @@
                                                             <h2>{{month}} {{year}}</h2>
                                                             <p>
                                                                 {{#if noFutureEvents}}
-                                                                    No More Events Listed.
+                                                                    No more events listed after this date.
+                                                                    <br><a href="#">See next upcoming event</a>
+                                                                    <a href="#">See most recent event</a>
+                                                                    <a href="#">See next</a>
                                                                 {{else}}
                                                                     {{#if noPastEvents}}
-                                                                        No Previous Events Listed.
+                                                                        No previous events listed before this date.
                                                                     {{else}}
                                                                         No Events This Month.
                                                                     {{/if}}
+                                                                    <br><a href="#">See next upcoming events.</a>
                                                                 {{/if}}
                                                             </p>
                                                         </div>
@@ -188,7 +192,7 @@
             {{/each}}
             <li class="no-upcoming-list">
                 There are currently no upcoming event<br>
-                Be sure to check back later!
+                Be sure to check back later! <A>VIEW PAST EVENTS</A> <A>VIEW ALL UPCOMING EVENTS</A> THIS MONTH
             </li>
             {{#if isAdmin}}
                 <li class="addEvent" title="Add an Event">
