@@ -1049,3 +1049,19 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
         }
     }
 }
+
+//Awareness Days & Month Styles
+
+// Day
+.calendar span.hasEvent.awareness button.eventDate{
+    background: lighten(@yellow,10%);
+    color: @black;
+    &:after{
+        .fa;
+        content: "\f005";
+        color: #006691;
+        position: absolute;
+        top: -6px;
+        left: -1px;
+    }
+}
