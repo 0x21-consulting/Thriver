@@ -14,10 +14,11 @@ Meteor.methods({
     this.unblock();
 
     Email.send({
-      to: 'micah.henning@wcasa.org',
-      from: `${name} <${email}>`,
-      subject: 'Comments from Website',
-      text: `${name} has submitted comments on the WCASA website:\r\n\r\n${comments}`,
+      to: 'wcasa@wcasa.org',
+      from: 'WCASA Website <website@wcasa.org>',
+      replyTo: `${name} <${email}>`,
+      subject: `Message from ${name}`,
+      text: `${name} (${email}) has submitted a message through the contact form on the WCASA website:\r\n\r\n${comments}`,
     });
   },
 });
