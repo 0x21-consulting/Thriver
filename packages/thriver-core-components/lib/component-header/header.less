@@ -47,7 +47,6 @@ header#menu{
         height: 39px;
         left: 15px;
         margin: 0px;
-        top: 22px;
         list-style: none;
         position: absolute;
         width: 180px;
@@ -55,6 +54,7 @@ header#menu{
         left: -5px;
         margin: 0px;
         top: 55px;
+        @media (max-height:750px){ top: 44px; }
         a, a:active, a:hover, a:focus{
             border: none;
             .shadowNone !important;
@@ -157,6 +157,10 @@ body.fixedHeader header#menu{
     }
     padding-top: 51px;
     padding-bottom: 23px;
+    @media (max-height:750px){
+        padding-top: 40px;
+        padding-bottom: 11px;
+    }
     height: auto;
     background: fade(@navy,100%);
     background: #ffffff;
