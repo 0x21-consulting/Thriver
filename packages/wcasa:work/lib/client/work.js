@@ -89,12 +89,23 @@ const changeTabs = (event) => {
         parent: $('.work .main'),
         offset_top: 100,
       });
+      // Calculate height of article content to determine
+      // whether Read More button should display
+      if (article.querySelector('.markdown').offsetHeight >= 650) {
+        article.querySelector('footer.truncate').classList.remove('hide');
+      }
     }, 250);
   }
 
   // Scroll to top of work on change tabs
   const offset = $('.work').offset().top + 228;
   $('body').animate({ scrollTop: offset }, 750);
+
+  // Calculate height of article content to determine
+  // whether Read More button should display
+  if (article.querySelector('.markdown').offsetHeight >= 650) {
+    article.querySelector('footer.truncate').classList.remove('hide');
+  }
 };
 
 // Tabs
