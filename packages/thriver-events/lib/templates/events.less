@@ -24,6 +24,7 @@
         padding: 10px;
         margin: 0 auto;
         &:focus{ .boxShadow(none); }
+        @media @mobile{ display: none; }
     }
     .no-upcoming-list {
         color: #fff;
@@ -970,6 +971,7 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
     p.search{
         border: none;
         display: block;
+        @media @mobile{ display: none; }
         position: relative;
         z-index: 9;
         max-width: 300px;
@@ -1104,7 +1106,6 @@ p.nothing-to-show{
     font-weight: bold;
     padding-top: 40px;
     line-height: 18px;
-
     span.fa{
         display: block;
         font-size: 40px;
