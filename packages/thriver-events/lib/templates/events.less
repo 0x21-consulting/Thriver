@@ -385,6 +385,8 @@
     min-height: 242px;
     padding: 0px 29px 0px 29px;
     margin-top: 15px;
+    margin-left: 0.9rem;
+    padding-top: 10px;
     span{
         float: left;
         width: 2.42em;
@@ -431,8 +433,8 @@
                 color: @teal;
                 .shadowNone;
                 background: #fff;
-                height: 26px;
-                width: 26px;
+                height: 24px;
+                width: 24px;
                 border-radius: 50%;
                 display: inline-block;
                 font-size: 11px;
@@ -1063,5 +1065,57 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
         position: absolute;
         top: -6px;
         left: -1px;
+    }
+}
+
+// Month
+.calendar.awareness{
+    background: #006691;
+    .borderRadius(5px);
+    h2{ background: darken(#006691,5%) !important;}
+}
+
+.calendar .awareness-month-events{
+    clear: both;
+    &, & li{ margin: 0; padding: 0;}
+    & li{
+        padding: 5px 0px 0px 0px;
+    }
+    & li:first-child{ padding-top: 20px;}
+    & li:last-child{ padding-bottom: 20px;}
+    li:before{
+        .fa;
+        margin-right: 5px;
+        content: "\f005";
+    }
+    list-style: none;
+    a{ color: #fff; }
+    text-align: left;
+    li:hover{
+        &:before{ color: lighten(@yellow,10%); }
+        a{ color: darken(#fff,5%); }
+    }
+}
+
+// Events List: Nothing to show
+p.nothing-to-show{
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 40px;
+    line-height: 18px;
+
+    span.fa{
+        display: block;
+        font-size: 40px;
+        text-align: center;
+        margin: 0 auto;
+        background: @orange;
+        color: #fff;
+        .borderRadius(50%);
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        margin-bottom: 20px;
     }
 }

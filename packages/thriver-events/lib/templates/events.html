@@ -193,7 +193,7 @@
                 {{>upcomingEventListItem}}
             {{/each}}
             <li class="no-upcoming-list">
-                There are currently no upcoming event<br>
+                There are currently no upcoming events<br>
                 Be sure to check back later!
             </li>
             {{#if isAdmin}}
@@ -303,7 +303,12 @@
                 </span>
             {{/each}}
         {{/each}}
-
+        <!-- Awareness Month Callouts-->
+            <!--<ul class="awareness-month-events">
+                <li><a href="#">Sexual Awareness Month</a></li>
+                <li><a href="#">WCASA Completion week</a></li>
+            </ul>-->
+        <!-- End Awareness Month Callouts -->
         <div style="clear:both;"></div>
     </div>
 </template>
@@ -326,31 +331,47 @@
 </template>
 
 <template name="upcomingEventsList">
-    {{#each upcomingEvents}}
-        <h2>{{month}} {{year}}</h2>
-        <ul>
-            {{#each event}}
-                <li>
-                    <a href="#" data-id="{{_id}}">
-                        <span>{{name}}</span>
-                        <span class="badge">{{friendly start end}}</span>
-                    </a>
-                </li>
-            {{/each}}
-        </ul>
-    {{/each}}
+    {{#if upcomingEvents}}
+        {{#each upcomingEvents}}
+            <h2>{{month}} {{year}}</h2>
+            <ul>
+                {{#each event}}
+                    <li>
+                        <a href="#" data-id="{{_id}}">
+                            <span>{{name}}</span>
+                            <span class="badge">{{friendly start end}}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/each}}
+    {{else}}
+        <p class="nothing-to-show">
+            <span class="fa">&#xf273;</span>
+            There are currently no upcoming events.<br>
+            Be sure to check back later!
+        </p>
+    {{/if}}
 </template>
 
 <template name="searchResultsList">
     <ul class="searchResultsList">
-        {{#each results}}
-            <li class="{{past start}}">
-                <a href="#" data-id="{{_id}}">
-                    <span>{{name}}</span>
-                    <span class="badge">{{friendly start end}}
-                      {{#if pastYear start}} {{year start}}{{/if}}</span>
-                </a>
-            </li>
-        {{/each}}
+        {{#if results}}
+            {{#each results}}
+                <li class="{{past start}}">
+                    <a href="#" data-id="{{_id}}">
+                        <span>{{name}}</span>
+                        <span class="badge">{{friendly start end}}
+                        {{#if pastYear start}} {{year start}}{{/if}}</span>
+                    </a>
+                </li>
+            {{/each}}
+        {{else}}
+            <p class="nothing-to-show">
+                <span class="fa">&#xf273;</span>
+                There are currently no past events.<br>
+                Be sure to check back later!
+            </p>
+        {{/if}}
     </ul>
 </template>
