@@ -12,6 +12,10 @@
                     and the service providers of the state as a whole. <br>
                     Check back often to find events year-round.
                 </p>
+                <p class="search">
+                    <span class="fa">&#xf002;</span><input id="eventSearch" type="search" placeholder="Search Events...">
+                    {{>searchResultsList}}
+                </p>
             </header>
         </div>
         <div class="shadow-box container">
@@ -34,10 +38,6 @@
                                 <button class="event-control-next" {{disabled}}>
                                     {{nextMonth}} <span class="fa">&#xf138;</span>
                                 </button>
-                            </li>
-                            <li class="search">
-                                <span class="fa">&#xf002;</span><input id="eventSearch" type="search">
-                                {{>searchResultsList}}
                             </li>
                             <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
                             <li class="mobile back-to-events">
