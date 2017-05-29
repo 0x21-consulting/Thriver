@@ -66,7 +66,8 @@ const updateSectionContent = (oldHash) => {
     // Restore view
     parent.classList.remove('edit');
     parent.querySelector('textarea').remove();
-    parent.querySelector(':scope > button').remove();
+    parent.querySelector(':scope > button.save').remove();
+    parent.querySelector(':scope > button.cancel').remove();
   };
 };
 
@@ -194,9 +195,15 @@ Template.workContent.events({
     const button = document.createElement('button');
 
     button.textContent = 'Save';
+    button.classList.add('save');
     button.addEventListener('mouseup',
       // Pass along hash of existing markdown
       updateSectionContent(content.dataset.hash));
+
+    // Button to cancel edit
+    const cancel = document.createElement('button');
+    cancel.textContent = 'Cancel';
+    cancel.classList.add('cancel');
 
     // Textarea should get markdown
     textarea.textContent = Thriver.sections.get(this.id, ['data']).data.content;
@@ -205,6 +212,24 @@ Template.workContent.events({
     parent.classList.add('edit');
     parent.appendChild(textarea);
     parent.appendChild(button);
+    parent.appendChild(cancel);
+  },
+
+  /**
+   * @summary Close edit page
+   * @method
+   *   @param {$.Event} event
+   */
+  'click button.cancel': (event) => {
+    check(event, $.Event);
+
+    const parent = event.target.parentElement;
+    parent.classList.remove('edit');
+
+    // Remove buttons and textarea
+    parent.querySelector('textarea').remove();
+    const buttons = parent.querySelectorAll('button');
+    for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
   },
 });
 
