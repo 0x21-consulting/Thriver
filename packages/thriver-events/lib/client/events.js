@@ -257,6 +257,19 @@ Template.events.events({
       main.querySelector('.tabs > li > a').click();
     }
   },
+  //
+  // TODO(eoghantadhg): Create a more universal function for showing/hiding events list
+  // Shows upcoming / past events via the calendar sidebar
+  //
+  'click .listViewEvents-proxy': (event) => {
+    check(event, $.Event);
+    $('.events .listViewEvents').click();
+  },
+  'click .listViewEventsPast-proxy': (event) => {
+    check(event, $.Event);
+    $('.events .listViewEvents').click();
+    $('.events a[data-id="pastEventsList"]').click();
+  },
 
   //
   // TODO(eoghantadhg): Properly comment these

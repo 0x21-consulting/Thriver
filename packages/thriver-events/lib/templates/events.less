@@ -13,6 +13,18 @@
     form input, form textarea{
         &:focus{-webkit-box-shadow: none !important; box-shadow:none-important;}
     }
+    .see-all-link{
+        display: block;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background: lighten(@teal,2.5%);
+        max-width: 200px;
+        font-size: 12px;
+        padding: 10px;
+        margin: 0 auto;
+        &:focus{ .boxShadow(none); }
+    }
     .no-upcoming-list {
         color: #fff;
         padding: 10px;
@@ -505,6 +517,7 @@
             -webkit-box-shadow:none;
         }
         &[disabled]{cursor: not-allowed;}
+        &:focus{.boxShadow(none); }
     }
 }
 
