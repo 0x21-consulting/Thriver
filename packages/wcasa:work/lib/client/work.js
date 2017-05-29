@@ -176,7 +176,7 @@ Template.workNav.events({
   'click h2': changeTabs,
   'click li > ul > li > a': changeTabs,
   'click button.backToTopWork': () => {
-    const offset = $('.work').offset().top + 228;
+    const offset = $('.work .main.container').offset().top - 125;
     $('body').animate({ scrollTop: offset }, 750);
   },
 
@@ -198,8 +198,7 @@ Template.workNav.events({
     , 200);
 
     // Scroll to top of work on change tabs
-    const offset = $('.work').offset().top + 228;
-    $('body').animate({ scrollTop: offset }, 750);
+    Thriver.history.navigate('/what-we-do/');
   },
 });
 
