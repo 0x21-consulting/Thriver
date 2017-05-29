@@ -78,87 +78,89 @@ AutoForm.addHooks(['addStaffPerson', 'addBoardPerson'], { before: {
     file = file.files[0];
 
     // If there's no file, there's nothing to do here
-    if (!(file instanceof File)) return doc;
+    if (!(file instanceof File)) that.result(doc);
 
-    // Read in the file
-    const reader = new FileReader();
+    else {
+      // Read in the file
+      const reader = new FileReader();
 
-    /**
-     * @summary Read in file and convert to base64
-     * @method
-     *   @param {Event} event
-     */
-    (function (mimeType) { // eslint-disable-line func-names
-      return reader.addEventListener('load', (event) => {
-        check(event, Event);
+      /**
+       * @summary Read in file and convert to base64
+       * @method
+       *   @param {Event} event
+       */
+      (function (mimeType) { // eslint-disable-line func-names
+        return reader.addEventListener('load', (event) => {
+          check(event, Event);
 
-        // Unsigned, 8-bit integer Array
-        // event.target.result is of type ArrayBuffer
-        const view = new Uint8Array(event.target.result);
+          // Unsigned, 8-bit integer Array
+          // event.target.result is of type ArrayBuffer
+          const view = new Uint8Array(event.target.result);
 
-        // Base 64 possible characters
-        const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+          // Base 64 possible characters
+          const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-        // Base64 string representation of image
-        let string = `data:${mimeType};base64,`;
+          // Base64 string representation of image
+          let string = `data:${mimeType};base64,`;
 
-        // Base64 works by breaking three bytes into four six-bit segments
-        // Each segment therefore must have a value between 0 and 64.
-        // That allows easy encoding using the base64 string above
-        for (let i = 0; i < view.byteLength; i += 3) {
-          /* eslint-disable no-bitwise */
+          // Base64 works by breaking three bytes into four six-bit segments
+          // Each segment therefore must have a value between 0 and 64.
+          // That allows easy encoding using the base64 string above
+          for (let i = 0; i < view.byteLength; i += 3) {
+            /* eslint-disable no-bitwise */
 
-          // First six bits (remove last two bits)
-          let segment = (view[i] & 0xFC) >> 2;
+            // First six bits (remove last two bits)
+            let segment = (view[i] & 0xFC) >> 2;
 
-          // Encode
-          string += base64.charAt(segment);
+            // Encode
+            string += base64.charAt(segment);
 
-          // Segment two (keep first nibble)
-          segment = (view[i] & 0x03) << 4;
+            // Segment two (keep first nibble)
+            segment = (view[i] & 0x03) << 4;
 
-          // If there are no more bytes because the array is exhausted,
-          // encode this nibble and output two markers
-          if (i + 1 >= view.byteLength) {
-            string += `${base64.charAt(segment)}==`;
-            break;
+            // If there are no more bytes because the array is exhausted,
+            // encode this nibble and output two markers
+            if (i + 1 >= view.byteLength) {
+              string += `${base64.charAt(segment)}==`;
+              break;
+            }
+
+            // Add first nibble from second byte
+            segment |= (view[i + 1] & 0xF0) >> 4;
+            string += base64.charAt(segment);
+
+            // Segment three (last nibble of second byte)
+            segment = (view[i + 1] & 0x0F) << 2;
+
+            // If there are no more bytes because the array is exhausted,
+            // enocde this segment and output one marker
+            if (i + 2 >= view.byteLength) {
+              string += `${base64.charAt(segment)}=`;
+              break;
+            }
+
+            // Complete segment with first two bits of third byte
+            segment |= (view[i + 2] & 0xC0) >> 6;
+            string += base64.charAt(segment);
+
+            // Final (fourth) segment using last six bits of third byte
+            segment = view[i + 2] & 0x3F;
+            string += base64.charAt(segment);
+
+            /* eslint-enable */
           }
 
-          // Add first nibble from second byte
-          segment |= (view[i + 1] & 0xF0) >> 4;
-          string += base64.charAt(segment);
+          // Set picture right
+          doc.picture = string;
 
-          // Segment three (last nibble of second byte)
-          segment = (view[i + 1] & 0x0F) << 2;
+          // Let form submit continue asynchronously
+          that.result(doc);
+        });
+      }(file.type));
 
-          // If there are no more bytes because the array is exhausted,
-          // enocde this segment and output one marker
-          if (i + 2 >= view.byteLength) {
-            string += `${base64.charAt(segment)}=`;
-            break;
-          }
-
-          // Complete segment with first two bits of third byte
-          segment |= (view[i + 2] & 0xC0) >> 6;
-          string += base64.charAt(segment);
-
-          // Final (fourth) segment using last six bits of third byte
-          segment = view[i + 2] & 0x3F;
-          string += base64.charAt(segment);
-
-          /* eslint-enable */
-        }
-
-        // Set picture right
-        doc.picture = string;
-
-        // Let form submit continue asynchronously
-        that.result(doc);
-      });
-    }(file.type));
-
-    // Read in file as an Array Buffer
-    reader.readAsArrayBuffer(file);
+      // Read in file as an Array Buffer
+      reader.readAsArrayBuffer(file);
+    }
   },
 },
   after: {
