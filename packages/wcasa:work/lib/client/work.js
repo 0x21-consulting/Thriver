@@ -202,13 +202,40 @@ Template.workNav.events({
   },
 });
 
-// TODO(micchickenburger): Clean these up.
 Template.workContent.events({
-  'click footer.truncate button': (event) => {
+  /**
+   * @summary Handle Read More
+   * @method
+   *   @param {$.Event} event
+   */
+  'click footer.truncate button.more': (event) => {
+    check(event, $.Event);
     event.preventDefault();
-    $('body').addClass('workReading');
+    document.body.classList.add('workReading');
     $('.sticky').trigger('sticky_kit:recalc');
   },
+
+  /**
+   * @summary Handle Read Less
+   * @method
+   *   @param {$.Event} event
+   */
+  'click footer.truncate button.less': (event) => {
+    check(event, $.Event);
+    event.preventDefault();
+
+    // Scroll back to top
+    const offset = $('.work .main.container').offset().top - 125;
+    $('body').animate({ scrollTop: offset }, 750);
+
+    document.body.classList.remove('workReading');
+    $('.sticky').trigger('sticky_kit:recalc');
+  },
+
+  /**
+   * @summary Mobile Support - Back to Previous
+   * @method
+   */
   'click .backToPrevious': () =>
     document.body.classList.remove('mobile-article-open'),
 });
