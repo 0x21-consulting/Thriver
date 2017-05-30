@@ -26,12 +26,14 @@ Package.onUse((api) => {
   api.addFiles([
     // Templates
     'lib/templates/donate.html',
+    'lib/templates/payments.html',
 
     // Styles
     'lib/templates/donate.less',
 
     // Helpers and methods
     'lib/client/donate.js',
+    'lib/client/payments.js',
   ], ['client']);
 
   // Client & Server processing

@@ -100,10 +100,10 @@ Template.aside.helpers({
   }, {
     title: 'Event Payment',
     icon: 'ticket',
-    id: 'event-payment',
+    id: 'payments',
     width: 700,
     position: 'right',
-    template: 'donate',
+    template: 'payments',
   }],
 });
 
