@@ -209,8 +209,9 @@ Template.events.events({
    * @method
    *   @param {$.Event} event
    */
-  'click button.eventDate': (event) => {
+  'click button.eventDate, click a.eventLink': (event) => {
     check(event, $.Event);
+    event.preventDefault();
 
     Thriver.events.navigate(event.currentTarget.dataset.id);
 

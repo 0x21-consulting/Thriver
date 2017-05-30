@@ -49,48 +49,56 @@
                         </ul>
                     </header>
                     <div class="eventsSlider">
-                        <button class="sliderPrev fa event-control-prev" {{disabled}}>&#xf053;</button>
-                        <div class="slideScroller">
-                            <ul class="slides" id="slidesList">
-                                {{#if events}}
-                                    {{#each events}}
-                                        {{#if noEvents}}
-                                            <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
-                                                <div class="eventContainer">
-                                                    <div class="inner">
-                                                        <header>
-                                                            <p class="eventDate">{{month}} {{year}}</p>
-                                                        </header>
-                                                        <div class="main">
-                                                            <div class="icon-main">
-                                                                <i class="fa">&#xf273;</i>
-                                                            </div>
-                                                            <h2>{{month}} {{year}}</h2>
-                                                            <p>
-                                                                {{#if noFutureEvents}}
-                                                                    No more events listed after this date.
-                                                                {{else}}
-                                                                    {{#if noPastEvents}}
-                                                                        No previous events listed before this date.
-                                                                    {{else}}
-                                                                        No Events This Month.
-                                                                    {{/if}}
-                                                                {{/if}}
-                                                                <!-- If there is a future event from today's date --><br><a href="#">See next upcoming event <span class="fa">&#xf105;</span></a><!-- Endif -->
-                                                                <!-- Show the last past event from today's date' --><br><a href="#">See latest past event <span class="fa">&#xf105;</span></a><!--Endif-->
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        {{else}}
-                                            {{> eventSlide}}
-                                        {{/if}}
-                                    {{/each}}
-                                {{/if}}
-                            </ul>
-                        </div>
-                        <button class="sliderNext fa event-control-next" {{disabled}}>&#xf054;</button>
+                      <button class="sliderPrev fa event-control-prev" {{disabled}}>&#xf053;</button>
+                      <div class="slideScroller">
+                        <ul class="slides" id="slidesList">
+                          {{#if events}}
+                            {{#each events}}
+                              {{#if noEvents}}
+                                <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
+                                  <div class="eventContainer">
+                                    <div class="inner">
+                                      <header>
+                                        <p class="eventDate">{{month}} {{year}}</p>
+                                      </header>
+                                      <div class="main">
+                                        <div class="icon-main">
+                                          <i class="fa">&#xf273;</i>
+                                        </div>
+                                        <h2>{{month}} {{year}}</h2>
+                                        <p>
+                                          {{#if noFutureEvents}}
+                                            No more events listed after this date.
+                                          {{else}}
+                                            {{#if noPastEvents}}
+                                              No previous events listed before this date.
+                                            {{else}}
+                                              No Events This Month.
+                                            {{/if}}
+                                          {{/if}}
+                                          <!-- If there is a future event from today's date -->
+                                          {{#if nextEvent}}
+                                            <br><a href="#" data-id="{{nextEvent}}" class="eventLink">
+                                              See the next upcoming event <span class="fa">&#xf105;</span></a>
+                                          {{/if}}
+                                          <!-- Show the last past event from today's date' -->
+                                          {{#if pastEvent}}
+                                            <br><a href="#" data-id="{{pastEvent}}" class="eventLink">
+                                              See the most recent past event <span class="fa">&#xf105;</span></a>
+                                          {{/if}}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                              {{else}}
+                                {{> eventSlide}}
+                              {{/if}}
+                            {{/each}}
+                          {{/if}}
+                        </ul>
+                      </div>
+                      <button class="sliderNext fa event-control-next" {{disabled}}>&#xf054;</button>
                     </div>
                     <article class="listViewEventsObject">
                         {{#each items}}

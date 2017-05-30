@@ -259,6 +259,8 @@ Template.events.helpers({
   events: () => {
     let noPastEvents;
     let noFutureEvents;
+    let pastEvent;
+    let nextEvent;
 
     // Get all events that start or end in this month
     let events = Thriver.events.collection.find({
@@ -294,17 +296,19 @@ Template.events.helpers({
           Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
       },
-    });
+    }, { sort: { start: 1 } });
     if (!events.count()) noFutureEvents = true;
+    else nextEvent = events.fetch()[0]._id;
 
     // Are there any past events?
     events = Thriver.events.collection.find({
-      end: {
+      start: {
         $lt: new Date(Thriver.calendar.thisYear.get(),
           Thriver.calendar.thisMonth.get()),
       },
-    });
+    }, { sort: { start: -1 } });
     if (!events.count()) noPastEvents = true;
+    else pastEvent = events.fetch()[0]._id;
 
     // Now we only have one slide
     Thriver.events.slideTotal.set(1);
@@ -317,6 +321,8 @@ Template.events.helpers({
       noEvents: true,
       noFutureEvents,
       noPastEvents,
+      nextEvent,
+      pastEvent,
     }];
   },
 });
