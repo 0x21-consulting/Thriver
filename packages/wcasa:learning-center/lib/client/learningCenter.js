@@ -1,8 +1,8 @@
 // How many list items to load
-Thriver.newsroom.quantity = new ReactiveVar(5);
+Thriver.learningCenter.quantity = new ReactiveVar(5);
 
 // Regular Expression for Search field
-Thriver.newsroom.search = new ReactiveVar();
+Thriver.learningCenter.search = new ReactiveVar();
 
 /**
  * Handle searching
@@ -13,17 +13,15 @@ const handleSearch = (event) => {
   const value = event.target.value;
 
   // If field is empty, clear reactive search variable
-  if (value.length === 0) Thriver.newsroom.search.set();
+  if (value.length === 0) Thriver.learningCenter.search.set();
 
   // Otherwise, create RegExp for searching fields
-  else Thriver.newsroom.search.set(new RegExp(`.*${value}.*`, 'gi'));
+  else Thriver.learningCenter.search.set(new RegExp(`.*${value}.*`, 'gi'));
 };
 
 // Subscriptions
-Meteor.subscribe('inTheNews');
-Meteor.subscribe('pressReleases');
-Meteor.subscribe('actionAlerts');
-Meteor.subscribe('newsletters');
+Meteor.subscribe('infosheets');
+Meteor.subscribe('webinars');
 
 // Events
 Template.aside.events({
@@ -32,31 +30,31 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #newsroom li.loadMore button': (event) => {
+  'click #learning-center li.loadMore button': (event) => {
     check(event, $.Event);
     check(event.target, Element);
 
     // Get all results
-    Thriver.newsroom.quantity.set(0);
+    Thriver.learningCenter.quantity.set(0);
 
     // Hide "Load More Results" button for entire section
-    const buttons = document.querySelectorAll('#newsroom li.loadMore button');
+    const buttons = document.querySelectorAll('#learning-center li.loadMore button');
     for (let i = 0; i < buttons.length; i += 1) buttons[i].classList.add('hide');
 
     // Show "everything" text
-    const texts = document.querySelectorAll('#newsroom .everything');
+    const texts = document.querySelectorAll('#learning-center .everything');
     for (let i = 0; i < texts.length; i += 1) texts[i].classList.remove('hide');
   },
 
   // Search field
-  'keyup #searchNews, search #searchNews': handleSearch,
+  'keyup #searchLC, search #searchLC': handleSearch,
 
   /**
    * @summary Prevent form submission
    * @method
    *   @param {$.Event} event
    */
-  'submit form#searchNewsForm': (event) => {
+  'submit form#searchLCForm': (event) => {
     check(event, $.Event);
 
     // Prevent form submission
@@ -64,15 +62,15 @@ Template.aside.events({
   },
 
   /**
-   * @summary Toggle Add Newsroom Item form
+   * @summary Toggle Add Learning Center Item form
    * @method
    *   @param {$.Event} event
    */
-  'click #newsroom aside.admin button.add': (event) => {
+  'click #learning-center aside.admin button.add': (event) => {
     check(event, $.Event);
 
     // Show form
-    const form = document.querySelector('#newsForm');
+    const form = document.querySelector('#LCForm');
     if (form.classList.contains('hide')) form.classList.remove('hide');
     else form.classList.add('hide');
   },
@@ -81,18 +79,18 @@ Template.aside.events({
 // Administrative events
 Template.list.events({
   /**
-   * @summary Delete a newsroom item
+   * @summary Delete a Learning Center item
    * @method
    *   @param {$.Event} event
    */
-  'click [data-tag="news"] aside.admin button.delete': (event) => {
+  'click [data-tag="lc"] aside.admin button.delete': (event) => {
     check(event, $.Event);
 
     event.stopPropagation();
 
     const id = event.target.parentElement.parentElement.dataset.id;
-    if (confirm('Are you sure you want to delete this Newsroom Item?')) {
-      Meteor.call('deleteNewsItem', id);
+    if (confirm('Are you sure you want to delete this Learning Center Item?')) {
+      Meteor.call('deleteLearningCenterItem', id);
     }
   },
 });

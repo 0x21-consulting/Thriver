@@ -20,24 +20,25 @@ Package.onUse((api) => {
 
   ], ['client']);
 
+  // Client and server
+  api.addFiles(['lib/schema.js'], ['client', 'server']);
+
   // Client processing
   api.addFiles([
     // Templates
-    'lib/templates/resources.html',
+    'lib/templates/learningCenter.html',
 
     // Styles
-    'lib/templates/resources.less',
+    'lib/templates/learningCenter.less',
 
     // Helpers and methods
-    'lib/client/infosheets.js',
-    'lib/client/library.js',
-    'lib/client/stats-data.js',
-    'lib/client/webinars.js',
+    'lib/client/helpers.js',
+    'lib/client/learningCenter.js',
   ], ['client']);
 
   // Server processing
   api.addFiles([
-
+    'lib/server.js',
   ], ['server']);
 });
 

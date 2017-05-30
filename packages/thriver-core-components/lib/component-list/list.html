@@ -1,6 +1,8 @@
 <template name="list">
     {{#if equals type 'article'}}
-        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
+        <section data-list-type="{{type}}" data-list-paginate="{{paginate}}"
+          data-list-paginate-count="{{perPage}}"
+          data-tag="{{tag}}" class="{{type}} {{style}}">
             {{#if equals itemType 'category'}}
                 {{#each categories}}
                     <article class="itemCategory" data-id="{{id}}">
@@ -27,7 +29,7 @@
                 {{/each}}
             {{else}}
                 {{#each items}}
-                    <article role="document">
+                    <article role="document" data-id="{{_id}}">
                         <div class="inner-container-wide">
                             <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{icon}}{{/if}}">
                                 <time class="dateMeta" datetime="{{ISODate date}}">
@@ -49,15 +51,16 @@
             {{#if equals paginate 'true'}}
             <li class="loadMore">
                 <button type="button">Load More <span class="fa"></span></button>
-                <span class="everything">That's everything!</span>
+                <span class="everything hide">That's everything!</span>
             </li>
             {{/if}}
         </section>
     {{/if}}
     <!--Catalog List pending explicit instructions on library-->
     {{#if equals type 'catalog'}}
-        <section data-list-type="{{type}}" data-list-paginate="{{#if paginate}}{{paginate}}{{/if}}" data-list-paginate-count="{{#if perPage}}{{perPage}}{{/if}}" class="{{type}}{{#if style}} {{style}}{{/if}}">
-        {{#each items}}
+      <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}"
+        data-list-paginate-count="{{perPage}}" class="{{type}} {{style}}">
+          {{#each items}}
             <article>
                 <div class="inner">
                     <details aria-expanded="false" aria-controls="{{id}}">

@@ -19,7 +19,7 @@ section#learning-center{
     a h3, a .icon{
         margin-top: 0px;
         padding-top: 0px;
-        text-align: center;
+        text-align: left;
         .textButtonColor(lighten(@teal, 2.5%));
         .font(1.4,1.4,0.01,@normal,none);
     }
@@ -46,7 +46,6 @@ section#learning-center{
             .buttonColor(@blueGray);
             margin: 0 auto;
             & + span.everything {
-                display: none;
                 margin: 0 auto;
             }
         }
@@ -358,4 +357,49 @@ article.itemCategory{
 menu.availability {
     margin-top: 10px !important;
 }
+}
+
+// Admin styles
+#learning-center aside.admin {
+    margin: 0 0 15px;
+
+    button {
+        color: @white;
+        background: @orange;
+    }
+
+    #LCForm {
+        margin: 15px auto;
+        text-align: left;
+        width: 90%;
+
+        select {
+            padding: 5px 10px;
+            font-size: 1.25rem;
+            font-weight: normal;
+            margin: 10px;
+        }
+
+        // Add * form styles
+        [data-required="true"] label::after {
+            content: '\f069';
+            font: 10px FontAwesome;
+            color: @orange;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+
+        // Validation error styles
+        span.help-block {
+            color: #f55;
+            font-weight: bold;
+            float: right;
+            margin-top: -53px;
+            margin-right: 10px;
+        }
+    }
+}
+#learning-center article aside.admin {
+    margin-top: -40px;
+    right: 30px;
 }
