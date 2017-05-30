@@ -235,6 +235,33 @@ Template.events.events({
   },
 
   /**
+   * @summary When clicking the Today button
+   * @method
+   *   @param {$.Event} event
+   */
+  'click .viewToday': (event) => {
+    check(event, $.Event);
+
+    // Get all future events sorted by closest
+    let events = Thriver.events.collection.find({
+      start: { $gte: new Date() },
+    }, { sort: { start: 1 } });
+
+    // If no events, get most recent past event
+    if (!events.count()) {
+      events = Thriver.events.collection.find({
+        start: { $lte: new Date() },
+      }, { sort: { start: -1 } });
+    }
+
+    // If still no events, do nothing
+    if (!events.count()) return;
+
+    // Navigate to event closest to today
+    Thriver.events.navigate(events.fetch()[0]._id);
+  },
+
+  /**
    * @summary When clicking the View All button
    * @method
    *   @param {$.Event} event
