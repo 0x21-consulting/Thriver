@@ -208,7 +208,7 @@ Template.eventSlide.helpers({
    * @function
    * @returns {Boolean}
    */
-  isSingular: !(Thriver.events.sameDayEvents.length > 1),
+  isSingular: () => !(Thriver.events.sameDayEvents.get().length > 1),
 
   /**
    * @summary Determine which Register Button to Show
