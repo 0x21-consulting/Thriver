@@ -239,26 +239,14 @@ Template.events.events({
    * @method
    *   @param {$.Event} event
    */
-  'click .viewToday': (event) => {
+  'click .viewThisMonth': (event) => {
     check(event, $.Event);
 
-    // Get all future events sorted by closest
-    let events = Thriver.events.collection.find({
-      start: { $gte: new Date() },
-    }, { sort: { start: 1 } });
+    const date = new Date();
 
-    // If no events, get most recent past event
-    if (!events.count()) {
-      events = Thriver.events.collection.find({
-        start: { $lte: new Date() },
-      }, { sort: { start: -1 } });
-    }
-
-    // If still no events, do nothing
-    if (!events.count()) return;
-
-    // Navigate to event closest to today
-    Thriver.events.navigate(events.fetch()[0]._id);
+    // Switch to this month
+    Thriver.calendar.thisMonth.set(date.getMonth());
+    Thriver.calendar.thisYear.set(date.getFullYear());
   },
 
   /**

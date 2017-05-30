@@ -252,6 +252,13 @@ Template.events.helpers({
   }],
 
   /**
+   * @summary Current month and year
+   * @function
+   * @returns {String}
+   */
+  thisMonth: () => `${Thriver.calendar.months[new Date().getMonth()]} ${new Date().getFullYear()}`,
+
+  /**
    * Provide current event data to event slides
    * @function
    * @returns {string[]}
