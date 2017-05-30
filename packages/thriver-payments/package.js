@@ -30,6 +30,7 @@ Package.onUse((api) => {
 
     // Styles
     'lib/templates/donate.less',
+    'lib/templates/payments.less',
 
     // Helpers and methods
     'lib/client/donate.js',

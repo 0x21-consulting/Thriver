@@ -98,7 +98,7 @@ Template.aside.helpers({
     position: 'right',
     template: 'donate',
   }, {
-    title: 'Event Payment',
+    title: 'Event Registration',
     icon: 'ticket',
     id: 'payments',
     width: 700,
