@@ -152,7 +152,8 @@
                         </aside>
                     {{/if}}
                     <p class="excerpt">
-                        <b>{{startTime this}}{{endTime this}}: {{{ address this }}}</b>
+                        <b>{{startTime this}}{{endTime this}}
+                          {{#if address this}}: {{{ address this }}}{{/if}}</b>
                     </p>
                     {{{ markdown description }}}
                 </div>

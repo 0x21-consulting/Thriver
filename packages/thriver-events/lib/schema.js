@@ -78,7 +78,7 @@ Thriver.events.schema = new SimpleSchema({
   },
   'location.name': {
     type: String,
-    optional: false,
+    optional: true,
     label: 'Location Name',
   },
   'location.mapUrl': {
