@@ -1,7 +1,7 @@
 @import (reference) "{thriver:core-styles}/lib/index.less";
 @import (reference) "{thriver:core-styles}/lib/styles/forms.import.less";
 
-section#donate {
+section#donate, section#payments {
     .sidebar-content{
         padding: 30px 0px;
         @media @mobile{padding: 20px;}
@@ -21,9 +21,15 @@ section#donate {
             padding: 0px 0px;
         }
     }
+    h2{
+        color: #fff;
+        .fa{color: @orange;}
+    }
+    a{ color: @teal; }
     h3{
         padding: 0px;
         margin: 0px 0px 20px 0px;
+        &.title{ font-size: 160%; }
     }
     h4{
         text-align: left;
