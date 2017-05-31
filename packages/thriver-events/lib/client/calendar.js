@@ -4,6 +4,12 @@
  */
 Thriver.calendar = {};
 
+/**
+ * @summary ReactiveVar for current slide
+ * @type {ReactiveVar}
+ */
+Thriver.calendar.currentSlide = new ReactiveVar();
+
 // TODO(micchickenburger): This should be internationalized
 Thriver.calendar.months = ['January', 'February', 'March', 'April',
   'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -40,7 +46,7 @@ Thriver.calendar.lastDate = (specificMonth) => {
   }
 
   // There can't be more than 30 days in April, June, Sept., or Nov.
-  if (![3, 5, 8, 10].every(val => specificMonth !== val)) return 30;
+  if (![3, 5, 8, 10].every(val => month !== val)) return 30;
 
   // All other months
   return 31;
