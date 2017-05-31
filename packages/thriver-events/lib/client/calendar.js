@@ -169,7 +169,7 @@ Template.calendar.helpers({
 
         // If today or this week, add special styles
         if (day.date === thisWeek && i === 0) day.currentWeekStart = 'currentWeekStart';
-        if (day.date === thisDay) day.today = 'today';
+        if (day.date === thisDay && day.date === count) day.today = 'today';
 
         // If we finished counting (next month's days)
         if (count > total) {
