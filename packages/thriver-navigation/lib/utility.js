@@ -93,8 +93,8 @@ Thriver.utilityNavigationHelpers = {
     position: 'right',
     user: 'public',
   }, {
-    // TODO: eoghanTadhg & mcChickenBurger: need to create a function to open sidebars not requiring a click of said button
-    // Payments (Not displayed)
+    // TODO(eoghanTadhg, michickenburger): need to create a function to open
+    // sidebars not requiring a click of said button Payments (Not displayed)
     title: 'Payments',
     icon: 'ticket',
     type: 'sidebar',
