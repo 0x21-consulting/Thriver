@@ -36,6 +36,21 @@ Thriver.events.schema = new SimpleSchema({
       rows: 5,
     },
   },
+  /** Awareness Events */
+  awareness: {
+    type: String,
+    optional: false,
+    allowedValues: ['', 'day', 'month'],
+    defaultValue: '',
+    label: 'Is this an awareness event?',
+    autoform: {
+      options: [
+        { label: 'No', value: '' },
+        { label: 'Yes, Awareness Day', value: 'day' },
+        { label: 'Yes, Awareness Month', value: 'month' },
+      ],
+    },
+  },
   /** Starting datetime */
   start: {
     type: Date,
@@ -54,7 +69,7 @@ Thriver.events.schema = new SimpleSchema({
       type: 'datetime-local',
     },
   },
-  /** Lat/Lon Coordinates for Physical locations */
+  /** Locations */
   location: {
     type: Object,
     optional: false,

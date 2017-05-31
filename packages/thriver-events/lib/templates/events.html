@@ -281,7 +281,7 @@
 
 
 <template name="calendar">
-    <div id="calendar" class="calendar">
+    <div id="calendar" class="calendar {{awareness}}">
         <h2>
             <button class="fa prevMonth monthPaginate event-control-prev" {{disabled}} role="button" type="button">&#xf0d9;</button>
             {{getMonth}} {{getYear}}
@@ -299,7 +299,7 @@
 
         {{#each week}}
             {{#each this}}
-                <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}}">
+                <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}} {{this.awareness}}">
                     {{#if hasEvent}}
                         <button data-id="{{id}}" class="eventDate">
                             {{date}}
@@ -311,11 +311,15 @@
                 </span>
             {{/each}}
         {{/each}}
+
         <!-- Awareness Month Callouts-->
-            <!--<ul class="awareness-month-events">
-                <li><a href="#">Sexual Awareness Month</a></li>
-                <li><a href="#">WCASA Completion week</a></li>
-            </ul>-->
+        {{#if awarenessEvents}}
+          <ul class="awareness-month-events">
+            {{#each awarenessEvents}}
+              <li><a href="#" data-id="{{_id}}">{{name}}</a></li>
+            {{/each}}
+          </ul>
+        {{/if}}
         <!-- End Awareness Month Callouts -->
         <div style="clear:both;"></div>
     </div>

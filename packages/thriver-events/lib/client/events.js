@@ -280,6 +280,7 @@ Template.events.events({
       main.querySelector('.tabs > li > a').click();
     }
   },
+
   //
   // TODO(eoghantadhg): Create a more universal function for showing/hiding events list
   // Shows upcoming / past events via the calendar sidebar

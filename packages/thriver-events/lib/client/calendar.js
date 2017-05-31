@@ -187,6 +187,10 @@ Template.calendar.helpers({
           // If the day is in the past
           if (count < thisDay) day.past = 'past';
 
+          // If the day is an awareness day
+          if (currentEvents[count][0].awareness === 'day' ||
+            currentEvents[count][0].awareness === 'month') day.awareness = 'awareness';
+
           // Hyperlink first event
           day.id = currentEvents[count][0]._id;
 
@@ -208,5 +212,62 @@ Template.calendar.helpers({
 
     // Return weeks
     return weeks;
+  },
+
+  /**
+   * @summary Determine if this is an Awareness Month
+   * @method
+   */
+  awareness: () => {
+    const year = Thriver.calendar.thisYear.get();
+    const month = Thriver.calendar.thisMonth.get();
+
+    const count = Thriver.events.collection.find({
+      start: {
+        $gte: new Date(year, month),
+        $lte: new Date(year, month, Thriver.calendar.lastDate(month)),
+      },
+      awareness: 'month',
+    }).count();
+
+    if (count) return 'awareness';
+    return '';
+  },
+
+  /**
+   * @summary Pass On Awareness Events
+   * @method
+   */
+  awarenessEvents: () => {
+    const year = Thriver.calendar.thisYear.get();
+    const month = Thriver.calendar.thisMonth.get();
+
+    const events = Thriver.events.collection.find({
+      start: {
+        $gte: new Date(year, month),
+        $lte: new Date(year, month, Thriver.calendar.lastDate(month)),
+      },
+      awareness: 'month',
+    });
+
+    return events;
+  },
+});
+
+// Calendar Events
+Template.calendar.events({
+  /**
+   * @summary Navigate on click for event links
+   * @method
+   *   @param {$.Event} event
+   */
+  'click a[data-id]': (event) => {
+    check(event, $.Event);
+
+    // Do nothing else
+    event.preventDefault();
+
+    // Navigate
+    Thriver.events.navigate(event.currentTarget.dataset.id);
   },
 });
