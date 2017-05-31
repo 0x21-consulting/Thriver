@@ -49,13 +49,13 @@
                         </ul>
                     </header>
                     <div class="eventsSlider">
-                      <button class="sliderPrev fa event-control-prev" {{disabled}}>&#xf053;</button>
+                      <button class="prev fa">&#xf053;</button>
                       <div class="slideScroller">
                         <ul class="slides" id="slidesList">
                           {{#if events}}
                             {{#each events}}
                               {{#if noEvents}}
-                                <li class="no-events-this-month eventSlide{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
+                                <li data-id="{{_id}}" class="{{which}} {{position}} no-events-this-month{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
                                   <div class="eventContainer">
                                     <div class="inner">
                                       <header>
@@ -98,7 +98,7 @@
                           {{/if}}
                         </ul>
                       </div>
-                      <button class="sliderNext fa event-control-next" {{disabled}}>&#xf054;</button>
+                      <button class="next fa">&#xf054;</button>
                     </div>
                     <article class="listViewEventsObject">
                         {{#each items}}
@@ -122,7 +122,7 @@
 </template>
 
 <template name="eventSlide">
-    <li class="eventSlide">
+    <li data-id="{{_id}}" class="eventSlide {{which}} {{position}}">
         <div class="eventContainer">
             <div class="inner">
                 <header>

@@ -85,6 +85,7 @@
         .shadow(closeLeft);
         ul{margin: 0px;}
         width: ~'calc(100% - 300px)';
+        overflow-x: hidden;
         .listViewEventsObject{
             display: none;
             //padding: 40px;
@@ -178,7 +179,7 @@
             margin: auto;
             position: relative;
             z-index: 1;
-            button.fa {
+            button {
                 line-height: 40px;
                 height: 40px;
                 font-size: 26px;
@@ -200,7 +201,7 @@
                 }
                 z-index: 3;
                 .shadowNone;
-                &.sliderNext{
+                &.next{
                     left: inherit;
                     right: 0px;
                 }
@@ -217,7 +218,7 @@
                         opacity: 0;
                         transition: height 275ms @easeDefault 0ms, opacity 275ms @easeDefault 0ms, visibility 0ms linear 0ms;
                     }
-                    li.eventSlide.extendedContent{
+                    li.extendedContent{
                         .extended{
                             max-height: 9999px;
                             opacity: 1;
@@ -230,9 +231,8 @@
                     list-style-type: none;
                     white-space: nowrap;
                     .trans(transform 375ms @easeDefault 0ms);
-                    .eventSlide{
+                    & > li {
                         white-space: initial;
-                        display: inline-block;
                         width: 100%;
                         margin-right: -3px;
                         background-color: @white;
@@ -244,7 +244,7 @@
                             .inner{
                                 padding: 0px;
                                 background-color: @white;
-                                min-height: 600px;
+                                min-height: 575px;
                                 @media @mobile{ min-height: 0px; }
                             }
                         }
@@ -288,25 +288,25 @@
                                 }
                             }
                         }
-                        h2{
-                        border-bottom: 2px solid @blue;
-                        display: block;
-                        color: @navy;
-                        margin: 20px 0px 0px 0px;
-                        text-align: left;
-                        border-bottom: 2px solid darken(@gray, 5%);
-                        color: @black;
-                        font-size: 28px;
-                        line-height: 32px;
-                        font-weight: 100;
-                        padding: 0px 10px 10px 10px;
-                        margin-bottom: 10px;
-                        //background-color: @gray;
-                        padding: 0px;
-                        margin: 0px;
-                        margin-bottom: 15px;
-                        padding-bottom: 12px;
-                        .shadowNone;
+                        h2 {
+                          border-bottom: 2px solid @blue;
+                          display: block;
+                          color: @navy;
+                          margin: 20px 0px 0px 0px;
+                          text-align: left;
+                          border-bottom: 2px solid darken(@gray, 5%);
+                          color: @black;
+                          font-size: 28px;
+                          line-height: 32px;
+                          font-weight: 100;
+                          padding: 0px 10px 10px 10px;
+                          margin-bottom: 10px;
+                          //background-color: @gray;
+                          padding: 0px;
+                          margin: 0px;
+                          margin-bottom: 15px;
+                          padding-bottom: 12px;
+                          .shadowNone;
                         }
                         header{
                             padding: 20px 60px;
@@ -760,11 +760,11 @@ button.seeAllEvents {
     display: block;
     margin: 0px 20px;
 }
-section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide.extendedContent .eventContainer .inner{
+section.events .eventsMain .eventsSlider .slideScroller .slides .extendedContent .eventContainer .inner{
     height: auto;
 }
 
-section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide.extendedContent .details{
+section.events .eventsMain .eventsSlider .slideScroller .slides .extendedContent .details{
     display: none !important;
 }
 
@@ -773,19 +773,19 @@ section.events span.truncated.fa{display: none;}
 .back-to-events{display: none !important;}
 @media (max-width:1000px){
     header.eventsHeader > ul li:first-child, header.eventsHeader > ul li:nth-child(2){ display: none; }
-    #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide h2{
+    #main section.events .eventsMain .eventsSlider .slideScroller .slides > li h2{
         font-size: 120%;
         line-height: 124%;
         font-weight: 500;
     }
-    #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide header{
+    #main section.events .eventsMain .eventsSlider .slideScroller .slides > li header{
         padding: 20px;
     }
     header.eventsHeader ul li.listViewEvents{
         position: static;
         float: right;
     }
-    #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide .main{ padding: 20px 70px; }
+    #main section.events .eventsMain .eventsSlider .slideScroller .slides > li .main{ padding: 20px 70px; }
 }
 
 @media @mobile{
@@ -796,7 +796,7 @@ section.events span.truncated.fa{display: none;}
             display: block;
         }
     }
-    #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide ul.actions {
+    #main section.events .eventsMain .eventsSlider .slideScroller .slides > li ul.actions {
         margin: 0px 0px 0px 15px;
     }
     #main section.events aside.eventsSidebar{
@@ -808,16 +808,16 @@ section.events span.truncated.fa{display: none;}
         }
     }
     .calendar{ margin: 20px auto 0px auto !important;}
-    body.active-event #main section.events .eventsMain .eventsSlider .slideScroller, body.active-event #main section.events .eventsMain .eventsSlider .slideScroller .slides, body.active-event #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide{
+    body.active-event #main section.events .eventsMain .eventsSlider .slideScroller, body.active-event #main section.events .eventsMain .eventsSlider .slideScroller .slides, body.active-event #main section.events .eventsMain .eventsSlider .slideScroller .slides > li {
         .transform(translate(0px,0px)) !important;
     }
-    #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide .eventContainer .inner, #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide .eventContainer{
+    #main section.events .eventsMain .eventsSlider .slideScroller .slides > li .eventContainer .inner, #main section.events .eventsMain .eventsSlider .slideScroller .slides > li .eventContainer{
         height: auto;
     }
     #main section.events{ padding:0px; }
     body.active-event{
-        #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide .main{padding:20px;}
-        #main section.events .eventsMain .eventsSlider .slideScroller, #main section.events .eventsMain .eventsSlider .slideScroller .slides, #main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide{
+        #main section.events .eventsMain .eventsSlider .slideScroller .slides > li .main{padding:20px;}
+        #main section.events .eventsMain .eventsSlider .slideScroller, #main section.events .eventsMain .eventsSlider .slideScroller .slides, #main section.events .eventsMain .eventsSlider .slideScroller .slides > li {
             height: auto;
             //overflow: initial;
         }
@@ -861,11 +861,11 @@ header.eventsHeader li.addEvent .fa {
     color: #647c7e;
     font-weight: 600;
 }
-li.eventSlide .adminControls {
+.slides > li .adminControls {
     display: inline-block;
     margin-left: 15px;
 }
-li.eventSlide .adminControls .fa {
+.slides > li .adminControls .fa {
     font-size: 16px;
     cursor: pointer;
     border-radius: 50%;
@@ -954,7 +954,7 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
     padding-left: 20px;
 }
 
-#main section.events .eventsMain .eventsSlider .slideScroller .slides .eventSlide aside.otherEvents {
+#main section.events .eventsMain .eventsSlider .slideScroller .slides > li aside.otherEvents {
     text-align: left;
     margin-bottom: 20px;
     background: #f9f9f9;
@@ -1119,4 +1119,27 @@ p.nothing-to-show{
         line-height: 70px;
         margin-bottom: 20px;
     }
+}
+
+/* SLIDER */
+div.eventsSlider ul.slides {
+  width: 100%;
+  overflow: hidden;
+
+  & > li {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0%);
+    transform-origin: top left;
+    transition: transform 500ms ease-out;
+
+    &.prev, &.current, &.next { display: block; }
+
+    &.prev { transform: translateX(-100%); }
+    &.next { transform: translateX(100%); }
+  }
 }

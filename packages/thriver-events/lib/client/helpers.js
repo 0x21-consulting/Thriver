@@ -1,3 +1,6 @@
+// TEST: ReactiveVar for current slide
+Thriver.calendar.currentSlide = new ReactiveVar();
+
 // Upcoming Events helpers
 Template.upcomingEvents.helpers({
   /**
@@ -264,73 +267,101 @@ Template.events.helpers({
    * @returns {string[]}
    */
   events: () => {
-    let noPastEvents;
-    let noFutureEvents;
-    let pastEvent;
-    let nextEvent;
-
-    // Get all events that start or end in this month
-    let events = Thriver.events.collection.find({
-      $or: [{
+    // Get all events that start in this month
+    const getEvents = (month, year) =>
+      Thriver.events.collection.find({
         start: {
-          $gte: new Date(Thriver.calendar.thisYear.get(),
-            Thriver.calendar.thisMonth.get()),
-          $lte: new Date(Thriver.calendar.thisYear.get(),
-            Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
-        } }, {
-          end: {
-            $gte: new Date(Thriver.calendar.thisYear.get(),
-              Thriver.calendar.thisMonth.get()),
-            $lte: new Date(Thriver.calendar.thisYear.get(),
-              Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
-          },
-        }],
-    }, { sort: { start: 1 } });
+          $gte: new Date(year, month),
+          $lte: new Date(year, month, Thriver.calendar.lastDate(month)),
+        },
+      }, { sort: { start: 1 } }).fetch();
 
-    // Update total for slides
-    if (events.count()) {
-      Thriver.events.slideTotal.set(events.count());
-      Thriver.events.slide(0);
-      return events;
+    // No events for this month, so make an empty slide
+    const createSlide = (month, year) => {
+      let noFutureEvents = false;
+      let nextEvent;
+      let noPastEvents = false;
+      let pastEvent;
+
+      // Are there any future events?
+      let events = Thriver.events.collection.find({
+        start: { $gt: new Date(year, month, Thriver.calendar.lastDate()) },
+      }, { sort: { start: 1 } });
+      if (!events.count()) noFutureEvents = true;
+      else nextEvent = events.fetch()[0]._id;
+
+      // Are there any past events?
+      events = Thriver.events.collection.find({
+        start: { $lt: new Date(year, month) },
+      }, { sort: { start: -1 } });
+      if (!events.count()) noPastEvents = true;
+      else pastEvent = events.fetch()[0]._id;
+
+      // Return that slide
+      return [{
+        _id: `${Thriver.calendar.months[month]}-${year}`, // identifying string for slider
+        month: Thriver.calendar.months[month],
+        year,
+        noEvents: true,
+        noFutureEvents,
+        noPastEvents,
+        nextEvent,
+        pastEvent,
+      }];
+    };
+
+    // Last month
+    let month = Thriver.calendar.getLastMonth();
+    let year = month === (Thriver.calendar.thisMonth.get() - 1) ?
+      Thriver.calendar.thisYear.get() : Thriver.calendar.thisYear.get() - 1;
+
+    let lastMonth = getEvents(month, year);
+    if (!lastMonth.length) lastMonth = createSlide(month, year);
+    for (let i = 0; i < lastMonth.length; i += 1) lastMonth[i].which = 'lastMonth';
+
+    // This Month
+    month = Thriver.calendar.thisMonth.get();
+    year = Thriver.calendar.thisYear.get();
+
+    let thisMonth = getEvents(month, year);
+    if (!thisMonth.length) thisMonth = createSlide(month, year);
+    for (let i = 0; i < thisMonth.length; i += 1) thisMonth[i].which = 'thisMonth';
+
+    let found = false;
+    if (Thriver.calendar.currentSlide.get()) {
+      for (let i = 0; i < thisMonth.length; i += 1) {
+        // Find the slide that should keep the .current class
+        if (thisMonth[i]._id === Thriver.calendar.currentSlide.get()) {
+          thisMonth[i].position = 'current';
+          found = true;
+          break;
+        }
+      }
+    }
+    if (!found) thisMonth[0].position = 'current';
+
+    // Next Month
+    month = (Thriver.calendar.thisMonth.get() + 1) % 12;
+    year = month === Thriver.calendar.thisMonth.get() + 1 ?
+      Thriver.calendar.thisYear.get() : Thriver.calendar.thisYear.get() + 1;
+
+    let nextMonth = getEvents(month, year);
+    if (!nextMonth.length) nextMonth = createSlide(month, year);
+    for (let i = 0; i < nextMonth.length; i += 1) nextMonth[i].which = 'nextMonth';
+
+    // Concatenate
+    const events = lastMonth.concat(thisMonth, nextMonth);
+
+    // Label prev and next events
+    for (let i = 0; i < events.length; i += 1) {
+      if (events[i].position === 'current') {
+        if (events[i - 1]) events[i - 1].position = 'prev';
+        if (events[i + 1]) events[i + 1].position = 'next';
+        break;
+      }
     }
 
-    // No slide this month
-
-    // Are there any future events?
-    events = Thriver.events.collection.find({
-      start: {
-        $gt: new Date(
-          Thriver.calendar.thisYear.get(),
-          Thriver.calendar.thisMonth.get(), Thriver.calendar.lastDate()),
-      },
-    }, { sort: { start: 1 } });
-    if (!events.count()) noFutureEvents = true;
-    else nextEvent = events.fetch()[0]._id;
-
-    // Are there any past events?
-    events = Thriver.events.collection.find({
-      start: {
-        $lt: new Date(Thriver.calendar.thisYear.get(),
-          Thriver.calendar.thisMonth.get()),
-      },
-    }, { sort: { start: -1 } });
-    if (!events.count()) noPastEvents = true;
-    else pastEvent = events.fetch()[0]._id;
-
-    // Now we only have one slide
-    Thriver.events.slideTotal.set(1);
-
-    // Return that slide
-    Thriver.events.slide(0);
-    return [{
-      month: Thriver.calendar.months[Thriver.calendar.thisMonth.get()],
-      year: Thriver.calendar.thisYear.get(),
-      noEvents: true,
-      noFutureEvents,
-      noPastEvents,
-      nextEvent,
-      pastEvent,
-    }];
+    return events;
   },
 });
 
