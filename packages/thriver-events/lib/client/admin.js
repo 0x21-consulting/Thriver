@@ -153,7 +153,7 @@ Template.viewRegistrations.helpers({
    * @returns {[String]}
    */
   getSpecialFields: () => {
-    if (activeEvent.get()) return activeEvent.get().registrationDetails;
+    if (activeEvent.get()) return activeEvent.get().registration.registrationDetails;
     return [];
   },
 

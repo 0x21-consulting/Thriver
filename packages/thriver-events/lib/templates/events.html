@@ -158,35 +158,37 @@
                     {{{ markdown description }}}
                 </div>
                 <ul class="actions">
+                  {{#if registration.required}}
                     {{> Template.dynamic template=registerTemplate}}
 
                     {{! Registration Form }}
                     <li class="registration-form hide" data-id="{{_id}}">
-                        <h3>Event Registration</h3>
-                        <form>
-                            {{#each registrationDetails }}
-                                <label>{{name}}
-                                    {{#if equals type "textarea"}}
-                                        <textarea name="{{id}}" required></textarea>
-                                    {{else}}
-                                        {{#if equals type "yes/no"}}
-                                            <select name="{{id}}" required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        {{else}}
-                                            <input type="{{type}}" name="{{id}}"
-                                                required />
-                                        {{/if}}
-                                    {{/if}}
-                                </label>
-                            {{/each}}
-                            <input type="submit" value="Register" />
-                        </form>
+                      <h3>Event Registration</h3>
+                      <form>
+                        {{#each registration.registrationDetails }}
+                          <label>{{name}}
+                            {{#if equals type "textarea"}}
+                              <textarea name="{{id}}" required></textarea>
+                            {{else}}
+                              {{#if equals type "yes/no"}}
+                                <select name="{{id}}" required>
+                                  <option value="yes">Yes</option>
+                                  <option value="no">No</option>
+                                </select>
+                              {{else}}
+                                <input type="{{type}}" name="{{id}}"
+                                  required />
+                              {{/if}}
+                            {{/if}}
+                          </label>
+                        {{/each}}
+                        <input type="submit" value="Register" />
+                      </form>
                     </li>
                     {{#if isAdmin}}
-                        <li class="viewRegistrations action">View Registrations</li>
+                      <li class="viewRegistrations action">View Registrations</li>
                     {{/if}}
+                  {{/if}}
                 </ul>
             </div>
         </div>
