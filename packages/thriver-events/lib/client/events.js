@@ -86,28 +86,6 @@ Thriver.events.getThisMonthEvents = () => {
   return currentEvents;
 };
 
-/**
- * @summary Slide to an event
- * @method
- *   @param {Number} position - Event position to slide to
- */
-Thriver.events.slide = (position) => {
-  check(position, Number);
-
-  // const slides = document.querySelector('.slides');
-
-  // Close any open asides
-  $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-  $('.listViewEvents').removeClass('active');
-  $('.searchResultsList').removeClass('active');
-
-  // Set current slide
-  // Thriver.events.currentSlide.set(position);
-
-  // Smooth slide to it
-  // if (slides) slides.style.webkitTransform = `translate(-${position}00%, 0px)`;
-};
-
 // Events template events
 Template.events.events({
   /**
