@@ -249,6 +249,11 @@ Template.events.events({
     // Switch to this month
     Thriver.calendar.thisMonth.set(date.getMonth());
     Thriver.calendar.thisYear.set(date.getFullYear());
+
+    // Close any open asides
+    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+    $('.listViewEvents').removeClass('active');
+    $('.searchResultsList').removeClass('active');
   },
 
   /**

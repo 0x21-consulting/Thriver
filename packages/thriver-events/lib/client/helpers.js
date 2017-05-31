@@ -1,6 +1,3 @@
-// TEST: ReactiveVar for current slide
-Thriver.calendar.currentSlide = new ReactiveVar();
-
 // Upcoming Events helpers
 Template.upcomingEvents.helpers({
   /**
