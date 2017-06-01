@@ -4,6 +4,12 @@
  */
 Thriver.calendar = {};
 
+/**
+ * @summary ReactiveVar for current slide
+ * @type {ReactiveVar}
+ */
+Thriver.calendar.currentSlide = new ReactiveVar();
+
 // TODO(micchickenburger): This should be internationalized
 Thriver.calendar.months = ['January', 'February', 'March', 'April',
   'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -40,7 +46,7 @@ Thriver.calendar.lastDate = (specificMonth) => {
   }
 
   // There can't be more than 30 days in April, June, Sept., or Nov.
-  if (![3, 5, 8, 10].every(val => specificMonth !== val)) return 30;
+  if (![3, 5, 8, 10].every(val => month !== val)) return 30;
 
   // All other months
   return 31;
@@ -163,7 +169,7 @@ Template.calendar.helpers({
 
         // If today or this week, add special styles
         if (day.date === thisWeek && i === 0) day.currentWeekStart = 'currentWeekStart';
-        if (day.date === thisDay) day.today = 'today';
+        if (day.date === thisDay && day.date === count) day.today = 'today';
 
         // If we finished counting (next month's days)
         if (count > total) {
@@ -180,6 +186,10 @@ Template.calendar.helpers({
 
           // If the day is in the past
           if (count < thisDay) day.past = 'past';
+
+          // If the day is an awareness day
+          if (currentEvents[count][0].awareness === 'day' ||
+            currentEvents[count][0].awareness === 'month') day.awareness = 'awareness';
 
           // Hyperlink first event
           day.id = currentEvents[count][0]._id;
@@ -202,5 +212,62 @@ Template.calendar.helpers({
 
     // Return weeks
     return weeks;
+  },
+
+  /**
+   * @summary Determine if this is an Awareness Month
+   * @method
+   */
+  awareness: () => {
+    const year = Thriver.calendar.thisYear.get();
+    const month = Thriver.calendar.thisMonth.get();
+
+    const count = Thriver.events.collection.find({
+      start: {
+        $gte: new Date(year, month),
+        $lte: new Date(year, month, Thriver.calendar.lastDate(month)),
+      },
+      awareness: 'month',
+    }).count();
+
+    if (count) return 'awareness';
+    return '';
+  },
+
+  /**
+   * @summary Pass On Awareness Events
+   * @method
+   */
+  awarenessEvents: () => {
+    const year = Thriver.calendar.thisYear.get();
+    const month = Thriver.calendar.thisMonth.get();
+
+    const events = Thriver.events.collection.find({
+      start: {
+        $gte: new Date(year, month),
+        $lte: new Date(year, month, Thriver.calendar.lastDate(month)),
+      },
+      awareness: 'month',
+    });
+
+    return events;
+  },
+});
+
+// Calendar Events
+Template.calendar.events({
+  /**
+   * @summary Navigate on click for event links
+   * @method
+   *   @param {$.Event} event
+   */
+  'click a[data-id]': (event) => {
+    check(event, $.Event);
+
+    // Do nothing else
+    event.preventDefault();
+
+    // Navigate
+    Thriver.events.navigate(event.currentTarget.dataset.id);
   },
 });

@@ -14,10 +14,6 @@ const calMobileEvent = () => {
   } else document.body.classList.remove('active-event');
 };
 
-// Slide management
-Thriver.events.currentSlide = new ReactiveVar(0);
-Thriver.events.slideTotal = new ReactiveVar(0);
-
 /** A list of all of today's events */
 Thriver.events.sameDayEvents = [];
 
@@ -90,28 +86,6 @@ Thriver.events.getThisMonthEvents = () => {
   return currentEvents;
 };
 
-/**
- * @summary Slide to an event
- * @method
- *   @param {Number} position - Event position to slide to
- */
-Thriver.events.slide = (position) => {
-  check(position, Number);
-
-  const slides = document.querySelector('.slides');
-
-  // Close any open asides
-  $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
-  $('.listViewEvents').removeClass('active');
-  $('.searchResultsList').removeClass('active');
-
-  // Set current slide
-  Thriver.events.currentSlide.set(position);
-
-  // Smooth slide to it
-  if (slides) slides.style.webkitTransform = `translate(-${position}00%, 0px)`;
-};
-
 // Events template events
 Template.events.events({
   /**
@@ -155,7 +129,7 @@ Template.events.events({
 
     Thriver.calendar.thisMonth.set(nextMonth % 12);
 
-        // Update Location Bar
+    // Update Location Bar
     Thriver.history.update(parentName,
       `${parentName}/${Thriver.calendar.thisYear.get()}/${Thriver.calendar
         .months[Thriver.calendar.thisMonth.get()]}`);
@@ -167,41 +141,69 @@ Template.events.events({
   },
 
   /**
-   * @summary Go to previous slide
+   * @summary Go to the next or previous slide
    * @method
    *   @param {$.Event} event
    */
-  'click .sliderPrev': (event) => {
+  'click .eventsSlider button': (event) => {
     check(event, $.Event);
 
-    const position = Thriver.events.currentSlide.get() - 1;
+    const parent = event.target.parentElement;
+    const prev = parent.querySelector('li.prev');
+    const current = parent.querySelector('li.current');
+    const next = parent.querySelector('li.next');
 
-    // If the position would be less than zero, go to last month
-    if (position < 0) {
-      document.querySelector('.prevMonth').click();
-      return;
+    let month = Thriver.calendar.thisMonth.get();
+    let year = Thriver.calendar.thisYear.get();
+
+    // Remove classes
+    prev.classList.remove('prev');
+    current.classList.remove('current');
+    next.classList.remove('next');
+
+    // Previous slide
+    if (event.target.classList.contains('prev')) {
+      // Slide first
+      current.classList.add('next');
+      prev.classList.add('current');
+      if ($(prev).prev()) $(prev).prev().addClass('prev');
+
+      // Keep track of current element after month change
+      Thriver.calendar.currentSlide.set(prev.dataset.id);
+
+      // Need to change month?
+      if (prev.classList.contains('lastMonth')) {
+        if (month - 1 < 0) {
+          month = 12;
+          year -= 1;
+        }
+
+        Thriver.calendar.thisMonth.set(month - 1);
+        Thriver.calendar.thisYear.set(year);
+      }
     }
 
-    Thriver.events.slide(position);
-  },
+    // Next slide
+    if (event.target.classList.contains('next')) {
+      // Slide first
+      current.classList.add('prev');
+      next.classList.add('current');
+      if ($(next).next()) $(next).next().addClass('next');
 
-  /**
-   * @summary Go to next slide
-   * @method
-   *   @param {$.Event} event
-   */
-  'click .sliderNext': (event) => {
-    check(event, $.Event);
+      // Keep track of current element after month change
+      Thriver.calendar.currentSlide.set(next.dataset.id);
 
-    const position = Thriver.events.currentSlide.get() + 1;
+      // Need to change month?
+      if (next.classList.contains('nextMonth')) {
+        if (month + 1 > 11) {
+          month = -1;
+          year += 1;
+        }
 
-    // If the position would be greater than the total, switch to next month
-    if (position >= Thriver.events.slideTotal.get()) {
-      document.querySelector('.nextMonth').click();
-      return;
+        Thriver.calendar.thisMonth.set(month + 1);
+        Thriver.calendar.thisYear.set(year);
+      }
     }
-
-    Thriver.events.slide(position);
   },
 
   /**
@@ -209,8 +211,9 @@ Template.events.events({
    * @method
    *   @param {$.Event} event
    */
-  'click button.eventDate': (event) => {
+  'click button.eventDate, click a.eventLink': (event) => {
     check(event, $.Event);
+    event.preventDefault();
 
     Thriver.events.navigate(event.currentTarget.dataset.id);
 
@@ -231,6 +234,26 @@ Template.events.events({
 
     // Something to do with Mobile
     calMobileEvent();
+  },
+
+  /**
+   * @summary When clicking the Today button
+   * @method
+   *   @param {$.Event} event
+   */
+  'click .viewThisMonth': (event) => {
+    check(event, $.Event);
+
+    const date = new Date();
+
+    // Switch to this month
+    Thriver.calendar.thisMonth.set(date.getMonth());
+    Thriver.calendar.thisYear.set(date.getFullYear());
+
+    // Close any open asides
+    $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
+    $('.listViewEvents').removeClass('active');
+    $('.searchResultsList').removeClass('active');
   },
 
   /**
@@ -256,6 +279,20 @@ Template.events.events({
       // Click first tab for convenience
       main.querySelector('.tabs > li > a').click();
     }
+  },
+
+  //
+  // TODO(eoghantadhg): Create a more universal function for showing/hiding events list
+  // Shows upcoming / past events via the calendar sidebar
+  //
+  'click .listViewEvents-proxy': (event) => {
+    check(event, $.Event);
+    $('.events .listViewEvents').click();
+  },
+  'click .listViewEventsPast-proxy': (event) => {
+    check(event, $.Event);
+    $('.events .listViewEvents').click();
+    $('.events a[data-id="pastEventsList"]').click();
   },
 
   //

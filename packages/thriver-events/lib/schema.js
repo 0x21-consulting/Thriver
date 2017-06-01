@@ -36,6 +36,21 @@ Thriver.events.schema = new SimpleSchema({
       rows: 5,
     },
   },
+  /** Awareness Events */
+  awareness: {
+    type: String,
+    optional: false,
+    allowedValues: ['', 'day', 'month'],
+    defaultValue: '',
+    label: 'Is this an awareness event?',
+    autoform: {
+      options: [
+        { label: 'No', value: '' },
+        { label: 'Yes, Awareness Day', value: 'day' },
+        { label: 'Yes, Awareness Month', value: 'month' },
+      ],
+    },
+  },
   /** Starting datetime */
   start: {
     type: Date,
@@ -54,7 +69,7 @@ Thriver.events.schema = new SimpleSchema({
       type: 'datetime-local',
     },
   },
-  /** Lat/Lon Coordinates for Physical locations */
+  /** Locations */
   location: {
     type: Object,
     optional: false,
@@ -63,18 +78,8 @@ Thriver.events.schema = new SimpleSchema({
   },
   'location.name': {
     type: String,
-    optional: false,
+    optional: true,
     label: 'Location Name',
-  },
-  'location.latitude': {
-    type: Number,
-    decimal: true,
-    optional: true,
-  },
-  'location.longitude': {
-    type: Number,
-    decimal: true,
-    optional: true,
   },
   'location.mapUrl': {
     type: String,
@@ -110,26 +115,42 @@ Thriver.events.schema = new SimpleSchema({
     defaultValue: 0,
     label: 'Cost in Dollars',
   },
-  /** Event HREF for Online Locations */
-  registerUrl: {
+
+  /** Registration details */
+  registration: {
+    type: Object,
+    optional: false,
+    defaultValue: {},
+    label: 'Registration Details',
+  },
+  'registration.required': {
+    type: Boolean,
+    optional: false,
+    defaultValue: false,
+    label: 'Is registration required?',
+    autoform: {
+      type: 'boolean-select',
+    },
+  },
+  /** Third-Party Registration Link */
+  'registration.registerUrl': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     optional: true,
     label: 'URL for Third-Party Registration Site',
   },
-
   /** Special Event Fields for Registration */
-  registrationDetails: {
+  'registration.registrationDetails': {
     type: Array,
     defaultValue: [],
     optional: false,
-    label: 'Add fields for registration details',
+    label: 'Add fields to ask users for additional event registration details',
   },
-  'registrationDetails.$': {
+  'registration.registrationDetails.$': {
     type: Object,
   },
   /** Field ID */
-  'registrationDetails.$.id': {
+  'registration.registrationDetails.$.id': {
     type: 'String',
     optional: false,
     autoValue: () => Random.id(),
@@ -138,13 +159,13 @@ Thriver.events.schema = new SimpleSchema({
     },
   },
   /** Name of field */
-  'registrationDetails.$.name': {
+  'registration.registrationDetails.$.name': {
     type: 'String',
     optional: false,
     label: 'Field Name',
   },
   /** Type of Field */
-  'registrationDetails.$.type': {
+  'registration.registrationDetails.$.type': {
     type: 'String',
     optional: false,
     allowedValues: [

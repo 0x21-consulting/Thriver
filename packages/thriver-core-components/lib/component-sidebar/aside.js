@@ -102,6 +102,13 @@ Template.aside.helpers({
     width: 700,
     position: 'right',
     template: 'donate',
+  }, {
+    title: 'Event Registration',
+    icon: 'ticket',
+    id: 'payments',
+    width: 700,
+    position: 'right',
+    template: 'payments',
   }],
 });
 
