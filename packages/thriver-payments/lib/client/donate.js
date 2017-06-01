@@ -17,6 +17,7 @@ const donateException = (element, message) => {
 // Donate form helpers
 Template.donate.helpers({
   amountTitle: 'Donation Amount',
+  reoccurTitle: 'Donation Type',
   detailsTitle: 'Payment Details',
   states: [{
     id: 'donateDefault',
@@ -30,6 +31,7 @@ Template.donate.helpers({
     content: '<h3>We\'re sorry, the donation was unsuccessful.<br> Please try again later.</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>',
   }],
   amount: [{ value: '25' }, { value: '50' }, { value: '100', checked: 'checked' }, { value: '200' }],
+  reoccur: [{ value: 'Just Once', checked: 'checked' }, { value: 'Weekly' }, { value: 'Monthly' }, { value: 'Yearly' }],
 
   name: () => {
     const user = Meteor.user();
