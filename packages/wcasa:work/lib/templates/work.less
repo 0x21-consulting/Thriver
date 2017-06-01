@@ -20,6 +20,7 @@ section.work{
         header h1{margin-top: 20px !important;}
     }
     .markdown{
+        margin-top: 25px;
         padding-right: 80px;
         @media @mobile{padding: 0px;}
     }
@@ -100,9 +101,15 @@ section.work .sa details{
         position: absolute;
         right: 0;
         display: block;
-        //color: @orange;
+        background: @orange;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
         box-shadow: none;
-        font-size: 20px;
+        font-size: 16px;
+        height: 24px;
+        width: 24px;
+        padding: 0;
+        margin: 5px;
     }
 
     &.edit > section > section, &.edit button.edit { display: none; }
@@ -140,12 +147,15 @@ section.work .sa details{
 
         // Admin controls
         textarea {
-            width: 100%;
+            width: 98%;
             height: 300px;
+            margin: 5px;
+            margin-bottom: 0;
         }
         button {
-            //background: @orange;
+            background: @orange;
             display: inline-block;
+            margin: 5px;
         }
 
         @media (max-width:945px){
@@ -212,6 +222,9 @@ section.work .workNav{
             letter-spacing: 0.025rem;
             font-weight: 600;
             text-transform: uppercase;
+            background: @teal;
+            padding: 10px 20px;
+            margin-bottom: 10px;
             &:focus{box-shadow: none;}
             &:hover{opacity: 1;}
         }
@@ -918,14 +931,18 @@ body.workActive section.work .main.container{
     }
 }
 
-//Tuncation Open
-.workReading section.work > .main{
-    .workTextContainer{
+// Truncation Closed
+section.work > .main .workContent footer.truncate button.less { display: none; }
+
+// Truncation Opened
+.workReading section.work > .main {
+    .workTextContainer {
+        margin-bottom: 50px;
         max-height: 9999px;
         overflow: hidden;
-        //&:after{display: none;}
     }
-    .workContent footer.truncate{.opacity(0);visibility: hidden;pointer-events: none;}
+    .workContent footer.truncate button.more { display: none; }
+    .workContent footer.truncate button.less { display: inline-block; }
 }
 
 section.work > .main{overflow: visible;}
@@ -1181,7 +1198,9 @@ h2.workContentAdmin {
     min-height: 31px; // in case there's no text
 }
 section.workContent article button {
-    color: #0d4668;
+    color: #fff;
+    background: @orange;
+    margin-right: 5px;
 }
 section.workContent textarea {
     width: 100%;
@@ -1267,7 +1286,7 @@ section.work{
 }
 
 #main > section.work{
-    .main{position: relative;} //Helps position sticky work nav
+    .main { position: relative; } // Helps position sticky work nav
     border-top: 2px solid #fff;
     details section{padding: 30px; margin-bottom: 20px; background: #fff;}
     @media @mobile{ details section{ padding: 20px;}}

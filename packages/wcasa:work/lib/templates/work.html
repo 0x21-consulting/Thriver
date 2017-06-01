@@ -114,16 +114,17 @@
                 <hr>
             </div>
         </div>
-        <footer class="truncate">
-            <button>Read More <span class="fa">&#xf0d7;</span></button>
+        <footer class="truncate hide">
+            <button class="more">Read More <span class="fa">&#xf0d7;</span></button>
+            <button class="less">Read Less <span class="fa">&#xf0d8;</span></button>
         </footer>
     </article>
 </template>
 
 <!--Tertiary Nav-->
 <template name="workTertiary">
-    <p class="glossary">Index</p>
-    <aside class="workTertiary"></aside>
+    <p class="glossary hide">Index</p>
+    <aside class="workTertiary hide"></aside>
 </template>
 
 <template name="workSubListItem">
@@ -143,25 +144,5 @@
         <section class="shadow-box">
             <section data-hash="{{hash}}">{{{ markdown data.aboutSA }}}</section>
         </section>
-        <!--<div>
-            <div class="column">
-                <h2>Etiam Vitae</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pharetra risus eget sem lacinia viverra. Etiam vitae libero eu nibh porta scelerisque. Proin porttitor libero et mauris laoreet accumsan. Integer aliquet sit amet odio in varius. Nunc sed neque et mi porttitor rhoncus non id odio.
-                </p>
-            </div>
-            <div class="column">
-                <h2>Morbi porttitor</h2>
-                <p>
-                    Pellentesque lobortis risus at tellus semper aliquet. Morbi porttitor, leo eget aliquam fringilla, elit augue faucibus augue, non finibus turpis nulla at nisl. Cras et justo tempor, sollicitudin tortor sed, lobortis arcu. Nulla fringilla, nulla dapibus accumsan dapibus, nisi mi rutrum tellus, a pharetra magna urna id turpis. Ut lobortis mauris sit amet auctor blandit. Aliquam erat volutpat.
-                </p>
-            </div>
-            <div class="column">
-                <h2>Commodo Risus</h2>
-                <p>
-                    Curabitur ornare dolor ac massa eleifend facilisis. Quisque gravida consequat velit vel malesuada. Nunc ex justo, commodo ut hendrerit vel, luctus at nibh. Nunc in augue eros. Cras euismod nulla nec enim tristique tempor eu ac nisi. Etiam vehicula ultrices odio, et commodo risus mollis vel.
-                </p>
-            </div>
-        </div>-->
     </details>
 </template>

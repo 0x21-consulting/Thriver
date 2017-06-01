@@ -89,12 +89,23 @@ const changeTabs = (event) => {
         parent: $('.work .main'),
         offset_top: 100,
       });
+      // Calculate height of article content to determine
+      // whether Read More button should display
+      if (article.querySelector('.markdown').offsetHeight >= 650) {
+        article.querySelector('footer.truncate').classList.remove('hide');
+      }
     }, 250);
   }
 
   // Scroll to top of work on change tabs
-  const offset = $('.work').offset().top + 228;
+  const offset = $('.work .main.container').offset().top - 125;
   $('body').animate({ scrollTop: offset }, 750);
+
+  // Calculate height of article content to determine
+  // whether Read More button should display
+  if (article.querySelector('.markdown').offsetHeight >= 650) {
+    article.querySelector('footer.truncate').classList.remove('hide');
+  }
 };
 
 // Tabs
@@ -165,7 +176,7 @@ Template.workNav.events({
   'click h2': changeTabs,
   'click li > ul > li > a': changeTabs,
   'click button.backToTopWork': () => {
-    const offset = $('.work').offset().top + 228;
+    const offset = $('.work .main.container').offset().top - 125;
     $('body').animate({ scrollTop: offset }, 750);
   },
 
@@ -187,18 +198,44 @@ Template.workNav.events({
     , 200);
 
     // Scroll to top of work on change tabs
-    const offset = $('.work').offset().top + 228;
-    $('body').animate({ scrollTop: offset }, 750);
+    Thriver.history.navigate('/what-we-do/');
   },
 });
 
-// TODO(micchickenburger): Clean these up.
 Template.workContent.events({
-  'click footer.truncate button': (event) => {
+  /**
+   * @summary Handle Read More
+   * @method
+   *   @param {$.Event} event
+   */
+  'click footer.truncate button.more': (event) => {
+    check(event, $.Event);
     event.preventDefault();
-    $('body').addClass('workReading');
+    document.body.classList.add('workReading');
     $('.sticky').trigger('sticky_kit:recalc');
   },
+
+  /**
+   * @summary Handle Read Less
+   * @method
+   *   @param {$.Event} event
+   */
+  'click footer.truncate button.less': (event) => {
+    check(event, $.Event);
+    event.preventDefault();
+
+    // Scroll back to top
+    const offset = $('.work .main.container').offset().top - 125;
+    $('body').animate({ scrollTop: offset }, 750);
+
+    document.body.classList.remove('workReading');
+    $('.sticky').trigger('sticky_kit:recalc');
+  },
+
+  /**
+   * @summary Mobile Support - Back to Previous
+   * @method
+   */
   'click .backToPrevious': () =>
     document.body.classList.remove('mobile-article-open'),
 });
@@ -253,6 +290,10 @@ Template.workContent.onRendered(() => {
 
     // We're ready now
     c.stop();
+
+    // Show Tertiary Navigation
+    tertiary.classList.remove('hide');
+    tertiary.parentElement.querySelector('.glossary').classList.remove('hide');
 
     for (let i = 0; i < content.length; i += 1) {
       // Create list and anchor elements
