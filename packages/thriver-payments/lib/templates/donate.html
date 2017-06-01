@@ -11,6 +11,7 @@
                 <input id="amt{{value}}" type="radio" name="amount" value="{{value}}" {{checked}} />
                 <label for="amt{{value}}" class="radio">${{{value}}}</label>
             {{/each}}
+            <input id="radio5" type="radio" name="amount" value="custom" {{checked}} />
             <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
             <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" onfocus="this.value = this.value;" />
         </fieldset>
