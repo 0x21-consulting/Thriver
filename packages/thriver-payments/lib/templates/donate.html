@@ -14,6 +14,15 @@
             <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
             <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" onfocus="this.value = this.value;" />
         </fieldset>
+        {{#if reoccur}}
+            <fieldset class="reoccur">
+                <h4>{{reoccurTitle}}</h4>
+                {{#each reoccur}}
+                    <input id="reoccur{{value}}" type="radio" name="reoccur" value="{{value}}" {{checked}} />
+                    <label for="reoccur{{value}}" class="radio">{{{value}}}</label>
+                {{/each}}
+            </fieldset>
+        {{/if}}
         <fieldset>
             <h4>{{detailsTitle}}</h4>
             <label>
