@@ -69,7 +69,7 @@ section#masthead div.tabs, section.masthead div.tabs{
         }
         *{position: relative; z-index: 3;}
     }
-    > article:first-child{
+    > article:first-child, > article:nth-child(4){
        // background-image: url('/lib/img/mastheadArticle.gif');
         a{.textButtonColor(@yellow) !important;}
         a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
@@ -90,7 +90,7 @@ section#masthead div.tabs, section.masthead div.tabs{
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2277b4', endColorstr='#00a5a8', GradientType=1);
         }
     }
-    > article:nth-child(2){
+    > article:nth-child(2), > article:nth-child(5){
         a{.textButtonColor(lighten(@yellow,15%)) !important;}
         a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
         &:after{
@@ -146,7 +146,7 @@ section#masthead, section.masthead{
     }
     menu.tabs{
         margin-top: 20px;
-        padding-top: 100px;
+        padding-top: 70px;
         height: 285px;
     }
     h1,p, a.cta{
