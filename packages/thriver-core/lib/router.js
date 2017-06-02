@@ -105,6 +105,36 @@ Router.route('press-release', {
 });
 
 /**
+ * @summary Route to support antiquated file_open.php from old website
+ *   to continue to allow old download links to work
+ */
+Router.route('file-open', {
+  path: '/file_open.php',
+  where: 'server',
+
+  /**
+   * @summary Wait for collection to populate
+   */
+  waitOn: () => Thriver.files.collection.findOne({}),
+
+  action: function fileOpen() {
+    if (this.ready()) {
+      const fileId = parseInt(this.url.replace(/.+\?id=(\d{1,4})/gi, '$1'), 10);
+      const file = Thriver.files.collection.findOne({ fileId });
+
+      if (file) {
+        const bucket = Thriver.settings.get('aws').bucket;
+
+        // HTTP 301 Permanent Redirect
+        this.response.writeHead(301, {
+          Location: `https://s3.us-east-2.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` });
+        this.response.end();
+      } else { this.response.end('This file does not exist.'); }
+    }
+  },
+});
+
+/**
  * @summary Display main canvas template by default
  */
 Router.configure({
