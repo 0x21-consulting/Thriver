@@ -64,7 +64,8 @@ Package.onUse((api) => {
   api.addFiles(['lib/router.js'], ['client', 'server']);
 
   api.addFiles([
-
+    // File download support
+    'lib/files.js',
   ], ['server']);
 
   api.export(['Thriver']);
