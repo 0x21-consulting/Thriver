@@ -21,8 +21,8 @@ Template.registerHelper('friendlyDate', (date) => {
     'August', 'September', 'October', 'November', 'December'];
 
   // Create friendly date string
-  return `${days[newDate.getDay()]}, ${newDate.getDate()} ${months[newDate.getMonth()]} \
-    ${newDate.getFullYear()}`;
+  return `${days[newDate.getUTCDay()]}, ${newDate.getUTCDate()} \
+    ${months[newDate.getUTCMonth()]} ${newDate.getUTCFullYear()}`;
 });
 
 /**
