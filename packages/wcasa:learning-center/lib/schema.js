@@ -62,6 +62,11 @@ Thriver.learningCenter.schema = new SimpleSchema({
       type: 'hidden',
     },
   },
+  /** Item Description */
+  description: {
+    type: String,
+    optional: true,
+  },
 });
 
 // Apply schema to collection

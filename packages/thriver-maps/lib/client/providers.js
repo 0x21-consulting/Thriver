@@ -112,7 +112,7 @@ Template.provider.helpers({
  */
 Template.providersList.helpers({
   provider: () =>
-    Thriver.providers.collection.find({ parent: null }),
+    Thriver.providers.collection.find({ parent: null }, { sort: { name: 1 } }),
 });
 
 /**
