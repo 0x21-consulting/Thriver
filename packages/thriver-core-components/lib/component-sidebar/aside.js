@@ -90,10 +90,6 @@ Template.aside.helpers({
       title: 'Action Alerts',
       id: 'action-alerts',
       template: 'actionAlerts',
-    }, {
-      title: 'Newsletters',
-      id: 'newsletters',
-      template: 'newsletters',
     }],
   }, {
     title: 'Donate to WCASA',
