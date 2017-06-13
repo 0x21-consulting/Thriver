@@ -288,8 +288,8 @@ geoXML3.parser = function (options) {
     }
   };
 
-  var kmlNS = 'http://www.opengis.net/kml/2.2';
-  var gxNS  = 'http://www.google.com/kml/ext/2.2';
+  var kmlNS = 'https://www.opengis.net/kml/2.2';
+  var gxNS  = 'https://www.google.com/kml/ext/2.2';
   var nodeValue              = geoXML3.nodeValue;
   var getBooleanValue        = geoXML3.getBooleanValue;
   var getElementsByTagNameNS = geoXML3.getElementsByTagNameNS;
@@ -1132,7 +1132,7 @@ function processStyleUrl(node) {
     if (stdRegEx.test(icon.href)) {
       // A standard GMap-style marker icon
 	icon.shadow = {
-	  url: 'http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png', // url
+	  url: 'https://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png', // url
           size: shadowSize,    // size
           origin: null,        // origin
 	  anchor: shadowPoint, // anchor
@@ -1141,7 +1141,7 @@ function processStyleUrl(node) {
     } else if (icon.href.indexOf('-pushpin.png') > -1) {
       // Pushpin marker icon
       icon.shadow = {
-	url: 'http://maps.google.com/mapfiles/ms/micons/pushpin_shadow.png',  // url
+	url: 'https://maps.google.com/mapfiles/ms/micons/pushpin_shadow.png',  // url
         size: shadowSize,    // size
         origin: null,        // origin
         anchor: shadowPoint, // anchor
@@ -1349,7 +1349,7 @@ function processStyleUrl(node) {
         (!parserOptions.suppressDirections || !parserOptions.suppressDirections)) {
       vars.directions.push('sll=' + placemark.latlng.toUrlValue());
 
-      var url = 'http://maps.google.com/maps?' + vars.directions.join('&');
+      var url = 'https://maps.google.com/maps?' + vars.directions.join('&');
       var address = encodeURIComponent( vars.val.address || placemark.latlng.toUrlValue() ).replace(/\%20/g, '+');
 
       vars.val.geDirections = '<a href="' + url + '&daddr=' + address + '" target=_blank>To Here</a> - <a href="' + url + '&saddr=' + address + '" target=_blank>From Here</a>';

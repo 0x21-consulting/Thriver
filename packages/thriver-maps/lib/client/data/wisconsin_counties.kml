@@ -7,7 +7,7 @@
 				<color>ff0000ff</color>
 				<scale>1.0</scale>
 				<Icon>
-					<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+					<href>https://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
 				</Icon>
 			</IconStyle>
 			<LabelStyle>
@@ -19,7 +19,7 @@
 				<color>ff0000ff</color>
 				<scale>1.0</scale>
 				<Icon>
-					<href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+					<href>https://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
