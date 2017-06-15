@@ -167,3 +167,12 @@ Template.body.events({
   // Mobile Events
   'click [aria-controls][data-toggle="mobile-navigation"]': Thriver.canvas.mobileMenu,
 });
+
+// Canvas Helpers
+Template.canvas.helpers({
+  /**
+   * @summary Get Google Analytics ID
+   * @returns {String}
+   */
+  gaID: () => Thriver.settings.get('googleAnalyticsId'),
+});
