@@ -56,15 +56,13 @@ Template.masthead.onRendered(() => {
   transitionSlider();
 
   // Run Transition Interval if isPaused != true
-  const masthead = document.getElementById('masthead');
+  const masthead = document.querySelector('section.masthead');
   let isPaused = false;
-  const interval = window.setInterval(function() {
-    if (!isPaused) {
-      transitionSlider();
-    }
+  window.setInterval(() => {
+    if (!isPaused) transitionSlider();
   }, 5000);
 
   // Toggle Pause
-  masthead.onmouseover = function () { isPaused = true; };
-  masthead.onmouseout = function () { isPaused = false; };
+  masthead.addEventListener('mouseover', () => { isPaused = true; });
+  masthead.addEventListener('mouseout', () => { isPaused = false; });
 });
