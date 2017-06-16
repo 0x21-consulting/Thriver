@@ -176,9 +176,9 @@ Template.donate.events({
       } else {
         // Success!  Now hide the form and display success
         form.classList.add('hide');
-        def.setAtrribute('aria-hidden', 'true');
-        fail.setAtrribute('aria-hidden', 'true');
-        success.setAtrribute('aria-hidden', 'false');
+        def.setAttribute('aria-hidden', 'true');
+        fail.setAttribute('aria-hidden', 'true');
+        success.setAttribute('aria-hidden', 'false');
       }
     });
   },
