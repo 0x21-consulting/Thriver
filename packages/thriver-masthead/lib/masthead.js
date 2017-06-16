@@ -31,30 +31,38 @@ Template.masthead.onRendered(() => {
   const transitionSlider = () => {
     const activeItem = document.querySelector('.masthead menu.tabs > li a[aria-expanded="true"]');
     const menuItems = document.querySelectorAll('.masthead menu.tabs > li');
-
     // If there is no active item, make the first active
     if (!activeItem) {
-      document.querySelector('.masthead menu.tabs > li a')
-        .setAttribute('aria-expanded', true);
-    }
+      document.querySelector('.masthead menu.tabs > li a').setAttribute('aria-expanded', true);
+      document.querySelector('.masthead div.tabs > article').setAttribute('aria-hidden', false);
+    } else {
+      // Set the appropriate item as active
+      for (let i = 0; i < menuItems.length; i += 1) {
+        const item = menuItems[i];
 
-    // Set the appropriate item as active
-    for (let i = 0; i < menuItems.length; i += 1) {
-      const item = menuItems[i];
+        // Look for which item is currently active
+        if (item.children[0].getAttribute('aria-expanded') === 'true') {
+          // If this is the last element
+          if ((i + 1) === menuItems.length) menuItems[0].children[0].click();
+          else menuItems[i + 1].children[0].click();
 
-      // Look for which item is currently active
-      if (item.children[0].getAttribute('aria-expanded') === 'true') {
-        // If this is the last element
-        if ((i + 1) === menuItems.length) menuItems[0].children[0].click();
-        else menuItems[i + 1].children[0].click();
-
-        break;
+          break;
+        }
       }
     }
   };
 
-  setInterval(transitionSlider, 15000);
-
   // Start
   transitionSlider();
+
+  // Run Transition Interval if isPaused != true
+  const masthead = document.querySelector('section.masthead');
+  let isPaused = false;
+  window.setInterval(() => {
+    if (!isPaused) transitionSlider();
+  }, 5000);
+
+  // Toggle Pause
+  masthead.addEventListener('mouseover', () => { isPaused = true; });
+  masthead.addEventListener('mouseout', () => { isPaused = false; });
 });
