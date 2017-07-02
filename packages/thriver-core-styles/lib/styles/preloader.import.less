@@ -1,0 +1,86 @@
+.preloader{
+  position: fixed;
+  bottom: 0; left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%; height: 100vh; // % Fallback
+  opacity: 0;
+  background: #fff;
+  transition: all 250ms ease-in-out 1000ms; -webkit-transition: all 250ms ease-in-out 1000ms;
+  &.loading{
+    opacity: 1;
+    //transform: translateY(0vh); -webkit-transform: translateY(0vh); -ms-transform: translateY(0vh); -moz-transform: translateY(0vh);
+    transition: all 150ms ease-in-out 0ms; -webkit-transition: all 150ms ease-in-out 0ms;
+  }
+
+  img{
+    position: absolute;
+    max-width: 420px;
+    height: auto;
+    left: 50%;
+    margin-left: -210px;
+    top: 102px;
+    transform-origin: center top;
+    transform: scale(1); -webkit-transform: scale(1); -ms-transform: scale(1); -moz-transform: scale(1);
+    transition: all 250ms ease-in-out 2000ms; -webkit-transition: all 250ms ease-in-out 2000ms;
+  }
+}
+
+body.loaded .preloader{
+    opacity: 0;
+    transition: opacity 250ms ease-in-out 2000ms; -webkit-transition: opacity 250ms ease-in-out 2000ms;
+    img{
+        transform: scale(0.7); -webkit-transform: scale(0.7); -ms-transform: scale(0.7); -moz-transform: scale(0.7);
+    }
+}
+body.load-complete .preloader{ display: none; }
+
+// Preloader Settings
+#canvas{
+    opacity: 0;
+    transition: opacity 250ms ease 1000ms; -webkit-transition: opacity 250ms ease 1000ms;
+    body.loaded &{ opacity: 1; }
+}
+
+
+// Animated Loader
+.preloader-graphic{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+}
+.preloader-graphic:before{
+    width:20px;
+    height:20px;
+    border-radius:20px;
+    background:#35b4c7;
+    content:'';
+    position:absolute;
+    background:#35b4c7;
+    animation: preloader-graphic-before 1.5s infinite ease-in-out;
+}
+
+.preloader-graphic:after{
+    width:20px;
+    height:20px;
+    border-radius:20px;
+    background:#35b4c7;
+    content:'';
+    position:absolute;
+    background:#ec6948;
+    left:22px;
+    animation: preloader-graphic-after 1.5s infinite ease-in-out;
+}
+
+@keyframes preloader-graphic-before {
+    0% {transform: translateX(0px) rotate(0deg)}
+    50% {transform: translateX(50px) scale(1.2) rotate(260deg); background:#ec6948;border-radius:0px;}
+    100% {transform: translateX(0px) rotate(0deg)}
+}
+@keyframes preloader-graphic-after {
+    0% {transform: translateX(0px)}
+    50% {transform: translateX(-50px) scale(1.2) rotate(-260deg);background:#35b4c7;border-radius:0px;}
+    100% {transform: translateX(0px)}
+}
