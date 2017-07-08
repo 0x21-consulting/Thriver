@@ -53,7 +53,7 @@ Template.aside.helpers({
     title: 'Learning Center',
     icon: 'institution',
     id: 'learning-center',
-    width: 500,
+    width: 700,
     position: 'right',
     filter: 'true',
     filterId: 'searchLC',
