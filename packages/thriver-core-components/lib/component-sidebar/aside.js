@@ -4,7 +4,7 @@ Template.aside.helpers({
     title: 'Account Details',
     icon: 'user',
     id: 'account',    // Sets the ID of the sidebar which gets targeted by utility nav items
-    width: 500,       // Sets the sidebar width & body class
+    width: 600,       // Sets the sidebar width & body class
     position: 'left', // Which Direction the sidebar appears from
     class: 'top',     // Style. accepts 'left' and 'top'
     tabs: [{          // If sidebar has tabs: use this property
@@ -22,6 +22,11 @@ Template.aside.helpers({
       icon: 'cal',
       id: 'events',
       template: 'eventsRegistered',
+    }, {
+      title: 'Payments',
+      icon: 'cal',
+      id: 'payments',
+      template: 'actpayments',
     }],
   }, {
     title: 'Notifications',

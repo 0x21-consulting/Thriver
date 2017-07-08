@@ -37,9 +37,11 @@ Package.onUse((api) => {
     'lib/templates/requests.html',
     'lib/templates/signin.html',
     'lib/templates/subscriptions.html',
+    'lib/templates/payments.html',
 
     // Styles
     'lib/templates/user.less',
+    'lib/templates/payments.less',
 
     // Helpers and methods
     'lib/client/user.js',
@@ -50,6 +52,7 @@ Package.onUse((api) => {
     'lib/client/requests.js',
     'lib/client/signin.js',
     'lib/client/subscriptions.js',
+    'lib/client/payments.js',
   ], ['client']);
 
   // Server processing

@@ -1,0 +1,23 @@
+<template name="actpayments">
+  <header><h2>{{heading}}</h2></header>
+  <ul class="stripes">
+    {{#if payments}}
+      {{#each payments}}
+        <li class="act-payment {{type}}">
+          <div class="inner-container">
+            <time class="dateMeta" datetime="{{dateTime}}">{{dateTime}}</time>
+            <h4 class="text">{{title}}</h4>
+            {{#if event}}
+                <a class="event-link" href="{{href}}">{{event}}</a>
+            {{/if}}
+            <p class="amount">{{amount}}</p>
+            <p class="card">{{{card}}}</p>
+            {{#if close}}<a class="close" href="#">{{close}}</a>{{/if}}
+          </div>
+        </li>
+      {{/each}}
+    {{else}}
+      <li class="none">{{none}}</li>
+    {{/if}}
+  </ul>
+</template>

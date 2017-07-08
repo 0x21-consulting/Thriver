@@ -1,0 +1,60 @@
+article[data-id="payments"]{
+  text-align: left;
+  p, h4{ color: #fff; }
+  h4.text{ font-weight: bold; }
+  li.act-payment{
+    padding: 20px 150px 20px 150px;
+    @media (max-width:767px){ padding: 20px; }
+    .inner-container{ position: relative; }
+    .inner-container:before{
+      content: "";
+      font-family: "FontAwesome";
+      display: block;
+      position: absolute;
+      font-size: 28px;
+      color: #00b7c5;
+      left: -45px;
+      top: 10px;
+    }
+  }
+  li.none{ padding: 36px; }
+  li.payment-event .inner-container:before{ content: "\f145"; }
+  li.donation-single .inner-container:before{
+    content: "\f004";
+  }
+  li.donation-reoccuring .inner-container:before{
+    content: "\f004";
+    color: lighten(#f1592a,10%);
+  }
+
+  p.amount{
+    clear: both;
+    background: rgba(0,0,0,0.25);
+    font-weight: bold;
+    margin: 5px 0px;
+    display: inline-block;
+    padding: 5px 10px;
+  }
+  p.card{
+    margin-bottom: 5px;
+    font-style: oblique;
+    opacity: 0.8;
+  }
+  .event-link{
+    color: #00b7c5;
+    display: block;
+    font-weight: bold;
+  }
+  a.close{
+    color: #f1592a;
+    display: block;
+    padding: 5px 0px;
+    font-size: 80%;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    &:before{
+      font-family: "FontAwesome";
+      margin-right: 5px;
+      content: "\f057";
+    }
+  }
+}
