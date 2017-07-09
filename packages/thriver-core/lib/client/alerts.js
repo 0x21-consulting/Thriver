@@ -18,6 +18,6 @@ Thriver.alert = {
     alert.classList.add('active', opts.class);
     setTimeout(function() {
       alert.classList.remove('active', opts.class);
-    }, 3000);
+    }, 3500);
   },
 };
