@@ -118,6 +118,12 @@ Template.register.events({
           document.querySelector('section#register p.register-success').classList.remove('hide');
         });
 
+        // Alert user: Account has been created
+        Thriver.alert.showAlert({
+          content: 'Welcome! You are now logged in.',
+          class: 'positive',
+        });
+
         // Close sidebar
         Thriver.canvas.closeSidebars();
       });

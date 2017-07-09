@@ -9,11 +9,13 @@ figure.alert{
     background-color: @orange;
     text-align: center;
     will-change:opacity,transform;
+    transition: all 250ms ease;
+    -webkit-transition: all 250ms ease;
     //.transition2(transform,@canvasDuration,@canvasEase,0ms,opacity,@canvasDuration,@canvasEase,0ms);
     .opacity(0);
     //.translate(0px,0px);
     .shadow(closeUp);
-    &.notification{
+    &.notification, &.positive{
         background-color: @teal;
     }
     &.important{
@@ -43,7 +45,10 @@ figure.alert{
         }
     }
     &.active{
-        //.translate(0px, -72px);
+        transform: translate(0px, -72px);
+        -webkit-transform: translate(0px, -72px);
+        -ms-transform: translate(0px, -72px);
+        -moz-transform: translate(0px, -72px);
         .opacity(1);
     }
 }

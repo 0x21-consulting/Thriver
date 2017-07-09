@@ -52,6 +52,7 @@ Package.onUse((api) => {
     'lib/client/history.js',
     'lib/client/scroll.js',
     'lib/client/canvas.js',
+    'lib/client/alerts.js',
 
     // UI Scripts
     'lib/client/ui/actions.js',
