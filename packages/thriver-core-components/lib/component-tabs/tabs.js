@@ -35,6 +35,16 @@ const toggleTabs = (event) => {
   }
 };
 
+Template.tabs.onRendered(() => {
+  /**
+   * @summary Remove Active Tabs on Mobile
+   */
+  if ($(window).width() < 768) {
+    $('menu.tabs > li > a').attr('aria-expanded', false);
+    $('div.tabs > article').attr('aria-hidden', true);
+  }
+});
+
 Template.body.events({
   // Tabs
   'click [data-toggle=tabs]': toggleTabs,
