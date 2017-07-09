@@ -37,11 +37,22 @@ const toggleTabs = (event) => {
 
 Template.tabs.onRendered(() => {
   /**
-   * @summary Remove Active Tabs on Mobile
+   * @summary Remove Active Tabs on Mobile if not currently linked to
    */
   if ($(window).width() < 768) {
-    $('menu.tabs > li > a').attr('aria-expanded', false);
-    $('div.tabs > article').attr('aria-hidden', true);
+
+    // Get URL and collect deep link
+    const url = window.location.href;
+    const deepTab = url.substring(url.lastIndexOf('/') + 1);
+
+    $('div.tabs > article').each(function () {
+      const dataId = $(this).attr('data-id');
+      const tab = $(this).parent().parent().find('menu.tabs > li > a[data-id=' + dataId + ']');
+      if (deepTab !== dataId) {
+        tab.attr('aria-expanded', false);
+        $(this).attr('aria-hidden', true);
+      }
+    });
   }
 });
 
