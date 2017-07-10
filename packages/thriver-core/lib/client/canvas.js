@@ -94,6 +94,9 @@ Thriver.canvas = {
 
       // Bind closure
       element.addEventListener('click', Thriver.canvas.handleCloseButton);
+
+      // Set Mobile Menu Open
+      Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
     };
 
     render();
