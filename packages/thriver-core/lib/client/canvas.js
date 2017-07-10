@@ -122,41 +122,52 @@ Thriver.canvas = {
   mobileMenu: (event) => {
     check(event, $.Event);
 
-    // Close menu if it's currently open
-    if (event.target.getAttribute('aria-expanded') === 'true') {
-      // Hide visible menu items
-      document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]')
-        .forEach(tab => tab.setAttribute('aria-expanded', false));
+    // Set States
+    const menuOpen = event.target.getAttribute('aria-expanded') === 'true';
+    const sidebarOpen = $('.off-canvas section.sidebar[aria-hidden="false"]').length > 0;
+    const tabOpen = $('.off-canvas menu.tabs li [aria-expanded="true"]').length > 0;
+    if (menuOpen) {
+      // Menu is Open
+      if (sidebarOpen) {
+        // Sidebar is Open
+        if (tabOpen) {
+          // Tab is Open
 
-      // Hide visible sections
-      document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]')
-        .forEach(section => section.setAttribute('aria-hidden', true));
+          // Hide visible menu items
+          document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]')
+            .forEach(tab => tab.setAttribute('aria-expanded', false));
 
-      // Allow scrolling
-      document.body.classList.remove('noScroll');
+          // Hide visible sections
+          document.querySelectorAll('.off-canvas div.tabs article[aria-hidden="false"]')
+            .forEach(section => section.setAttribute('aria-hidden', true));
+        } else {
+          // Sidebar is open, but no tabs are open
+          Thriver.canvas.closeSidebars();
+        }
+      } else {
+        // No sidebars or tabs are open
 
-      // Hide menu
-      Thriver.util.hide(document.getElementById('mobile-navigation'), true);
+        // Allow scrolling
+        document.body.classList.remove('noScroll');
 
-      // Remove `expanded` attribute from Toggle
-      Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
+        // Hide menu
+        Thriver.util.hide(document.getElementById('mobile-navigation'), true);
 
-      // We're done
-      return false;
+        // Remove `expanded` attribute from Toggle
+        Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
+      }
+    } else {
+      // Nothing is open: Open the menu
+
+      // Set Toggle to Expanded
+      Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
+
+      // Prevent body scrolling
+      document.body.classList.add('noScroll');
+
+      // Then make the menu visible
+      Thriver.util.hide(document.getElementById('mobile-navigation'), false);
     }
-
-    // Open menu
-
-    // Set Toggle to Expanded
-    Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
-
-    // Prevent body scrolling
-    document.body.classList.add('noScroll');
-
-    // Then make the menu visible
-    Thriver.util.hide(document.getElementById('mobile-navigation'), false);
-
-    return false;
   },
 };
 
