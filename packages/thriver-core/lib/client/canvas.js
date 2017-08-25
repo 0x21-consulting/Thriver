@@ -139,10 +139,10 @@ Thriver.canvas = {
       // Otherwise hide entire menu
       else {
         Thriver.util.hide(document.getElementById('mobile-navigation'), true);
-        
+
         // Allow scrolling
         document.body.classList.remove('noScroll');
-      
+
         // Remove `expanded` attribute from Toggle
         Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
       }
