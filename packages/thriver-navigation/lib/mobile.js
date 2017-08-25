@@ -2,8 +2,8 @@ Template.navigationMobile.helpers(Thriver.mainNavigationHelpers);
 Template.navigationMobile.helpers(Thriver.utilityNavigationHelpers);
 
 Template.navigationMobile.events({
-  'click [aria-controls][data-toggle=mobile-navigation]': () =>
-    Thriver.canvas.toggleCanvas(),
+  // 'click [aria-controls][data-toggle=mobile-navigation]': () =>
+    // Thriver.canvas.toggleCanvas(),
 
   'click [data-type="main-navigation-item"]': () => {
     const toggleMobile = document.querySelectorAll(
