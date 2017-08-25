@@ -5,7 +5,7 @@
  *   @param {string}  message - The message to display to user
  */
 const donateException = (element, message) => {
-  check(element, Element);
+  // No check on element because of old browser compatibility
 
   const elem = element;
 
