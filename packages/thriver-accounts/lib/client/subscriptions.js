@@ -1,4 +1,15 @@
 /**
+ * @summary Subscribe to Vertical Response Lists
+ */
+Meteor.subscribe('subscriptions');
+
+/**
+ * @summary Retain Vertical Response lists
+ * @type {Collection}
+ */
+Thriver.Lists = new Mongo.Collection(null);
+
+/**
  * Handle ListServ Subscriptions
  * @method
  *   @param {string}  url       - The ListServ URL

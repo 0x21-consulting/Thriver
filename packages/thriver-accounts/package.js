@@ -15,6 +15,7 @@ Package.onUse((api) => {
     'thriver:core-styles',
     'accounts-password',
     'mizzao:user-status',
+    'http',
   ]);
 
   // Schema
@@ -56,6 +57,7 @@ Package.onUse((api) => {
   api.addFiles([
     'lib/accounts.js',
     'lib/notifications.js',
+    'lib/verticalResponse.js',
   ], ['server']);
 });
 
