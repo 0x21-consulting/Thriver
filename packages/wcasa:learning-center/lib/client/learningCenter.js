@@ -32,7 +32,7 @@ Template.aside.events({
    */
   'click #learning-center li.loadMore button': (event) => {
     check(event, $.Event);
-    check(event.target, Element);
+    // No check on event.target because of old browser compatibility
 
     // Get all results
     Thriver.learningCenter.quantity.set(0);

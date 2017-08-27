@@ -15,11 +15,6 @@ Template.navigationMobile.events({
     document.body.classList.remove('noScroll');
   },
 
-  'click #mobile-navigation li > a[href="#service-providers"]': (event) => {
-    event.preventDefault();
-    // m.toggleMore;  m is not defined
-  },
-
   'click #mobile-navigation figure a[href="#service-providers"]': () => {
     const toggleMobile = document.querySelectorAll(
       '[aria-controls][data-toggle=mobile-navigation]');
