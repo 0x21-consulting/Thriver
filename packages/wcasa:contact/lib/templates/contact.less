@@ -172,6 +172,7 @@ section.contact{
   p.copyright{
     margin-bottom: 0px;
     padding-bottom: 40px;
+    @media (max-width:767px){ padding: 20px; }
   }
   ul.contactInfo li, p.address li{ margin-bottom: 0px; }
 }
@@ -209,22 +210,6 @@ section.contact{
       padding: 0px !important;
       margin: 0px !important;
     }
-  }
-  & > div > header p{
-    border-top: none;
-    padding: 0px;
-  }
-  header{
-    ul{
-      border-top: 2px solid #c1cbd1;
-      max-width: 600px;
-      margin: 0 auto !important;
-      padding:15px 0px 5px 0px;
-    }
-  }
-  form{
-    padding: 20px;
-    margin-top: 0px;
     input, textarea{
       font-size: 18px;
       background-color: @blue;
@@ -241,6 +226,22 @@ section.contact{
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#062131', endColorstr='#03263d',GradientType=1 );
       }
     }
+  }
+  & > div > header p{
+    border-top: none;
+    padding: 0px;
+  }
+  header{
+    ul{
+      border-top: 2px solid #c1cbd1;
+      max-width: 600px;
+      margin: 0 auto !important;
+      padding:15px 0px 5px 0px;
+    }
+  }
+  form{
+    padding: 20px;
+    margin-top: 0px;
     input.button{
       background:none;
       .buttonColor(@orange);

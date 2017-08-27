@@ -298,6 +298,12 @@ dl{
         -o-transform:skew(8deg) rotate(3deg);
         transform:skew(8deg) rotate(3deg);
     }
+    @media (max-width:767px){
+        &:before, &:after{ display: none; }
+        -webkit-box-shadow:none;
+        -moz-box-shadow:none;
+        box-shadow:none;
+    }
 }
 
 .shadow-box{padding: 0px !important;}

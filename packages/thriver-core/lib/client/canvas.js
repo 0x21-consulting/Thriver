@@ -94,6 +94,9 @@ Thriver.canvas = {
 
       // Bind closure
       element.addEventListener('click', Thriver.canvas.handleCloseButton);
+
+      // Set Mobile Menu Open
+      Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
     };
 
     render();
@@ -147,22 +150,9 @@ Thriver.canvas = {
         Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
       }
 
-      // We're done
-      return false;
+      // Then make the menu visible
+      Thriver.util.hide(document.getElementById('mobile-navigation'), false);
     }
-
-    // Open menu
-
-    // Set Toggle to Expanded
-    Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
-
-    // Prevent body scrolling
-    document.body.classList.add('noScroll');
-
-    // Then make the menu visible
-    Thriver.util.hide(document.getElementById('mobile-navigation'), false);
-
-    return false;
   },
 };
 
