@@ -105,6 +105,13 @@ Template.aside.helpers({
     width: 700,
     position: 'right',
     template: 'payments',
+  }, {
+    title: 'Privacy Policy',
+    icon: 'eye',
+    id: 'legal-privacy-policy',
+    width: 700,
+    position: 'right',
+    template: 'legal-privacy-policy',
   }],
 });
 
