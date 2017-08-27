@@ -2,7 +2,6 @@
  * @summary Handle form submission
  * @method
  */
-
-Template.canvas.onRendered( function() {
-  window.setTimeout(function(){$("#app-preloader").addClass("loading");}, 100);
+Template.canvas.onRendered(() => {
+  window.setTimeout(() => document.querySelector('#app-preloader').classList.add('loading'), 100);
 });
