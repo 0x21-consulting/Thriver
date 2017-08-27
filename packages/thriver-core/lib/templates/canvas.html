@@ -4,8 +4,8 @@
     <script>
       // Do not append class until after the DOM is created to leverage CSS animations
       // Then after css animations complete: Remove the preloader
-      window.setTimeout(function(){ $("body").addClass("loaded"); }, 2000);
-      window.setTimeout(function(){ $("body").addClass("load-complete"); }, 4500);
+      window.setTimeout(() => document.body.classList.add('loaded'), 2000);
+      window.setTimeout(() => document.body.classList.add('load-complete'), 4500);
     </script>
     {{> browseHappy}}
     <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">

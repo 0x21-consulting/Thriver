@@ -1,7 +1,7 @@
 /**
- * @summary Handle form submission
+ * @summary Show preloader by default
  * @method
  */
-Template.canvas.onRendered(() => {
-  window.setTimeout(() => document.querySelector('#app-preloader').classList.add('loading'), 100);
+Template.canvas.onCreated(() => {
+  window.setTimeout(() => document.querySelector('#app-preloader').classList.add('loading'));
 });
