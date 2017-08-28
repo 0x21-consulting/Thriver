@@ -125,8 +125,24 @@ Thriver.canvas = {
   mobileMenu: (event) => {
     check(event, $.Event);
 
+    const toggle = document.getElementById('mobile-toggle');
+    const navigation = document.getElementById('mobile-navigation');
+
+    const openMenu = () => {
+      // Open menu
+      Thriver.util.makeActive(toggle);
+      Thriver.util.hide(navigation, false);
+
+      // Prevent scrolling
+      document.body.classList.add('noScroll');
+    };
+
     // Close menu if it's currently open
     if (event.target.getAttribute('aria-expanded') === 'true') {
+      // Sometimes sidebars are opened without the menu, so let's open the menu
+      // now so that something appears when the sidebar is closed
+      openMenu();
+
       // Hide visible menu items
       let elems = document.querySelectorAll('.off-canvas menu.tabs li [aria-expanded="true"]');
       for (let i = 0, tab = elems[i]; i < elems.length; i += 1) tab.setAttribute('aria-expanded', false);
@@ -141,18 +157,15 @@ Thriver.canvas = {
 
       // Otherwise hide entire menu
       else {
-        Thriver.util.hide(document.getElementById('mobile-navigation'), true);
+        Thriver.util.hide(navigation, true);
 
         // Allow scrolling
         document.body.classList.remove('noScroll');
 
         // Remove `expanded` attribute from Toggle
-        Thriver.util.makeActive(document.getElementById('mobile-toggle'), false);
+        Thriver.util.makeActive(toggle, false);
       }
-
-      // Then make the menu visible
-      Thriver.util.hide(document.getElementById('mobile-navigation'), false);
-    }
+    } else openMenu();
   },
 };
 
