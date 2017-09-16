@@ -35,6 +35,28 @@ const toggleTabs = (event) => {
   }
 };
 
+Template.tabs.onRendered(() => {
+  /**
+   * @summary Remove Active Tabs on Mobile if not currently linked to
+   */
+  if ($(window).width() < 768) {
+    // Get URL and collect deep link
+    const url = window.location.href;
+    const deepTab = url.substring(url.lastIndexOf('/') + 1);
+
+    $('div.tabs > article').each(function () {
+      const dataId = $(this).attr('data-id');
+      const tab = $(this).parent().parent().find(`menu.tabs > li > a[data-id=${dataId}]`);
+      const masthead = $(this).parent().parent().parent()
+        .hasClass('masthead');
+      if (deepTab !== dataId && !masthead) {
+        tab.attr('aria-expanded', false);
+        $(this).attr('aria-hidden', true);
+      }
+    });
+  }
+});
+
 Template.body.events({
   // Tabs
   'click [data-toggle=tabs]': toggleTabs,

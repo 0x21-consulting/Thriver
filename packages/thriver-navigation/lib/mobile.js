@@ -2,9 +2,6 @@ Template.navigationMobile.helpers(Thriver.mainNavigationHelpers);
 Template.navigationMobile.helpers(Thriver.utilityNavigationHelpers);
 
 Template.navigationMobile.events({
-  'click [aria-controls][data-toggle=mobile-navigation]': () =>
-    Thriver.canvas.toggleCanvas(),
-
   'click [data-type="main-navigation-item"]': () => {
     const toggleMobile = document.querySelectorAll(
       '[aria-controls][data-toggle=mobile-navigation]');
@@ -16,11 +13,6 @@ Template.navigationMobile.events({
 
     Thriver.util.hide(mobileNavigation, true);
     document.body.classList.remove('noScroll');
-  },
-
-  'click #mobile-navigation li > a[href="#service-providers"]': (event) => {
-    event.preventDefault();
-    // m.toggleMore;  m is not defined
   },
 
   'click #mobile-navigation figure a[href="#service-providers"]': () => {

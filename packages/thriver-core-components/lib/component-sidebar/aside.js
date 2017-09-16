@@ -53,7 +53,7 @@ Template.aside.helpers({
     title: 'Learning Center',
     icon: 'institution',
     id: 'learning-center',
-    width: 500,
+    width: 700,
     position: 'right',
     filter: 'true',
     filterId: 'searchLC',
@@ -105,6 +105,13 @@ Template.aside.helpers({
     width: 700,
     position: 'right',
     template: 'payments',
+  }, {
+    title: 'Privacy Policy',
+    icon: 'eye',
+    id: 'legal-privacy-policy',
+    width: 700,
+    position: 'right',
+    template: 'legal-privacy-policy',
   }],
 });
 

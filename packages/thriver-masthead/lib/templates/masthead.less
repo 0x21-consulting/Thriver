@@ -132,6 +132,9 @@ section#masthead, section.masthead{
         @media (max-width:990px){
             height: 500px;
         }
+        @media (max-width:767px){
+            height: 200px;
+        }
     }
     div.tabs{
         display: table;
@@ -148,6 +151,7 @@ section#masthead, section.masthead{
         margin-top: 20px;
         padding-top: 30px;
         height: 285px;
+        @media @mobile{ height: auto; }
     }
     h1,p, a.cta{
         color: @white;
@@ -286,7 +290,7 @@ main section#masthead, main section.masthead{
             position: absolute;
             bottom: 10px;
             left:50%;
-            margin-left:-43px !important;
+            margin-left:-73px !important;
             &:before{ display: none; }
             li{
                 display: inline-block;
