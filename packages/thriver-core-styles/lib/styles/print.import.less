@@ -1,5 +1,5 @@
 //@import "animate.import.less";
-
+/*
 @media print {
     body #canvas {
         header#menu *{
@@ -253,10 +253,7 @@
     section.providers article.details header, section.providers article.details .main{
         padding: 0px !important;
     }
-    /*section.providers .main.mapTool {
-        display: block;
-        padding: 40px;
-    }*/
+
     section.providers article.details{
         padding: 40px !important;
         .boxShadow(none) !important;
@@ -331,9 +328,7 @@
         text-align: left !important;
     }
     menu.tabs{display: block !important;}
-    /*article#profile:after {
-        content: 'Nothing to print.';
-    }*/
+
     menu.tabs > li a[aria-expanded=true]{display: none !important;}
 
     aside.off-canvas form input, aside.off-canvas form textarea {
@@ -408,3 +403,21 @@ section#donate p{
 
 
 } //end print
+*/
+
+
+
+
+@media print {
+    // CONTEXT
+    body{ background: #fff; }
+    .overlay{ display: none; }
+    body.noScroll{
+        main.main{display: none;}
+        aside.off-canvas{
+            width: 100%;
+            position: static;
+        }
+    }
+    //*{ color: #333 !important; text-align: left !important; }
+}

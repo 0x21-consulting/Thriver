@@ -66,7 +66,9 @@ Thriver.history.updateLocation = () => {
     accessFunction: { $exists: false } }).fetch();
 
   const links = document.querySelectorAll('nav.mainNav a');
+  const sections = document.querySelectorAll('main > section');
   let link;
+  let section;
 
   // For each registered section, get its Y coordinate
   for (let i = 0; i < elements.length; i += 1) {
@@ -87,14 +89,17 @@ Thriver.history.updateLocation = () => {
       // Update URL/location bar
       Thriver.history.updateLocationBar(elements[i].currentPath);
 
-      // Remove active class from all main nav items
+      // Remove active class from all main nav items and sections
       for (let k = 0; k < links.length; k += 1) links[k].classList.remove('active');
+      for (let k = 0; k < sections.length; k += 1) sections[k].classList.remove('active');
 
       // Add active class to associated menu item
       link = document.querySelector(`nav.mainNav a[href="/${elements[i].element}"]`);
+      section = document.querySelector(`main > section[id="${elements[i].element}"]`);
 
       if (link instanceof Element) {
         link.classList.add('active');
+        section.classList.add('active');
 
         // This allows the UI to remove unwanted :focus class to last selection
         $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
