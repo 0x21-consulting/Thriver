@@ -56,10 +56,10 @@ const initialize = () => {
   // Hover effects
   // NOTE: Can't use lambda expression because of `this` context
   const mouseover = function () {
-    //this.setIcon(createPin('#00cad9', '#004146'), this);
+    this.setIcon(createPin('#00cad9', '#004146'), this);
   };
   const mouseout = function () {
-    //this.setIcon(createPin('#00b7c5', '#004146'), this);
+    this.setIcon(createPin('#00b7c5', '#004146'), this);
   };
 
   // Display info label on hover
