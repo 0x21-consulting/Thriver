@@ -105,6 +105,13 @@ Thriver.history.updateLocation = () => {
         $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
       }
 
+      // Check if there are currently no active items: apply to masthead
+      let noActiveSection = true;
+      for (let k = 0; k < sections.length; k += 1) {
+        if (sections[k].classList.contains('active')) noActiveSection = false;
+      }
+      if (noActiveSection) document.querySelector('main > section').classList.add('active');
+
       break;
     }
   }
