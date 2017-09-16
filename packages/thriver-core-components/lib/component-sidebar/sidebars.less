@@ -229,3 +229,82 @@ article a.icon:before{
 @media @mobile{
     #resources article.itemCategory details{width: 100% !important;}
 }
+
+
+// Print Optimization
+@media print{
+    [data-canvas-state=open] .off-canvas section.sidebar[aria-hidden="false"]{ height: auto !important; }
+    body aside.off-canvas{
+        padding: 20px;
+        //width: auto !important;
+        menu.tabs{ display: none; }
+        form label.toggleSwitchLabel {
+            left: 0px;
+        }
+        ul.notificationMenu button.redirectButton, ul.eventsMenu button.redirectButton, ul.libraryMenu button.redirectButton {
+            text-align: left;
+            margin: 0px;
+        }
+        &, & *{ background: transparent !important; text-align: left !important; }
+        *{ color: #333 !important; }
+        header h1{ text-align: left; color: #333; padding: 0px;}
+        .sidebar-content{
+            box-shadow: none; -webkit-box-shadow:none;
+            form {
+                max-width: 360px;
+                margin: 20px 0px;
+                padding: 0px !important;
+                input, textarea{
+                    background: transparent !important;
+                    color: #333 !important;
+                    padding: 0px !important;
+                    text-indent: 0px !important;
+                    border-bottom: 1px solid #999 !important;
+                }
+            }
+
+        }
+        .sidebar-content input[type=submit], button, a, button[data-canvas-event="close"]{
+            color: #01B6C7 !important;
+            padding: 0px !important;
+            text-decoration: underline !important;
+            font-weight: bold !important;
+            text-indent: 0px;
+            border-bottom: none !important;
+        }
+        ul.eventsMenu > li, ul.notificationMenu > li, ul.libraryMenu > li{ padding: 10px 0px !important;}
+        [data-list-type="article"] article {
+            padding: 10px 0px;
+            margin: 0px;
+        }
+        .inner-container-wide {
+            max-width: 100%;
+        }
+        .filter{display: none;}
+
+        //Twitter
+        section#twitter .twitterElement {
+            padding: 0px;
+            box-shadow: none;
+            margin-top: 20px;
+        }
+        section#twitter iframe {
+            height: 3000px !important;
+            max-width: 100% !important;
+        }
+
+        //Newsroom
+        section#newsroom .links {
+            margin: 10px 0px;
+        }
+
+        //Donate
+        section#donate p, section#payments p {
+            max-width: 100% !important;
+            margin: 0px;
+            padding: 0px;
+        }
+        section#donate form fieldset, section#payments form fieldset{ padding: 0px;}
+
+    }
+}
