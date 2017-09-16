@@ -8,11 +8,26 @@
             position: static;
         }
     }
-    main{
+    html body main#main{
         & > section{
-            display: none;
-            &.active, &#contact{ display: block; }
+            display: none !important; //TODO: possibly crashing chrome
+            &.active, &#contact{
+                display: block !important;
+            }
         }
     }
     button#showFeedbackForm{ display: none !important; }
+    .container{ padding: 0px; }
+    .sa.container {
+        margin-top: 40px;
+    }
+    #main > section.work details section {
+        box-shadow: none;
+        padding: 0px;
+    }
+    .shadow-box:before, .shadow-box:after {
+        display: none !important;
+    }
+    .shadow-box{ box-shadow: none !important; -webkit-box-shadow:none !important; }
+
 }

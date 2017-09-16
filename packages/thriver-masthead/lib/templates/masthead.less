@@ -88,6 +88,7 @@ section#masthead div.tabs, section.masthead div.tabs{
             background: -ms-linear-gradient(left, #2277b4 0%, #00a5a8 100%);
             background: linear-gradient(to right, #2277b4 0%, #00a5a8 100%);
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2277b4', endColorstr='#00a5a8', GradientType=1);
+            @media print{ background: transparent;}
         }
     }
     > article:nth-child(2), > article:nth-child(5){
@@ -103,6 +104,7 @@ section#masthead div.tabs, section.masthead div.tabs{
             background: #4b6cb7;
             background: -webkit-linear-gradient(to left, #4b6cb7, #182848);
             background: linear-gradient(to left, #4b6cb7, #182848);
+            @media print{ background: transparent;}
         }
     }
     > article:nth-child(3){
@@ -119,6 +121,7 @@ section#masthead div.tabs, section.masthead div.tabs{
             background: #f46b45;
             background: -webkit-linear-gradient(to left, #f46b45, #eea849);
             background: linear-gradient(to left, #f46b45, #eea849);
+            @media print{ background: transparent;}
         }
     }
 }
@@ -331,12 +334,4 @@ main section#masthead, main section.masthead{
     html body section#masthead *:after{ display: none !important; }
     html body main#main section#masthead div.tabs > article[aria-hidden=false]:after{ visibility: hidden !important; overflow: hidden !important; height: 0px !important; }
     html body main#main section#masthead div.tabs > article img, section#masthead div.tabs > article .masthead-bg, section.masthead div.tabs > article .masthead-bg{ display: none !important; opacity: 0 !important; height: 0px !important; overflow: hidden !important; visibility: hidden !important;}
-    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(1):after,
-    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(2):after,
-    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(3):after,
-    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(4):after,
-    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(5):after{
-        visibility: hidden !important; overflow: hidden !important; height: 0px !important; display: none !important;
-    }
-
 }

@@ -343,3 +343,35 @@ section.outreach{
         padding: 15px;
     }
 }
+
+@media print{
+    #main section.outreach .action-alert-link {
+        display: inline;
+    }
+    #main section.outreach div.tabs > article > h2{ border: none !important;}
+    #main section.outreach div.tabs > article {
+        padding: 0px;
+        margin: 0px;
+        min-height: 0px !important;
+        max-width: none !important;
+    }
+    #main section.outreach .tab-box {
+        max-width: none;
+        margin: 0;
+    }
+    #main section.outreach div.tabs > article details summary {
+        background: transparent !important;
+        padding: 0px !important;
+        box-shadow: none !important; -webkit-box-shadow:none !important;
+    }
+    #main section.outreach div.tabs > article details summary h1 {
+        color: #333 !important;
+    }
+    #main section.outreach div.tabs > article > h2 {
+        text-align: left;
+    }
+    section.outreach [data-list-type="article"] .inner article {
+        padding: 0px;
+        margin-top: 20px !important;
+    }
+}
