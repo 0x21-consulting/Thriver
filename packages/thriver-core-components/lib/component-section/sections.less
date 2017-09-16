@@ -130,3 +130,22 @@
         border-bottom: none;
     }
 }
+
+@media print{
+    html body #main > section{
+        border: none !important;
+        padding: 20px !important;
+    }
+    html body #main > section{
+        &, *{ color: #333 !important;}
+        input[type=submit], button, a{
+            color: #01B6C7 !important;
+            background: transparent !important;
+            padding: 0px !important;
+            text-decoration: underline !important;
+            font-weight: bold !important;
+            text-indent: 0px;
+            border-bottom: none !important;
+        }
+    }
+}

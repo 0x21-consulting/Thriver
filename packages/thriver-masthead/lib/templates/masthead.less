@@ -318,3 +318,25 @@ main section#masthead, main section.masthead{
         }
     }
 }
+
+
+@media print{
+    section#masthead menu.tabs, section.masthead menu.tabs{ display: none; }
+    section#masthead, section.masthead{ &, & *{ background: transparent !important; }}
+    section#masthead, section.masthead, section#masthead > .container, section.masthead > .container, section#masthead div.tabs, section.masthead div.tabs {
+        height: auto;
+        width: 100%;
+    }
+    section#masthead div.tabs > article, section.masthead div.tabs > article{ padding: 0px !important;}
+    html body section#masthead *:after{ display: none !important; }
+    html body main#main section#masthead div.tabs > article[aria-hidden=false]:after{ visibility: hidden !important; overflow: hidden !important; height: 0px !important; }
+    html body main#main section#masthead div.tabs > article img, section#masthead div.tabs > article .masthead-bg, section.masthead div.tabs > article .masthead-bg{ display: none !important; opacity: 0 !important; height: 0px !important; overflow: hidden !important; visibility: hidden !important;}
+    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(1):after,
+    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(2):after,
+    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(3):after,
+    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(4):after,
+    section#masthead div.tabs > article:nth-child(3):after, section.masthead div.tabs > article:nth-child(5):after{
+        visibility: hidden !important; overflow: hidden !important; height: 0px !important; display: none !important;
+    }
+
+}
