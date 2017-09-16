@@ -10,9 +10,8 @@
     }
     main{
         & > section{
-            page-break-inside: avoid;
             display: none;
-            &.active{ display: block; }
+            &.active, &#contact{ display: block; }
         }
     }
     button#showFeedbackForm{ display: none !important; }

@@ -261,3 +261,35 @@ div.sidebar-document {
     }
   }
 }
+
+@media print{
+  ul.contactInfo{
+    max-width: 100%;
+    text-align: left;
+  }
+  section.contact ul.contactInfo li, section.contact p.address li {
+    display: block;
+  }
+  section.contact .alert {
+    background: transparent;
+    text-align: left;
+    max-width: 100%;
+    padding: 0px;
+  }
+  form#contactForm {
+    display: none;
+  }
+  section.contact ul.contactInfo, section.contact p.address {
+    max-width: 100%;
+    text-align: left;
+  }
+  section.contact .copyright {
+    text-align: left;
+    &, & *{
+      padding: 0px !important;
+      margin: 0px !important;
+      position: static !important;
+      text-indent: 0px !important;
+    }
+  }
+}
