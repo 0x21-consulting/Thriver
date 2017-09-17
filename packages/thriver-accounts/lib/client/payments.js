@@ -7,6 +7,7 @@ Template.actpayments.helpers({
     type: 'donation-single',
     card: 'Paid using card ending in <b>0021</b>',
     amount: '$200.00',
+    receiptUrl: 'http://google.com',
   }, {
     title: 'Reoccuring Donation',
     dateTime: '07/12/2017',
@@ -14,6 +15,7 @@ Template.actpayments.helpers({
     card: 'Paid using card ending in <b>0021</b>',
     amount: '$80.00',
     close: 'Cancel Reoccuring payment',
+    receiptUrl: 'http://google.com',
   }, {
     title: 'Event Registration',
     event: 'WCASA Annual Meeting', // Only for events
@@ -22,6 +24,7 @@ Template.actpayments.helpers({
     type: 'payment-event',
     card: 'Paid using card ending in <b>0021</b>',
     amount: '$35.00',
+    receiptUrl: 'http://google.com',
   }],
 });
 

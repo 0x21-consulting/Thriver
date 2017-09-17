@@ -8,10 +8,13 @@
             <time class="dateMeta" datetime="{{dateTime}}">{{dateTime}}</time>
             <h4 class="text">{{title}}</h4>
             {{#if event}}
-                <a class="event-link" href="{{href}}">{{event}}</a>
+              <a class="event-link" href="{{href}}">{{event}}</a>
             {{/if}}
             <p class="amount">{{amount}}</p>
             <p class="card">{{{card}}}</p>
+            {{#if receiptUrl}}
+              <a class="receipt" href="{{receiptUrl}}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Download receipt</a>
+            {{/if}}
             {{#if close}}<a class="close" href="#">{{close}}</a>{{/if}}
           </div>
         </li>
