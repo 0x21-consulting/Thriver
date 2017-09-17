@@ -12,6 +12,13 @@
     {{/each}}
 </template>
 
+<template name="stats">
+    <header class="mobile"><h2>{{title}}</h2></header>
+    {{#each lists}}
+        {{>list}}
+    {{/each}}
+</template>
+
 <template name="LCSubHead">
     {{#if isAdmin}}
         <aside class="admin">
