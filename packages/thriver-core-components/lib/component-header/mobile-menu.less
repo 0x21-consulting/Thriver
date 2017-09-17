@@ -52,12 +52,14 @@
             &[data-action="signout"], &[data-action="register"]{
                 //border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
             }
-            &[href="#service-providers"]{background-color: @orange;}
+            &[href="/service-providers"]{background-color: @orange;}
+            &[href="/service-providers"]{background-color: @orange;}
+            &[href="/payments"]{ display: none; }
             &[aria-expanded]:after{
                 content:"\f0da";
                 .fa;
             }
-            &[href="#notifications"], &[href="#"], &[href="#accounts"] {
+            &[href="/notifications"], &[href="/"], &[href="/accounts"] {
                 background: darken(@mobileNavigationBgColor,5%);
             }
             &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{

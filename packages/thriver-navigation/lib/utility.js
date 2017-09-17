@@ -102,6 +102,13 @@ Thriver.utilityNavigationHelpers = {
     position: 'right',
     user: 'public',
   }, {
+    title: 'Privacy Policy',
+    icon: 'eye',
+    type: 'sidebar',
+    sidebar: 'legal-privacy-policy',
+    position: 'right',
+    user: 'public',
+  }, {
     // Youtube
     title: '<span class="mobile">Youtube</span>',
     icon: 'youtube',

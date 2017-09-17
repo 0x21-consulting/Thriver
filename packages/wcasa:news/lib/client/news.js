@@ -34,7 +34,7 @@ Template.aside.events({
    */
   'click #newsroom li.loadMore button': (event) => {
     check(event, $.Event);
-    check(event.target, Element);
+    // No check on event.target because of old browser compatibility
 
     // Get all results
     Thriver.newsroom.quantity.set(0);

@@ -25,7 +25,7 @@
 
 <template name="utilityItem">
     <li class="{{#if equals position 'right'}}right{{/if}} {{#if more}}more{{/if}}">
-        <a href="{{#if equals type 'link'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}/{{{sidebar}}}{{/if}}{{#if equals type 'null'}}/{{/if}}" target="{{#if equals type 'link'}}_blank{{/if}}" class="{{#if icon}}icon icon-{{{icon}}}{{/if}} {{#if iconAfter}}icon-after{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" aria-controls="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" aria-expanded="false" data-toggle="{{#if equals type 'sidebar'}}canvas{{/if}}" data-action="{{#if action}}{{action}}{{/if}}" data-notification={{this.alert.show}}>
+        <a href="{{#if equals type 'link'}}{{{url}}}{{/if}}{{#if equals type 'sidebar'}}/{{{sidebar}}}{{/if}}{{#if equals type 'null'}}/{{/if}}" target="{{target}}" class="{{#if icon}}icon icon-{{{icon}}}{{/if}} {{#if iconAfter}}icon-after{{/if}} {{#if this.alerts}}{{#if show}}notificationAlert{{/if}}{{/if}}" aria-controls="{{#if equals type 'sidebar'}}{{{sidebar}}}{{/if}}" aria-expanded="false" data-toggle="{{#if equals type 'sidebar'}}canvas{{/if}}" data-action="{{#if action}}{{action}}{{/if}}" data-notification={{this.alert.show}}>
             {{{title}}}
             {{#if equals sidebar 'account'}}<i>&#xf007;</i> {{name}}{{/if}}
         </a>

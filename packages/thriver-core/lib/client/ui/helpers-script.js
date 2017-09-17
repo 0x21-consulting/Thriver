@@ -2,7 +2,7 @@
 Thriver.util = {
   // Add Class
   addClass: (element, className) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(className, String);
 
     element.classList.add(className);
@@ -10,7 +10,7 @@ Thriver.util = {
 
   // Remove Class
   removeClass: (element, className) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(className, String);
 
     element.classList.remove(className);
@@ -18,7 +18,7 @@ Thriver.util = {
 
   // Remove Class (by Prefix)
   removeClassByPrefix: (element, prefix) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(prefix, String);
 
     const regx = new RegExp(`\\b${prefix}.*?\\b`, 'g');
@@ -29,7 +29,7 @@ Thriver.util = {
   },
 
   hide: (element, state) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(state, Match.Maybe(Boolean));
 
     if (state === false) element.setAttribute('aria-hidden', 'false');
@@ -37,7 +37,7 @@ Thriver.util = {
   },
 
   makeActive: (element, state) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(state, Match.Maybe(Boolean));
 
     if (state === false) element.setAttribute('aria-expanded', 'false');
@@ -45,7 +45,7 @@ Thriver.util = {
   },
 
   findAncestor: (element, className) => {
-    check(element, Element);
+    // No check on element because of old browser compatibility
     check(className, String);
 
     let currentElement = element;

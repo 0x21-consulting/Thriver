@@ -44,6 +44,7 @@ Package.onUse((api) => {
     'lib/templates/head.html',
     'lib/templates/canvas.html',
     'lib/templates/browseHappy.html',
+    'lib/templates/preloader.html',
 
     // Client scripts
     'lib/client/shims.js',
@@ -53,7 +54,8 @@ Package.onUse((api) => {
     'lib/client/scroll.js',
     'lib/client/canvas.js',
     'lib/client/alerts.js',
-
+    'lib/client/preloader.js',
+    
     // UI Scripts
     'lib/client/ui/actions.js',
     'lib/client/ui/focus.js',
