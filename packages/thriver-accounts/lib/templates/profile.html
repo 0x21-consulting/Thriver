@@ -1,5 +1,13 @@
 <template name="profile">
   <header><h2>{{heading}}</h2></header>
+  <form>
+    {{ #each emailListDoc}}
+      <div class="form-group">
+          <label for="userEmail" class="control-label">Email</label>
+          <input type="text"  name="userEmail" class="form-control" value="{{ address }}" disabled>
+      </div>
+    {{/each}}
+  </form>
   {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update"
     omitFields=omitFields fields="profile" validation="browser" 
       buttonContent=submitValue}}

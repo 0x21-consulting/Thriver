@@ -10,7 +10,7 @@ Template.profile.helpers({
    * @returns {Object}
    */
   doc: Meteor.user,
-
+  emailListDoc: () => Meteor.user().emails,
   /**
    * @summary Don't include the following fields in the form
    * @function

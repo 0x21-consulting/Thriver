@@ -26,6 +26,11 @@
                 -webkit-text-fill-color: @white;
             }
         }
+
+        &[disabled] {
+            color: darken(@inputColor, 30%);
+            cursor: not-allowed;
+        }
     }
     input[type=radio]:checked + label.radio{
         background-color: @radioSelect;
