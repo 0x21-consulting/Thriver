@@ -101,6 +101,7 @@ const initialize = () => {
     // County Layer
     const countyLayer = new geoXML3.parser({
       map: Thriver.map,
+      singleInfoWindow: true,
       suppressInfoWindows: false,
     });
     countyLayer.parse('/packages/thriver_maps/lib/client/data/wisconsin_counties.kml');
@@ -155,6 +156,9 @@ const initialize = () => {
 
         // Display Label
         google.maps.event.addListener(marker, 'mouseover', displayLabel);
+
+        // Hide Label
+        google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
         // Add to map
         marker.setMap(Thriver.map);
