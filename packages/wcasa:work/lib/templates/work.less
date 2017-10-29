@@ -1351,3 +1351,34 @@ section.work .workNav > ul > li.new-section {
 
 @media @mobile{ .workActive section.work .workNav > ul > li.backToIndexWork a{display: block !important;} }
 .mobile-article-open.workActive.workReading section.work .workContent{ @media @mobile{height: auto !important;}}
+
+@media print{
+    section.work .inner-container-wide{ max-width: none;}
+    section.work .sa details {
+        margin: 0px;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+    }
+    section.work .sa details summary {
+        background: transparent;
+        padding: 0px !important;
+    }
+    section.work .workNav > ul > li {
+        width: 50%;
+    }
+    section.work .workNav > ul > li > ul{ padding: 0px !important; }
+    section.work .workNav > ul > li > ul{ min-height: 0px !important; margin-bottom: 20px !important;}
+    html body section.work menu.workNav.sticky{ display: none !important;}
+    body.workActive section.work .main.container .workContent, body.workActive section.work .main.container li.backToIndexWork {
+        padding: 0px;
+        box-shadow: none !important; -webkit-box-shadow:none !important;
+    }
+    #main > section.work .main{ box-shadow: none !important; -webkit-box-shadow:none !important;}
+    section.work .workContent article.active{ margin-top: 40px !important;}
+    section.work button.more, section.work button.less{ display: none !important; }
+    section.work > .main .workTextContainer:after{ display: none !important; }
+    section.work > .main .workTextContainer {
+        max-height: none !important;
+    }
+}

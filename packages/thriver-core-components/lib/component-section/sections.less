@@ -130,3 +130,38 @@
         border-bottom: none;
     }
 }
+
+@media print{
+    html body #main > section{
+        border: none !important;
+        padding: 20px !important;
+    }
+    html body #main > section{
+        &, *{ color: #333 !important;}
+        input[type=submit], button, a{
+            color: #01B6C7 !important;
+            background: transparent !important;
+            padding: 0px !important;
+            text-decoration: underline !important;
+            font-weight: bold !important;
+            text-indent: 0px;
+            border-bottom: none !important;
+        }
+    }
+    #main > section > div > header{ text-align: left;}
+    #main > section.contact > div > header p {
+        text-align: left;
+        max-width: 100%;
+    }
+    html body #main > section{ background: transparent !important;}
+    #main > section > div > header p {
+        text-align: left;
+        width: auto !important;
+        max-width: none !important;
+        border: none;
+        padding: 0px;
+        margin: 0px;
+        display: block;
+    }
+    #main > section menu.tabs{ display: none !important; }
+}

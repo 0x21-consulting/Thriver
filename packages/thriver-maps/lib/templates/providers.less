@@ -668,3 +668,12 @@ div.mapTool article.details aside.adminControls {
         background: @orange;
     }
 }
+
+@media print{
+    section.providers .providerSearch{ display: none; }
+    section.providers article.details{ background: transparent !important;}
+    #main section.providers article.details header{ padding: 20px 0px !important;}
+    section.providers p.other-offices{ padding: 0px !important;}
+    #main section.providers article.details .main{ padding: 0px !important;}
+
+}
