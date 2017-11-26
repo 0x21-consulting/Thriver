@@ -267,7 +267,7 @@ form{
     }
     .toggleSwitch {
         display: inline-block;
-        position: absolute;
+        position: relative;
         top: 11px;
         width: 60px;
         @media @mobile{ right: 20px;}
@@ -382,24 +382,6 @@ input, textarea, select {
    -webkit-appearance: none;
 }
 
-//Checkbox Override
-article[data-id="profile"]{
-    input[type="checkbox"] {
-        position:relative;
-        top: 2px !important;
-        -webkit-appearance: checkbox !important;
-        -moz-appearance: checkbox !important;
-        -ms-appearance: checkbox !important;
-        -o-appearance: checkbox !important;
-        appearance: checkbox !important;
-        width: 16px !important;
-        height: 16px !important;
-        display: inline-block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    .checkbox{text-align: left;}
-}
 //Autoform Styles
 .form-group:after {
     clear: both;
