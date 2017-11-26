@@ -184,46 +184,6 @@ const initialize = () => {
 
       // Stop
       c.stop();
-
-      // Geolocation
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          // Get the distance from current location for each provider
-          const distanceProviders = Thriver.providers.collection.find({},
-            { coordinates: 1 }).map((provider) => {
-              // Calculate distance
-              const distance = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(position.coords.latitude,
-                  position.coords.longitude),
-                new google.maps.LatLng(provider.coordinates.lat,
-                  provider.coordinates.lon)
-              );
-
-              return { id: provider._id, distance };
-            });
-
-          // Sort array
-          distanceProviders.sort((a, b) => a.distance - b.distance);
-
-          // Get closest provider
-          const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
-
-          // Show details pane and resize map
-          document.getElementById('service-providers').classList.remove('full-view');
-          google.maps.event.trigger(Thriver.map, 'resize');
-
-          // Center on it
-          Thriver.map.panTo(new google.maps.LatLng(
-            closest.coordinates.lat,
-            closest.coordinates.lon
-          ));
-
-          Thriver.map.setZoom(11);
-
-          // Show results
-          Thriver.providers.active.set(closest);
-        });
-      }
     });
 
     // Create a WCASA map marker
@@ -267,12 +227,12 @@ const moveMap = (county) => {
   // Get coordinates for all providers for that county
   providers = Thriver.providers.collection.find({ counties: { $elemMatch: { $in: [county] } } },
     { coordinates: 1, name: 1 }).map(provider =>
-      // We only care about the coordinates
-      ({
-        coordinates: provider.coordinates,
-        id: provider._id,
-        name: provider.name,
-      }));
+    // We only care about the coordinates
+    ({
+      coordinates: provider.coordinates,
+      id: provider._id,
+      name: provider.name,
+    }));
 
   // If there aren't any providers for this county, report that
   if (!providers.length) return false;
@@ -306,7 +266,7 @@ const moveMap = (county) => {
   // Bounds
   Thriver.map.fitBounds(new google.maps.LatLngBounds(
     new google.maps.LatLng(x[1], y[1]), // Southwest
-    new google.maps.LatLng(x[0], y[0])  // to Northeast
+    new google.maps.LatLng(x[0], y[0]), // to Northeast
   ));
 
   return true;
@@ -331,6 +291,9 @@ const getCounty = (zip) => {
 Template.providers.onRendered(initialize);
 
 Template.providers.events({
+  // Not a real form; don't submit it anywhere
+  'submit #search': event => event.preventDefault(),
+
   // County drop-down list
   'change #county': (event) => {
     Thriver.providers.openDetails();
@@ -343,6 +306,50 @@ Template.providers.events({
     // Close search field
     Thriver.providers.closeMapSearch();
     document.body.classList.remove('providersListOpen');
+  },
+
+  // Geolocate
+  'click button.geolocate': () => {
+    // Geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        // Get the distance from current location for each provider
+        const distanceProviders = Thriver.providers.collection.find({},
+          { coordinates: 1 },
+        ).map((provider) => {
+          // Calculate distance
+          const distance = google.maps.geometry.spherical.computeDistanceBetween(
+            new google.maps.LatLng(position.coords.latitude,
+              position.coords.longitude),
+            new google.maps.LatLng(provider.coordinates.lat,
+              provider.coordinates.lon),
+          );
+
+          return { id: provider._id, distance };
+        });
+
+        // Sort array
+        distanceProviders.sort((a, b) => a.distance - b.distance);
+
+        // Get closest provider
+        const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
+
+        // Show details pane and resize map
+        document.getElementById('service-providers').classList.remove('full-view');
+        google.maps.event.trigger(Thriver.map, 'resize');
+
+        // Center on it
+        Thriver.map.panTo(new google.maps.LatLng(
+          closest.coordinates.lat,
+          closest.coordinates.lon,
+        ));
+
+        Thriver.map.setZoom(11);
+
+        // Show results
+        Thriver.providers.active.set(closest);
+      });
+    }
   },
 
   'click .mapView': (event) => {
