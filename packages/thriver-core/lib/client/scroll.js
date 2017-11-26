@@ -78,7 +78,7 @@ const handleHeaderStateChange = () => {
 
   // Set a timeout to add the class after one millisecond
   timeout = setTimeout(() => {
-    if (document.body.scrollTop > 260 && window.innerWidth > 767) {
+    if (window.scrollY > 260 && window.innerWidth > 767) {
       document.body.classList.remove('fixedHeaderReturn');
       document.body.classList.add('fixedHeader');
     } else {
@@ -89,7 +89,7 @@ const handleHeaderStateChange = () => {
     // Back to Top
     // TODO(eoghantadhg): move this into appropriate module
     if (document.getElementById('back-to-top')) {
-      if (document.body.scrollTop > 1000 && window.innerWidth > 767) {
+      if (window.scrollY > 1000 && window.innerWidth > 767) {
         document.getElementById('back-to-top').classList.add('active');
       } else document.getElementById('back-to-top').classList.remove('active');
     }
