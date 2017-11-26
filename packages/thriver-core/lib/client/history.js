@@ -263,10 +263,13 @@ Template.body.events({
   'click a[href^="/"][target!="_blank"]': (event) => {
     check(event, $.Event);
 
-    // Prevent navigation away from page
-    event.preventDefault();
+    // Only for internal paths; file_open.php is a 301 redirect
+    if (!event.target.pathname.match(/\/file_open.php/i)) {
+      // Prevent navigation away from page
+      event.preventDefault();
 
-    // Navigate to path
-    Thriver.history.navigate(event.target.pathname || '/');
+      // Navigate to path
+      Thriver.history.navigate(event.target.pathname || '/');
+    }
   },
 });
