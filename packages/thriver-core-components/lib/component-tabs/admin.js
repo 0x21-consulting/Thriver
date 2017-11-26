@@ -133,7 +133,7 @@ Template.tabs.events({
    * @method
    *   @param {$.Event} event - jQuery Event handle
    */
-  'click [editable!="false"] h2': (event) => {
+  'click article[data-editable="true"] h2': (event) => {
     check(event, $.Event);
 
     event.preventDefault();
