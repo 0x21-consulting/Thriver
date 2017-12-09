@@ -1,14 +1,15 @@
 {
+  "lockfileVersion": 1,
   "dependencies": {
     "node-uuid": {
       "version": "1.4.8",
       "resolved": "https://registry.npmjs.org/node-uuid/-/node-uuid-1.4.8.tgz",
-      "from": "node-uuid@*"
+      "integrity": "sha1-sEDrCSOWivq/jTL7HxfxFn/auQc="
     },
     "paypal-rest-sdk": {
       "version": "0.6.3",
       "resolved": "https://registry.npmjs.org/paypal-rest-sdk/-/paypal-rest-sdk-0.6.3.tgz",
-      "from": "paypal-rest-sdk@0.6.3"
+      "integrity": "sha1-znO9QAj9wxJQJwRKIb5SprZdEuQ="
     }
   }
 }
