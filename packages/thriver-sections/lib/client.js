@@ -8,7 +8,8 @@ Template.canvas.helpers({
    * @summary Display page sections in body
    * @function
    */
-  sections: Thriver.sections.get,
+  sections: () => Thriver.sections.get(),
+  sectionsExist: () => !!Thriver.sections.get().count(),
 });
 
 /**
@@ -34,18 +35,18 @@ Thriver.sections.generateId = (name) => {
   // Make all lower case and remove beginning and ending spaces
   thisName = thisName.toLowerCase().trim()
 
-  // Validate URI doesn't include improper characters
-  .replace(/[^a-z0-9-\s]/g, '')
+    // Validate URI doesn't include improper characters
+    .replace(/[^a-z0-9-\s]/g, '')
 
-  // Replace all spaces with dashes
-  .replace(/\s+/g, '-')
+    // Replace all spaces with dashes
+    .replace(/\s+/g, '-')
 
-  // anchors can't begin with numbers or hyphens
-  .replace(/^[\d-]*/g, '');
+    // anchors can't begin with numbers or hyphens
+    .replace(/^[\d-]*/g, '');
 
   if (removeName || thisName.length > 0) return thisName;
 
-  return '';  // otherwise return an empty string
+  return ''; // otherwise return an empty string
 };
 
 Template.registerHelper('anchor', Thriver.sections.generateId);

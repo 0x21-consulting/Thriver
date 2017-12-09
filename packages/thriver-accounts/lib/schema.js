@@ -340,6 +340,12 @@ Thriver.accounts.schema.user = new SimpleSchema({
     type: Mongo.ObjectID,
     optional: true,
   },
+
+  /** Whether or not the user is an administrator */
+  admin: {
+    type: Boolean,
+    optional: true,
+  },
 });
 
 // Attach schema to users collection
