@@ -196,7 +196,8 @@ Template.workNav.events({
       document.body.classList.remove('workActive', 'workReading', 'workFadeOut'), 200);
 
     // Scroll to top of work on change tabs
-    Thriver.history.navigate('/what-we-do/');
+    const section = event.delegateTarget.parentElement.parentElement;
+    Thriver.history.navigate(`/${section.id}/`);
   },
 });
 
