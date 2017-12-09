@@ -62,8 +62,8 @@ Thriver.history.registry.attachSchema(Thriver.history.schema);
  */
 Thriver.history.updateLocation = () => {
   // Don't include special-access sections, since they're not visible on page
-  const elements = Thriver.history.registry.find({
-    accessFunction: { $exists: false } }).fetch();
+  const elements = Thriver.history.registry
+    .find({ accessFunction: { $exists: false } }).fetch();
 
   const links = document.querySelectorAll('nav.mainNav a');
   const sections = document.querySelectorAll('main > section');
@@ -77,7 +77,14 @@ Thriver.history.updateLocation = () => {
   }
 
   // For masthead and everything before first registered section
-  elements.unshift({ element: '', y: 0, h: elements[0].y, currentPath: '' });
+  if (elements[0]) {
+    elements.unshift({
+      element: '',
+      y: 0,
+      h: elements[0].y,
+      currentPath: '',
+    });
+  }
 
   // Does the current scroll position match with any element?
   for (let i = 0; i < elements.length; i += 1) {
