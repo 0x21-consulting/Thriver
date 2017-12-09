@@ -8,7 +8,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint packages/"
+    "lint": "eslint packages/",
+    "dev-debug": "meteor debug"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
