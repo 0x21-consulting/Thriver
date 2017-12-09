@@ -36,6 +36,9 @@ Thriver.canvas = {
 
     // Remove overlay
     Thriver.canvas.removeOverlay();
+
+    // Update Location Bar
+    Thriver.history.updateLocation();
   },
 
   /**
