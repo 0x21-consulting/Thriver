@@ -72,8 +72,11 @@ Thriver.history.updateLocation = () => {
 
   // For each registered section, get its Y coordinate
   for (let i = 0; i < elements.length; i += 1) {
-    elements[i].y = document.querySelector(`#${elements[i].element}`).offsetTop;
-    elements[i].h = document.querySelector(`#${elements[i].element}`).offsetHeight;
+    const elem = document.querySelector(`#${elements[i].element}`);
+    if (elem) {
+      elements[i].y = elem.offsetTop;
+      elements[i].h = elem.offsetHeight;
+    }
   }
 
   // For masthead and everything before first registered section
