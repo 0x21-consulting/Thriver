@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary History and Location namespace
  * @namespace Thriver.history

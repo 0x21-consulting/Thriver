@@ -14,7 +14,6 @@ Package.onUse((api) => {
     'thriver:core',
     'thriver:core-styles',
     'accounts-password',
-    'mizzao:user-status',
   ]);
 
   // Schema

@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Notifications namespace
  * @namespace Thriver.notifications

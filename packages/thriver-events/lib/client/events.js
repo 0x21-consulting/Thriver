@@ -1,6 +1,3 @@
-// TODO(micchickenburger): Turn off debugging for production
-SimpleSchema.debug = true;
-
 // Subscribe to events
 Meteor.subscribe('events');
 

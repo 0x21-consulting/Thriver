@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Providers namespace
  * @namespace
@@ -12,9 +14,13 @@ Thriver.providers.collection = new Mongo.Collection('providers');
 Thriver.providers.counties = new Mongo.Collection('counties');
 
 // Create custom validation messages
-SimpleSchema.messages({
-  invalidLatitude: 'Latitude must be between 42.5 and 47.083',
-  invalidLongitude: 'Longitude must be between -86.767 and -92.883',
+SimpleSchema.setDefaultMessages({
+  messages: {
+    en: {
+      invalidLatitude: 'Latitude must be between 42.5 and 47.083',
+      invalidLongitude: 'Longitude must be between -86.767 and -92.883',
+    },
+  },
 });
 
 /**
@@ -37,8 +43,16 @@ Thriver.providers.schema = new SimpleSchema({
   },
   /** Counties Covered by this Provider */
   counties: {
-    type: [String],
+    type: Array,
     defaultValue: [],
+    optional: false,
+    label: 'Counties Served by Provider',
+    autoform: {
+      type: 'select-checkbox',
+    },
+  },
+  'counties.$': {
+    type: String,
     allowedValues: [
       'Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown',
       'Buffalo', 'Burnett', 'Calumet', 'Chippewa', 'Clark',
@@ -56,10 +70,6 @@ Thriver.providers.schema = new SimpleSchema({
       'Washburn', 'Washington', 'Waukesha', 'Waupaca', 'Waushara',
       'Winnebago', 'Wood',
     ],
-    label: 'Counties Served by Provider',
-    autoform: {
-      type: 'select-checkbox',
-    },
   },
   /** Provider's Address */
   address: {
@@ -79,7 +89,6 @@ Thriver.providers.schema = new SimpleSchema({
   },
   'coordinates.lat': {
     type: Number,
-    decimal: true,
     optional: false,
     custom: function () { // eslint-disable-line object-shorthand,func-names
       if (this.value < 42.5 || this.value > 47.083) {
@@ -91,7 +100,6 @@ Thriver.providers.schema = new SimpleSchema({
   },
   'coordinates.lon': {
     type: Number,
-    decimal: true,
     optional: false,
     custom: function () { // eslint-disable-line object-shorthand,func-names
       if (this.value > -86.767 || this.value < -92.883) {
@@ -104,13 +112,12 @@ Thriver.providers.schema = new SimpleSchema({
 
   /** Provider Main Phone Number */
   phones: {
-    type: [Object],
-    optional: false,
+    type: Array,
     defaultValue: [],
+    optional: false,
   },
   'phones.$': {
     type: Object,
-    optional: false,
   },
   'phones.$.number': {
     type: String,
@@ -140,7 +147,6 @@ Thriver.providers.schema = new SimpleSchema({
   'phones.$.ext': {
     type: Number,
     optional: true,
-    decimal: false,
   },
 
   /** Crisis Phone Number */
@@ -173,12 +179,11 @@ Thriver.providers.schema = new SimpleSchema({
   'crisis.ext': {
     type: Number,
     optional: true,
-    decimal: false,
   },
 
   /** Contact email address */
   emails: {
-    type: [Object],
+    type: Array,
     optional: false,
     defaultValue: [],
   },

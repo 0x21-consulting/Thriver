@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary People Namespace
  * @namespace

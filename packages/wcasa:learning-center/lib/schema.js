@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Learning Center namespace
  * @namespace Thriver.newsroom
