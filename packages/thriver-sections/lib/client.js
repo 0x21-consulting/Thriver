@@ -27,7 +27,7 @@ Thriver.sections.generateId = (name) => {
   let thisName = (name instanceof Spacebars.kw) ? name.hash.name : name;
 
   // Return empty string if null
-  if (thisName === null) return '';
+  if (!thisName || thisName === null) return '';
 
   // Is the name an empty string?
   const removeName = !thisName.length;
