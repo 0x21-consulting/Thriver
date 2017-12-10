@@ -148,13 +148,15 @@ Thriver.history.update = (section, path) => {
   check(section, String);
   check(path, String);
 
-  // Update collection with new path
-  Thriver.history.registry.update({ element: section }, {
-    $set: { currentPath: path },
-  });
+  if (section.length && path.length) {
+    // Update collection with new path
+    Thriver.history.registry.update({ element: section }, {
+      $set: { currentPath: path },
+    });
 
-  // Update URI
-  Thriver.history.updateLocationBar(path);
+    // Update URI
+    Thriver.history.updateLocationBar(path);
+  }
 };
 
 /**
