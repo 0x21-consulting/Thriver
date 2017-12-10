@@ -31,14 +31,14 @@ Template.providers.helpers({
   counties: () =>
     // NOTE: Meteor's mongo driver still doesn't support
     //   db.collection.distinct(), so we have to hack it
-    _.chain(
-      Thriver.providers.collection.find({}, { counties: 1 }).map(provider =>
+    _.chain(Thriver.providers.collection.find({}, { counties: 1 })
+      .map(provider =>
         provider.counties))
 
-    // provider.counties is an array, so we have to flatten them all,
-    // then sort them alphabetically, then return distinct ones
-    .flatten().sort().uniq()
-    .value()
+      // provider.counties is an array, so we have to flatten them all,
+      // then sort them alphabetically, then return distinct ones
+      .flatten().sort().uniq()
+      .value()
   ,
 });
 
@@ -61,10 +61,12 @@ Template.provider.helpers({
     if (data.parent) {
       const parent = Thriver.providers.collection.findOne({ _id: data.parent }, { name: 1 });
       const siblings = Thriver.providers.collection.find(
-        { parent: data.parent }, { name: 1 }).map((doc) => {
-          if (data._id !== doc._id) return doc;
-          return undefined;
-        });
+        { parent: data.parent },
+        { name: 1 },
+      ).map((doc) => {
+        if (data._id !== doc._id) return doc;
+        return undefined;
+      });
 
       siblings.unshift(parent);
 
@@ -152,35 +154,37 @@ Template.providers.onRendered(() => {
   const instanceName = Template.instance().data.name;
 
   // Register
-  Thriver.history.registry.insert({
-    element: Thriver.sections.generateId(instanceName),
+  if (instanceName) {
+    Thriver.history.registry.insert({
+      element: Thriver.sections.generateId(instanceName),
 
-    /** Handle deep-linking */
-    callback: (path) => {
-      // If there's no path, there's nothing to do
-      if (!path.length) return;
+      /** Handle deep-linking */
+      callback: (path) => {
+        // If there's no path, there's nothing to do
+        if (!path.length) return;
 
-      // Wait for collection and google API to become available
-      Deps.autorun((c) => {
-        try {
-          // Find provider, if one with this name exists
-          Thriver.providers.collection.find().forEach((doc) => {
-            if (path[0] === Thriver.sections.generateId(doc.name)) {
-              // Set provider as active
-              Thriver.providers.active.set(doc);
+        // Wait for collection and google API to become available
+        Deps.autorun((c) => {
+          try {
+            // Find provider, if one with this name exists
+            Thriver.providers.collection.find().forEach((doc) => {
+              if (path[0] === Thriver.sections.generateId(doc.name)) {
+                // Set provider as active
+                Thriver.providers.active.set(doc);
 
-              // Update map
-              Thriver.map.panTo(new google.maps.LatLng(
-                doc.coordinates.lat,
-                doc.coordinates.lon
-              ));
-              Thriver.map.setZoom(13);
-            }
-          });
+                // Update map
+                Thriver.map.panTo(new google.maps.LatLng(
+                  doc.coordinates.lat,
+                  doc.coordinates.lon,
+                ));
+                Thriver.map.setZoom(13);
+              }
+            });
 
-          c.stop();
-        } catch (error) { /* do nothing */ }
-      });
-    },
-  });
+            c.stop();
+          } catch (error) { /* do nothing */ }
+        });
+      },
+    });
+  }
 });
