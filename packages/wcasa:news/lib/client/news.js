@@ -10,7 +10,7 @@ Thriver.newsroom.search = new ReactiveVar();
  *   @param {Event} event
  */
 const handleSearch = (event) => {
-  const value = event.target.value;
+  const { value } = event.target;
 
   // If field is empty, clear reactive search variable
   if (value.length === 0) Thriver.newsroom.search.set();
@@ -90,8 +90,8 @@ Template.list.events({
 
     event.stopPropagation();
 
-    const id = event.target.parentElement.parentElement.dataset.id;
-    if (confirm('Are you sure you want to delete this Newsroom Item?')) {
+    const { id } = event.target.parentElement.parentElement.dataset;
+    if (window.confirm('Are you sure you want to delete this Newsroom Item?')) {
       Meteor.call('deleteNewsItem', id);
     }
   },

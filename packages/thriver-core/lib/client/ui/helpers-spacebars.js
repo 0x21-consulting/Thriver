@@ -37,9 +37,3 @@ Template.registerHelper('ISODate', (date) => {
 
   return newDate.toISOString();
 });
-
-// debug
-// TODO(micchickenburger): Remove for production
-Template.registerHelper('debug', (stuff) => {
-  console.debug(stuff);
-});

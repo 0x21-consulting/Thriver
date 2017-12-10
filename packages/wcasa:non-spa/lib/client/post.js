@@ -21,7 +21,7 @@ const updateContent = (oldHash) => {
     const parent = event.target.parentElement;
 
     // Get section ID
-    const id = event.target.parentElement.querySelector('section').dataset.id;
+    const { id } = event.target.parentElement.querySelector('section').dataset;
     const content = event.target.parentElement.querySelector('textarea').value;
     const newHash = SHA256(content);
 
@@ -43,17 +43,15 @@ Template.post.helpers({
    * @returns {String}
    */
   hash: () => {
-    let content = Thriver.newsroom.collection.findOne({ _id: this._id }, {
-      content: 1 });
+    const content = Thriver.newsroom.collection
+      .findOne({ _id: this._id }, { content: 1 });
 
     // Sometimes this helper executes before the collection is ready
     // If so, just return and wait for the rerun
     if (!content) return '';
 
     // Get content
-    content = content.content;
-
-    if (content) return SHA256(content);
+    if (content.content) return SHA256(content.content);
 
     return '';
   },
@@ -119,7 +117,7 @@ Template.post.events({
     check(event, $.Event);
 
     // Get section to edit
-    const data = Template.instance().data;
+    const { data } = Template.instance();
     const content = document.body.querySelector(`[data-id="${data._id}"]`);
     const parent = content.parentElement;
 
@@ -129,13 +127,15 @@ Template.post.events({
     // Button by which to okay changes and commit to db
     const button = document.createElement('button');
     button.textContent = 'Save';
-    button.addEventListener('mouseup',
+    button.addEventListener(
+      'mouseup',
       // Pass along hash of existing markdown
-      updateContent(content.dataset.hash));
+      updateContent(content.dataset.hash),
+    );
 
     // Textarea should get markdown
-    textarea.textContent = Thriver.newsroom.collection.findOne(
-      { _id: data._id }, { content: 1 }).content;
+    textarea.textContent = Thriver.newsroom.collection
+      .findOne({ _id: data._id }, { content: 1 }).content;
 
     // Add textarea but hide preview
     parent.classList.add('edit');

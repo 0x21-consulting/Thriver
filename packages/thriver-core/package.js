@@ -10,23 +10,23 @@ Package.onUse((api) => {
   api.versionsFrom('METEOR@1.0');
 
   const packages = [
-    'ecmascript',                 // javascript
-    'mongo',                      // database
-    'reactive-var',               // Support for reactive variables
+    'ecmascript', // javascript
+    'mongo', // database
+    'reactive-var', // Support for reactive variables
 
-    'templating',                 // Allow templates
-    'spacebars',                  // Template Syntax
-    'blaze-html-templates',       // Reactive templates
-    'iron:router@1.0.13',         // Template routing
+    'templating', // Allow templates
+    'spacebars', // Template Syntax
+    'blaze-html-templates', // Reactive templates
+    'iron:router@1.0.13', // Template routing
 
-    'sha',                        // SHA Hash support
-    'gwendall:body-events',       // Support Meteor.body.events
+    'sha', // SHA Hash support
+    'gwendall:body-events', // Support Meteor.body.events
 
-    'check',                      // Check library
-    'audit-argument-checks',      // Enforce Check
+    'check', // Check library
+    'audit-argument-checks', // Enforce Check
 
-    'aldeed:collection2-core',    // Enforce schemas on collections
-    'aldeed:autoform',            // Enforce schemas on forms
+    'aldeed:collection2-core', // Enforce schemas on collections
+    'aldeed:autoform', // Enforce schemas on forms
   ];
 
   api.use(packages);

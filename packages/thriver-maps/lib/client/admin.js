@@ -102,7 +102,7 @@ Template.provider.events({
   'click .adminControls .delete': (event) => {
     check(event, $.Event);
 
-    if (confirm('Are you sure you want to delete this provicer?')) {
+    if (window.confirm('Are you sure you want to delete this provicer?')) {
       Meteor.call('deleteProvider', Thriver.providers.active.get()._id);
 
       // Close side pane and show whole map

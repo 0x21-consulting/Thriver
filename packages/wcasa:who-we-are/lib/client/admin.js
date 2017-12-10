@@ -10,7 +10,7 @@ const deletePerson = (event) => {
   event.stopPropagation();
 
   // Delete person upon confirmation
-  if (confirm('Are you sure you want to delete this person?')) {
+  if (window.confirm('Are you sure you want to delete this person?')) {
     Meteor.call('deletePerson', Template.instance().data._id);
   }
 };
@@ -58,117 +58,121 @@ Template.staff.events({ 'click aside.addPerson button.close': closeForm });
 Template.board.events({ 'click aside.addPerson button.close': closeForm });
 
 /** Handle file upload and base64 encoding */
-AutoForm.addHooks(['addStaffPerson', 'addBoardPerson'], { before: {
-  /**
-   * @summary Use Before Hook on addPerson forms to upload image and convert to base64
-   * @method
-   *   @param {Object} document - Document to alter
-   */
-  method: function (document) { // eslint-disable-line object-shorthand,func-names
-    // Can't use lambda expression because of `this` context
-    check(document, Object);
-
-    // Scope for async reader load event function
-    const that = this;
-
-    const doc = document;
-
-    // Get file
-    let file = this.event.target.querySelector('input[type="file"]');
-    file = file.files[0];
-
-    // If there's no file, there's nothing to do here
-    if (!(file instanceof File)) that.result(doc);
-
-    else {
-      // Read in the file
-      const reader = new FileReader();
-
+AutoForm.addHooks(
+  ['addStaffPerson', 'addBoardPerson'],
+  {
+    before: {
       /**
-       * @summary Read in file and convert to base64
+       * @summary Use Before Hook on addPerson forms to upload image and convert to base64
        * @method
-       *   @param {Event} event
+       *   @param {Object} document - Document to alter
        */
-      (function (mimeType) { // eslint-disable-line func-names
-        return reader.addEventListener('load', (event) => {
-          check(event, Event);
+      method: function (document) { // eslint-disable-line object-shorthand,func-names
+        // Can't use lambda expression because of `this` context
+        check(document, Object);
 
-          // Unsigned, 8-bit integer Array
-          // event.target.result is of type ArrayBuffer
-          const view = new Uint8Array(event.target.result);
+        // Scope for async reader load event function
+        const that = this;
 
-          // Base 64 possible characters
-          const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+        const doc = document;
 
-          // Base64 string representation of image
-          let string = `data:${mimeType};base64,`;
+        // Get file
+        let file = this.event.target.querySelector('input[type="file"]');
+        [file] = file.files;
 
-          // Base64 works by breaking three bytes into four six-bit segments
-          // Each segment therefore must have a value between 0 and 64.
-          // That allows easy encoding using the base64 string above
-          for (let i = 0; i < view.byteLength; i += 3) {
-            /* eslint-disable no-bitwise */
+        // If there's no file, there's nothing to do here
+        if (!(file instanceof File)) that.result(doc);
 
-            // First six bits (remove last two bits)
-            let segment = (view[i] & 0xFC) >> 2;
+        else {
+          // Read in the file
+          const reader = new FileReader();
 
-            // Encode
-            string += base64.charAt(segment);
+          /**
+           * @summary Read in file and convert to base64
+           * @method
+           *   @param {Event} event
+           */
+          (function (mimeType) { // eslint-disable-line func-names
+            return reader.addEventListener('load', (event) => {
+              check(event, Event);
 
-            // Segment two (keep first nibble)
-            segment = (view[i] & 0x03) << 4;
+              // Unsigned, 8-bit integer Array
+              // event.target.result is of type ArrayBuffer
+              const view = new Uint8Array(event.target.result);
 
-            // If there are no more bytes because the array is exhausted,
-            // encode this nibble and output two markers
-            if (i + 1 >= view.byteLength) {
-              string += `${base64.charAt(segment)}==`;
-              break;
-            }
+              // Base 64 possible characters
+              const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-            // Add first nibble from second byte
-            segment |= (view[i + 1] & 0xF0) >> 4;
-            string += base64.charAt(segment);
+              // Base64 string representation of image
+              let string = `data:${mimeType};base64,`;
 
-            // Segment three (last nibble of second byte)
-            segment = (view[i + 1] & 0x0F) << 2;
+              // Base64 works by breaking three bytes into four six-bit segments
+              // Each segment therefore must have a value between 0 and 64.
+              // That allows easy encoding using the base64 string above
+              for (let i = 0; i < view.byteLength; i += 3) {
+                /* eslint-disable no-bitwise */
 
-            // If there are no more bytes because the array is exhausted,
-            // enocde this segment and output one marker
-            if (i + 2 >= view.byteLength) {
-              string += `${base64.charAt(segment)}=`;
-              break;
-            }
+                // First six bits (remove last two bits)
+                let segment = (view[i] & 0xFC) >> 2;
 
-            // Complete segment with first two bits of third byte
-            segment |= (view[i + 2] & 0xC0) >> 6;
-            string += base64.charAt(segment);
+                // Encode
+                string += base64.charAt(segment);
 
-            // Final (fourth) segment using last six bits of third byte
-            segment = view[i + 2] & 0x3F;
-            string += base64.charAt(segment);
+                // Segment two (keep first nibble)
+                segment = (view[i] & 0x03) << 4;
 
-            /* eslint-enable */
-          }
+                // If there are no more bytes because the array is exhausted,
+                // encode this nibble and output two markers
+                if (i + 1 >= view.byteLength) {
+                  string += `${base64.charAt(segment)}==`;
+                  break;
+                }
 
-          // Set picture right
-          doc.picture = string;
+                // Add first nibble from second byte
+                segment |= (view[i + 1] & 0xF0) >> 4;
+                string += base64.charAt(segment);
 
-          // Let form submit continue asynchronously
-          that.result(doc);
-        });
-      }(file.type));
+                // Segment three (last nibble of second byte)
+                segment = (view[i + 1] & 0x0F) << 2;
 
-      // Read in file as an Array Buffer
-      reader.readAsArrayBuffer(file);
-    }
-  },
-},
-  after: {
-    /** Close form after submission */
-    method: function () { // eslint-disable-line object-shorthand,func-names
-      // Can't use lambda expression because of `this` context
-      const button = this.event.target.parentElement.querySelector('button.close');
-      if (button instanceof Element) button.click();
+                // If there are no more bytes because the array is exhausted,
+                // enocde this segment and output one marker
+                if (i + 2 >= view.byteLength) {
+                  string += `${base64.charAt(segment)}=`;
+                  break;
+                }
+
+                // Complete segment with first two bits of third byte
+                segment |= (view[i + 2] & 0xC0) >> 6;
+                string += base64.charAt(segment);
+
+                // Final (fourth) segment using last six bits of third byte
+                segment = view[i + 2] & 0x3F;
+                string += base64.charAt(segment);
+
+                /* eslint-enable */
+              }
+
+              // Set picture right
+              doc.picture = string;
+
+              // Let form submit continue asynchronously
+              that.result(doc);
+            });
+          }(file.type));
+
+          // Read in file as an Array Buffer
+          reader.readAsArrayBuffer(file);
+        }
+      },
+    },
+    after: {
+      /** Close form after submission */
+      method: function () { // eslint-disable-line object-shorthand,func-names
+        // Can't use lambda expression because of `this` context
+        const button = this.event.target.parentElement.querySelector('button.close');
+        if (button instanceof Element) button.click();
+      },
     },
   },
-});
+);

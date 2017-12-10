@@ -88,9 +88,12 @@ Meteor.methods({
     check(content, String);
 
     // Perform edit
-    Thriver.newsroom.collection.update({ _id: id }, { $set: {
-      content } }, (error) => {
+    Thriver.newsroom.collection.update(
+      { _id: id },
+      { $set: { content } },
+      (error) => {
         if (error) throw new Meteor.Error(error);
-      });
+      },
+    );
   },
 });

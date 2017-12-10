@@ -31,8 +31,7 @@ Meteor.Paypal = {
     let firstName = '';
     let lastName = '';
     if (data.name) {
-      firstName = data.name.split(' ')[0];
-      lastName = data.name.split(' ')[1];
+      [firstName, lastName] = data.name.split(' ');
     }
     return {
       credit_card: {
@@ -75,14 +74,16 @@ if (Meteor.isServer) {
 
         const fut = new Future();
         this.unblock();
-        paypalSdk.payment.create(paymentJson, Meteor.bindEnvironment((err, payment) => {
-          if (err) {
-            fut.return({ saved: false, error: err });
-          } else {
-            fut.return({ saved: true, payment });
-          }
-        },
-        (e) => { console.error(e); }));
+        paypalSdk.payment.create(paymentJson, Meteor.bindEnvironment(
+          (err, payment) => {
+            if (err) {
+              fut.return({ saved: false, error: err });
+            } else {
+              fut.return({ saved: true, payment });
+            }
+          },
+          (e) => { throw e; },
+        ));
         return fut.wait();
       },
     });

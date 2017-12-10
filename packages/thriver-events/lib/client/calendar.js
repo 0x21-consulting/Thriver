@@ -29,7 +29,7 @@ Thriver.calendar.lastDate = (specificMonth) => {
 
   let month = specificMonth;
 
-  if (isNaN(month) || month < 0 || month > 11) {
+  if (Number.isNaN(month) || month < 0 || month > 11) {
     // if invalid month number, just use current month
     month = Thriver.calendar.thisMonth.get();
   }
@@ -117,8 +117,10 @@ Template.calendar.helpers({
    * @returns {Day[][]}
    */
   week: () => {
-    const firstDay = new Date(Thriver.calendar.thisYear.get(),
-      Thriver.calendar.thisMonth.get()).getDay();
+    const firstDay = new Date(
+      Thriver.calendar.thisYear.get(),
+      Thriver.calendar.thisMonth.get(),
+    ).getDay();
 
     const total = Thriver.calendar.lastDate();
     const weeks = [];

@@ -3,11 +3,11 @@ Template.aside.helpers({
   items: [{
     title: 'Account Details',
     icon: 'user',
-    id: 'account',    // Sets the ID of the sidebar which gets targeted by utility nav items
-    width: 500,       // Sets the sidebar width & body class
+    id: 'account', // Sets the ID of the sidebar which gets targeted by utility nav items
+    width: 500, // Sets the sidebar width & body class
     position: 'left', // Which Direction the sidebar appears from
-    class: 'top',     // Style. accepts 'left' and 'top'
-    tabs: [{          // If sidebar has tabs: use this property
+    class: 'top', // Style. accepts 'left' and 'top'
+    tabs: [{ // If sidebar has tabs: use this property
       title: 'Profile',
       icon: 'user',
       id: 'profile',
@@ -77,8 +77,8 @@ Template.aside.helpers({
     filter: 'true',
     filterId: 'searchNews',
     class: 'top',
-    subhead: 'newsSubHead',   // header subtemplate
-    tabs: [{                  // If sidebar has tabs: use this property
+    subhead: 'newsSubHead', // header subtemplate
+    tabs: [{ // If sidebar has tabs: use this property
       title: 'In the News',
       id: 'in-the-news',
       template: 'inTheNews',
@@ -161,7 +161,7 @@ Template.aside.onRendered(() => {
         return;
       }
 
-      const id = section.id;
+      const { id } = section;
       const tabs = document.querySelectorAll(`#${id} menu.tabs > li > a`);
 
       // Find tab, then click it
@@ -171,7 +171,7 @@ Template.aside.onRendered(() => {
 
       // Otherwise, if there isn't any path, click the first tab for the user
       if (!path.length && tabs.length) {
-        if (screen.width > 767) tabs[0].click();
+        if (window.screen.width > 767) tabs[0].click();
       }
     };
 

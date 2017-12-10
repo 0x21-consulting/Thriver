@@ -32,7 +32,7 @@ Package.onUse((api) => {
     'lib/client/outreach.js',
   ], ['client']);
 
-    // Server processing
+  // Server processing
   api.addFiles([
     'lib/server/outreach.js',
   ], ['server']);

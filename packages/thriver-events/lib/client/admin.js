@@ -98,7 +98,7 @@ Template.eventSlide.events({
   'click .adminControls .delete': (event) => {
     check(event, $.Event);
 
-    if (confirm('Are you sure you want to delete this event?')) {
+    if (window.confirm('Are you sure you want to delete this event?')) {
       Meteor.call('deleteEvent', Blaze.getData()._id);
     }
   },

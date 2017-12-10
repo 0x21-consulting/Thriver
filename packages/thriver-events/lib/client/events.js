@@ -28,18 +28,29 @@ Thriver.events.getThisMonthEvents = () => {
   Thriver.events.collection.find({
     $or: [{
       start: {
-        $gte: new Date(Thriver.calendar.thisYear.get(),
-          Thriver.calendar.thisMonth.get()),
-        $lte: new Date(Thriver.calendar.thisYear.get(),
-          Thriver.calendar.thisMonth.get(), total),
-      } }, {
-        end: {
-          $gte: new Date(Thriver.calendar.thisYear.get(),
-            Thriver.calendar.thisMonth.get()),
-          $lte: new Date(Thriver.calendar.thisYear.get(),
-            Thriver.calendar.thisMonth.get(), total),
-        },
-      }],
+        $gte: new Date(
+          Thriver.calendar.thisYear.get(),
+          Thriver.calendar.thisMonth.get(),
+        ),
+        $lte: new Date(
+          Thriver.calendar.thisYear.get(),
+          Thriver.calendar.thisMonth.get(),
+          total,
+        ),
+      },
+    }, {
+      end: {
+        $gte: new Date(
+          Thriver.calendar.thisYear.get(),
+          Thriver.calendar.thisMonth.get(),
+        ),
+        $lte: new Date(
+          Thriver.calendar.thisYear.get(),
+          Thriver.calendar.thisMonth.get(),
+          total,
+        ),
+      },
+    }],
   }, { sort: { start: 1 } }).forEach((event) => {
     // If there's no start date, do nothing
     if (!(event.start instanceof Date)) return;
@@ -101,9 +112,11 @@ Template.events.events({
     Thriver.calendar.thisMonth.set(Thriver.calendar.getLastMonth());
 
     // Update Location Bar
-    Thriver.history.update(parentName,
+    Thriver.history.update(
+      parentName,
       `${parentName}/${Thriver.calendar.thisYear.get()}/${Thriver.calendar
-        .months[Thriver.calendar.thisMonth.get()]}`);
+        .months[Thriver.calendar.thisMonth.get()]}`,
+    );
 
     // Close any open asides
     $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
@@ -127,9 +140,11 @@ Template.events.events({
     Thriver.calendar.thisMonth.set(nextMonth % 12);
 
     // Update Location Bar
-    Thriver.history.update(parentName,
+    Thriver.history.update(
+      parentName,
       `${parentName}/${Thriver.calendar.thisYear.get()}/${Thriver.calendar
-        .months[Thriver.calendar.thisMonth.get()]}`);
+        .months[Thriver.calendar.thisMonth.get()]}`,
+    );
 
     // Close any open asides
     $('.listViewEventsObjectOpen').removeClass('listViewEventsObjectOpen');
@@ -337,9 +352,9 @@ Template.eventSlide.events({
       // Create link
       a = document.createElement('a');
       a.href = Blaze.getData().registerUrl;
-      a.target = '_blank';            // new tab
-      a.classList.add('hide');        // keep hidden on page
-      document.body.appendChild(a);   // Required for Mozilla to click
+      a.target = '_blank';
+      a.classList.add('hide');
+      document.body.appendChild(a); // Required for Mozilla to click
 
       a.click();
       a.remove();
