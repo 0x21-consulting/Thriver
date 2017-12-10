@@ -7,11 +7,13 @@ Template.events.onRendered(() => {
   const instanceName = Template.instance().data.name;
 
   // Register
-  Thriver.history.registry.insert({
-    element: Thriver.sections.generateId(instanceName),
-    /** Handle deep-linking */
-    callback: path => Thriver.events.parsePath(path),
-  });
+  if (instanceName) {
+    Thriver.history.registry.insert({
+      element: Thriver.sections.generateId(instanceName),
+      /** Handle deep-linking */
+      callback: path => Thriver.events.parsePath(path),
+    });
+  }
 });
 
 /**
