@@ -347,6 +347,9 @@ Template.providers.events({
         // Sort array
         distanceProviders.sort((a, b) => a.distance - b.distance);
 
+        // Nothing to do if there aren't any providers
+        if (!distanceProviders.length) return;
+
         // Get closest provider
         const closest = Thriver.providers.collection.findOne({ _id: distanceProviders[0].id });
 
