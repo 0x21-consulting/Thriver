@@ -18,13 +18,15 @@ Thriver.providers.openDetails = () =>
   document.getElementById('service-providers').classList.remove('full-view');
 
 // Setting the map view to full
-const fullMap = (condition) => {
+const fullMap = (condition, providerSection) => {
+  if (!providerSection) return;
+
   if (condition === true) {
-    document.getElementById('service-providers').classList.add('full-view');
+    providerSection.classList.add('full-view');
     if (Thriver.map.getZoom() > 0) Thriver.map.setZoom(7);
     Thriver.map.setCenter(new google.maps.LatLng(44.863579, -89.574563));
   } else {
-    document.getElementById('service-providers').classList.remove('full-view');
+    providerSection.classList.remove('full-view');
   }
 };
 
@@ -55,16 +57,16 @@ const initialize = () => {
 
   // Hover effects
   // NOTE: Can't use lambda expression because of `this` context
-  const mouseover = function () {
+  const mouseover = function mouseover() {
     this.setIcon(createPin('#00cad9', '#004146'), this);
   };
-  const mouseout = function () {
+  const mouseout = function mouseout() {
     this.setIcon(createPin('#00b7c5', '#004146'), this);
   };
 
   // Display info label on hover
   // NOTE: Can't use lambda expression because of `this` context
-  const displayLabel = function () {
+  const displayLabel = function displayLabel() {
     // Close any existing infowindow
     if (Thriver.map.infowindow) Thriver.map.infowindow.close();
 
@@ -130,8 +132,11 @@ const initialize = () => {
 
     // Wait for collection to become available before acting on it
     Deps.autorun((c) => {
+      const providerSection = document.querySelector('#mapCanvas').parentElement
+        .parentElement.parentElement;
+
       // Show the full map by default
-      fullMap(true);
+      fullMap(true, providerSection);
 
       // Get all providers' IDs, names, and coordinates
       const providers = Thriver.providers.collection.find({}, { name: 1, coordinates: 1 });
@@ -167,7 +172,7 @@ const initialize = () => {
 
         // Click Marker
         // NOTE: Can't use lambda expression because of `this` context
-        marker.addListener('click', function () {
+        marker.addListener('click', function eventHandler() {
           // Show details pane
           document.getElementById('service-providers').classList.remove('full-view');
           google.maps.event.trigger(Thriver.map, 'resize');
@@ -189,7 +194,7 @@ const initialize = () => {
     });
 
     // Create a WCASA map marker
-    (function () {
+    (() => {
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(43.0346679, -89.4252416),
         icon: createPin('#062131', '##062131'),
@@ -203,7 +208,7 @@ const initialize = () => {
 
       // Add to map
       marker.setMap(Thriver.map);
-    }());
+    })();
   };
 
   // Create maps API script
@@ -375,13 +380,27 @@ Template.providers.events({
     event.stopPropagation();
     event.preventDefault();
 
+    const providerSection = event.target.parentElement
+      .parentElement.parentElement.parentElement;
+
     document.body.classList.remove('providersListOpen');
-    document.getElementById('service-providers').classList.add('full-view');
+    providerSection.classList.add('full-view');
 
     google.maps.event.trigger(Thriver.map, 'resize');
 
     hideLabel();
-    fullMap(true);
+    fullMap(true, providerSection);
+  },
+
+  'click .seeAllProviders': (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const providerSection = event.target.parentElement
+      .parentElement.parentElement.parentElement;
+
+    providerSection.classList.remove('full-view');
+    document.body.classList.add('providersListOpen');
   },
 
   // Clicking ZIP Code GO button

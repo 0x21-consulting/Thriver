@@ -130,21 +130,6 @@ Template.providerListViewItem.helpers({
   },
 });
 
-// From jQuery Helpers File
-// TODO: Rewrite
-Template.providers.onRendered(() => {
-  // Toggle provider list view
-  $('.seeAllProviders').click((event) => {
-    event.stopPropagation();
-    event.preventDefault();
-
-    document.getElementById('service-providers').classList.remove('full-view');
-    $('body').addClass('providersListOpen');
-  });
-
-  document.addEventListener('mouseup', Thriver.providers.closeMapSearch);
-});
-
 /**
  * @summary Register Deep-linking
  * @method
