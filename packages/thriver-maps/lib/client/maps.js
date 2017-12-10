@@ -142,8 +142,10 @@ const initialize = () => {
       // Create map markers for each provider
       providers.forEach((provider) => {
         const marker = new google.maps.Marker({
-          position: new google.maps.LatLng(provider.coordinates.lat,
-            provider.coordinates.lon),
+          position: new google.maps.LatLng(
+            provider.coordinates.lat,
+            provider.coordinates.lon,
+          ),
           icon: createPin('#00b7c5', '#004146'),
           animation: google.maps.Animation.DROP,
           title: provider.name,
@@ -207,7 +209,11 @@ const initialize = () => {
   // Create maps API script
   const googleApiKey = Thriver.settings.get('googleMapsApiKey');
   const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&callback=initializeMap&key=${googleApiKey}`;
+  if (googleApiKey) {
+    script.src = `https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&callback=initializeMap&key=${googleApiKey}`;
+  } else {
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&callback=initializeMap';
+  }
   script.async = true;
   script.defer = true;
   document.body.appendChild(script);
@@ -225,8 +231,9 @@ const moveMap = (county) => {
   let y = [];
 
   // Get coordinates for all providers for that county
-  providers = Thriver.providers.collection.find({ counties: { $elemMatch: { $in: [county] } } },
-    { coordinates: 1, name: 1 }).map(provider =>
+  providers = Thriver.providers.collection.find({
+    counties: { $elemMatch: { $in: [county] } },
+  }, { coordinates: 1, name: 1 }).map(provider =>
     // We only care about the coordinates
     ({
       coordinates: provider.coordinates,
@@ -279,9 +286,10 @@ const getCounty = (zip) => {
   let county = '';
 
   // Get county
-  county = Thriver.providers.counties.findOne({ zips:
+  county = Thriver.providers.counties.findOne({
     // Minimongo doesn't support $eq for some reason
-    { $elemMatch: { $in: [zip] } } });
+    zips: { $elemMatch: { $in: [zip] } },
+  });
 
   // Now get providers that support that county
   if (!moveMap(county.name)) return false;
@@ -314,19 +322,22 @@ Template.providers.events({
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         // Get the distance from current location for each provider
-        const distanceProviders = Thriver.providers.collection.find({},
-          { coordinates: 1 },
-        ).map((provider) => {
-          // Calculate distance
-          const distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(position.coords.latitude,
-              position.coords.longitude),
-            new google.maps.LatLng(provider.coordinates.lat,
-              provider.coordinates.lon),
-          );
+        const distanceProviders = Thriver.providers.collection.find({}, { coordinates: 1 })
+          .map((provider) => {
+            // Calculate distance
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(
+              new google.maps.LatLng(
+                position.coords.latitude,
+                position.coords.longitude,
+              ),
+              new google.maps.LatLng(
+                provider.coordinates.lat,
+                provider.coordinates.lon,
+              ),
+            );
 
-          return { id: provider._id, distance };
-        });
+            return { id: provider._id, distance };
+          });
 
         // Sort array
         distanceProviders.sort((a, b) => a.distance - b.distance);
@@ -422,7 +433,7 @@ const followProviderLink = (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  const data = Template.instance().data;
+  const { data } = Template.instance();
 
   // Update info section
   Thriver.providers.active.set(Thriver.providers.collection
@@ -436,7 +447,7 @@ const followProviderLink = (event) => {
   google.maps.event.trigger(Thriver.map, 'resize');
   Thriver.map.panTo(new google.maps.LatLng(
     data.coordinates.lat,
-    data.coordinates.lon
+    data.coordinates.lon,
   ));
   Thriver.map.setZoom(13);
 };
