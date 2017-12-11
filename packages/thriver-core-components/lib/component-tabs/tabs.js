@@ -44,7 +44,7 @@ Template.tabs.onRendered(() => {
     const url = window.location.href;
     const deepTab = url.substring(url.lastIndexOf('/') + 1);
 
-    $('div.tabs > article').each(function () {
+    $('div.tabs > article').each(function mobileTab() {
       const dataId = $(this).attr('data-id');
       const tab = $(this).parent().parent().find(`menu.tabs > li > a[data-id=${dataId}]`);
       const masthead = $(this).parent().parent().parent()

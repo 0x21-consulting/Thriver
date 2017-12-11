@@ -105,82 +105,88 @@ Template.donate.events({
     check([name, number, type, cvv2, year, month], [String]);
 
     // Initiate Purchase
-    Meteor.Paypal.purchase({ name, number, type, cvv2, year, month },
+    Meteor.Paypal.purchase(
+      {
+        name, number, type, cvv2, year, month,
+      },
       { total, currency: 'USD' },
-    (error, results) => {
-      let details;
+      (error, results) => {
+        if (error) {
+          console.error('error?', error);
+          return;
+        }
 
-      if (error) {
-        console.error('error?', error);
-        return;
-      }
+        console.debug(results);
+        // results contains:
+        //   saved (true or false)
+        //   if false: "error" contains the reasons for failure
+        //   if true: "payment" contains the transaction information
 
-      console.debug(results);
-      // results contains:
-      //   saved (true or false)
-      //   if false: "error" contains the reasons for failure
-      //   if true: "payment" contains the transaction information
+        if (results && !results.saved) {
+          // Hide default message and indicate error
+          def.setAttribute('aria-hidden', 'true');
+          fail.setAttribute('aria-hidden', 'false');
 
-      if (results && !results.saved) {
-        // Hide default message and indicate error
-        def.setAttribute('aria-hidden', 'true');
-        fail.setAttribute('aria-hidden', 'false');
+          // Re-enable submit button
+          form.querySelector('button.submit').disabled = false;
 
-        // Re-enable submit button
-        form.querySelector('button.submit').disabled = false;
+          // Handle error details
+          if (results.error.response.details) {
+            const { details } = results.error.response;
 
-        // Handle error details
-        if (results.error.response.details) {
-          details = results.error.response.details;
-
-          for (let i = 0; i < details.length; i += 1) {
-            switch (details[i].issue) {
-              case 'Expiration date cannot be in the past.':
-                donateException(form.year,
-                  'Expiration date cannot be in the past');
-                break;
-              case 'The credit card number is not valid for the specified credit card type':
-              case 'Value is invalid':
-              case 'Must be numeric':
-                switch (details[i].field) {
-                  case 'payer.funding_instruments[0].credit_card':
-                  case 'payer.funding_instruments[0].credit_card.number':
-                    donateException(form.number, 'Invalid credit card number');
-                    break;
-                  case 'payer.funding_instruments[0].credit_card.cvv2':
-                    donateException(form.cvv2, 'Invalid CVV2 Code');
-                    break;
-                  default:
-                }
-                break;
-              case 'Amount cannot be zero':
-                donateException(form.querySelector('#customAmt'),
-                  'Donation amount must be greater than zero');
-                break;
-              case 'Length of cvv2 is invalid for the specified credit card type.':
-                donateException(form.cvv2, 'Invalid CVV2 Code');
-                break;
-              default:
+            for (let i = 0; i < details.length; i += 1) {
+              switch (details[i].issue) {
+                case 'Expiration date cannot be in the past.':
+                  donateException(
+                    form.year,
+                    'Expiration date cannot be in the past',
+                  );
+                  break;
+                case 'The credit card number is not valid for the specified credit card type':
+                case 'Value is invalid':
+                case 'Must be numeric':
+                  switch (details[i].field) {
+                    case 'payer.funding_instruments[0].credit_card':
+                    case 'payer.funding_instruments[0].credit_card.number':
+                      donateException(form.number, 'Invalid credit card number');
+                      break;
+                    case 'payer.funding_instruments[0].credit_card.cvv2':
+                      donateException(form.cvv2, 'Invalid CVV2 Code');
+                      break;
+                    default:
+                  }
+                  break;
+                case 'Amount cannot be zero':
+                  donateException(
+                    form.querySelector('#customAmt'),
+                    'Donation amount must be greater than zero',
+                  );
+                  break;
+                case 'Length of cvv2 is invalid for the specified credit card type.':
+                  donateException(form.cvv2, 'Invalid CVV2 Code');
+                  break;
+                default:
+              }
             }
           }
-        }
 
-        // If there aren't any details, check for other errors
-        switch (results.error.response.name) {
-          case 'CREDIT_CARD_REFUSED':
-            console.error('Credit Card Refused.');
-            break;
-          default:
-            console.error(results.error.response.name);
+          // If there aren't any details, check for other errors
+          switch (results.error.response.name) {
+            case 'CREDIT_CARD_REFUSED':
+              console.error('Credit Card Refused.');
+              break;
+            default:
+              console.error(results.error.response.name);
+          }
+        } else {
+          // Success!  Now hide the form and display success
+          form.classList.add('hide');
+          def.setAttribute('aria-hidden', 'true');
+          fail.setAttribute('aria-hidden', 'true');
+          success.setAttribute('aria-hidden', 'false');
         }
-      } else {
-        // Success!  Now hide the form and display success
-        form.classList.add('hide');
-        def.setAttribute('aria-hidden', 'true');
-        fail.setAttribute('aria-hidden', 'true');
-        success.setAttribute('aria-hidden', 'false');
-      }
-    });
+      },
+    );
   },
 
   // Show credit card type
@@ -254,7 +260,6 @@ Template.donate.events({
     if (event.target.value.length === 4 || event.target.value.length === 9
         || event.target.value.length === 14) {
       ccField.value += ' ';
-      return;
     }
   },
 });

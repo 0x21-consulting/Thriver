@@ -18,7 +18,7 @@ Meteor.methods({
     check(opportunity.content, String);
 
     // First, ensure the opportunities array already exists
-    const data = Thriver.sections.get(id, ['data']).data;
+    const { data } = Thriver.sections.get(id, ['data']);
 
     const opp = opportunity;
 
@@ -53,9 +53,9 @@ Meteor.methods({
 
     // Remove opportunity
     Thriver.sections.collection.update({ _id: parentID }, {
-      $pull: {                     // pull
-        'data.opportunities': {    // from opportunities array
-          id: opportunityID,       // where ID equals opportunityID
+      $pull: {
+        'data.opportunities': {
+          id: opportunityID,
         },
       },
     });

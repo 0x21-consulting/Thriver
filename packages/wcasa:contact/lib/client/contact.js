@@ -61,7 +61,6 @@ Template.contact.events({
     Meteor.call('submitContactForm', name, email, comments, (error) => {
       if (error) {
         contactTemplate.set('failureContact');
-        console.error(error);
       } else {
         contactTemplate.set('thanksContact');
       }

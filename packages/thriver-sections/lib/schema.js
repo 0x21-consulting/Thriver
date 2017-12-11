@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Site sections namespace
  * @namespace Thriver.sections
@@ -59,8 +61,11 @@ Thriver.sections.schema = new SimpleSchema({
   },
   /** Section Tabs or subsections */
   children: {
-    type: [String],
+    type: Array,
     defaultValue: [],
+  },
+  'children.$': {
+    type: String,
   },
 });
 

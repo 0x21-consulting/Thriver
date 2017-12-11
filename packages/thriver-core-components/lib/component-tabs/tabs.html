@@ -19,13 +19,15 @@
             <article data-id="{{id}}" aria-hidden="{{#if isFirst}}false{{else}}true{{/if}}" data-editable="{{editable}}"
                 class="{{#if isAdmin}}admin{{/if}}">
                 {{#if isAdmin}}
-                    {{#if editable}}
-                        <aside class="admin">
-                            <button class="fa add">&#xf067;</button>
-                            <button class="fa edit">&#xf044;</button>
-                            <button class="fa delete">&#xf1f8;</button>
-                        </aside>
+                  <aside class="admin">
+                    {{#if addable}}
+                      <button class="fa add">&#xf067;</button>
                     {{/if}}
+                    {{#if editable}}
+                      <button class="fa edit">&#xf044;</button>
+                      <button class="fa delete">&#xf1f8;</button>
+                    {{/if}}
+                  </aside>
                 {{/if}}
                 {{> Template.dynamic template=template}}
             </article>

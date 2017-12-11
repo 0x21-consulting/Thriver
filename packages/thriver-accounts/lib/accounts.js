@@ -9,12 +9,26 @@ Meteor.startup(() => {
   if (mail instanceof Object) {
     url = `smtp://${
       encodeURIComponent(mail.username)
-        }:${mail.password
-        }@${mail.host
-        }:${mail.port}`;
+    }:${mail.password
+    }@${mail.host
+    }:${mail.port}`;
 
     process.env.MAIL_URL = url;
   }
+});
+
+/**
+ * Setup first user account as an administrator
+ */
+Accounts.onCreateUser((options, user) => {
+  const newUser = user;
+  if (!Meteor.users.find().count()) {
+    newUser.admin = true;
+  }
+  if (options.profile) {
+    newUser.profile = options.profile;
+  }
+  return newUser;
 });
 
 /**
@@ -53,7 +67,7 @@ Meteor.methods({
     let user = Meteor.users.find({ _id: id }, { emails: 1 }).fetch();
 
     // Validate user
-    user = user[0]; // break out of array
+    [user] = user; // break out of array
     if (!user || !(user.emails instanceof Array)) return;
 
     // Get organization based on user's email domain
@@ -64,8 +78,10 @@ Meteor.methods({
     // If there's a match, associate
     if (matches instanceof Array) {
       if (matches[0]._id) {
-        Meteor.users.update({ _id: user._id }, {
-          $set: { organization: matches[0]._id } });
+        Meteor.users.update(
+          { _id: user._id },
+          { $set: { organization: matches[0]._id } },
+        );
       }
     }
 
@@ -88,7 +104,7 @@ Meteor.methods({
     let organization = Organizations.find({ _id: Meteor.user().organization })
       .fetch();
 
-    organization = organization[0]; // break out of array
+    [organization] = organization; // break out of array
 
     if (organization && organization.name) return organization.name;
 

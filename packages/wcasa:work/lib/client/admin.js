@@ -16,8 +16,8 @@ const handler = (event) => {
   }
 
   // Get section ID
-  const target = event.target;
-  const id = target.parentElement.parentElement.dataset.id;
+  const { target } = event;
+  const { id } = target.parentElement.parentElement.dataset;
   const name = target.textContent;
 
   // Remove editability
@@ -55,8 +55,8 @@ const updateSectionContent = (oldHash) => {
     const parent = event.target.parentElement;
 
     // Get section ID
-    const target = event.target;
-    const id = target.parentElement.parentElement.dataset.id;
+    const { target } = event;
+    const { id } = target.parentElement.parentElement.dataset;
     const content = target.parentElement.querySelector('textarea').value;
     const newHash = SHA256(content);
 
@@ -99,14 +99,16 @@ Template.workNav.events({
     // Determine index
     const index = elems.length;
 
-    Meteor.call('addSection', 'article', index, parent.dataset.id, 'Unnamed Page',
+    Meteor.call(
+      'addSection', 'article', index, parent.dataset.id, 'Unnamed Page',
       (error, id) => {
         Template.workListItem.onRendered(() => {
           // Let's be helpful and navigate to the new page
           const link = document.querySelector(`li[data-id="${id}"] > a`);
           link.click();
         });
-      });
+      },
+    );
   },
 });
 
@@ -122,7 +124,7 @@ Template.workContent.events({
     event.preventDefault();
     event.stopPropagation();
 
-    const target = event.target;
+    const { target } = event;
 
     // Make content editable to allow user to change
     target.contentEditable = true;
@@ -140,7 +142,7 @@ Template.workContent.events({
    * @method
    *   @param {$.Event} event - jQuery Event handle
    */
-  'click header button.delete': function (event) {
+  'click header button.delete': function deleteSection(event) {
     // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
@@ -148,8 +150,9 @@ Template.workContent.events({
     event.stopPropagation();
 
     // Get Nav link
-    const link = event.delegateTarget.parentElement.querySelector(
-      `menu [data-id="${this.id}"]`).parentElement.parentElement;
+    const link = event.delegateTarget.parentElement
+      .querySelector(`menu [data-id="${this.id}"]`)
+      .parentElement.parentElement;
 
     let parent;
 
@@ -161,7 +164,7 @@ Template.workContent.events({
     }
 
     // Warn
-    if (!confirm('Are you sure you want to delete this section?')) return;
+    if (!window.confirm('Are you sure you want to delete this section?')) return;
 
     // First, remove reference to parent element
     // first parameter is parent ID, second this ID
@@ -176,7 +179,7 @@ Template.workContent.events({
    * @method
    *   @param {$.Event} event - jQuery event handler
    */
-  'click header button.edit': function (event) {
+  'click header button.edit': function editSectionMarkdown(event) {
     // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
@@ -196,9 +199,11 @@ Template.workContent.events({
 
     button.textContent = 'Save';
     button.classList.add('save');
-    button.addEventListener('mouseup',
+    button.addEventListener(
+      'mouseup',
       // Pass along hash of existing markdown
-      updateSectionContent(content.dataset.hash));
+      updateSectionContent(content.dataset.hash),
+    );
 
     // Button to cancel edit
     const cancel = document.createElement('button');

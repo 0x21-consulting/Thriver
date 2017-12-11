@@ -7,7 +7,7 @@ const handler = (event) => {
   check(event, Event);
   event.stopPropagation();
 
-  const target = event.target;
+  const { target } = event;
 
   if (event.which) {
     if (event.which === 13) {
@@ -83,13 +83,13 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click aside.admin button.oppDelete': function (event) {
+  'click aside.admin button.oppDelete': function deleteOpportunity(event) {
     // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
-    const id = Template.parentData().id;
+    const { id } = Template.parentData();
 
-    if (confirm('Are you sure you want to delete this opportunity?')) {
+    if (window.confirm('Are you sure you want to delete this opportunity?')) {
       Meteor.call('deleteOpportunity', id, this.id);
     }
   },
@@ -99,7 +99,7 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click aside.admin button.oppEdit': function (event) {
+  'click aside.admin button.oppEdit': function editOpportunity(event) {
     // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
@@ -116,8 +116,10 @@ Template.list.events({
     // Button by which to okay changes and commit to db
     const button = document.createElement('button');
     button.textContent = 'Save';
-    button.addEventListener('mouseup',
-      updateSectionContent(SHA256(this.content), parentID, this.id));
+    button.addEventListener(
+      'mouseup',
+      updateSectionContent(SHA256(this.content), parentID, this.id),
+    );
 
     // Textarea should get markdown
     for (let i = 0; i < data.length; i += 1) {

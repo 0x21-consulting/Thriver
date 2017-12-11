@@ -23,7 +23,7 @@ Meteor.methods({
    *   @param {string} name     - Initial section name (optional)
    */
   addSection: (template, index, parent, name) => {
-      // Check Authorization
+    // Check Authorization
     if (!Meteor.userId() || !Meteor.user().admin) {
       throw new Meteor.Error('not-authorized');
     }
@@ -34,28 +34,30 @@ Meteor.methods({
     check(parent, Match.Maybe(String));
     check(name, Match.Maybe(String));
 
-      // Add new section
-    return Thriver.sections.collection.insert({
-      name: name || null,
-      template,
-      order: index,
-      displayOnPage: !parent,
-    },
+    // Add new section
+    return Thriver.sections.collection.insert(
+      {
+        name: name || null,
+        template,
+        order: index,
+        displayOnPage: !parent,
+      },
 
-    // Update parent section, if there is one, to include section
-    (error, id) => {
-      if (error) throw new Meteor.Error(error);
+      // Update parent section, if there is one, to include section
+      (error, id) => {
+        if (error) throw new Meteor.Error(error);
 
-      // If no parent, do nothing
-      if (!parent) return;
+        // If no parent, do nothing
+        if (!parent) return;
 
-      // Update parent element to include new child
-      Thriver.sections.collection.update({ _id: parent }, {
-        $addToSet: {
-          children: id,
-        },
-      });
-    });
+        // Update parent element to include new child
+        Thriver.sections.collection.update({ _id: parent }, {
+          $addToSet: {
+            children: id,
+          },
+        });
+      },
+    );
   },
 
   /**
@@ -95,14 +97,12 @@ Meteor.methods({
     check(id, String);
 
     // Delete any tabs
-    let children = Thriver.sections.get(id, ['children']);
+    const children = Thriver.sections.get(id, ['children']);
 
     if (children && children.children instanceof Array) {
-      children = children.children;
-
       // Remove each tab, one at a time
-      for (let i = 0; i < children.length; i += 1) {
-        Thriver.sections.collection.remove({ _id: children[i] });
+      for (let i = 0; i < children.children.length; i += 1) {
+        Thriver.sections.collection.remove({ _id: children.children[i] });
       }
     }
 

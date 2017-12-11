@@ -5,8 +5,10 @@ Template.upcomingEvents.helpers({
    * @function
    * @returns {Mongo.Collection}
    */
-  upcomingEvents: Thriver.events.collection.find({ start: { $gt: new Date() } },
-    { sort: { start: 1 }, limit: 5 }),
+  upcomingEvents: Thriver.events.collection.find(
+    { start: { $gt: new Date() } },
+    { sort: { start: 1 }, limit: 5 },
+  ),
 });
 
 // Upcoming Event item Helpers
@@ -363,7 +365,7 @@ Template.events.helpers({
 });
 
 // Don't show registration for events which occur in the past
-const pastEvent = function () {
+const pastEvent = function pastEvent() {
   // If there is an end date, has the end date passed?
   if (this.end) {
     if (this.end < new Date()) return true;

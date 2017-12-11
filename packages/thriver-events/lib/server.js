@@ -2,7 +2,7 @@
 Meteor.publish('events', () => Thriver.events.collection.find({}));
 
 // Publish Registrations
-Meteor.publish('registrations', function (eventId) {
+Meteor.publish('registrations', function publishRegistrations(eventId) {
   // Check authorization
   if (!this.userId || !Meteor.users.findOne({ _id: this.userId }).admin) {
     throw new Meteor.Error('not-authorized');
@@ -58,10 +58,13 @@ Meteor.methods({
     check(event, Object);
 
     // Perform update
-    Thriver.events.collection.update({ _id: event._id }, { $set: event },
+    Thriver.events.collection.update(
+      { _id: event._id },
+      { $set: event },
       (error) => {
         if (error) throw new Meteor.Error(error);
-      });
+      },
+    );
   },
 
   /**
@@ -98,12 +101,14 @@ Meteor.methods({
     if (!id) throw new Meteor.Error('You must be logged in to register for an event.');
 
     // Update user profile
-    Meteor.users.update({ _id: id }, { $push: {
-      'profile.events.registeredEvents': {
-        id: event,
-        details,
+    Meteor.users.update({ _id: id }, {
+      $push: {
+        'profile.events.registeredEvents': {
+          id: event,
+          details,
+        },
       },
-    } });
+    });
   },
 
   /**
@@ -120,8 +125,10 @@ Meteor.methods({
     if (!id) throw new Meteor.Error('You must be logged in to unregister from an event.');
 
     // Update user profile
-    Meteor.users.update({ _id: id }, { $pull: {
-      'profile.events.registeredEvents': { id: event },
-    } });
+    Meteor.users.update({ _id: id }, {
+      $pull: {
+        'profile.events.registeredEvents': { id: event },
+      },
+    });
   },
 });

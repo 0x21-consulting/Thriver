@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary History and Location namespace
  * @namespace Thriver.history
@@ -62,8 +64,8 @@ Thriver.history.registry.attachSchema(Thriver.history.schema);
  */
 Thriver.history.updateLocation = () => {
   // Don't include special-access sections, since they're not visible on page
-  const elements = Thriver.history.registry.find({
-    accessFunction: { $exists: false } }).fetch();
+  const elements = Thriver.history.registry
+    .find({ accessFunction: { $exists: false } }).fetch();
 
   const links = document.querySelectorAll('nav.mainNav a');
   const sections = document.querySelectorAll('main > section');
@@ -72,12 +74,22 @@ Thriver.history.updateLocation = () => {
 
   // For each registered section, get its Y coordinate
   for (let i = 0; i < elements.length; i += 1) {
-    elements[i].y = document.querySelector(`#${elements[i].element}`).offsetTop;
-    elements[i].h = document.querySelector(`#${elements[i].element}`).offsetHeight;
+    const elem = document.querySelector(`#${elements[i].element}`);
+    if (elem) {
+      elements[i].y = elem.offsetTop;
+      elements[i].h = elem.offsetHeight;
+    }
   }
 
   // For masthead and everything before first registered section
-  elements.unshift({ element: '', y: 0, h: elements[0].y, currentPath: '' });
+  if (elements[0]) {
+    elements.unshift({
+      element: '',
+      y: 0,
+      h: elements[0].y,
+      currentPath: '',
+    });
+  }
 
   // Does the current scroll position match with any element?
   for (let i = 0; i < elements.length; i += 1) {
@@ -138,13 +150,15 @@ Thriver.history.update = (section, path) => {
   check(section, String);
   check(path, String);
 
-  // Update collection with new path
-  Thriver.history.registry.update({ element: section }, {
-    $set: { currentPath: path },
-  });
+  if (section.length && path.length) {
+    // Update collection with new path
+    Thriver.history.registry.update({ element: section }, {
+      $set: { currentPath: path },
+    });
 
-  // Update URI
-  Thriver.history.updateLocationBar(path);
+    // Update URI
+    Thriver.history.updateLocationBar(path);
+  }
 };
 
 /**

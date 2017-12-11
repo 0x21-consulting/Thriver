@@ -20,7 +20,7 @@ const getOffsetTop = (element) => {
  * @method
  *   @param {Event} event
  */
-const setTemplate = () => {
+const setTemplate = (event) => {
   const placeholder = document.querySelector('.placeholder');
   const menu = document.querySelector('#templates-menu');
   let parent;
@@ -32,7 +32,7 @@ const setTemplate = () => {
 
   // Determine placeholder's parent
   if (placeholder instanceof Element && placeholder.dataset.parent) {
-    parent = placeholder.dataset.parent;
+    parent = placeholder.dataset.parent; // eslint-disable-line prefer-destructuring
     elements = document.querySelectorAll(`[data-id="${parent}"] > menu li`);
   }
 
@@ -184,7 +184,7 @@ const placeholder = (event) => {
   const offsetTop = getOffsetTop(target);
 
   // Not every section has a parent section, so undefined is OK here
-  const parent = target.dataset.parent;
+  const { parent } = target.dataset;
 
   // Create a new section
   const section = new Section(parent);

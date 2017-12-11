@@ -24,8 +24,8 @@ Template.notifications.helpers({
     const notifs = Thriver.notifications.collection.find({}).fetch();
 
     // Ation alerts since last login
-    const alerts = Thriver.newsroom.collection.find(
-      { date: { $gt: Thriver.lastLogin.get() } }).fetch();
+    const alerts = Thriver.newsroom.collection
+      .find({ date: { $gt: Thriver.lastLogin.get() } }).fetch();
 
     // Combination
     const all = notifs.concat(alerts);

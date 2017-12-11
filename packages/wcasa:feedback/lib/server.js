@@ -2,7 +2,7 @@
  * @summary Publish feedback to admin interface
  * @method
  */
-Meteor.publish('feedback', function () {
+Meteor.publish('feedback', function publishFeedback() {
   // Publish
   if (this.userId && Meteor.users.findOne({ _id: this.userId }).admin) {
     return Thriver.feedback.collection.find();

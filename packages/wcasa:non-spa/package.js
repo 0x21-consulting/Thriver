@@ -32,7 +32,7 @@ Package.onUse((api) => {
     'lib/client/post.js',
   ], ['client']);
 
-// Server processing
+  // Server processing
   api.addFiles([
 
   ], ['server']);

@@ -58,7 +58,7 @@ Template.eventsRegistered.events({
    * @summary Unregister from an event
    * @method
    */
-  'click button.unregister': function () {
+  'click button.unregister': function unregister() {
     Meteor.call('unregisterEvent', this.id);
   },
 
