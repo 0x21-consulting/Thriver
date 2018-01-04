@@ -141,4 +141,5 @@ Router.route('file-open', {
  */
 Router.configure({
   layoutTemplate: 'canvas',
+  noRoutesTemplate: false,
 });

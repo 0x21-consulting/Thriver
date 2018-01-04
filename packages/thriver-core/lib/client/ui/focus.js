@@ -9,11 +9,13 @@ Thriver.focus = {};
 
 // Focusable Variables
 Thriver.focus.focusable = 'a[href], area[href], input, select, textarea, button, iframe, object, embed, *[tabindex], *[contenteditable]';
-Thriver.focus.globalFocusGroup = $('[data-focus="global"]').find(Thriver.focus.focusable);
+Thriver.focus.globalFocusGroup = Array.from($('[data-focus="global"]')
+  .find(Thriver.focus.focusable));
 [Thriver.focus.focusGlobalElFirst] = Thriver.focus.globalFocusGroup;
 Thriver.focus.focusGlobalElLast =
   Thriver.focus.globalFocusGroup[Thriver.focus.globalFocusGroup.length - 1];
-Thriver.focus.activeFocusGroup = $('[aria-hidden="false"][data-focus="group"]').find(Thriver.focus.focusable);
+Thriver.focus.activeFocusGroup = Array.from($('[aria-hidden="false"][data-focus="group"]')
+  .find(Thriver.focus.focusable));
 [Thriver.focus.focusGroupElFirst] = Thriver.focus.activeFocusGroup;
 Thriver.focus.focusGroupElLast =
   Thriver.focus.activeFocusGroup[Thriver.focus.activeFocusGroup.length - 1];
