@@ -1,8 +1,26 @@
+/**
+ * @description 
+ *  Update user profile field. Makes a call to the backend
+ *  with a property it has to update and the new value
+ * @method
+ *  @param {any} fieldName
+ *  @param {any} fieldValue
+ */
+const updateProfileField = (fieldName, fieldValue) => {
+  const profile = {};
+  profile[fieldName] = fieldValue;
+
+  Meteor.call('updateUserProfile', profile, (error) => {
+    if (error) console.log(error);
+  });
+};
+
 // Helpers
 Template.profile.helpers({
   // Populate Profile tab under Account Overview
   heading: 'Profile Overview',
   submitValue: 'Update Account',
+  dieteryRestrictions: ['Vegan', 'Vegetarian', 'Pescetarian'],
 
   /**
    * @summary Pass user context to profile form
@@ -21,52 +39,21 @@ Template.profile.helpers({
     'profile.events.registeredEvents',
     'profile.online',
   ],
+  getArianSelectedAttribute: (arg1, arg2) => (arg1 === arg2 ? 'selected' : null),
 });
 
 // Events
 Template.profile.events({
-  'submit form': (event) => {
-    check(event, $.Event);
-
-    // Prevent Navigation
-    event.preventDefault();
-    event.stopPropagation();
-
-    // Get form
-    const profileForm = event.target;
-
-    // Get form fields
-    const firstname = profileForm.firstName.value;
-    const lastname = profileForm.lastName.value;
-    const title = profileForm.jobTitle.value;
-    const address1 = profileForm.address1.value;
-    const address2 = profileForm.address2.value;
-    const city = profileForm.city.value;
-    const state = profileForm.state.value;
-    const zip = profileForm.zipCode.value;
-    const telephone = profileForm.telephone.value;
-
-    const updatedUser = {
-      profile: {
-        firstname,
-        lastname,
-        zip,
-        city,
-        address1,
-        address2,
-        state,
-        telephone,
-        title,
-      },
-    };
-
-    // TODO: Fetch the toggle-ables
-
-    // Update database
-    Meteor.call('updateUser', updatedUser, (error, result) => {
-      if (error) console.log(error);
-
-        console.log(result);
-    });
+  'blur input[type="text"][name*="profile."]': (event) => {
+    // Handle events for input boxes
+    updateProfileField(event.target.name, event.target.value);
+  },
+  'click input[type="checkbox"][name*="profile."]': (event) => {
+    // Handle events for checkboxes
+    updateProfileField(event.target.name, event.target.checked);
+  },
+  'change select[name*="profile."]': (event) => {
+    // Handle evetns for select elements
+    updateProfileField(event.target.name, event.target.value);
   },
 });

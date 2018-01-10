@@ -10,37 +10,37 @@
     </div>
     {{/each}}
     <div class="form-group">
-      <label for="firstName" class="control-label">First Name</label>
-      <input type="text" name="firstName" class="form-control" value="{{ user.profile.firstname }}">
+      <label for="profile.firstName" class="control-label">First Name</label>
+      <input type="text" name="profile.firstname" class="form-control" value="{{ user.profile.firstname }}">
     </div>
     <div class="form-group">
-      <label for="lasttName" class="control-label">Last Name</label>
-      <input type="text" name="lastName" class="form-control" value="{{ user.profile.lastname }}">
+      <label for="profile.lasttName" class="control-label">Last Name</label>
+      <input type="text" name="profile.lastname" class="form-control" value="{{ user.profile.lastname }}">
     </div>
     <div class="form-group">
-      <label for="jobTitle" class="control-label">Job Title</label>
-      <input type="text" name="jobTitle" class="form-control" value="{{ user.profile.title }}">
+      <label for="profile.title" class="control-label">Job Title</label>
+      <input type="text" name="profile.title" class="form-control" value="{{ user.profile.title }}">
     </div>
     <div class="form-group">
-      <label for="address1" class="control-label">Address</label>
-      <input type="text" name="address1" class="form-control" value="{{ user.profile.address1 }}">
-      <input type="text" name="address2" class="form-control" value="{{ user.profile.address2 }}">
+      <label for="profile.address1" class="control-label">Address</label>
+      <input type="text" name="profile.address1" class="form-control" value="{{ user.profile.address1 }}">
+      <input type="text" name="profile.address2" class="form-control" value="{{ user.profile.address2 }}">
     </div>
     <div class="form-group">
-      <label for="city" class="control-label">City</label>
-      <input type="text" name="city" class="form-control" value="{{ user.profile.city }}">
+      <label for="profile.city" class="control-label">City</label>
+      <input type="text" name="profile.city" class="form-control" value="{{ user.profile.city }}">
     </div>
     <div class="form-group">
-      <label for="state" class="control-label">State</label>
-      <input type="text" maxlength="2" name="state" class="form-control" value="{{ user.profile.state }}">
+      <label for="profile.state" class="control-label">State</label>
+      <input type="text" maxlength="2" name="profile.state" class="form-control" value="{{ user.profile.state }}">
     </div>
     <div class="form-group">
-      <label for="zipCode" class="control-label">ZIP Code</label>
-      <input type="text" maxlength="10" name="zipCode" class="form-control" value="{{ user.profile.zip }}">
+      <label for="profile.zip" class="control-label">ZIP Code</label>
+      <input type="text" maxlength="10" name="profile.zip" class="form-control" value="{{ user.profile.zip }}">
     </div>
     <div class="form-group">
-      <label for="telephone" class="control-label">Telephone</label>
-      <input type="tel" maxlength="10" name="telephone" class="form-control" value="{{ user.profile.telephone }}">
+      <label for="profile.telephone" class="control-label">Telephone</label>
+      <input type="tel" maxlength="10" name="profile.telephone" class="form-control" value="{{ user.profile.telephone }}">
     </div>
     <header>
       <h2>I am</h2>
@@ -52,35 +52,49 @@
             Gluten Free
           </label>
           <div class="toggleSwitch">
-            <input id="glutenFree" type="checkbox" checked="{{user.profile.events.diet.glutenFree}}">
+            <input id="glutenFree" type="checkbox" name="profile.events.diet.glutenFree" checked="{{user.profile.events.diet.glutenFree}}">
             <label for="glutenFree" role="checkbox" aria-checked="{{user.profile.events.diet.glutenFree}}"></label>
           </div>
         </li>
         <li>
           <label for="lactose" class="toggleSwitchLabel">
-            Lactose Intollerant
+            Lactose Intolerant
           </label>
           <div class="toggleSwitch">
-            <input id="lactose" type="checkbox" checked="{{user.profile.events.diet.lactose}}">
+            <input id="lactose" type="checkbox" name="profile.events.diet.lactose" checked="{{user.profile.events.diet.lactose}}">
             <label for="lactose" role="checkbox" aria-checked="{{user.profile.events.diet.lactose}}"></label>
           </div>
         </li>
         <li>
-          <label for="lactose" class="toggleSwitchLabel">
+          <label for="ovo" class="toggleSwitchLabel">
             Ovo
           </label>
           <div class="toggleSwitch">
-            <input id="ovo" type="checkbox" checked="{{user.profile.events.diet.ovo}}">
+            <input id="ovo" type="checkbox" name="profile.events.diet.ovo" checked="{{user.profile.events.diet.ovo}}">
             <label for="ovo" role="checkbox" aria-checked="{{user.profile.events.diet.ovo}}"></label>
           </div>
         </li>
         <li>
-          <label for="lactose" class="toggleSwitchLabel">
+          <label for="lacto" class="toggleSwitchLabel">
             Lacto
           </label>
           <div class="toggleSwitch">
-            <input id="lacto" type="checkbox" checked="{{user.profile.events.diet.lacto}}">
+            <input id="lacto" type="checkbox" name="profile.events.diet.lacto" checked="{{user.profile.events.diet.lacto}}">
             <label for="lacto" role="checkbox" aria-checked="{{user.profile.events.diet.lacto}}"></label>
+          </div>
+        </li>
+        <li>
+          <div class="form-group">
+            <label for="dieteryRestrictions" class="control-label"></label>
+            <div class="styledSelect fullBlockMob">
+              <label for="profile.events.diet.arian">{{user.profile.events.diet.arian}}</label>
+              <select name="profile.events.diet.arian" id="dieteryRestrictions" autocomplete="off">
+                <option value>(Select One)</option>
+                {{ #each dieteryRestrictions }}
+                <option value="{{ this }}" {{getArianSelectedAttribute user.profile.events.diet.arian this }}>{{ this }}</option>
+                {{ /each }}
+              </select>
+            </div>
           </div>
         </li>
       </ul>
@@ -95,7 +109,7 @@
             Peanut
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-peanut" type="checkbox" checked="{{user.profile.events.diet.allergies.peanut}}">
+            <input id="alergies-peanut" type="checkbox" name="profile.events.diet.allergies.peanut" checked="{{user.profile.events.diet.allergies.peanut}}">
             <label for="alergies-peanut" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.peanut}}"></label>
           </div>
         </li>
@@ -104,7 +118,7 @@
             Milk
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-milk" type="checkbox" checked="{{user.profile.events.diet.allergies.milk}}">
+            <input id="alergies-milk" type="checkbox" name="profile.events.diet.allergies.milk" checked="{{user.profile.events.diet.allergies.milk}}">
             <label for="alergies-milk" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.milk}}"></label>
           </div>
         </li>
@@ -113,7 +127,7 @@
             Egg
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-egg" type="checkbox" checked="{{user.profile.events.diet.allergies.egg}}">
+            <input id="alergies-egg" type="checkbox" name="profile.events.diet.allergies.egg" checked="{{user.profile.events.diet.allergies.egg}}">
             <label for="alergies-egg" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.egg}}"></label>
           </div>
         </li>
@@ -122,7 +136,7 @@
             Wheat
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-wheat" type="checkbox" checked="{{user.profile.events.diet.allergies.wheat}}">
+            <input id="alergies-wheat" type="checkbox" name="profile.events.diet.allergies.wheat" checked="{{user.profile.events.diet.allergies.wheat}}">
             <label for="alergies-wheat" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.wheat}}"></label>
           </div>
         </li>
@@ -131,7 +145,7 @@
             Soy
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-soy" type="checkbox" checked="{{user.profile.events.diet.allergies.soy}}">
+            <input id="alergies-soy" type="checkbox" name="profile.events.diet.allergies.soy" checked="{{user.profile.events.diet.allergies.soy}}">
             <label for="alergies-soy" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.soy}}"></label>
           </div>
         </li>
@@ -140,7 +154,7 @@
             Fish
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-fish" type="checkbox" checked="{{user.profile.events.diet.allergies.fish}}">
+            <input id="alergies-fish" type="checkbox" name="profile.events.diet.allergies.fish" checked="{{user.profile.events.diet.allergies.fish}}">
             <label for="alergies-fish" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.fish}}"></label>
           </div>
         </li>
@@ -149,18 +163,15 @@
             Shellfish
           </label>
           <div class="toggleSwitch">
-            <input id="alergies-shellfish" type="checkbox" checked="{{user.profile.events.diet.allergies.shellfish}}">
+            <input id="alergies-shellfish" type="checkbox" name="profile.events.diet.allergies.shellfish" checked="{{user.profile.events.diet.allergies.shellfish}}">
             <label for="alergies-shellfish" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.shellfish}}"></label>
           </div>
         </li>
       </ul>
     </div>
-    <div class="form-group">
-      <input type="submit" name="submitButton" value="Update Profile" />
-    </div>
   </form>
 
   <!-- TODO Fix  -->
- {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update" omitFields=omitFields fields="profile" validation="browser"
-  buttonContent=submitValue}} 
+ <!-- {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update" omitFields=omitFields fields="profile" validation="browser"
+  buttonContent=submitValue}}  -->
 </template>
