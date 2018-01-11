@@ -21,6 +21,7 @@ Template.profile.helpers({
   heading: 'Profile Overview',
   submitValue: 'Update Account',
   dieteryRestrictions: ['Vegan', 'Vegetarian', 'Pescetarian'],
+  emergencyRelationshipChoices: ['Parent', 'Child', 'Sibling', 'Partner', 'Relative', 'Other'],
 
   /**
    * @summary Pass user context to profile form
@@ -45,6 +46,10 @@ Template.profile.helpers({
 // Events
 Template.profile.events({
   'blur input[type="text"][name*="profile."]': (event) => {
+    // Handle events for input boxes
+    updateProfileField(event.target.name, event.target.value);
+  },
+  'blur textarea[name*="profile."]': (event) => {
     // Handle events for input boxes
     updateProfileField(event.target.name, event.target.value);
   },
