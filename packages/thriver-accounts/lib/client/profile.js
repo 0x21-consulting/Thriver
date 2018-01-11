@@ -1,5 +1,5 @@
 /**
- * @description 
+ * @description
  *  Update user profile field. Makes a call to the backend
  *  with a property it has to update and the new value
  * @method
