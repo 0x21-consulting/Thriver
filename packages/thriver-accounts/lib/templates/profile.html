@@ -4,44 +4,44 @@
       <h2>{{heading}}</h2>
     </header>
     <div class="form-group-container">
-      {{ #each user.emails}}
+      {{#each user.emails}}
       <div class="form-group">
-        <label for="userEmail{{@index}}" class="control-label">Email {{ verified }}</label>
-        <input type="text" name="userEmail{{@index}}" class="form-control" value="{{ address }}" disabled>
+        <label for="userEmail{{@index}}" class="control-label">Email {{verified}}</label>
+        <input type="text" name="userEmail{{@index}}" class="form-control" value="{{address}}" disabled>
       </div>
       {{/each}}
       <div class="form-group">
         <label for="profile.firstName" class="control-label">First Name</label>
-        <input type="text" name="profile.firstname" class="form-control" value="{{ user.profile.firstname }}">
+        <input type="text" name="profile.firstname" class="form-control" value="{{user.profile.firstname}}">
       </div>
       <div class="form-group">
         <label for="profile.lasttName" class="control-label">Last Name</label>
-        <input type="text" name="profile.lastname" class="form-control" value="{{ user.profile.lastname }}">
+        <input type="text" name="profile.lastname" class="form-control" value="{{user.profile.lastname}}">
       </div>
       <div class="form-group">
         <label for="profile.title" class="control-label">Job Title</label>
-        <input type="text" name="profile.title" class="form-control" value="{{ user.profile.title }}">
+        <input type="text" name="profile.title" class="form-control" value="{{user.profile.title}}">
       </div>
       <div class="form-group">
         <label for="profile.address1" class="control-label">Address</label>
-        <input type="text" name="profile.address1" class="form-control" value="{{ user.profile.address1 }}">
-        <input type="text" name="profile.address2" class="form-control" value="{{ user.profile.address2 }}">
+        <input type="text" name="profile.address1" class="form-control" value="{{user.profile.address1}}">
+        <input type="text" name="profile.address2" class="form-control" value="{{user.profile.address2}}">
       </div>
       <div class="form-group">
         <label for="profile.city" class="control-label">City</label>
-        <input type="text" name="profile.city" class="form-control" value="{{ user.profile.city }}">
+        <input type="text" name="profile.city" class="form-control" value="{{user.profile.city}}">
       </div>
       <div class="form-group">
         <label for="profile.state" class="control-label">State</label>
-        <input type="text" maxlength="2" name="profile.state" class="form-control" value="{{ user.profile.state }}">
+        <input type="text" maxlength="2" name="profile.state" class="form-control" value="{{user.profile.state}}">
       </div>
       <div class="form-group">
         <label for="profile.zip" class="control-label">ZIP Code</label>
-        <input type="text" maxlength="10" name="profile.zip" class="form-control" value="{{ user.profile.zip }}">
+        <input type="text" maxlength="10" name="profile.zip" class="form-control" value="{{user.profile.zip}}">
       </div>
       <div class="form-group">
         <label for="profile.telephone" class="control-label">Telephone</label>
-        <input type="tel" maxlength="10" name="profile.telephone" class="form-control" value="{{ user.profile.telephone }}">
+        <input type="tel" maxlength="10" name="profile.telephone" class="form-control" value="{{user.profile.telephone}}">
       </div>
     </div>
     <header>
@@ -93,9 +93,9 @@
         <div class="styledSelect fullBlockMob">
           <select name="profile.events.diet.arian" id="dieteryRestrictions">
             <option value> - Select One - </option>
-            {{ #each dieteryRestrictions }}
-            <option value="{{ this }}" {{getArianSelectedAttribute user.profile.events.diet.arian this }}>{{ this }}</option>
-            {{ /each }}
+            {{#each dieteryRestrictions}}
+            <option value="{{this}}" {{getArianSelectedAttribute user.profile.events.diet.arian this}}>{{this}}</option>
+            {{/each}}
           </select>
         </div>
       </div>
@@ -180,22 +180,22 @@
       </div>
       <div class="form-group">
         <label for="profile.events.emergencyName" class="control-label">Emergency Contact Name</label>
-        <input type="text" name="profile.events.emergencyName" class="form-control" value="{{ user.profile.events.emergencyName }}">
+        <input type="text" name="profile.events.emergencyName" class="form-control" value="{{user.profile.events.emergencyName}}">
       </div>
       <div class="form-group">
         <label for="profile.emergencyRelationship" class="control-label">Emergency Contact Relationship</label>
         <div class="styledSelect fullBlockMob">
           <select name="profile.events.emergencyRelationship" id="profile.emergencyRelationship">
             <option value> - Select One - </option>
-            {{ #each emergencyRelationshipChoices }}
-            <option value="{{ this }}" {{getArianSelectedAttribute user.profile.events.emergencyRelationship this }}>{{ this }}</option>
-            {{ /each }}
+            {{#each emergencyRelationshipChoices}}
+            <option value="{{this}}" {{getArianSelectedAttribute user.profile.events.emergencyRelationship this}}>{{this}}</option>
+            {{/each}}
           </select>
         </div>
       </div>
       <div class="form-group">
         <label for="profile.emergencyTelephone" class="control-label">Emergency Contact Name</label>
-        <input id="profile.emergencyTelephone" type="text" name="profile.events.emergencyTelephone" class="form-control" value="{{ user.profile.events.emergencyTelephone }}">
+        <input id="profile.emergencyTelephone" type="text" name="profile.events.emergencyTelephone" class="form-control" value="{{user.profile.events.emergencyTelephone}}">
       </div>
     </div>
   </form>
