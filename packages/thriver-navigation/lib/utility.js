@@ -88,7 +88,7 @@ Thriver.utilityNavigationHelpers = {
     user: 'public',
   }, {
     // Learning Center
-    title: 'Learning Center',
+    title: 'Resource Center',
     icon: 'institution',
     type: 'sidebar',
     sidebar: 'learning-center',

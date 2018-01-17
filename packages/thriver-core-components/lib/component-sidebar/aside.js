@@ -50,7 +50,7 @@ Template.aside.helpers({
     position: 'right',
     template: 'twitter',
   }, {
-    title: 'Learning Center',
+    title: 'Resource Center',
     icon: 'institution',
     id: 'learning-center',
     width: 700,
