@@ -69,7 +69,7 @@ Template.aside.helpers({
       template: 'webinars',
     }],
   }, {
-    title: 'Newsroom',
+    title: 'News',
     icon: 'news',
     id: 'newsroom',
     width: 700,

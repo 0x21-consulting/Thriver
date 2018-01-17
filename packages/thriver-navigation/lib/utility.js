@@ -96,7 +96,7 @@ Thriver.utilityNavigationHelpers = {
     user: 'public',
   }, {
     // News
-    title: 'Newsroom',
+    title: 'News',
     icon: 'news',
     type: 'sidebar',
     sidebar: 'newsroom',
