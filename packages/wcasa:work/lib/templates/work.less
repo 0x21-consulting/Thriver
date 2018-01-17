@@ -204,6 +204,10 @@ section.work .sa details{
 }
 //Nav Landing
 section.work .workNav{width: 100%;}
+section.work .main > .shadow-box{
+    &:before, &:after{ display: none; } //Correct Shadow Nav
+    box-shadow: none; -webkit-box-shadow:none;
+}
 section.work .workNav{
     .backToTopWork{
         display: none;
@@ -905,6 +909,7 @@ body.workActive section.work .main.container{
         //padding-right: 20px;
         //width: 661px;
         width: auto;
+        table tbody td:first-child{ white-space: nowrap; }
     }
 }
 
