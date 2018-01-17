@@ -91,7 +91,7 @@ Template.list.events({
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
-    if (window.confirm('Are you sure you want to delete this Newsroom Item?')) {
+    if (window.confirm('Are you sure you want to delete this News Item?')) {
       Meteor.call('deleteNewsItem', id);
     }
   },
