@@ -120,6 +120,14 @@ Template.workNav.helpers({
     return false;
   },
   tabs: getValue('children'),
+  childCount: () => {
+    const id = Template.instance().data.id || Template.instance().data._id;
+    const result = Thriver.sections.get(id, ['children']);
+    const count = result.children.length;
+    if (count % 4 === 0 || count % 4 >= 2) return 'grid-4';
+    return 'grid-3';
+  },
+
 });
 
 // Navigation
