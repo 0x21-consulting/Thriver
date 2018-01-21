@@ -1,22 +1,22 @@
 import SimpleSchema from 'simpl-schema';
 
 /**
- * @summary Learning Center namespace
+ * @summary Resource Center namespace
  * @namespace Thriver.newsroom
  */
-Thriver.learningCenter = {};
+Thriver.resourceCenter = {};
 
 /**
- * @summary Learning Center collection
+ * @summary Resource Center collection
  * @type {Mongo.Collection}
  */
-Thriver.learningCenter.collection = new Mongo.Collection('learningCenter');
+Thriver.resourceCenter.collection = new Mongo.Collection('learningCenter');
 
 /**
- * @summary Learning Center Schema
+ * @summary Resource Center Schema
  * @type {SimpleSchema}
  */
-Thriver.learningCenter.schema = new SimpleSchema({
+Thriver.resourceCenter.schema = new SimpleSchema({
   /** ID */
   _id: {
     type: String,
@@ -72,4 +72,4 @@ Thriver.learningCenter.schema = new SimpleSchema({
 });
 
 // Apply schema to collection
-Thriver.learningCenter.collection.attachSchema(Thriver.learningCenter.schema);
+Thriver.resourceCenter.collection.attachSchema(Thriver.resourceCenter.schema);

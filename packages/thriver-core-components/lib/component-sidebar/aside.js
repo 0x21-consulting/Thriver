@@ -52,7 +52,7 @@ Template.aside.helpers({
   }, {
     title: 'Resource Center',
     icon: 'institution',
-    id: 'learning-center',
+    id: 'resource-center',
     width: 700,
     position: 'right',
     filter: 'true',
@@ -71,7 +71,7 @@ Template.aside.helpers({
   }, {
     title: 'News',
     icon: 'news',
-    id: 'newsroom',
+    id: 'news',
     width: 700,
     position: 'right',
     filter: 'true',

@@ -1,8 +1,8 @@
 // How many list items to load
-Thriver.learningCenter.quantity = new ReactiveVar(5);
+Thriver.resourceCenter.quantity = new ReactiveVar(5);
 
 // Regular Expression for Search field
-Thriver.learningCenter.search = new ReactiveVar();
+Thriver.resourceCenter.search = new ReactiveVar();
 
 /**
  * Handle searching
@@ -13,10 +13,10 @@ const handleSearch = (event) => {
   const { value } = event.target;
 
   // If field is empty, clear reactive search variable
-  if (value.length === 0) Thriver.learningCenter.search.set();
+  if (value.length === 0) Thriver.resourceCenter.search.set();
 
   // Otherwise, create RegExp for searching fields
-  else Thriver.learningCenter.search.set(new RegExp(`.*${value}.*`, 'gi'));
+  else Thriver.resourceCenter.search.set(new RegExp(`.*${value}.*`, 'gi'));
 };
 
 // Subscriptions
@@ -30,19 +30,19 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #learning-center li.loadMore button': (event) => {
+  'click #resource-center li.loadMore button': (event) => {
     check(event, $.Event);
     // No check on event.target because of old browser compatibility
 
     // Get all results
-    Thriver.learningCenter.quantity.set(0);
+    Thriver.resourceCenter.quantity.set(0);
 
     // Hide "Load More Results" button for entire section
-    const buttons = document.querySelectorAll('#learning-center li.loadMore button');
+    const buttons = document.querySelectorAll('#resource-center li.loadMore button');
     for (let i = 0; i < buttons.length; i += 1) buttons[i].classList.add('hide');
 
     // Show "everything" text
-    const texts = document.querySelectorAll('#learning-center .everything');
+    const texts = document.querySelectorAll('#resource-center .everything');
     for (let i = 0; i < texts.length; i += 1) texts[i].classList.remove('hide');
   },
 
@@ -62,11 +62,11 @@ Template.aside.events({
   },
 
   /**
-   * @summary Toggle Add Learning Center Item form
+   * @summary Toggle Add Resource Center Item form
    * @method
    *   @param {$.Event} event
    */
-  'click #learning-center aside.admin button.add': (event) => {
+  'click #resource-center aside.admin button.add': (event) => {
     check(event, $.Event);
 
     // Show form
@@ -79,7 +79,7 @@ Template.aside.events({
 // Administrative events
 Template.list.events({
   /**
-   * @summary Delete a Learning Center item
+   * @summary Delete a Resource Center item
    * @method
    *   @param {$.Event} event
    */
@@ -89,8 +89,8 @@ Template.list.events({
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
-    if (window.confirm('Are you sure you want to delete this Learning Center Item?')) {
-      Meteor.call('deleteLearningCenterItem', id);
+    if (window.confirm('Are you sure you want to delete this Resource Center Item?')) {
+      Meteor.call('deleteResourceCenterItem', id);
     }
   },
 });

@@ -6,14 +6,14 @@ Template.inTheNews.helpers({
     style: 'stripes',
     tag: 'news',
     items: () =>
-      Thriver.newsroom.collection.find({
+      Thriver.news.collection.find({
         type: 'inTheNews',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
-          { title: Thriver.newsroom.search.get() },
-          { publisher: Thriver.newsroom.search.get() },
+        $or: Thriver.news.search.get() instanceof RegExp ? [
+          { title: Thriver.news.search.get() },
+          { publisher: Thriver.news.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.newsroom.quantity.get(),
+        limit: Thriver.news.quantity.get(),
         sort: { date: -1 },
       }),
   }],
@@ -27,14 +27,14 @@ Template.actionAlerts.helpers({
     style: 'stripes',
     tag: 'news',
     items: () => {
-      const items = Thriver.newsroom.collection.find({
+      const items = Thriver.news.collection.find({
         type: 'actionAlert',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
-          { title: Thriver.newsroom.search.get() },
-          { content: Thriver.newsroom.search.get() },
+        $or: Thriver.news.search.get() instanceof RegExp ? [
+          { title: Thriver.news.search.get() },
+          { content: Thriver.news.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.newsroom.quantity.get(),
+        limit: Thriver.news.quantity.get(),
         sort: { date: -1 },
       }).fetch();
 
@@ -56,14 +56,14 @@ Template.press.helpers({
     style: 'stripes',
     tag: 'news',
     items: () => {
-      const items = Thriver.newsroom.collection.find({
+      const items = Thriver.news.collection.find({
         type: 'pressRelease',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
-          { title: Thriver.newsroom.search.get() },
-          { content: Thriver.newsroom.search.get() },
+        $or: Thriver.news.search.get() instanceof RegExp ? [
+          { title: Thriver.news.search.get() },
+          { content: Thriver.news.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.newsroom.quantity.get(),
+        limit: Thriver.news.quantity.get(),
         sort: { date: -1 },
       }).fetch();
 
@@ -85,14 +85,14 @@ Template.newsletters.helpers({
     style: 'stripes',
     tag: 'news',
     items: () =>
-      Thriver.newsroom.collection.find({
+      Thriver.news.collection.find({
         type: 'newsletter',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
-          { title: Thriver.newsroom.search.get() },
-          { content: Thriver.newsroom.search.get() },
+        $or: Thriver.news.search.get() instanceof RegExp ? [
+          { title: Thriver.news.search.get() },
+          { content: Thriver.news.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.newsroom.quantity.get(),
+        limit: Thriver.news.quantity.get(),
         sort: { date: -1 },
       }),
   }],

@@ -18,7 +18,7 @@ Router.route('action-alert', {
     if (!this.ready()) return undefined;
 
     let item;
-    const items = Thriver.newsroom.collection.find({ type: 'actionAlert' }).fetch();
+    const items = Thriver.news.collection.find({ type: 'actionAlert' }).fetch();
 
     // Find the Newsroom item that matches the name
     for (let i = 0; i < items.length; i += 1) {

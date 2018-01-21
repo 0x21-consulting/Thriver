@@ -6,14 +6,14 @@ Template.infosheets.helpers({
     style: 'stripes',
     tag: 'lc',
     items: () =>
-      Thriver.learningCenter.collection.find({
+      Thriver.resourceCenter.collection.find({
         type: 'infosheet',
-        $or: Thriver.learningCenter.search.get() instanceof RegExp ? [
-          { title: Thriver.learningCenter.search.get() },
-          { publisher: Thriver.learningCenter.search.get() },
+        $or: Thriver.resourceCenter.search.get() instanceof RegExp ? [
+          { title: Thriver.resourceCenter.search.get() },
+          { publisher: Thriver.resourceCenter.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.learningCenter.quantity.get(),
+        limit: Thriver.resourceCenter.quantity.get(),
         sort: { date: -1 },
       }),
   }],
@@ -27,14 +27,14 @@ Template.webinars.helpers({
     style: 'stripes',
     tag: 'lc',
     items: () =>
-      Thriver.learningCenter.collection.find({
+      Thriver.resourceCenter.collection.find({
         type: 'webinar',
-        $or: Thriver.learningCenter.search.get() instanceof RegExp ? [
-          { title: Thriver.learningCenter.search.get() },
-          { publisher: Thriver.learningCenter.search.get() },
+        $or: Thriver.resourceCenter.search.get() instanceof RegExp ? [
+          { title: Thriver.resourceCenter.search.get() },
+          { publisher: Thriver.resourceCenter.search.get() },
         ] : [{}],
       }, {
-        limit: Thriver.learningCenter.quantity.get(),
+        limit: Thriver.resourceCenter.quantity.get(),
         sort: { date: -1 },
       }),
   }],

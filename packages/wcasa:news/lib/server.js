@@ -14,16 +14,16 @@
 
 // Publish Newsroom sections -- they're public
 Meteor.publish('inTheNews', () =>
-  Thriver.newsroom.collection.find({ type: 'inTheNews' }, { sort: { date: 1 } }));
+  Thriver.news.collection.find({ type: 'inTheNews' }, { sort: { date: 1 } }));
 
 Meteor.publish('pressReleases', () =>
-  Thriver.newsroom.collection.find({ type: 'pressRelease' }, { sort: { date: 1 } }));
+  Thriver.news.collection.find({ type: 'pressRelease' }, { sort: { date: 1 } }));
 
 Meteor.publish('actionAlerts', () =>
-  Thriver.newsroom.collection.find({ type: 'actionAlert' }, { sort: { date: 1 } }));
+  Thriver.news.collection.find({ type: 'actionAlert' }, { sort: { date: 1 } }));
 
 Meteor.publish('newsletters', () =>
-  Thriver.newsroom.collection.find({ type: 'newsletter' }, { sort: { date: 1 } }));
+  Thriver.news.collection.find({ type: 'newsletter' }, { sort: { date: 1 } }));
 
 Meteor.methods({
   /**
@@ -46,7 +46,7 @@ Meteor.methods({
     if (item.date instanceof Date) thisItem.date = new Date(thisItem.date.toISOString());
 
     // Perform Insert
-    Thriver.newsroom.collection.insert(item, (error) => {
+    Thriver.news.collection.insert(item, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },
@@ -66,7 +66,7 @@ Meteor.methods({
     check(id, String);
 
     // Perform deletion
-    Thriver.newsroom.collection.remove({ _id: id }, (error) => {
+    Thriver.news.collection.remove({ _id: id }, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },
@@ -88,7 +88,7 @@ Meteor.methods({
     check(content, String);
 
     // Perform edit
-    Thriver.newsroom.collection.update(
+    Thriver.news.collection.update(
       { _id: id },
       { $set: { content } },
       (error) => {

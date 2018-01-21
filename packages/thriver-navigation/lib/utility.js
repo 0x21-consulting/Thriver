@@ -87,11 +87,11 @@ Thriver.utilityNavigationHelpers = {
     position: 'right',
     user: 'public',
   }, {
-    // Learning Center
+    // Resource Center
     title: 'Resource Center',
     icon: 'institution',
     type: 'sidebar',
-    sidebar: 'learning-center',
+    sidebar: 'resource-center',
     position: 'right',
     user: 'public',
   }, {
@@ -99,7 +99,7 @@ Thriver.utilityNavigationHelpers = {
     title: 'News',
     icon: 'news',
     type: 'sidebar',
-    sidebar: 'newsroom',
+    sidebar: 'news',
     position: 'right',
     user: 'public',
   }, {

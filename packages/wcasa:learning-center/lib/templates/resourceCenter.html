@@ -1,0 +1,23 @@
+<template name="webinars">
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
+</template>
+
+<template name="infosheets">
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
+</template>
+
+<template name="LCSubHead">
+  {{#if isAdmin}}
+    <aside class="admin">
+      <button class="fa add">&#xf067; Add Resource Center Item</button>
+      {{> quickForm collection="Thriver.resourceCenter.collection" id="LCForm"
+        meteormethod="addResourceCenterItem" type="method" doc=doc class="hide" }}
+    </aside>
+  {{/if}}
+</template>
