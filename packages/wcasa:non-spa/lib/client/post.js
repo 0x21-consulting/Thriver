@@ -43,7 +43,7 @@ Template.post.helpers({
    * @returns {String}
    */
   hash: () => {
-    const content = Thriver.newsroom.collection
+    const content = Thriver.news.collection
       .findOne({ _id: this._id }, { content: 1 });
 
     // Sometimes this helper executes before the collection is ready
@@ -134,7 +134,7 @@ Template.post.events({
     );
 
     // Textarea should get markdown
-    textarea.textContent = Thriver.newsroom.collection
+    textarea.textContent = Thriver.news.collection
       .findOne({ _id: data._id }, { content: 1 }).content;
 
     // Add textarea but hide preview

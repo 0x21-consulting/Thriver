@@ -2,21 +2,21 @@ import SimpleSchema from 'simpl-schema';
 
 /**
  * @summary Newsroom namespace
- * @namespace Thriver.newsroom
+ * @namespace Thriver.news
  */
-Thriver.newsroom = {};
+Thriver.news = {};
 
 /**
  * @summary Newsroom collection
  * @type {Mongo.Collection}
  */
-Thriver.newsroom.collection = new Mongo.Collection('newsroom');
+Thriver.news.collection = new Mongo.Collection('newsroom');
 
 /**
  * @summary Newsroom Schema
  * @type {SimpleSchema}
  */
-Thriver.newsroom.schema = new SimpleSchema({
+Thriver.news.schema = new SimpleSchema({
   /** ID */
   _id: {
     type: String,
@@ -69,4 +69,4 @@ Thriver.newsroom.schema = new SimpleSchema({
 });
 
 // Apply schema to collection
-Thriver.newsroom.collection.attachSchema(Thriver.newsroom.schema);
+Thriver.news.collection.attachSchema(Thriver.news.schema);

@@ -1,7 +1,7 @@
 @import (reference) "{thriver:core-styles}/lib/index.less";
 
 //Element Styles
-section#learning-center{
+section#resource-center{
     div.tabs > article > p{
         padding: 20px;
         background: rgba(255,255,255,0.05);
@@ -74,7 +74,7 @@ section#learning-center{
 
 //Library
 //.library > li{
-#learning-center article{
+#resource-center article{
     details{background-color: darken(@sidebarSecondaryColor, 3%);}
     &:nth-child(even) details{background-color: darken(@sidebarSecondaryColor, 1%);}
     p{margin:0px;}
@@ -191,7 +191,7 @@ section#learning-center{
 }
 
 
-#learning-center{
+#resource-center{
     h2{
         margin: 0px;
     }
@@ -331,7 +331,7 @@ article.itemCategory{
 .status.transit dd{ color: @teal !important;}
 
 //Basic Category Detail/summary
-#learning-center article.itemCategory details{
+#resource-center article.itemCategory details{
     margin: 0px;
     width:100%;
     padding: 0px;
@@ -345,12 +345,12 @@ article.itemCategory{
 .librarySearchHeader{
     display: none;
 }
-#learning-center article aside.info > * {
+#resource-center article aside.info > * {
     width: 100%;
     float: none;
     margin: 0px;
 }
-#learning-center article aside.info {
+#resource-center article aside.info {
     padding: 0px;
     margin-bottom: 40px;
     text-indent: 20px;
@@ -361,7 +361,7 @@ menu.availability {
 }
 
 // Admin styles
-#learning-center aside.admin {
+#resource-center aside.admin {
     margin: 0 0 15px;
 
     button {
@@ -400,7 +400,7 @@ menu.availability {
         }
     }
 }
-#learning-center article aside.admin {
+#resource-center article aside.admin {
     margin-top: -40px;
     right: 30px;
 }

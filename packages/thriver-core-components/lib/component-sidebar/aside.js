@@ -50,9 +50,9 @@ Template.aside.helpers({
     position: 'right',
     template: 'twitter',
   }, {
-    title: 'Learning Center',
+    title: 'Resource Center',
     icon: 'institution',
-    id: 'learning-center',
+    id: 'resource-center',
     width: 700,
     position: 'right',
     filter: 'true',
@@ -69,9 +69,9 @@ Template.aside.helpers({
       template: 'webinars',
     }],
   }, {
-    title: 'Newsroom',
+    title: 'News',
     icon: 'news',
-    id: 'newsroom',
+    id: 'news',
     width: 700,
     position: 'right',
     filter: 'true',

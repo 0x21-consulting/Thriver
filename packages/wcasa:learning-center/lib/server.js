@@ -1,16 +1,16 @@
-// Publish Learning Center items
+// Publish Resource Center items
 Meteor.publish('infosheets', () =>
-  Thriver.learningCenter.collection.find({ type: 'infosheet' }, { sort: { date: 1 } }));
+  Thriver.resourceCenter.collection.find({ type: 'infosheet' }, { sort: { date: 1 } }));
 Meteor.publish('webinars', () =>
-  Thriver.learningCenter.collection.find({ type: 'webinar' }, { sort: { date: 1 } }));
+  Thriver.resourceCenter.collection.find({ type: 'webinar' }, { sort: { date: 1 } }));
 
 Meteor.methods({
   /**
-   * @summary Add Learning Center Item
+   * @summary Add Resource Center Item
    * @method
    *   @param {Object} item - Item to add
    */
-  addLearningCenterItem: (item) => {
+  addResourceCenterItem: (item) => {
     // Check authorization
     if (!Meteor.userId() || !Meteor.user().admin) {
       throw new Meteor.Error('not-authorized');
@@ -25,17 +25,17 @@ Meteor.methods({
     if (item.date instanceof Date) thisItem.date = new Date(thisItem.date.toISOString());
 
     // Perform Insert
-    Thriver.learningCenter.collection.insert(item, (error) => {
+    Thriver.resourceCenter.collection.insert(item, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },
 
   /**
-   * @summary Delete Learning Center Item
+   * @summary Delete Resource Center Item
    * @method
    *   @param {String} id - ID of item to delete
    */
-  deleteLearningCenterItem: (id) => {
+  deleteResourceCenterItem: (id) => {
     // Check authorization
     if (!Meteor.userId() || !Meteor.user().admin) {
       throw new Meteor.Error('not-authorized');
@@ -45,7 +45,7 @@ Meteor.methods({
     check(id, String);
 
     // Perform deletion
-    Thriver.learningCenter.collection.remove({ _id: id }, (error) => {
+    Thriver.resourceCenter.collection.remove({ _id: id }, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },

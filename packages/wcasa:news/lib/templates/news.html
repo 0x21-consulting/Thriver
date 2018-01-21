@@ -43,19 +43,19 @@
 <template name="newsSubHead">
     <div class="links">
         <a href="/account/subscriptions" class="manageSubscriptions">
-            Manage Newsroom Subscriptions <span class="fa"></span>
+            Manage News Subscriptions <span class="fa"></span>
         </a> |
         <button id="inquire" class="inquire">
-            Inquire About our Newsroom <span class="fa"></span>
+            Inquire About our News <span class="fa"></span>
             <span class="contactInfo">
-                For information regarding WCASA's Newsroom: email Dominic Holt at <a href="mailto:dominich@wcasa.org">dominich@wcasa.org</a>.
+                For information regarding WCASA News: email Dominic Holt at <a href="mailto:dominich@wcasa.org">dominich@wcasa.org</a>.
             </span>
         </button>
     </div>
     {{#if isAdmin}}
         <aside class="admin">
-            <button class="fa add">&#xf067; Add Newsroom Item</button>
-            {{> quickForm collection="Thriver.newsroom.collection" id="newsForm"
+            <button class="fa add">&#xf067; Add News Item</button>
+            {{> quickForm collection="Thriver.news.collection" id="newsForm"
                 meteormethod="addNewsItem" type="method" doc=doc class="hide" }}
         </aside>
     {{/if}}

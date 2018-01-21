@@ -1,7 +1,7 @@
 Package.describe({
   name: 'wcasa:learning-center',
   version: '0.0.1-teal',
-  summary: 'Learning Center Section for the WCASA Implementation of Thriver CMS',
+  summary: 'Resource Center Section for the WCASA Implementation of Thriver CMS',
   git: 'https://github.com/enove/Thriver.git',
   documentation: 'README.md',
 });
@@ -26,14 +26,14 @@ Package.onUse((api) => {
   // Client processing
   api.addFiles([
     // Templates
-    'lib/templates/learningCenter.html',
+    'lib/templates/resourceCenter.html',
 
     // Styles
-    'lib/templates/learningCenter.less',
+    'lib/templates/resourceCenter.less',
 
     // Helpers and methods
     'lib/client/helpers.js',
-    'lib/client/learningCenter.js',
+    'lib/client/resourceCenter.js',
   ], ['client']);
 
   // Server processing
