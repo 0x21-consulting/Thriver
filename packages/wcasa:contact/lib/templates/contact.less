@@ -261,3 +261,38 @@ div.sidebar-document {
     }
   }
 }
+
+@media print{
+  html body #main > section.contact{ border-top: 2px solid #e2edf3 !important; margin-top: 60px !important; padding-top: 60px !important;}
+  html body section.contact{ padding-top: 60px !important;}
+  ul.contactInfo{
+    max-width: 100%;
+    text-align: left;
+  }
+  section.contact ul.contactInfo li, section.contact p.address li {
+    display: block;
+  }
+  section.contact .alert {
+    background: transparent;
+    text-align: left;
+    max-width: 100%;
+    padding: 0px;
+  }
+  form#contactForm {
+    display: none;
+  }
+  section.contact ul.contactInfo, section.contact p.address {
+    max-width: 100%;
+    text-align: left;
+  }
+  section.contact .copyright {
+    text-align: left;
+    &, & *{
+      padding: 0px !important;
+      margin: 0px !important;
+      position: static !important;
+      text-indent: 0px !important;
+    }
+  }
+  section.contact ul.contactInfo{ border: none !important;}
+}

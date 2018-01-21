@@ -123,11 +123,13 @@ Router.route('file-open', {
       const file = Thriver.files.collection.findOne({ fileId });
 
       if (file) {
-        const bucket = Thriver.settings.get('aws').bucket;
+        const { bucket } = Thriver.settings.get('aws');
 
         // HTTP 301 Permanent Redirect
-        this.response.writeHead(301, {
-          Location: `https://s3.us-east-2.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` });
+        this.response.writeHead(
+          301,
+          { Location: `https://s3.us-east-2.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` },
+        );
         this.response.end();
       } else { this.response.end('This file does not exist.'); }
     }
@@ -139,4 +141,5 @@ Router.route('file-open', {
  */
 Router.configure({
   layoutTemplate: 'canvas',
+  noRoutesTemplate: false,
 });

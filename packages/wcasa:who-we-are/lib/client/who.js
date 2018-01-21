@@ -14,7 +14,8 @@ Template.who.helpers({
    * @returns {Object}
    */
   sections: () => {
-    const children = Thriver.sections.get(Template.instance().data._id, ['children']).children;
+    const { children } = Thriver.sections
+      .get(Template.instance().data._id, ['children']);
     const tabs = [];
 
     // Populate tabs in the format desired
@@ -57,13 +58,13 @@ Template.who.helpers({
 });
 
 Template.board.helpers({
-  board: () => Thriver.people.collection.find({
-    boardMember: true }, { sort: { title: -1, name: 1 } }),
+  board: () => Thriver.people.collection
+    .find({ boardMember: true }, { sort: { title: -1, name: 1 } }),
 });
 
 Template.staff.helpers({
-  staff: () => Thriver.people.collection.find({
-    boardMember: false }, { sort: { name: 1 } }),
+  staff: () => Thriver.people.collection
+    .find({ boardMember: false }, { sort: { name: 1 } }),
 });
 
 Template.who.events({
@@ -107,7 +108,7 @@ Template.who.onRendered(() => {
       // Get Sections recursively
       const getChildren = (id) => {
         const sections = {};
-        const children = Thriver.sections.get(id, ['children']).children;
+        const { children } = Thriver.sections.get(id, ['children']);
 
         // Get name and ID for each tab
         for (let i = 0; i < children.length; i += 1) {
@@ -115,7 +116,7 @@ Template.who.onRendered(() => {
           const section = Thriver.sections.get(children[i], ['name']);
 
           if (section) {
-            let name = section.name;
+            let { name } = section;
 
             // Then sanitize section name
             name = Thriver.sections.generateId(name);

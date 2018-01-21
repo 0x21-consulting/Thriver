@@ -3,12 +3,19 @@ Template.register.helpers({
   signin: 'Sign in to your account',
   success: 'Registration successful!  Please check your email to verify your account.',
   items: [{
-    title: 'Name',
-    id: 'nameReg',
-    name: 'name',
+    title: 'First Name',
+    id: 'firstNameReg',
+    name: 'firstName',
     type: 'text',
     required: 'required',
-    placeholder: 'Name',
+    placeholder: 'First Name',
+  }, {
+    title: 'Last Name',
+    id: 'lastNameReg',
+    name: 'lastName',
+    type: 'text',
+    required: 'required',
+    placeholder: 'Last Name',
   }, {
     title: 'Email Address',
     id: 'emailReg',
@@ -55,7 +62,8 @@ Template.register.events({
     event.preventDefault(); event.stopPropagation();
 
     // Get form values
-    let name = event.target.name.value;
+    const firstname = event.target.firstName.value;
+    const lastname = event.target.lastName.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     const zip = event.target.zip.value;
@@ -68,33 +76,24 @@ Template.register.events({
       error.classList.remove('hide');
     };
 
-    // Enforce proper name format by removing excess spaces,
-    // making all lower case, then capitalizing just the first character
-    name = name.trim().replace(/\s+/g, ' ').toLowerCase().split(/\s/);
+    Accounts.createUser(
+      {
+        email,
+        password,
+        profile: {
+          // Name
+          firstname,
+          lastname,
+          zip,
 
-    for (let i = 0; i < name.length; i += 1) {
-      name[i] = name[i].charAt(0).toUpperCase() + name[i].substr(1);
-    }
-
-    name = name.join(' ');
-
-    Accounts.createUser({
-      email,
-      password,
-      profile: {
-        // Name
-        firstname: name.replace(/^(.+)\s.+/, '$1'),
-        lastname: name.replace(/^.+\s(.+)/, '$1'),
-        zip,
-
-        // Email subscriptions by default
-        subscriptions: {
-          pressReleases: true,
-          actionAlerts: true,
-          newsletter: true,
+          // Email subscriptions by default
+          subscriptions: {
+            pressReleases: true,
+            actionAlerts: true,
+            newsletter: true,
+          },
         },
       },
-    },
       /**
        * Handle Account creation callback
        * @method
@@ -126,7 +125,8 @@ Template.register.events({
 
         // Close sidebar
         Thriver.canvas.closeSidebars();
-      });
+      },
+    );
   },
 
   /**
@@ -138,7 +138,7 @@ Template.register.events({
     check(event, $.Event);
 
     const parent = event.target.parentElement;
-    const password = parent.password;
+    const { password } = parent;
 
     if (password instanceof Element) {
       if (password.value === event.target.value) {

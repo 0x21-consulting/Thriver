@@ -1,10 +1,10 @@
 // Bind section modifying events
 Template.sectionAdmin.events({
-    /**
-     * @summary Modify Section name, which also creates section ID
-     * @method
-     *   @param {$.Event} event
-     */
+  /**
+   * @summary Modify Section name, which also creates section ID
+   * @method
+   *   @param {$.Event} event
+   */
   'change input.section-name': (event) => {
     check(event, $.Event);
 
@@ -37,7 +37,7 @@ Template.sectionAdmin.events({
           'thruout', 'till', 'times', 'to', 'toward', 'towards', 'under', 'underneath',
           'unlike', 'until', 'unto', 'up', 'upon', 'versus', 'vs.', 'v.', 'via', 'vice',
           'with', 'within', 'without', 'worth', 'and', 'the']
-        .find(element => word.toLowerCase() === element);
+          .find(element => word.toLowerCase() === element);
 
         // If this isn't the first word, and it's a specialCase, keep lowercase
         // Note: Even though word contains the value of a number, its type is string

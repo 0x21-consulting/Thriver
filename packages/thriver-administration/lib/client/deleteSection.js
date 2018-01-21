@@ -14,9 +14,9 @@ Template.sectionAdmin.events({
     if (!event.delegateTarget || !event.delegateTarget.dataset) return;
 
     // Are you sure??
-    if (!confirm('Are you sure you want to delete this section?')) return;
+    if (!window.confirm('Are you sure you want to delete this section?')) return;
 
-    const id = event.delegateTarget.dataset.id;
+    const { id } = event.delegateTarget.dataset;
     const link = document.querySelector(`menu [data-id="${id}"]`);
 
     // Get siblings
@@ -36,7 +36,7 @@ Template.sectionAdmin.events({
     // And update parent to remove from child list
     if (link && link.dataset.parent) Meteor.call('removeChild', link.dataset.parent, id);
 
-        // Update order of remaining sibling elements
+    // Update order of remaining sibling elements
     for (; index < elements.length; index += 1) {
       Meteor.call('updateSectionOrder', elements[index].dataset.id, index);
     }

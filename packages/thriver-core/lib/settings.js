@@ -52,7 +52,7 @@ Meteor.startup(() => {
   // If there is no Meteor settings object, there's nothing to prefill
   if (!(Meteor.settings instanceof Object)) return;
 
-    // Prefill server settings
+  // Prefill server settings
   if (Meteor.isServer) addSettings(Meteor.settings);
 
   // Prefill client settings

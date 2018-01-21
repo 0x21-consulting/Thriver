@@ -13,7 +13,7 @@ Package.onUse((api) => {
     'thriver:core-styles',
   ]);
 
-    // Resources
+  // Resources
   api.addAssets([
 
   ], ['client']);

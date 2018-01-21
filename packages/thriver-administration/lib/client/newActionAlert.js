@@ -13,7 +13,12 @@ Template.admin.events({
     const fields = [
       { element: 'input', name: 'title', label: 'Title' },
       { element: 'textarea', name: 'content', label: 'Content' },
-      { element: 'input', name: 'masthead', label: 'Replace Masthead?', type: 'checkbox' },
+      {
+        element: 'input',
+        name: 'masthead',
+        label: 'Replace Masthead?',
+        type: 'checkbox',
+      },
     ];
 
     // Create each field

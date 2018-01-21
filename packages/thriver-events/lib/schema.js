@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Events namespace
  * @type {Object}
@@ -110,7 +112,6 @@ Thriver.events.schema = new SimpleSchema({
   },
   'cost.$.cost': {
     type: Number,
-    decimal: true,
     optional: false,
     defaultValue: 0,
     label: 'Cost in Dollars',

@@ -65,8 +65,7 @@ const changeTabs = (event) => {
     document.body.classList.add('mobile-article-open');
 
     // Add to path
-    path += `${Thriver.sections.generateId(
-      getValue('name')(parent.dataset.id))}/`;
+    path += `${Thriver.sections.generateId(getValue('name')(parent.dataset.id))}/`;
   }
 
   // Add current link to history as well
@@ -121,6 +120,14 @@ Template.workNav.helpers({
     return false;
   },
   tabs: getValue('children'),
+  childCount: () => {
+    const id = Template.instance().data.id || Template.instance().data._id;
+    const result = Thriver.sections.get(id, ['children']);
+    const count = result.children.length;
+    if (count % 4 === 0 || count % 4 >= 2) return 'grid-4';
+    return 'grid-3';
+  },
+
 });
 
 // Navigation
@@ -148,7 +155,7 @@ Template.workContent.helpers({
   name: getValue('name'),
   hash: () => {
     const id = Template.instance().id || Template.instance()._id;
-    const content = getValue('data')(id).content;
+    const { content } = getValue('data')(id);
 
     // Return a SHA256 hash of the content for use in editing
     if (content) return SHA256(content);
@@ -194,11 +201,11 @@ Template.workNav.events({
     // Fade out and make not active
     document.body.classList.add('workFadeOut');
     setTimeout(() =>
-      document.body.classList.remove('workActive', 'workReading', 'workFadeOut')
-    , 200);
+      document.body.classList.remove('workActive', 'workReading', 'workFadeOut'), 200);
 
     // Scroll to top of work on change tabs
-    Thriver.history.navigate('/what-we-do/');
+    const section = event.delegateTarget.parentElement.parentElement;
+    Thriver.history.navigate(`/${section.id}/`);
   },
 });
 
@@ -247,7 +254,7 @@ const smoothScroll = (event) => {
   event.preventDefault();
 
   // Get position of element
-  const target = event.target;
+  const { target } = event;
   let element = document.querySelector(target.hash);
   let offsetTop = 0;
 
@@ -320,62 +327,64 @@ Template.workContent.onRendered(() => {
 Template.work.onRendered(() => {
   // Get db ID from current instance
   const instance = Template.instance();
-  const data = instance.data;
+  const { data } = instance;
   const instanceName = data.name;
 
   // Register
-  Thriver.history.registry.insert({
-    element: Thriver.sections.generateId(instanceName),
+  if (data && instanceName) {
+    Thriver.history.registry.insert({
+      element: Thriver.sections.generateId(instanceName),
 
-    /** Handle deep-linking */
-    callback: (path) => {
-      // Get Sections recursively
-      const getChildren = (id) => {
-        const sections = {};
-        const children = Thriver.sections.get(id, ['children']).children;
+      /** Handle deep-linking */
+      callback: (path) => {
+        // Get Sections recursively
+        const getChildren = (id) => {
+          const sections = {};
+          const { children } = Thriver.sections.get(id, ['children']);
 
-        // Get name and ID for each tab
-        for (let i = 0; i < children.length; i += 1) {
-          // Get section name
-          const section = Thriver.sections.get(children[i], ['name']);
+          // Get name and ID for each tab
+          for (let i = 0; i < children.length; i += 1) {
+            // Get section name
+            const section = Thriver.sections.get(children[i], ['name']);
 
-          // Do nothing if the section doesn't exist
-          if (section) {
-            let name = section.name;
+            // Do nothing if the section doesn't exist
+            if (section) {
+              let { name } = section;
 
-            // Then sanitize section name
-            name = Thriver.sections.generateId(name);
+              // Then sanitize section name
+              name = Thriver.sections.generateId(name);
 
-            // Add to link list and Recurse
-            sections[name] = getChildren(children[i]);
+              // Add to link list and Recurse
+              sections[name] = getChildren(children[i]);
 
-            // Add ID to list as well
-            sections[name]._id = section._id;
+              // Add ID to list as well
+              sections[name]._id = section._id;
+            }
           }
+
+          return sections;
+        };
+
+        // If there's no path, there's nothing to do
+        if (!path.length) return;
+
+        // Get link list of all browseable sections
+        let sections = getChildren(data._id);
+
+        // Get link for deep-linked section
+        for (let i = 0; i < path.length; i += 1) {
+          if (sections[path[i]]) sections = sections[path[i]];
+          else break;
         }
 
-        return sections;
-      };
+        // Find anchor element
+        const link = document.querySelector(`li[data-id="${sections._id}"] > a`);
 
-      // If there's no path, there's nothing to do
-      if (!path.length) return;
-
-      // Get link list of all browseable sections
-      let sections = getChildren(data._id);
-
-      // Get link for deep-linked section
-      for (let i = 0; i < path.length; i += 1) {
-        if (sections[path[i]]) sections = sections[path[i]];
-        else break;
-      }
-
-      // Find anchor element
-      const link = document.querySelector(`li[data-id="${sections._id}"] > a`);
-
-      // Click anchor to activate page
-      if (link instanceof Element) link.click();
-    },
-  });
+        // Click anchor to activate page
+        if (link instanceof Element) link.click();
+      },
+    });
+  }
 });
 
 /**

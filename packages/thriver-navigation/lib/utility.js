@@ -1,17 +1,36 @@
 // Populate Profile tab under Account Overview
 Thriver.utilityNavigationHelpers = {
+  // Notifications
   items: [{
-    // Notifications
-    title: '<span class="mobile">Notifications</span>', // Readable Title
-    icon: 'bell',               // Icon class to be applied (see icons.less)
-    // iconAfter: true,         // default is false. Will place the icon :after instead of :before
-    type: 'sidebar',            // Sets Link type. (Accepts: sidebar, external, null) *Required
-    sidebar: 'notifications',   // which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
-    // position: 'right'        // default is left (accepts: 'left', 'right')
-    user: 'active',             // Set If item should only be active when logged in/out (accepts: 'active','inactive')
-    alerts: true,               // Set to true to add notification element
-    // url: 'wcasa.org',        // *required if type=external
-    // more: 'getHelp'          // If list item has additional elements within. Get the template
+    // Readable Title
+    title: '<span class="mobile">Notifications</span>',
+
+    // Icon class to be applied (see icons.less)
+    icon: 'bell',
+
+    // default is false. Will place the icon :after instead of :before
+    // iconAfter: true,
+
+    // Sets Link type. (Accepts: sidebar, external, null) *Required
+    type: 'sidebar',
+
+    // which sidebar to activate. *required if type=sidebar (Should be same as sidebars.item.id).
+    sidebar: 'notifications',
+
+    // default is left (accepts: 'left', 'right')
+    // position: 'right',
+
+    // Set If item should only be active when logged in/out (accepts: 'active','inactive')
+    user: 'active',
+
+    // Set to true to add notification element
+    alerts: true,
+
+    // *required if type=external
+    // url: 'wcasa.org',
+
+    // If list item has additional elements within. Get the template
+    // more: 'getHelp'
   }, {
     // Accounts
     icon: 'caret-right',
@@ -43,15 +62,14 @@ Thriver.utilityNavigationHelpers = {
     type: 'null',
     user: 'active',
     action: 'signout',
-  }, {
-    /*
+  }, { /*
     // Language
     icon: 'flag',
     type: 'sidebar',
     sidebar: 'lang',
     position: 'right',
     user: 'public'
-  },{*/
+  },{ */
     // Get Help
     title: 'Get Help',
     type: 'link',

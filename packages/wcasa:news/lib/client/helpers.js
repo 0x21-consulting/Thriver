@@ -8,10 +8,10 @@ Template.inTheNews.helpers({
     items: () =>
       Thriver.newsroom.collection.find({
         type: 'inTheNews',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
-          title: Thriver.newsroom.search.get() }, {
-            publisher: Thriver.newsroom.search.get(),
-          }] : [{}],
+        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
+          { title: Thriver.newsroom.search.get() },
+          { publisher: Thriver.newsroom.search.get() },
+        ] : [{}],
       }, {
         limit: Thriver.newsroom.quantity.get(),
         sort: { date: -1 },
@@ -29,10 +29,10 @@ Template.actionAlerts.helpers({
     items: () => {
       const items = Thriver.newsroom.collection.find({
         type: 'actionAlert',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
-          title: Thriver.newsroom.search.get() }, {
-            content: Thriver.newsroom.search.get(),
-          }] : [{}],
+        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
+          { title: Thriver.newsroom.search.get() },
+          { content: Thriver.newsroom.search.get() },
+        ] : [{}],
       }, {
         limit: Thriver.newsroom.quantity.get(),
         sort: { date: -1 },
@@ -58,10 +58,10 @@ Template.press.helpers({
     items: () => {
       const items = Thriver.newsroom.collection.find({
         type: 'pressRelease',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
-          title: Thriver.newsroom.search.get() }, {
-            content: Thriver.newsroom.search.get(),
-          }] : [{}],
+        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
+          { title: Thriver.newsroom.search.get() },
+          { content: Thriver.newsroom.search.get() },
+        ] : [{}],
       }, {
         limit: Thriver.newsroom.quantity.get(),
         sort: { date: -1 },
@@ -87,10 +87,10 @@ Template.newsletters.helpers({
     items: () =>
       Thriver.newsroom.collection.find({
         type: 'newsletter',
-        $or: Thriver.newsroom.search.get() instanceof RegExp ? [{
-          title: Thriver.newsroom.search.get() }, {
-            content: Thriver.newsroom.search.get(),
-          }] : [{}],
+        $or: Thriver.newsroom.search.get() instanceof RegExp ? [
+          { title: Thriver.newsroom.search.get() },
+          { content: Thriver.newsroom.search.get() },
+        ] : [{}],
       }, {
         limit: Thriver.newsroom.quantity.get(),
         sort: { date: -1 },

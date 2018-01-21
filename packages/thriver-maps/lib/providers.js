@@ -69,9 +69,12 @@ Meteor.methods({
     check(provider, Object);
 
     // Perform update
-    Thriver.providers.collection.update({ _id: provider._id }, { $set: provider },
+    Thriver.providers.collection.update(
+      { _id: provider._id },
+      { $set: provider },
       (error) => {
         if (error) throw new Meteor.Error(error);
-      });
+      },
+    );
   },
 });

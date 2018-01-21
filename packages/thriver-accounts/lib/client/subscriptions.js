@@ -127,16 +127,16 @@ Template.subscriptions.helpers({
 });
 
 Template.subscriptions.events({
-    /**
-     * Subscribe to something
-     * @method
-     *   @param {$.Event} event - Checked event
-     */
+  /**
+   * Subscribe to something
+   * @method
+   *   @param {$.Event} event - Checked event
+   */
   'change #subscriptions input[type="checkbox"]': (event) => {
     check(event, $.Event);
 
     // Get checkbox info
-    const checked = event.target.checked;
+    const { checked } = event.target;
 
     let query;
 
@@ -151,40 +151,55 @@ Template.subscriptions.events({
         query = { 'profile.subscriptions.expertWitness': !!checked };
 
         // Initial ListServ subscription
-        listServSubscribe('expert-witness-wcasa-blog.org',
-          Meteor.user().emails[0].address, !!checked);
+        listServSubscribe(
+          'expert-witness-wcasa-blog.org',
+          Meteor.user().emails[0].address,
+          !!checked,
+        );
 
         break;
       case 'saPreventionToggle':
         query = { 'profile.subscriptions.saPrevention': !!checked };
 
         // Initial ListServ subscription
-        listServSubscribe('wi-sa-prevention-wcasa-blog.org',
-          Meteor.user().emails[0].address, !!checked);
+        listServSubscribe(
+          'wi-sa-prevention-wcasa-blog.org',
+          Meteor.user().emails[0].address,
+          !!checked,
+        );
 
         break;
       case 'saTaskForceToggle':
         query = { 'profile.subscriptions.saTaskForce': !!checked };
 
         // Initial ListServ subscription
-        listServSubscribe('wi-satf-wcasa-blog.org',
-          Meteor.user().emails[0].address, !!checked);
+        listServSubscribe(
+          'wi-satf-wcasa-blog.org',
+          Meteor.user().emails[0].address,
+          !!checked,
+        );
 
         break;
       case 'saAdvocatesToggle':
         query = { 'profile.subscriptions.saAdvocates': !!checked };
 
         // Initial ListServ subscription
-        listServSubscribe('wi-sa-advocates-wcasa-blog.org',
-          Meteor.user().emails[0].address, !!checked);
+        listServSubscribe(
+          'wi-sa-advocates-wcasa-blog.org',
+          Meteor.user().emails[0].address,
+          !!checked,
+        );
 
         break;
       case 'campusSAToggle':
         query = { 'profile.subscriptions.campusSA': !!checked };
 
         // Initial ListServ subscription
-        listServSubscribe('campussa-wcasa-blog.org',
-          Meteor.user().emails[0].address, !!checked);
+        listServSubscribe(
+          'campussa-wcasa-blog.org',
+          Meteor.user().emails[0].address,
+          !!checked,
+        );
 
         break;
       default: // do nothing

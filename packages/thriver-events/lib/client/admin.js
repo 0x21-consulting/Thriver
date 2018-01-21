@@ -98,7 +98,7 @@ Template.eventSlide.events({
   'click .adminControls .delete': (event) => {
     check(event, $.Event);
 
-    if (confirm('Are you sure you want to delete this event?')) {
+    if (window.confirm('Are you sure you want to delete this event?')) {
       Meteor.call('deleteEvent', Blaze.getData()._id);
     }
   },
@@ -169,13 +169,17 @@ Template.viewRegistrations.helpers({
     if (activeEvent.get() && events instanceof Array) {
       for (let i = 0; i < events.length; i += 1) {
         if (events[i].id === activeEvent.get()._id) {
-          const entries = Object.entries(events[i].details);
+          const deets = events[i].details;
 
-          for (let j = 0; j < entries.length; j += 1) {
-            details.push({
-              id: entries[j][0],
-              value: entries[j][1],
-            });
+          if (deets) {
+            const entries = Object.entries(deets);
+
+            for (let j = 0; j < entries.length; j += 1) {
+              details.push({
+                id: entries[j][0],
+                value: entries[j][1],
+              });
+            }
           }
 
           return details;

@@ -8,7 +8,7 @@ const handler = (event) => {
 
   event.stopPropagation();
 
-  const target = event.target;
+  const { target } = event;
 
   if (event.which) {
     if (event.which === 13) {
@@ -20,7 +20,7 @@ const handler = (event) => {
   }
 
   // Get section ID
-  const id = target.parentElement.dataset.id;
+  const { id } = target.parentElement.dataset;
   const name = target.textContent;
 
   // Remove editability
@@ -58,7 +58,7 @@ const updateSectionContent = (oldHash) => {
     const parent = event.target.parentElement;
 
     // Get section ID
-    const id = parent.dataset.id;
+    const { id } = parent.dataset;
     const content = parent.querySelector('textarea').value;
     const newHash = SHA256(content);
 
@@ -101,13 +101,19 @@ Template.tabs.events({
     // Determine index
     const index = elems.length;
 
-    Meteor.call('addSection', 'article', index, parent.dataset.id, 'Unnamed Page',
+    Meteor.call(
+      'addSection',
+      'article',
+      index,
+      parent.dataset.id,
+      'Unnamed Page',
       (error, id) =>
         Template.tabs.onRendered(() => {
           // Let's be helpful and navigate to the new page
           const link = document.querySelector(`li[data-id="${id}"] > a`);
           link.click();
-        }));
+        }),
+    );
   },
 
   /**
@@ -120,7 +126,7 @@ Template.tabs.events({
 
     event.preventDefault();
 
-    const id = event.target.parentElement.parentElement.dataset.id;
+    const { id } = event.target.parentElement.parentElement.dataset;
 
     Meteor.call('addOpportunity', id, {
       title: 'New Opportunity',
@@ -133,13 +139,13 @@ Template.tabs.events({
    * @method
    *   @param {$.Event} event - jQuery Event handle
    */
-  'click [editable!="false"] h2': (event) => {
+  'click article[data-editable="true"] h2': (event) => {
     check(event, $.Event);
 
     event.preventDefault();
     event.stopPropagation();
 
-    const target = event.target;
+    const { target } = event;
 
     // Make content editable to allow user to change
     target.contentEditable = true;
@@ -157,7 +163,7 @@ Template.tabs.events({
    * @method
    *   @param {$.Event} event - jQuery Event handle
    */
-  'click div.tabs > article[editable!="false"] > aside.admin > button.delete': function (event) {
+  'click div.tabs > article[editable!="false"] > aside.admin > button.delete': function deleteSection(event) {
     // Can't use lambda expression here on account of lexical `this`
     check(event, $.Event);
 
@@ -192,7 +198,7 @@ Template.tabs.events({
    * @method
    *   @param {$.Event} event - jQuery event handler
    */
-  'click [editable!="false"] button.edit': function (event) {
+  'click [editable!="false"] button.edit': function editSection(event) {
     // Can't use lambda expression because of lexical `this`
     check(event, $.Event);
 
@@ -210,9 +216,11 @@ Template.tabs.events({
     // Button by which to okay changes and commit to db
     const button = document.createElement('button');
     button.textContent = 'Save';
-    button.addEventListener('mouseup',
+    button.addEventListener(
+      'mouseup',
       // Pass along hash of existing markdown
-      updateSectionContent(content.dataset.hash));
+      updateSectionContent(content.dataset.hash),
+    );
 
     // Textarea should get markdown
     textarea.textContent = Thriver.sections.get(this.id, ['data']).data.content;
@@ -232,7 +240,7 @@ Template.generic.helpers({
     const section = Thriver.sections.get(data.id, ['data']);
 
     if (section) {
-      let content = section.data.content;
+      let { content } = section.data;
 
       if (!content) content = '';
 

@@ -204,6 +204,10 @@ section.work .sa details{
 }
 //Nav Landing
 section.work .workNav{width: 100%;}
+section.work .main > .shadow-box{
+    &:before, &:after{ display: none; } //Correct Shadow Nav
+    box-shadow: none; -webkit-box-shadow:none;
+}
 section.work .workNav{
     .backToTopWork{
         display: none;
@@ -236,60 +240,35 @@ section.work .workNav{
         }
     }
 }
+section.work .workNav{
+    &.grid-3 > ul > li{ width: 33%; }
+    &.grid-4 > ul > li{ width: 25.08%;}
+    & > ul > li{
+        @media (max-width:865px){ width:42%; }
+        @media @mobile{ width:100%; }
+    }
+}
 section.work .workNav > ul{
     margin: 0px;
     .clearfix;
     width: 100%;
     text-align: center;
-    @media (max-width:945px){
-        //padding-bottom: 60px;
-    }
     @media @mobile{ padding-bottom: 0px;}
     > li {
         list-style: none;
         vertical-align: top;
         text-align: left;
         margin: 0px;
-        //background-color: lighten(@lightBlue, 90%);
-        //box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.15);
         &:hover{
             box-shadow: 0 7px 9px rgba(0, 0, 0, 0.1), 2px 2px 2px -2px rgba(0, 0, 0, 0.2);
             -webkit-box-shadow:0 7px 9px rgba(0, 0, 0, 0.1), 2px 2px 2px -2px rgba(0, 0, 0, 0.2);
         }
-        width: 25.08%;
-        @media (max-width:1100px){
-            //width:28%;
-        }
-        @media (max-width:865px){
-            width:42%;
-        }
-        //margin: 0 0.5% 1% 0.5%;
         margin: 0px;
         margin-left: -4px;
         display: inline-block;
-        //min-height: 228px;
         .borderRadius(2px);
         overflow: hidden;
-       /* @media (min-width:1101px){
-            &:nth-child(2){ margin-left: 0px; }
-            &:nth-child(5){ margin-right: 0px; }
-            &:nth-child(4n + 5){ margin-right: 0px; }
-            &:nth-child(6){ margin-left: 0px; }
-            &:nth-child(4n + 6){ margin-left: 0px; }
-        }
-        @media (max-width:1100px) and (min-width:866px){
-            &:nth-child(2){ margin-left: 0px; }
-            &:nth-child(4){ margin-right: 0px; }
-            &:nth-child(3n + 4){ margin-right: 0px; }
-            &:nth-child(5){ margin-left: 0px; }
-            &:nth-child(3n + 5){ margin-left: 0px; }
-        }
-        @media (max-width:865px) and (min-width:768px){
-            &:nth-child(even){ margin-left: 0px; }
-            &:nth-child(odd){ margin-right: 0px; }
-        }*/
         @media @mobile{
-            width:100%;
             margin: 0px;
             .borderRadius(0px);
             .shadowNone;
@@ -930,6 +909,7 @@ body.workActive section.work .main.container{
         //padding-right: 20px;
         //width: 661px;
         width: auto;
+        table tbody td:first-child{ white-space: nowrap; }
     }
 }
 
@@ -1321,8 +1301,11 @@ p.glossary {
 
 
 section.work .workNav > ul > li.new-section {
-    width: 100% !important;
+    max-width: 100% !important;
     padding: 0px !important;
+    margin: 30px auto 0 auto;
+    clear: both;
+    display: block;
     background: @teal;
     padding-right: 3px !important; //odd
     a{
@@ -1351,3 +1334,34 @@ section.work .workNav > ul > li.new-section {
 
 @media @mobile{ .workActive section.work .workNav > ul > li.backToIndexWork a{display: block !important;} }
 .mobile-article-open.workActive.workReading section.work .workContent{ @media @mobile{height: auto !important;}}
+
+@media print{
+    section.work .inner-container-wide{ max-width: none;}
+    section.work .sa details {
+        margin: 0px;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+    }
+    section.work .sa details summary {
+        background: transparent;
+        padding: 0px !important;
+    }
+    section.work .workNav > ul > li {
+        width: 50%;
+    }
+    section.work .workNav > ul > li > ul{ padding: 0px !important; }
+    section.work .workNav > ul > li > ul{ min-height: 0px !important; margin-bottom: 20px !important;}
+    html body section.work menu.workNav.sticky{ display: none !important;}
+    body.workActive section.work .main.container .workContent, body.workActive section.work .main.container li.backToIndexWork {
+        padding: 0px;
+        box-shadow: none !important; -webkit-box-shadow:none !important;
+    }
+    #main > section.work .main{ box-shadow: none !important; -webkit-box-shadow:none !important;}
+    section.work .workContent article.active{ margin-top: 40px !important;}
+    section.work button.more, section.work button.less{ display: none !important; }
+    section.work > .main .workTextContainer:after{ display: none !important; }
+    section.work > .main .workTextContainer {
+        max-height: none !important;
+    }
+}

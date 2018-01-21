@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary History and Location namespace
  * @namespace Thriver.history
@@ -62,20 +64,32 @@ Thriver.history.registry.attachSchema(Thriver.history.schema);
  */
 Thriver.history.updateLocation = () => {
   // Don't include special-access sections, since they're not visible on page
-  const elements = Thriver.history.registry.find({
-    accessFunction: { $exists: false } }).fetch();
+  const elements = Thriver.history.registry
+    .find({ accessFunction: { $exists: false } }).fetch();
 
   const links = document.querySelectorAll('nav.mainNav a');
+  const sections = document.querySelectorAll('main > section');
   let link;
+  let section;
 
   // For each registered section, get its Y coordinate
   for (let i = 0; i < elements.length; i += 1) {
-    elements[i].y = document.querySelector(`#${elements[i].element}`).offsetTop;
-    elements[i].h = document.querySelector(`#${elements[i].element}`).offsetHeight;
+    const elem = document.querySelector(`#${elements[i].element}`);
+    if (elem) {
+      elements[i].y = elem.offsetTop;
+      elements[i].h = elem.offsetHeight;
+    }
   }
 
   // For masthead and everything before first registered section
-  elements.unshift({ element: '', y: 0, h: elements[0].y, currentPath: '' });
+  if (elements[0]) {
+    elements.unshift({
+      element: '',
+      y: 0,
+      h: elements[0].y,
+      currentPath: '',
+    });
+  }
 
   // Does the current scroll position match with any element?
   for (let i = 0; i < elements.length; i += 1) {
@@ -87,18 +101,28 @@ Thriver.history.updateLocation = () => {
       // Update URL/location bar
       Thriver.history.updateLocationBar(elements[i].currentPath);
 
-      // Remove active class from all main nav items
+      // Remove active class from all main nav items and sections
       for (let k = 0; k < links.length; k += 1) links[k].classList.remove('active');
+      for (let k = 0; k < sections.length; k += 1) sections[k].classList.remove('active');
 
       // Add active class to associated menu item
       link = document.querySelector(`nav.mainNav a[href="/${elements[i].element}"]`);
+      section = document.querySelector(`main > section[id="${elements[i].element}"]`);
 
       if (link instanceof Element) {
         link.classList.add('active');
+        section.classList.add('active');
 
         // This allows the UI to remove unwanted :focus class to last selection
         $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
       }
+
+      // Check if there are currently no active items: apply to masthead
+      let noActiveSection = true;
+      for (let k = 0; k < sections.length; k += 1) {
+        if (sections[k].classList.contains('active')) noActiveSection = false;
+      }
+      if (noActiveSection) document.querySelector('main > section').classList.add('active');
 
       break;
     }
@@ -126,13 +150,15 @@ Thriver.history.update = (section, path) => {
   check(section, String);
   check(path, String);
 
-  // Update collection with new path
-  Thriver.history.registry.update({ element: section }, {
-    $set: { currentPath: path },
-  });
+  if (section.length && path.length) {
+    // Update collection with new path
+    Thriver.history.registry.update({ element: section }, {
+      $set: { currentPath: path },
+    });
 
-  // Update URI
-  Thriver.history.updateLocationBar(path);
+    // Update URI
+    Thriver.history.updateLocationBar(path);
+  }
 };
 
 /**
@@ -251,10 +277,13 @@ Template.body.events({
   'click a[href^="/"][target!="_blank"]': (event) => {
     check(event, $.Event);
 
-    // Prevent navigation away from page
-    event.preventDefault();
+    // Only for internal paths; file_open.php is a 301 redirect
+    if (!event.target.pathname.match(/\/file_open.php/i)) {
+      // Prevent navigation away from page
+      event.preventDefault();
 
-    // Navigate to path
-    Thriver.history.navigate(event.target.pathname || '/');
+      // Navigate to path
+      Thriver.history.navigate(event.target.pathname || '/');
+    }
   },
 });

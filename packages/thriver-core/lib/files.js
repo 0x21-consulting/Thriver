@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Thriver File Download Namespace
  * @namespace Thriver.files

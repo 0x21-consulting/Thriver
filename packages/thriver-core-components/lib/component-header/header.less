@@ -205,3 +205,21 @@ body.fixedHeader header#menu{
         }
     }*/
 }
+
+@media print{
+    // HEADER
+    header#menu{
+        -webkit-transform: none;
+        transform: none;
+        position: static;
+        padding: 0px;
+        margin: 0px;
+        height: auto;
+        background: transparent;
+    }
+    header#menu div.brand{
+        position: static;
+        margin: 0px;
+    }
+    body{ #mobile-header, #utility, nav.mainNav, .brand-small, #mobile-navigation{ display: none !important; } }
+}

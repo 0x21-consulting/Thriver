@@ -1,3 +1,5 @@
+import SimpleSchema from 'simpl-schema';
+
 /**
  * @summary Notifications namespace
  * @namespace Thriver.notifications
@@ -338,6 +340,12 @@ Thriver.accounts.schema.user = new SimpleSchema({
   /** Organization to which a user belongs */
   organization: {
     type: Mongo.ObjectID,
+    optional: true,
+  },
+
+  /** Whether or not the user is an administrator */
+  admin: {
+    type: Boolean,
     optional: true,
   },
 });

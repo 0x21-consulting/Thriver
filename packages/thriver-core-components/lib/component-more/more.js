@@ -1,6 +1,6 @@
 // more.js controls display events for elements containing details/more. Via hover or click.
 const more = {
-  toggleMore: () => {
+  toggleMore: (event) => {
     const parent = Thriver.util.findAncestor(event.target, 'more');
     const e = parent.getElementsByTagName('figure')[0];
 
@@ -17,11 +17,11 @@ const more = {
 
 Template.body.events({
   // 'More' Hovers
-  'mouseenter li.more > a': () => {
-    if (window.innerWidth > 767) more.toggleMore();
+  'mouseenter li.more > a': (event) => {
+    if (window.innerWidth > 767) more.toggleMore(event);
   },
 
-  'mouseleave li.more > a': () => {
-    if (window.innerWidth > 767) more.toggleMore();
+  'mouseleave li.more > a': (event) => {
+    if (window.innerWidth > 767) more.toggleMore(event);
   },
 });

@@ -117,8 +117,11 @@ Template.feedback.events({
 
     const form = event.target;
 
-    Meteor.call('addFeedback', form.querySelector('#selectElement').dataset.element,
-      form.querySelector('textarea').value, (error) => {
+    Meteor.call(
+      'addFeedback',
+      form.querySelector('#selectElement').dataset.element,
+      form.querySelector('textarea').value,
+      (error) => {
         if (error) {
           throw new Meteor.Error(error);
         }
@@ -128,7 +131,8 @@ Template.feedback.events({
         form.querySelector('#selectElement').dataset.element = 'No element selected';
         form.classList.add('hide');
         document.querySelector('#showFeedbackForm').classList.remove('hide');
-      });
+      },
+    );
   },
 
   /**

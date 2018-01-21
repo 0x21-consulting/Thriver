@@ -25,8 +25,8 @@ Package.onUse((api) => {
     'check', // Check library
     'audit-argument-checks', // Enforce Check
 
-    'aldeed:collection2@2.9.1', // Enforce schemas on collections
-    'aldeed:autoform@5.8.1', // Enforce schemas on forms
+    'aldeed:collection2-core', // Enforce schemas on collections
+    'aldeed:autoform', // Enforce schemas on forms
   ];
 
   api.use(packages);

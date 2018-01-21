@@ -3,7 +3,6 @@
         <form autocomplete="off" id="{{filterId}}Form">
             <label for="{{filterId}}" class="fa">&#xf002;</label>
             <input id="{{filterId}}" type="search" placeholder="Search" />
-            {{>filterObject}}
         </form>
     </aside>
 </template>
@@ -13,7 +12,7 @@
     <fieldset class="filterObject">
         <div class="styledSelect fullBlockMob">
             <label class="dtHide">Classification</label>
-            <select id="category" name="category">
+            <select id="classification" name="classification">
                 <option value="0">Select Classification</option>
                 <option value="01">Survivors</option>
                 <option value="02">Providers</option>

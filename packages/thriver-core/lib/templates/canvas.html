@@ -13,10 +13,13 @@
       {{> navigation}}
       {{> navigationMobile}}
       <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
-        {{data}}
-        {{#each sections}}
-          {{> Template.dynamic template=template}}
-        {{/each}}
+        {{#if sectionsExist}}
+          {{#each sections}}
+            {{> Template.dynamic template=template}}
+          {{/each}}
+        {{else}}
+          <p>There currently aren't any sections.  To add one, login with an administrator account and drag the puzzle piece on the lower left onto the page.  If there aren't any accounts created yet, the first account created will automatically become an administrator.</p>
+        {{/if}}
         {{>top}}
       </main>
       {{> aside}}
@@ -32,7 +35,6 @@
   {{/if}}
   {{> alerts}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
   {{#if gaID}}
