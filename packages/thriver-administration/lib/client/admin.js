@@ -32,3 +32,18 @@ Template.registerHelper('isAdmin', getAdmin);
 Template.body.onCreated(checkAdmin);
 Accounts.onLogin(checkAdmin);
 Accounts.onLogout(checkAdmin);
+
+Template.admin.events({
+  'click #admin-popout': (event) => {
+    const adminControls = event.target.parentElement.querySelector('#admin-controls');
+    if (adminControls instanceof Element) {
+      if (adminControls.classList.contains('hide')) {
+        adminControls.classList.remove('hide');
+        event.target.classList.add('open');
+      } else {
+        adminControls.classList.add('hide');
+        event.target.classList.remove('open');
+      }
+    }
+  },
+});

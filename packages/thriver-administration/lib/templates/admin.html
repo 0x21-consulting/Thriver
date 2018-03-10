@@ -1,19 +1,19 @@
-<!-- Admin panel on right side of page -->
+<!-- Admin panel on left side of page -->
 <template name="admin">
-    <aside id="admin-controls">
-        <button id="newSection" draggable="true" title="Add Page Section">&#xf12e;</button>
-        <button id="newActionAlert" title="Create Action Alert">&#xf0f3;</button>
-        <button id="viewFeedback" title="View Feedback">&#xf27b;</button>
-    </aside>
+  <button id="admin-popout" title="View admin controls">&#xf0ad;</button>
+  <aside id="admin-controls" class="hide">
+    <button id="newSection" draggable="true" title="Add Page Section">&#xf12e;</button>
+    <button id="viewFeedback" title="View Feedback">&#xf27b;</button>
+  </aside>
 </template>
 
 <!-- Admin controls on each section -->
 <template name="sectionAdmin">
-    <aside class="section-controls">
-        <span class="fa direction">&#xf0ab;</span>
-        <p>Section:</p>
-        <input type="text" class="section-name" placeholder="Section Name" value="{{name}}" />
-        <span class="fa edit">&#xf040;</span>
-        <button class="section-delete" title="Delete">Remove Section <span>&#xf014;</span></button>
-    </aside>
+  <aside class="section-controls">
+    <span class="fa direction">&#xf0ab;</span>
+    <p>Section:</p>
+    <input type="text" class="section-name" placeholder="Section Name" value="{{name}}" />
+    <span class="fa edit">&#xf040;</span>
+    <button class="section-delete" title="Delete">Remove Section <span>&#xf014;</span></button>
+  </aside>
 </template>
