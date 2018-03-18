@@ -10,8 +10,23 @@ const updateProfileField = (fieldName, fieldValue) => {
   const profile = {};
   profile[fieldName] = fieldValue;
 
-  Meteor.call('updateUserProfile', profile, (error) => {
-    if (error) console.log(error);
+  Meteor.call('updateUserProfile', profile, (errorMessage) => {
+    if (errorMessage) {
+      const errorElement = document.getElementById('connection-error');
+      errorElement.innerText = errorMessage;
+      errorElement.classList.remove('hide');
+
+      const scroll = document.querySelector('#account .scroll');
+      let height = 0;
+      let a = scroll;
+
+      while (a) {
+        height += a.offsetHeight;
+        a = a.parentElement;
+      }
+
+      scroll.scrollTop = height;
+    }
   });
 };
 
