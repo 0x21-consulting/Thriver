@@ -1,6 +1,203 @@
 <template name="profile">
-  <header><h2>{{heading}}</h2></header>
-  {{> quickForm collection="Meteor.users" id="updateProfile" doc=doc type="update"
-    omitFields=omitFields fields="profile" validation="browser" 
-      buttonContent=submitValue}}
+  <form id="profile">
+    <header>
+      <h2>{{heading}}</h2>
+    </header>
+    <div class="form-group-container">
+      {{#each user.emails}}
+      <div class="form-group">
+        <label for="userEmail{{@index}}" class="control-label">Email {{verified}}</label>
+        <input type="text" name="userEmail{{@index}}" class="form-control" value="{{address}}" disabled>
+      </div>
+      {{/each}}
+      <div class="form-group">
+        <label for="profile.firstName" class="control-label">First Name</label>
+        <input type="text" name="profile.firstname" class="form-control" value="{{user.profile.firstname}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.lasttName" class="control-label">Last Name</label>
+        <input type="text" name="profile.lastname" class="form-control" value="{{user.profile.lastname}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.title" class="control-label">Job Title</label>
+        <input type="text" name="profile.title" class="form-control" value="{{user.profile.title}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.address1" class="control-label">Address</label>
+        <input type="text" name="profile.address1" class="form-control" value="{{user.profile.address1}}">
+        <input type="text" name="profile.address2" class="form-control" value="{{user.profile.address2}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.city" class="control-label">City</label>
+        <input type="text" name="profile.city" class="form-control" value="{{user.profile.city}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.state" class="control-label">State</label>
+        <input type="text" maxlength="2" name="profile.state" class="form-control" value="{{user.profile.state}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.zip" class="control-label">ZIP Code</label>
+        <input type="text" maxlength="10" name="profile.zip" class="form-control" value="{{user.profile.zip}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.telephone" class="control-label">Telephone</label>
+        <input type="tel" maxlength="10" name="profile.telephone" class="form-control" value="{{user.profile.telephone}}">
+      </div>
+    </div>
+    <header>
+      <h2>Dietery Restrictions</h2>
+    </header>
+    <div class="form-group">
+      <ul class="toggleSwitches stripes">
+        <li>
+          <label for="glutenFree" class="toggleSwitchLabel">
+            Gluten Free
+          </label>
+          <div class="toggleSwitch">
+            <input id="glutenFree" type="checkbox" name="profile.events.diet.glutenFree" checked="{{user.profile.events.diet.glutenFree}}">
+            <label for="glutenFree" role="checkbox" aria-checked="{{user.profile.events.diet.glutenFree}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="lactose" class="toggleSwitchLabel">
+            Lactose Intolerant
+          </label>
+          <div class="toggleSwitch">
+            <input id="lactose" type="checkbox" name="profile.events.diet.lactose" checked="{{user.profile.events.diet.lactose}}">
+            <label for="lactose" role="checkbox" aria-checked="{{user.profile.events.diet.lactose}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="ovo" class="toggleSwitchLabel">
+            Ovo
+          </label>
+          <div class="toggleSwitch">
+            <input id="ovo" type="checkbox" name="profile.events.diet.ovo" checked="{{user.profile.events.diet.ovo}}">
+            <label for="ovo" role="checkbox" aria-checked="{{user.profile.events.diet.ovo}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="lacto" class="toggleSwitchLabel">
+            Lacto
+          </label>
+          <div class="toggleSwitch">
+            <input id="lacto" type="checkbox" name="profile.events.diet.lacto" checked="{{user.profile.events.diet.lacto}}">
+            <label for="lacto" role="checkbox" aria-checked="{{user.profile.events.diet.lacto}}"></label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="form-group-container">
+      <div class="form-group">
+        <label for="dieteryRestrictions" class="control-label">&nbsp;</label>
+        <div class="styledSelect fullBlockMob">
+          <select name="profile.events.diet.arian" id="dieteryRestrictions">
+            <option value> - Select One - </option>
+            {{#each dieteryRestrictions}}
+            <option value="{{this}}" {{getArianSelectedAttribute user.profile.events.diet.arian this}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    </div>
+    <header>
+      <h2>Alergies</h2>
+    </header>
+    <div class="form-group">
+      <ul class="toggleSwitches stripes">
+        <li>
+          <label for="alergies-peanut" class="toggleSwitchLabel">
+            Peanut
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-peanut" type="checkbox" name="profile.events.diet.allergies.peanut" checked="{{user.profile.events.diet.allergies.peanut}}">
+            <label for="alergies-peanut" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.peanut}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-milk" class="toggleSwitchLabel">
+            Milk
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-milk" type="checkbox" name="profile.events.diet.allergies.milk" checked="{{user.profile.events.diet.allergies.milk}}">
+            <label for="alergies-milk" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.milk}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-egg" class="toggleSwitchLabel">
+            Egg
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-egg" type="checkbox" name="profile.events.diet.allergies.egg" checked="{{user.profile.events.diet.allergies.egg}}">
+            <label for="alergies-egg" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.egg}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-wheat" class="toggleSwitchLabel">
+            Wheat
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-wheat" type="checkbox" name="profile.events.diet.allergies.wheat" checked="{{user.profile.events.diet.allergies.wheat}}">
+            <label for="alergies-wheat" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.wheat}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-soy" class="toggleSwitchLabel">
+            Soy
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-soy" type="checkbox" name="profile.events.diet.allergies.soy" checked="{{user.profile.events.diet.allergies.soy}}">
+            <label for="alergies-soy" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.soy}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-fish" class="toggleSwitchLabel">
+            Fish
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-fish" type="checkbox" name="profile.events.diet.allergies.fish" checked="{{user.profile.events.diet.allergies.fish}}">
+            <label for="alergies-fish" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.fish}}"></label>
+          </div>
+        </li>
+        <li>
+          <label for="alergies-shellfish" class="toggleSwitchLabel">
+            Shellfish
+          </label>
+          <div class="toggleSwitch">
+            <input id="alergies-shellfish" type="checkbox" name="profile.events.diet.allergies.shellfish" checked="{{user.profile.events.diet.allergies.shellfish}}">
+            <label for="alergies-shellfish" role="checkbox" aria-checked="{{user.profile.events.diet.allergies.shellfish}}"></label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <header>
+      <h2>Emergency Contact and Event Information</h2>
+    </header>
+    <div class="form-group-container">
+      <div class="form-group">
+        <label for="profile.accommodations" class="control-label">Please list any accommodations requested for events you attend</label>
+        <textarea name="profile.events.accommodations" class="form-control" id="profile.accommodations" cols="30">{{user.profile.events.accommodations}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="profile.events.emergencyName" class="control-label">Emergency Contact Name</label>
+        <input type="text" name="profile.events.emergencyName" class="form-control" value="{{user.profile.events.emergencyName}}">
+      </div>
+      <div class="form-group">
+        <label for="profile.emergencyRelationship" class="control-label">Emergency Contact Relationship</label>
+        <div class="styledSelect fullBlockMob">
+          <select name="profile.events.emergencyRelationship" id="profile.emergencyRelationship">
+            <option value> - Select One - </option>
+            {{#each emergencyRelationshipChoices}}
+            <option value="{{this}}" {{getArianSelectedAttribute user.profile.events.emergencyRelationship this}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="profile.emergencyTelephone" class="control-label">Emergency Contact Name</label>
+        <input id="profile.emergencyTelephone" type="text" name="profile.events.emergencyTelephone" class="form-control" value="{{user.profile.events.emergencyTelephone}}">
+      </div>
+    </div>
+      <p id="connection-error" class="hide"></p>
+  </form>
 </template>

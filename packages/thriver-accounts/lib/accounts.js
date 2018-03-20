@@ -111,6 +111,23 @@ Meteor.methods({
     // User has an organization but it's not found in the database
     return '';
   },
+
+  /**
+   * Update a user's profile attribute
+   * @function
+   * @returns {object}
+   */
+  updateUserProfile(updatedUserProfile) {
+    check(updatedUserProfile, Object);
+
+    // Nothing to do if no user is logged in, or if they
+    // don't have a designated organization
+    if (!Meteor.user()) return 'User not logged in';
+
+    Meteor.users.update({ _id: Meteor.userId() }, { $set: updatedUserProfile });
+    // Execute callback
+    return false;
+  },
 });
 
 /**
