@@ -1,0 +1,50 @@
+<template name="canvas">
+  {{> preloader}}
+  {{#if Template.subscriptionsReady}}
+    <script>
+      // Do not append class until after the DOM is created to leverage CSS animations
+      // Then after css animations complete: Remove the preloader
+      window.setTimeout(() => document.body.classList.add('loaded'), 2000);
+      window.setTimeout(() => document.body.classList.add('load-complete'), 4500);
+    </script>
+    {{> browseHappy}}
+    <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
+      {{> utility}}
+      {{> navigation}}
+      {{> navigationMobile}}
+      <main class="main masterContainer" id="main" data-focus="group" aria-hidden="false">
+        {{#if sectionsExist}}
+          {{#each sections}}
+            {{> Template.dynamic template=template}}
+          {{/each}}
+        {{else}}
+          <p>There currently aren't any sections.  To add one, login with an administrator account and drag the puzzle piece on the lower left onto the page.  If there aren't any accounts created yet, the first account created will automatically become an administrator.</p>
+        {{/if}}
+        {{>top}}
+      </main>
+      {{> aside}}
+      <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
+    </div>
+    {{#if currentUser}}
+      {{> feedback}}
+    {{/if}}
+    {{#if isAdmin}}
+      {{> admin}}
+      {{> feedbackAdmin}}
+    {{/if}}
+  {{/if}}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  {{#if gaID}}
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{gaID}}', 'auto');
+      ga('send', 'pageview');
+    </script>
+  {{/if}}
+</template>
