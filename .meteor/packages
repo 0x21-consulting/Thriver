@@ -37,3 +37,7 @@ audit-argument-checks # Enforce Check
 
 aldeed:collection2-core # Enforce schemas on collections
 aldeed:autoform # Enforce schemas on forms
+
+accounts-password
+fortawesome:fontawesome
+less

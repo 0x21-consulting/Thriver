@@ -1,3 +1,7 @@
+import { Template } from 'meteor/templating';
+
+import './preloader.html';
+
 /**
  * @summary Show preloader by default
  * @method

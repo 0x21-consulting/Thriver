@@ -1,0 +1,101 @@
+<template name="who">
+    <section class="who" id="{{anchor name=name}}" data-id="{{_id}}">
+        {{#if isAdmin}}
+            {{> sectionAdmin}}
+        {{/if}}
+        <div class="containerSmall">
+            <header>
+                <h1>{{headline}}</h1>
+                <p>WCASA is a membership agency comprised of organizations
+                  <br>working to end sexual violence in Wisconsin. WCASA
+                  <br>is made up of its staff, board, volunteers, and {{count}}
+                  <br>sexual assault service provider agencies.
+                </p>
+            </header>
+            <div class="shadow-box container">
+                <div class="tab-box">
+                    {{#each sections}}
+                        {{> tabs}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template name="staff">
+    <h2>The WCASA Staff</h2>
+    {{#if isAdmin}}
+        <aside class="admin">
+            <button class="fa add">&#xf067;</button>
+        </aside>
+    {{/if}}
+    <ul class="clearfix">
+        {{#each staff}}
+            {{> personStaff}}
+        {{/each}}
+    </ul>
+    {{#if isAdmin}}
+        <aside class="addPerson hide">
+            <button class="fa close">&#xf057; Close</button>
+            {{> quickForm collection=people id="addStaffPerson" type="method"
+                omitFields="_id" meteormethod="addPerson" }}
+        </aside>
+    {{/if}}
+</template>
+
+<template name="board">
+    <h2>Board of Directors</h2>
+    {{#if isAdmin}}
+        <aside class="admin">
+            <button class="fa add" title="Add a person">&#xf067;</button>
+        </aside>
+    {{/if}}
+    <ul class="clearfix">
+        {{#each board}}
+            {{> personBoard}}
+        {{/each}}
+    </ul>
+    {{#if isAdmin}}
+        <aside class="addPerson hide">
+            <button class="fa close">&#xf057; Close</button>
+            {{> quickForm collection=people id="addBoardPerson" type="method"
+                omitFields="_id" meteormethod="addPerson" }}
+        </aside>
+    {{/if}}
+</template>
+
+<template name="personStaff">
+    <li data-id="{{_id}}">
+        {{#if picture}}
+            <img src="{{picture}}" alt="{{name}}" />
+        {{else}}
+            <img src="/packages/wcasa_who-we-are/lib/client/avatar.jpg" alt="{{name}}" />
+        {{/if}}
+        <div class="details">
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+        {{#if isAdmin}}
+            <aside class="admin">
+                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+            </aside>
+        {{/if}}
+    </li>
+</template>
+
+<template name="personBoard">
+    <li data-id="{{_id}}">
+        <div class="details">
+            <h4>{{name}}</h4>
+            <h5>{{title}}</h5>
+            <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+        {{#if isAdmin}}
+            <aside class="admin">
+                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+            </aside>
+        {{/if}}
+    </li>
+</template>

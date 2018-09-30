@@ -1,6 +1,18 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import Settings from '/logic/core/settings';
+import Util from '/views/canvas/ui/util';
+
+import './canvas.html';
+import './preloader';
+import './markdown';
+
+// Import History later because it depends on the canvas template
+import History from '/views/history/history';
+
 // Canvas.js is dedicated to managing canvas events.
 // This includes how the canvas/off-canvas elements open/close and relate.
-Thriver.canvas = {
+const Canvas = {
   /**
    * @summary Remove Overlay
    * @method
@@ -26,19 +38,19 @@ Thriver.canvas = {
     const links = document.querySelectorAll('a[data-toggle="canvas"][aria-expanded="true"]');
 
     // Close all sidebars
-    for (let i = 0; i < sidebars.length; i += 1) Thriver.util.hide(sidebars[i]);
+    for (let i = 0; i < sidebars.length; i += 1) Util.hide(sidebars[i]);
 
     // Reset links
     for (let i = 0; i < links.length; i += 1) {
-      Thriver.util.makeActive(links[i], false);
-      links[i].removeEventListener('click', Thriver.canvas.handleCloseButton);
+      Util.makeActive(links[i], false);
+      links[i].removeEventListener('click', Canvas.handleCloseButton);
     }
 
     // Remove overlay
-    Thriver.canvas.removeOverlay();
+    Canvas.removeOverlay();
 
     // Update Location Bar
-    Thriver.history.updateLocation();
+    History.updateLocation();
   },
 
   /**
@@ -62,11 +74,8 @@ Thriver.canvas = {
    *   @param {Object} data - Show the sidebar in this data object
    */
   openSidebar: (data) => {
-    check(data, Object);
-    check(data.element, String);
-
     // First, close any open sidebars
-    Thriver.canvas.closeSidebars();
+    Canvas.closeSidebars();
 
     // Wait for element to render
     const render = () => {
@@ -83,23 +92,23 @@ Thriver.canvas = {
       const sidebar = document.querySelector(`#${element.getAttribute('aria-controls')}.sidebar`);
 
       // Open Overlay
-      Thriver.canvas.addOverlay();
+      Canvas.addOverlay();
 
       // Make link active
-      Thriver.util.makeActive(element);
+      Util.makeActive(element);
 
       // Make sidebar active
-      Thriver.util.hide(sidebar, false);
+      Util.hide(sidebar, false);
 
       // Set width
       canvas.dataset.canvasWidth = sidebar.dataset.width;
       canvas.dataset.canvasPosition = sidebar.dataset.position;
 
       // Bind closure
-      element.addEventListener('click', Thriver.canvas.handleCloseButton);
+      element.addEventListener('click', Canvas.handleCloseButton);
 
       // Set Mobile Menu Open
-      Thriver.util.makeActive(document.getElementById('mobile-toggle'), true);
+      Util.makeActive(document.getElementById('mobile-toggle'), true);
     };
 
     render();
@@ -111,13 +120,11 @@ Thriver.canvas = {
    *   @param {Event|$.Event} event
    */
   handleCloseButton: (event) => {
-    check(event, Match.OneOf(Event, $.Event));
-
     // Prevent anchor link from reopening sidebar while we're trying to close it
     event.stopPropagation();
     event.preventDefault();
 
-    Thriver.canvas.closeSidebars();
+    Canvas.closeSidebars();
   },
 
   /**
@@ -126,15 +133,13 @@ Thriver.canvas = {
    *   @param {$.Event} event
    */
   mobileMenu: (event) => {
-    check(event, $.Event);
-
     const toggle = document.getElementById('mobile-toggle');
     const navigation = document.getElementById('mobile-navigation');
 
     const openMenu = () => {
       // Open menu
-      Thriver.util.makeActive(toggle);
-      Thriver.util.hide(navigation, false);
+      Util.makeActive(toggle);
+      Util.hide(navigation, false);
 
       // Prevent scrolling
       document.body.classList.add('noScroll');
@@ -160,13 +165,13 @@ Thriver.canvas = {
 
       // Otherwise hide entire menu
       else {
-        Thriver.util.hide(navigation, true);
+        Util.hide(navigation, true);
 
         // Allow scrolling
         document.body.classList.remove('noScroll');
 
         // Remove `expanded` attribute from Toggle
-        Thriver.util.makeActive(toggle, false);
+        Util.makeActive(toggle, false);
       }
     } else openMenu();
   },
@@ -174,10 +179,10 @@ Thriver.canvas = {
 
 Template.body.events({
   // Canvas Actions
-  'click .overlay, click [data-canvas-event="close"]': Thriver.canvas.closeSidebars,
+  'click .overlay, click [data-canvas-event="close"]': Canvas.closeSidebars,
 
   // Mobile Events
-  'click [aria-controls][data-toggle="mobile-navigation"]': Thriver.canvas.mobileMenu,
+  'click [aria-controls][data-toggle="mobile-navigation"]': Canvas.mobileMenu,
 });
 
 // Canvas Helpers
@@ -186,5 +191,7 @@ Template.canvas.helpers({
    * @summary Get Google Analytics ID
    * @returns {String}
    */
-  gaID: () => Thriver.settings.get('googleAnalyticsId'),
+  gaID: () => Settings.get('googleAnalyticsId'),
 });
+
+export default Canvas;

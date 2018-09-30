@@ -1,12 +1,13 @@
+import { $ } from 'meteor/jquery';
+import { Template } from 'meteor/templating';
+import History from './history';
+
 /**
  * @summary Smooth scroll to a linked section
  * @method
  *   @param {string} path - Element ID to scroll to
  */
-Thriver.history.smoothScroll = (path) => {
-  // Sanitize path
-  check(path, String);
-
+const smoothScroll = (path) => {
   // Get rid of leading slashes and any sub paths
   const newPath = path.replace(/^\/*/, '').replace(/\/.*/g, '');
 
@@ -39,16 +40,13 @@ Thriver.history.smoothScroll = (path) => {
  * @method
  *   @param {$.Event} event - jQuery Event triggered by <a> element click
  */
-Thriver.history.smoothScrollEventHandler = (event) => {
-  // currentTarget will be an anchor element
-  check(event, $.Event);
-
+const smoothScrollEventHandler = (event) => {
   // Don't allow page to navigate away
   event.preventDefault();
   event.stopPropagation();
 
   // Smooth scroll to anchor's href destination
-  Thriver.history.navigate(event.currentTarget.pathname);
+  History.navigate(event.currentTarget.pathname);
 };
 
 /**
@@ -98,3 +96,5 @@ const handleHeaderStateChange = () => {
 
 // Handle header state change
 Template.canvas.onRendered(() => window.addEventListener('scroll', handleHeaderStateChange));
+
+export { smoothScroll, smoothScrollEventHandler };

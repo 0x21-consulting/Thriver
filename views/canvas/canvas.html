@@ -7,7 +7,9 @@
       window.setTimeout(() => document.body.classList.add('loaded'), 2000);
       window.setTimeout(() => document.body.classList.add('load-complete'), 4500);
     </script>
-    {{> browseHappy}}
+    <!--[if lte IE 9]>
+      <p class="browsehappy"><span class="inner"><span class="fa">&#xf071;</span> You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</span></p>
+    <![endif]-->
     <div id="canvas" class="canvas" data-canvas-position="" data-canvas-state="closed" data-canvas-width="">
       {{> utility}}
       {{> navigation}}

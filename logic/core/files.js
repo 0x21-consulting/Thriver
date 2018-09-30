@@ -1,22 +1,22 @@
+import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
  * @summary Thriver File Download Namespace
- * @namespace Thriver.files
  */
-Thriver.files = {};
+const Files = {};
 
 /**
  * @summary Files collection
  * @type {Mongo.Collection}
  */
-Thriver.files.collection = new Mongo.Collection('files');
+Files.collection = new Mongo.Collection('files');
 
 /**
  * @summary Files collection schema
  * @type {SimpleSchema}
  */
-Thriver.files.schema = new SimpleSchema({
+Files.schema = new SimpleSchema({
   /** ID */
   _id: {
     type: String,
@@ -35,4 +35,6 @@ Thriver.files.schema = new SimpleSchema({
 });
 
 // Apply schema to collection
-Thriver.files.collection.attachSchema(Thriver.files.schema);
+Files.collection.attachSchema(Files.schema);
+
+export default Files;

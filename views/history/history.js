@@ -1,29 +1,34 @@
 import SimpleSchema from 'simpl-schema';
+import { Mongo } from 'meteor/mongo';
+import { Tracker } from 'meteor/tracker';
+import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
+import Canvas from '/views/canvas/canvas';
+import { smoothScroll } from './scroll';
 
 /**
  * @summary History and Location namespace
- * @namespace Thriver.history
  */
-Thriver.history = {};
+const History = {};
 
 /**
  * @summary Scroll Event timeout constant
  * @type {number}
  */
-Thriver.history.TIMEOUT = 200;
-Object.defineProperty(Thriver.history, 'TIMEOUT', { writable: false }); // make constant
+History.TIMEOUT = 200;
+Object.defineProperty(History, 'TIMEOUT', { writable: false }); // make constant
 
 /**
  * @summary Registry for History, Routing, and Deep-Linking functionality
  * @type {Collection}
  */
-Thriver.history.registry = new Mongo.Collection(null);
+History.registry = new Mongo.Collection(null);
 
 /**
  * @summary Enforce Registry Schema
  * @type {SimpleSchema}
  */
-Thriver.history.schema = new SimpleSchema({
+History.schema = new SimpleSchema({
   /** Element ID to link to */
   element: {
     type: String,
@@ -56,15 +61,15 @@ Thriver.history.schema = new SimpleSchema({
 });
 
 // Attach Schema
-Thriver.history.registry.attachSchema(Thriver.history.schema);
+History.registry.attachSchema(History.schema);
 
 /**
  * @summary Update Browser's location bar
  * @method
  */
-Thriver.history.updateLocation = () => {
+History.updateLocation = () => {
   // Don't include special-access sections, since they're not visible on page
-  const elements = Thriver.history.registry
+  const elements = History.registry
     .find({ accessFunction: { $exists: false } }).fetch();
 
   const links = document.querySelectorAll('nav.mainNav a');
@@ -96,10 +101,10 @@ Thriver.history.updateLocation = () => {
     // If this is the last element OR
     // If the section height minus the portion hidden off the screen is more
     // than half the height of the visible area, we're good.
-    if (i === elements.length - 1 ||
-        (elements[i].h - (window.scrollY - elements[i].y)) > (window.innerHeight / 2)) {
+    if (i === elements.length - 1
+        || (elements[i].h - (window.scrollY - elements[i].y)) > (window.innerHeight / 2)) {
       // Update URL/location bar
-      Thriver.history.updateLocationBar(elements[i].currentPath);
+      History.updateLocationBar(elements[i].currentPath);
 
       // Remove active class from all main nav items and sections
       for (let k = 0; k < links.length; k += 1) links[k].classList.remove('active');
@@ -134,11 +139,7 @@ Thriver.history.updateLocation = () => {
  * @method
  *   @param {String} path
  */
-Thriver.history.updateLocationBar = (path) => {
-  check(path, String);
-
-  window.history.pushState({ path }, undefined, `/${path}`);
-};
+History.updateLocationBar = path => window.history.pushState({ path }, undefined, `/${path}`);
 
 /**
  * @summary Update a section's path
@@ -146,18 +147,15 @@ Thriver.history.updateLocationBar = (path) => {
  *   @param {String} section - Section name to update
  *   @param {String} path    - Path to set for section
  */
-Thriver.history.update = (section, path) => {
-  check(section, String);
-  check(path, String);
-
+History.update = (section, path) => {
   if (section.length && path.length) {
     // Update collection with new path
-    Thriver.history.registry.update({ element: section }, {
+    History.registry.update({ element: section }, {
       $set: { currentPath: path },
     });
 
     // Update URI
-    Thriver.history.updateLocationBar(path);
+    History.updateLocationBar(path);
   }
 };
 
@@ -166,17 +164,14 @@ Thriver.history.update = (section, path) => {
  * @method
  *   @param {String} path - Path to navigate to
  */
-Thriver.history.navigate = (path) => {
-  // Must have a path
-  check(path, String);
-
+History.navigate = (path) => {
   // Break into constituent parts
   const newPath = path.split(/\//)
     // Ignore empties
     .filter(element => element.length !== 0);
 
   // If there's no path, allow scroll to top
-  if (!newPath.length) Thriver.history.smoothScroll('/');
+  if (!newPath.length) smoothScroll('/');
 
   // Navigate to the appropriate element, once it exists
   // TODO(micchickenburger): Test for an infinite loop if the element doesn't exist
@@ -185,7 +180,7 @@ Thriver.history.navigate = (path) => {
      * @summary Get registered element
      * @type {Object}
      */
-    const location = Thriver.history.registry.findOne({ element: newPath[0] });
+    const location = History.registry.findOne({ element: newPath[0] });
 
     if (location) c.stop(); else return;
 
@@ -194,14 +189,14 @@ Thriver.history.navigate = (path) => {
       location.accessFunction(location.accessData);
     } else {
       // Close sidebars because all sidebars would have accessFunction
-      Thriver.canvas.closeSidebars();
+      Canvas.closeSidebars();
 
       // Smooth scroll to element
-      Thriver.history.smoothScroll(location.element);
+      smoothScroll(location.element);
     }
 
     // Update element's stateful path
-    Thriver.history.update(location.element, newPath.join('/'));
+    History.update(location.element, newPath.join('/'));
 
     // Now, pass the rest of the path along to the callback function
     if (location.callback instanceof Function) location.callback(newPath.slice(1));
@@ -246,10 +241,10 @@ Template.canvas.onRendered(() => {
     clearTimeout(timeout);
 
     // Set a timeout to modify location bar about every quarter second
-    timeout = setTimeout(Thriver.history.updateLocation, Thriver.history.TIMEOUT);
+    timeout = setTimeout(History.updateLocation, History.TIMEOUT);
   });
 
-  Thriver.history.navigate(path);
+  History.navigate(path);
 });
 
 /**
@@ -258,12 +253,8 @@ Template.canvas.onRendered(() => {
  *   @param {Event} event - Popstate event
  */
 window.addEventListener('popstate', (event) => {
-  check(event, Event);
-  check(event.state, Object);
-  check(event.state.path, Match.Maybe(String));
-
   // Navigate to path
-  if (event.state.path) Thriver.history.navigate(event.state.path);
+  if (event.state.path) History.navigate(event.state.path);
 });
 
 /**
@@ -275,15 +266,15 @@ window.addEventListener('popstate', (event) => {
 Template.body.events({
   // If href starts with a slash and is intended to remain in this tab
   'click a[href^="/"][target!="_blank"]': (event) => {
-    check(event, $.Event);
-
     // Only for internal paths; file_open.php is a 301 redirect
     if (!event.target.pathname.match(/\/file_open.php/i)) {
       // Prevent navigation away from page
       event.preventDefault();
 
       // Navigate to path
-      Thriver.history.navigate(event.target.pathname || '/');
+      History.navigate(event.target.pathname || '/');
     }
   },
 });
+
+export default History;

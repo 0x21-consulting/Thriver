@@ -1,14 +1,17 @@
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+
 /**
  * @summary Thriver Settings
- * @namespace Thriver.settings
+ * @namespace Settings
  */
-Thriver.settings = {};
+const Settings = {};
 
 /**
  * @summary Settings collection
  * @type {Collection}
  */
-Thriver.settings.collection = new Mongo.Collection(null);
+Settings.collection = new Mongo.Collection(null);
 
 /**
  * @summary Get a setting
@@ -17,8 +20,8 @@ Thriver.settings.collection = new Mongo.Collection(null);
  *   @param {any}    defaultValue - If no setting can be found, returns this value
  * @returns {defaultValue|undefined}
  */
-Thriver.settings.get = (setting, defaultValue) =>
-  Thriver.settings.collection.findOne()[setting] || defaultValue || undefined;
+Settings.get = (setting, defaultValue) => Settings.collection.findOne()[setting]
+  || defaultValue || undefined;
 
 /**
  * @summary Prefill settings collection
@@ -42,12 +45,12 @@ Meteor.startup(() => {
       pair[setting] = values[index];
 
       // Add to collection
-      Thriver.settings.collection.update({}, { $set: pair });
+      Settings.collection.update({}, { $set: pair });
     });
   };
 
   // Just one settings record
-  Thriver.settings.collection.insert({});
+  Settings.collection.insert({});
 
   // If there is no Meteor settings object, there's nothing to prefill
   if (!(Meteor.settings instanceof Object)) return;
@@ -58,3 +61,5 @@ Meteor.startup(() => {
   // Prefill client settings
   else if (Meteor.settings.public instanceof Object) addSettings(Meteor.settings.public);
 });
+
+export default Settings;

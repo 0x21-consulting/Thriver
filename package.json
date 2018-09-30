@@ -21,7 +21,9 @@
     "@babel/runtime": "7.0.0-beta.55",
     "bcrypt": "^3.0.1",
     "core-js": "^2.5.7",
-    "simpl-schema": "^1.5.3"
+    "fibers": "^3.0.0",
+    "paypal-rest-sdk": "^1.8.1",
+    "simpl-schema": "1.4.3"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",

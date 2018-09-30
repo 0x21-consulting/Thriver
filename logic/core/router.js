@@ -1,3 +1,10 @@
+import { Router } from 'meteor/iron:router';
+import { Meteor } from 'meteor/meteor';
+import News from '/logic/news/schema';
+import Sections from '/logic/sections/sections';
+import Files from './files';
+import Settings from './settings';
+
 /**
  * @summary Route for Action Alerts
  */
@@ -13,16 +20,16 @@ Router.route('action-alert', {
   /**
    * @summary Data to pass to template
    */
-  data: function () { // eslint-disable-line object-shorthand,func-names
+  data: function () { // eslint-disable-line object-shorthand
     // Can't use lambda expression because of `this` context
     if (!this.ready()) return undefined;
 
     let item;
-    const items = Thriver.news.collection.find({ type: 'actionAlert' }).fetch();
+    const items = News.collection.find({ type: 'actionAlert' }).fetch();
 
     // Find the Newsroom item that matches the name
     for (let i = 0; i < items.length; i += 1) {
-      if (Thriver.sections.generateId(items[i].title) === this.params.title) {
+      if (Sections.generateId(items[i].title) === this.params.title) {
         item = items[i];
         break;
       }
@@ -71,11 +78,11 @@ Router.route('press-release', {
     if (!this.ready()) return undefined;
 
     let item;
-    const items = Thriver.newsroom.collection.find({ type: 'pressRelease' }).fetch();
+    const items = News.collection.find({ type: 'pressRelease' }).fetch();
 
     // Find the Newsroom item that matches the name
     for (let i = 0; i < items.length; i += 1) {
-      if (Thriver.sections.generateId(items[i].title) === this.params.title) {
+      if (Sections.generateId(items[i].title) === this.params.title) {
         item = items[i];
         break;
       }
@@ -115,15 +122,15 @@ Router.route('file-open', {
   /**
    * @summary Wait for collection to populate
    */
-  waitOn: () => Thriver.files.collection.findOne({}),
+  waitOn: () => Files.collection.findOne({}),
 
   action: function fileOpen() {
     if (this.ready()) {
       const fileId = parseInt(this.url.replace(/.+\?id=(\d{1,4})/gi, '$1'), 10);
-      const file = Thriver.files.collection.findOne({ fileId });
+      const file = Files.collection.findOne({ fileId });
 
       if (file) {
-        const { bucket } = Thriver.settings.get('aws');
+        const { bucket } = Settings.get('aws');
 
         // HTTP 301 Permanent Redirect
         this.response.writeHead(
