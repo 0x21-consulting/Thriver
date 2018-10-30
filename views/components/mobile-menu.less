@@ -1,0 +1,181 @@
+@import (reference) "/views/styles/index.less";
+@import (reference) "/views/styles/context.import.less";
+
+//default colors
+//This is packaged and needs to be loaded before options.import.less
+//@mobileNavigationBgColor: #eee;
+//@mobileNavigationColor: #222;
+//@mobileNavigationBorderColor: #aaa;
+//@mobileNavIconColor: #000;
+
+#mobile-header{
+    border-bottom: 1px solid #aaa;
+    button{
+        padding: 0px !important;
+        span{pointer-events: none;}
+        .shadowNone;
+        &:active #nav-icon{
+            //box-shadow:inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+            //-webkit-box-shadow:inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+            background: transparent;
+        }
+    }
+}
+
+#mobile-navigation{
+    background-color: @mobileNavigationBgColor;
+    ul{margin:0px;padding:0px;}
+    figure[aria-hidden="true"]{display: none;}
+    figure[aria-hidden="false"]{display: block;}
+    //li:hover figure[aria-hidden="false"]{display: none;}
+    //li a:focus + figure[aria-hidden="false"]{display: block;}
+    //li a:focus + figure[aria-hidden="true"]{display: block;}
+    li{
+        list-style: none;
+        margin: 0;
+
+        //i{display: none;}
+        a{
+            display: block;
+            color: @mobileNavigationColor;
+            line-height: @headerMobileH;
+            text-transform: none;
+            font-weight: 500;
+            padding: 0px 15px;
+            span{pointer-events: none;}
+            //border-bottom: 1px solid @mobileNavigationBorderColor;
+            //&:after{display: none;}
+            //&:before{display: none;}
+            &[href="#notifications"], &[href="#signin"]{
+                //border-top: 2px solid darken(@mobileNavigationBgColor,15%);
+            }
+            &[data-action="signout"], &[data-action="register"]{
+                //border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
+            }
+            &[href="/service-providers"]{background-color: @orange;}
+            &[href="/service-providers"]{background-color: @orange;}
+            &[href="/payments"]{ display: none; }
+            &[aria-expanded]:after{
+                content:"\f0da";
+                .fa;
+            }
+            &[href="/notifications"], &[href="/"], &[href="/accounts"] {
+                background: darken(@mobileNavigationBgColor,5%);
+            }
+            &[href="https://www.facebook.com/wcasa"], &[href="https://www.youtube.com/user/WCASAVPCC"]{
+                &:after{display: none;}
+                background: darken(@mobileNavigationBgColor,15%);
+            }
+            //&[href="#twitter"]{border-bottom:2px solid darken(@mobileNavigationBgColor,15%);}
+        }
+        &[data-type=main-navigation-item] a{
+                background: darken(@mobileNavigationBgColor,12%);
+        }
+        &:nth-child(even){background-color: darken(@mobileNavigationBgColor,3.5%); }
+    }
+    figure {
+        //display: block;
+        padding: 5px 10px 10px 10px;
+        background: #eee;
+        dt{color:#222;}
+        a[href="#service-providers"]{
+            margin-top: 10px;
+            background: @teal;
+            display: inline-block;
+        }
+    }
+}
+
+
+//// Material Design Menu Icon (Spinner) ////
+// This needs to be made cross-browser friendly
+#nav-icon {
+	padding: 23px 15px 24px 15px;
+    pointer-events: none;
+	span{
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 3px;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+		background: @mobileNavMenuIconColor;
+		animation-duration: 300ms;
+		animation-timing-function: ease-in-out;
+		&:before, &:after{
+			display: block;
+			width: inherit;
+			height: 3px;
+			position: absolute;
+			background: inherit;
+            border-radius:5px;
+            -webkit-border-radius:5px;
+			left: 0;
+			content: '';
+			animation-duration: 300ms;
+			animation-timing-function: ease-in-out;
+		}
+		&:before{ bottom: 250%; }
+		&:after{ top: 250%; }
+	}
+}
+
+//Active
+header.mobile [aria-expanded="true"] #nav-icon{
+    background-color: @teal;
+    span{background: @white; }
+    span, span:before, span:after{ animation-fill-mode: forwards; }
+    span{ animation-name: sidebar-toggle-active; }
+    span:before{ animation-name: sidebar-toggle-active-before; }
+    span:after{ animation-name: sidebar-toggle-active-after; }
+}
+//Inactive
+header.mobile [aria-expanded="false"] #nav-icon{
+    span { animation-name: sidebar-toggle-inactive; }
+    span:before { animation-name: sidebar-toggle-inactive-before; }
+    span:after { animation-name: sidebar-toggle-inactive-after; }
+}
+
+//// Animations ////
+
+// Header Off-canvas Footer Toggler
+// Needs to be made cross-browser compatable
+@keyframes sidebar-toggle-active {
+  0% {} 100% { transform: rotate(180deg); }
+}
+@keyframes sidebar-toggle-active-before {
+	0% {}
+	100% {
+		transform: rotate(45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+}
+@keyframes sidebar-toggle-active-after {
+	0% {}
+	100% {
+		transform: rotate(-45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+}
+@keyframes sidebar-toggle-inactive {
+	0% { transform: rotate(-180deg); }
+	100% {}
+}
+@keyframes sidebar-toggle-inactive-before {
+	0% {
+		transform: rotate(45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+	100% {}
+}
+@keyframes sidebar-toggle-inactive-after {
+	0% {
+		transform: rotate(-45deg);
+		margin: -10% 60%;
+		width: 50%;
+	}
+	100% {}
+}

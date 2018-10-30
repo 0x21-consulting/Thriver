@@ -1,11 +1,11 @@
 sudo: required
 
 language: node_js
-node_js: "4.1.1"
+node_js: "8.11.3"
 
 before_install:
   # install meteor
-  - "curl -L https://git.io/ejPSng | /bin/sh"
+  - "curl https://install.meteor.com | /bin/sh"
 
   # install spacejam for testing packages
   #- "npm install -g spacejam"

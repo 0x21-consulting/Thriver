@@ -1,0 +1,39 @@
+@import (reference) "/views/styles/index.less";
+@import (reference) "/views/styles/forms.import.less";
+
+//Defaults
+//@filterBgColor: #222;
+.filter{
+    background-color: @filterBgColor;
+    padding: 20px;
+    form{
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blueGray, 5%),@teal,@gray,darken(@blue, 2%));
+        margin: 0 auto;
+        width: 300px;
+        position: relative;
+        .placeholderColor(@white);
+        label{
+            position: absolute;
+            color: @white;
+            font-size: 16px;
+            top: 6px;
+            font-weight: normal;
+            position: absolute;
+            left: 0px;
+        }
+        fieldset{display: none;}
+        input{
+            font-weight: bold;
+            &[type=search], &[type=search]:focus{
+                background-color: transparent;
+                .shadowNone;
+            }
+        }
+    }
+    &.active-filter{
+        fieldset{display: block;}
+    }
+    @media @mobile{
+        display: none;
+    }
+}
