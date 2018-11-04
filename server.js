@@ -1,4 +1,4 @@
-import '/logic/core/router';
+// import '/logic/core/router';
 import '/logic/sections/server';
 import '/logic/news/server';
 import '/logic/accounts/notifications';

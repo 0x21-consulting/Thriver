@@ -1,5 +1,4 @@
 <template name="canvas">
-  {{> preloader}}
   {{#if Template.subscriptionsReady}}
     <script>
       // Do not append class until after the DOM is created to leverage CSS animations
@@ -34,6 +33,8 @@
       {{> admin}}
       {{> feedbackAdmin}}
     {{/if}}
+  {{else}}
+    {{> preloader}}
   {{/if}}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
