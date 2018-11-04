@@ -174,4 +174,12 @@ Template.utilityItem.helpers({
 
 Template.utility.helpers(utilityNavigationHelpers);
 
+// Handle sign out
+Template.utilityItem.events({
+  'click [data-action="signout"]'(event) {
+    event.preventDefault();
+    Meteor.logout();
+  },
+});
+
 export default utilityNavigationHelpers;
