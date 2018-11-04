@@ -26,23 +26,6 @@
   }
 }
 
-body.loaded .preloader{
-    opacity: 0;
-    transition: opacity 250ms ease-in-out 2000ms; -webkit-transition: opacity 250ms ease-in-out 2000ms;
-    img{
-        transform: scale(0.7); -webkit-transform: scale(0.7); -ms-transform: scale(0.7); -moz-transform: scale(0.7);
-    }
-}
-body.load-complete .preloader{ display: none; }
-
-// Preloader Settings
-#canvas{
-    opacity: 0;
-    transition: opacity 250ms ease 1000ms; -webkit-transition: opacity 250ms ease 1000ms;
-    body.loaded &{ opacity: 1; }
-}
-
-
 // Animated Loader
 .preloader-graphic{
     position:absolute;

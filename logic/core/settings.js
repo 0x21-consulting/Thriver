@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 /**
  * @summary Thriver Settings
@@ -22,6 +23,12 @@ Settings.collection = new Mongo.Collection(null);
  */
 Settings.get = (setting, defaultValue) => Settings.collection.findOne()[setting]
   || defaultValue || undefined;
+
+/**
+ * @summary Is the settings collection ready?
+ * @type {ReactiveVar}
+ */
+Settings.ready = new ReactiveVar(false);
 
 /**
  * @summary Prefill settings collection
