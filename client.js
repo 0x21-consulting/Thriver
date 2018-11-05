@@ -16,7 +16,7 @@ import '/views/components/adminTabs';
 
 // Logic
 import '/logic/core/autoform';
-import '/logic/core/router';
+import '/logic/routes';
 import '/logic/sections/client';
 
 // Accounts

@@ -10,6 +10,10 @@ import './markdown';
 // Import History later because it depends on the canvas template
 import History from '/views/history/history';
 
+Template.canvas.onCreated(function () {
+  this.subscribe('sections');
+});
+
 // Canvas.js is dedicated to managing canvas events.
 // This includes how the canvas/off-canvas elements open/close and relate.
 const Canvas = {
@@ -191,7 +195,10 @@ Template.canvas.helpers({
    * @summary Get Google Analytics ID
    * @returns {String}
    */
-  gaID: () => Settings.get('googleAnalyticsId'),
+  gaID: () => {
+    if (Settings.ready.get()) return Settings.get('googleAnalyticsId');
+    return false;
+  },
 });
 
 export default Canvas;

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import News from './schema';
+import Sections from '/logic/sections/sections';
 
 // Structure
 //   _id           {string}   auto_incr
@@ -20,11 +21,25 @@ import News from './schema';
 Meteor.publish('inTheNews', () => News.collection
   .find({ type: 'inTheNews' }, { sort: { date: 1 } }));
 
-Meteor.publish('pressReleases', () => News.collection
-  .find({ type: 'pressRelease' }, { sort: { date: 1 } }));
+Meteor.publish('pressReleases', (title) => {
+  check(title, Match.Maybe(String));
 
-Meteor.publish('actionAlerts', () => News.collection
-  .find({ type: 'actionAlert' }, { sort: { date: 1 } }));
+  const query = { type: 'pressRelease' };
+
+  if (title) query.friendlyTitle = title;
+
+  return News.collection.find(query, { sort: { date: 1 } });
+});
+
+Meteor.publish('actionAlerts', (title) => {
+  check(title, Match.Maybe(String));
+
+  const query = { type: 'actionAlert' };
+
+  if (title) query.friendlyTitle = title;
+
+  return News.collection.find(query, { sort: { date: 1 } });
+});
 
 Meteor.publish('newsletters', () => News.collection
   .find({ type: 'newsletter' }, { sort: { date: 1 } }));
@@ -49,8 +64,11 @@ Meteor.methods({
     // Enforce UTC
     if (item.date instanceof Date) thisItem.date = new Date(thisItem.date.toISOString());
 
+    // Add friendly title
+    thisItem.friendlyTitle = Sections.generateId(item.title);
+
     // Perform Insert
-    News.collection.insert(item, (error) => {
+    News.collection.insert(thisItem, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },
