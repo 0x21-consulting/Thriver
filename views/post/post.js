@@ -45,7 +45,7 @@ Template.post.helpers({
    */
   hash: () => {
     const content = News.collection
-      .findOne({ _id: this._id }, { content: 1 });
+      .findOne({}, { content: 1 });
 
     // Sometimes this helper executes before the collection is ready
     // If so, just return and wait for the rerun
@@ -56,6 +56,9 @@ Template.post.helpers({
 
     return '';
   },
+
+  content: () => News.collection.findOne({}).content,
+  title: () => News.collection.findOne({}).title,
 
   home: {
     url: '/',
