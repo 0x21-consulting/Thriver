@@ -75,6 +75,10 @@ Template.aside.helpers({
       title: 'Webinars',
       id: 'webinars',
       template: 'webinars',
+    }, {
+      title: 'Library',
+      id: 'library',
+      template: 'library',
     }],
   }, {
     title: 'News',

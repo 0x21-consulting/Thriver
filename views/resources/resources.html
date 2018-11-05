@@ -21,3 +21,26 @@
     </aside>
   {{/if}}
 </template>
+
+<template name="library">
+  <header class="mobile"><h2>{{title}}</h2></header>
+  <header class="librarySearchHeader">
+      <h2>Library Results</h2>
+      <dl class="breadcrumb">
+          <!--These List Items should only show based on user's filter selection-->
+          <dt class="fa" title="search terms"></dt>
+          <dd>"Survivor Stories"</dd>
+          <dt class="fa" title="classification"></dt>
+          <dd>Providers</dd>
+          <dt class="fa" title="category"></dt>
+          <dd>Resources</dd>
+          <dt class="fa" title="material"></dt>
+          <dd>Book or Booklet</dd>
+          <dt class="count"></dt>
+          <dd class="count">24 results</dd>
+      </dl>
+  </header>
+  {{#each lists}}
+      {{>list}}
+  {{/each}}
+</template>
