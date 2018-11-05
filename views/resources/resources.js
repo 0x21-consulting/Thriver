@@ -30,6 +30,7 @@ const handleSearch = (event) => {
 // Subscriptions
 Meteor.subscribe('infosheets');
 Meteor.subscribe('webinars');
+Meteor.subscribe('library');
 
 // Events
 Template.aside.events({
@@ -101,4 +102,13 @@ Template.lcSubHead.helpers({
    * @returns {Mongo.Collection}
    */
   resources: () => Resources.collection,
+});
+
+Template.libraryForm.helpers({
+  /**
+   * @summary The collection to use to populate form
+   * @function
+   * @returns {Mongo.Collection}
+   */
+  library: () => Resources.collection,
 });

@@ -40,7 +40,15 @@
           <dd class="count">24 results</dd>
       </dl>
   </header>
+  {{> libraryForm}}
   {{#each lists}}
       {{>list}}
   {{/each}}
+</template>
+
+<template name="libraryForm">
+  <section id="library-admin">
+    {{> quickForm collection=library id="LibraryForm"
+    meteormethod="addLibraryItem" type="method" doc=doc class="hide" }}
+  </section>
 </template>
