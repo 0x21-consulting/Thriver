@@ -53,7 +53,8 @@ Template.library.helpers({
       type: 'library',
       $or: Resources.search.get() instanceof RegExp ? [
         { title: Resources.search.get() },
-        { publisher: Resources.search.get() },
+        { description: Resources.search.get() },
+        { description: Resources.search.get() },
       ] : [{}],
     }, {
       limit: Resources.quantity.get(),
@@ -61,14 +62,19 @@ Template.library.helpers({
     }),
     */
     items: [{
-      title: 'hello',
-      byline: 'there pal.',
-      callNumber: 'callNum',
-      copies: 'Copies',
-      subjectHeading: 'something',
-      classification: 'somethingClassification',
-      category: 'someCat',
+      title: 'Stories from a Certain Book About John Doe',
+      description: 'Learn about something or other. with a fully detailed something along the lines of several many things. Such as stuff and junk amongst much more valuable things. Considerations and nonsense may apply.',
+      descriptionTrunc: 'Learn about something or other. with a fully detailed something along the lines of several many things. Such as stuff and junk amongst much more valuable things. Considerations...',
+      callNumber: 534827834727,
+      copies: 12,
+      subjectHeading: 'Some Headings',
+      classification: 'Providers',
+      category: 'Resource',
       type: 'book',
+      status: {
+        text: 'get it',
+        type: 'transit',
+      },
     }],
   }],
 });

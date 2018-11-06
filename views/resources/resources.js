@@ -76,6 +76,21 @@ Template.aside.events({
     if (form.classList.contains('hide')) form.classList.remove('hide');
     else form.classList.add('hide');
   },
+
+  /**
+   * @summary Add aria-expanded to Summary/Details element
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #resource-center summary': (event) => {
+    // Show form
+    
+    const item = event.target.closest('details');
+    console.log(item);
+    if (item.data('aria-expanded') == 'false') item.setAttribute('aria-expanded', 'true');
+    else item.setAttribute('aria-expanded', 'false');
+  },
+  
 });
 
 // Administrative events

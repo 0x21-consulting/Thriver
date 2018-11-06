@@ -9,11 +9,11 @@
 
 <!--Pending explicit library content before making section reactive-->
 <template name="filterObject">
-    <fieldset class="filterObject">
+    <form class="flex-form">
         <div class="styledSelect fullBlockMob">
             <label class="dtHide">Classification</label>
             <select id="classification" name="classification">
-                <option value="0">Select Classification</option>
+                <option value="0">Classification</option>
                 <option value="01">Survivors</option>
                 <option value="02">Providers</option>
                 <option value="03">Resources</option>
@@ -22,7 +22,7 @@
         <div class="styledSelect fullBlockMob">
             <label class="dtHide">Category</label>
             <select id="category" name="category">
-                <option value="0">Select Category</option>
+                <option value="0">Category</option>
                 <option value="01">Survivors</option>
                 <option value="02">Providers</option>
                 <option value="03">Resources</option>
@@ -31,13 +31,13 @@
         <div class="styledSelect fullBlockMob">
             <label class="dtHide">Material</label>
             <select id="material" name="material">
-                <option value="0">Select Material Type</option>
+                <option value="0">Type</option>
                 <option value="01">Book</option>
                 <option value="02">CD</option>
                 <option value="03">eBook</option>
             </select>
         </div>
-        <input type="submit" value="Search Library" />
-        <button class="viewAll ref">View All Alphabetically</button>
-    </fieldset>
+        <!---<input type="submit" value="Search Library" />-->
+        <!--<button class="viewAll ref">View All Alphabetically</button>-->
+    </form>
 </template>

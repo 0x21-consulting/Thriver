@@ -24,10 +24,11 @@
 
 <template name="library">
   <header class="mobile"><h2>{{title}}</h2></header>
+  {{> filterObject}}
+  <!--
   <header class="librarySearchHeader">
       <h2>Library Results</h2>
       <dl class="breadcrumb">
-          <!--These List Items should only show based on user's filter selection-->
           <dt class="fa" title="search terms"></dt>
           <dd>"Survivor Stories"</dd>
           <dt class="fa" title="classification"></dt>
@@ -40,6 +41,7 @@
           <dd class="count">24 results</dd>
       </dl>
   </header>
+  -->
   {{> libraryForm}}
   {{#each lists}}
       {{>list}}
@@ -48,7 +50,31 @@
 
 <template name="libraryForm">
   <section id="library-admin">
-    {{> quickForm collection=library id="LibraryForm"
-    meteormethod="addLibraryItem" type="method" doc=doc class="hide" }}
+    <button id="add-library-item">Add Library Item</button>
+    <div class="form-container">
+      <form>
+        <input name="title" type="text" />
+        <textarea name="description"></textarea>
+        <input name="call-number" type="number" />
+        <input name="copies" type="number" />
+        <select name="classification">
+          <option>Providers</option>
+          <option>Resources</option>
+        </select>
+        <select name="category">
+          <option>Learning</option>
+          <option>Something Else</option>
+        </select>
+        <select name="material">
+          <option>DVD</option>
+          <option>Book</option>
+        </select>
+        <div class="form-group">
+          <input type="radio" name="status" value="available" checked>Available
+          <input type="radio" name="status" value="unavailable">Unavailable
+        </div>
+        <input type="submit" class="btn" value="Add Item" />
+      </form>
+    </div>
   </section>
 </template>

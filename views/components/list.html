@@ -66,9 +66,10 @@
                     <details aria-expanded="false" aria-controls="{{id}}">
                         <summary id="catalog{{id}}">
                             <h1>{{title}}</h1>
-                            <p class="meta">{{byline}}</p>
+                            <p class="meta">{{descriptionTrunc}}</p>
                         </summary>
                         <dl>
+                            <p class="meta">{{description}}</p>
                             <!--Would be nice to have the spacebars tag just do: prop:val-->
                             <dt>Call Number</dt><dd>{{callNumber}}</dd>
                             <dt>Copies</dt><dd>{{copies}}</dd>
