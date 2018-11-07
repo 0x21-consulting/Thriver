@@ -66,33 +66,37 @@
                     <details aria-expanded="false" aria-controls="{{id}}">
                         <summary id="catalog{{id}}">
                             <h1>{{title}}</h1>
+                            <span class="status gem"><i class="fas fa-circle"></i></span>
+                            <ul class="cats-tags">
+                                <li class="category"><i class="fas fa-book"></i> {{material}}</li>
+                                <li class="classification">{{classification}}</li>
+                                {{#each tags}}
+                                    <li class="tag">{{this}}</li>
+                                {{/each}}
+                            </ul>
                             <p class="meta">{{descriptionTrunc}}</p>
                         </summary>
-                        <dl>
-                            <p class="meta">{{description}}</p>
-                            <!--Would be nice to have the spacebars tag just do: prop:val-->
-                            <dt>Call Number</dt><dd>{{callNumber}}</dd>
-                            <dt>Copies</dt><dd>{{copies}}</dd>
-                            <dt>Subject Headings</dt><dd>{{subjectHeading}}</dd>
-                            <dt>Classification</dt><dd>{{classification}}</dd>
-                            <dt>Category</dt><dd>{{category}}</dd>
-                            <dt>Material</dt><dd>{{type}}</dd>
-                        </dl>
+                        <p class="meta inner-desc">{{description}}</p>
+                        {{#if subjectHeading}}
+                            <div class="subject-headings">
+                                <h2>Subject Headings</h2>
+                                <p>{{subjectHeading}}</p>
+                            </div>
+                        {{/if}}
+                        <hr />
+                        <aside class="info">
+                            <dl>
+                                <dt>Status</dt><dd>{{status.text}}</dd>
+                                <dt>Call Number</dt><dd>{{callNumber}}</dd>
+                                <dt>Copies</dt><dd>{{copies}}</dd>
+                            </dl>
+                            <menu class="availability">
+                                {{#if equals status.type 'transit'}}
+                                    <li><button>Request Copy</button></li>
+                                {{/if}}
+                            </menu>
+                        </aside>
                     </details>
-                    <aside class="info">
-                        {{#if type}}
-                            <dl class="material"><dt>Material</dt><dd>{{type}}</dd></dl>
-                        {{/if}}
-                        {{#if status}}
-                            <dl class="status {{status.type}}"><dt>Status</dt><dd>{{status.text}}</dd></dl>
-                        {{/if}}
-                        <menu class="availability">
-                            {{#if equals status.type 'transit'}}
-                                <li><button>Request Copy</button></li>
-                            {{/if}}
-                            <!--Remaining interaction buttons here-->
-                        </menu>
-                    </aside>
                 </div>
             </article>
         {{/each}}

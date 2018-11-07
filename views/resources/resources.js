@@ -70,11 +70,23 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #resource-center aside.admin button.add': () => {
+  'click #admin-btn-resource-add': () => {
     // Show form
     const form = document.querySelector('#LCForm');
     if (form.classList.contains('hide')) form.classList.remove('hide');
     else form.classList.add('hide');
+  },
+
+  /**
+   * @summary Toggle Add Library Item form
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #admin-btn-library-add': () => {
+    // Show form
+    const formContainer = document.querySelector('#admin-form-container-library-add');
+    if (formContainer.classList.contains('hide')) formContainer.classList.remove('hide');
+    else formContainer.classList.add('hide');
   },
 
   /**
@@ -83,14 +95,10 @@ Template.aside.events({
    *   @param {$.Event} event
    */
   'click #resource-center summary': (event) => {
-    // Show form
-    
     const item = event.target.closest('details');
-    console.log(item);
-    if (item.data('aria-expanded') == 'false') item.setAttribute('aria-expanded', 'true');
+    if (item.getAttribute('aria-expanded') === 'false') item.setAttribute('aria-expanded', 'true');
     else item.setAttribute('aria-expanded', 'false');
   },
-  
 });
 
 // Administrative events
@@ -119,7 +127,7 @@ Template.lcSubHead.helpers({
   resources: () => Resources.collection,
 });
 
-Template.libraryForm.helpers({
+Template.libraryAddForm.helpers({
   /**
    * @summary The collection to use to populate form
    * @function
