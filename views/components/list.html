@@ -56,9 +56,7 @@
             {{/if}}
         </section>
     {{/if}}
-    <!--Catalog List pending explicit instructions on library-->
     {{#if equals type 'catalog'}}
-    {{global_debug this}}
       <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}"
         data-list-paginate-count="{{perPage}}" class="{{type}} {{style}}">
           {{#each items}}
@@ -77,7 +75,7 @@
                             <ul class="cats-tags">
                                 <li class="category"><i class="fas fa-book"></i> {{material}}</li>
                                 <li class="classification">{{classification}}</li>
-                                {{#each tags}}
+                                {{#each keywords}}
                                     <li class="tag">{{this}}</li>
                                 {{/each}}
                             </ul>

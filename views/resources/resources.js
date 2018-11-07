@@ -87,6 +87,8 @@ Template.aside.events({
       return checkboxesChecked.length > 0 ? checkboxesChecked : null;
     };
 
+    const keywords = getTags('library-add-form-keywords');
+
     const data = {
       title: document.getElementById('library-add-form-title').value,
       description: document.getElementById('library-add-form-desc').value,
@@ -96,7 +98,7 @@ Template.aside.events({
       classification: document.getElementById('library-add-form-classifications').value,
       material: document.getElementById('library-add-form-material').value,
       status: document.getElementById('library-add-form-status').value,
-      tags: getTags('library-add-form-keywords'),
+      keywords,
     };
 
     console.log(data);
