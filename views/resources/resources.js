@@ -65,12 +65,54 @@ Template.aside.events({
   'keyup #searchLC, search #searchLC': handleSearch,
 
   /**
-   * @summary Prevent form submission
+   * @summary Prevent resources form submission
    * @method
    *   @param {$.Event} event
    */
   'submit form#searchLCForm': event => event.preventDefault(),
 
+  /**
+   * @summary Add Library Form Submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#admin-form-library-add': (event) => {
+
+    event.preventDefault();
+
+    const getTags = (checkboxesName) => {
+      const checkboxes = document.getElementsByName(checkboxesName);
+      const checkboxesChecked = [];
+      for (let i = 0; i < checkboxes.length; i += 1) {
+        if (checkboxes[i].checked) checkboxesChecked.push(checkboxes[i].value);
+      }
+      return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    };
+
+    const data = {
+      title: document.getElementById('library-add-form-title').value,
+      description: document.getElementById('library-add-form-desc').value,
+      callNumber: document.getElementById('library-add-form-callNumber').value,
+      copies: document.getElementById('library-add-form-copies').value,
+      subjectHeading: document.getElementById('library-add-form-subjectHeading').value,
+      classification: document.getElementById('library-add-form-classifications').value,
+      material: document.getElementById('library-add-form-material').value,
+      status: document.getElementById('library-add-form-status').value,
+      tags: getTags('library-add-form-keywords'),
+    };
+
+    console.log(data);
+
+    // Insert subscriber into the collection
+    Meteor.call('addLibraryItem', data, function(error) {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        console.log('Subscription successful');
+        console.log(data);
+      }
+    });
+  },
 
   /**
    * @summary Toggle Add Resource Center Item form

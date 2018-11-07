@@ -38,45 +38,55 @@
       <form id="admin-form-library-add">
         <label>
           Title
-          <input name="title" type="text" />
+          <input id="library-add-form-title" name="title" type="text" />
         </label>
         <label>
           Description
-          <textarea name="description"></textarea>
+          <textarea id="library-add-form-desc" name="description"></textarea>
         </label>
         <hr />
         <div class="styledSelect fullBlockMob w-50">
           <label class="">Material</label>
-          <select name="material">
+          <select name="material" id="library-add-form-material" >
             {{#each form.materials}}
-              <option name="{{simpleString this}}">{{this}}</option>
+              <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
         <div class="styledSelect fullBlockMob w-50">
           <label class="">Classification</label>
-          <select name="classifications">
+          <select name="classifications" id="library-add-form-classifications" >
             {{#each form.classifications}}
-              <option name="{{simpleString this}}">{{this}}</option>
+              <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
         <div class="styledSelect fullBlockMob w-33">
           <label class="">Status</label>
-          <select name="classifications">
+          <select name="status" id="library-add-form-status" >
             {{#each form.status}}
-              <option name="{{simpleString this}}">{{this}}</option>
+              <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
         <label class="w-33">
           Call Number
-          <input name="call-number" type="text" />
+          <input id="library-add-form-callNumber" name="callNumber" type="text" />
         </label>
         <label class="w-33">
           Copies
-          <input name="copies" type="number" />
+          <input id="library-add-form-copies" name="copies" type="number" />
         </label>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Add Subject Headings <i class="fas fa-caret-right"></i>
+          </summary>
+          <label>
+            Subject Headings
+            <textarea id="library-add-form-subjectHeading" name="subjectHeadings"></textarea>
+          </label>
+          <hr />
+        </details>
         <details aria-expanded="false" class="admin-form-details">
           <summary>
             Add Keywords <i class="fas fa-caret-right"></i>
@@ -85,7 +95,7 @@
             {{#each form.keywords}}
               <div class="">
                 <div class="toggleSwitch">
-                  <input type="checkbox" name="{{simpleString this}}" id="library-keyword-id-{{simpleString this}}">
+                  <input type="checkbox" name="library-add-form-keywords" value="{{this}}" id="library-keyword-id-{{simpleString this}}">
                   <label for="library-keyword-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>
                 </div>
                 <label for="library-keyword-id-{{simpleString this}}" class="toggleSwitchLabel">
