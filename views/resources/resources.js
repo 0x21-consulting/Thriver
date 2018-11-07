@@ -35,9 +35,8 @@ Meteor.subscribe('library');
 /**
  * @summary Convert a string to lowercase and without special characters or spaces
  */
-Template.registerHelper('simpleString', (string) => {
-  return string.toLowerCase().replace(/\s/g, '');
-});
+Template.registerHelper('simpleString', string => string
+  .toLowerCase().replace(/\s/g, ''));
 
 // Events
 Template.aside.events({
@@ -77,7 +76,6 @@ Template.aside.events({
    *   @param {$.Event} event
    */
   'submit form#admin-form-library-add': (event) => {
-
     event.preventDefault();
 
     const getTags = (checkboxesName) => {
@@ -157,12 +155,25 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click [data-tag="lc"] aside.admin button.delete': (event) => {
+  'click .itemCategory aside.admin button.delete': (event) => {
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
     if (window.confirm('Are you sure you want to delete this Resource Center Item?')) {
       Meteor.call('deleteResourceCenterItem', id);
+    }
+  },
+  /**
+   * @summary Delete a Library item
+   * @method
+   *   @param {$.Event} event
+   */
+  'click .library-item aside.admin button.libDelete': (event) => {
+    event.stopPropagation();
+    const { id } = event.target.closest('.library-item').dataset;
+    console.log(id);
+    if (window.confirm('Are you sure you want to delete this Library Item?')) {
+      Meteor.call('deleteLibraryItem', id);
     }
   },
 });

@@ -1,46 +1,38 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import Resources from './schema';
+import Library from './schema';
 
-// Publish Resource Center items
-Meteor.publish('infosheets', () => Resources.collection
-  .find({ type: 'infosheet' }, { sort: { date: 1 } }));
-
-Meteor.publish('webinars', () => Resources.collection
-  .find({ type: 'webinar' }, { sort: { date: 1 } }));
+// Publish Library Center items
+Meteor.publish('library', () => Library.collection
+  .find({}, { sort: { title: 1 } }));
 
 Meteor.methods({
   /**
-   * @summary Add Resource Center Item
+   * @summary Add Library Item
    * @method
    *   @param {Object} item - Item to add
    */
-  addResourceCenterItem: (item) => {
+  addLibraryItem: (item) => {
     // Check authorization
     if (!Meteor.userId() || !Meteor.user().admin) {
       throw new Meteor.Error('not-authorized');
     }
 
-    const thisItem = item;
-
     // Parameter checks
     check(item, Object);
 
-    // Enforce UTC
-    if (item.date instanceof Date) thisItem.date = new Date(thisItem.date.toISOString());
-
     // Perform Insert
-    Resources.collection.insert(item, (error) => {
+    Library.collection.insert(item, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },
 
   /**
-   * @summary Delete Resource Center Item
+   * @summary Delete Library Item
    * @method
    *   @param {String} id - ID of item to delete
    */
-  deleteResourceCenterItem: (id) => {
+  deleteLibraryItem: (id) => {
     // Check authorization
     if (!Meteor.userId() || !Meteor.user().admin) {
       throw new Meteor.Error('not-authorized');
@@ -50,7 +42,7 @@ Meteor.methods({
     check(id, String);
 
     // Perform deletion
-    Resources.collection.remove({ _id: id }, (error) => {
+    Library.collection.remove({ _id: id }, (error) => {
       if (error) throw new Meteor.Error(error);
     });
   },

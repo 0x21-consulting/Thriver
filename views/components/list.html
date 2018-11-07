@@ -58,14 +58,21 @@
     {{/if}}
     <!--Catalog List pending explicit instructions on library-->
     {{#if equals type 'catalog'}}
+    {{global_debug this}}
       <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}"
         data-list-paginate-count="{{perPage}}" class="{{type}} {{style}}">
           {{#each items}}
-            <article>
+            <article data-id="{{_id}}" class="library-item">
                 <div class="inner">
                     <details aria-expanded="false" aria-controls="{{id}}">
                         <summary id="catalog{{id}}">
                             <h1>{{title}}</h1>
+                            {{#if isAdmin}}
+                                <aside class="admin">
+                                    <!--<button class="fa libEdit">&#xf044;</button>-->
+                                    <button class="fa libDelete">&#xf1f8;</button>
+                                </aside>
+                            {{/if}}
                             <span class="status gem"><i class="fas fa-circle"></i></span>
                             <ul class="cats-tags">
                                 <li class="category"><i class="fas fa-book"></i> {{material}}</li>
@@ -86,7 +93,7 @@
                         <hr />
                         <aside class="info">
                             <dl>
-                                <dt>Status</dt><dd>{{status.text}}</dd>
+                                <dt>Status</dt><dd>{{status}}</dd>
                                 <dt>Call Number</dt><dd>{{callNumber}}</dd>
                                 <dt>Copies</dt><dd>{{copies}}</dd>
                             </dl>

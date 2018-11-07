@@ -12,3 +12,4 @@ import '/logic/contact/contact';
 import '/logic/feedback/server';
 import '/logic/resources/server';
 import '/logic/people/server';
+import '/logic/library/server';

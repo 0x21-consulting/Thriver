@@ -28,11 +28,11 @@
   <header class="mobile"><h2>{{title}}</h2></header>
   {{> filterObject}}
   {{#each lists}}
-      {{>list}}
+    {{> list}}
   {{/each}}
 </template>
 
-<template name="libraryAddForm">
+<template name="libraryAddForm">{{global_debug this}}
   <section id="admin-form-container-library-add" class="hide admin-form-container">
     <div class="form-container">
       <form id="admin-form-library-add">
@@ -48,7 +48,7 @@
         <div class="styledSelect fullBlockMob w-50">
           <label class="">Material</label>
           <select name="material" id="library-add-form-material" >
-            {{#each form.materials}}
+            {{#each materials}}
               <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
@@ -56,7 +56,7 @@
         <div class="styledSelect fullBlockMob w-50">
           <label class="">Classification</label>
           <select name="classifications" id="library-add-form-classifications" >
-            {{#each form.classifications}}
+            {{#each classifications}}
               <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
@@ -64,7 +64,7 @@
         <div class="styledSelect fullBlockMob w-33">
           <label class="">Status</label>
           <select name="status" id="library-add-form-status" >
-            {{#each form.status}}
+            {{#each status}}
               <option name="{{this}}">{{this}}</option>
             {{/each}}
           </select>
@@ -92,7 +92,7 @@
             Add Keywords <i class="fas fa-caret-right"></i>
           </summary>
           <div class="keyword-container">
-            {{#each form.keywords}}
+            {{#each keywords}}
               <div class="">
                 <div class="toggleSwitch">
                   <input type="checkbox" name="library-add-form-keywords" value="{{this}}" id="library-keyword-id-{{simpleString this}}">

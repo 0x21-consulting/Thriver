@@ -39,3 +39,5 @@ Template.registerHelper('ISODate', (date) => {
 
   return newDate.toISOString();
 });
+
+Template.registerHelper('global_debug', text => console.log(text));

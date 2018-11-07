@@ -55,7 +55,6 @@ Resources.schema = new SimpleSchema({
     allowedValues: [
       'infosheet',
       'webinar',
-      'library'
     ],
   },
   /** Category */
