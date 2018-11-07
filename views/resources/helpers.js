@@ -97,7 +97,7 @@ Template.library.helpers({
 
 Template.libraryAddForm.helpers({
   form: {
-    status: ['available', 'unavailable'],
+    status: ['Available', 'Unavailable'],
     materials: [
       'Activities',
       'Books',

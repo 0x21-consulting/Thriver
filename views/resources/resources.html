@@ -49,7 +49,7 @@
           <label class="">Material</label>
           <select name="material">
             {{#each form.materials}}
-              <option name="{{this}}">{{this}}</option>
+              <option name="{{simpleString this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
@@ -57,7 +57,7 @@
           <label class="">Classification</label>
           <select name="classifications">
             {{#each form.classifications}}
-              <option name="{{this}}">{{this}}</option>
+              <option name="{{simpleString this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
@@ -65,7 +65,7 @@
           <label class="">Status</label>
           <select name="classifications">
             {{#each form.status}}
-              <option name="{{this}}">{{this}}</option>
+              <option name="{{simpleString this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
@@ -85,10 +85,10 @@
             {{#each form.keywords}}
               <div class="">
                 <div class="toggleSwitch">
-                  <input type="checkbox" name="{{this}}" id="library-keyword-id-{{this}}">
-                  <label for="alergies-peanut" role="checkbox" aria-checked="{{this}}"></label>
+                  <input type="checkbox" name="{{simpleString this}}" id="library-keyword-id-{{simpleString this}}">
+                  <label for="library-keyword-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>
                 </div>
-                <label for="library-keyword-id-{{this}}" class="toggleSwitchLabel">
+                <label for="library-keyword-id-{{simpleString this}}" class="toggleSwitchLabel">
                   {{this}}
                 </label>
               </div>

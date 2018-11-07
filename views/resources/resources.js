@@ -32,6 +32,13 @@ Meteor.subscribe('infosheets');
 Meteor.subscribe('webinars');
 Meteor.subscribe('library');
 
+/**
+ * @summary Convert a string to lowercase and without special characters or spaces
+ */
+Template.registerHelper('simpleString', (string) => {
+  return string.toLowerCase().replace(/\s/g, '');
+});
+
 // Events
 Template.aside.events({
   /**
