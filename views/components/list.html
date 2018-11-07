@@ -56,42 +56,52 @@
             {{/if}}
         </section>
     {{/if}}
-    <!--Catalog List pending explicit instructions on library-->
     {{#if equals type 'catalog'}}
       <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}"
         data-list-paginate-count="{{perPage}}" class="{{type}} {{style}}">
           {{#each items}}
-            <article>
+            <article data-id="{{_id}}" class="library-item">
                 <div class="inner">
                     <details aria-expanded="false" aria-controls="{{id}}">
                         <summary id="catalog{{id}}">
                             <h1>{{title}}</h1>
-                            <p class="meta">{{byline}}</p>
-                        </summary>
-                        <dl>
-                            <!--Would be nice to have the spacebars tag just do: prop:val-->
-                            <dt>Call Number</dt><dd>{{callNumber}}</dd>
-                            <dt>Copies</dt><dd>{{copies}}</dd>
-                            <dt>Subject Headings</dt><dd>{{subjectHeading}}</dd>
-                            <dt>Classification</dt><dd>{{classification}}</dd>
-                            <dt>Category</dt><dd>{{category}}</dd>
-                            <dt>Material</dt><dd>{{type}}</dd>
-                        </dl>
-                    </details>
-                    <aside class="info">
-                        {{#if type}}
-                            <dl class="material"><dt>Material</dt><dd>{{type}}</dd></dl>
-                        {{/if}}
-                        {{#if status}}
-                            <dl class="status {{status.type}}"><dt>Status</dt><dd>{{status.text}}</dd></dl>
-                        {{/if}}
-                        <menu class="availability">
-                            {{#if equals status.type 'transit'}}
-                                <li><button>Request Copy</button></li>
+                            {{#if isAdmin}}
+                                <aside class="admin">
+                                    <!--<button class="fa libEdit">&#xf044;</button>-->
+                                    <button class="fa libDelete">&#xf1f8;</button>
+                                </aside>
                             {{/if}}
-                            <!--Remaining interaction buttons here-->
-                        </menu>
-                    </aside>
+                            <span class="status gem"><i class="fas fa-circle"></i></span>
+                            <ul class="cats-tags">
+                                <li class="category"><i class="fas fa-book"></i> {{material}}</li>
+                                <li class="classification">{{classification}}</li>
+                                {{#each keywords}}
+                                    <li class="tag">{{this}}</li>
+                                {{/each}}
+                            </ul>
+                            <p class="meta">{{descriptionTrunc}}</p>
+                        </summary>
+                        <p class="meta inner-desc">{{description}}</p>
+                        {{#if subjectHeading}}
+                            <div class="subject-headings">
+                                <h2>Subject Headings</h2>
+                                <p>{{subjectHeading}}</p>
+                            </div>
+                        {{/if}}
+                        <hr />
+                        <aside class="info">
+                            <dl>
+                                <dt>Status</dt><dd>{{status}}</dd>
+                                <dt>Call Number</dt><dd>{{callNumber}}</dd>
+                                <dt>Copies</dt><dd>{{copies}}</dd>
+                            </dl>
+                            <menu class="availability">
+                                {{#if equals status.type 'transit'}}
+                                    <li><button>Request Copy</button></li>
+                                {{/if}}
+                            </menu>
+                        </aside>
+                    </details>
                 </div>
             </article>
         {{/each}}

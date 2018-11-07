@@ -30,6 +30,13 @@ const handleSearch = (event) => {
 // Subscriptions
 Meteor.subscribe('infosheets');
 Meteor.subscribe('webinars');
+Meteor.subscribe('library');
+
+/**
+ * @summary Convert a string to lowercase and without special characters or spaces
+ */
+Template.registerHelper('simpleString', string => string
+  .toLowerCase().replace(/\s/g, ''));
 
 // Events
 Template.aside.events({
@@ -57,23 +64,89 @@ Template.aside.events({
   'keyup #searchLC, search #searchLC': handleSearch,
 
   /**
-   * @summary Prevent form submission
+   * @summary Prevent resources form submission
    * @method
    *   @param {$.Event} event
    */
   'submit form#searchLCForm': event => event.preventDefault(),
 
+  /**
+   * @summary Add Library Form Submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#admin-form-library-add': (event) => {
+    event.preventDefault();
+
+    const getTags = (checkboxesName) => {
+      const checkboxes = document.getElementsByName(checkboxesName);
+      const checkboxesChecked = [];
+      for (let i = 0; i < checkboxes.length; i += 1) {
+        if (checkboxes[i].checked) checkboxesChecked.push(checkboxes[i].value);
+      }
+      return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    };
+
+    const keywords = getTags('library-add-form-keywords');
+
+    const data = {
+      title: document.getElementById('library-add-form-title').value,
+      description: document.getElementById('library-add-form-desc').value,
+      callNumber: document.getElementById('library-add-form-callNumber').value,
+      copies: document.getElementById('library-add-form-copies').value,
+      subjectHeading: document.getElementById('library-add-form-subjectHeading').value,
+      classification: document.getElementById('library-add-form-classifications').value,
+      material: document.getElementById('library-add-form-material').value,
+      status: document.getElementById('library-add-form-status').value,
+      keywords,
+    };
+
+    console.log(data);
+
+    // Insert subscriber into the collection
+    Meteor.call('addLibraryItem', data, function(error) {
+      if (error) {
+        console.log(error.reason);
+      } else {
+        console.log('Subscription successful');
+        console.log(data);
+      }
+    });
+  },
 
   /**
    * @summary Toggle Add Resource Center Item form
    * @method
    *   @param {$.Event} event
    */
-  'click #resource-center aside.admin button.add': () => {
+  'click #admin-btn-resource-add': () => {
     // Show form
     const form = document.querySelector('#LCForm');
     if (form.classList.contains('hide')) form.classList.remove('hide');
     else form.classList.add('hide');
+  },
+
+  /**
+   * @summary Toggle Add Library Item form
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #admin-btn-library-add': () => {
+    // Show form
+    const formContainer = document.querySelector('#admin-form-container-library-add');
+    if (formContainer.classList.contains('hide')) formContainer.classList.remove('hide');
+    else formContainer.classList.add('hide');
+  },
+
+  /**
+   * @summary Add aria-expanded to Summary/Details element
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #resource-center summary': (event) => {
+    const item = event.target.closest('details');
+    if (item.getAttribute('aria-expanded') === 'false') item.setAttribute('aria-expanded', 'true');
+    else item.setAttribute('aria-expanded', 'false');
   },
 });
 
@@ -84,12 +157,25 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click [data-tag="lc"] aside.admin button.delete': (event) => {
+  'click .itemCategory aside.admin button.delete': (event) => {
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
     if (window.confirm('Are you sure you want to delete this Resource Center Item?')) {
       Meteor.call('deleteResourceCenterItem', id);
+    }
+  },
+  /**
+   * @summary Delete a Library item
+   * @method
+   *   @param {$.Event} event
+   */
+  'click .library-item aside.admin button.libDelete': (event) => {
+    event.stopPropagation();
+    const { id } = event.target.closest('.library-item').dataset;
+    console.log(id);
+    if (window.confirm('Are you sure you want to delete this Library Item?')) {
+      Meteor.call('deleteLibraryItem', id);
     }
   },
 });
@@ -101,4 +187,13 @@ Template.lcSubHead.helpers({
    * @returns {Mongo.Collection}
    */
   resources: () => Resources.collection,
+});
+
+Template.libraryAddForm.helpers({
+  /**
+   * @summary The collection to use to populate form
+   * @function
+   * @returns {Mongo.Collection}
+   */
+  library: () => Resources.collection,
 });

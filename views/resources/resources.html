@@ -15,9 +15,99 @@
 <template name="lcSubHead">
   {{#if isAdmin}}
     <aside class="admin">
-      <button class="fa add">&#xf067; Add Resource Center Item</button>
+      <button id="admin-btn-resource-add" class="fa add">&#xf067; Webinar/Infosheet</button>
       {{> quickForm collection=resources id="LCForm"
         meteormethod="addResourceCenterItem" type="method" doc=doc class="hide" }}
+        <button id="admin-btn-library-add" class="fa add">&#xf067; Library Item</button>
+        {{> libraryAddForm }}
     </aside>
   {{/if}}
+</template>
+
+<template name="library">
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{> filterObject}}
+  {{#each lists}}
+    {{> list}}
+  {{/each}}
+</template>
+
+<template name="libraryAddForm">
+  <section id="admin-form-container-library-add" class="hide admin-form-container">
+    <div class="form-container">
+      <form id="admin-form-library-add">
+        <label>
+          Title
+          <input id="library-add-form-title" name="title" type="text" />
+        </label>
+        <label>
+          Description
+          <textarea id="library-add-form-desc" name="description"></textarea>
+        </label>
+        <hr />
+        <div class="styledSelect fullBlockMob w-50">
+          <label class="">Material</label>
+          <select name="material" id="library-add-form-material" >
+            {{#each materials}}
+              <option name="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="styledSelect fullBlockMob w-50">
+          <label class="">Classification</label>
+          <select name="classifications" id="library-add-form-classifications" >
+            {{#each classifications}}
+              <option name="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="styledSelect fullBlockMob w-33">
+          <label class="">Status</label>
+          <select name="status" id="library-add-form-status" >
+            {{#each status}}
+              <option name="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <label class="w-33">
+          Call Number
+          <input id="library-add-form-callNumber" name="callNumber" type="text" />
+        </label>
+        <label class="w-33">
+          Copies
+          <input id="library-add-form-copies" name="copies" type="number" />
+        </label>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Add Subject Headings <i class="fas fa-caret-right"></i>
+          </summary>
+          <label>
+            Subject Headings
+            <textarea id="library-add-form-subjectHeading" name="subjectHeadings"></textarea>
+          </label>
+          <hr />
+        </details>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Add Keywords <i class="fas fa-caret-right"></i>
+          </summary>
+          <div class="keyword-container">
+            {{#each keywords}}
+              <div class="">
+                <div class="toggleSwitch">
+                  <input type="checkbox" name="library-add-form-keywords" value="{{this}}" id="library-keyword-id-{{simpleString this}}">
+                  <label for="library-keyword-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>
+                </div>
+                <label for="library-keyword-id-{{simpleString this}}" class="toggleSwitchLabel">
+                  {{this}}
+                </label>
+              </div>
+            {{/each}}
+          </div>
+          <hr />
+        </details>
+        <input type="submit" class="btn" value="Add Library Item" />
+      </form>
+    </div>
+  </section>
 </template>
