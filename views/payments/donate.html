@@ -13,7 +13,7 @@
       {{/each}}
       <input id="radio5" type="radio" name="amount" value="custom" {{checked}} />
       <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
-      <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" onfocus="this.value = this.value;" />
+      <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" />
     </fieldset>
     {{#if reoccur}}
       <fieldset class="reoccur">
@@ -24,20 +24,29 @@
         {{/each}}
       </fieldset>
     {{/if}}
-    <fieldset>
-      <h4>{{detailsTitle}}</h4>
-      <label>
-        Name on Card
-        <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
-      </label>
-      <label>
-        Card Details
-        <div id="card-element"></div>
-      </label>
-    </fieldset>
-    <div id="card-errors" role="alert"></div>
-    <fieldset>
-      <button type="submit" class="submit">Donate</button>
-    </fieldset>
+
+    <!-- Pay with Credit Card tab -->
+    <button type="button">Credit Card</button>
+    <!-- Apple Pay, Google Pay, Microsoft Pay, etc. -->
+    <div id="payment-request-button"></div>
+
+    <!-- Pay with Credit Card Form -->
+    <section id="pay-with-card">
+      <fieldset>
+        <h4>{{detailsTitle}}</h4>
+        <label>
+          Name on Card
+          <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
+        </label>
+        <label>
+          Card Details
+          <div id="card-element"></div>
+        </label>
+      </fieldset>
+      <div id="card-errors" role="alert"></div>
+      <fieldset>
+        <button type="submit" class="submit">Donate</button>
+      </fieldset>
+    </section>
   </form>
 </template>

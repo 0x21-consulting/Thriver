@@ -5,14 +5,49 @@ import Settings from '/logic/core/settings';
 import './donate.html';
 
 let stripe;
+let elements;
 let card;
+let paymentRequest;
+
+/**
+ * Create a payment request for Apple Pay, Google Pay, and
+ * Microsoft Pay given an amount in dollars
+ * @param {Number} amount - Amount in dollars
+ */
+const createPaymentRequest = (amount) => {
+  paymentRequest = stripe.paymentRequest({
+    country: 'US',
+    currency: 'usd',
+    total: {
+      label: 'Donation',
+      amount: parseInt(amount, 10) * 100,
+    },
+    requestPayerName: true,
+    requestPayerEmail: true,
+  });
+
+  const prButton = elements.create('paymentRequestButton', { paymentRequest });
+
+  (async () => {
+    // Check the availability of the Payment Request API
+    const result = await paymentRequest.canMakePayment();
+    if (result) prButton.mount('#payment-request-button');
+    else document.querySelector('#payment-request-button').classList.add('hide');
+  })();
+
+  // Handle tokenization and send to server
+  paymentRequest.on('token', async (event) => {
+    console.log(event.token);
+    Meteor.call('pay', event.token);
+  });
+};
 
 // Populate form
 Template.donate.onRendered(() => {
   stripe = window.Stripe(Settings.get('stripePublicKey'));
-  const elements = stripe.elements();
+  elements = stripe.elements();
 
-  // Create form elements
+  // Create credit card form elements
   card = elements.create('card');
   card.mount('#card-element');
   card.addEventListener('change', ({ error }) => {
@@ -20,23 +55,10 @@ Template.donate.onRendered(() => {
     if (error) displayError.textContent = error.message;
     else displayError.textContent = '';
   });
+
+  // Support for Apple Pay, Google Pay, Microsoft Pay, etc.
+  createPaymentRequest(25);
 });
-
-/**
- * @summary Donate form validation and error handling
- * @method
- *   @param {Element} element - The element to target
- *   @param {string}  message - The message to display to user
- */
-const donateException = (element, message) => {
-  // No check on element because of old browser compatibility
-
-  const elem = element;
-
-  // Add error state to element
-  elem.classList.add('error');
-  elem.parentElement.dataset.error = `${message}`; // coercion to string
-};
 
 // Donate form helpers
 Template.donate.helpers({
@@ -79,10 +101,23 @@ Template.donate.helpers({
 
 // Donate form events
 Template.donate.events({
+  'click form [name="amount"]'(event) {
+    paymentRequest.update({
+      total: {
+        // Convert to cents
+        amount: parseInt(event.target.value, 10) * 100,
+        label: 'Donation',
+      },
+    });
+  },
   'click form .custom': () => {
     const customAmount = document.getElementById('customAmt');
     customAmount.focus();
     customAmount.checked = true;
+  },
+  'click form .customAmt': () => {
+    const custom = document.getElementById('radio5');
+    custom.click();
   },
 
   // Handle form submission
