@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import Settings from '/logic/core/settings';
 
 import './donate.html';
 
+const amount = new ReactiveVar(100);
 let stripe;
 let elements;
 let card;
@@ -12,15 +14,14 @@ let paymentRequest;
 /**
  * Create a payment request for Apple Pay, Google Pay, and
  * Microsoft Pay given an amount in dollars
- * @param {Number} amount - Amount in dollars
  */
-const createPaymentRequest = (amount) => {
+const createPaymentRequest = () => {
   paymentRequest = stripe.paymentRequest({
     country: 'US',
     currency: 'usd',
     total: {
       label: 'Donation',
-      amount: parseInt(amount, 10) * 100,
+      amount: amount.get() * 100,
     },
     requestPayerName: true,
     requestPayerEmail: true,
@@ -57,7 +58,7 @@ Template.donate.onRendered(() => {
   });
 
   // Support for Apple Pay, Google Pay, Microsoft Pay, etc.
-  createPaymentRequest(25);
+  createPaymentRequest(amount.get());
 });
 
 // Donate form helpers
@@ -101,23 +102,45 @@ Template.donate.helpers({
 
 // Donate form events
 Template.donate.events({
+  /**
+   * Clicking a donation amount should update amount to authorize
+   * @param {$.Event} event
+   */
   'click form [name="amount"]'(event) {
-    paymentRequest.update({
-      total: {
-        // Convert to cents
-        amount: parseInt(event.target.value, 10) * 100,
-        label: 'Donation',
-      },
-    });
+    if (event.target.value !== 'custom') {
+      amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
+    }
   },
+  /**
+   * Clicking the custom button should focus the custom input field
+   */
   'click form .custom': () => {
     const customAmount = document.getElementById('customAmt');
     customAmount.focus();
     customAmount.checked = true;
   },
+  /**
+   * Clicking in the custom input field to set "Other" to selected
+   */
   'click form .customAmt': () => {
     const custom = document.getElementById('radio5');
     custom.click();
+  },
+  /**
+   * Updating the custom input field should update amount to authorize
+   * @param {$.Event} event
+   */
+  'keyup form .custom': (event) => {
+    if (!Number.isNaN(Number(event.target.value))) {
+      amount.set(parseInt(event.target.value, 10));
+    }
   },
 
   // Handle form submission
@@ -133,6 +156,22 @@ Template.donate.events({
       // Inform the customer that there was an error.
       const errorElement = document.getElementById('card-errors');
       errorElement.textContent = error.message;
-    } else Meteor.call('pay', token); // Send token to server
+    } else {
+      token.amount = amount.get() * 100;
+      token.description = 'WCASA Donation';
+
+      // Send token to server
+      Meteor.call('pay', token, (err, result) => {
+        if (err) {
+          // Inform the customer that there was an error.
+          const errorElement = document.getElementById('card-errors');
+          errorElement.textContent = error.message;
+        } else {
+          document.querySelector('#donateDefault').classList.add('hide');
+          document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
+          console.log(result);
+        }
+      });
+    }
   },
 });

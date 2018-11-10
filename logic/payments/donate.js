@@ -1,20 +1,34 @@
 import { Meteor } from 'meteor/meteor';
-import paypalSdk from 'paypal-rest-sdk';
+import StripeConstructor from 'stripe';
+import { check } from 'meteor/check';
 import Settings from '/logic/core/settings';
 
-import './paypal';
+let stripe;
 
 /**
- * @summary Configure PayPal options
+ * @summary Configure Stripe options
  */
 Meteor.startup(() => {
-  const settings = Settings.get('paypal') || {};
-  const clientId = settings.client_id || '';
-  const clientSecret = settings.client_secret || '';
+  const settings = Settings.get('stripe') || {};
+  const { secretKey } = settings;
+  stripe = StripeConstructor(secretKey);
+});
 
-  paypalSdk.configure({
-    mode: 'sandbox', // sandbox or live
-    client_id: clientId,
-    client_secret: clientSecret,
-  });
+Meteor.methods({
+  /**
+   * @summary Create a Stripe payment
+   * @param {object} token - The payment token
+   */
+  pay: (token) => {
+    check(token, Object);
+
+    const { id, amount, description } = token;
+
+    return stripe.charges.create({
+      amount,
+      currency: 'usd',
+      description,
+      source: id,
+    });
+  },
 });
