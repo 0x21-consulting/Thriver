@@ -22,7 +22,6 @@
     "bcrypt": "^3.0.1",
     "core-js": "^2.5.7",
     "fibers": "^3.0.0",
-    "paypal-rest-sdk": "^1.8.1",
     "simpl-schema": "1.4.3",
     "stripe": "^6.14.0"
   },
