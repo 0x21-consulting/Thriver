@@ -1,62 +1,100 @@
 <template name="inTheNews">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="press">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="actionAlerts">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="pressMediaKits">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="annualReports">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="newsletters">
-    <header class="mobile"><h2>{{title}}</h2></header>
-    {{#each lists}}
-        {{>list}}
-    {{/each}}
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each lists}}
+    {{>list}}
+  {{/each}}
 </template>
 
 <template name="newsSubHead">
-    <div class="links">
-        <a href="/account/subscriptions" class="manageSubscriptions">
-            Manage News Subscriptions <span class="fa"></span>
-        </a> |
-        <button id="inquire" class="inquire">
-            Inquire About our News <span class="fa"></span>
-            <span class="contactInfo">
-                For information regarding WCASA News: email Dominic Holt at <a href="mailto:dominich@wcasa.org">dominich@wcasa.org</a>.
-            </span>
-        </button>
-    </div>
-    {{#if isAdmin}}
-        <aside class="admin">
-            <button class="fa add">&#xf067; Add News Item</button>
-            {{> quickForm collection=news id="newsForm"
-                meteormethod="addNewsItem" type="method" doc=doc class="hide" }}
-        </aside>
-    {{/if}}
+  <div class="links">
+      <a href="/account/subscriptions" class="manageSubscriptions">
+        Manage News Subscriptions <span class="fa"></span>
+      </a> |
+      <button id="inquire" class="inquire">
+        Inquire About our News <span class="fa"></span>
+        <span class="contactInfo">
+            For information regarding WCASA News: email Dominic Holt at <a href="mailto:dominich@wcasa.org">dominich@wcasa.org</a>.
+        </span>
+    </button>
+  </div>
+  {{#if isAdmin}}
+    <aside class="admin">
+      <div class="admin-tools" id="admin-tools-news">
+        <button class="fa add">&#xf067; News Item</button>
+      </div>
+      <section class="admin-form-container" id="admin-form-container-news-add">
+        <div class="form-container">
+          <h4>Add News Item</h4>
+          <button class="fa add exit">&#xf00d;</button>
+          <form id="newsForm">
+            <label>
+              Title
+              <input type="text" name="title" id="news-add-form-title" />
+            </label>
+            <label>
+              Url
+              <input type="text" name="url" id="news-add-form-url"  />
+            </label>
+            <label>
+              Publisher
+              <input type="text" name="publisher" id="news-add-form-publisher" />
+            </label>
+            <div class="styledSelect fullBlockMob w-50 ">
+              <label>Type</label>
+              <select name="type" id="news-add-form-type" >
+                {{#each types}}
+                  <option name="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <label class="w-50">
+              Date
+              <input type="date" name="date" id="news-add-form-date" />
+            </label>
+            <br />
+            <label class="clear-both">
+              Description
+              <textarea rows="5" name="content" id="news-add-form-content" ></textarea>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Add Item" />
+          </form>
+        </div>
+      </section>
+    </aside>
+  {{/if}}
 </template>

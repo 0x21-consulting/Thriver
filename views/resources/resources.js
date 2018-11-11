@@ -101,16 +101,9 @@ Template.aside.events({
       keywords,
     };
 
-    console.log(data);
-
     // Insert subscriber into the collection
     Meteor.call('addLibraryItem', data, function(error) {
-      if (error) {
-        console.log(error.reason);
-      } else {
-        console.log('Subscription successful');
-        console.log(data);
-      }
+      if (error) console.log(error.reason);
     });
   },
 
@@ -119,7 +112,7 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #admin-btn-resource-add': () => {
+  'click aside.admin button.add.resource': () => {
     // Show form
     const form = document.querySelector('#LCForm');
     if (form.classList.contains('hide')) form.classList.remove('hide');
@@ -131,11 +124,17 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #admin-btn-library-add': () => {
-    // Show form
+  'click aside.admin button.add.library': () => {
+    // Show form & hide tools
     const formContainer = document.querySelector('#admin-form-container-library-add');
-    if (formContainer.classList.contains('hide')) formContainer.classList.remove('hide');
-    else formContainer.classList.add('hide');
+    const adminTools = document.querySelector('#admin-tools-resources');
+    if (formContainer.classList.contains('hide')) {
+      formContainer.classList.remove('hide');
+      adminTools.classList.add('hide');
+    } else {
+      formContainer.classList.add('hide');
+      adminTools.classList.remove('hide');
+    }
   },
 
   /**

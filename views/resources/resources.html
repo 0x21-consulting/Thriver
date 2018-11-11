@@ -15,10 +15,12 @@
 <template name="lcSubHead">
   {{#if isAdmin}}
     <aside class="admin">
-      <button id="admin-btn-resource-add" class="fa add">&#xf067; Webinar/Infosheet</button>
-      {{> quickForm collection=resources id="LCForm"
-        meteormethod="addResourceCenterItem" type="method" doc=doc class="hide" }}
-        <button id="admin-btn-library-add" class="fa add">&#xf067; Library Item</button>
+      <div class="admin-tools" id="admin-tools-resources">
+        <button id="admin-btn-resource-add" class="fa add resource">&#xf067; Webinar/Infosheet</button>
+        <button id="admin-btn-library-add" class="fa add library">&#xf067; Library Item</button>
+        </div>
+        {{> quickForm collection=resources id="LCForm"
+          meteormethod="addResourceCenterItem" type="method" doc=doc class="hide" }}
         {{> libraryAddForm }}
     </aside>
   {{/if}}
@@ -35,6 +37,8 @@
 <template name="libraryAddForm">
   <section id="admin-form-container-library-add" class="hide admin-form-container">
     <div class="form-container">
+      <h4>Add Library Item</h4>
+      <button class="fa add exit library">&#xf00d;</button>
       <form id="admin-form-library-add">
         <label>
           Title
@@ -46,7 +50,7 @@
         </label>
         <hr />
         <div class="styledSelect fullBlockMob w-50">
-          <label class="">Material</label>
+          <label>Material</label>
           <select name="material" id="library-add-form-material" >
             {{#each materials}}
               <option name="{{this}}">{{this}}</option>
@@ -54,7 +58,7 @@
           </select>
         </div>
         <div class="styledSelect fullBlockMob w-50">
-          <label class="">Classification</label>
+          <label>Classification</label>
           <select name="classifications" id="library-add-form-classifications" >
             {{#each classifications}}
               <option name="{{this}}">{{this}}</option>
@@ -62,7 +66,7 @@
           </select>
         </div>
         <div class="styledSelect fullBlockMob w-33">
-          <label class="">Status</label>
+          <label>Status</label>
           <select name="status" id="library-add-form-status" >
             {{#each status}}
               <option name="{{this}}">{{this}}</option>
@@ -93,7 +97,7 @@
           </summary>
           <div class="keyword-container">
             {{#each keywords}}
-              <div class="">
+              <div >
                 <div class="toggleSwitch">
                   <input type="checkbox" name="library-add-form-keywords" value="{{this}}" id="library-keyword-id-{{simpleString this}}">
                   <label for="library-keyword-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>

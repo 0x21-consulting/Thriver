@@ -143,3 +143,7 @@ Template.annualReports.helpers({
     }],
   }],
 });
+
+Template.newsSubHead.helpers({
+  types: ['actionAlert', 'inTheNews', 'pressRelease', 'newsletter'],
+});
