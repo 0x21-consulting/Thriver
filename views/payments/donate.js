@@ -137,7 +137,7 @@ Template.donate.events({
    * Updating the custom input field should update amount to authorize
    * @param {$.Event} event
    */
-  'keyup form .custom': (event) => {
+  'keyup form .customAmt': (event) => {
     if (!Number.isNaN(Number(event.target.value))) {
       amount.set(parseInt(event.target.value, 10));
     }

@@ -47,7 +47,7 @@ Meteor.methods({
         text: `Hello ${user.profile.firstname} ${user.profile.lastname
         },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
         } of $${result.amount / 100}.  You can access your receipt here:\n\n${
-          process.env.ROOT_URL}receipt/${result.id}`,
+          process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
       });
     }
 
