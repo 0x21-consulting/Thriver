@@ -59,3 +59,15 @@ Meteor.publish('purchases', function () {
     'payments.description': { $ne: 'WCASA Donation' },
   }, { _id: 0, payments: 1 });
 });
+
+/**
+ * Publish single receipt
+ */
+Meteor.publish('receipt', function (id) {
+  check(id, String);
+
+  return Meteor.users.find({
+    _id: this.userId,
+    'payments.id': id,
+  }, { _id: 0, payments: 1 });
+});

@@ -1,0 +1,32 @@
+<template name="receiptsList">
+  <header><h2>{{heading}}</h2></header>
+  <h3>Donations</h3>
+  <ul class="receiptsMenu stripes">
+    {{#if donations}}
+      {{#each donations}}
+        <li class="receiptItem">
+          <a href="/receipt/{{id}}" target="_blank">
+            <h4 class="text">${{total}} {{description}}</h4>
+            <time class="dateMeta" datetime="{{timestampUTC}}">{{friendlyDate timestamp}}</time>
+          </a>
+        </li>
+      {{/each}}
+    {{else}}
+      <li class="none">{{none}}</li>
+    {{/if}}
+    <li><button class="viewReceipts redirectButton" data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
+  </ul>
+  <!--
+  <ul class="receiptsMenu stripes">
+    <h3>Purchases</h3>
+    {{#if purchases}}
+      {{#each purchases}}
+        ...
+      {{/each}}
+    {{else}}
+      <li class="none">{{none}}</li>
+    {{/if}}
+    <li><button class="viewReceipts redirectButton" data-action="more" aria-label="{{moreButtonAria}}">{{moreButton}}</button></li>
+  </ul>
+  -->
+</template>
