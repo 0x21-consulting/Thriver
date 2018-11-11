@@ -67,14 +67,15 @@
               <input type="text" name="title" id="news-add-form-title" />
             </label>
             <label>
-              Url
-              <input type="text" name="url" id="news-add-form-url"  />
-            </label>
-            <label>
               Publisher
               <input type="text" name="publisher" id="news-add-form-publisher" />
             </label>
-            <div class="styledSelect fullBlockMob w-50 ">
+            <label class="clear-both">
+              Description
+              <textarea rows="5" name="content" id="news-add-form-content" ></textarea>
+            </label>
+            <hr />
+            <div class="styledSelect fullBlockMob w-50">
               <label>Type</label>
               <select name="type" id="news-add-form-type" >
                 {{#each types}}
@@ -82,14 +83,13 @@
                 {{/each}}
               </select>
             </div>
-            <label class="w-50">
+            <label class="w-50 margin-right-0">
               Date
               <input type="date" name="date" id="news-add-form-date" />
             </label>
-            <br />
             <label class="clear-both">
-              Description
-              <textarea rows="5" name="content" id="news-add-form-content" ></textarea>
+              Url
+              <input type="text" name="url" id="news-add-form-url"  />
             </label>
             <input type="submit" class="btn btn-primary" value="Add Item" />
           </form>

@@ -18,10 +18,9 @@
       <div class="admin-tools" id="admin-tools-resources">
         <button id="admin-btn-resource-add" class="fa add resource">&#xf067; Webinar/Infosheet</button>
         <button id="admin-btn-library-add" class="fa add library">&#xf067; Library Item</button>
-        </div>
-        {{> quickForm collection=resources id="LCForm"
-          meteormethod="addResourceCenterItem" type="method" doc=doc class="hide" }}
-        {{> libraryAddForm }}
+      </div>
+      {{> resourceAddForm}}
+      {{> libraryAddForm }}
     </aside>
   {{/if}}
 </template>
@@ -57,7 +56,7 @@
             {{/each}}
           </select>
         </div>
-        <div class="styledSelect fullBlockMob w-50">
+        <div class="styledSelect fullBlockMob w-50 margin-right-0">
           <label>Classification</label>
           <select name="classifications" id="library-add-form-classifications" >
             {{#each classifications}}
@@ -77,7 +76,7 @@
           Call Number
           <input id="library-add-form-callNumber" name="callNumber" type="text" />
         </label>
-        <label class="w-33">
+        <label class="w-33 margin-right-0">
           Copies
           <input id="library-add-form-copies" name="copies" type="number" />
         </label>
@@ -111,6 +110,49 @@
           <hr />
         </details>
         <input type="submit" class="btn" value="Add Library Item" />
+      </form>
+    </div>
+  </section>
+</template>
+
+<template name="resourceAddForm">
+  <section id="admin-form-container-resource-add" class="hide admin-form-container">
+    <div class="form-container">
+      <h4>Add Webinar or Infosheet</h4>
+      <button class="fa add exit resource">&#xf00d;</button>
+      <form id="admin-form-resource-add">
+        <input type="hidden" name="_id" />
+        <input type="hidden" name="category" id="resources-add-form-category" />
+        <label>
+          Title
+          <input type="text" name="title" id="resources-add-form-title" />
+        </label>
+        <label>
+          Publisher
+          <input type="text" name="publisher" id="resources-add-form-publisher" />
+        </label>
+        <label class="clear-both">
+          Description
+          <textarea rows="5" name="description" id="resources-add-form-desc" ></textarea>
+        </label>
+        <hr />
+        <div class="styledSelect fullBlockMob w-50">
+          <label>Type</label>
+          <select name="type" id="resources-add-form-type" >
+            {{#each types}}
+              <option name="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <label class="w-50 margin-right-0">
+          Date
+          <input type="date" name="date" id="resources-add-form-date" />
+        </label>
+        <label class="clear-both">
+          Url
+          <input type="text" name="url" id="resources-add-form-url"  />
+        </label>
+        <input type="submit" class="btn btn-primary" value="Add Item" />        
       </form>
     </div>
   </section>

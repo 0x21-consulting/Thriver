@@ -129,3 +129,7 @@ Template.libraryAddForm.helpers({
     'WOC',
   ],
 });
+
+Template.resourceAddForm.helpers({
+  types: ['infosheet', 'webinar'],
+});
