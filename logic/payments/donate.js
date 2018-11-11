@@ -39,3 +39,23 @@ Meteor.methods({
     return result;
   },
 });
+
+/**
+ * Publish user donations
+ */
+Meteor.publish('donations', function () {
+  return Meteor.users.find({
+    _id: this.userId,
+    'payments.description': 'WCASA Donation',
+  }, { _id: 0, payments: 1 });
+});
+
+/**
+ * Publish user payments
+ */
+Meteor.publish('purchases', function () {
+  return Meteor.users.find({
+    _id: this.userId,
+    'payments.description': { $ne: 'WCASA Donation' },
+  }, { _id: 0, payments: 1 });
+});
