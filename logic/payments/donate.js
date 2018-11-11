@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import StripeConstructor from 'stripe';
 import { check } from 'meteor/check';
 import Settings from '/logic/core/settings';
@@ -34,6 +35,20 @@ Meteor.methods({
     if (result.status === 'succeeded' && this.userId) {
       // Write to user record
       Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
+
+      const user = Meteor.users.findOne({ _id: this.userId });
+      const isDonation = /Donation/.test(result.description);
+
+      // Send receipt email
+      Email.send({
+        from: 'WCASA <website@wcasa.org>',
+        to: user.emails[0].address,
+        subject: isDonation ? 'Donation Receipt' : 'Purchase Receipt',
+        text: `Hello ${user.profile.firstname} ${user.profile.lastname
+        },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
+        } of $${result.amount / 100}.  You can access your receipt here:\n\n${
+          process.env.ROOT_URL}receipt/${result.id}`,
+      });
     }
 
     return result;
