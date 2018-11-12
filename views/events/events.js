@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
+import { ReactiveVar } from 'meteor/reactive-var';
 import Events from '/logic/events/schema';
 import Calendar from './calendar';
 import History from '/views/history/history';
@@ -14,6 +15,9 @@ import './viewAll';
 
 // Subscribe to events
 Meteor.subscribe('events');
+
+// Event details for payments
+const paymentDetails = new ReactiveVar({});
 
 /**
  * @summary Toggle `active-event` class for Mobile
@@ -383,18 +387,25 @@ Template.eventSlide.events({
 
     for (let i = 0; i < form.length - 1; i += 1) attributes[form[i].name] = form[i].value;
 
+    const eventData = Template.instance().data;
+
     // Pay registration cost
     if (attributes['cost-tier'] > 0) {
+      paymentDetails.set({
+        name: eventData.name,
+        description: eventData.description,
+        cost: attributes['cost-tier'],
+      });
       History.navigate('/pay');
+    } else {
+      Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
+
+      // Hide registration form
+      form.parentElement.classList.add('hide');
+
+      // Show register button again
+      form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
     }
-
-    Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
-
-    // Hide registration form
-    form.parentElement.classList.add('hide');
-
-    // Show register button again
-    form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
   },
 
   /**
@@ -418,4 +429,4 @@ Template.eventSlide.events({
   },
 });
 
-export default Events;
+export { Events, paymentDetails };

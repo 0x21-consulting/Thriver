@@ -32,8 +32,8 @@ const createPaymentRequest = () => {
   (async () => {
     // Check the availability of the Payment Request API
     const result = await paymentRequest.canMakePayment();
-    if (result) prButton.mount('#payment-request-button');
-    else document.querySelector('#payment-request-button').classList.add('hide');
+    if (result) prButton.mount('#donate-payment-request-button');
+    else document.querySelector('#donate-payment-request-button').classList.add('hide');
   })();
 
   // Handle tokenization and send to server
@@ -50,9 +50,9 @@ Template.donate.onRendered(() => {
 
   // Create credit card form elements
   card = elements.create('card');
-  card.mount('#card-element');
+  card.mount('#donate-card-element');
   card.addEventListener('change', ({ error }) => {
-    const displayError = document.getElementById('card-errors');
+    const displayError = document.getElementById('donate-card-errors');
     if (error) displayError.textContent = error.message;
     else displayError.textContent = '';
   });
@@ -154,7 +154,7 @@ Template.donate.events({
 
     if (error) {
       // Inform the customer that there was an error.
-      const errorElement = document.getElementById('card-errors');
+      const errorElement = document.getElementById('donate-card-errors');
       errorElement.textContent = error.message;
     } else {
       token.amount = amount.get() * 100;
@@ -164,7 +164,7 @@ Template.donate.events({
       Meteor.call('pay', token, (err, result) => {
         if (err) {
           // Inform the customer that there was an error.
-          const errorElement = document.getElementById('card-errors');
+          const errorElement = document.getElementById('donate-card-errors');
           errorElement.textContent = error.message;
         } else {
           document.querySelector('#donateDefault').classList.add('hide');
