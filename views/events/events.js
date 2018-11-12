@@ -383,6 +383,11 @@ Template.eventSlide.events({
 
     for (let i = 0; i < form.length - 1; i += 1) attributes[form[i].name] = form[i].value;
 
+    // Pay registration cost
+    if (attributes['cost-tier'] > 0) {
+      History.navigate('/pay');
+    }
+
     Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
 
     // Hide registration form

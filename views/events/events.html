@@ -1,240 +1,249 @@
 <!--Note that li.eventSlide requires a value=# which matches that of it's cooresponding calendar listing: '.eventDate'. values should start at 0-->
 
 <template name="events">
-    <section class="events mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#if isAdmin}}
-            {{> sectionAdmin}}
-        {{/if}}
-        <div class="containerSmall">
-            <header>
-                <h1>Events</h1>
-                <p>WCASA caters its events toward the needs of its membership <br>
-                    and the service providers of the state as a whole. <br>
-                    Check back often to find events year-round.
-                </p>
-                <p class="search">
-                    <span class="fa">&#xf002;</span><input id="eventSearch" type="search" placeholder="Search Events...">
-                    {{>searchResultsList}}
-                </p>
-            </header>
-        </div>
-        <div class="shadow-box container">
-            <div class="eventsContainer">
-                <aside class="eventsSidebar">
-                    <h2 class="sidebarHeader">Events Calendar</h2>
-                    {{>calendar}}
-                    <h2 class="sidebarHeader">Upcoming Events</h2>
-                    {{>upcomingEvents}}
-                </aside>
-                <div class="eventsMain main">
-                    <header class="eventsHeader">
-                        <ul>
-                            <li class="prevMonth event-control-prev" {{disabled}}>
-                                <button class="event-control-prev">
-                                    <span class="fa">&#xf137;</span> {{lastMonth}}
-                                </button>
-                            </li>
-                            <li class="nextMonth event-control-prev" {{disabled}}>
-                                <button class="event-control-next" {{disabled}}>
-                                    {{nextMonth}} <span class="fa">&#xf138;</span>
-                                </button>
-                            </li>
-                            <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
-                            <li class="viewThisMonth">
-                                <span class="fa">&#xf274;</span> This Month
-                                <span class="tooltip">Switch to {{thisMonth}}</span>
-                            </li>
-                            <li class="mobile back-to-events">
-                                <button><span class="fa">&#xf137;</span> Back to Events</button></li>
-                        </ul>
-                    </header>
-                    <div id="events-slider" class="eventsSlider">
-                      <button class="prev fa">&#xf053;</button>
-                      <div class="slideScroller">
-                        <ul class="slides" id="slidesList">
-                          {{#if events}}
-                            {{#each events}}
-                              {{#if noEvents}}
-                                <li data-id="{{_id}}" class="{{which}} {{position}} no-events-this-month{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
-                                  <div class="eventContainer">
-                                    <div class="inner">
-                                      <header>
-                                        <p class="eventDate">{{month}} {{year}}</p>
-                                      </header>
-                                      <div class="main">
-                                        <div class="icon-main">
-                                          <i class="fa">&#xf273;</i>
-                                        </div>
-                                        <h2>{{month}} {{year}}</h2>
-                                        <p>
-                                          {{#if noFutureEvents}}
-                                            No more events listed after this date.
-                                          {{else}}
-                                            {{#if noPastEvents}}
-                                              No previous events listed before this date.
-                                            {{else}}
-                                              No Events This Month.
-                                            {{/if}}
-                                          {{/if}}
-                                          <!-- If there is a future event from today's date -->
-                                          {{#if nextEvent}}
-                                            <br><a href="#" data-id="{{nextEvent}}" class="eventLink">
-                                              See the next upcoming event <span class="fa">&#xf105;</span></a>
-                                          {{/if}}
-                                          <!-- Show the last past event from today's date' -->
-                                          {{#if pastEvent}}
-                                            <br><a href="#" data-id="{{pastEvent}}" class="eventLink">
-                                              See the most recent past event <span class="fa">&#xf105;</span></a>
-                                          {{/if}}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>
-                              {{else}}
-                                {{> eventSlide}}
-                              {{/if}}
-                            {{/each}}
-                          {{/if}}
-                        </ul>
-                      </div>
-                      <button class="next fa">&#xf054;</button>
-                    </div>
-                    <article class="listViewEventsObject">
-                        {{#each items}}
-                            {{>tabs}}
-                        {{/each}}
-                    </article>
-                    {{#if isAdmin}}
-                        {{> eventsAdmin}}
-                        {{> viewRegistrations}}
+  <section class="events mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+    {{#if isAdmin}}
+      {{> sectionAdmin}}
+    {{/if}}
+    <div class="containerSmall">
+      <header>
+        <h1>Events</h1>
+        <p>WCASA caters its events toward the needs of its membership <br>
+          and the service providers of the state as a whole. <br>
+          Check back often to find events year-round.
+        </p>
+        <p class="search">
+          <span class="fa">&#xf002;</span><input id="eventSearch" type="search" placeholder="Search Events...">
+          {{>searchResultsList}}
+        </p>
+      </header>
+    </div>
+    <div class="shadow-box container">
+      <div class="eventsContainer">
+        <aside class="eventsSidebar">
+          <h2 class="sidebarHeader">Events Calendar</h2>
+          {{>calendar}}
+          <h2 class="sidebarHeader">Upcoming Events</h2>
+          {{>upcomingEvents}}
+        </aside>
+        <div class="eventsMain main">
+          <header class="eventsHeader">
+            <ul>
+              <li class="prevMonth event-control-prev" {{disabled}}>
+                <button class="event-control-prev">
+                  <span class="fa">&#xf137;</span> {{lastMonth}}
+                </button>
+              </li>
+              <li class="nextMonth event-control-prev" {{disabled}}>
+                <button class="event-control-next" {{disabled}}>
+                  {{nextMonth}} <span class="fa">&#xf138;</span>
+                </button>
+              </li>
+              <li class="listViewEvents"><span class="fa">&#xf03a;</span><span class="fa open">&#xf00d;</span> View All</li>
+              <li class="viewThisMonth">
+                <span class="fa">&#xf274;</span> This Month
+                <span class="tooltip">Switch to {{thisMonth}}</span>
+              </li>
+              <li class="mobile back-to-events">
+                <button><span class="fa">&#xf137;</span> Back to Events</button></li>
+            </ul>
+          </header>
+          <div id="events-slider" class="eventsSlider">
+            <button class="prev fa">&#xf053;</button>
+            <div class="slideScroller">
+              <ul class="slides" id="slidesList">
+                {{#if events}}
+                  {{#each events}}
+                    {{#if noEvents}}
+                      <li data-id="{{_id}}" class="{{which}} {{position}} no-events-this-month{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
+                        <div class="eventContainer">
+                          <div class="inner">
+                            <header>
+                              <p class="eventDate">{{month}} {{year}}</p>
+                            </header>
+                            <div class="main">
+                              <div class="icon-main">
+                                <i class="fa">&#xf273;</i>
+                              </div>
+                              <h2>{{month}} {{year}}</h2>
+                              <p>
+                                {{#if noFutureEvents}}
+                                  No more events listed after this date.
+                                {{else}}
+                                  {{#if noPastEvents}}
+                                    No previous events listed before this date.
+                                  {{else}}
+                                    No Events This Month.
+                                  {{/if}}
+                                {{/if}}
+                                <!-- If there is a future event from today's date -->
+                                {{#if nextEvent}}
+                                  <br><a href="#" data-id="{{nextEvent}}" class="eventLink">
+                                    See the next upcoming event <span class="fa">&#xf105;</span></a>
+                                {{/if}}
+                                <!-- Show the last past event from today's date' -->
+                                {{#if pastEvent}}
+                                  <br><a href="#" data-id="{{pastEvent}}" class="eventLink">
+                                    See the most recent past event <span class="fa">&#xf105;</span></a>
+                                {{/if}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    {{else}}
+                      {{> eventSlide}}
                     {{/if}}
-                </div>
+                  {{/each}}
+                {{/if}}
+              </ul>
             </div>
+            <button class="next fa">&#xf054;</button>
+          </div>
+          <article class="listViewEventsObject">
+            {{#each items}}
+              {{>tabs}}
+            {{/each}}
+          </article>
+          {{#if isAdmin}}
+            {{> eventsAdmin}}
+            {{> viewRegistrations}}
+          {{/if}}
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <template name="eventListItem">
-    <li>
-        <p><strong>{{name}}</strong></p>
-    </li>
+  <li>
+    <p><strong>{{name}}</strong></p>
+  </li>
 </template>
 
 <template name="eventSlide">
-    <li data-id="{{_id}}" class="eventSlide {{which}} {{position}}">
-        <div class="eventContainer">
-            <div class="inner">
-                <header>
-                    <p class="eventDate">{{startDate this}}</p>
-                </header>
-                <div class="main">
-                    <h2>{{name}}
-                        {{#if isAdmin}}
-                            <aside class="adminControls">
-                                <span class="fa edit" title="Edit Event">&#xf044;</span>
-                                <span class="fa delete" title="Delete Event">&#xf014;</span>
-                            </aside>
-                        {{/if}}
-                    </h2>
-                    {{ #if numberSameDayEvents this }}
-                        <aside class="otherEvents">
-                        {{ #if isSingular }}
-                            There is one other event on this date:
-                        {{ else }}
-                            There are {{ numberSameDayEvents this }} other events on this date:
-                        {{/if}}
-                            <ul>
-                                {{#each sameDayEvents}}
-                                <li><a href="#" data-id="{{_id}}">{{name}}</a></li>
-                                {{/each}}
-                            </ul>
-                        </aside>
-                    {{/if}}
-                    <p class="excerpt">
-                        <b>{{startTime this}}{{endTime this}}
-                          {{#if address this}}: {{{ address this }}}{{/if}}</b>
-                    </p>
-                    {{{ markdown description }}}
-                </div>
-                <ul class="actions">
-                  {{#if registration.required}}
-                    {{> Template.dynamic template=registerTemplate}}
-
-                    {{! Registration Form }}
-                    <li class="registration-form hide" data-id="{{_id}}">
-                      <h3>Event Registration</h3>
-                      <form>
-                        {{#each registration.registrationDetails }}
-                          <label>{{name}}
-                            {{#if equals type "textarea"}}
-                              <textarea name="{{id}}" required></textarea>
-                            {{else}}
-                              {{#if equals type "yes/no"}}
-                                <select name="{{id}}" required>
-                                  <option value="yes">Yes</option>
-                                  <option value="no">No</option>
-                                </select>
-                              {{else}}
-                                <input type="{{type}}" name="{{id}}"
-                                  required />
-                              {{/if}}
-                            {{/if}}
-                          </label>
-                        {{/each}}
-                        <input type="submit" value="Register" />
-                      </form>
-                    </li>
-                    {{#if isAdmin}}
-                      <li class="viewRegistrations action">View Registrations</li>
-                    {{/if}}
-                  {{/if}}
-                </ul>
-            </div>
+  <li data-id="{{_id}}" class="eventSlide {{which}} {{position}}">
+    <div class="eventContainer">
+      <div class="inner">
+        <header>
+          <p class="eventDate">{{startDate this}}</p>
+        </header>
+        <div class="main">
+          <h2>{{name}}
+            {{#if isAdmin}}
+              <aside class="adminControls">
+                <span class="fa edit" title="Edit Event">&#xf044;</span>
+                <span class="fa delete" title="Delete Event">&#xf014;</span>
+              </aside>
+            {{/if}}
+          </h2>
+          {{#if numberSameDayEvents this}}
+            <aside class="otherEvents">
+              {{#if isSingular}}
+                There is one other event on this date:
+              {{else}}
+                There are {{numberSameDayEvents this}} other events on this date:
+              {{/if}}
+              <ul>
+                {{#each sameDayEvents}}
+                  <li><a href="#" data-id="{{_id}}">{{name}}</a></li>
+                {{/each}}
+              </ul>
+            </aside>
+          {{/if}}
+          <p class="excerpt">
+            <b>{{startTime this}}{{endTime this}}
+              {{#if address this}}: {{{ address this }}}{{/if}}</b>
+          </p>
+          {{{markdown description}}}
         </div>
-    </li>
-</template>
+        <ul class="actions">
+          {{#if registration.required}}
+            {{> Template.dynamic template=registerTemplate}}
 
+            {{! Registration Form }}
+            <li class="registration-form hide" data-id="{{_id}}">
+              <h3>Event Registration</h3>
+              <form>
+                {{#each registration.registrationDetails }}
+                  <label>{{name}}
+                    {{#if equals type "textarea"}}
+                      <textarea name="{{id}}" required></textarea>
+                    {{else}}
+                      {{#if equals type "yes/no"}}
+                        <select name="{{id}}" required>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      {{else}}
+                        <input type="{{type}}" name="{{id}}" required />
+                      {{/if}}
+                    {{/if}}
+                  </label>
+                {{/each}}
 
-
-
-<template name="upcomingEvents">
-        <ul class="upcomingEvents">
-            {{ #each upcomingEvents }}
-                {{>upcomingEventListItem}}
-            {{/each}}
-            <li class="no-upcoming-list">
-                There are currently no upcoming events<br>
-                Be sure to check back later!
+                {{! Cost tiers}}
+                {{#if cost.length}}
+                  <fieldset>
+                    <h4>Please select the appropriate option:</h4>
+                    {{#each cost}}
+                      <label>
+                        <input type="radio" name="cost-tier" value="{{cost}}" required>
+                        ${{cost}} {{description}}
+                      </label>
+                    {{/each}}
+                  </fieldset>
+                {{/if}}
+                <input type="submit" value="Register" />
+              </form>
             </li>
             {{#if isAdmin}}
-                <li class="addEvent" title="Add an Event">
-                    <span class="fa">&#xf055;</span> Add Event
-                </li>
+              <li class="viewRegistrations action">View Registrations</li>
             {{/if}}
+          {{/if}}
         </ul>
-        {{ #if upcomingEvents }}
-            <button class="see-all-link button listViewEvents-proxy"><span class="fa">&#xf274;</span> View upcoming events</button>
-        {{else}}
-            <button class="see-all-link button listViewEventsPast-proxy"><span class="fa">&#xf274;</span> View past events</button>
-        {{/if}}
+      </div>
+    </div>
+  </li>
+</template>
+
+<template name="upcomingEvents">
+  <ul class="upcomingEvents">
+    {{ #each upcomingEvents }}
+      {{>upcomingEventListItem}}
+    {{/each}}
+    <li class="no-upcoming-list">
+      There are currently no upcoming events<br>
+      Be sure to check back later!
+    </li>
+    {{#if isAdmin}}
+      <li class="addEvent" title="Add an Event">
+        <span class="fa">&#xf055;</span> Add Event
+      </li>
+    {{/if}}
+  </ul>
+  {{#if upcomingEvents}}
+    <button class="see-all-link button listViewEvents-proxy"><span class="fa">&#xf274;</span> View upcoming events</button>
+  {{else}}
+    <button class="see-all-link button listViewEventsPast-proxy"><span class="fa">&#xf274;</span> View past events</button>
+  {{/if}}
 </template>
 
 <template name="upcomingEventListItem">
-    <li>
-        <h3>
-            <a class="eventDate" href="#" data-id="{{_id}}">
-             {{ friendlyDate this }} &mdash; <span>{{ name }}</span>
-            </a>
-        </h3>
-        <ul class="actions">
-            <!--{{>actionRegisterPrompt}}-->
-            <!--{{>actionUnregisterPrompt}}-->
-            <!--{{>actionRegistered}}-->
-            <!--{{>actionNotRegistered}}-->
-            <!--{{>actionNotLoggedIn}}-->
-        </ul>
-    </li>
+  <li>
+    <h3>
+      <a class="eventDate" href="#" data-id="{{_id}}">
+        {{friendlyDate this}} &mdash; <span>{{name}}</span>
+      </a>
+    </h3>
+    <ul class="actions">
+      <!--{{>actionRegisterPrompt}}-->
+      <!--{{>actionUnregisterPrompt}}-->
+      <!--{{>actionRegistered}}-->
+      <!--{{>actionNotRegistered}}-->
+      <!--{{>actionNotLoggedIn}}-->
+    </ul>
+  </li>
 </template>
 
 <template name="actionRegistered">
@@ -258,135 +267,134 @@
 </template>
 
 <template name="actionUnregisterPrompt">
-    <li class="noRegistered info">You have been unregistered for this event.</li>
+  <li class="noRegistered info">You have been unregistered for this event.</li>
 </template>
 
 <template name="actionRegisterPrompt">
-    <li class="justRegistered info">You are now registered for this event.</li>
+  <li class="justRegistered info">You are now registered for this event.</li>
 </template>
 
 <template name="actionNotLoggedIn">
-    <li class="notAccount info">
-        <a href="/sign-in" class="login">Login</a> or <a href="/register" class="create">Create an Account</a> to register for this event.
-    </li>
-    <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
+  <li class="notAccount info">
+    <a href="/sign-in" class="login">Login</a> or <a href="/register" class="create">Create an Account</a> to register
+    for this event.
+  </li>
+  <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
 </template>
 
 <template name="eventSummary">
-    <span class="eventSummary">
-        <ul>
-            {{#each this}}
-                <li>{{name}}</li>
-            {{/each}}
-        </ul>
-    </span>
+  <span class="eventSummary">
+    <ul>
+      {{#each this}}
+        <li>{{name}}</li>
+      {{/each}}
+    </ul>
+  </span>
 </template>
-
 
 <template name="calendar">
-    <div id="calendar" class="calendar {{awareness}}">
-        <h2>
-            <button class="fa prevMonth monthPaginate event-control-prev" {{disabled}} role="button" type="button">&#xf0d9;</button>
-            {{getMonth}} {{getYear}}
-            <button class="fa nextMonth monthPaginate event-control-next" {{disabled}} role="button">&#xf0da;</button>
-        </h2>
-        <!--Days-->
-        <span class="weekday">S</span>
-        <span class="weekday">M</span>
-        <span class="weekday">T</span>
-        <span class="weekday">W</span>
-        <span class="weekday">T</span>
-        <span class="weekday">F</span>
-        <span class="weekday">S</span>
-        <!--Days End-->
+  <div id="calendar" class="calendar {{awareness}}">
+    <h2>
+      <button class="fa prevMonth monthPaginate event-control-prev" {{disabled}} role="button" type="button">&#xf0d9;</button>
+      {{getMonth}} {{getYear}}
+      <button class="fa nextMonth monthPaginate event-control-next" {{disabled}} role="button">&#xf0da;</button>
+    </h2>
+    <!--Days-->
+    <span class="weekday">S</span>
+    <span class="weekday">M</span>
+    <span class="weekday">T</span>
+    <span class="weekday">W</span>
+    <span class="weekday">T</span>
+    <span class="weekday">F</span>
+    <span class="weekday">S</span>
+    <!--Days End-->
 
-        {{#each week}}
-            {{#each this}}
-                <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}} {{this.awareness}}">
-                    {{#if hasEvent}}
-                        <button data-id="{{id}}" class="eventDate">
-                            {{date}}
-                            {{> eventSummary currentEvents}}
-                        </button>
-                    {{else}}
-                        {{date}}
-                    {{/if}}
-                </span>
-            {{/each}}
+    {{#each week}}
+      {{#each this}}
+        <span class="{{notCurrent}} {{currentWeekStart}} {{today}} {{hasEvent}} {{past}} {{this.awareness}}">
+          {{#if hasEvent}}
+            <button data-id="{{id}}" class="eventDate">
+              {{date}}
+              {{> eventSummary currentEvents}}
+            </button>
+          {{else}}
+            {{date}}
+          {{/if}}
+        </span>
+      {{/each}}
+    {{/each}}
+
+    <!-- Awareness Month Callouts-->
+    {{#if awarenessEvents}}
+      <ul class="awareness-month-events">
+        {{#each awarenessEvents}}
+          <li><a href="#" data-id="{{_id}}">{{name}}</a></li>
         {{/each}}
-
-        <!-- Awareness Month Callouts-->
-        {{#if awarenessEvents}}
-          <ul class="awareness-month-events">
-            {{#each awarenessEvents}}
-              <li><a href="#" data-id="{{_id}}">{{name}}</a></li>
-            {{/each}}
-          </ul>
-        {{/if}}
-        <!-- End Awareness Month Callouts -->
-        <div style="clear:both;"></div>
-    </div>
+      </ul>
+    {{/if}}
+    <!-- End Awareness Month Callouts -->
+    <div style="clear:both;"></div>
+  </div>
 </template>
 
-
 <template name="pastEventsList">
-    {{#each pastEvents}}
-        <h2>{{month}} {{year}}</h2>
-        <ul>
-            {{#each event}}
-                <li>
-                    <a href="#" data-id="{{_id}}">
-                        <span>{{name}}</span>
-                        <span class="badge">{{friendly start end}}</span>
-                    </a>
-                </li>
-            {{/each}}
-        </ul>
-    {{/each}}
+  {{#each pastEvents}}
+    <h2>{{month}} {{year}}</h2>
+    <ul>
+      {{#each event}}
+        <li>
+          <a href="#" data-id="{{_id}}">
+            <span>{{name}}</span>
+            <span class="badge">{{friendly start end}}</span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  {{/each}}
 </template>
 
 <template name="upcomingEventsList">
-    {{#if upcomingEvents}}
-        {{#each upcomingEvents}}
-            <h2>{{month}} {{year}}</h2>
-            <ul>
-                {{#each event}}
-                    <li>
-                        <a href="#" data-id="{{_id}}">
-                            <span>{{name}}</span>
-                            <span class="badge">{{friendly start end}}</span>
-                        </a>
-                    </li>
-                {{/each}}
-            </ul>
+  {{#if upcomingEvents}}
+    {{#each upcomingEvents}}
+      <h2>{{month}} {{year}}</h2>
+      <ul>
+        {{#each event}}
+          <li>
+            <a href="#" data-id="{{_id}}">
+              <span>{{name}}</span>
+              <span class="badge">{{friendly start end}}</span>
+            </a>
+          </li>
         {{/each}}
-    {{else}}
-        <p class="nothing-to-show">
-            <span class="fa">&#xf273;</span>
-            There are currently no upcoming events.<br>
-            Be sure to check back later!
-        </p>
-    {{/if}}
+      </ul>
+    {{/each}}
+  {{else}}
+    <p class="nothing-to-show">
+      <span class="fa">&#xf273;</span>
+      There are currently no upcoming events.<br>
+      Be sure to check back later!
+    </p>
+  {{/if}}
 </template>
 
 <template name="searchResultsList">
-    <ul class="searchResultsList">
-        {{#if results}}
-            {{#each results}}
-                <li class="{{past start}}">
-                    <a href="#" data-id="{{_id}}">
-                        <span>{{name}}</span>
-                        <span class="badge">{{friendly start end}}
-                        {{#if pastYear start}} {{year start}}{{/if}}</span>
-                    </a>
-                </li>
-            {{/each}}
-        {{else}}
-            <p class="nothing-to-show">
-                <span class="fa">&#xf273;</span>
-                There are currently no past events.<br>
-                Be sure to check back later!
-            </p>
-        {{/if}}
-    </ul>
+  <ul class="searchResultsList">
+    {{#if results}}
+      {{#each results}}
+        <li class="{{past start}}">
+          <a href="#" data-id="{{_id}}">
+            <span>{{name}}</span>
+            <span class="badge">{{friendly start end}}
+              {{#if pastYear start}} {{year start}}{{/if}}</span>
+          </a>
+        </li>
+      {{/each}}
+    {{else}}
+      <p class="nothing-to-show">
+        <span class="fa">&#xf273;</span>
+        There are currently no past events.<br>
+        Be sure to check back later!
+      </p>
+    {{/if}}
+  </ul>
 </template>

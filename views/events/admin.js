@@ -166,8 +166,6 @@ Template.eventAddForm.events({
       };
     }
 
-    console.log('Sending to server:', data);
-
     if (formMethod.get() === 'updateEvent') {
       // Add event ID
       data._id = activeEvent.get()._id;

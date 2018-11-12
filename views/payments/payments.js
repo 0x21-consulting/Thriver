@@ -10,7 +10,7 @@ import './payments.html';
  */
 Template.payments.onRendered(() => {
   History.registry.insert({
-    element: 'payments',
+    element: 'pay',
     accessData: {
       element: 'a[aria-controls="payments"]',
     },
