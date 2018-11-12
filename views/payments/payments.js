@@ -118,6 +118,7 @@ Template.payments.events({
         } else {
           // success
           console.log(result);
+          paymentDetails.get().callback();
         }
       });
     }

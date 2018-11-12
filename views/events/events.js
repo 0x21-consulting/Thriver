@@ -395,6 +395,18 @@ Template.eventSlide.events({
         name: eventData.name,
         description: eventData.description,
         cost: attributes['cost-tier'],
+        callback: () => {
+          Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
+
+          // Hide registration form
+          form.parentElement.classList.add('hide');
+
+          // Show register button again
+          form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
+
+          // Hide sidebar
+          History.navigate('/events');
+        },
       });
       History.navigate('/pay');
     } else {
