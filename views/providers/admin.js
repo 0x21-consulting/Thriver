@@ -18,7 +18,7 @@ const closeForm = (event) => {
   event.delegateTarget.querySelector('section.addProvider').classList.add('hide');
 
   // Show inner again
-  event.delegateTarget.querySelector('div.inner').classList.remove('hide');
+  event.delegateTarget.querySelector('.mapTool').classList.remove('hide');
 };
 
 /** Admin events */
@@ -47,12 +47,12 @@ Template.providers.events({
     const popout = event.target.parentElement.parentElement.parentElement;
     const form = event.target.parentElement.parentElement.parentElement
       .querySelector('section.addProvider');
-    const inner = event.target.parentElement.parentElement.parentElement
-      .querySelector('.inner');
+    const mapTool = event.target.parentElement.parentElement.parentElement
+      .querySelector('.mapTool');
 
     if (popout instanceof Element) popout.classList.remove('full-view');
     if (form instanceof Element) form.classList.remove('hide');
-    if (inner instanceof Element) inner.classList.add('hide');
+    if (mapTool instanceof Element) mapTool.classList.add('hide');
   },
 });
 
