@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Template, Blaze } from 'meteor/templating';
+import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 import Events from '/logic/events/schema';
 import Calendar from './calendar';
@@ -338,10 +338,10 @@ Template.eventSlide.events({
     let registrationForm;
 
     // If this is a third-party register link, navigate to it
-    if (Blaze.getData().registerUrl) {
+    if (Template.instance().data.registerUrl) {
       // Create link
       a = document.createElement('a');
-      a.href = Blaze.getData().registerUrl;
+      a.href = Template.instance().data.registerUrl;
       a.target = '_blank';
       a.classList.add('hide');
       document.body.appendChild(a); // Required for Mozilla to click

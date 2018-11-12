@@ -44,9 +44,9 @@ Meteor.methods({
     if (newEvent.end instanceof Date) newEvent.end = new Date(newEvent.end.toISOString());
 
     // Perform Insert
-    Events.collection.insert(newEvent, (error) => {
-      if (error) throw new Meteor.Error(error);
-    });
+    const result = Events.collection.insert(newEvent);
+
+    return result;
   },
 
   /**
@@ -62,13 +62,12 @@ Meteor.methods({
     check(event, Object);
 
     // Perform update
-    Events.collection.update(
+    const result = Events.collection.update(
       { _id: event._id },
       { $set: event },
-      (error) => {
-        if (error) throw new Meteor.Error(error);
-      },
     );
+
+    return result;
   },
 
   /**
