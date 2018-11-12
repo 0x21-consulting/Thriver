@@ -27,13 +27,11 @@ People.schema = new SimpleSchema({
   name: {
     type: String,
     optional: false,
-    label: 'Name and Credentials',
   },
   /** Person's job title */
   title: {
     type: String,
     optional: false,
-    label: 'Job or Position Title',
   },
   /** Email address */
   email: {
@@ -45,21 +43,12 @@ People.schema = new SimpleSchema({
   boardMember: {
     type: Boolean,
     optional: false,
-    defaultValue: false,
-    label: 'Is this person a Board Member?',
-    autoform: {
-      type: 'boolean-select',
-    },
   },
   /** Picture or Avatar */
   // TODO(micchickenburger): Consider making this a Binary Blob at some point
   picture: {
     type: String,
     optional: true,
-    label: 'Picture or Avatar',
-    autoform: {
-      type: 'file',
-    },
   },
 });
 

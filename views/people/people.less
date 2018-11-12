@@ -5,6 +5,16 @@ section.who div.tabs > article{
 }
 
 section.who div.tabs{
+    .addPerson{ margin-top: 40px; }
+    aside.admin button {
+        font-weight: bold;
+        position: relative;
+        top: -9px;
+    }
+    form { .formColors(@gray, desaturate(darken(@gray,50%),25%), @teal,@blueGrayLight,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
+    form input, form textarea{
+        &:focus{-webkit-box-shadow: none !important; box-shadow:none-important;}
+    }
     > article{
         h2{
             border-bottom: 2px solid darken(@gray, 5%);
@@ -345,20 +355,8 @@ section.who article[data-id="staff"], section.who article[data-id="board"] {
         }
     }
 
-    button {
-        background: @teal;
-    }
+    button { background: @teal; }
 
-    button.close {
-        color: @orange;
-        background: transparent;
-        float: right;
-        margin-top: -10px;
-
-        // Appear above label
-        position: relative;
-        z-index: 1;
-    }
 }
 
 
