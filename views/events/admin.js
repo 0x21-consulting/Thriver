@@ -169,6 +169,8 @@ Template.eventAddForm.events({
     console.log('Sending to server:', data);
 
     if (formMethod.get() === 'updateEvent') {
+      // Add event ID
+      data._id = activeEvent.get()._id;
       Meteor.call('updateEvent', data, (error) => {
         if (error) console.error(error);
         else document.querySelector('#admin-form-container-event-add button.close').click();
