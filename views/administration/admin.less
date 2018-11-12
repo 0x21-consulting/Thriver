@@ -153,15 +153,41 @@ aside.adminAside {
 }
 
 // Admin Form Container
+.admin-tools button {
+  color: #ffffff;
+  .buttonColor(#00b7c4);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 .admin-form-container{
-  padding: 40px;
+  position: relative;
+  padding: 28px 20px 29px 20px;
   text-align: left;
-  max-width: 550px;
-  margin: 0 auto;
+  max-width: 450px;
+  margin: 0 auto 50px auto;
+  background: rgb(104, 131, 142);
+  box-shadow: 2px 2px 42px 2px rgba(0,0,0,0.15);
+  .add.exit{
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    background: transparent;
+    box-shadow: none;
+    font-size: 20px;
+  }
   h2{ padding: 0 0 20px 0; }
+  h4{ 
+    text-align: center; 
+    color: #fff;
+  }
   input, textarea, .styledSelect{
     margin-top: 5px;
     margin-bottom: 15px;
+  }
+  textarea{
+    height: 90px;
+    min-height: 0px;
   }
   .styledSelect{ margin-top: 20px; }
   input[type=submit]{
@@ -169,6 +195,30 @@ aside.adminAside {
     clear: both;
     width: auto;
   }
+  .styledSelect{
+    width:100%;
+    margin: 19px 1% 18px 0px !important; //Override column rules
+    label{ display: block; }
+  }
+  .add-item-btn{
+    background: @teal;
+    color: #fff;
+  }
+  input[type=submit]{
+    margin-top: 10px;
+    text-indent: 0px;
+    margin-bottom: 6px;
+  }
+  input[type=date]{
+    height: 18px;
+  }
+  #main .mainSection &{
+    max-width: none;
+    background: #fff;
+    padding: 40px 55px;
+    h4, button.close, select{ color: @black; }
+    input[type=submit], button[type=submit], button{ color: #fff; font-weight:bold;}
+}
 }
 .admin-form-details{
   clear: both;

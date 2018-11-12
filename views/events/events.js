@@ -6,7 +6,7 @@ import Calendar from './calendar';
 import History from '/views/history/history';
 
 import './events.html';
-import './admin.html';
+import './admin';
 import './helpers';
 import './history';
 import './search';

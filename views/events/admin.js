@@ -9,6 +9,7 @@ import './admin.html';
 
 const formMethod = new ReactiveVar('addEvent');
 const activeEvent = new ReactiveVar();
+const isAllDayEvent = new ReactiveVar(false);
 const Registrations = new Mongo.Collection('registrations');
 
 /**
@@ -33,20 +34,110 @@ Template.eventsAdmin.events({
   'submit #eventForm': closeForm,
 });
 
-/** Events template events */
-Template.events.events({
+Template.eventAddForm.helpers({
+  dateType: () => (isAllDayEvent.get() ? 'date' : 'datetime-local'),
+});
+
+/** Admin events */
+Template.eventAddForm.events({
+  'change #event-add-form-multi-day'(event) {
+    const { checked } = event.target;
+
+    if (checked) isAllDayEvent.set(false);
+    else isAllDayEvent.set(true);
+  },
+
   /**
-   * @summary Show Event Add Form
+   * @summary Close Form
+   */
+  'click button.close': closeForm,
+
+  /**
+   * @summary Add Event Submission
    * @method
    *   @param {$.Event} event
    */
-  'click li.addEvent': (event) => {
+  'submit form#admin-form-event-add': (event) => {
+    event.preventDefault();
+
+    // Return PriceTiersArray
+    const priceTiersArray = () => {
+      const tiers = document.querySelectorAll('.event-price-tier');
+      const arr = [];
+      for (let i = 0; i < tiers.length; i += 1) {
+        const obj = {
+          description: tiers[i].querySelector('.description-inp').value,
+          cost: tiers[i].querySelector('.cost-inp').value,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    // Return RegistrationArray
+    const registrationDetailsArray = () => {
+      const items = document.querySelectorAll('.event-registration-item');
+      const arr = [];
+      for (let i = 0; i < items.length; i += 1) {
+        const obj = {
+          name: items[i].querySelector('.field-name-inp').value,
+          type: items[i].querySelector('.field-type-inp').value,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    const start = document.getElementById('event-add-form-dateStart').value;
+    const end = document.getElementById('event-add-form-dateEnd').value;
+
+    const data = {
+      name: document.getElementById('event-add-form-name').value,
+      description: document.getElementById('event-add-form-desc').value,
+      awareness: document.getElementById('event-add-form-awareness').value,
+      start: start ? new Date(start) : undefined,
+      end: end ? new Date(end) : undefined,
+      location: {
+        name: document.getElementById('event-add-form-location-name').value,
+        mapUrl: document.getElementById('event-add-form-location-map-url').value,
+        webinarUrl: document.getElementById('event-add-form-location-webinar-url').value,
+      },
+      cost: priceTiersArray(),
+      registration: {
+        required: document.getElementById('event-add-form-registration-required').value,
+        registerUrl: document.getElementById('event-add-form-registration-external-url').value,
+        registrationDetails: registrationDetailsArray(),
+      },
+    };
+
+    console.log(data);
+
+    // Insert subscriber into the collection
+    Meteor.call('addEvent', data, function(error) {
+      console.log('calling');
+      if (error) {
+        console.log(error.reason);
+      } else {
+        console.log('Subscription successful');
+        console.log(data);
+      }
+    });
+  },
+});
+
+/** Events template events */
+Template.upcomingEvents.events({
+  /**
+   * @summary Show Event Add Form
+   * @method
+   */
+  'click li.addEvent': () => {
     // Set appropriate form type
     formMethod.set('addEvent');
     activeEvent.set(null);
 
-    const slider = event.delegateTarget.querySelector('.eventsSlider');
-    const admin = event.delegateTarget.querySelector('section.addEvent');
+    const slider = document.getElementById('events-slider');
+    const admin = document.getElementById('admin-form-container-context-event-add');
 
     if (slider instanceof Element) slider.classList.add('hide');
     if (admin instanceof Element) admin.classList.remove('hide');
