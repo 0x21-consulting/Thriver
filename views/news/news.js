@@ -80,8 +80,6 @@ Template.aside.events({
       content: document.getElementById('news-add-form-content').value,
     };
 
-    //console.log(data);
-
     // Insert subscriber into the collection
     Meteor.call('addNewsItem', data, function(error) {
       console.log('calling');

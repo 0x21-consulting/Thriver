@@ -10,49 +10,28 @@
       <h4><span>$</span>{{amount}}</h4>
       <hr>
     </fieldset>
-    <fieldset>
-      <h4>{{detailsTitle}}</h4>
-      <label>
-        Name on Card
-        <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
-      </label>
-      <label>
-        Credit Card Number
-        <input type="text" name="number" placeholder="#### #### #### ####" required pattern="[\d ]{12,19}" maxlength="42" />
-      </label>
-      <span class="cc-pic fa"> </span>
-      <input type="hidden" name="type" value="mastercard" />
-      <div class="styledSelect fullBlockMob">
-        <label>Expiration</label>
-        <select name="month">
-          <option value="01">January</option>
-          <option value="02">February</option>
-          <option value="03">March</option>
-          <option value="04">April</option>
-          <option value="05">May</option>
-          <option value="06">June</option>
-          <option value="07">July</option>
-          <option value="08">August</option>
-          <option value="09">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-        </select>
-      </div>
-      <div class="styledSelect small">
-        <select name="year">
-          {{#each year}}
-            <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <div class="cvv2">
-        <label> CVV2 Number </label>
-        <input type="text" name="cvv2" required pattern="^[0-9]{3,4}$" maxlength="4" />
-      </div>
-    </fieldset>
-    <fieldset>
-      <button type="submit" class="submit">Register</button>
-    </fieldset>
+    <!-- Pay with Credit Card tab -->
+    <button type="button">Credit Card</button>
+    <!-- Apple Pay, Google Pay, Microsoft Pay, etc. -->
+    <div id="payment-request-button"></div>
+
+    <!-- Pay with Credit Card Form -->
+    <section id="pay-with-card">
+      <fieldset>
+        <h4>{{detailsTitle}}</h4>
+        <label>
+          Name on Card
+          <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
+        </label>
+        <label>
+          Card Details
+          <div id="pay-card-element"></div>
+        </label>
+      </fieldset>
+      <div id="pay-card-errors" role="alert"></div>
+      <fieldset>
+        <button type="submit" class="submit">Register</button>
+      </fieldset>
+    </section>
   </form>
 </template>

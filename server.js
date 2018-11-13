@@ -7,7 +7,7 @@ import '/logic/events/server';
 import '/logic/administration/server';
 import '/logic/providers/providers';
 import '/logic/outreach/outreach';
-import '/logic/payments/donate';
+import '/logic/payments/payments';
 import '/logic/contact/contact';
 import '/logic/feedback/server';
 import '/logic/resources/server';

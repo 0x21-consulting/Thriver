@@ -43,17 +43,8 @@ Events.schema = new SimpleSchema({
   /** Awareness Events */
   awareness: {
     type: String,
-    optional: false,
+    optional: true,
     allowedValues: ['', 'day', 'month'],
-    defaultValue: '',
-    label: 'Is this an awareness event?',
-    autoform: {
-      options: [
-        { label: 'No', value: '' },
-        { label: 'Yes, Awareness Day', value: 'day' },
-        { label: 'Yes, Awareness Month', value: 'month' },
-      ],
-    },
   },
   /** Starting datetime */
   start: {

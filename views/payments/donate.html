@@ -1,72 +1,52 @@
 <template name="donate">
-    {{#each states}}
-        <div id="{{id}}" aria-hidden="{{#if active}}false{{else}}true{{/if}}">
-            {{{content}}}
-        </div>
-    {{/each}}
-    <form id="donateForm" autocomplete="off">
-        <fieldset>
-            <h4>{{amountTitle}}</h4>
-            {{#each amount}}
-                <input id="amt{{value}}" type="radio" name="amount" value="{{value}}" {{checked}} />
-                <label for="amt{{value}}" class="radio">${{{value}}}</label>
-            {{/each}}
-            <input id="radio5" type="radio" name="amount" value="custom" {{checked}} />
-            <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
-            <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" onfocus="this.value = this.value;" />
-        </fieldset>
-        {{#if reoccur}}
-            <fieldset class="reoccur">
-                <h4>{{reoccurTitle}}</h4>
-                {{#each reoccur}}
-                    <input id="reoccur{{value}}" type="radio" name="reoccur" value="{{value}}" {{checked}} />
-                    <label for="reoccur{{value}}" class="radio">{{{value}}}</label>
-                {{/each}}
-            </fieldset>
-        {{/if}}
-        <fieldset>
-            <h4>{{detailsTitle}}</h4>
-            <label>
-                Name on Card
-                <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
-            </label>
-            <label>
-                Credit Card Number
-                <input type="text" name="number" placeholder="#### #### #### ####" required pattern="[\d ]{12,19}" maxlength="42" />
-            </label>
-            <span class="cc-pic fa"> </span>
-            <input type="hidden" name="type" value="mastercard" />
-            <div class="styledSelect fullBlockMob">
-                <label>Expiration</label>
-                <select name="month">
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-            </div>
-            <div class="styledSelect small">
-                <select name="year">
-                    {{#each year}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="cvv2">
-                <label> CVV2 Number </label>
-                <input type="text" name="cvv2" required pattern="^[0-9]{3,4}$" maxlength="4" />
-            </div>
-         </fieldset>
-         <fieldset>
-            <button type="submit" class="submit">Donate</button>
-        </fieldset>
-    </form>
+  {{#each states}}
+    <div id="{{id}}" aria-hidden="{{#if active}}false{{else}}true{{/if}}">
+      {{{content}}}
+    </div>
+  {{/each}}
+  <form id="donateForm" autocomplete="off">
+    <fieldset>
+      <h4>{{amountTitle}}</h4>
+      {{#each amount}}
+        <input id="amt{{value}}" type="radio" name="amount" value="{{value}}" {{checked}} />
+        <label for="amt{{value}}" class="radio">${{{value}}}</label>
+      {{/each}}
+      <input id="radio5" type="radio" name="amount" value="custom" {{checked}} />
+      <label for="radio5" class="radio custom">Other <span class="bill">$</span></label>
+      <input class="customAmt" id="customAmt" type="number" name="amount" min="0" value="75" />
+    </fieldset>
+    {{#if reoccur}}
+      <fieldset class="reoccur">
+        <h4>{{reoccurTitle}}</h4>
+        {{#each reoccur}}
+          <input id="reoccur{{value}}" type="radio" name="reoccur" value="{{value}}" {{checked}} />
+          <label for="reoccur{{value}}" class="radio">{{{value}}}</label>
+        {{/each}}
+      </fieldset>
+    {{/if}}
+
+    <!-- Pay with Credit Card tab -->
+    <button type="button">Credit Card</button>
+    <!-- Apple Pay, Google Pay, Microsoft Pay, etc. -->
+    <div id="donate-payment-request-button"></div>
+
+    <!-- Pay with Credit Card Form -->
+    <section id="donate-with-card">
+      <fieldset>
+        <h4>{{detailsTitle}}</h4>
+        <label>
+          Name on Card
+          <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
+        </label>
+        <label>
+          Card Details
+          <div id="donate-card-element"></div>
+        </label>
+      </fieldset>
+      <div id="donate-card-errors" role="alert"></div>
+      <fieldset>
+        <button type="submit" class="submit">Donate</button>
+      </fieldset>
+    </section>
+  </form>
 </template>

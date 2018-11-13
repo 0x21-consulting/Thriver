@@ -348,9 +348,26 @@ Accounts.schema.user = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+
+  /** Payment history */
+  payments: {
+    type: Array,
+    defaultValue: [],
+  },
+  'payments.$': {
+    type: Object,
+    blackbox: true,
+    optional: true,
+  },
 });
 
 // Attach schema to users collection
 Meteor.users.attachSchema(Accounts.schema.user);
+
+// Indexes
+if (Meteor.isServer) {
+  Meteor.users.rawCollection().createIndex({ 'payments.description': 1 });
+  Meteor.users.rawCollection().createIndex({ 'payments.metadata.event_id': 1 });
+}
 
 export { Notifications, Accounts };

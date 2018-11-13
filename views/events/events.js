@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Template, Blaze } from 'meteor/templating';
+import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
+import { ReactiveVar } from 'meteor/reactive-var';
 import Events from '/logic/events/schema';
 import Calendar from './calendar';
 import History from '/views/history/history';
@@ -14,6 +15,9 @@ import './viewAll';
 
 // Subscribe to events
 Meteor.subscribe('events');
+
+// Event details for payments
+const paymentDetails = new ReactiveVar({});
 
 /**
  * @summary Toggle `active-event` class for Mobile
@@ -338,10 +342,10 @@ Template.eventSlide.events({
     let registrationForm;
 
     // If this is a third-party register link, navigate to it
-    if (Blaze.getData().registerUrl) {
+    if (Template.instance().data.registerUrl) {
       // Create link
       a = document.createElement('a');
-      a.href = Blaze.getData().registerUrl;
+      a.href = Template.instance().data.registerUrl;
       a.target = '_blank';
       a.classList.add('hide');
       document.body.appendChild(a); // Required for Mozilla to click
@@ -383,13 +387,38 @@ Template.eventSlide.events({
 
     for (let i = 0; i < form.length - 1; i += 1) attributes[form[i].name] = form[i].value;
 
-    Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
+    const eventData = Template.instance().data;
 
-    // Hide registration form
-    form.parentElement.classList.add('hide');
+    // Pay registration cost
+    if (attributes['cost-tier'] > 0) {
+      paymentDetails.set({
+        name: eventData.name,
+        description: eventData.description,
+        cost: attributes['cost-tier'],
+        id: eventData._id,
+        callback: () => {
+          Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
 
-    // Show register button again
-    form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
+          // Hide registration form
+          form.parentElement.classList.add('hide');
+
+          // Show register button again
+          form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
+
+          // Hide sidebar
+          History.navigate('/events');
+        },
+      });
+      History.navigate('/pay');
+    } else {
+      Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
+
+      // Hide registration form
+      form.parentElement.classList.add('hide');
+
+      // Show register button again
+      form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
+    }
   },
 
   /**
@@ -413,4 +442,4 @@ Template.eventSlide.events({
   },
 });
 
-export default Events;
+export { Events, paymentDetails };

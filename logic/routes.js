@@ -38,6 +38,17 @@ FlowRouter.route('/press-release/:title', {
 });
 
 /**
+ * @summary Receipts route
+ */
+FlowRouter.route('/receipt/:id', {
+  name: 'App.receipts',
+  waitOn: params => Meteor.subscribe('receipt', params.id),
+  action() {
+    this.render('receipt');
+  },
+});
+
+/**
  * @summary Default route
  */
 FlowRouter.route('/*', {

@@ -80,17 +80,17 @@
 <template name="eventAddForm">
   <section id="admin-form-container-event-add" class="admin-form-container">
     <div class="form-container">
-      <h4>Add Event</h4>
-      <button class="fa add close exit library">&#xf00d;</button>
+      <h4>{{formType}} Event</h4>
+      <button type="button" class="fa add close exit library">&#xf00d;</button>
       <form id="admin-form-event-add">
         <fieldset>
           <label>
             Name
-            <input id="event-add-form-name" name="name" type="text" />
+            <input id="event-add-form-name" name="name" type="text" value="{{doc.name}}" />
           </label>
           <label>
             Description
-            <textarea id="event-add-form-desc" name="description"></textarea>
+            <textarea id="event-add-form-desc" name="description">{{doc.description}}</textarea>
           </label>
           <hr />
           <div>
@@ -105,18 +105,18 @@
           <!-- Multi-day or all-day event? if yes, input type="date"; else input type="datetime-local" -->
           <label class="w-33">
             Start Date
-            <input type="{{dateType}}" name="dateStart" id="event-add-form-dateStart" />
+            <input type="{{dateType}}" name="dateStart" id="event-add-form-dateStart" value="{{datetime doc.start}}" />
           </label>
           <label class="w-33">
             End Date
-            <input type="{{dateType}}" name="dateEnd" id="event-add-form-dateEnd" />
+            <input type="{{dateType}}" name="dateEnd" id="event-add-form-dateEnd" value="{{datetime doc.end}}" />
           </label>
           <div class="styledSelect fullBlockMob w-33 margin-right-0">
             <label>Awareness Event</label>
-            <select name="awareness" id="event-add-form-awareness" >
-              <option value="">No</option>
-              <option value="day">Yes, Awareness Day</option>
-              <option value="month">Yes, Awareness Month</option>
+            <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
+              <option value="" {{selected "" doc.awareness}}>No</option>
+              <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
+              <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
             </select>
           </div>
         </fieldset>
@@ -125,32 +125,34 @@
           <h5>Location</h5>
           <label>
             Location Name
-            <input id="event-add-form-location-name" name="name" type="text" />
+            <input id="event-add-form-location-name" name="name" type="text" value="{{doc.location.name}}" />
           </label>
           <label>
             Location Map URL
-            <input id="event-add-form-location-map-url" name="map-url" type="text" />
+            <input id="event-add-form-location-map-url" name="map-url" type="text" value="{{doc.location.mapUrl}}" />
           </label>
           <label>
             Webinar URL
-            <input id="event-add-form-location-webinar-url" name="webinar-url" type="text" />
+            <input id="event-add-form-location-webinar-url" name="webinar-url" type="text" value="{{doc.location.webinarUrl}}" />
           </label>
         </fieldset>
         <hr />
         <fieldset>
           <h5>Pricing</h5>
-          <div class="event-price-tier">
-            <label class="w-75">
-              Tier Description
-              <input id="event-add-form-tier-desc-{{id}}" name="tier-desc-{{id}}" type="text" class="description-inp" />
-            </label>
-            <label class="w-25">
-              Cost
-              <input id="event-add-form-cost-{{id}}" name="cost-{{id}}" type="number"  class="cost-inp" />
-            </label>
-          </div>
+          {{#each pricingItems}}
+            <div class="event-price-tier">
+              <label class="w-75">
+                Tier Description
+                <input type="text" class="description-inp" value="{{description}}" />
+              </label>
+              <label class="w-25">
+                Cost
+                <input type="number"  class="cost-inp" value="{{cost}}" />
+              </label>
+            </div>
+          {{/each}}
           <div class="clear-both">
-            <button id="admin-btn-event-add-pricing-tier" class="fa add resource add-item-btn">&#xf067; Add Pricing Tier</button>
+            <button type="button" id="admin-btn-event-add-pricing-tier" class="fa add resource add-item-btn">&#xf067; Add Pricing Tier</button>
           </div>
         </fieldset>
         <hr />
@@ -158,7 +160,7 @@
           <h5>Registration</h5>
           <div>
             <div class="toggleSwitch">
-              <input type="checkbox" name="library-add-form-keywords" id="event-add-form-registration-required">
+              <input type="checkbox" name="library-add-form-keywords" id="event-add-form-registration-required" {{checked doc.registration.required}}>
               <label for="event-add-form-registration-required" role="checkbox"></label>
             </div>
             <label for="event-add-form-registration-required" class="toggleSwitchLabel">
@@ -170,29 +172,31 @@
             <input id="event-add-form-registration-external-url" name="webinar-url" type="text" />
           </label>
           <h5>Registration Fields</h5>
-          <div class="event-registration-item">
-            <label class="w-75">
-              Field Name
-              <input id="event-add-form-field-name-{{id}}" name="tier-field-name-{{id}}" type="text" class="field-name-inp" />
-            </label>
-            <div class="styledSelect fullBlockMob w-25">
-              <label>Field Type</label>
-              <select name="field-type" id="event-add-form-field-type-{{id}}" class="field-type-inp">
-                <option value="text">text</option>
-                <option value="email">email</option>
-                <option value="yes/no">yes/no</option>
-                <option value="date">date</option>
-                <option value="color">color</option>
-                <option value="textarea">textarea</option>
-              </select>
+          {{#each registrationItems}}
+            <div class="event-registration-item">
+              <label class="w-75">
+                Field Name
+                <input type="text" class="field-name-inp" value="{{name}}" />
+              </label>
+              <div class="styledSelect fullBlockMob w-25">
+                <label>Field Type</label>
+                <select name="field-type" class="field-type-inp">
+                  <option value="text" {{selected "text" type}}>text</option>
+                  <option value="email" {{selected "email" type}}>email</option>
+                  <option value="yes/no" {{selected "yes/no" type}}>yes/no</option>
+                  <option value="date" {{selected "date" type}}>date</option>
+                  <option value="color" {{selected "color" type}}>color</option>
+                  <option value="textarea" {{selected "textarea" type}}>textarea</option>
+                </select>
+              </div>
             </div>
-          </div>
+          {{/each}}
           <div class="clear-both">
-            <button id="admin-btn-event-add-pricing-tier" class="fa add resource add-item-btn">&#xf067; Add Pricing Tier</button>
+            <button type="button" id="admin-btn-event-add-registration-item" class="fa add resource add-item-btn">&#xf067; Add Registration Item</button>
           </div>
         </fieldset>
         <hr />
-        <input type="submit" class="btn" value="Create Event" />
+        <input type="submit" class="btn" value="{{formType}} Event" />
       </form>
     </div>
   </section>
