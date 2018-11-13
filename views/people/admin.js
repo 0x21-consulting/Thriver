@@ -60,30 +60,24 @@ Template.addPersonForm.events({
   /**
    * @summary Add Person Form Submission
    * @method
-   *   @param {$.Event} event
+   *   @param {$.Event} ev
    */
   'submit form.admin-form-person-add': (event) => {
     event.preventDefault();
     /**
      * @summary Use Before addPerson forms submission to upload image and convert to base64
      * @method
-     *   @param {Object} document - Document to alter
+     *   @param {Element} form - The HTML form
+     *   @param {Function} cb - Callback function
      */
-    const boardImg = (form) => {
-      // Scope for async reader load event function
-      const that = this;
-      const doc = document;
+    const readAvatar = (form, cb) => {
+      let picture = '';
 
-      return undefined;
-
-      // Return undefined if not provided
-      if (!form.querySelectorAll('input[type="file"]').length > 0) return undefined;
       // Get file
-      let file = form.querySelectorAll('input[type="file"]')[0];
+      let file = form.querySelector('input[type="file"]');
       [file] = file.files;
 
-      // If there's no file, there's nothing to do here
-      if (!(file instanceof File)) return undefined;
+      if (!file) return cb();
 
       // Read in the file
       const reader = new FileReader();
@@ -91,13 +85,15 @@ Template.addPersonForm.events({
       /**
        * @summary Read in file and convert to base64
        * @method
-       *   @param {Event} event
+       *   @param {Event} ev
        */
       (function (mimeType) { // eslint-disable-line func-names
-        return reader.addEventListener('load', () => {
+        return reader.addEventListener('load', (ev) => {
           // Unsigned, 8-bit integer Array
           // event.target.result is of type ArrayBuffer
-          const view = new Uint8Array(event.target.result);
+          const view = new Uint8Array(ev.target.result);
+          console.log(`Image size: ${view.byteLength}`);
+          console.log(ev.target);
 
           // Base 64 possible characters
           const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -153,43 +149,42 @@ Template.addPersonForm.events({
           }
 
           // Set picture right
-          doc.picture = string;
+          picture = string;
 
           // Let form submit continue asynchronously
-          that.result(doc);
+          cb(picture);
         });
       }(file.type));
 
       // Read in file as an Array Buffer
       reader.readAsArrayBuffer(file);
 
-      // Return file
-      return doc.picture;
+      return undefined;
     };
 
     const form = event.delegateTarget.querySelectorAll('.admin-form-person-add')[0];
-    console.log(form);
-    const data = {
-      name: form.querySelectorAll('input[name=person-add-form-name]')[0].value,
-      title: form.querySelectorAll('input[name=person-add-form-title]')[0].value,
-      email: form.querySelectorAll('input[name=person-add-form-email]')[0].value,
-      boardMember: form.querySelectorAll('input[name=person-add-form-board-member]')[0].checked,
-      picture: boardImg(form),
+
+    const addPerson = (picture) => {
+      const data = {
+        name: form.querySelectorAll('input[name=person-add-form-name]')[0].value,
+        title: form.querySelectorAll('input[name=person-add-form-title]')[0].value,
+        email: form.querySelectorAll('input[name=person-add-form-email]')[0].value,
+        boardMember: form.querySelectorAll('input[name=person-add-form-board-member]')[0].checked,
+        picture,
+      };
+
+      // Insert subscriber into the collection
+      Meteor.call('addPerson', data, function(error) {
+        console.log('calling');
+        if (error) {
+          console.log(error.reason);
+        } else {
+          console.log('Subscription successful');
+          console.log(data);
+        }
+      });
     };
 
-    console.log(data);
-
-    // Insert subscriber into the collection
-    /*
-    Meteor.call('addPerson', data, function(error) {
-      console.log('calling');
-      if (error) {
-        console.log(error.reason);
-      } else {
-        console.log('Subscription successful');
-        console.log(data);
-      }
-    });
-    */
+    readAvatar(form, addPerson);
   },
 });
