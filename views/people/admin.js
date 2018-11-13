@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { AutoForm } from 'meteor/aldeed:autoform';
 
 /**
  * @summary Delete a person
@@ -28,7 +27,7 @@ const openForm = (event) => {
 
   // Show add form
   event.delegateTarget.querySelector('ul.clearfix').classList.add('hide');
-  event.delegateTarget.querySelector('aside.addPerson').classList.remove('hide');
+  event.delegateTarget.querySelector('.addPerson').classList.remove('hide');
 };
 
 /**
@@ -55,117 +54,137 @@ Template.board.events({ 'click aside.admin button.add': openForm });
 Template.staff.events({ 'click aside.addPerson button.close': closeForm });
 Template.board.events({ 'click aside.addPerson button.close': closeForm });
 
-/** Handle file upload and base64 encoding */
-AutoForm.addHooks(
-  ['addStaffPerson', 'addBoardPerson'],
-  {
-    before: {
+/** Add Person Forms */
+Template.addPersonForm.helpers({ formId: '0-1' });
+Template.addPersonForm.events({
+  /**
+   * @summary Add Person Form Submission
+   * @method
+   *   @param {$.Event} ev
+   */
+  'submit form.admin-form-person-add': (event) => {
+    event.preventDefault();
+    /**
+     * @summary Use Before addPerson forms submission to upload image and convert to base64
+     * @method
+     *   @param {Element} form - The HTML form
+     *   @param {Function} cb - Callback function
+     */
+    const readAvatar = (form, cb) => {
+      let picture = '';
+
+      // Get file
+      let file = form.querySelector('input[type="file"]');
+      [file] = file.files;
+
+      if (!file) return cb();
+
+      // Read in the file
+      const reader = new FileReader();
+
       /**
-       * @summary Use Before Hook on addPerson forms to upload image and convert to base64
+       * @summary Read in file and convert to base64
        * @method
-       *   @param {Object} document - Document to alter
+       *   @param {Event} ev
        */
-      method: function (document) { // eslint-disable-line object-shorthand,func-names
-        // Scope for async reader load event function
-        const that = this;
+      (function (mimeType) { // eslint-disable-line func-names
+        return reader.addEventListener('load', (ev) => {
+          // Unsigned, 8-bit integer Array
+          // event.target.result is of type ArrayBuffer
+          const view = new Uint8Array(ev.target.result);
+          console.log(`Image size: ${view.byteLength}`);
+          console.log(ev.target);
 
-        const doc = document;
+          // Base 64 possible characters
+          const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-        // Get file
-        let file = this.event.target.querySelector('input[type="file"]');
-        [file] = file.files;
+          // Base64 string representation of image
+          let string = `data:${mimeType};base64,`;
 
-        // If there's no file, there's nothing to do here
-        if (!(file instanceof File)) that.result(doc);
+          // Base64 works by breaking three bytes into four six-bit segments
+          // Each segment therefore must have a value between 0 and 64.
+          // That allows easy encoding using the base64 string above
+          for (let i = 0; i < view.byteLength; i += 3) {
+            /* eslint-disable no-bitwise */
 
-        else {
-          // Read in the file
-          const reader = new FileReader();
+            // First six bits (remove last two bits)
+            let segment = (view[i] & 0xFC) >> 2;
 
-          /**
-           * @summary Read in file and convert to base64
-           * @method
-           *   @param {Event} event
-           */
-          (function (mimeType) { // eslint-disable-line func-names
-            return reader.addEventListener('load', (event) => {
-              // Unsigned, 8-bit integer Array
-              // event.target.result is of type ArrayBuffer
-              const view = new Uint8Array(event.target.result);
+            // Encode
+            string += base64.charAt(segment);
 
-              // Base 64 possible characters
-              const base64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+            // Segment two (keep first nibble)
+            segment = (view[i] & 0x03) << 4;
 
-              // Base64 string representation of image
-              let string = `data:${mimeType};base64,`;
+            // If there are no more bytes because the array is exhausted,
+            // encode this nibble and output two markers
+            if (i + 1 >= view.byteLength) {
+              string += `${base64.charAt(segment)}==`;
+              break;
+            }
 
-              // Base64 works by breaking three bytes into four six-bit segments
-              // Each segment therefore must have a value between 0 and 64.
-              // That allows easy encoding using the base64 string above
-              for (let i = 0; i < view.byteLength; i += 3) {
-                /* eslint-disable no-bitwise */
+            // Add first nibble from second byte
+            segment |= (view[i + 1] & 0xF0) >> 4;
+            string += base64.charAt(segment);
 
-                // First six bits (remove last two bits)
-                let segment = (view[i] & 0xFC) >> 2;
+            // Segment three (last nibble of second byte)
+            segment = (view[i + 1] & 0x0F) << 2;
 
-                // Encode
-                string += base64.charAt(segment);
+            // If there are no more bytes because the array is exhausted,
+            // enocde this segment and output one marker
+            if (i + 2 >= view.byteLength) {
+              string += `${base64.charAt(segment)}=`;
+              break;
+            }
 
-                // Segment two (keep first nibble)
-                segment = (view[i] & 0x03) << 4;
+            // Complete segment with first two bits of third byte
+            segment |= (view[i + 2] & 0xC0) >> 6;
+            string += base64.charAt(segment);
 
-                // If there are no more bytes because the array is exhausted,
-                // encode this nibble and output two markers
-                if (i + 1 >= view.byteLength) {
-                  string += `${base64.charAt(segment)}==`;
-                  break;
-                }
+            // Final (fourth) segment using last six bits of third byte
+            segment = view[i + 2] & 0x3F;
+            string += base64.charAt(segment);
 
-                // Add first nibble from second byte
-                segment |= (view[i + 1] & 0xF0) >> 4;
-                string += base64.charAt(segment);
+            /* eslint-enable */
+          }
 
-                // Segment three (last nibble of second byte)
-                segment = (view[i + 1] & 0x0F) << 2;
+          // Set picture right
+          picture = string;
 
-                // If there are no more bytes because the array is exhausted,
-                // enocde this segment and output one marker
-                if (i + 2 >= view.byteLength) {
-                  string += `${base64.charAt(segment)}=`;
-                  break;
-                }
+          // Let form submit continue asynchronously
+          cb(picture);
+        });
+      }(file.type));
 
-                // Complete segment with first two bits of third byte
-                segment |= (view[i + 2] & 0xC0) >> 6;
-                string += base64.charAt(segment);
+      // Read in file as an Array Buffer
+      reader.readAsArrayBuffer(file);
 
-                // Final (fourth) segment using last six bits of third byte
-                segment = view[i + 2] & 0x3F;
-                string += base64.charAt(segment);
+      return undefined;
+    };
 
-                /* eslint-enable */
-              }
+    const form = event.delegateTarget.querySelectorAll('.admin-form-person-add')[0];
 
-              // Set picture right
-              doc.picture = string;
+    const addPerson = (picture) => {
+      const data = {
+        name: form.querySelectorAll('input[name=person-add-form-name]')[0].value,
+        title: form.querySelectorAll('input[name=person-add-form-title]')[0].value,
+        email: form.querySelectorAll('input[name=person-add-form-email]')[0].value,
+        boardMember: form.querySelectorAll('input[name=person-add-form-board-member]')[0].checked,
+        picture,
+      };
 
-              // Let form submit continue asynchronously
-              that.result(doc);
-            });
-          }(file.type));
-
-          // Read in file as an Array Buffer
-          reader.readAsArrayBuffer(file);
+      // Insert subscriber into the collection
+      Meteor.call('addPerson', data, function(error) {
+        console.log('calling');
+        if (error) {
+          console.log(error.reason);
+        } else {
+          console.log('Subscription successful');
+          console.log(data);
         }
-      },
-    },
-    after: {
-      /** Close form after submission */
-      method: function () { // eslint-disable-line object-shorthand,func-names
-        // Can't use lambda expression because of `this` context
-        const button = this.event.target.parentElement.querySelector('button.close');
-        if (button instanceof Element) button.click();
-      },
-    },
+      });
+    };
+
+    readAvatar(form, addPerson);
   },
-);
+});

@@ -212,13 +212,13 @@ aside.adminAside {
   input[type=date]{
     height: 18px;
   }
-  #main .mainSection &{
+  .main &{
     max-width: none;
     background: #fff;
     padding: 40px 55px;
-    h4, button.close, select{ color: @black; }
+    h4, button.close, select, button.add.exit{ color: @black; }
     input[type=submit], button[type=submit], button{ color: #fff; font-weight:bold;}
-}
+  }
 }
 .admin-form-details{
   clear: both;
@@ -245,4 +245,8 @@ aside.adminAside {
     display: block;
   }
   textarea{ max-height: 250px; }
+
+  .main &{
+    color: #062031;
+  }
 }

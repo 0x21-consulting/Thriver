@@ -5,6 +5,15 @@ section.providers{
     z-index: 1;
     position: relative;
     label{display: block}
+    .provider-admin-form-container{
+        max-width:700px;
+        margin: 40px auto 100px auto;
+        textarea[name=address]{ height: 53px; }
+        form { .formColors(@gray, desaturate(darken(@gray,50%),25%), @teal,@blueGrayLight,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
+        .toggle-list-container{
+            columns: 3;
+        }
+    }
     article.details{
         width: 700px;
         background: @navy;
@@ -574,10 +583,6 @@ section.addProvider header button.close {
     background: @teal;
 }
 #providerForm {
-    padding: 10px 0 0 10px;
-    height: 600px;
-    overflow-y: auto;
-
     div.af-checkbox-group {
         columns: 3;
     }

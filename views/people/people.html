@@ -1,101 +1,131 @@
+<!-- TODO: Render same form in board of directors body copy area. -->
 <template name="who">
-    <section class="who" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#if isAdmin}}
-            {{> sectionAdmin}}
-        {{/if}}
-        <div class="containerSmall">
-            <header>
-                <h1>{{headline}}</h1>
-                <p>WCASA is a membership agency comprised of organizations
-                  <br>working to end sexual violence in Wisconsin. WCASA
-                  <br>is made up of its staff, board, volunteers, and {{count}}
-                  <br>sexual assault service provider agencies.
-                </p>
-            </header>
-            <div class="shadow-box container">
-                <div class="tab-box">
-                    {{#each sections}}
-                        {{> tabs}}
-                    {{/each}}
-                </div>
-            </div>
+  <section class="who" id="{{anchor name=name}}" data-id="{{_id}}">
+    {{#if isAdmin}}
+      {{> sectionAdmin}}
+    {{/if}}
+    <div class="containerSmall">
+      <header>
+        <h1>{{headline}}</h1>
+        <p>WCASA is a membership agency comprised of organizations
+          <br>working to end sexual violence in Wisconsin. WCASA
+          <br>is made up of its staff, board, volunteers, and {{count}}
+          <br>sexual assault service provider agencies.
+        </p>
+      </header>
+      <div class="shadow-box container">
+        <div class="tab-box">
+          {{#each sections}}
+            {{> tabs}}
+          {{/each}}
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <template name="staff">
-    <h2>The WCASA Staff</h2>
-    {{#if isAdmin}}
-        <aside class="admin">
-            <button class="fa add">&#xf067;</button>
-        </aside>
-    {{/if}}
-    <ul class="clearfix">
-        {{#each staff}}
-            {{> personStaff}}
-        {{/each}}
-    </ul>
-    {{#if isAdmin}}
-        <aside class="addPerson hide">
-            <button class="fa close">&#xf057; Close</button>
-            {{> quickForm collection=people id="addStaffPerson" type="method"
-                omitFields="_id" meteormethod="addPerson" }}
-        </aside>
-    {{/if}}
+  <h2>The WCASA Staff</h2>
+  {{#if isAdmin}}
+    <aside class="admin">
+      <button class="fa add" title="Add a person">&#xf067; Add Person</button>
+    </aside>
+    <aside id="addPersonFormContainer" class="addPerson hide">
+      {{> addPersonForm '1'}}
+    </aside>
+  {{/if}}
+  <ul class="clearfix">
+    {{#each staff}}
+      {{> personStaff}}
+    {{/each}}
+  </ul>
 </template>
 
 <template name="board">
-    <h2>Board of Directors</h2>
-    {{#if isAdmin}}
-        <aside class="admin">
-            <button class="fa add" title="Add a person">&#xf067;</button>
-        </aside>
-    {{/if}}
-    <ul class="clearfix">
-        {{#each board}}
-            {{> personBoard}}
-        {{/each}}
-    </ul>
-    {{#if isAdmin}}
-        <aside class="addPerson hide">
-            <button class="fa close">&#xf057; Close</button>
-            {{> quickForm collection=people id="addBoardPerson" type="method"
-                omitFields="_id" meteormethod="addPerson" }}
-        </aside>
-    {{/if}}
+  <h2>Board of Directors</h2>
+  {{#if isAdmin}}
+    <aside class="admin">
+      <button class="fa add" title="Add a person">&#xf067; Add Person</button>
+    </aside>
+    <aside id="addPersonFormContainer" class="addPerson hide">
+      {{> addPersonForm '2'}}
+    </aside>
+  {{/if}}
+  <ul class="clearfix">
+    {{#each board}}
+      {{> personBoard}}
+    {{/each}}
+  </ul>
 </template>
 
 <template name="personStaff">
-    <li data-id="{{_id}}">
-        {{#if picture}}
-            <img src="{{picture}}" alt="{{name}}" />
-        {{else}}
-            <img src="/packages/wcasa_who-we-are/lib/client/avatar.jpg" alt="{{name}}" />
-        {{/if}}
-        <div class="details">
-            <h4>{{name}}</h4>
-            <h5>{{title}}</h5>
-            <a href="mailto:{{email}}">{{email}}</a>
-        </div>
-        {{#if isAdmin}}
-            <aside class="admin">
-                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
-            </aside>
-        {{/if}}
-    </li>
+  <li data-id="{{_id}}">
+    {{#if picture}}
+      <img src="{{picture}}" alt="{{name}}" />
+    {{else}}
+      <img src="/avatar.jpg" alt="{{name}}" />
+    {{/if}}
+    <div class="details">
+      <h4>{{name}}</h4>
+      <h5>{{title}}</h5>
+      <a href="mailto:{{email}}">{{email}}</a>
+    </div>
+    {{#if isAdmin}}
+      <aside class="admin">
+        <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+      </aside>
+    {{/if}}
+  </li>
 </template>
 
 <template name="personBoard">
-    <li data-id="{{_id}}">
-        <div class="details">
-            <h4>{{name}}</h4>
-            <h5>{{title}}</h5>
-            <a href="mailto:{{email}}">{{email}}</a>
+  <li data-id="{{_id}}">
+    <div class="details">
+      <h4>{{name}}</h4>
+      <h5>{{title}}</h5>
+      <a href="mailto:{{email}}">{{email}}</a>
+    </div>
+    {{#if isAdmin}}
+      <aside class="admin">
+        <button class="fa delete" title="Delete this person">&#xf1f8;</button>
+      </aside>
+    {{/if}}
+  </li>
+</template>
+
+<template name="addPersonForm">
+  <section id="admin-form-container-person-add-{{this}}" class="admin-form-container">
+    <div class="form-container">
+      <h4>Add Person</h4>
+      <button class="fa add exit close">&#xf00d;</button>
+      <form id="admin-form-resource-add-{{this}}" class="persons-form admin-form-person-add">
+        <label>
+          Name and Credentials
+          <input type="text" name="person-add-form-name" />
+        </label>
+        <label class="w-50">
+          Title
+          <input type="text" name="person-add-form-title" />
+        </label>
+        <label class="w-50 margin-right-0">
+          Email
+          <input type="text" name="person-add-form-email" />
+        </label>
+        <label class="w-50">
+          Picture
+          <input type="file" name="person-add-form-picture" />
+        </label>
+        <div class="w-50">
+          <div class="toggleSwitch">
+            <input type="checkbox" name="person-add-form-board-member" id="person-add-form-board-member-{{this}}">
+            <label for="person-add-form-board-member-{{this}}" role="checkbox"></label>
+          </div>
+          <label for="person-add-form-board-member-{{this}}" class="toggleSwitchLabel">
+            Is this person a Board Member?
+          </label>
         </div>
-        {{#if isAdmin}}
-            <aside class="admin">
-                <button class="fa delete" title="Delete this person">&#xf1f8;</button>
-            </aside>
-        {{/if}}
-    </li>
+        <input type="submit" class="btn btn-primary" value="Add Person" />        
+      </form>
+    </div>
+  </section>
 </template>

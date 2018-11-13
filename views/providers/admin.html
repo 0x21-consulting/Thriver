@@ -1,10 +1,157 @@
 <template name="addProvider">
-    <section class="hide addProvider">
-        <header>
-            <h2>Add a Provider</h2>
-            <button class="fa close">&#xf057; Close</button>
-        </header>
-        {{> quickForm collection=providers id="providerForm" 
-            meteormethod=method type="method" doc=doc }}
-    </section>
+  <section class="hide addProvider">
+    {{> addProviderForm}}
+  </section>
+</template>
+
+<template name="addProviderForm">
+  <section id="admin-form-container-provider-add" class="admin-form-container provider-admin-form-container">
+    <div class="form-container">
+      <h4>Add Service Provider</h4>
+      <button class="fa add exit close">&#xf00d;</button>
+      <form id="admin-form-provider-add">
+        <label>
+          Name
+          <input type="text" name="name" id="provider-add-form-name" value="{{doc.name}}" required />
+        </label>
+        <label class="w-66">
+          Address
+          <textarea rows="2" name="address" id="provider-add-form-address" required>{{doc.address}}</textarea>
+        </label>
+        <div class="styledSelect fullBlockMob w-33 margin-right-0">
+          <label>Parent Location</label>
+          <select name="parent-location" id="resources-add-form-type">
+            <option name="none" value="">None</option>
+            {{#each providers}}
+              <option value="{{value}}">{{label}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <h5 class="clear-both">Coordinates</h5>
+        <label class="w-50">
+          Longitude
+          <input type="number" min="-92.883" max="-86.768" name="longitude" value="{{doc.coordinates.lon}}" required />
+        </label>
+        <label class="w-50 margin-right-0">
+          Latitude
+          <input type="number" min="42.6" max="47.083" name="latitude" value="{{doc.coordinates.lat}}" required />
+        </label>
+        <hr />
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Counties Served <i class="fas fa-caret-right"></i>
+          </summary>
+          <div class="toggle-list-container">
+            {{#each counties}}
+              <div>
+                <div class="toggleSwitch">
+                  <input type="checkbox" name="provider-add-form-county" value="{{this}}" id="provider-county-id-{{simpleString this}}">
+                  <label for="provider-county-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>
+                </div>
+                <label for="provider-county-id-{{simpleString this}}" class="toggleSwitchLabel">
+                  {{this}}
+                </label>
+              </div>
+            {{/each}}
+          </div>
+          <hr />
+        </details>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Phone Lines <i class="fas fa-caret-right"></i>
+          </summary>
+          {{#each phones}}                                        
+            <div class="provider-number-item">
+              <label class="w-25">
+                Number
+                <input type="text" class="number-inp" value="{{number}}" />
+              </label>
+              <label class="w-25">
+                Ext
+                <input type="text" class="number-ext-inp" value="{{ext}}" />
+              </label>
+              <label class="w-25">
+                Description
+                <input type="text" class="number-desc-inp" value="{{description}}" />
+              </label>
+              <div class="w-25">
+                <div class="toggleSwitch">
+                  <input type="checkbox" name="provider-add-form-tty" id="provider-add-form-tty-{{@index}}" {{checked tty}}>
+                  <label for="provider-add-form-tty-{{@index}}" role="checkbox"></label>
+                </div>
+                <label for="provider-add-form-tty-{{@index}}}" class="toggleSwitchLabel">
+                  TTY-Enabled
+                </label>
+              </div>
+            </div>
+          {{/each}}
+          <div class="clear-both">
+            <button id="admin-btn-provider-add-number" class="fa add resource add-item-btn">&#xf067; Add Line</button>
+          </div>
+          <hr />
+        </details>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Crisis Lines <i class="fas fa-caret-right"></i>
+          </summary>
+          <label class="w-50">
+            Number
+            <input type="text" name="crisis-number" value="{{doc.crisis.number}}" required />
+          </label>
+          <label class="w-25">
+            Ext
+            <input type="text" name="crisis-ext" value="{{doc.crisis.ext}}" required />
+          </label>
+          <div class="w-25">
+            <div class="toggleSwitch">
+              <input type="checkbox" id="provider-add-form-crisis-tty" name="crisis-tty" {{checked doc.crisis.tty}}>
+              <label for="provider-add-form-crisis-tty" role="checkbox"></label>
+            </div>
+            <label for="provider-add-form-crisis-tty" class="toggleSwitchLabel">
+              TTY-Enabled
+            </label>
+          </div>
+        </details>
+        <details aria-expanded="false" class="admin-form-details">
+          <summary>
+            Email Addresses <i class="fas fa-caret-right"></i>
+          </summary>
+          {{#each emails}}
+            <div class="provider-email-item">
+              <label class="w-50">
+                Email
+                <input type="email" class="email-inp" value="{{address}}" />
+              </label>
+              <label class="w-50">
+                Description
+                <input type="text" class="email-desc-inp" value="{{description}}" />
+              </label>
+            </div>
+          {{/each}}
+          <div class="clear-both">
+            <button id="admin-btn-provider-add-email" class="fa add resource add-item-btn">&#xf067; Add Email Address</button>
+          </div>
+          <hr />
+        </details>
+        <label>
+          Notes
+          <textarea rows="5" name="notes">{{doc.notes}}</textarea>
+        </label>
+        <h5 class="clear-both">External Links</h5>
+        <label class="w-33">
+          Website
+          <input type="text" name="website-url" value="{{doc.website}}" />
+        </label>
+        <label class="w-33 margin-right-0">
+          Facebook
+          <input type="text" name="facebook-url" value="{{doc.facebook}}" />
+        </label>
+        <label class="w-33 margin-right-0">
+          Twitter
+          <input type="text" name="twitter-url" value="{{doc.twitter}}" />
+        </label>
+        <input type="submit" class="btn btn-primary" value="Add Service Provider" />        
+      </form>
+    </div>
+  </section>
 </template>

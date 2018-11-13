@@ -8,26 +8,130 @@ import './admin.html';
 Providers.formMethod = new ReactiveVar('addProvider');
 const activeProvider = new ReactiveVar();
 
+const phones = new ReactiveVar(new Map());
+const emails = new ReactiveVar(new Map());
+
 /**
  * @summary Close Provider Add/Update Admin Form
  * @method
  *   @param {$.Event} event
  */
-const closeForm = (event) => {
+const closeForm = () => {
   // Close add Provider Form
-  event.delegateTarget.querySelector('section.addProvider').classList.add('hide');
+  document.querySelector('.providers section.addProvider').classList.add('hide');
 
   // Show inner again
-  event.delegateTarget.querySelector('div.inner').classList.remove('hide');
+  document.querySelector('.providers .mapTool').classList.remove('hide');
 };
 
 /** Admin events */
-Template.addProvider.events({
+Template.addProviderForm.events({
   /**
    * @summary Close Form
    */
   'click button.close': closeForm,
-  'submit #providerForm': closeForm,
+
+  /**
+   * @summary Add Provider Form Submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#admin-form-provider-add': (event) => {
+    event.preventDefault();
+    closeForm();
+
+    const getCounties = (checkboxesName) => {
+      const checkboxes = document.getElementsByName(checkboxesName);
+      const checkboxesChecked = [];
+      for (let i = 0; i < checkboxes.length; i += 1) {
+        if (checkboxes[i].checked) checkboxesChecked.push(checkboxes[i].value);
+      }
+      return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    };
+
+    const getPhones = () => {
+      const items = document.querySelectorAll('.provider-number-item');
+      const arr = [];
+      for (let i = 0; i < items.length; i += 1) {
+        const obj = {
+          number: items[i].querySelector('.number-inp').value,
+          ext: Number(items[i].querySelector('.number-ext-inp').value),
+          description: items[i].querySelector('.number-desc-inp').value,
+          tty: items[i].querySelector('[name="provider-add-form-tty"]').checked,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    const getEmails = () => {
+      const items = document.querySelectorAll('.provider-email-item');
+      const arr = [];
+      for (let i = 0; i < items.length; i += 1) {
+        const obj = {
+          address: items[i].querySelector('.email-inp').value,
+          description: items[i].querySelector('.email-desc-inp').value,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    const form = document.getElementById('admin-form-provider-add');
+
+    const data = {
+      name: form.querySelector('input[name=name]').value,
+      counties: getCounties('provider-add-form-county'),
+      address: form.querySelector('textarea[name=address]').value,
+      coordinates: {
+        lat: Number(form.querySelector('input[name=latitude]').value),
+        lon: Number(form.querySelector('input[name=longitude]').value),
+      },
+      phones: getPhones(), // array of objs
+      crisis: {
+        number: form.querySelector('input[name=crisis-number]').value,
+        tty: form.querySelector('input[name=crisis-tty]').checked, // bool
+        ext: Number(form.querySelector('input[name=crisis-ext]').value), // num
+      },
+      emails: getEmails(), // array of objs
+      website: form.querySelector('input[name=website-url]').value,
+      facebook: form.querySelector('input[name=facebook-url]').value,
+      twitter: form.querySelector('input[name=twitter-url]').value,
+      notes: form.querySelector('textarea[name=notes]').value,
+      parent: form.querySelector('select[name=parent-location]').value,
+    };
+
+    console.log(data);
+
+    // Insert subscriber into the collection
+    Meteor.call('addProvider', data, function(error, results) {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(results);
+      }
+    });
+  },
+});
+
+Template.addProviderForm.helpers({
+  counties: [
+    'Adams', 'Ashland', 'Barron', 'Bayfield', 'Brown',
+    'Buffalo', 'Burnett', 'Calumet', 'Chippewa', 'Clark',
+    'Columbia', 'Crawford', 'Dane', 'Dodge', 'Door',
+    'Douglas', 'Dunn', 'Eau Claire', 'Florence', 'Fond Du Lac',
+    'Forest', 'Grant', 'Green', 'Green Lake', 'Iowa',
+    'Iron', 'Jackson', 'Jefferson', 'Juneau', 'Kenosha',
+    'Kewaunee', 'La Crosse', 'Lafayette', 'Langlade', 'Lincoln',
+    'Manitowoc', 'Marathon', 'Marinette', 'Marquette', 'Menominee',
+    'Milwaukee', 'Monroe', 'Oconto', 'Oneida', 'Outagamie',
+    'Ozaukee', 'Pepin', 'Pierce', 'Polk', 'Portage',
+    'Price', 'Racine', 'Richland', 'Rock', 'Rusk',
+    'Saint Croix', 'Sauk', 'Sawyer', 'Shawano', 'Sheboygan',
+    'Taylor', 'Trempealeau', 'Vernon', 'Vilas', 'Walworth',
+    'Washburn', 'Washington', 'Waukesha', 'Waupaca', 'Waushara',
+    'Winnebago', 'Wood',
+  ],
 });
 
 /** Providers template events */
@@ -47,17 +151,17 @@ Template.providers.events({
     const popout = event.target.parentElement.parentElement.parentElement;
     const form = event.target.parentElement.parentElement.parentElement
       .querySelector('section.addProvider');
-    const inner = event.target.parentElement.parentElement.parentElement
-      .querySelector('.inner');
+    const mapTool = event.target.parentElement.parentElement.parentElement
+      .querySelector('.mapTool');
 
     if (popout instanceof Element) popout.classList.remove('full-view');
     if (form instanceof Element) form.classList.remove('hide');
-    if (inner instanceof Element) inner.classList.add('hide');
+    if (mapTool instanceof Element) mapTool.classList.add('hide');
   },
 });
 
 /** Admin Helpers */
-Template.addProvider.helpers({
+Template.addProviderForm.helpers({
   /**
    * @summary Meteor Method to call on submit
    * @function
@@ -77,7 +181,13 @@ Template.addProvider.helpers({
    * @function
    * @returns {Mongo.Collection}
    */
-  providers: () => Providers.collection,
+  providers: () => Providers.collection.find()
+    .map(provider => ({ label: provider.name, value: provider._id })),
+
+  phones: () => Array.from(phones.get().values()),
+  emails: () => Array.from(emails.get().values()),
+
+  checked: value => (value ? 'checked' : ''),
 });
 
 /** Admin events for provider popout */
@@ -108,7 +218,7 @@ Template.provider.events({
    *   @param {$.Event} event
    */
   'click .adminControls .delete': () => {
-    if (window.confirm('Are you sure you want to delete this provicer?')) {
+    if (window.confirm('Are you sure you want to delete this provider?')) {
       Meteor.call('deleteProvider', Providers.active.get()._id);
 
       // Close side pane and show whole map
