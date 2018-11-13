@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Email } from 'meteor/email';
 import StripeConstructor from 'stripe';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import Settings from '/logic/core/settings';
 
 let stripe;
@@ -23,7 +23,7 @@ Meteor.methods({
    */
   async pay(token, metadata) {
     check(token, Object);
-    check(metadata, Object);
+    check(metadata, Match.Maybe(Object));
 
     const { id, amount, description } = token;
 

@@ -367,6 +367,7 @@ Meteor.users.attachSchema(Accounts.schema.user);
 // Indexes
 if (Meteor.isServer) {
   Meteor.users.rawCollection().createIndex({ 'payments.description': 1 });
+  Meteor.users.rawCollection().createIndex({ 'payments.metadata.event_id': 1 });
 }
 
 export { Notifications, Accounts };
