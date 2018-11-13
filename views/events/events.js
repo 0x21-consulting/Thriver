@@ -395,6 +395,7 @@ Template.eventSlide.events({
         name: eventData.name,
         description: eventData.description,
         cost: attributes['cost-tier'],
+        id: eventData._id,
         callback: () => {
           Meteor.call('registerEvent', form.parentElement.dataset.id, attributes);
 

@@ -160,8 +160,19 @@ Template.donate.events({
       token.amount = amount.get() * 100;
       token.description = 'WCASA Donation';
 
+      const user = Meteor.user();
+      const metadata = {};
+
+      if (user) {
+        metadata.user_id = Meteor.userId();
+        metadata.user_name = `${user.profile.firstname} ${user.profile.lastname}`;
+        metadata.user_email = user.emails[0].address;
+      } else {
+        metadata.name = event.target.querySelector('[name="name"]').value;
+      }
+
       // Send token to server
-      Meteor.call('pay', token, (err, result) => {
+      Meteor.call('pay', token, metadata, (err, result) => {
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('donate-card-errors');

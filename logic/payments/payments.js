@@ -19,9 +19,11 @@ Meteor.methods({
   /**
    * @summary Create a Stripe payment
    * @param {object} token - The payment token
+   * @param {object} metadata - Metadata to store with Stripe
    */
-  async pay(token) {
+  async pay(token, metadata) {
     check(token, Object);
+    check(metadata, Object);
 
     const { id, amount, description } = token;
 
@@ -30,6 +32,7 @@ Meteor.methods({
       currency: 'usd',
       description,
       source: id,
+      metadata,
     });
 
     if (result.status === 'succeeded' && this.userId) {

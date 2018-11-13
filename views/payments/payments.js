@@ -30,6 +30,15 @@ Template.payments.onRendered(() => {
 Template.payments.helpers({
   amountTitle: 'Registration Price',
   detailsTitle: 'Payment Details',
+  name: () => {
+    const user = Meteor.user();
+
+    // Just return name of logged in user
+    if (user && user.profile) return `${user.profile.firstname} ${user.profile.lastname}`;
+
+    // Otherwise
+    return '';
+  },
   states: () => [{
     id: 'paymentsDefault',
     content: `<h3 class="title">${paymentDetails.get().name}</h3><p>${paymentDetails.get().description}</p>`,
@@ -109,8 +118,17 @@ Template.payments.events({
       token.amount = paymentDetails.get().cost * 100;
       token.description = `WCASA ${paymentDetails.get().name}`;
 
+      const user = Meteor.user();
+      const metadata = {
+        event_id: paymentDetails.get().id,
+        event_name: paymentDetails.get().name,
+        user_id: Meteor.userId(),
+        user_name: `${user.profile.firstname} ${user.profile.lastname}`,
+        user_email: user.emails[0].address,
+      };
+
       // Send token to server
-      Meteor.call('pay', token, (err, result) => {
+      Meteor.call('pay', token, metadata, (err, result) => {
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('pay-card-errors');
