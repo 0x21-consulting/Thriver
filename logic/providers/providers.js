@@ -37,9 +37,9 @@ Meteor.methods({
     const newProvider = provider;
 
     // Perform Insert
-    Providers.collection.insert(newProvider, (error) => {
-      if (error) throw new Meteor.Error(error);
-    });
+    const result = Providers.collection.insert(newProvider);
+
+    return result;
   },
 
   /**
@@ -55,15 +55,15 @@ Meteor.methods({
     check(provider, String);
 
     // Perform update
-    Providers.collection.remove({ _id: provider }, (error) => {
-      if (error) throw new Meteor.Error(error);
-    });
+    const result = Providers.collection.remove({ _id: provider });
+
+    return result;
   },
 
   /**
    * @summary Update a Provider
    * @method
-   *   @param {Object} provicer - Provider to modify
+   *   @param {Object} provider - Provider to modify
    */
   updateProvider: (provider) => {
     // Check authorization
@@ -73,12 +73,11 @@ Meteor.methods({
     check(provider, Object);
 
     // Perform update
-    Providers.collection.update(
+    const result = Providers.collection.update(
       { _id: provider._id },
       { $set: provider },
-      (error) => {
-        if (error) throw new Meteor.Error(error);
-      },
     );
+
+    return result;
   },
 });
