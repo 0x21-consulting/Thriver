@@ -147,10 +147,12 @@ Template.donate.events({
   'submit form': async (event) => {
     event.preventDefault();
 
+    // Disable submit button
+    const submit = event.target.querySelector('[type="submit"]');
+    submit.disabled = true;
+
     // Create token
     const { token, error } = await stripe.createToken(card);
-
-    console.log(token);
 
     if (error) {
       // Inform the customer that there was an error.
@@ -172,7 +174,7 @@ Template.donate.events({
       }
 
       // Send token to server
-      Meteor.call('pay', token, metadata, (err, result) => {
+      Meteor.call('pay', token, metadata, (err) => {
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('donate-card-errors');
@@ -180,8 +182,9 @@ Template.donate.events({
         } else {
           document.querySelector('#donateDefault').classList.add('hide');
           document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
-          console.log(result);
+          document.querySelector('#donateForm').classList.add('hide');
         }
+        submit.removeAttribute('disabled');
       });
     }
   },

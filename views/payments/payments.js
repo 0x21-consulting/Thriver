@@ -105,10 +105,12 @@ Template.payments.events({
   async 'submit #paymentForm'(event) {
     event.preventDefault();
 
+    // Disable submit button
+    const submit = event.target.querySelector('[type="submit"]');
+    submit.disabled = true;
+
     // Create token
     const { token, error } = await stripe.createToken(card);
-
-    console.log(token);
 
     if (error) {
       // Inform the customer that there was an error.
@@ -128,16 +130,16 @@ Template.payments.events({
       };
 
       // Send token to server
-      Meteor.call('pay', token, metadata, (err, result) => {
+      Meteor.call('pay', token, metadata, (err) => {
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('pay-card-errors');
           errorElement.textContent = error.message;
         } else {
           // success
-          console.log(result);
           paymentDetails.get().callback();
         }
+        submit.removeAttribute('disabled');
       });
     }
   },
