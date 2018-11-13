@@ -1,23 +1,65 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
+import Settings from '/logic/core/settings';
 
 import './donate.html';
 
+const amount = new ReactiveVar(100);
+let stripe;
+let elements;
+let card;
+let paymentRequest;
+
 /**
- * @summary Donate form validation and error handling
- * @method
- *   @param {Element} element - The element to target
- *   @param {string}  message - The message to display to user
+ * Create a payment request for Apple Pay, Google Pay, and
+ * Microsoft Pay given an amount in dollars
  */
-const donateException = (element, message) => {
-  // No check on element because of old browser compatibility
+const createPaymentRequest = () => {
+  paymentRequest = stripe.paymentRequest({
+    country: 'US',
+    currency: 'usd',
+    total: {
+      label: 'Donation',
+      amount: amount.get() * 100,
+    },
+    requestPayerName: true,
+    requestPayerEmail: true,
+  });
 
-  const elem = element;
+  const prButton = elements.create('paymentRequestButton', { paymentRequest });
 
-  // Add error state to element
-  elem.classList.add('error');
-  elem.parentElement.dataset.error = `${message}`; // coercion to string
+  (async () => {
+    // Check the availability of the Payment Request API
+    const result = await paymentRequest.canMakePayment();
+    if (result) prButton.mount('#donate-payment-request-button');
+    else document.querySelector('#donate-payment-request-button').classList.add('hide');
+  })();
+
+  // Handle tokenization and send to server
+  paymentRequest.on('token', async (event) => {
+    console.log(event.token);
+    Meteor.call('pay', event.token);
+  });
 };
+
+// Populate form
+Template.donate.onRendered(() => {
+  stripe = window.Stripe(Settings.get('stripePublicKey'));
+  elements = stripe.elements();
+
+  // Create credit card form elements
+  card = elements.create('card');
+  card.mount('#donate-card-element');
+  card.addEventListener('change', ({ error }) => {
+    const displayError = document.getElementById('donate-card-errors');
+    if (error) displayError.textContent = error.message;
+    else displayError.textContent = '';
+  });
+
+  // Support for Apple Pay, Google Pay, Microsoft Pay, etc.
+  createPaymentRequest(amount.get());
+});
 
 // Donate form helpers
 Template.donate.helpers({
@@ -56,210 +98,94 @@ Template.donate.helpers({
     // Otherwise
     return '';
   },
-
-  year: () => {
-    // Just display this and the next ten years
-    const years = [];
-    const thisYear = new Date().getUTCFullYear();
-
-    for (let i = 0; i < 10; i += 1) years.push(thisYear + i);
-
-    return years;
-  },
 });
 
 // Donate form events
 Template.donate.events({
+  /**
+   * Clicking a donation amount should update amount to authorize
+   * @param {$.Event} event
+   */
+  'click form [name="amount"]'(event) {
+    if (event.target.value !== 'custom') {
+      amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
+    }
+  },
+  /**
+   * Clicking the custom button should focus the custom input field
+   */
   'click form .custom': () => {
     const customAmount = document.getElementById('customAmt');
     customAmount.focus();
     customAmount.checked = true;
   },
-
-  // Handle form submission
-  'submit form': (event) => {
-    event.preventDefault();
-
-    // Elements
-    const form = event.target;
-    const def = document.querySelector('#donateDefault');
-    const fail = document.querySelector('#donateFailure');
-    const success = document.querySelector('#donateSuccess');
-
-    // Calculate total
-    const total = form.amount.value === 'custom'
-      ? document.querySelector('#customAmt').value
-      : form.amount.value;
-
-    // Disable submit button to prevent accidental double-submit
-    form.querySelector('button.submit').disabled = true;
-
-    // Clear old error messages
-    const errors = form.querySelectorAll('[data-error]');
-    for (let i = 0; i < errors.length; i += 1) delete errors[i].dataset.error;
-
-    // Check parameters
-    const name = form.name.value;
-    const number = form.number.value.replace(/ /g, '');
-    const type = form.type.value;
-    const cvv2 = form.cvv2.value;
-    const year = form.year.value;
-    const month = form.month.value;
-
-    // Initiate Purchase
-    Meteor.Paypal.purchase(
-      {
-        name, number, type, cvv2, year, month,
-      },
-      { total, currency: 'USD' },
-      (error, results) => {
-        if (error) {
-          console.error('error?', error);
-          return;
-        }
-
-        console.debug(results);
-        // results contains:
-        //   saved (true or false)
-        //   if false: "error" contains the reasons for failure
-        //   if true: "payment" contains the transaction information
-
-        if (results && !results.saved) {
-          // Hide default message and indicate error
-          def.setAttribute('aria-hidden', 'true');
-          fail.setAttribute('aria-hidden', 'false');
-
-          // Re-enable submit button
-          form.querySelector('button.submit').disabled = false;
-
-          // Handle error details
-          if (results.error.response.details) {
-            const { details } = results.error.response;
-
-            for (let i = 0; i < details.length; i += 1) {
-              switch (details[i].issue) {
-                case 'Expiration date cannot be in the past.':
-                  donateException(
-                    form.year,
-                    'Expiration date cannot be in the past',
-                  );
-                  break;
-                case 'The credit card number is not valid for the specified credit card type':
-                case 'Value is invalid':
-                case 'Must be numeric':
-                  switch (details[i].field) {
-                    case 'payer.funding_instruments[0].credit_card':
-                    case 'payer.funding_instruments[0].credit_card.number':
-                      donateException(form.number, 'Invalid credit card number');
-                      break;
-                    case 'payer.funding_instruments[0].credit_card.cvv2':
-                      donateException(form.cvv2, 'Invalid CVV2 Code');
-                      break;
-                    default:
-                  }
-                  break;
-                case 'Amount cannot be zero':
-                  donateException(
-                    form.querySelector('#customAmt'),
-                    'Donation amount must be greater than zero',
-                  );
-                  break;
-                case 'Length of cvv2 is invalid for the specified credit card type.':
-                  donateException(form.cvv2, 'Invalid CVV2 Code');
-                  break;
-                default:
-              }
-            }
-          }
-
-          // If there aren't any details, check for other errors
-          switch (results.error.response.name) {
-            case 'CREDIT_CARD_REFUSED':
-              console.error('Credit Card Refused.');
-              break;
-            default:
-              console.error(results.error.response.name);
-          }
-        } else {
-          // Success!  Now hide the form and display success
-          form.classList.add('hide');
-          def.setAttribute('aria-hidden', 'true');
-          fail.setAttribute('aria-hidden', 'true');
-          success.setAttribute('aria-hidden', 'false');
-        }
-      },
-    );
+  /**
+   * Clicking in the custom input field to set "Other" to selected
+   */
+  'click form .customAmt': () => {
+    const custom = document.getElementById('radio5');
+    custom.click();
+  },
+  /**
+   * Updating the custom input field should update amount to authorize
+   * @param {$.Event} event
+   */
+  'keyup form .customAmt': (event) => {
+    if (!Number.isNaN(Number(event.target.value))) {
+      amount.set(parseInt(event.target.value, 10));
+    }
   },
 
-  // Show credit card type
-  'keyup [name="number"]': (event) => {
-    const ccField = event.target;
+  // Handle form submission
+  'submit form': async (event) => {
+    event.preventDefault();
 
-    const ccImage = ccField.parentElement.parentElement
-      .querySelector('.cc-pic');
+    // Disable submit button
+    const submit = event.target.querySelector('[type="submit"]');
+    submit.disabled = true;
 
-    const ccType = ccField.parentElement.parentElement
-      .querySelector('[name="type"]');
+    // Create token
+    const { token, error } = await stripe.createToken(card);
 
-    if (!ccImage || !ccType) return;
+    if (error) {
+      // Inform the customer that there was an error.
+      const errorElement = document.getElementById('donate-card-errors');
+      errorElement.textContent = error.message;
+    } else {
+      token.amount = amount.get() * 100;
+      token.description = 'WCASA Donation';
 
-    switch (event.target.value.substr(0, 2)) {
-      // American Express
-      case '34':
-      case '37':
-        ccImage.textContent = '\uf1f3';
-        ccType.value = 'amex';
-        break;
-      // Diners Club
-      case '30': case '36': case '38': case '39':
-      case '54': case '55':
-        ccImage.textContent = '\uf24c'; break;
-      // JCB
-      case '35':
-        ccImage.textContent = '\uf24b'; break;
-      default:
-        // Test based on first digit
-        switch (event.target.value.substr(0, 1)) {
-          // Discover
-          case '6':
-            ccImage.textContent = '\uf1f2';
-            ccType.value = 'discover';
-            break;
-          // Maestro/Mastercard
-          case '5':
-            ccImage.textContent = '\uf1f1';
-            ccType.value = 'mastercard';
-            break;
-          // Visa
-          case '4':
-            ccImage.textContent = '\uf1f0';
-            ccType.value = 'visa';
-            break;
-          default:
-            ccImage.textContent = ' ';
-            ccType.value = 'mastercard';
-        }
-    }
+      const user = Meteor.user();
+      const metadata = {};
 
-    // Based on credit card type, space out the numbers
-
-    // If this is the backspace key, ignore
-    if (event.keyCode === 8) return;
-
-    // American Express and Diners Club cards indent at 4 and 10
-    if (ccType.value === 'amex') {
-      if (event.target.value.length === 4 || event.target.value.length === 11) {
-        ccField.value += ' ';
-        return;
+      if (user) {
+        metadata.user_id = Meteor.userId();
+        metadata.user_name = `${user.profile.firstname} ${user.profile.lastname}`;
+        metadata.user_email = user.emails[0].address;
+      } else {
+        metadata.name = event.target.querySelector('[name="name"]').value;
       }
-      // Otherwise, don't indent at all
-      return;
-    }
 
-    // All other credit cards have a space after 4, 8, and 12
-    if (event.target.value.length === 4 || event.target.value.length === 9
-        || event.target.value.length === 14) {
-      ccField.value += ' ';
+      // Send token to server
+      Meteor.call('pay', token, metadata, (err) => {
+        if (err) {
+          // Inform the customer that there was an error.
+          const errorElement = document.getElementById('donate-card-errors');
+          errorElement.textContent = error.message;
+        } else {
+          document.querySelector('#donateDefault').classList.add('hide');
+          document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
+          document.querySelector('#donateForm').classList.add('hide');
+        }
+        submit.removeAttribute('disabled');
+      });
     }
   },
 });

@@ -9,13 +9,32 @@
         "youtubeChannel" : "https://www.youtube.com/user/my-nonprofit",
         
         "googleAnalyticsId": "",
-        "googleMapsApiKey": ""
+        "googleMapsApiKey": "",
+
+        "stripePublicKey": ""
     },
     
-    "paypal": {
-        "host": "api.paypal.com",
-        "port": "",
-        "client_id": "",
-        "client_secret": ""
+    "stripe": {
+      "secretKey": ""
+    },
+
+    "mail": {
+      "host": "",
+      "port": 587,
+      "username": "",
+      "password": ""
+    },
+  
+    "aws": {
+      "user": "",
+      "access_key": "",
+      "secret": "",
+      "bucket": ""
+    },
+  
+    "verticalResponse": {
+      "key": "",
+      "secret": "",
+      "access_token": ""
     }
 }

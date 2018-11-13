@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Template, Blaze } from 'meteor/templating';
+import { Template } from 'meteor/templating';
 import { Mongo } from 'meteor/mongo';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
@@ -9,6 +9,9 @@ import './admin.html';
 
 const formMethod = new ReactiveVar('addEvent');
 const activeEvent = new ReactiveVar();
+const isAllDayEvent = new ReactiveVar(false);
+const registrationItems = new ReactiveVar([]);
+const pricingItems = new ReactiveVar([]);
 const Registrations = new Mongo.Collection('registrations');
 
 /**
@@ -18,10 +21,12 @@ const Registrations = new Mongo.Collection('registrations');
  */
 const closeForm = (event) => {
   // Close add Event Form
-  event.delegateTarget.querySelector('.eventsSlider').classList.remove('hide');
-  event.delegateTarget.querySelector('section.addEvent').classList.add('hide');
-  event.delegateTarget.querySelector('section.viewRegistrations')
-    .classList.add('hide');
+  const slider = event.delegateTarget.querySelector('.eventsSlider');
+  if (slider instanceof Element) slider.classList.remove('hide');
+  const addEvent = event.delegateTarget.querySelector('section.addEvent');
+  if (addEvent instanceof Element) addEvent.classList.add('hide');
+  const viewRegs = event.delegateTarget.querySelector('section.viewRegistrations');
+  if (viewRegs instanceof Element) viewRegs.classList.add('hide');
 };
 
 /** Admin events */
@@ -33,20 +38,167 @@ Template.eventsAdmin.events({
   'submit #eventForm': closeForm,
 });
 
-/** Events template events */
-Template.events.events({
+Template.eventAddForm.helpers({
+  dateType: () => (isAllDayEvent.get() ? 'date' : 'datetime-local'),
+  formType: () => (formMethod.get() === 'updateEvent' ? 'Update' : 'Add'),
+
   /**
-   * @summary Show Event Add Form
+   * @summary Document context for updates
+   * @function
+   * @returns {Object}
+   */
+  doc: () => activeEvent.get(),
+
+  /**
+   * @summary Checked attribute given some condition
+   * @param {boolean} bool
+   * @returns {string}
+   */
+  checked: bool => (bool ? 'checked' : ''),
+  selected: (a, b) => (a === b ? 'selected' : ''),
+
+  /**
+   * @summary Get pricing items
+   */
+  pricingItems: () => pricingItems.get(),
+
+  /**
+   * @summary Get registration items
+   */
+  registrationItems: () => registrationItems.get(),
+});
+
+/** Admin events */
+Template.eventAddForm.events({
+  'change #event-add-form-multi-day'(event) {
+    const { checked } = event.target;
+
+    if (checked) isAllDayEvent.set(true);
+    else isAllDayEvent.set(false);
+  },
+
+  /**
+   * @summary Add a new pricing tier
+   */
+  'click #admin-btn-event-add-pricing-tier'(event) {
+    event.preventDefault();
+    const items = pricingItems.get();
+    items.push({});
+    pricingItems.set(items);
+  },
+
+  /**
+   * @summary Add a new registration item
+   */
+  'click #admin-btn-event-add-registration-item'(event) {
+    event.preventDefault();
+    const items = registrationItems.get();
+    items.push({});
+    registrationItems.set(items);
+  },
+
+  /**
+   * @summary Close Form
+   */
+  'click button.close': closeForm,
+
+  /**
+   * @summary Add Event Submission
    * @method
    *   @param {$.Event} event
    */
-  'click li.addEvent': (event) => {
+  'submit form#admin-form-event-add': (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    // Return PriceTiersArray
+    const priceTiersArray = () => {
+      const tiers = document.querySelectorAll('.event-price-tier');
+      const arr = [];
+      for (let i = 0; i < tiers.length; i += 1) {
+        const obj = {
+          description: tiers[i].querySelector('.description-inp').value,
+          cost: tiers[i].querySelector('.cost-inp').value,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    // Return RegistrationArray
+    const registrationDetailsArray = () => {
+      const items = document.querySelectorAll('.event-registration-item');
+      const arr = [];
+      for (let i = 0; i < items.length; i += 1) {
+        const obj = {
+          name: items[i].querySelector('.field-name-inp').value,
+          type: items[i].querySelector('.field-type-inp').value,
+        };
+        arr.push(obj);
+      }
+      return arr;
+    };
+
+    const start = document.getElementById('event-add-form-dateStart').value;
+    const end = document.getElementById('event-add-form-dateEnd').value;
+
+    const data = {
+      name: document.getElementById('event-add-form-name').value,
+      description: document.getElementById('event-add-form-desc').value,
+      awareness: document.getElementById('event-add-form-awareness').value,
+      start: start ? (new Date(start)).getTime() : undefined,
+      end: end ? (new Date(end)).getTime() : undefined,
+      location: {
+        name: document.getElementById('event-add-form-location-name').value,
+        mapUrl: document.getElementById('event-add-form-location-map-url').value,
+        webinarUrl: document.getElementById('event-add-form-location-webinar-url').value,
+      },
+      cost: priceTiersArray(),
+    };
+
+    const required = document.getElementById('event-add-form-registration-required').checked;
+    if (required) {
+      data.registration = {
+        required,
+        registerUrl: document.getElementById('event-add-form-registration-external-url').value,
+        registrationDetails: registrationDetailsArray(),
+      };
+    }
+
+    if (formMethod.get() === 'updateEvent') {
+      // Add event ID
+      data._id = activeEvent.get()._id;
+      Meteor.call('updateEvent', data, (error) => {
+        if (error) console.error(error);
+        else document.querySelector('#admin-form-container-event-add button.close').click();
+      });
+    } else {
+      // Insert event into the collection
+      Meteor.call('addEvent', data, (error) => {
+        if (error) console.error(error);
+        else form.reset();
+      });
+    }
+  },
+});
+
+/** Events template events */
+Template.upcomingEvents.events({
+  /**
+   * @summary Show Event Add Form
+   * @method
+   */
+  'click li.addEvent': () => {
     // Set appropriate form type
     formMethod.set('addEvent');
     activeEvent.set(null);
 
-    const slider = event.delegateTarget.querySelector('.eventsSlider');
-    const admin = event.delegateTarget.querySelector('section.addEvent');
+    pricingItems.set([]);
+    registrationItems.set([]);
+
+    const slider = document.getElementById('events-slider');
+    const admin = document.getElementById('admin-form-container-context-event-add');
 
     if (slider instanceof Element) slider.classList.add('hide');
     if (admin instanceof Element) admin.classList.remove('hide');
@@ -66,13 +218,6 @@ Template.eventsAdmin.helpers({
   method: () => formMethod.get(),
 
   /**
-   * @summary Document context for updates
-   * @function
-   * @returns {Object}
-   */
-  doc: () => activeEvent.get(),
-
-  /**
    * @summary The collection to use to populate form
    * @function
    * @returns {Mongo.Collection}
@@ -90,7 +235,11 @@ Template.eventSlide.events({
   'click .adminControls .edit': (event) => {
     // Set form type to Update
     formMethod.set('updateEvent');
-    activeEvent.set(Blaze.getData());
+    const { data } = Template.instance();
+    activeEvent.set(data);
+
+    pricingItems.set(data.cost);
+    registrationItems.set(data.registration.registrationDetails);
 
     // Hide Slider and show admin interface
     const eventsSlider = event.delegateTarget.parentElement.parentElement;
@@ -107,7 +256,7 @@ Template.eventSlide.events({
    */
   'click .adminControls .delete': () => {
     if (window.confirm('Are you sure you want to delete this event?')) {
-      Meteor.call('deleteEvent', Blaze.getData()._id);
+      Meteor.call('deleteEvent', Template.instance().data._id);
     }
   },
 
@@ -125,7 +274,7 @@ Template.eventSlide.events({
       .classList.remove('hide');
 
     // Set active event
-    activeEvent.set(Blaze.getData());
+    activeEvent.set(Template.instance().data);
   },
 });
 

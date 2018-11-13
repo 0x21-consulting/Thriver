@@ -1,9 +1,6 @@
 <template name="eventsAdmin">
-  <section class="addEvent hide">
-    <h3>Add an Event</h3>
-    <button class="fa close">&#xf057; Close</button>
-    <!-- {{> quickForm collection=events id="eventForm" 
-      meteormethod=method type="method" doc=doc }} -->
+  <section id="admin-form-container-context-event-add" class="addEvent hide">
+    {{> eventAddForm}}
   </section>
 </template>
 
@@ -77,5 +74,130 @@
         </tr>
       {{/each}}
     </table>
+  </section>
+</template>
+
+<template name="eventAddForm">
+  <section id="admin-form-container-event-add" class="admin-form-container">
+    <div class="form-container">
+      <h4>{{formType}} Event</h4>
+      <button type="button" class="fa add close exit library">&#xf00d;</button>
+      <form id="admin-form-event-add">
+        <fieldset>
+          <label>
+            Name
+            <input id="event-add-form-name" name="name" type="text" value="{{doc.name}}" />
+          </label>
+          <label>
+            Description
+            <textarea id="event-add-form-desc" name="description">{{doc.description}}</textarea>
+          </label>
+          <hr />
+          <div>
+            <div class="toggleSwitch">
+              <input type="checkbox" name="" id="event-add-form-multi-day">
+              <label for="event-add-form-multi-day" role="checkbox"></label>
+            </div>
+            <label for="event-add-form-multi-day" class="toggleSwitchLabel">
+              Multi-day Event
+            </label>
+          </div>
+          <!-- Multi-day or all-day event? if yes, input type="date"; else input type="datetime-local" -->
+          <label class="w-33">
+            Start Date
+            <input type="{{dateType}}" name="dateStart" id="event-add-form-dateStart" value="{{datetime doc.start}}" />
+          </label>
+          <label class="w-33">
+            End Date
+            <input type="{{dateType}}" name="dateEnd" id="event-add-form-dateEnd" value="{{datetime doc.end}}" />
+          </label>
+          <div class="styledSelect fullBlockMob w-33 margin-right-0">
+            <label>Awareness Event</label>
+            <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
+              <option value="" {{selected "" doc.awareness}}>No</option>
+              <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
+              <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
+            </select>
+          </div>
+        </fieldset>
+        <hr />
+        <fieldset>
+          <h5>Location</h5>
+          <label>
+            Location Name
+            <input id="event-add-form-location-name" name="name" type="text" value="{{doc.location.name}}" />
+          </label>
+          <label>
+            Location Map URL
+            <input id="event-add-form-location-map-url" name="map-url" type="text" value="{{doc.location.mapUrl}}" />
+          </label>
+          <label>
+            Webinar URL
+            <input id="event-add-form-location-webinar-url" name="webinar-url" type="text" value="{{doc.location.webinarUrl}}" />
+          </label>
+        </fieldset>
+        <hr />
+        <fieldset>
+          <h5>Pricing</h5>
+          {{#each pricingItems}}
+            <div class="event-price-tier">
+              <label class="w-75">
+                Tier Description
+                <input type="text" class="description-inp" value="{{description}}" />
+              </label>
+              <label class="w-25">
+                Cost
+                <input type="number"  class="cost-inp" value="{{cost}}" />
+              </label>
+            </div>
+          {{/each}}
+          <div class="clear-both">
+            <button type="button" id="admin-btn-event-add-pricing-tier" class="fa add resource add-item-btn">&#xf067; Add Pricing Tier</button>
+          </div>
+        </fieldset>
+        <hr />
+        <fieldset>
+          <h5>Registration</h5>
+          <div>
+            <div class="toggleSwitch">
+              <input type="checkbox" name="library-add-form-keywords" id="event-add-form-registration-required" {{checked doc.registration.required}}>
+              <label for="event-add-form-registration-required" role="checkbox"></label>
+            </div>
+            <label for="event-add-form-registration-required" class="toggleSwitchLabel">
+              Registration Required
+            </label>
+          </div>
+          <label>
+            Registration URL for Third-Party Site (If Applicable)
+            <input id="event-add-form-registration-external-url" name="webinar-url" type="text" />
+          </label>
+          <h5>Registration Fields</h5>
+          {{#each registrationItems}}
+            <div class="event-registration-item">
+              <label class="w-75">
+                Field Name
+                <input type="text" class="field-name-inp" value="{{name}}" />
+              </label>
+              <div class="styledSelect fullBlockMob w-25">
+                <label>Field Type</label>
+                <select name="field-type" class="field-type-inp">
+                  <option value="text" {{selected "text" type}}>text</option>
+                  <option value="email" {{selected "email" type}}>email</option>
+                  <option value="yes/no" {{selected "yes/no" type}}>yes/no</option>
+                  <option value="date" {{selected "date" type}}>date</option>
+                  <option value="color" {{selected "color" type}}>color</option>
+                  <option value="textarea" {{selected "textarea" type}}>textarea</option>
+                </select>
+              </div>
+            </div>
+          {{/each}}
+          <div class="clear-both">
+            <button type="button" id="admin-btn-event-add-registration-item" class="fa add resource add-item-btn">&#xf067; Add Registration Item</button>
+          </div>
+        </fieldset>
+        <hr />
+        <input type="submit" class="btn" value="{{formType}} Event" />
+      </form>
+    </div>
   </section>
 </template>

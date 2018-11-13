@@ -40,4 +40,20 @@ Template.registerHelper('ISODate', (date) => {
   return newDate.toISOString();
 });
 
+/**
+ * @summary Produce a compliant date timestamp for date elements
+ * @function
+ *   @param {Date} date
+ * @returns {String}
+ */
+Template.registerHelper('datetime', (date) => {
+  if (date) {
+    // If string, convert to date
+    const newDate = date instanceof Date ? date : new Date(date);
+
+    return newDate.toISOString().replace(/Z$/, '');
+  }
+  return '';
+});
+
 Template.registerHelper('global_debug', text => console.log(text));

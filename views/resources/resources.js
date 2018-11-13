@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import Resources from '/logic/resources/schema';
+import Library from '/logic/library/schema';
 
 import './resources.html';
 import './helpers';
@@ -105,6 +106,39 @@ Template.aside.events({
 
     // Insert subscriber into the collection
     Meteor.call('addLibraryItem', data, function(error) {
+      console.log('calling');
+      if (error) {
+        console.log(error.reason);
+      } else {
+        console.log('Subscription successful');
+        console.log(data);
+      }
+    });
+  },
+
+  /**
+   * @summary Add Resource Form Submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#admin-form-resource-add': (event) => {
+    event.preventDefault();
+
+    const data = {
+      title: document.getElementById('resources-add-form-title').value,
+      url: document.getElementById('resources-add-form-url').value,
+      publisher: document.getElementById('resources-add-form-publisher').value,
+      date: new Date(document.getElementById('resources-add-form-date').value),
+      type: document.getElementById('resources-add-form-type').value,
+      description: document.getElementById('resources-add-form-desc').value,
+      category: document.getElementById('resources-add-form-category').value,
+    };
+
+    console.log(data);
+
+    // Insert subscriber into the collection
+    Meteor.call('addResourceCenterItem', data, function(error) {
+      console.log('calling');
       if (error) {
         console.log(error.reason);
       } else {
@@ -119,11 +153,17 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #admin-btn-resource-add': () => {
-    // Show form
-    const form = document.querySelector('#LCForm');
-    if (form.classList.contains('hide')) form.classList.remove('hide');
-    else form.classList.add('hide');
+  'click aside.admin button.add.resource': () => {
+    // Show form & hide tools
+    const formContainer = document.querySelector('#admin-form-container-resource-add');
+    const adminTools = document.querySelector('#admin-tools-resources');
+    if (formContainer.classList.contains('hide')) {
+      formContainer.classList.remove('hide');
+      adminTools.classList.add('hide');
+    } else {
+      formContainer.classList.add('hide');
+      adminTools.classList.remove('hide');
+    }
   },
 
   /**
@@ -131,11 +171,17 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'click #admin-btn-library-add': () => {
-    // Show form
+  'click aside.admin button.add.library': () => {
+    // Show form & hide tools
     const formContainer = document.querySelector('#admin-form-container-library-add');
-    if (formContainer.classList.contains('hide')) formContainer.classList.remove('hide');
-    else formContainer.classList.add('hide');
+    const adminTools = document.querySelector('#admin-tools-resources');
+    if (formContainer.classList.contains('hide')) {
+      formContainer.classList.remove('hide');
+      adminTools.classList.add('hide');
+    } else {
+      formContainer.classList.add('hide');
+      adminTools.classList.remove('hide');
+    }
   },
 
   /**
@@ -173,14 +219,13 @@ Template.list.events({
   'click .library-item aside.admin button.libDelete': (event) => {
     event.stopPropagation();
     const { id } = event.target.closest('.library-item').dataset;
-    console.log(id);
     if (window.confirm('Are you sure you want to delete this Library Item?')) {
       Meteor.call('deleteLibraryItem', id);
     }
   },
 });
 
-Template.lcSubHead.helpers({
+Template.resourceAddForm.helpers({
   /**
    * @summary The collection to use to populate form
    * @function
@@ -191,9 +236,10 @@ Template.lcSubHead.helpers({
 
 Template.libraryAddForm.helpers({
   /**
+   * TODO: Is this correct
    * @summary The collection to use to populate form
    * @function
    * @returns {Mongo.Collection}
    */
-  library: () => Resources.collection,
+  library: () => Library.collection,
 });

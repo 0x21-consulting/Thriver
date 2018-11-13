@@ -28,6 +28,7 @@ import '/views/accounts/requests';
 import '/views/accounts/signin';
 import '/views/accounts/subscriptions';
 import '/views/accounts/user';
+import '/views/accounts/receipts';
 
 // Views
 import '/views/providers/providers';
@@ -39,6 +40,7 @@ import '/views/navigation/navigation';
 import '/views/outreach/outreach';
 import '/views/payments/payments';
 import '/views/payments/donate';
+import '/views/payments/receipt';
 import '/views/twitter/twitter';
 import '/views/contact/contact';
 import '/views/feedback/feedback';

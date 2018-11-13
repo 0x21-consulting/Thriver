@@ -44,9 +44,9 @@ Meteor.methods({
     if (newEvent.end instanceof Date) newEvent.end = new Date(newEvent.end.toISOString());
 
     // Perform Insert
-    Events.collection.insert(newEvent, (error) => {
-      if (error) throw new Meteor.Error(error);
-    });
+    const result = Events.collection.insert(newEvent);
+
+    return result;
   },
 
   /**
@@ -62,13 +62,12 @@ Meteor.methods({
     check(event, Object);
 
     // Perform update
-    Events.collection.update(
+    const result = Events.collection.update(
       { _id: event._id },
       { $set: event },
-      (error) => {
-        if (error) throw new Meteor.Error(error);
-      },
     );
+
+    return result;
   },
 
   /**
@@ -92,25 +91,35 @@ Meteor.methods({
   /**
    * @summary Register for an event
    * @method
-   *   @param {String} event   - Event to register for
+   *   @param {String} id   - Event to register for
    *   @param {Object} details - Individual event details
    */
-  registerEvent: (event, details) => {
-    check(event, String);
+  registerEvent: (id, details) => {
+    check(id, String);
     check(details, Match.Maybe(Object));
 
-    const id = Meteor.userId();
+    const userId = Meteor.userId();
 
     // User must be logged in to register for an event
-    if (!id) throw new Meteor.Error('You must be logged in to register for an event.');
+    if (!userId) throw new Meteor.Error('You must be logged in to register for an event.');
+
+    const event = Events.collection.findOne({ _id: id });
+    if (!event) throw new Meteor.Error('Event does not exist.');
+
+    // If the event has a cost, verify user made a purchase
+    if (event.cost.length) {
+      const purchase = Meteor.users.findOne({
+        _id: userId,
+        'payments.metadata.event_id': id,
+      });
+
+      if (!purchase) throw new Meteor.Error(`User ${userId} did not purchase registration to event ${id}.`);
+    }
 
     // Update user profile
-    Meteor.users.update({ _id: id }, {
+    Meteor.users.update({ _id: userId }, {
       $push: {
-        'profile.events.registeredEvents': {
-          id: event,
-          details,
-        },
+        'profile.events.registeredEvents': { id, details },
       },
     });
   },

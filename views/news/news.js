@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
 
 import './news.html';
-import './helpers.js';
+import './helpers';
 
 // How many list items to load
 News.quantity = new ReactiveVar(5);
@@ -64,15 +64,50 @@ Template.aside.events({
   'submit form#searchNewsForm': event => event.preventDefault(),
 
   /**
+   * @summary Add Library Form Submission
+   * @method
+   *   @param {$.Event} event
+   */
+  'submit form#newsForm': (event) => {
+    event.preventDefault();
+
+    const data = {
+      title: document.getElementById('news-add-form-title').value,
+      url: document.getElementById('news-add-form-url').value,
+      publisher: document.getElementById('news-add-form-publisher').value,
+      date: new Date(document.getElementById('news-add-form-date').value),
+      type: document.getElementById('news-add-form-type').value,
+      content: document.getElementById('news-add-form-content').value,
+    };
+
+    // Insert subscriber into the collection
+    Meteor.call('addNewsItem', data, function(error) {
+      console.log('calling');
+      if (error) {
+        console.log(error.reason);
+      } else {
+        console.log('Subscription successful');
+        console.log(data);
+      }
+    });
+  },
+
+  /**
    * @summary Toggle Add Newsroom Item form
    * @method
    *   @param {$.Event} event
    */
   'click #news aside.admin button.add': () => {
-    // Show form
-    const form = document.querySelector('#newsForm');
-    if (form.classList.contains('hide')) form.classList.remove('hide');
-    else form.classList.add('hide');
+    // Show form & hide tools
+    const formContainer = document.querySelector('#admin-form-container-news-add');
+    const adminTools = document.querySelector('#admin-tools-news');
+    if (formContainer.classList.contains('hide')) {
+      formContainer.classList.remove('hide');
+      adminTools.classList.add('hide');
+    } else {
+      formContainer.classList.add('hide');
+      adminTools.classList.remove('hide');
+    }
   },
 });
 
