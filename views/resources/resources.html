@@ -33,6 +33,24 @@
   {{/each}}
 </template>
 
+<template name="resourceData">
+  <header class="mobile"><h2>{{title}}</h2></header>
+  {{#each items}}
+    {{>tabs}}
+  {{/each}}  
+</template>
+
+<template name="resourceDataState">
+  <div class="sidebar-editable">
+    <p style="text-align:center;">State Data Coming Soon...</p>
+  </div>
+</template>
+<template name="resourceDataNational">
+    <div class="sidebar-editable">
+        <p style="text-align:center;">National Data Coming Soon...</p>
+      </div>
+</template>
+
 <template name="libraryAddForm">
   <section id="admin-form-container-library-add" class="hide admin-form-container">
     <div class="form-container">

@@ -19,12 +19,21 @@ aside.off-canvas{
     header{
         h1, h2{
             display: block;
-            padding: 34px 0px 34px 0px;
+            padding: 50px 0px 50px 0px;
             margin: 0;
             text-align: center;
-            color: @sidebarHeadingColor;
-            .font(1.6,1.6,0.1,@normal,uppercase);
-            .fa{font-weight: @light;}
+            color: #ffffff;
+            font-size: 16px;
+            font-size: 1.6rem;
+            line-height: 16px;
+            line-height: 1.6rem;
+            letter-spacing: 1px;
+            letter-spacing: 0.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 24px;
+            letter-spacing: 0.2rem;
             a{ color: @sidebarHeadingColor; }
             @media @mobile{
                 padding: 20px;
@@ -36,8 +45,6 @@ aside.off-canvas{
     .sidebar-content{
         background-color: @sidebarSecondaryColor;
         color:@sidebarTextColor;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
         @media @mobile { .shadowNone; }
     }
     .sidebar-document{
@@ -310,3 +317,8 @@ article a.icon:before{
     }
 }
 
+// Sidebar Editable Content Styles
+.sidebar-editable{
+    padding: 40px;
+    &, p{ color: #fff; }
+}
