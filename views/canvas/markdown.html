@@ -1,0 +1,20 @@
+<template name="markdown">
+  <section class="markdown">
+    {{#if edit}}
+      {{> markdownEditor}}
+    {{else}}
+      <div class="markdown">
+        {{{markdown content}}}
+      </div>
+    {{/if}}
+  </section>
+</template>
+
+<template name="markdownEditor">
+  <section class="markdown-editor">
+    <textarea>{{content}}</textarea>
+    <section class="preview">{{{markdown preview}}}</section>
+  </section>
+  <button class="save">Save</button>
+  <button class="cancel">Cancel</button>
+</template>
