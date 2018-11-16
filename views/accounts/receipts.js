@@ -33,4 +33,9 @@ Template.receiptsList.helpers({
   timestampUTC() { return new Date(this.created * 1000).toISOString(); },
 
   total() { return this.amount / 100; },
+
+  headingDonations: 'Donations',
+  headingPurchases: 'Purchases',
+  noneDonations: 'No donations yet.',
+  nonePurchases: 'No purchases have been made.',
 });
