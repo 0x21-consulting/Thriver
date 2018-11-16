@@ -26,7 +26,7 @@ menu.tabs{
         flex: 1;
         display: flex;
         a{
-            .font(1.2,1.2,0.2,@bold,uppercase);
+            .font(1.18,1.2,0.2,600,uppercase);
             display: flex;
             &:before{margin-right: 5px;}
             width:100%;
@@ -65,7 +65,12 @@ menu.tabs{
     }
 
 }
-div.tabs{
+#main div.tabs{
+    h2{
+        font-size: 1.8rem;
+        padding: 24px;
+        font-weight: 500;
+    }
     background-color: @tabBgColor;
     > [aria-hidden=true]{display: none;}
     > [aria-hidden=false]{display: block;}
@@ -104,6 +109,7 @@ div.tabs article[aria-hidden="true"]{
             }
     });
     .animation(animateTabLeave @durationDefault @easeDefault both);
+    display: none;
 
 }
 @media (min-width:768px){

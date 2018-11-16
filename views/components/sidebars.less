@@ -15,7 +15,10 @@ aside.off-canvas{
     text-align: center;
     @media @mobile{ text-align: left; }
     ul, ol, li{ list-style: none; margin: 0;}
-    form { .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
+    form { 
+        .formColors(darken(@blueGray, 5%),@gray,@teal,@gray,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); 
+        padding: 50px 40px;
+    }
     header{
         h1, h2{
             display: block;
@@ -39,7 +42,10 @@ aside.off-canvas{
                 padding: 20px;
                 text-align: left;
             }
-            &:before{margin-right: 5px;}
+            &:before{
+                opacity: 0.45;
+                margin-right: 12px;
+            }
         }
     }
     .sidebar-content{
