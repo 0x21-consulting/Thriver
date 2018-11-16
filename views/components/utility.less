@@ -35,6 +35,21 @@ nav.utility{
         figure[aria-hidden="false"]{display: block !important;}
         figure[aria-hidden="false"]{display: none !important;} // Temp hide the hotline modal
     }
+    li.admin{
+        width: 42px;
+        button{
+            padding: 3px 12px 3px 12px;
+            color: #00bbca;
+            border: 2px dashed #adbfc7;
+            margin: 2px;
+            &:focus{
+                background: #00bbca;
+                color: #fff;
+                border-color: transparent;
+                box-shadow: none;
+            }
+        }
+    }
     ul > li> a{
         &[href="/"], &[href="/register"]{
             background-color: transparent;

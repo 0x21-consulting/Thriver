@@ -19,6 +19,10 @@
                     {{>utilityItem}}
                 {{/if}}
             {{/each}}
+            {{#if isAdmin}}
+                {{> admin}}
+                {{> feedbackAdmin}}
+            {{/if}}
         </ul>
     </nav>
 </template>
