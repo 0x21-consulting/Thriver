@@ -1,7 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { SHA256 } from 'meteor/sha';
 import Sections from '/logic/sections/sections';
+import getValue from './work';
+
+const edit = new ReactiveVar(false);
 
 /**
  * Handler for updating work section names
@@ -41,21 +45,14 @@ const handler = (event) => {
  * @method
  *   @param {string} oldHash - SHA256 hash of original markdown
  *     to detect if there was a change
+ *   @param {string} id - Element id
+ *   @param {Event} event - Click event passed to handler
  */
-const updateSectionContent = oldHash => (event) => {
-  /**
-   * Handler for updating section content
-   * @method
-   *   @param {Event} event - Click event passed to handler
-   */
-  event.stopPropagation();
-  event.preventDefault();
-
+const updateSectionContent = (oldHash, id, event) => {
   const parent = event.target.parentElement;
 
   // Get section ID
   const { target } = event;
-  const { id } = target.parentElement.parentElement.dataset;
   const content = target.parentElement.querySelector('textarea').value;
   const newHash = SHA256(content);
 
@@ -106,6 +103,13 @@ Template.workNav.events({
       },
     );
   },
+});
+
+Template.workContent.helpers({
+  markdownData: () => ({
+    content: getValue('data')(Template.instance().data.id).content,
+    edit: edit.get(),
+  }),
 });
 
 Template.workContent.events({
@@ -168,59 +172,29 @@ Template.workContent.events({
   /**
    * Edit section markdown
    * @method
-   *   @param {$.Event} event - jQuery event handler
    */
-  'click header button.edit': function editSectionMarkdown(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    // Get section to edit
-    const section = event.delegateTarget.querySelector(`[data-id="${this.id}"]`);
-    const content = section.querySelector('.workTextContainer');
-    const parent = content.parentElement;
-
-    // Create a textarea element through which to edit markdown
-    const textarea = document.createElement('textarea');
-
-    // Button by which to okay changes and commit to db
-    const button = document.createElement('button');
-
-    button.textContent = 'Save';
-    button.classList.add('save');
-    button.addEventListener(
-      'mouseup',
-      // Pass along hash of existing markdown
-      updateSectionContent(content.dataset.hash),
-    );
-
-    // Button to cancel edit
-    const cancel = document.createElement('button');
-    cancel.textContent = 'Cancel';
-    cancel.classList.add('cancel');
-
-    // Textarea should get markdown
-    textarea.textContent = Sections.get(this.id, ['data']).data.content;
-
-    // Add textarea but hide preview
-    parent.classList.add('edit');
-    parent.appendChild(textarea);
-    parent.appendChild(button);
-    parent.appendChild(cancel);
+  'click header button.edit': () => {
+    edit.set(true);
   },
 
   /**
    * @summary Close edit page
    * @method
-   *   @param {$.Event} event
    */
-  'click button.cancel': (event) => {
-    const parent = event.target.parentElement;
-    parent.classList.remove('edit');
+  'click button.cancel': () => {
+    edit.set(false);
+  },
 
-    // Remove buttons and textarea
-    parent.querySelector('textarea').remove();
-    const buttons = parent.querySelectorAll('button');
-    for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
+  /**
+   * @summary Commit edit
+   * @method
+   */
+  'click button.save'(event) {
+    const { id } = Template.instance().data;
+    const section = event.delegateTarget.querySelector(`[data-id="${id}"]`);
+    const content = section.querySelector('.workTextContainer');
+
+    updateSectionContent(content.dataset.hash, id, event);
   },
 });
 
