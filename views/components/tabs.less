@@ -66,16 +66,18 @@ menu.tabs{
 
 }
 #main div.tabs{
-    h2{
-        font-size: 1.8rem;
-        padding: 24px;
-        font-weight: 500;
-    }
     background-color: @tabBgColor;
     > [aria-hidden=true]{display: none;}
     > [aria-hidden=false]{display: block;}
     &.top{}
 }
+aside.off-canvas header h2, #main div.tabs h2{
+    font-size: 1.8rem;
+    padding: 24px;
+    font-weight: 500;
+    margin-top: 23px;
+}
+
 
 //Tabs Animation
 div.tabs article[aria-hidden="false"]{
@@ -243,7 +245,7 @@ article.admin .itemCategory aside.admin {
     }
 }
 
-article.admin h2, article.admin summary h1 { cursor: pointer; }
+article.admin summary h1 { cursor: pointer; }
 article.admin.edit section.content { display: none; }
 article.admin textarea {
     width: 100%;
