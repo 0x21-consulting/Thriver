@@ -7,25 +7,21 @@ Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
     tabs: [{ // If sidebar has tabs: use this property
-      title: 'New Site, New Features!',
-      id: 'mastheadSlideA', // These are for aria-controls
-      template: 'slideA', // This could really just be an editable content area instead of unique templates
+      title: 'By Your Side campaign',
+      id: 'mastheadSlideE',
+      template: 'slideE',
     }, {
-      title: 'The Movement is Bigger than WCASA',
+      title: 'The Bigger Movement',
       id: 'mastheadSlideB',
       template: 'slideB',
-    }, {
-      title: 'Five New SASP Members in 2017',
-      id: 'mastheadSlideC',
-      template: 'slideC',
     }, {
       title: 'WCASA\'s 2017-19 Budget Proposal',
       id: 'mastheadSlideD',
       template: 'slideD',
     }, {
-      title: 'By Your Side campaign',
-      id: 'mastheadSlideE',
-      template: 'slideE',
+      title: 'New Site, New Features!',
+      id: 'mastheadSlideA', // These are for aria-controls
+      template: 'slideA', // This could really just be an editable content area instead of unique templates
     }],
   }],
 });
