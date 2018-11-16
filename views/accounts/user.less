@@ -176,11 +176,23 @@ aside.off-canvas{
                     margin-top: -22px;
                     right: 60px;
                     .buttonColor(@teal);
-                    &:hover{ color: #fff !important; } // Scope issue
+                    &:hover, &:focus, &:active{ color: #fff !important; } // Scope issue
                 }
                 .toggleSwitch{
                     float: right;
                     margin-right: 68px;
+                }
+            }
+            &#preferences{
+                max-width:none;
+                padding: 0;
+                label.toggleSwitchLabel{
+                    width: 42%;
+                    text-align: right !important;
+                }
+                .inner-form{
+                    max-width: 360px;
+                    margin: 0 auto;
                 }
             }
             &#profile {
