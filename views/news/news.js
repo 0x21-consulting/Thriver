@@ -89,6 +89,8 @@ Template.aside.events({
         console.log('Subscription successful');
         console.log(data);
       }
+      document.querySelector('#admin-form-container-news-add button.exit').click();
+      document.getElementById('newsForm').reset();
     });
   },
 
