@@ -65,9 +65,10 @@ section#resource-center{
     text-align: left;
     .clearfix;
     padding: 20px;
+    &[data-id=library]{ padding: 20px 0; }
+    &.library-item{ padding: 0; }
     details{
         position: relative;
-        .shadow(far);
         .inner-desc{ padding: 0 20px 5px 20px; }
         dt{ clear: none; float: left; }
         dd{ float: left; margin-right: 10px; margin-left: 4px;}
@@ -121,6 +122,15 @@ section#resource-center{
         &[aria-expanded=true]{
             summary .meta{ display: none; }
         }
+        summary, p.meta.inner-desc, aside.info {
+            padding-left: 36px;
+            padding-right: 36px;
+        }
+        summary:hover{
+            background: rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        &[aria-expanded=true] summary:hover{ background: transparent; }
     }
     dl{
         //.dlColors(@black,@white,@white);

@@ -74,14 +74,16 @@
             {{/each}}
           </select>
         </div>
-        <div class="styledSelect fullBlockMob w-50 margin-right-0">
-          <label>Classification</label>
-          <select name="classifications" id="library-add-form-classifications" >
-            {{#each classifications}}
-              <option name="{{this}}">{{this}}</option>
-            {{/each}}
-          </select>
-        </div>
+        {{#if isAdmin}}
+          <div class="styledSelect fullBlockMob w-50 margin-right-0">
+            <label>Classification</label>
+            <select name="classifications" id="library-add-form-classifications" >
+              {{#each classifications}}
+                <option name="{{this}}">{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        {{/if}}
         <div class="styledSelect fullBlockMob w-33">
           <label>Status</label>
           <select name="status" id="library-add-form-status" >
@@ -98,16 +100,6 @@
           Copies
           <input id="library-add-form-copies" name="copies" type="number" />
         </label>
-        <details aria-expanded="false" class="admin-form-details">
-          <summary>
-            Add Subject Headings <i class="fas fa-caret-right"></i>
-          </summary>
-          <label>
-            Subject Headings
-            <textarea id="library-add-form-subjectHeading" name="subjectHeadings"></textarea>
-          </label>
-          <hr />
-        </details>
         <details aria-expanded="false" class="admin-form-details">
           <summary>
             Add Keywords <i class="fas fa-caret-right"></i>

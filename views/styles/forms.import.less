@@ -415,7 +415,9 @@ button.btn.btn-primary{
 form.flex-form{
     display: flex;
     width: 100%;
-    & > *{
-
+    & > .styledSelect{
+        margin-right: 6px;
+        &:last-child{ margin-right: 0; }
+        label{ display: block; }
     }
 }
