@@ -71,13 +71,12 @@ const utilityNavigationHelpers = {
   }, {
     // Language
     title: 'Obtener Ayuda',
-    type: 'link',
-    url: '/espanol',
+    sidebar: 'espanol',
+    type: 'sidebar',
     icon: 'flag',
     position: 'right',
     user: 'public',
     classes: 'transparent',
-    target: '_blank',
   }, {
     // Get Help
     title: 'Get Help',

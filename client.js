@@ -48,6 +48,7 @@ import '/views/resources/resources';
 import '/views/people/people';
 import '/views/work/work';
 import '/views/post/post';
+import '/views/espanol/espanol';
 
 // Libraries
 import '/views/lib/shims';

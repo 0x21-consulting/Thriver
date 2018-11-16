@@ -133,6 +133,21 @@ Template.aside.helpers({
     width: 700,
     position: 'right',
     template: 'legal-privacy-policy',
+  }, {
+    title: 'Obtener Ayuda',
+    icon: 'flag',
+    id: 'espanol',
+    width: 700,
+    position: 'right',
+    tabs: [{ // If sidebar has tabs: use this property
+      title: 'Información',
+      id: 'espanolInformacion',
+      template: 'espanolInformacion',
+    }, {
+      title: 'Más',
+      id: 'espanolMas',
+      template: 'espanolMas',
+    }],
   }],
 });
 
