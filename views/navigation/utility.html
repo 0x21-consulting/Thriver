@@ -2,6 +2,11 @@
     <nav id="utility" class="utility" data-focus="global">
         <ul>
             {{#if currentUser}}
+                <li class="feedback">
+                    {{> feedback}}
+                </li>
+            {{/if}}
+            {{#if currentUser}}
                 {{#each items}}
                     {{#if equals user 'active'}}
                         {{>utilityItem}}
@@ -20,7 +25,9 @@
                 {{/if}}
             {{/each}}
             {{#if isAdmin}}
-                {{> admin}}
+                <li class="right admin">
+                    {{> admin}}
+                </li>
                 {{> feedbackAdmin}}
             {{/if}}
         </ul>

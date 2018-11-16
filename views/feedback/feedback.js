@@ -14,7 +14,6 @@ Template.feedback.events({
    */
   'click #showFeedbackForm': () => {
     document.querySelector('#feedback').classList.remove('hide');
-    document.querySelector('#showFeedbackForm').classList.add('hide');
   },
 
   /**
@@ -129,7 +128,6 @@ Template.feedback.events({
         form.reset();
         form.querySelector('#selectElement').dataset.element = 'No element selected';
         form.classList.add('hide');
-        document.querySelector('#showFeedbackForm').classList.remove('hide');
       },
     );
   },
@@ -144,7 +142,6 @@ Template.feedback.events({
 
     // Hide form and show button
     document.querySelector('#feedback').classList.add('hide');
-    document.querySelector('#showFeedbackForm').classList.remove('hide');
   },
 });
 

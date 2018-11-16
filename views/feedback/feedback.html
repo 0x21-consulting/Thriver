@@ -1,12 +1,13 @@
 <template name="feedback">
-  <button id="showFeedbackForm" class="fa" title="Leave Feedback">&#xf27b; Provide Feedback</button>
+  <button id="showFeedbackForm" class="fa" title="Leave Feedback"><i class="fas fa-comments"></i></button>
   <form id="feedback" class="hide">
-    <p>Thank you for using our new site.  Feel free to use this form to leave any comments you have, and do pair your comments with a page element if you'd like.</p>
+    <h2>Thank you for using our new site.</h2>
+    <p>Feel free to use this form to leave any comments you have, and do pair your comments with a page element if you'd like.<br /></p>
     <button id="selectElement" data-element="No element selected">Select Page Element</button>
     <label><h4>Comments:</h4>
       <textarea required></textarea>
     </label>
-    <button type="submit">Submit</button>
+    <button type="submit">Provide Feedback</button>
     <button class="close">Close</button>
   </form>
 </template>
