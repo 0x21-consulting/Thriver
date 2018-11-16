@@ -1,6 +1,10 @@
 @import (reference) "/views/styles/index.less";
 @import (reference) "/views/styles/context.import.less";
 
+#main > section.masthead{
+    padding-bottom: 80px;
+}
+
 section#masthead, section.masthead{
     //background: black;
     overflow: hidden;
@@ -53,7 +57,7 @@ section#masthead menu.tabs, section.masthead menu.tabs{
     position: relative;
     z-index: 3;
     border-left: 2px solid #fff; //fallback
-    border-left: 2px solid rgba(255,255,255,0.75);
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
     padding: 20px 0px 50px 0px;
 }
 section#masthead div.tabs, section.masthead div.tabs{
@@ -69,7 +73,7 @@ section#masthead div.tabs, section.masthead div.tabs{
         }
         *{position: relative; z-index: 3;}
     }
-    > article:first-child, > article:nth-child(4){
+    > article:first-child, > article:nth-child(3){
        // background-image: url('/lib/img/mastheadArticle.gif');
         a{.textButtonColor(@yellow) !important;}
         a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
@@ -91,7 +95,7 @@ section#masthead div.tabs, section.masthead div.tabs{
             @media print{ background: transparent;}
         }
     }
-    > article:nth-child(2), > article:nth-child(5){
+    > article:nth-child(2), > article:nth-child(4){
         a{.textButtonColor(lighten(@yellow,15%)) !important;}
         a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
         &:after{
@@ -107,25 +111,8 @@ section#masthead div.tabs, section.masthead div.tabs{
             @media print{ background: transparent;}
         }
     }
-    > article:nth-child(3){
-       // background-image: url('/lib/img/mastheadArticle.gif');
-        a{.textButtonColor(@yellow) !important;}
-        a.button{.buttonColor(#f46b45) !important; color:@white !important;}
-        &:after{
-            content:'';
-            top: 0; left: 0;
-            opacity: 0.9;
-            width:100%;
-            height: 100%;
-            position: absolute;
-            background: #f46b45;
-            background: -webkit-linear-gradient(to left, #f46b45, #eea849);
-            background: linear-gradient(to left, #f46b45, #eea849);
-            @media print{ background: transparent;}
-        }
-    }
 }
-//section#masthead, section.masthead{
+
 
 section#masthead, section.masthead{
     color:@white;
@@ -167,7 +154,7 @@ section#masthead, section.masthead{
     }
     h1{
         margin: 0px 0px 20px 0px;
-        .font(3.6,4.2,0.15,@bold,uppercase);
+        .font(4.6,5,0.15,400,uppercase);
         @media @mobile{
             .font(2.6,3.2,0.15,@bold,uppercase);
             text-align: center;
@@ -175,7 +162,8 @@ section#masthead, section.masthead{
         }
     }
     p, li{
-    .font(1.4,2.5,0,@normal,none);
+    .font(1.6,3,0,@normal,none);
+    opacity: 0.9;
     @media @mobile{
         .font(1.4,1.9,0.025,@normal,none);
     }
@@ -197,7 +185,7 @@ section#masthead, section.masthead{
     menu.tabs{
         &:before{
             content:"What's New";
-            .font(1.8,2.2,0.025,@normal,uppercase);
+            .font(1.4,2.2,0.025,@normal,uppercase);
             color: @white;
             margin: 0px 0px 16px 0px;
             padding: 0px 0px 0px 30px;
@@ -206,19 +194,17 @@ section#masthead, section.masthead{
         > li a{
             list-style: none;
             display: inline-block;
-            .font(1.4,1.7,0.025,@normal,uppercase);
+            .font(1.5,1.8,0.025,@normal,uppercase);
             margin: 0px;
             //.textButtonColor(@gray);
             cursor: pointer;
-            .opacity(1);
+            .opacity(0.6);
             border-bottom: 2px solid transparent;
             padding:25px 15px 15px 30px;
             .trans(opacity @durationDefault @easeDefault 0ms);
             width: auto;
-            &[aria-expanded="true"]{
+            &[aria-expanded="true"], &:hover{
                 .opacity(1);
-                //border-bottom: 2px solid @gray;
-                //border-bottom: 2px solid rgba(255,255,255,0.15);
             }
             &:last-child{
                 margin:0px;
@@ -237,7 +223,7 @@ section#masthead, section.masthead{
                 left: 0;
                 width: 100%;
                 height: 2px;
-                background-color: @white;
+                background-color: rgba(255, 255, 255, 0.35);
                 top: 100%;
                 width: ~'calc(100% - 20px)';
                 .opacity(0);

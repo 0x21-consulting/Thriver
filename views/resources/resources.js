@@ -39,6 +39,14 @@ Meteor.subscribe('library');
 Template.registerHelper('simpleString', string => string
   .toLowerCase().replace(/\s/g, ''));
 
+Template.registerHelper('truncate', function(string) {
+  if (string.length >= 2) {
+    const stringTruncated = `${string.substring(0, 2)}...`;
+    return new Template.SafeString(stringTruncated);
+  }
+  return new Template.SafeString(string);
+});
+
 // Events
 Template.aside.events({
   /**
@@ -93,9 +101,7 @@ Template.aside.events({
     const data = {
       title: document.getElementById('library-add-form-title').value,
       description: document.getElementById('library-add-form-desc').value,
-      callNumber: document.getElementById('library-add-form-callNumber').value,
       copies: document.getElementById('library-add-form-copies').value,
-      subjectHeading: document.getElementById('library-add-form-subjectHeading').value,
       classification: document.getElementById('library-add-form-classifications').value,
       material: document.getElementById('library-add-form-material').value,
       status: document.getElementById('library-add-form-status').value,
@@ -242,4 +248,21 @@ Template.libraryAddForm.helpers({
    * @returns {Mongo.Collection}
    */
   library: () => Library.collection,
+});
+
+Template.resourceData.helpers({
+  title: 'Data',
+  items: [{
+    tabs: [{ // If sidebar has tabs: use this property
+      title: 'State',
+      icon: 'user',
+      id: 'resourceDataState',
+      template: 'resourceDataState',
+    }, {
+      title: 'National',
+      icon: 'cal',
+      id: 'resourceDataNational',
+      template: 'resourceDataNational',
+    }],
+  }],
 });

@@ -20,13 +20,6 @@
       {{> aside}}
       <div class="overlay" id="overlay" role="presentational" aria-hidden="true"></div>
     </div>
-    {{#if currentUser}}
-      {{> feedback}}
-    {{/if}}
-    {{#if isAdmin}}
-      {{> admin}}
-      {{> feedbackAdmin}}
-    {{/if}}
     {{#if gaID}}
       <!-- Google Analytics -->
       <script>

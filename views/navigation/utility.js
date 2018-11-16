@@ -68,14 +68,16 @@ const utilityNavigationHelpers = {
     type: 'null',
     user: 'active',
     action: 'signout',
-  }, { /*
+  }, {
     // Language
-    icon: 'flag',
+    title: 'Obtener Ayuda',
+    sidebar: 'espanol',
     type: 'sidebar',
-    sidebar: 'lang',
+    icon: 'flag',
     position: 'right',
-    user: 'public'
-  },{ */
+    user: 'public',
+    classes: 'transparent',
+  }, {
     // Get Help
     title: 'Get Help',
     type: 'link',

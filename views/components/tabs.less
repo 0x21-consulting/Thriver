@@ -26,7 +26,7 @@ menu.tabs{
         flex: 1;
         display: flex;
         a{
-            .font(1.2,1.2,0.2,@bold,uppercase);
+            .font(1.18,1.2,0.2,600,uppercase);
             display: flex;
             &:before{margin-right: 5px;}
             width:100%;
@@ -65,12 +65,19 @@ menu.tabs{
     }
 
 }
-div.tabs{
+#main div.tabs{
     background-color: @tabBgColor;
     > [aria-hidden=true]{display: none;}
     > [aria-hidden=false]{display: block;}
     &.top{}
 }
+aside.off-canvas header h2, #main div.tabs h2{
+    font-size: 1.8rem;
+    padding: 24px;
+    font-weight: 500;
+    margin-top: 23px;
+}
+
 
 //Tabs Animation
 div.tabs article[aria-hidden="false"]{
@@ -104,6 +111,7 @@ div.tabs article[aria-hidden="true"]{
             }
     });
     .animation(animateTabLeave @durationDefault @easeDefault both);
+    display: none;
 
 }
 @media (min-width:768px){
@@ -237,7 +245,7 @@ article.admin .itemCategory aside.admin {
     }
 }
 
-article.admin h2, article.admin summary h1 { cursor: pointer; }
+article.admin summary h1 { cursor: pointer; }
 article.admin.edit section.content { display: none; }
 article.admin textarea {
     width: 100%;

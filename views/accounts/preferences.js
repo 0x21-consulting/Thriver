@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-import './profile.html';
+import './preferences.html';
 
 /**
  * @description
@@ -36,10 +36,12 @@ const updateProfileField = (fieldName, fieldValue) => {
 };
 
 // Helpers
-Template.profile.helpers({
-  // Populate Profile tab under Account Overview
-  heading: 'Profile Overview',
+Template.preferences.helpers({
+  // Populate Preferences tab under Account Overview
+  heading: 'Preferences',
   submitValue: 'Update Account',
+  dieteryRestrictions: ['Vegan', 'Vegetarian', 'Pescetarian'],
+  emergencyRelationshipChoices: ['Parent', 'Child', 'Sibling', 'Partner', 'Relative', 'Other'],
 
   /**
    * @summary Pass user context to profile form
@@ -62,7 +64,7 @@ Template.profile.helpers({
 });
 
 // Events
-Template.profile.events({
+Template.preferences.events({
   'blur input[type="text"][name*="profile."]': (event) => {
     // Handle events for input boxes
     updateProfileField(event.target.name, event.target.value);

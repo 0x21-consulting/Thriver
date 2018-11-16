@@ -53,7 +53,6 @@ Template.library.helpers({
       $or: Resources.search.get() instanceof RegExp ? [
         { title: Resources.search.get() },
         { description: Resources.search.get() },
-        { subjectHeading: Resources.search.get() },
       ] : [{}],
     }, {
       limit: Resources.quantity.get(),

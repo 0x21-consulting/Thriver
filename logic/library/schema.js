@@ -25,9 +25,7 @@ Library.schema = new SimpleSchema({
   },
   title: { type: String, optional: true },
   description: { type: String, optional: true },
-  callNumber: { type: String, optional: true },
   copies: { type: SimpleSchema.Integer, optional: true },
-  subjectHeading: { type: String, optional: true },
   classification: {
     type: String,
     optional: true,

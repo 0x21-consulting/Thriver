@@ -1,9 +1,9 @@
 <!-- Admin panel on left side of page -->
 <template name="admin">
-  <button id="admin-popout" title="View admin controls">&#xf0ad;</button>
+  <button id="admin-popout" title="View admin controls"><i class="fas fa-plus"></i></button>
   <aside id="admin-controls" class="hide">
-    <button id="newSection" draggable="true" title="Add Page Section">&#xf12e;</button>
-    <button id="viewFeedback" title="View Feedback">&#xf27b;</button>
+    <button id="newSection" draggable="true" title="Add Page Section"><i class="fas fa-puzzle-piece"></i></button>
+    <button id="viewFeedback" title="View Feedback"><i class="fas fa-comments"></i></button>
   </aside>
 </template>
 
@@ -11,9 +11,8 @@
 <template name="sectionAdmin">
   <aside class="section-controls">
     <span class="fa direction">&#xf0ab;</span>
-    <p>Section:</p>
     <input type="text" class="section-name" placeholder="Section Name" value="{{name}}" />
     <span class="fa edit">&#xf040;</span>
-    <button class="section-delete" title="Delete">Remove Section <span>&#xf014;</span></button>
+    <button class="section-delete" title="Delete"><span>&#xf014;</span></button>
   </aside>
 </template>

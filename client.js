@@ -23,6 +23,7 @@ import '/logic/sections/client';
 import '/views/accounts/events';
 import '/views/accounts/notifications';
 import '/views/accounts/profile';
+import '/views/accounts/preferences';
 import '/views/accounts/register';
 import '/views/accounts/requests';
 import '/views/accounts/signin';
@@ -48,6 +49,7 @@ import '/views/resources/resources';
 import '/views/people/people';
 import '/views/work/work';
 import '/views/post/post';
+import '/views/espanol/espanol';
 
 // Libraries
 import '/views/lib/shims';

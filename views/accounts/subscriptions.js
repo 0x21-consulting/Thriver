@@ -75,54 +75,62 @@ Template.subscriptions.helpers({
     heading: 'Mailing Lists (Listservs)',
     items: [{
       title: 'Expert Witness',
+      description: 'Advocates and other service provider staff to solicit expert witnesses and for professionals to offer themselves as expert witnesses.',
       id: 'expertWitnessToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.expertWitness;
-        }
-
-        return false;
-      },
+      url: 'http://lists.wcasa-blog.org/listinfo.cgi/expert-witness-wcasa-blog.org',
     }, {
       title: 'SA Prevention',
+      description: 'Share resources with Sexual assault prevention staff.',
       id: 'saPreventionToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.saPrevention;
-        }
-
-        return false;
-      },
+      url: 'http://lists.wcasa-blog.org/listinfo.cgi/wi-sa-prevention-wcasa-blog.org',
     }, {
       title: 'Survivors & Allies Task Force',
+      description: 'Focused on survivors and their allies, meant as a space to suggest activities, share insights and resources, and support survivors.',
       id: 'saTaskForceToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.saTaskForce;
-        }
-
-        return false;
-      },
+      url: 'http://lists.wcasa-blog.org/listinfo.cgi/wi-satf-wcasa-blog.org',
     }, {
       title: 'Sexual Assault Advocates',
+      description: 'Sexual assault advocates across the state can share resources and ask questions.',
       id: 'saAdvocatesToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.saAdvocates;
-        }
-
-        return false;
-      },
+      url: 'http://lists.wcasa-blog.org/listinfo.cgi/wi-sa-advocates-wcasa-blog.org',
     }, {
       title: 'Campus Sexual Assault',
+      description: 'Specifically for staff and those associated with the campus sexual assault field.',
       id: 'campusSAToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.campusSA;
-        }
-
-        return false;
-      },
+      url: 'http://lists.wcasa-blog.org/listinfo.cgi/campussa-wcasa-blog.org',
+    }],
+  }, {
+    heading: 'Regional Mailing Lists (Listservs)',
+    items: [{
+      title: 'Southwest Region',
+      description: 'Adams, Crawford, Grant, Iowa, Juneau, La Crosse, Lafayette, Monroe, Richland, Sauk, Vernon',
+      id: 'listServSWRegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Southwest%20Regional%20Listserv',
+    }, {
+      title: 'South Central Region',
+      description: 'Columbia, Dane, Dodge, Green, Jefferson, Rock, Walworth',
+      id: 'listservSCRegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20South%20Central%20Regional%20Listserv',
+    }, {
+      title: 'Southeast Region',
+      description: 'Kenosha, Milwaukee, Ozaukee, Racine, Washington, Waukesha',
+      id: 'listservSERegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Southeast%20Regional%20Listserv',
+    }, {
+      title: 'Northwest Region',
+      description: 'Ashland, Barron, Bayfield, Buffalo, Burnett, Chippewa, Clark, Douglas, Dunn, Eau Claire, Jackson, Pepin, Pierce, Polk, Rusk, Sawyer, St. Croix, Trempealeau, Washburn',
+      id: 'listservNWRegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Northwest%20Regional%20Listserv',
+    }, {
+      title: 'North Central Region',
+      description: 'Florence, Forest, Iron, Langlade, Lincoln, Marathon, Oneida, Portage, Price, Taylor, Vilas, Wood',
+      id: 'liserservNCRegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20North%20Central%20Regional%20Listserv',
+    }, {
+      title: 'Northeast Region',
+      description: 'Brown, Calumet, Door, Fond du Lac, Green Lake, Kewaunee, Manitowoc, Marinette, Marquette, Menominee, Oconto, Outagamie, Shawano, Sheboygan, Waupaca, Waushara, Winnebago',
+      id: 'listservNERegion',
+      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Northeast%20Regional%20Listserv',
     }],
   }],
 });

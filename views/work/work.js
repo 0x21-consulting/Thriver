@@ -389,3 +389,5 @@ Template.work.onRendered(() => {
  * @method
  */
 Template.work.onRendered(detailsShim.init);
+
+export default getValue;

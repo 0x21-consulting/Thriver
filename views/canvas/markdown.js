@@ -1,5 +1,10 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import Marked from '/views/lib/marked';
+
+import './markdown.html';
+
+const preview = new ReactiveVar('');
 
 /**
  * @summary Convert markdown into HTML
@@ -16,4 +21,18 @@ Template.registerHelper('markdown', (text) => {
 
   // Remove <p> tags
   return html.trim().replace(/^<p>/i, '').replace(/<\/p>$/i, '');
+});
+
+Template.markdownEditor.helpers({
+  preview: () => preview.get(),
+});
+
+Template.markdownEditor.events({
+  'keyup .markdown-editor textarea'(event) {
+    preview.set(event.target.value);
+  },
+});
+
+Template.markdownEditor.onRendered(() => {
+  preview.set(Template.instance().data.content);
 });

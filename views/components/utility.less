@@ -35,6 +35,28 @@ nav.utility{
         figure[aria-hidden="false"]{display: block !important;}
         figure[aria-hidden="false"]{display: none !important;} // Temp hide the hotline modal
     }
+    li.admin{
+        width: 42px;
+        button{
+            padding: 3px 12px 3px 12px;
+            color: #00bbca;
+            border: 2px dashed #adbfc7;
+            margin: 2px;
+            &:focus{
+                background: #00bbca;
+                color: #fff;
+                border-color: transparent;
+                box-shadow: none;
+            }
+        }
+    }
+    li.feedback{
+        button{
+            background-color: #d5dee2;
+            color: #36474f;
+            padding: 12px 12px 11px 12px;
+        }
+    }
     ul > li> a{
         &[href="/"], &[href="/register"]{
             background-color: transparent;
@@ -88,6 +110,11 @@ nav.utility{
             &[aria-expanded="true"]:after{ display: none;}
         }
     }
+    ul > li.transparent a{
+        background-color: transparent;
+        color: @baseTransparentColor;
+        &:hover{.boxShadow(none);}
+    }
 }
 
 // Constants
@@ -117,7 +144,7 @@ nav.utility{
         //line-height: @utilityHeight;
         padding: @utilityaPadding;
         background-color: @utilityButtonDefaultBgColor;
-        font-weight: 700;
+        font-weight: 600;
         font-size: 13px;
         letter-spacing: 1px;
         @media (max-width:1200px){ font-size: 11px; }
@@ -135,6 +162,7 @@ nav.utility{
         &:hover, &:focus{.boxShadow(2px 2px 2px 0px rgba(0,0,0,0.2));}
         &[aria-expanded="true"]{
             background-color: @utilityButtonActiveBgColor;
+            color: #fff;
             .boxShadow(inset 0px 0px 2px 0px rgba(0,0,0,0.5));
         }
     }

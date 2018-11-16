@@ -21,20 +21,25 @@ Template.aside.helpers({
       id: 'profile',
       template: 'profile',
     }, {
-      title: 'Subscriptions',
-      icon: 'envelope',
-      id: 'subscriptions',
-      template: 'subscriptions',
-    }, {
       title: 'Events',
       icon: 'cal',
       id: 'events',
       template: 'eventsRegistered',
     }, {
+      title: 'Subscriptions',
+      icon: 'envelope',
+      id: 'subscriptions',
+      template: 'subscriptions',
+    }, {
       title: 'Receipts',
       icon: 'cal',
       id: 'receipts',
       template: 'receiptsList',
+    }, {
+      title: 'Preferences',
+      icon: 'gear',
+      id: 'preferences',
+      template: 'preferences',
     }],
   }, {
     title: 'Notifications',
@@ -73,6 +78,10 @@ Template.aside.helpers({
     class: 'top',
     subhead: 'lcSubHead',
     tabs: [{
+      title: 'Library',
+      id: 'library',
+      template: 'library',
+    }, {
       title: 'Infosheets',
       id: 'infosheets',
       template: 'infosheets',
@@ -81,9 +90,9 @@ Template.aside.helpers({
       id: 'webinars',
       template: 'webinars',
     }, {
-      title: 'Library',
-      id: 'library',
-      template: 'library',
+      title: 'Data',
+      id: 'data',
+      template: 'resourceData',
     }],
   }, {
     title: 'News',
@@ -129,6 +138,21 @@ Template.aside.helpers({
     width: 700,
     position: 'right',
     template: 'legal-privacy-policy',
+  }, {
+    title: 'Obtener Ayuda',
+    icon: 'flag',
+    id: 'espanol',
+    width: 700,
+    position: 'right',
+    tabs: [{ // If sidebar has tabs: use this property
+      title: 'Información',
+      id: 'espanolInformacion',
+      template: 'espanolInformacion',
+    }, {
+      title: 'Más',
+      id: 'espanolMas',
+      template: 'espanolMas',
+    }],
   }],
 });
 

@@ -9,10 +9,14 @@
                             {{title}}
                             <span class="description">{{description}}</span>
                         </label>
-                        <div class="toggleSwitch">
-                            <input id="{{id}}" type="checkbox" checked="{{checked}}">
-                            <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
-                        </div>
+                        {{#if url}}
+                            <a href="{{url}}" target="_blank" title="Manage Listserv" class="button btn">Manage</a>
+                        {{else}}
+                            <div class="toggleSwitch">
+                                <input id="{{id}}" type="checkbox" checked="{{checked}}">
+                                <label for="{{id}}" role="checkbox" aria-checked="{{checked}}"></label>
+                            </div>
+                        {{/if}}
                     </li>
                 {{/each}}
             </ul>

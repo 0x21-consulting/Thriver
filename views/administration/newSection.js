@@ -182,7 +182,7 @@ const placeholder = (event) => {
   const { parent } = target.dataset;
 
   // Create a new section
-  const section = new Section(parent);
+  const section = Section(parent);
 
   // More useful
   const oEvent = event.originalEvent;
@@ -215,7 +215,7 @@ Template.body.events({
 
     // If there are no sections on the page, add section, otherwise ignore
     if (!document.querySelector('.masterContainer > section')) {
-      document.querySelector('.masterContainer').appendChild(new Section());
+      document.querySelector('.masterContainer').appendChild(Section());
     }
   },
 });
