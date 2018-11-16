@@ -23,6 +23,7 @@ import '/logic/sections/client';
 import '/views/accounts/events';
 import '/views/accounts/notifications';
 import '/views/accounts/profile';
+import '/views/accounts/preferences';
 import '/views/accounts/register';
 import '/views/accounts/requests';
 import '/views/accounts/signin';
