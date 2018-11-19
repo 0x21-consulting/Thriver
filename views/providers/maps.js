@@ -4,6 +4,7 @@ import { Tracker } from 'meteor/tracker';
 import Providers from '/logic/providers/schema';
 import Settings from '/logic/core/settings';
 import geoXML3 from './geoxml3';
+//import mapLabel from '/views/lib/maplabel.js';
 
 // Subscribe to Provider data
 Meteor.subscribe('providers');
@@ -149,7 +150,17 @@ const initialize = () => {
       featureType: 'poi',
       elementType: 'labels',
       stylers: [{ visibility: 'off' }],
-    }, {
+    },
+    /*
+    {
+      featureType: 'administrative.locality',
+      elementType: 'labels',
+      stylers: [{
+        visibility: 'off',
+      }],
+    },
+    */
+    {
       stylers: [
         { gamma: 0.78 },
         { lightness: 5 },
@@ -165,6 +176,296 @@ const initialize = () => {
         { gamma: 1.94 },
       ],
     }]);
+
+    // Country Labels
+    /*
+    const createMapLabel = (label, coordinates) => {
+      const mapLabel = new mapLabel({
+        text: label,
+        position: new google.maps.LatLng(coordinates[0], coordinates[1]),
+        map: mapObject,
+        fontSize: 20,
+        align: 'right',
+      });
+      return mapLabel;
+    };
+    createMapLabel('', [42.070704, -92.729125]);
+    */
+
+    /* TODO: MOVE INTO LIBRARY FILE */
+    /**
+     * @fileoverview Map Label.
+     *
+     * @author Luke Mahe (lukem@google.com),
+     *         Chris Broadfoot (cbro@google.com)
+     */
+
+    /**
+     * Creates a new Map Label
+     * @constructor
+     * @extends google.maps.OverlayView
+     * @param {Object.<string, *>=} opt_options Optional properties to set.
+     */
+    function MapLabel(opt_options) {
+      this.set('fontFamily', 'raleway', 'sans-serif');
+      this.set('fontSize', 12);
+      this.set('fontColor', '#000000');
+      this.set('strokeWeight', 10);
+      this.set('strokeColor', '#ffffff');
+      this.set('align', 'center');
+
+      this.set('zIndex', 1e3);
+
+      this.setValues(opt_options);
+    }
+    MapLabel.prototype = new google.maps.OverlayView;
+
+    window['MapLabel'] = MapLabel;
+
+
+    /** @inheritDoc */
+    MapLabel.prototype.changed = function(prop) {
+      switch (prop) {
+        case 'fontFamily':
+        case 'fontSize':
+        case 'fontColor':
+        case 'strokeWeight':
+        case 'strokeColor':
+        case 'align':
+        case 'text':
+          return this.drawCanvas_();
+        case 'maxZoom':
+        case 'minZoom':
+        case 'position':
+          return this.draw();
+      }
+    };
+
+    /**
+     * Draws the label to the canvas 2d context.
+     * @private
+     */
+    MapLabel.prototype.drawCanvas_ = function() {
+      var canvas = this.canvas_;
+      if (!canvas) return;
+
+      var style = canvas.style;
+      style.zIndex = /** @type number */(this.get('zIndex'));
+
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = this.get('strokeColor');
+      ctx.fillStyle = this.get('fontColor');
+      ctx.font = this.get('fontSize') + 'px ' + this.get('fontFamily');
+
+      var strokeWeight = Number(this.get('strokeWeight'));
+
+      var text = this.get('text');
+      if (text) {
+        if (strokeWeight) {
+          ctx.lineWidth = strokeWeight;
+          ctx.strokeText(text, strokeWeight, strokeWeight);
+        }
+
+        ctx.fillText(text, strokeWeight, strokeWeight);
+
+        var textMeasure = ctx.measureText(text);
+        var textWidth = textMeasure.width + strokeWeight;
+        style.marginLeft = this.getMarginLeft_(textWidth) + 'px';
+        // Bring actual text top in line with desired latitude.
+        // Cheaper than calculating height of text.
+        style.marginTop = '-0.4em';
+      }
+    };
+
+    /**
+     * @inheritDoc
+     */
+    MapLabel.prototype.onAdd = function() {
+      var canvas = this.canvas_ = document.createElement('canvas');
+      var style = canvas.style;
+      style.position = 'absolute';
+
+      var ctx = canvas.getContext('2d');
+      ctx.lineJoin = 'round';
+      ctx.textBaseline = 'top';
+
+      this.drawCanvas_();
+
+      var panes = this.getPanes();
+      if (panes) {
+        panes.mapPane.appendChild(canvas);
+      }
+    };
+    MapLabel.prototype['onAdd'] = MapLabel.prototype.onAdd;
+
+    /**
+     * Gets the appropriate margin-left for the canvas.
+     * @private
+     * @param {number} textWidth  the width of the text, in pixels.
+     * @return {number} the margin-left, in pixels.
+     */
+    MapLabel.prototype.getMarginLeft_ = function(textWidth) {
+      switch (this.get('align')) {
+        case 'left':
+          return 0;
+        case 'right':
+          return -textWidth;
+      }
+      return textWidth / -2;
+    };
+
+    /**
+     * @inheritDoc
+     */
+    MapLabel.prototype.draw = function() {
+      var projection = this.getProjection();
+
+      if (!projection) {
+        // The map projection is not ready yet so do nothing
+        return;
+      }
+
+      if (!this.canvas_) {
+        // onAdd has not been called yet.
+        return;
+      }
+
+      var latLng = /** @type {google.maps.LatLng} */ (this.get('position'));
+      if (!latLng) {
+        return;
+      }
+      var pos = projection.fromLatLngToDivPixel(latLng);
+
+      var style = this.canvas_.style;
+
+      style['top'] = pos.y + 'px';
+      style['left'] = pos.x + 'px';
+
+      style['visibility'] = this.getVisible_();
+    };
+    MapLabel.prototype['draw'] = MapLabel.prototype.draw;
+
+    /**
+     * Get the visibility of the label.
+     * @private
+     * @return {string} blank string if visible, 'hidden' if invisible.
+     */
+    MapLabel.prototype.getVisible_ = function() {
+      var minZoom = /** @type number */(this.get('minZoom'));
+      var maxZoom = /** @type number */(this.get('maxZoom'));
+
+      if (minZoom === undefined && maxZoom === undefined) {
+        return '';
+      }
+
+      var map = this.getMap();
+      if (!map) {
+        return '';
+      }
+
+      var mapZoom = map.getZoom();
+      if (mapZoom < minZoom || mapZoom > maxZoom) {
+        return 'hidden';
+      }
+      return '';
+    };
+
+    /**
+    * @inheritDoc
+    */
+    MapLabel.prototype.onRemove = function() {
+      var canvas = this.canvas_;
+      if (canvas && canvas.parentNode) {
+        canvas.parentNode.removeChild(canvas);
+      }
+    };
+    MapLabel.prototype['onRemove'] = MapLabel.prototype.onRemove;
+    /** END TODO: MOVE */
+
+    const newLabel = (text, coordinates) => {
+      /* eslint-disable no-new */
+      new MapLabel({
+        text,
+        position: new google.maps.LatLng(coordinates[0], coordinates[1]),
+        map: mapObject,
+        fontSize: 12,
+        align: 'center',
+      });
+    };
+
+    newLabel('Adams', [43.973763, -89.767223]);
+    newLabel('Ashland', [46.546291, -90.665154]);
+    newLabel('Barron', [45.437192, -91.852892]);
+    newLabel('Bayfield', [46.634199, -91.177282]);
+    newLabel('Brown', [44.473961, -87.995926]);
+    newLabel('Buffalo', [44.389759, -91.758714]);
+    newLabel('Burnett', [45.865255, -92.367978]);
+    newLabel('Calumet', [44.078410, -88.212132]);
+    newLabel('Chippewa', [45.069092, -91.283505]);
+    newLabel('Clark', [44.733596, -90.610201]);
+    newLabel('Columbia', [43.471882, -89.330472]);
+    newLabel('Crawford', [43.249910, -90.951230]);
+    newLabel('Dane', [43.067468, -89.417852]);
+    newLabel('Dodge', [43.422706, -88.704379]);
+    newLabel('Door', [45.067808, -87.087936]);
+    newLabel('Douglas', [46.463316, -91.892580]);
+    newLabel('Dunn', [44.947741, -91.897720]);
+    newLabel('Eau Claire', [44.726355, -91.286414]);
+    newLabel('Florence', [45.849646, -88.400322]);
+    newLabel('Fond Du Lac', [43.754722, -88.493284]);
+    newLabel('Forest', [45.666882, -88.773225]);
+    newLabel('Grant', [42.870062, -90.695368]);
+    newLabel('Green', [42.677728, -89.605639]);
+    newLabel('Green Lake', [43.761410, -88.987228]);
+    newLabel('Iowa', [43.001021, -90.133692]);
+    newLabel('Iron', [46.326550, -90.261299]);
+    newLabel('Jackson', [44.324895, -90.806541]);
+    newLabel('Jefferson', [43.013807, -88.773986]);
+    newLabel('Juneau', [43.932836, -90.113984]);
+    newLabel('Kenosha', [42.579703, -87.424898]);
+    newLabel('Kewaunee', [44.500949, -87.161813]);
+    newLabel('La Crosse', [43.908222, -91.111758]);
+    newLabel('Lafayette', [42.655578, -90.130292]);
+    newLabel('Langlade', [45.259204, -89.068190]);
+    newLabel('Lincoln', [45.338319, -89.742082]);
+    newLabel('Manitowoc', [44.105108, -87.313828]);
+    newLabel('Marathon', [44.898036, -89.757823]);
+    newLabel('Marinette', [45.346899, -87.991198]);
+    newLabel('Marquette', [43.826053, -89.409095]);
+    newLabel('Menominee', [44.991304, -88.669251]);
+    newLabel('Milwaukee', [43.017655, -87.481575]);
+    newLabel('Monroe', [43.945175, -90.619969]);
+    newLabel('Oconto', [44.996575, -88.206516]);
+    newLabel('Oneida', [45.713791, -89.536693]);
+    newLabel('Outagamie', [44.418226, -88.464988]);
+    newLabel('Ozaukee', [43.360715, -87.496553]);
+    newLabel('Pepin', [44.627436, -91.834890]);
+    newLabel('Pierce', [44.725337, -92.426279]);
+    newLabel('Polk', [45.468030, -92.453154]);
+    newLabel('Portage', [44.476246, -89.498070]);
+    newLabel('Prince', [45.679072, -90.359650]);
+    newLabel('Racine', [42.754075, -87.414676]);
+    newLabel('Richland', [43.376199, -90.435693]);
+    newLabel('Rock', [42.669931, -89.075119]);
+    newLabel('Rusk', [45.472734, -91.136745]);
+    newLabel('Saint Croix', [45.028959, -92.447284]);
+    newLabel('Sauk', [43.427998, -89.943329]);
+    newLabel('Sawyer', [45.864913, -91.147130]);
+    newLabel('Shawano', [44.789641, -88.755813]);
+    newLabel('Sheboygan', [43.746002, -87.730546]);
+    newLabel('Taylor', [45.211656, -90.504853]);
+    newLabel('Trempealeau', [44.303050, -91.358867]);
+    newLabel('Vernon', [43.599858, -90.815226]);
+    newLabel('Vilas', [46.049848, -89.501254]);
+    newLabel('Walworth', [42.668110, -88.541731]);
+    newLabel('Washburn', [45.892463, -91.796423]);
+    newLabel('Washington', [43.391156, -88.232917]);
+    newLabel('Waukesha', [43.019308, -88.306707]);
+    newLabel('Waupaca', [44.478004, -88.967006]);
+    newLabel('Waushara', [44.112825, -89.239752]);
+    newLabel('Winnebago', [44.085707, -88.668149]);
+    newLabel('Wood', [44.461413, -90.038825]);
 
     // Wait for collection to become available before acting on it
     Tracker.autorun((c) => {
@@ -232,7 +533,7 @@ const initialize = () => {
     // Create a WCASA map marker
     (() => {
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng(43.0346679, -89.4252416),
+        position: new google.maps.LatLng(),
         icon: createPin('#062131', '##062131'),
         animation: google.maps.Animation.DROP,
         title: 'WCASA',
