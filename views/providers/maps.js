@@ -103,8 +103,11 @@ const initialize = () => {
       maxZoom: 16,
       streetViewControl: false,
       zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_BOTTOM,
         style: 3,
       },
+      mapTypeControl: false,
+      fullscreenControl: false,
     };
 
     // Map instance
