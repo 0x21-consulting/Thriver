@@ -110,6 +110,21 @@ const initialize = () => {
     // Map instance
     mapObject = new google.maps.Map(mapElement, options);
 
+    // Drag Bounds
+    const allowedBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(42.070704, -92.729125),
+      new google.maps.LatLng(46.503119, -86.315914),
+    );
+    let lastValidCenter = mapObject.getCenter();
+
+    google.maps.event.addListener(mapObject, 'center_changed', function() {
+      if (allowedBounds.contains(mapObject.getCenter())) {
+        lastValidCenter = mapObject.getCenter();
+        return;
+      }
+      mapObject.panTo(lastValidCenter);
+    });
+
     // State Layer
     const stateLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
@@ -287,12 +302,6 @@ const moveMap = (county) => {
     document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(mapObject, 'resize');
   }
-
-  // Bounds
-  mapObject.fitBounds(new google.maps.LatLngBounds(
-    new google.maps.LatLng(x[1], y[1]), // Southwest
-    new google.maps.LatLng(x[0], y[0]), // to Northeast
-  ));
 
   return true;
 };
