@@ -139,19 +139,20 @@ Template.aside.helpers({
     position: 'right',
     template: 'legal-privacy-policy',
   }, {
-    title: 'Obtener Ayuda',
+    title: '¡Bienvenidos a la página web en Español de WCASA!',
     icon: 'flag',
     id: 'espanol',
     width: 700,
     position: 'right',
+    subhead: 'espanolSubhead',
     tabs: [{ // If sidebar has tabs: use this property
-      title: 'Información',
-      id: 'espanolInformacion',
-      template: 'espanolInformacion',
+      title: 'Servicios Bilingües',
+      id: 'espanolServiciosBilingues',
+      template: 'espanolServiciosBilingues',
     }, {
-      title: 'Más',
-      id: 'espanolMas',
-      template: 'espanolMas',
+      title: 'Recursos',
+      id: 'espanolRecursos',
+      template: 'espanolRecursos',
     }],
   }],
 });

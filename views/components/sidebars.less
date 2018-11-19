@@ -11,6 +11,7 @@
 
 //Sidebar Styles
 aside.off-canvas{
+    header, header p{ color: #fff; }
     background-color: @sidebarPrimaryColor;
     text-align: center;
     @media @mobile{ text-align: left; }
@@ -23,7 +24,9 @@ aside.off-canvas{
         h1, h2{
             display: block;
             padding: 50px 0px 50px 0px;
-            margin: 0;
+            max-width: 460px;
+            margin: 0 auto;
+            line-height: 2.4rem;
             text-align: center;
             color: #ffffff;
             font-size: 16px;
@@ -326,7 +329,21 @@ article a.icon:before{
 }
 
 // Sidebar Editable Content Styles
-.sidebar-editable{
+aside.off-canvas .sidebar-editable{
     padding: 40px;
-    &, p{ color: #fff; }
+    text-align:left; 
+    &, h2, h3, h4, p{ color: #fff; }
+    h3{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #fff;
+        padding: 20px;
+        background: rgba(0,0,0,0.15);        
+     }
+    h4{ margin: 0; }
+    p{ margin-bottom: 10px; }
+    a{ 
+        color: lighten(@teal, 5%);
+        &:hover{ color: lighten(@teal, 15%); }    
+    }
 }
