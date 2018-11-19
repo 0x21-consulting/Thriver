@@ -78,10 +78,6 @@ Template.aside.helpers({
     class: 'top',
     subhead: 'lcSubHead',
     tabs: [{
-      title: 'Library',
-      id: 'library',
-      template: 'library',
-    }, {
       title: 'Infosheets',
       id: 'infosheets',
       template: 'infosheets',
@@ -89,6 +85,10 @@ Template.aside.helpers({
       title: 'Webinars',
       id: 'webinars',
       template: 'webinars',
+    }, {
+      title: 'Library',
+      id: 'library',
+      template: 'library',
     }, {
       title: 'Data',
       id: 'data',
