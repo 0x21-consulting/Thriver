@@ -110,6 +110,14 @@ const initialize = () => {
     // Map instance
     mapObject = new google.maps.Map(mapElement, options);
 
+    // State Layer
+    const stateLayer = new geoXML3.parser({ // eslint-disable-line new-cap
+      map: mapObject,
+      singleInfoWindow: true,
+      suppressInfoWindows: false,
+    });
+    stateLayer.parse('/wisconsin_state.kml');
+
     // County Layer
     const countyLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
