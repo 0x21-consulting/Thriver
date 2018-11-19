@@ -178,20 +178,6 @@ const initialize = () => {
     }]);
 
     // Country Labels
-    /*
-    const createMapLabel = (label, coordinates) => {
-      const mapLabel = new mapLabel({
-        text: label,
-        position: new google.maps.LatLng(coordinates[0], coordinates[1]),
-        map: mapObject,
-        fontSize: 20,
-        align: 'right',
-      });
-      return mapLabel;
-    };
-    createMapLabel('', [42.070704, -92.729125]);
-    */
-
     /* TODO: MOVE INTO LIBRARY FILE */
     /**
      * @fileoverview Map Label.
