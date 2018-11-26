@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import Toast from '/views/components/toasts';
 
 import './profile.html';
 
@@ -31,6 +32,10 @@ const updateProfileField = (fieldName, fieldValue) => {
       }
 
       scroll.scrollTop = height;
+    }
+    // Alert the user.
+    if (document.querySelectorAll('.profile-update-toast').length < 1) {
+      Toast({ text: 'Your profile has been updated.', classes: 'profile-update-toast', duration: 3000 });
     }
   });
 };

@@ -1,0 +1,43 @@
+#toasts-list{
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  z-index: 9999;
+  &, & > li{ list-style: none; margin: 0; padding: 0; }
+  & > li{
+    position: relative;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color: #fff;
+    margin-bottom: 10px;
+    padding: 20px 25px 18px 25px;
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: 0.085rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 201ms ease-out;
+    -webkit-transition: all 201ms ease-out;
+    background: #00b7c5;
+    &.pos{ background: #26b703; }
+    &.neg{ background: #f1592a; }
+    &.visible{
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    p{
+      margin: 0;
+      padding: 5px 25px 5px 5px;
+    }
+    button{
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      margin-top: -17px;
+      opacity: 0.5;
+      &:hover{ box-shadow: none; -webkit-box-shadow: none; }
+    }
+    &:hover button{ opacity: 0.6; }
+  }
+}
