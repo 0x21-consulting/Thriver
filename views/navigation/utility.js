@@ -184,7 +184,7 @@ Template.utilityItem.events({
     event.preventDefault();
     Meteor.logout();
     Canvas.closeSidebars();
-    Toast({ text: 'You are no longer signed in.', duration: 3000 });
+    Toast({ text: 'You are no longer signed in.', classes: 'neg' });
   },
 });
 

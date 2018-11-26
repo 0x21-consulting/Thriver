@@ -4,7 +4,7 @@ const Toast = function(options){
   const opts = {
     text: options.text,
     classes: options.classes || 'default',
-    duration: options.duration || 5000,
+    duration: options.duration || 4000,
   }
   const list = document.getElementById('toasts-list');
   const item = document.createElement('li');
