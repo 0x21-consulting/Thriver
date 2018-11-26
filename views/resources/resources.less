@@ -10,7 +10,7 @@ section#resource-center{
         font-size: 1.4rem;
         margin: 30px;
     }
-    h3{
+    .dateMeta + h3{
         padding: 0px;
         text-align: left !important;
     }
@@ -63,7 +63,7 @@ section#resource-center{
 #resource-center article{
     details{ background-color: darken(@sidebarSecondaryColor, 3%); }
     &:nth-child(even) details{ background-color: darken(@sidebarSecondaryColor, 1%); }
-    p{ margin:0px; }
+    .inner-container-wide p, p.meta{ margin:0px; }
     p.description { margin-top: 10px;}
     text-align: left;
     .clearfix;
