@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Accounts } from 'meteor/accounts-base';
 import Canvas from '/views/canvas/canvas';
+import Toast from '/views/components/toasts';
 
 import './register.html';
 
@@ -120,6 +121,7 @@ Template.register.events({
           // Notify user to check email
           document.querySelector('section#register form').classList.add('hide');
           document.querySelector('section#register p.register-success').classList.remove('hide');
+          Toast({ text: 'Your account has been created!' });
         });
 
         // Close sidebar
