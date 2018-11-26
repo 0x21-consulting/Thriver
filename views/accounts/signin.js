@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import Canvas from '/views/canvas/canvas';
+import Toast from '/views/components/toasts';
 
 import './signin.html';
 
@@ -60,6 +61,7 @@ Template.signin.events({
       // Close sidebars and reset form
       form.reset();
       Canvas.closeSidebars();
+      Toast({ text: 'Welcome! You are now signed in.' });
     });
   },
 });

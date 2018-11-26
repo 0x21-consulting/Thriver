@@ -29,7 +29,7 @@
                 {{/each}}
             {{else}}
                 {{#each items}}
-                    <article role="document" data-id="{{_id}}">
+                    <article role="document" class="document" data-id="{{_id}}">
                         <div class="inner-container-wide">
                             <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{icon}}{{/if}}">
                                 <time class="dateMeta" datetime="{{ISODate date}}">
@@ -38,6 +38,7 @@
                                 {{#if title}}<h3>{{title}}</h3>{{/if}}
                                 {{#if publisher}}<p class="content text">{{publisher}}</p>{{/if}}
                                 {{#if description}}<p class="content text description">{{description}}</p>{{/if}}
+                                {{#if content}}<p class="content text description">{{content}}</p>{{/if}}
                             </a>
                         </div>
                         {{#if isAdmin}}

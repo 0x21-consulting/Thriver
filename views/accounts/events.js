@@ -4,6 +4,7 @@ import Sections from '/logic/sections/sections';
 import History from '/views/history/history';
 import Events from '/logic/events/schema';
 import Calendar from '/views/events/calendar';
+import Toast from '/views/components/toasts';
 
 import './events.html';
 
@@ -67,6 +68,7 @@ Template.eventsRegistered.events({
    */
   'click button.unregister': function unregister() {
     Meteor.call('unregisterEvent', this.id);
+    Toast({ text: 'You have been unregistered for this event.', classes: 'neg' });
   },
 
   /**

@@ -2,7 +2,7 @@
 import '/views/canvas/canvas';
 
 // Components
-import '/views/components/alerts';
+import '/views/components/toasts';
 import '/views/components/aside';
 import '/views/components/filter';
 import '/views/components/form';

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import Toast from '/views/components/toasts';
 
 import './subscriptions.html';
 
@@ -105,17 +106,17 @@ Template.subscriptions.helpers({
       title: 'Southwest Region',
       description: 'Adams, Crawford, Grant, Iowa, Juneau, La Crosse, Lafayette, Monroe, Richland, Sauk, Vernon',
       id: 'listServSWRegion',
-      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Southwest%20Regional%20Listserv',
+      url: 'http://lists.wcasa-blog.org/admin.cgi/regional_ta_sw-wcasa-blog.org',
     }, {
       title: 'South Central Region',
       description: 'Columbia, Dane, Dodge, Green, Jefferson, Rock, Walworth',
       id: 'listservSCRegion',
-      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20South%20Central%20Regional%20Listserv',
+      url: 'http://lists.wcasa-blog.org/admin.cgi/regional_ta_sc-wcasa-blog.org',
     }, {
       title: 'Southeast Region',
       description: 'Kenosha, Milwaukee, Ozaukee, Racine, Washington, Waukesha',
       id: 'listservSERegion',
-      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Southeast%20Regional%20Listserv',
+      url: 'http://lists.wcasa-blog.org/admin.cgi/regional_ta_se-wcasa-blog.org',
     }, {
       title: 'Northwest Region',
       description: 'Ashland, Barron, Bayfield, Buffalo, Burnett, Chippewa, Clark, Douglas, Dunn, Eau Claire, Jackson, Pepin, Pierce, Polk, Rusk, Sawyer, St. Croix, Trempealeau, Washburn',
@@ -130,7 +131,7 @@ Template.subscriptions.helpers({
       title: 'Northeast Region',
       description: 'Brown, Calumet, Door, Fond du Lac, Green Lake, Kewaunee, Manitowoc, Marinette, Marquette, Menominee, Oconto, Outagamie, Shawano, Sheboygan, Waupaca, Waushara, Winnebago',
       id: 'listservNERegion',
-      url: 'mailto:wcasa@wcasa.org?subject=Subscribe%20me%20to%20the%20Northeast%20Regional%20Listserv',
+      url: 'http://lists.wcasa-blog.org/admin.cgi/regional_ta_ne-wcasa-blog.org',
     }],
   }],
 });
@@ -214,5 +215,11 @@ Template.subscriptions.events({
 
     // Now make the change
     Meteor.users.update({ _id: Meteor.userId() }, { $set: query });
+
+    // Alert the User
+    if (document.querySelectorAll('.subscriptions-update-toast').length < 1) {
+      // Alert the user.
+      Toast({ text: 'Your subscriptions have been updated.', classes: 'subscriptions-update-toast', duration: 3000 });
+    }
   },
 });

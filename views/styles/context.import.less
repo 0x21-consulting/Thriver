@@ -206,6 +206,10 @@ Canvas Animations.
 //Body is given class noScroll, pausing scroller on body (helpers.less)
 @{offActive}{
     overflow: hidden;
+    body.fixedHeader & header#menu{ 
+        box-shadow: none !important; // TODO: rescope shadow
+        -webkit-box-shadow: none !important; // TODO: rescope shadow
+    }
     @{overlay}{
         .opacity(0.95);
         width:100%;

@@ -57,14 +57,14 @@ Template.aside.helpers({
   }, {
     title: 'Create an Account',
     id: 'register',
-    width: 356,
+    width: 500,
     position: 'left',
     template: 'register',
   }, {
     title: 'Twitter',
     icon: 'twitter',
     id: 'twitter',
-    width: 356,
+    width: 500,
     position: 'right',
     template: 'twitter',
   }, {
@@ -78,10 +78,6 @@ Template.aside.helpers({
     class: 'top',
     subhead: 'lcSubHead',
     tabs: [{
-      title: 'Library',
-      id: 'library',
-      template: 'library',
-    }, {
       title: 'Infosheets',
       id: 'infosheets',
       template: 'infosheets',
@@ -89,6 +85,10 @@ Template.aside.helpers({
       title: 'Webinars',
       id: 'webinars',
       template: 'webinars',
+    }, {
+      title: 'Library',
+      id: 'library',
+      template: 'library',
     }, {
       title: 'Data',
       id: 'data',
@@ -139,19 +139,20 @@ Template.aside.helpers({
     position: 'right',
     template: 'legal-privacy-policy',
   }, {
-    title: 'Obtener Ayuda',
+    title: '¡Bienvenidos a la página web en Español de WCASA!',
     icon: 'flag',
     id: 'espanol',
     width: 700,
     position: 'right',
+    subhead: 'espanolSubhead',
     tabs: [{ // If sidebar has tabs: use this property
-      title: 'Información',
-      id: 'espanolInformacion',
-      template: 'espanolInformacion',
+      title: 'Servicios Bilingües',
+      id: 'espanolServiciosBilingues',
+      template: 'espanolServiciosBilingues',
     }, {
-      title: 'Más',
-      id: 'espanolMas',
-      template: 'espanolMas',
+      title: 'Recursos',
+      id: 'espanolRecursos',
+      template: 'espanolRecursos',
     }],
   }],
 });

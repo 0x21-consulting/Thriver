@@ -4,24 +4,27 @@
 section#resource-center{
     div.tabs > article > p{
         padding: 20px;
-        background: rgba(255,255,255,0.05);
+        background: rgba(255, 255, 255, 0.05);
         color: #fff;
-        box-shadow: inset 0px 0px 20px -5px rgba(0,0,0,0.3);
+        line-height: 1.6;
+        font-size: 1.4rem;
+        margin: 30px;
     }
     h3{
         padding: 0px;
-        text-align: left;
+        text-align: left !important;
     }
     h3 a{
-        .font(1.4,1.4,0.01,@normal,none);
-        .textButtonColor(lighten(@teal, 5%));
+        .font(1.6,1.6,0.01,@normal,none);
+        .textButtonColor(#59c3cc);
     }
     a h3, a .icon{
         margin-top: 0px;
+        margin-bottom: 6px;
         padding-top: 0px;
-        text-align: left;
+        text-align: center;
         .textButtonColor(lighten(@teal, 2.5%));
-        .font(1.4,1.4,0.01,@normal,none);
+        .font(1.8,1.8,0.01,@normal,none);
     }
     form{
         button.viewAll{
@@ -61,10 +64,9 @@ section#resource-center{
     details{ background-color: darken(@sidebarSecondaryColor, 3%); }
     &:nth-child(even) details{ background-color: darken(@sidebarSecondaryColor, 1%); }
     p{ margin:0px; }
-    p.description { margin-top: 10px; font-style: italic; }
+    p.description { margin-top: 10px;}
     text-align: left;
     .clearfix;
-    padding: 20px;
     &[data-id=library]{ padding: 20px 0; }
     &.library-item{ padding: 0; }
     details{
@@ -144,14 +146,6 @@ section#resource-center{
     }
     dl dt, dl dd, button{.font(1.2,1.6,0.025,@normal,none)};
     button.requestLibraryItem{display: block;width: 100%;}
-    //dl{background-color: darken(@sidebarSecondaryColor, 8.5%);}
-    button{.buttonColor(#00b7c5);}
-    //summary{background-color: darken(@sidebarContentBgColor, 8.5%);}
-    /*&:nth-child(even){
-        dl{background-color: darken(@sidebarSecondaryColor, 6.5%);}
-        button{.buttonColor(darken(@sidebarSecondaryColor, 1%));}
-        //summary{background-color: darken(@sidebarContentBgColor, 6.5%);}
-    }*/
     dl.material dt{display: none;}
     aside.info{
         padding: 0px 20px 20px 20px;

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import count from '/views/accounts/notifications';
+import Canvas from '/views/canvas/canvas';
+import Toast from '/views/components/toasts';
 
 import './utility.html';
 
@@ -70,7 +72,7 @@ const utilityNavigationHelpers = {
     action: 'signout',
   }, {
     // Language
-    title: 'Obtener Ayuda',
+    title: 'Español',
     sidebar: 'espanol',
     type: 'sidebar',
     icon: 'flag',
@@ -181,6 +183,8 @@ Template.utilityItem.events({
   'click [data-action="signout"]'(event) {
     event.preventDefault();
     Meteor.logout();
+    Canvas.closeSidebars();
+    Toast({ text: 'You are no longer signed in.', classes: 'neg' });
   },
 });
 
