@@ -72,7 +72,7 @@ const utilityNavigationHelpers = {
     action: 'signout',
   }, {
     // Language
-    title: 'Obtener Ayuda',
+    title: 'Español',
     sidebar: 'espanol',
     type: 'sidebar',
     icon: 'flag',
