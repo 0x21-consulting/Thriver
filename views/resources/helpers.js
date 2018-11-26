@@ -136,24 +136,32 @@ Template.resourceAddForm.helpers({
 
 Template.resourceData.helpers({
   title: 'Data',
-  subheadText: 'Just how bad of a problem is sexual assault? The reality is that we don’t definitively know; the available data can not begin to paint the complete picture of the scope of the problem. Why? Because most of the numbers we have reflect the number of crimes reported to law enforcement. But, sexual assault is one of those crimes that is still so misunderstood; we know that many victims are not reporting – either because they are ashamed, feel the assault was somehow their fault, are worried about consequences to their perpetrator (who all too often is someone known to the victim and/or an intimate partner), or because they feel that what happened was just “normal” and wasn’t a crime at all.',
-  subheadTextStrong: 'In partnership with state agencies and the service providers we represent, WCASA is working toward a more comprehensive picture of sexual violence in Wisconsin.',
   items: [{
-    tabs: [{ // If sidebar has tabs: use this property
-      title: 'Wisconsin',
+    tabs: [{
+      isFirst: true,
+      title: 'Overview',
       icon: 'user',
-      id: 'resourceDataState',
-      template: 'resourceDataState',
-    }, {
-      title: 'National',
-      icon: 'cal',
-      id: 'resourceDataNational',
-      template: 'resourceDataNational',
+      id: 'resourceDataOverview',
+      template: 'resourceDataOverview',
+      noFilter: true,
     }, {
       title: 'Infographics',
       icon: 'none',
       id: 'resourceInfographics',
       template: 'resourceInfographics',
+      noFilter: true,
+    }, {
+      title: 'Wisconsin',
+      icon: 'user',
+      id: 'resourceDataState',
+      template: 'resourceDataState',
+      noFilter: true,
+    }, {
+      title: 'National',
+      icon: 'cal',
+      id: 'resourceDataNational',
+      template: 'resourceDataNational',
+      noFilter: true,
     }],
   }],
 });
