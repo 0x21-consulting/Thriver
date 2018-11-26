@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import Toast from '/views/components/toasts';
 
 import './subscriptions.html';
 
@@ -214,5 +215,11 @@ Template.subscriptions.events({
 
     // Now make the change
     Meteor.users.update({ _id: Meteor.userId() }, { $set: query });
+
+    // Alert the User
+    if (document.querySelectorAll('.subscriptions-update-toast').length < 1) {
+      // Alert the user.
+      Toast({ text: 'Your subscriptions have been updated.', classes: 'subscriptions-update-toast', duration: 3000 });
+    }
   },
 });

@@ -32,9 +32,8 @@ const updateProfileField = (fieldName, fieldValue) => {
       }
 
       scroll.scrollTop = height;
-    }
-    // Alert the user.
-    if (document.querySelectorAll('.profile-update-toast').length < 1) {
+    } else if (document.querySelectorAll('.profile-update-toast').length < 1) {
+      // Alert the user.
       Toast({ text: 'Your profile has been updated.', classes: 'profile-update-toast', duration: 3000 });
     }
   });
