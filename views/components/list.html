@@ -69,13 +69,15 @@
                             {{#if isAdmin}}
                                 <aside class="admin">
                                     <!--<button class="fa libEdit">&#xf044;</button>-->
-                                    <button class="fa libDelete">&#xf1f8;</button>
+                                    <button class="fa libDelete delete">&#xf1f8;</button>
                                 </aside>
                             {{/if}}
-                            <span class="status gem"><i class="fas fa-circle"></i></span>
+                            <span class="status gem" title={{status}}><i class="fas fa-circle {{status}}"></i></span>
                             <ul class="cats-tags">
-                                <li class="category"><i class="fas fa-book"></i> {{material}}</li>
-                                <li class="classification">{{classification}}</li>
+                                <li class="category material-{{material}}">{{material}}</li>
+                                {{#if isAdmin}}
+                                    <li class="classification">{{classification}}</li>
+                                {{/if}}
                                 {{#each keywords}}
                                     <li class="tag">{{this}}</li>
                                 {{/each}}
@@ -87,12 +89,13 @@
                         <aside class="info">
                             <dl>
                                 <dt>Status</dt><dd>{{status}}</dd>
-                                <dt>Call Number</dt><dd>{{callNumber}}</dd>
-                                <dt>Copies</dt><dd>{{copies}}</dd>
+                                {{#if isAdmin}}
+                                    <dt>Copies</dt><dd>{{copies}}</dd>
+                                {{/if}}
                             </dl>
                             <menu class="availability">
-                                {{#if equals status.type 'transit'}}
-                                    <li><button>Request Copy</button></li>
+                                {{#if equals status 'Available'}}
+                                    <li><button class="request-copy">Request Copy</button></li>
                                 {{/if}}
                             </menu>
                         </aside>
