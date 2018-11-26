@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
+import Toast from '/views/components/toasts';
 
 import './news.html';
 import './helpers';
@@ -91,6 +92,7 @@ Template.aside.events({
       }
       document.querySelector('#admin-form-container-news-add button.exit').click();
       document.getElementById('newsForm').reset();
+      Toast({ text: 'News item added.', duration: 3000 });
     });
   },
 
