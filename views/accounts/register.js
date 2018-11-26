@@ -121,7 +121,7 @@ Template.register.events({
           // Notify user to check email
           document.querySelector('section#register form').classList.add('hide');
           document.querySelector('section#register p.register-success').classList.remove('hide');
-          Toast({ text: 'Your account has been created!' });
+          Toast({ text: 'Welcome to WCASA! Your account has been created.' });
         });
 
         // Close sidebar

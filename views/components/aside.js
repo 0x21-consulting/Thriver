@@ -64,7 +64,7 @@ Template.aside.helpers({
     title: 'Twitter',
     icon: 'twitter',
     id: 'twitter',
-    width: 356,
+    width: 500,
     position: 'right',
     template: 'twitter',
   }, {

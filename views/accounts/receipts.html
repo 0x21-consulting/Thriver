@@ -23,7 +23,9 @@
       {{#each purchases}}
         <li class="receiptItem">
           <div class="item-container">
-              <p>A purchase was made.</p>
+              <h4 class="text">${{total}} {{description}}</h4>
+              <time class="dateMeta" datetime="{{timestampUTC}}">{{friendlyDate timestamp}}</time>
+              <a href="/receipt/{{id}}" target="_blank" class="viewReceipts redirectButton button btn"><i class="fas fa-file"></i></a>
           </div>
         </li>
       {{/each}}
