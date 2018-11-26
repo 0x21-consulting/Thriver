@@ -250,19 +250,3 @@ Template.libraryAddForm.helpers({
   library: () => Library.collection,
 });
 
-Template.resourceData.helpers({
-  title: 'Data',
-  items: [{
-    tabs: [{ // If sidebar has tabs: use this property
-      title: 'State',
-      icon: 'user',
-      id: 'resourceDataState',
-      template: 'resourceDataState',
-    }, {
-      title: 'National',
-      icon: 'cal',
-      id: 'resourceDataNational',
-      template: 'resourceDataNational',
-    }],
-  }],
-});
