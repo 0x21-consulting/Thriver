@@ -245,4 +245,3 @@ Template.libraryAddForm.helpers({
    */
   library: () => Library.collection,
 });
-
