@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import Resources from '/logic/resources/schema';
 import Library from '/logic/library/schema';
+import Toast from '/views/components/toasts';
 
 import './resources.html';
 import './helpers';
@@ -112,12 +113,10 @@ Template.aside.events({
 
     // Insert subscriber into the collection
     Meteor.call('addLibraryItem', data, function(error) {
-      console.log('calling');
       if (error) {
         console.log(error.reason);
       } else {
-        console.log('Subscription successful');
-        console.log(data);
+        Toast({ text: 'Resource item added.', duration: 3000 });
       }
     });
   },
@@ -135,21 +134,18 @@ Template.aside.events({
       url: document.getElementById('resources-add-form-url').value,
       publisher: document.getElementById('resources-add-form-publisher').value,
       date: new Date(document.getElementById('resources-add-form-date').value),
-      type: document.getElementById('resources-add-form-type').value,
+      type: document.getElementById('resources-add-form-type-select').value,
       description: document.getElementById('resources-add-form-desc').value,
-      category: document.getElementById('resources-add-form-category').value,
     };
-
-    console.log(data);
 
     // Insert subscriber into the collection
     Meteor.call('addResourceCenterItem', data, function(error) {
-      console.log('calling');
       if (error) {
         console.log(error.reason);
       } else {
-        console.log('Subscription successful');
-        console.log(data);
+        document.querySelector('#admin-form-container-resource-add button.exit').click();
+        document.getElementById('admin-form-resource-add').reset();
+        Toast({ text: 'Resource item added.', duration: 3000 });
       }
     });
   },
@@ -209,7 +205,7 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click .itemCategory aside.admin button.delete': (event) => {
+  'click .document aside.admin button.delete': (event) => {
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;

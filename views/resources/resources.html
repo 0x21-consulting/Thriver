@@ -154,7 +154,7 @@
       <form id="admin-form-library-add">
         <label>
           Title
-          <input id="library-add-form-title" name="title" type="text" />
+          <input id="library-add-form-title" name="title" type="text" required />
         </label>
         <label>
           Description
@@ -227,10 +227,9 @@
       <button class="fa add exit resource">&#xf00d;</button>
       <form id="admin-form-resource-add">
         <input type="hidden" name="_id" />
-        <input type="hidden" name="category" id="resources-add-form-category" />
         <label>
           Title
-          <input type="text" name="title" id="resources-add-form-title" />
+          <input type="text" name="title" id="resources-add-form-title" required />
         </label>
         <label>
           Publisher
@@ -243,19 +242,19 @@
         <hr />
         <div class="styledSelect fullBlockMob w-50">
           <label>Type</label>
-          <select name="type" id="resources-add-form-type" >
+          <select name="type" id="resources-add-form-type-select" >
             {{#each types}}
-              <option name="{{this}}">{{this}}</option>
+              <option value="{{this}}">{{this}}</option>
             {{/each}}
           </select>
         </div>
         <label class="w-50 margin-right-0">
           Date
-          <input type="date" name="date" id="resources-add-form-date" />
+          <input type="date" name="date" id="resources-add-form-date" required />
         </label>
         <label class="clear-both">
           Url
-          <input type="text" name="url" id="resources-add-form-url"  />
+          <input type="text" name="url" id="resources-add-form-url" required  />
         </label>
         <input type="submit" class="btn btn-primary" value="Add Item" />        
       </form>
