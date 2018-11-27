@@ -54,7 +54,6 @@ import '/views/post/post';
 import '/views/espanol/espanol';
 
 // Libraries
-import '/views/lib/shims';
 import '/views/lib/helpers-spacebars';
 import '/views/lib/escape';
 
