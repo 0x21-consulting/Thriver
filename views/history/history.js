@@ -171,7 +171,10 @@ History.navigate = (path) => {
     .filter(element => element.length !== 0);
 
   // If there's no path, allow scroll to top
-  if (!newPath.length) smoothScroll('/');
+  if (!newPath.length) {
+    smoothScroll('/');
+    Canvas.closeSidebars(); // don't need these open when scrolling to top of page
+  }
 
   // Navigate to the appropriate element, once it exists
   // TODO(micchickenburger): Test for an infinite loop if the element doesn't exist
