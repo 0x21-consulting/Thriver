@@ -10,7 +10,7 @@ section#resource-center{
         font-size: 1.4rem;
         margin: 30px;
     }
-    h3{
+    .dateMeta + h3{
         padding: 0px;
         text-align: left !important;
     }
@@ -63,11 +63,24 @@ section#resource-center{
 #resource-center article{
     details{ background-color: darken(@sidebarSecondaryColor, 3%); }
     &:nth-child(even) details{ background-color: darken(@sidebarSecondaryColor, 1%); }
-    p{ margin:0px; }
+    .inner-container-wide p, p.meta{ margin:0px; }
     p.description { margin-top: 10px;}
     text-align: left;
     .clearfix;
-    &[data-id=library]{ padding: 20px 0; }
+    &[data-id=library]{ 
+        padding: 20px 0; 
+        dt{ color: #fff; opacity: 0.9;}
+        button.request-copy{
+            .buttonColor(@teal);
+        }
+        details p.request-sent {
+            line-height: 15px;
+            font-size: 1.3rem;
+            border: 2px solid @teal;
+            padding: 11px 17px;
+            font-weight: 600;
+        }
+    }
     &.library-item{ padding: 0; }
     details{
         position: relative;
@@ -96,6 +109,7 @@ section#resource-center{
             position: relative;
             top: -2px;
             margin-left: 3px;
+            &.Unavailable{ color: gray; }
         }
         &:hover{
             h1{
@@ -115,8 +129,23 @@ section#resource-center{
                 display: inline-block;
                 margin-right: 1px;
                 padding: 0 8px;
-                &.category{ background: #8a52ef; }
-                &.classification{ background: #f55; }
+                &.classification{ background: #293b44; }
+                &.category{ 
+                    background: #293b44;
+                    font-weight: bold; 
+                    &.material-Activities{ background: #bb8f02; }
+                    &.material-Books{ background: #0297a2; }
+                    &.material-Curriculum{ background: #4c6b7b; }
+                    &.material-DVDs{ background: #0261ab; }
+                    &.material-Guide{ background: #3a42c7; }
+                    &.material-Handbook{ background: darken(#0297a2, 5%); }
+                    &.material-Manual{ background: #00bbca; }
+                    &.material-Report{ background: #282f96; }
+                    &.material-Study{ background: #113888; }
+                    &.material-Textbook{ background: darken(#0297a2, 7.5%); }
+                    &.material-Toolkit{ background: #118864; }
+                    &.material-Workbook{ background: darken(#0297a2, 10%); }
+                }
             }
 
         }

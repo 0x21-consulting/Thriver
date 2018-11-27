@@ -40,7 +40,13 @@ Meteor.subscribe('library');
 Template.registerHelper('simpleString', string => string
   .toLowerCase().replace(/\s/g, ''));
 
-Template.registerHelper('truncate', string => (string.length >= 2 ? `${string.substring(0, 2)}...` : string));
+Template.registerHelper('truncate', function(string) {
+  if (string.length >= 100) {
+    const stringTruncated = `${string.substring(0, 100)}...`;
+    return stringTruncated;
+  }
+  return string;
+});
 
 // Events
 Template.aside.events({
@@ -62,6 +68,22 @@ Template.aside.events({
     // Show "everything" text
     const texts = document.querySelectorAll('#resource-center .everything');
     for (let i = 0; i < texts.length; i += 1) texts[i].classList.remove('hide');
+  },
+
+  /**
+   * @summary Request Library Item
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #resource-center button.request-copy': (event) => {
+    const textNode = document.createElement('p');
+    const text = 'Request sent!';
+    textNode.classList.add('request-sent');
+    textNode.textContent = text;
+
+    event.target.parentNode.replaceChild(textNode, event.target);
+
+    Toast({ text: 'Library item requested.' });
   },
 
   // Search field

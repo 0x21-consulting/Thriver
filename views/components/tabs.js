@@ -37,6 +37,13 @@ const toggleTabs = (event) => {
     default:
       document.querySelector('aside.filter').classList.remove('active-filter');
   }
+
+  // Select first child tab if any
+  // TODO: Open first child tab
+  /*
+  const firstTab = menu.parentNode.querySelectorAll('div.tabs menu.tabs > li:first-child a');
+  if (firstTab.length > 0) firstTab[0].click();
+  */
 };
 
 Template.tabs.onRendered(() => {
