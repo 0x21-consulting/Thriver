@@ -15,11 +15,11 @@ Template.signin.helpers({
     required: 'required',
     placeholder: 'Email',
   }, {
-    title: 'Password',
+    title: 'Passphrase',
     id: 'signinPassword',
     type: 'password',
     required: 'required',
-    placeholder: 'Password',
+    placeholder: 'Passphrase',
   }],
 });
 
@@ -50,7 +50,7 @@ Template.signin.events({
         switch (error.error) {
           case 403:
             handleError('So sorry. Either you\'ve mistyped your email address,'
-              + ' or your password is incorrect.');
+              + ' or your passphrase is incorrect.');
             break;
           default:
             handleError('An unknown error has occurred.');

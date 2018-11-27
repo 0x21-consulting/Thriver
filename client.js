@@ -27,6 +27,7 @@ import '/views/accounts/preferences';
 import '/views/accounts/register';
 import '/views/accounts/requests';
 import '/views/accounts/signin';
+import '/views/accounts/forgot';
 import '/views/accounts/subscriptions';
 import '/views/accounts/user';
 import '/views/accounts/receipts';
