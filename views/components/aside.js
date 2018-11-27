@@ -93,6 +93,7 @@ Template.aside.helpers({
       title: 'Data',
       id: 'data',
       template: 'resourceData',
+      noFilter: true,
     }],
   }, {
     title: 'News',

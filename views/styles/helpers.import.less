@@ -311,3 +311,29 @@ dl{
 
 // Margin Overrides
 .margin-right-0{ margin-right: 0 !important; }
+
+// Flex Block List
+ul.flex-block-list{
+    display: flex;
+    flex-wrap: wrap;
+    & > li{
+        flex: 1 0 30%;
+        display: flex;
+        margin-bottom: 12px;
+        margin-right: 1.5%;
+        a{
+            display: block;
+            background: #00b7c4;
+            color: #fff !important; //Scope issue
+            padding: 17px 17px;
+            width: 100%;
+            font-weight: 600;
+            line-height: 1.4;
+            &:hover{
+                background: #00cfdf;
+                box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.15);
+                -webkit-box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.15);
+            }
+        }
+    }
+}

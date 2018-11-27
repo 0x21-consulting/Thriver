@@ -17,15 +17,17 @@
                 <option value="01">List of Materials...</option>
             </select>
         </div>
-        <div class="styledSelect fullBlockMob">
-            <label class="">Classification</label>
-            <select id="classification" name="classification">
-                <option value="0">Show All</option>
-                <option value="01">Survivors</option>
-                <option value="02">Providers</option>
-                <option value="03">Resources</option>
-            </select>
-        </div>
+        {{#if isAdmin}}
+            <div class="styledSelect fullBlockMob">
+                <label class="">Classification</label>
+                <select id="classification" name="classification">
+                    <option value="0">Show All</option>
+                    <option value="01">Survivors</option>
+                    <option value="02">Providers</option>
+                    <option value="03">Resources</option>
+                </select>
+            </div>
+        {{/if}}
         <div class="styledSelect fullBlockMob">
             <label class="">Keyword</label>
             <select id="category" name="category">

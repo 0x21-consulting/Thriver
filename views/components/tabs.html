@@ -47,6 +47,6 @@
 
 <template name="tabAnchor">
     <li>
-        <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" aria-expanded="{{#if isFirst}}true{{else}}false{{/if}}" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
+        <a href="#" data-icon="{{icon}}" aria-controls="#{{id}}" data-no-filter="{{#if noFilter}}true{{else}}false{{/if}}" aria-expanded="{{#if isFirst}}true{{else}}false{{/if}}" data-toggle="tabs" data-id="{{id}}">{{title}}</a>
     </li>
 </template>
