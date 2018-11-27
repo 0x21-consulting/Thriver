@@ -40,13 +40,7 @@ Meteor.subscribe('library');
 Template.registerHelper('simpleString', string => string
   .toLowerCase().replace(/\s/g, ''));
 
-Template.registerHelper('truncate', function(string) {
-  if (string.length >= 2) {
-    const stringTruncated = `${string.substring(0, 2)}...`;
-    return new Template.SafeString(stringTruncated);
-  }
-  return new Template.SafeString(string);
-});
+Template.registerHelper('truncate', string => (string.length >= 2 ? `${string.substring(0, 2)}...` : string));
 
 // Events
 Template.aside.events({
