@@ -40,7 +40,10 @@ const toggleTabs = (event) => {
 
   // Select first child tab if any
   // TODO: Open first child tab
-  // if (menu.parentNode.querySelectorAll('div.tabs menu.tabs > li:first-child a')[0].length > 0) menu.parentNode.querySelectorAll('div.tabs menu.tabs > li:first-child a')[0].click();
+  /*
+  const firstTab = menu.parentNode.querySelectorAll('div.tabs menu.tabs > li:first-child a');
+  if (firstTab.length > 0) firstTab[0].click();
+  */
 };
 
 Template.tabs.onRendered(() => {
