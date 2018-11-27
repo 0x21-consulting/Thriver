@@ -29,7 +29,7 @@ const Canvas = {
     document.body.classList.remove('noScroll');
 
     // Open canvas
-    canvas.dataset.canvasState = '';
+    if (canvas) canvas.dataset.canvasState = '';
   },
 
   /**
