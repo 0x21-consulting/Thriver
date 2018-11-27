@@ -72,6 +72,15 @@ const utilityNavigationHelpers = {
     user: 'inactive',
     classes: 'hide',
   }, {
+    // Reset passphrase
+    title: 'Reset Passphrase',
+    icon: 'caret-right',
+    iconAfter: true,
+    type: 'sidebar',
+    sidebar: 'reset-passphrase',
+    user: 'inactive',
+    classes: 'hide',
+  }, {
     // Sign Out
     title: 'Sign Out',
     icon: 'caret-right',
