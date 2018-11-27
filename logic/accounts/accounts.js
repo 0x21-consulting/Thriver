@@ -64,6 +64,23 @@ Meteor.methods({
     // Execute callback
     return false;
   },
+
+  /**
+   * Submit a forgotten passphrase email
+   * @function
+   * @param {string} email
+   */
+  forgotPassphrase(email) {
+    check(email, String);
+
+    // The email address entered must be paired to a valid user account
+    const account = Meteor.users.findOne({ 'emails.address': email });
+
+    if (account) {
+      // Send password reset email
+      Accounts.sendResetPasswordEmail(account._id, email);
+    }
+  },
 });
 
 /**
