@@ -257,7 +257,7 @@ Template.canvas.onRendered(() => {
  */
 window.addEventListener('popstate', (event) => {
   // Navigate to path
-  if (event.state.path) History.navigate(event.state.path);
+  if (event.state && event.state.path) History.navigate(event.state.path);
 });
 
 /**
