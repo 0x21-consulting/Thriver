@@ -33,6 +33,11 @@ News.schema = new SimpleSchema({
     type: String,
     optional: false,
   },
+  /** Item Title */
+  friendlyTitle: {
+    type: String,
+    optional: false,
+  },
   /** Item Date */
   date: {
     type: Date,
