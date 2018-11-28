@@ -33,6 +33,12 @@ News.schema = new SimpleSchema({
     type: String,
     optional: false,
   },
+  /** Item Date */
+  date: {
+    type: Date,
+    optional: false,
+    defaultValue: new Date(),
+  },
   /** Item Link */
   url: {
     type: String,
@@ -43,12 +49,6 @@ News.schema = new SimpleSchema({
   publisher: {
     type: String,
     optional: true,
-  },
-  /** Item Date */
-  date: {
-    type: Date,
-    optional: false,
-    defaultValue: new Date(),
   },
   /** Item Type */
   type: {
@@ -68,6 +68,10 @@ News.schema = new SimpleSchema({
     autoform: {
       rows: 5,
     },
+  },
+  description: {
+    type: String,
+    optional: true,
   },
 });
 
