@@ -221,7 +221,7 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click .document aside.admin button.delete': (event) => {
+  'click [data-tag="lc"] aside.admin button.delete': (event) => {
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
