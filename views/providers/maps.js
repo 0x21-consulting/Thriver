@@ -300,22 +300,18 @@ const initialize = () => {
         // Click Marker
         // NOTE: Can't use lambda expression because of `this` context
         marker.addListener('click', function eventHandler() {
+          // Show details pane
+          document.getElementById('service-providers').classList.remove('full-view');
+          google.maps.event.trigger(mapObject, 'resize');
+
+          // Appropriate zoom level
+          mapObject.setZoom(11);
+          mapObject.panTo(marker.getPosition());
+
+          // Show results if the result has an ID
           if (this.id) {
-            // Show details pane
-            document.getElementById('service-providers').classList.remove('full-view');
-            google.maps.event.trigger(mapObject, 'resize');
-
-            // Appropriate zoom level
-            mapObject.setZoom(11);
-            mapObject.panTo(marker.getPosition());
-
-            // Show results if the result has an ID
-            if (this.id) {
-              Providers.active.set(Providers.collection
-                .findOne({ _id: this.id }));
-            }
-          } else {
-            alert('county!');            
+            Providers.active.set(Providers.collection
+              .findOne({ _id: this.id }));
           }
         });
       });
@@ -598,4 +594,4 @@ Template.providerListViewItem.events({
   'click div.pad': followProviderLink,
 });
 
-export default mapObject;
+export default moveMap;
