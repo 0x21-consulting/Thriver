@@ -55,7 +55,7 @@
             background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.1) 100%); /* Chrome10-25,Safari5.1-6 */
             background: radial-gradient(ellipse at center,  rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26000000', endColorstr='#1a000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            max-width: 701px;
+            max-width: 1000px;
             margin: 0 auto;
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
             -webkit-box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -151,26 +151,16 @@
         }
     }
     div.tabs > article{
-        //.transition(all, 500ms, ease-out, 0ms);
-        //max-height: 0px;
-        //overflow: hidden;
         border-top: 0px solid transparent;
         border-bottom: 0px solid transparent;
         max-width: 704px;
-        //padding: 20px;
         margin: 0 auto;
         margin-top: 20px;
         transition: transform 500ms @durationDefault @easeDefault 0ms opacity 400ms @easeDefault 100ms;
-        //opacity: 0;
-        //.scale(0.9,0.9);
         list-style: none;
-        //.accelerate;
         .borderRadius(0px 0px 2px 2px);
         background-color: @white;
-        box-shadow: 0px -3px 5px 0px rgba(0, 0, 0, 0.2);
-        -webkit-box-shadow:0px -3px 5px 0px rgba(0, 0, 0, 0.2);
-        //transform-origin:
-        margin:0px !important;
+        margin:0 auto !important;
         padding: 40px;
         > section{padding: 10px;}
         > h2{
