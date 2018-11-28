@@ -16,6 +16,73 @@ let { google } = window;
 // eslint-disable-next-line import/no-mutable-exports
 let mapObject = {};
 
+// Helper for moving map based on provider locations
+const moveMap = (county) => {
+  let providers = [];
+  let x = [];
+  let y = [];
+
+  // Get coordinates for all providers for that county
+  providers = Providers.collection.find({
+    counties: { $elemMatch: { $in: [county] } },
+  }, { coordinates: 1, name: 1 }).map(provider => ({
+    // We only care about the coordinates
+    coordinates: provider.coordinates,
+    id: provider._id,
+    name: provider.name,
+  }));
+
+  // If there aren't any providers for this county, report that
+  if (!providers.length) return false;
+
+  // Calculate bounding box
+  // Determine lowest and highest Lat values
+  providers.sort((a, b) => b.coordinates.lat - a.coordinates.lat);
+
+  x = [providers[0].coordinates.lat,
+    providers[providers.length - 1].coordinates.lat];
+
+  // Determine lowest and highest Lon values
+  providers.sort((a, b) => b.coordinates.lon - a.coordinates.lon);
+
+  y = [providers[0].coordinates.lon,
+    providers[providers.length - 1].coordinates.lon];
+
+  // If there was only one result, click on it for the user
+  if (providers.length === 1) {
+    Providers.active.set(Providers.collection
+      .findOne({ _id: providers[0].id }));
+    document.getElementById('service-providers').classList.remove('full-view');
+    google.maps.event.trigger(mapObject, 'resize');
+  } else {
+    document.getElementById('service-providers').classList.add('full-view');
+    google.maps.event.trigger(mapObject, 'resize');
+  }
+
+  // Bounds
+  mapObject.fitBounds(new google.maps.LatLngBounds(
+    new google.maps.LatLng(x[1], y[1]), // Southwest
+    new google.maps.LatLng(x[0], y[0]), // to Northeast
+  ));
+
+  return true;
+};
+
+// Get county from ZIP code number
+const getCounty = (zip) => {
+  let county = '';
+
+  // Get county
+  county = Providers.counties.findOne({
+    // Minimongo doesn't support $eq for some reason
+    zips: { $elemMatch: { $in: [zip] } },
+  });
+
+  // Now get providers that support that county
+  if (!county || !moveMap(county.name)) return false;
+  return true;
+};
+
 // Close Map Search
 Providers.closeMapSearch = () => {
   const search = document.querySelector('.providers .providerSearch');
@@ -133,15 +200,46 @@ const initialize = () => {
     const stateLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
       singleInfoWindow: true,
-      suppressInfoWindows: false,
+      suppressInfoWindows: true,
     });
     stateLayer.parse('/wisconsin_state.kml');
 
     // County Layer
+    const clickablePolygon = (p) => {
+      google.maps.event.addListener(
+        p.polygon,
+        'click',
+        function () {
+          moveMap(p.name);
+        },
+      );
+      google.maps.event.addListener(
+        p.polygon,
+        'mouseover',
+        function () {
+          p.polygon.setOptions({ color: '#FFFF00' });
+        },
+      );
+      google.maps.event.addListener(
+        p.polygon,
+        'mouseout',
+        function () {
+          p.polygon.setOptions({ color: '#00FFFF' });
+        },
+      );
+    };
+
+
     const countyLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
       singleInfoWindow: true,
-      suppressInfoWindows: false,
+      suppressInfoWindows: true,
+      afterParse: (doc) => {
+        for (let i = 0; i < doc[0].placemarks.length; i += 1) {
+          const p = doc[0].placemarks[i];
+          clickablePolygon(p);
+        }
+      },
     });
     countyLayer.parse('/wisconsin_counties.kml');
 
@@ -354,73 +452,6 @@ const initialize = () => {
   window.initializeMap = init;
 };
 
-// Helper for moving map based on provider locations
-const moveMap = (county) => {
-  let providers = [];
-  let x = [];
-  let y = [];
-
-  // Get coordinates for all providers for that county
-  providers = Providers.collection.find({
-    counties: { $elemMatch: { $in: [county] } },
-  }, { coordinates: 1, name: 1 }).map(provider => ({
-    // We only care about the coordinates
-    coordinates: provider.coordinates,
-    id: provider._id,
-    name: provider.name,
-  }));
-
-  // If there aren't any providers for this county, report that
-  if (!providers.length) return false;
-
-  // Calculate bounding box
-  // Determine lowest and highest Lat values
-  providers.sort((a, b) => b.coordinates.lat - a.coordinates.lat);
-
-  x = [providers[0].coordinates.lat,
-    providers[providers.length - 1].coordinates.lat];
-
-  // Determine lowest and highest Lon values
-  providers.sort((a, b) => b.coordinates.lon - a.coordinates.lon);
-
-  y = [providers[0].coordinates.lon,
-    providers[providers.length - 1].coordinates.lon];
-
-  // If there was only one result, click on it for the user
-  if (providers.length === 1) {
-    Providers.active.set(Providers.collection
-      .findOne({ _id: providers[0].id }));
-    document.getElementById('service-providers').classList.remove('full-view');
-    google.maps.event.trigger(mapObject, 'resize');
-  } else {
-    document.getElementById('service-providers').classList.add('full-view');
-    google.maps.event.trigger(mapObject, 'resize');
-  }
-
-  // Bounds
-  mapObject.fitBounds(new google.maps.LatLngBounds(
-    new google.maps.LatLng(x[1], y[1]), // Southwest
-    new google.maps.LatLng(x[0], y[0]), // to Northeast
-  ));
-
-  return true;
-};
-
-// Get county from ZIP code number
-const getCounty = (zip) => {
-  let county = '';
-
-  // Get county
-  county = Providers.counties.findOne({
-    // Minimongo doesn't support $eq for some reason
-    zips: { $elemMatch: { $in: [zip] } },
-  });
-
-  // Now get providers that support that county
-  if (!county || !moveMap(county.name)) return false;
-  return true;
-};
-
 Template.providers.onRendered(initialize);
 
 Template.providers.events({
@@ -593,5 +624,3 @@ const followProviderLink = (event) => {
 Template.providerListViewItem.events({
   'click div.pad': followProviderLink,
 });
-
-export default moveMap;
