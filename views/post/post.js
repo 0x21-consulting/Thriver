@@ -86,11 +86,11 @@ Template.post.helpers({
     media: {
       title: 'Media Contacts',
       contact: [{
-        name: 'Dominic Holt',
+        name: 'Peter Fiala',
         org: 'WCASA',
-        phone: '608-257-1516',
-        phoneExt: '113',
-        email: 'dominich@wcasa.org',
+        phone: '(608) 257-1516',
+        // phoneExt: '113',
+        email: 'peterf@wcasa.org',
       }],
     },
     about: [],
