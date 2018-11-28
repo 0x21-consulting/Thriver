@@ -230,12 +230,12 @@ Template.workContent.events({
   'click footer.truncate button.less': (event) => {
     event.preventDefault();
 
+    document.body.classList.remove('workReading');
+    $('.sticky').trigger('sticky_kit:recalc');
+
     // Scroll back to top
     const offset = $('.work .main.container').offset().top - 125;
     $('body').animate({ scrollTop: offset }, 750);
-
-    document.body.classList.remove('workReading');
-    $('.sticky').trigger('sticky_kit:recalc');
   },
 
   /**
