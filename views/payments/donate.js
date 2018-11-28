@@ -191,7 +191,7 @@ Template.donate.events({
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('donate-card-errors');
-          errorElement.textContent = error.message;
+          errorElement.textContent = err.message;
         } else {
           document.querySelector('#donateDefault').classList.add('hide');
           document.querySelector('#donateSuccess').removeAttribute('aria-hidden');

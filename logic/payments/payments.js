@@ -47,32 +47,60 @@ Meteor.methods({
     check(token, Object);
     check(metadata, Match.Maybe(Object));
 
-    const { id, amount, description } = token;
+    let result;
+    const {
+      id, amount, description, recur,
+    } = token;
 
-    const result = await stripe.charges.create({
-      amount,
-      currency: 'usd',
-      description,
-      source: id,
-      metadata,
-    });
+    if (!recur || recur === 'once') {
+      result = await stripe.charges.create({
+        amount,
+        currency: 'usd',
+        description,
+        source: id,
+        metadata,
+      });
 
-    if (result.status === 'succeeded' && this.userId) {
-      // Write to user record
-      Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
+      if (result.status === 'succeeded' && this.userId) {
+        // Write to user record
+        Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
 
-      const user = Meteor.users.findOne({ _id: this.userId });
-      const isDonation = /Donation/.test(result.description);
+        const user = Meteor.users.findOne({ _id: this.userId });
+        const isDonation = /Donation/.test(result.description);
 
-      // Send receipt email
-      Email.send({
-        from: 'WCASA <website@wcasa.org>',
-        to: user.emails[0].address,
-        subject: isDonation ? 'Donation Receipt' : 'Purchase Receipt',
-        text: `Hello ${user.profile.firstname} ${user.profile.lastname
-        },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
-        } of $${result.amount / 100}.  You can access your receipt here:\n\n${
-          process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
+        // Send receipt email
+        Email.send({
+          from: 'WCASA <website@wcasa.org>',
+          to: user.emails[0].address,
+          subject: isDonation ? 'Donation Receipt' : 'Purchase Receipt',
+          text: `Hello ${user.profile.firstname} ${user.profile.lastname
+          },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
+          } of $${result.amount / 100}.  You can access your receipt here:\n\n${
+            process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
+        });
+      }
+    } else {
+      // Recurring donation
+      // Start by creating a plan
+      const plan = await stripe.plans.create({
+        product: product.id,
+        nickname: `${product.name} $${amount / 100} every ${recur}`,
+        currency: 'usd',
+        interval: recur,
+        amount,
+      });
+
+      // Next, create a customer object that stores the payment method
+      const customer = await stripe.customers.create({
+        email: metadata.user_email,
+        source: id, // token id
+        metadata,
+      });
+
+      // Finally, subscribe customer to the plan
+      result = await stripe.subscriptions.create({
+        customer: customer.id,
+        items: [{ plan: plan.id }],
       });
     }
 
