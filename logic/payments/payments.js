@@ -5,6 +5,7 @@ import { check, Match } from 'meteor/check';
 import Settings from '/logic/core/settings';
 
 let stripe;
+let product;
 
 /**
  * @summary Configure Stripe options
@@ -13,6 +14,27 @@ Meteor.startup(() => {
   const settings = Settings.get('stripe') || {};
   const { secretKey } = settings;
   stripe = StripeConstructor(secretKey);
+
+  // Check to see if there is an existing WCASA Donation product for
+  // recurring donations.  If not, create one.
+  stripe.products.list({ type: 'service' }, (error, products) => {
+    if (error) throw new Meteor.Error(error);
+
+    products.data.forEach((prod) => {
+      if (prod.name === 'WCASA Donation') product = prod;
+    });
+
+    // If no product was found, create one
+    if (!product) {
+      stripe.products.create({
+        name: 'WCASA Donation',
+        type: 'service',
+      }, (err, prod) => {
+        if (err) throw new Meteor.Error(err);
+        product = prod;
+      });
+    }
+  });
 });
 
 Meteor.methods({
