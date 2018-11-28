@@ -150,17 +150,11 @@ const initialize = () => {
       featureType: 'poi',
       elementType: 'labels',
       stylers: [{ visibility: 'off' }],
-    },
-    /*
-    {
-      featureType: 'administrative.locality',
+    }, {
+      featureType: 'administrative.province',
       elementType: 'labels',
-      stylers: [{
-        visibility: 'off',
-      }],
-    },
-    */
-    {
+      stylers: [{ visibility: 'off' }],
+    }, {
       stylers: [
         { gamma: 0.78 },
         { lightness: 5 },
@@ -600,4 +594,4 @@ Template.providerListViewItem.events({
   'click div.pad': followProviderLink,
 });
 
-export default mapObject;
+export default moveMap;

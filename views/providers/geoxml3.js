@@ -1,4 +1,5 @@
 /* eslint-disable */
+import moveMap from './maps';
 
 /**
  * @fileOverview Renders KML on the Google Maps JavaScript API Version 3
@@ -8,7 +9,7 @@
  *
  * geoxml3.js
  *
- * Renders KML on the Google Maps JavaScript API Version 3
+ * Renders KML on thmoveMape Google Maps JavaScript API Version 3
  * http://code.google.com/p/geoxml3/
  *
  * Copyright 2010 Sterling Udell, Larry Ross
@@ -1193,7 +1194,7 @@ function processStyleUrl(node) {
     if (!!doc) doc.markers.push(marker);
 
     // Set up and create the infowindow if it is not suppressed
-    createInfoWindow(placemark, doc, marker);
+    moveMap(markerOptions.title);
     placemark.marker = marker;
     return marker;
   };
@@ -1271,9 +1272,7 @@ function processStyleUrl(node) {
       var p = new google.maps.Polyline(polyOptions);
     }
     p.bounds = bounds;
-
-    // setup and create the infoWindow if it is not suppressed
-    createInfoWindow(placemark, doc, p);
+    
     if (!!doc) doc.gpolylines.push(p);
     placemark.polyline = p;
     return p;
@@ -1332,76 +1331,10 @@ function processStyleUrl(node) {
     var p = new google.maps.Polygon(polyOptions);
     p.bounds = bounds;
 
-    createInfoWindow(placemark, doc, p);
+    moveMap(polyOptions.title);
     if (!!doc) doc.gpolygons.push(p);
     placemark.polygon = p;
     return p;
-  }
-
-  var createInfoWindow = function(placemark, doc, gObj) {
-    var bStyle = placemark.style.balloon;
-    var vars = placemark.vars;
-
-    if (!placemark.balloonVisibility || bStyle.displayMode === 'hide') return;
-
-    // define geDirections
-    if (placemark.latlng &&
-        (!parserOptions.suppressDirections || !parserOptions.suppressDirections)) {
-      vars.directions.push('sll=' + placemark.latlng.toUrlValue());
-
-      var url = 'https://maps.google.com/maps?' + vars.directions.join('&');
-      var address = encodeURIComponent( vars.val.address || placemark.latlng.toUrlValue() ).replace(/\%20/g, '+');
-
-      vars.val.geDirections = '<a href="' + url + '&daddr=' + address + '" target=_blank>To Here</a> - <a href="' + url + '&saddr=' + address + '" target=_blank>From Here</a>';
-    }
-    else vars.val.geDirections = '';
-
-    // add in the variables
-    var iwText = bStyle.text.replace(/\$\[(\w+(\/displayName)?)\]/g, function(txt, n, dn) { return dn ? vars.display[n] : vars.val[n]; });
-    var classTxt = 'geoxml3_infowindow geoxml3_style_' + placemark.styleID;
-
-    // color styles
-    var styleArr = [];
-    if (bStyle.bgColor   != 'ffffffff') styleArr.push('background: ' + kmlColor(bStyle.bgColor  ).color + ';');
-    if (bStyle.textColor != 'ff000000') styleArr.push('color: '      + kmlColor(bStyle.textColor).color + ';');
-    var styleProp = styleArr.length ? ' style="' + styleArr.join(' ') + '"' : '';
-
-    var infoWindowOptions = geoXML3.combineOptions(parserOptions.infoWindowOptions, {
-      content: '<div class="' + classTxt + '"' + styleProp + '>' + iwText + '</div>',
-      pixelOffset: new google.maps.Size(0, 2)
-    });
-
-    gObj.infoWindow = parserOptions.infoWindow || new google.maps.InfoWindow(infoWindowOptions);
-    gObj.infoWindowOptions = infoWindowOptions;
-
-    // Info Window-opening event handler
-    google.maps.event.addListener(gObj, 'click', function(e) {
-      var iW = this.infoWindow;
-      iW.close();
-      iW.setOptions(this.infoWindowOptions);
-
-      if      (e && e.latLng) iW.setPosition(e.latLng);
-      else if (this.bounds)   iW.setPosition(this.bounds.getCenter());
-
-      iW.setContent("<div id='geoxml3_infowindow'>"+iW.getContent()+"</div>");
-      google.maps.event.addListenerOnce(iW, "domready", function() {
-        var node = document.getElementById('geoxml3_infowindow');
-        var imgArray = node.getElementsByTagName('img');
-        for (var i = 0; i < imgArray.length; i++)
-        {
-          var imgUrlIE = imgArray[i].getAttribute("src");
-          var imgUrl  = cleanURL(doc.baseDir, imgUrlIE);
-
-          if (kmzMetaData[imgUrl]) {
-             imgArray[i].src = kmzMetaData[imgUrl].dataUrl;
-          } else if (kmzMetaData[imgUrlIE]) {
-             imgArray[i].src = kmzMetaData[imgUrlIE].dataUrl;
-          }
-        }
-      });
-      iW.open(this.map, this.bounds ? null : this);
-    });
-
   }
 
   return {

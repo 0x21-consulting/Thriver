@@ -73,10 +73,10 @@ section#masthead div.tabs, section.masthead div.tabs{
         }
         *{position: relative; z-index: 3;}
     }
-    > article:first-child, > article:nth-child(3){
+    > article:first-child{
        // background-image: url('/lib/img/mastheadArticle.gif');
         a{.textButtonColor(@yellow) !important;}
-        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+        a.button{color:@white !important;}
         &:after{
             content:'';
             top: 0; left: 0;
@@ -95,9 +95,9 @@ section#masthead div.tabs, section.masthead div.tabs{
             @media print{ background: transparent;}
         }
     }
-    > article:nth-child(2), > article:nth-child(4){
+    > article:nth-child(4){
         a{.textButtonColor(lighten(@yellow,15%)) !important;}
-        a.button{.buttonColor(rgba(34,119,180,1)) !important; color:@white !important;}
+        a.button{color:@white !important;}
         &:after{
             content:'';
             top: 0; left: 0;
@@ -106,8 +106,40 @@ section#masthead div.tabs, section.masthead div.tabs{
             height: 100%;
             position: absolute;
             background: #4b6cb7;
-            background: -webkit-linear-gradient(to left, #4b6cb7, #182848);
-            background: linear-gradient(to left, #4b6cb7, #182848);
+            background: -webkit-linear-gradient(to left, #4b6cb7, #1f2c7b);
+            background: linear-gradient(to left, #4b6cb7, #1f2c7b);
+            @media print{ background: transparent;}
+        }
+    }
+    > article:nth-child(2){
+        a{.textButtonColor(lighten(@teal,15%)) !important;}
+        a.button{color:@white !important;}
+        &:after{
+            content:'';
+            top: 0; left: 0;
+            opacity: 0.9;
+            width:100%;
+            height: 100%;
+            position: absolute;
+            background: #f05929;
+            background: -webkit-linear-gradient(to left, #e5b053, #008192);
+            background: linear-gradient(to left, #e5b053, #008192);
+            @media print{ background: transparent;}
+        }
+    }
+    > article:nth-child(3){
+        a{.textButtonColor(lighten(@yellow,15%)) !important;}
+        a.button{color:@white !important;}
+        &:after{
+            content:'';
+            top: 0; left: 0;
+            opacity: 0.9;
+            width:100%;
+            height: 100%;
+            position: absolute;
+            background: #03648d;
+            background: -webkit-linear-gradient(to left, #03648d, #0495c7);
+            background: linear-gradient(to left, #03648d, #0495c7);
             @media print{ background: transparent;}
         }
     }
@@ -132,7 +164,6 @@ section#masthead, section.masthead{
             &[aria-hidden="false"]{
                 display: table-cell;
                 vertical-align: middle;
-                width: 100%;
             }
         }
 
@@ -151,6 +182,10 @@ section#masthead, section.masthead{
         .buttonColor(@orange);
         margin: 7px 0px 0px 0px;
         padding: 20px;
+        background: transparent !important;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        margin-right: 10px !important;
     }
     h1{
         margin: 0px 0px 20px 0px;
@@ -162,19 +197,33 @@ section#masthead, section.masthead{
         }
     }
     p, li{
-    .font(1.6,3,0,@normal,none);
-    opacity: 0.9;
-    @media @mobile{
-        .font(1.4,1.9,0.025,@normal,none);
+        .font(1.6,3,0,@normal,none);
+        font-size: 1.4rem;
+        line-height: 1.5;
+        opacity: 0.9;
+        @media @mobile{
+            .font(1.4,1.9,0.025,@normal,none);
+        }
     }
+    p.subhead {
+        font-size: 2rem;
+        line-height: 1.5;
     }
-    ul{margin-left: 0px;}
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+        margin-left: 16px;
+    }
     article li{
-        display: inline;
-        margin: 0;
-        list-style: none;
-        &:after{ content:", "; }
-        &:last-child:after{content: "";}
+        font-size: 1.4rem;
+        line-height: 1.5;
+        flex: 1 0 47.5%;
+        margin-bottom: 15px;
+        &:nth-child(odd){
+            margin-right:5%;
+            @media @mobile{ margin-right: 0; }
+        }
     }
     a{cursor: pointer;}
 }
