@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check';
 import Settings from '/logic/core/settings';
@@ -37,11 +36,6 @@ Accounts.onCreateUser((options, user) => {
   return newUser;
 });
 
-/**
- * The Organizations collection
- */
-const Organizations = new Mongo.Collection('organizations');
-
 Meteor.methods({
   /**
    * Handle sending email verification email
@@ -52,70 +46,6 @@ Meteor.methods({
     check(id, String);
 
     Accounts.sendVerificationEmail(id);
-  },
-
-  /**
-   * Assign organizational association
-   * @description
-   *   A user's organizational association is determined by
-   *   their email domain.  Therefore, only once a user has
-   *   established an account and verified their email address
-   *   will the association be established.
-   * @method
-   *   @param {string}   id       - The user's Meteor ID
-   *   @param {Function} callback
-   */
-  assignOrganization(id, callback) {
-    check(id, String);
-    check(callback, Function);
-
-    // Only get user id and emails array
-    let user = Meteor.users.find({ _id: id }, { emails: 1 }).fetch();
-
-    // Validate user
-    [user] = user; // break out of array
-    if (!user || !(user.emails instanceof Array)) return;
-
-    // Get organization based on user's email domain
-    const matches = Organizations.find({
-      domain: user.emails[0].address.replace(/.+@(.+)/, '$1'),
-    }).fetch();
-
-    // If there's a match, associate
-    if (matches instanceof Array) {
-      if (matches[0]._id) {
-        Meteor.users.update(
-          { _id: user._id },
-          { $set: { organization: matches[0]._id } },
-        );
-      }
-    }
-
-    // Otherwise do nothing
-
-    // Execute callback
-    if (callback instanceof Function) callback();
-  },
-
-  /**
-   * Return the name of the user's designated organization association
-   * @function
-   * @returns {string}
-   */
-  getOrganization() {
-    // Nothing to do if no user is logged in, or if they
-    // don't have a designated organization
-    if (!Meteor.user() || !Meteor.user().organization) return '';
-
-    let organization = Organizations.find({ _id: Meteor.user().organization })
-      .fetch();
-
-    [organization] = organization; // break out of array
-
-    if (organization && organization.name) return organization.name;
-
-    // User has an organization but it's not found in the database
-    return '';
   },
 
   /**
@@ -133,6 +63,23 @@ Meteor.methods({
     Meteor.users.update({ _id: Meteor.userId() }, { $set: updatedUserProfile });
     // Execute callback
     return false;
+  },
+
+  /**
+   * Submit a forgotten passphrase email
+   * @function
+   * @param {string} email
+   */
+  forgotPassphrase(email) {
+    check(email, String);
+
+    // The email address entered must be paired to a valid user account
+    const account = Meteor.users.findOne({ 'emails.address': email });
+
+    if (account) {
+      // Send password reset email
+      Accounts.sendResetPasswordEmail(account._id, email);
+    }
   },
 });
 

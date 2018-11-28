@@ -1,14 +1,19 @@
 @import (reference) "/views/styles/index.less";
 
-#sign-in, #register{
+#sign-in, #register, #forgot-passphrase, #reset-passphrase{
     form{
         margin-top: 0;
         label{display: none;}
         input[type="submit"]{ margin: 0; }
+        p#reset-error {
+            color: #f05929;
+            font-weight: bold;
+            margin: 20px 0 0 0;
+        }
     }
     a { color: @white; }
 }
-#sign-in, #register, #accounts{
+#sign-in, #register, #accounts, #forgot-passphrase, #reset-passphrase{
     form{
         label{text-align: left;}
         padding:30px;

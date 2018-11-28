@@ -423,7 +423,7 @@ const getCounty = (zip) => {
   });
 
   // Now get providers that support that county
-  if (!moveMap(county.name)) return false;
+  if (!county || !moveMap(county.name)) return false;
   return true;
 };
 
@@ -531,7 +531,7 @@ Template.providers.events({
   },
 
   // Clicking ZIP Code GO button
-  'click #zip + .submit': (event) => {
+  'click #zipCodeSearch + .submit': (event) => {
     // Stop form submission
     event.preventDefault();
 
@@ -550,7 +550,7 @@ Template.providers.events({
   },
 
   // Reaching 5 digits
-  'keyup #zip': (event) => {
+  'keyup #zipCodeSearch': (event) => {
     const target = event.currentTarget;
 
     if (target.value.length === 5) {

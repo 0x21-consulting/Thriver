@@ -4,7 +4,6 @@ import { $ } from 'meteor/jquery';
 import { SHA256 } from 'meteor/sha';
 import Sections from '/logic/sections/sections';
 import History from '/views/history/history';
-import detailsShim from '/views/lib/shims';
 
 import './work.html';
 import './sticky';
@@ -383,11 +382,5 @@ Template.work.onRendered(() => {
     });
   }
 });
-
-/**
- * @summary Support details elements in unsupported browsers
- * @method
- */
-Template.work.onRendered(detailsShim.init);
 
 export default getValue;

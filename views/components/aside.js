@@ -55,6 +55,18 @@ Template.aside.helpers({
     position: 'left',
     template: 'signin',
   }, {
+    title: 'Forgot Passphrase',
+    id: 'forgot-passphrase',
+    width: 356,
+    position: 'left',
+    template: 'forgotPassphrase',
+  }, {
+    title: 'Reset Passphrase',
+    id: 'reset-passphrase',
+    width: 356,
+    position: 'left',
+    template: 'resetPassphrase',
+  }, {
     title: 'Create an Account',
     id: 'register',
     width: 500,
