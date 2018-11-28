@@ -81,27 +81,55 @@ Meteor.methods({
       }
     } else {
       // Recurring donation
-      // Start by creating a plan
-      const plan = await stripe.plans.create({
-        product: product.id,
-        nickname: `${product.name} $${amount / 100} every ${recur}`,
-        currency: 'usd',
-        interval: recur,
-        amount,
+      // Start by creating a plan unless plan already exists
+      const plans = await stripe.plans.list({ product: product.id });
+      const nickname = `${product.name} $${amount / 100} every ${recur}`;
+      let plan;
+
+      // Use existing plan if available
+      plans.data.forEach((p) => {
+        if (p.nickname === nickname) plan = p;
       });
 
+      // Otherwise create new plan
+      if (!plan) {
+        plan = await stripe.plans.create({
+          product: product.id,
+          nickname,
+          currency: 'usd',
+          interval: recur,
+          amount,
+        });
+      }
+
       // Next, create a customer object that stores the payment method
-      const customer = await stripe.customers.create({
-        email: metadata.user_email,
-        source: id, // token id
-        metadata,
-      });
+      // Unless customer object already exists
+      let customer = Meteor.users.findOne({ _id: this.userId }).stripeId;
+
+      if (!customer) {
+        customer = await stripe.customers.create({
+          email: metadata.user_email,
+          source: id, // token id
+          metadata,
+        });
+
+        customer = customer.id;
+
+        if (customer) {
+          Meteor.users.update({ _id: this.userId }, { $set: { stripeId: customer } });
+        }
+      }
 
       // Finally, subscribe customer to the plan
       result = await stripe.subscriptions.create({
-        customer: customer.id,
+        customer,
         items: [{ plan: plan.id }],
       });
+
+      // Store subscription details
+      if (result.status === 'active') {
+        Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
+      }
     }
 
     return result;
