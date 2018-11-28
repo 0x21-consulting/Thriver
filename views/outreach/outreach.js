@@ -71,7 +71,7 @@ Template.outreach.events({
    * @method
    *   @param {$.Event} event
    */
-  'click .action-alert-link': () => History.navigate('/newsroom/action-alerts'),
+  'click .action-alert-link': () => History.navigate('/news/action-alerts'),
 });
 
 /**
