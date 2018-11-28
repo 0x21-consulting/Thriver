@@ -6,22 +6,22 @@ import './masthead.html';
 Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
-    tabs: [{ // If sidebar has tabs: use this property
-      title: 'By Your Side campaign',
-      id: 'mastheadSlideE',
-      template: 'slideE',
+    tabs: [{
+      title: 'New Site, New Features!',
+      id: 'mastheadSlideA', // These are for aria-controls
+      template: 'slideA', // This could really just be an editable content area instead of unique templates
     }, {
       title: 'The Bigger Movement',
       id: 'mastheadSlideB',
       template: 'slideB',
     }, {
-      title: 'WCASA\'s 2017-19 Budget Proposal',
+      title: '2019 Calendar',
+      id: 'mastheadSlideE',
+      template: 'slideE',
+    }, {
+      title: 'We Value your Feedback',
       id: 'mastheadSlideD',
       template: 'slideD',
-    }, {
-      title: 'New Site, New Features!',
-      id: 'mastheadSlideA', // These are for aria-controls
-      template: 'slideA', // This could really just be an editable content area instead of unique templates
     }],
   }],
 });
