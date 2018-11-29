@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
-import Sections from '/logic/sections/sections';
 
 const selectedType = new ReactiveVar();
 
@@ -46,7 +45,7 @@ Template.actionAlerts.helpers({
 
       // Dynamically create URL
       for (let i = 0; i < items.length; i += 1) {
-        items[i].url = `/action-alert/${Sections.generateId(items[i].title)}`;
+        items[i].url = `/action-alert/${items[i].friendlyTitle}`;
       }
 
       return items;
@@ -75,7 +74,7 @@ Template.press.helpers({
 
       // Dynamically create URL
       for (let i = 0; i < items.length; i += 1) {
-        items[i].url = `/press-release/${Sections.generateId(items[i].title)}`;
+        items[i].url = `/press-release/${items[i].friendlyTitle}`;
       }
 
       return items;
