@@ -1,9 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SHA256 } from 'meteor/sha';
+import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
 
 import './post.html';
+
+const item = new ReactiveVar({});
 
 /**
  * Handler for updating content
@@ -36,6 +39,11 @@ const updateContent = oldHash => (event) => {
   parent.querySelector(':scope > button').remove();
 };
 
+Template.post.onRendered(function () {
+  item.set(News.collection
+    .findOne({ friendlyTitle: this.data.friendlyTitle }));
+});
+
 /** Helpers */
 Template.post.helpers({
   /**
@@ -43,22 +51,16 @@ Template.post.helpers({
    * @function
    * @returns {String}
    */
-  hash: () => {
-    const content = News.collection
-      .findOne({}, { content: 1 });
-
-    // Sometimes this helper executes before the collection is ready
-    // If so, just return and wait for the rerun
-    if (!content) return '';
+  hash() {
+    const { content } = item.get();
 
     // Get content
-    if (content.content) return SHA256(content.content);
-
-    return '';
+    if (!content) return '';
+    return SHA256(content);
   },
 
-  content: () => News.collection.findOne({}).content,
-  title: () => News.collection.findOne({}).title,
+  content: () => item.get().content,
+  title: () => item.get().title,
 
   home: {
     url: '/',

@@ -6,8 +6,8 @@ import { Meteor } from 'meteor/meteor';
  */
 FlowRouter.route('/action-alert/:title', {
   name: 'App.actionAlerts',
-  waitOn: params => Meteor.subscribe('actionAlerts', params.title),
-  action() {
+  waitOn: params => Meteor.subscribe('actionAlert', params.title),
+  action(params) {
     this.render('post', {
       category: 'Action Alert',
       logos: [{
@@ -15,6 +15,7 @@ FlowRouter.route('/action-alert/:title', {
         src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
         url: '/',
       }],
+      friendlyTitle: params.title,
     });
   },
 });
@@ -24,8 +25,8 @@ FlowRouter.route('/action-alert/:title', {
  */
 FlowRouter.route('/press-release/:title', {
   name: 'App.pressReleases',
-  waitOn: params => Meteor.subscribe('pressReleases', params.title),
-  action() {
+  waitOn: params => Meteor.subscribe('pressRelease', params.title),
+  action(params) {
     this.render('post', {
       category: 'Press Release',
       logos: [{
@@ -33,6 +34,7 @@ FlowRouter.route('/press-release/:title', {
         src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
         url: '/',
       }],
+      friendlyTitle: params.title,
     });
   },
 });
