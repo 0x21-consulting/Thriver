@@ -35,10 +35,7 @@ Meteor.publish('pressRelease', (friendlyTitle) => {
   check(friendlyTitle, Match.Maybe(String));
 
   const query = { type: 'pressRelease', friendlyTitle };
-  const result = News.collection.find(query, { sort: { date: 1 } });
-  console.log(JSON.stringify(query));
-  console.log(JSON.stringify(result.fetch()));
-  return result;
+  return News.collection.find(query, { sort: { date: 1 } });
 });
 
 // Used for the action alert route and post template

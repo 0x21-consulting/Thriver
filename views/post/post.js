@@ -6,7 +6,7 @@ import News from '/logic/news/schema';
 
 import './post.html';
 
-const item = new ReactiveVar({});
+const item = new ReactiveVar();
 
 /**
  * Handler for updating content
@@ -41,7 +41,7 @@ const updateContent = oldHash => (event) => {
 
 Template.post.onRendered(function () {
   item.set(News.collection
-    .findOne({ friendlyTitle: this.data.friendlyTitle }));
+    .findOne({ friendlyTitle: this.data.friendlyTitle })._id);
 });
 
 /** Helpers */
@@ -52,15 +52,16 @@ Template.post.helpers({
    * @returns {String}
    */
   hash() {
-    const { content } = item.get();
+    const post = News.collection.findOne({ _id: item.get() });
 
     // Get content
-    if (!content) return '';
-    return SHA256(content);
+    if (post && post.content) return SHA256(post.content);
+    return '';
   },
 
-  content: () => item.get().content,
-  title: () => item.get().title,
+  id: () => (item.get() ? News.collection.findOne({ _id: item.get() })._id : ''),
+  content: () => (item.get() ? News.collection.findOne({ _id: item.get() }).content : ''),
+  title: () => (item.get() ? News.collection.findOne({ _id: item.get() }).title : ''),
 
   home: {
     url: '/',
@@ -121,8 +122,8 @@ Template.post.events({
    */
   'click aside.admin button.edit': () => {
     // Get section to edit
-    const { data } = Template.instance();
-    const content = document.body.querySelector(`[data-id="${data._id}"]`);
+    const id = item.get();
+    const content = document.body.querySelector(`[data-id="${id}"]`);
     const parent = content.parentElement;
 
     // Create a textarea element through which to edit markdown
@@ -132,14 +133,13 @@ Template.post.events({
     const button = document.createElement('button');
     button.textContent = 'Save';
     button.addEventListener(
-      'mouseup',
+      'click',
       // Pass along hash of existing markdown
       updateContent(content.dataset.hash),
     );
 
     // Textarea should get markdown
-    textarea.textContent = News.collection
-      .findOne({ _id: data._id }, { content: 1 }).content;
+    textarea.textContent = News.collection.findOne({ _id: item.get() }).content;
 
     // Add textarea but hide preview
     parent.classList.add('edit');
