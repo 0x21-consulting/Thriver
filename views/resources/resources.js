@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import Resources from '/logic/resources/schema';
-import Library from '/logic/library/schema';
 import Toast from '/views/components/toasts';
 
 import './resources.html';
@@ -13,6 +12,9 @@ Resources.quantity = new ReactiveVar(5);
 
 // Regular Expression for Search field
 Resources.search = new ReactiveVar();
+Resources.classification = new ReactiveVar();
+Resources.material = new ReactiveVar();
+Resources.keywords = new ReactiveVar();
 
 /**
  * Handle searching
@@ -40,13 +42,7 @@ Meteor.subscribe('library');
 Template.registerHelper('simpleString', string => string
   .toLowerCase().replace(/\s/g, ''));
 
-Template.registerHelper('truncate', function(string) {
-  if (string.length >= 100) {
-    const stringTruncated = `${string.substring(0, 100)}...`;
-    return stringTruncated;
-  }
-  return string;
-});
+Template.registerHelper('truncate', s => (s.length >= 100 ? `${s.substring(0, 100)}...` : s));
 
 // Events
 Template.aside.events({
@@ -88,6 +84,21 @@ Template.aside.events({
 
   // Search field
   'keyup #searchLC, search #searchLC': handleSearch,
+
+  // Library filters
+  'change [data-id="library"] .flex-form .styledSelect > select'(event) {
+    const keywords = Array.from(event.target.selectedOptions).map(opt => opt.value);
+
+    switch (event.target.id) {
+      case 'library-classification':
+        Resources.classification.set(event.target.value); break;
+      case 'library-material':
+        Resources.material.set(event.target.value); break;
+      case 'library-keywords':
+        Resources.keywords.set(keywords); break;
+      default:
+    }
+  },
 
   /**
    * @summary Prevent resources form submission
@@ -241,23 +252,4 @@ Template.list.events({
       Meteor.call('deleteLibraryItem', id);
     }
   },
-});
-
-Template.resourceAddForm.helpers({
-  /**
-   * @summary The collection to use to populate form
-   * @function
-   * @returns {Mongo.Collection}
-   */
-  resources: () => Resources.collection,
-});
-
-Template.libraryAddForm.helpers({
-  /**
-   * TODO: Is this correct
-   * @summary The collection to use to populate form
-   * @function
-   * @returns {Mongo.Collection}
-   */
-  library: () => Library.collection,
 });

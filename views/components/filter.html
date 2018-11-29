@@ -1,39 +1,26 @@
 <template name="filter">
-    <aside class="filter">
-        <form autocomplete="off" id="{{filterId}}Form">
-            <label for="{{filterId}}" class="fa">&#xf002;</label>
-            <input id="{{filterId}}" type="search" placeholder="Search" />
-        </form>
-    </aside>
+	<aside class="filter">
+		<form autocomplete="off" id="{{filterId}}Form">
+			<label for="{{filterId}}" class="fa">&#xf002;</label>
+			<input id="{{filterId}}" type="search" placeholder="Search" />
+		</form>
+	</aside>
 </template>
 
-<!--TODO: Convert to handlebars -->
 <template name="filterObject">
-    <form class="flex-form">
-        <div class="styledSelect fullBlockMob">
-            <label class="">Material</label>
-            <select id="material" name="material">
-                <option value="0">Show All</option>
-                <option value="01">List of Materials...</option>
-            </select>
-        </div>
-        {{#if isAdmin}}
-            <div class="styledSelect fullBlockMob">
-                <label class="">Classification</label>
-                <select id="classification" name="classification">
-                    <option value="0">Show All</option>
-                    <option value="01">Survivors</option>
-                    <option value="02">Providers</option>
-                    <option value="03">Resources</option>
-                </select>
-            </div>
-        {{/if}}
-        <div class="styledSelect fullBlockMob">
-            <label class="">Keyword</label>
-            <select id="category" name="category">
-                <option value="0">Show All</option>
-                <option value="01">List of Keywords...</option>
-            </select>
-        </div>
-    </form>
+	{{#if filters}}
+		<form class="flex-form">
+			{{#each filters}}
+				<div class="styledSelect fullBlockMob">
+					<label class="">{{label}}</label>
+					<select id="{{name}}" name="{{name}}" {{multiple}}>
+						<option value="">Show All</option>
+						{{#each options}}
+							<option value="{{this}}">{{this}}</option>
+						{{/each}}
+					</select>
+				</div>
+			{{/each}}
+		</form>
+	{{/if}}
 </template>
