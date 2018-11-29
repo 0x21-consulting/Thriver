@@ -17,7 +17,7 @@ const count = new ReactiveVar(0);
 // Update page title with notifications count
 const updateTitle = () => {
   const title = 'WCASA | Wisconsin Coalition Against Sexual Assault';
-
+  console.log(`Notification count: ${count.get()}`);
   if (count.get() > 0) {
     document.title = `(${count.get()}) - ${title}`;
   } else document.title = title;
@@ -33,41 +33,18 @@ Template.notifications.helpers({
     // Notifications from db (manually issued)
     const notifs = Notifications.collection.find({}).fetch();
 
-    // Ation alerts since last login
+    // Action alerts since last login
     const alerts = News.collection
-      .find({ date: { $gt: lastLogin.get() } }).fetch();
+      .find({ date: { $gt: lastLogin.get() } }, { sort: { date: -1 } }).fetch();
 
     // Combination
     const all = notifs.concat(alerts);
-
-    // Week
-    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    // Month
-    const month = ['January', 'February', 'March', 'April', 'May',
-      'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     // Update total count
     count.set(all.length);
 
     // Update title
     updateTitle();
-
-    // Normalize datasets
-    for (let i = 0; i < all.length; i += 1) {
-      // Every notification needs a template
-      if (!all[i].template) all[i].template = 'notificationGeneric';
-
-      // Alerts have titles, so assign their text
-      if (!all[i].text) all[i].text = all[i].title;
-
-      // Normalize date
-      all[i].date = `${week[all[i].date.getDay()]}, ${all[i].date.getDate()} ${month[all[i].date.getMonth()]} \
-         ${all[i].date.getFullYear()} \
-         ${(all[i].date.getHours() > 12 ? all[i].date.getHours() % 12 : all[i].date.getHours())}\
-        :${all[i].date.getMinutes()} \
-        ${(all[i].date.getHours() > 11 ? 'pm' : 'am')}`;
-    }
 
     // If no notifications, say so
     if (!all.length) return [{ template: 'notificationEmpty' }];
