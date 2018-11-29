@@ -116,9 +116,6 @@ Accounts.schema.profile = new SimpleSchema({
       'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
       'AS', 'DC', 'GU', 'MP', 'PR', 'VI'],
     optional: true,
-    autoform: {
-      template: 'thriver_select',
-    },
   },
   zip: {
     type: String,
@@ -169,9 +166,6 @@ Accounts.schema.profile = new SimpleSchema({
     optional: true,
     allowedValues: ['Vegan', 'Vegetarian', 'Pescetarian'],
     label: ' ',
-    autoform: {
-      template: 'thriver_select',
-    },
   },
 
   /** Allergens */
@@ -215,9 +209,6 @@ Accounts.schema.profile = new SimpleSchema({
     type: String,
     optional: true,
     label: 'Please list any accommodations requested for events you attend',
-    autoform: {
-      rows: 5,
-    },
   },
 
   /** Emergency Contact */
@@ -231,9 +222,6 @@ Accounts.schema.profile = new SimpleSchema({
     allowedValues: ['Parent', 'Child', 'Sibling', 'Partner', 'Relative', 'Other'],
     optional: true,
     label: 'Emergency Contact Relation',
-    autoform: {
-      template: 'thriver_select',
-    },
   },
   'events.emergencyTelephone': {
     type: String,

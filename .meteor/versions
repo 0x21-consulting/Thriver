@@ -1,6 +1,5 @@
 accounts-base@1.4.3
 accounts-password@1.5.1
-aldeed:autoform@6.3.0
 aldeed:collection2-core@2.1.2
 allow-deny@1.1.0
 audit-argument-checks@1.0.7
@@ -60,7 +59,6 @@ mobile-status-bar@1.0.14
 modern-browsers@0.1.2
 modules@0.13.0
 modules-runtime@0.10.3
-momentjs:moment@2.22.2
 mongo@1.6.0
 mongo-decimal@0.1.0
 mongo-dev-server@1.1.0

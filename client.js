@@ -5,7 +5,6 @@ import '/views/canvas/canvas';
 import '/views/components/toasts';
 import '/views/components/aside';
 import '/views/components/filter';
-import '/views/components/form';
 import '/views/components/help';
 import '/views/components/list';
 import '/views/components/more';
@@ -15,7 +14,6 @@ import '/views/components/admin';
 import '/views/components/adminTabs';
 
 // Logic
-import '/logic/core/autoform';
 import '/logic/routes';
 import '/logic/sections/client';
 
