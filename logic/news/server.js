@@ -21,28 +21,30 @@ import Sections from '/logic/sections/sections';
 Meteor.publish('inTheNews', () => News.collection
   .find({ type: 'inTheNews' }, { sort: { date: 1 } }));
 
-Meteor.publish('pressReleases', (title) => {
-  check(title, Match.Maybe(String));
+Meteor.publish('actionAlerts', () => News.collection
+  .find({ type: 'actionAlert' }, { sort: { date: 1 } }));
 
-  const query = { type: 'pressRelease' };
-
-  if (title) query.friendlyTitle = title;
-
-  return News.collection.find(query, { sort: { date: 1 } });
-});
-
-Meteor.publish('actionAlerts', (title) => {
-  check(title, Match.Maybe(String));
-
-  const query = { type: 'actionAlert' };
-
-  if (title) query.friendlyTitle = title;
-
-  return News.collection.find(query, { sort: { date: 1 } });
-});
+Meteor.publish('pressReleases', () => News.collection
+  .find({ type: 'pressRelease' }, { sort: { date: 1 } }));
 
 Meteor.publish('newsletters', () => News.collection
   .find({ type: 'newsletter' }, { sort: { date: 1 } }));
+
+// Used for the press release route and post template
+Meteor.publish('pressRelease', (friendlyTitle) => {
+  check(friendlyTitle, Match.Maybe(String));
+
+  const query = { type: 'pressRelease', friendlyTitle };
+  return News.collection.find(query, { sort: { date: 1 } });
+});
+
+// Used for the action alert route and post template
+Meteor.publish('actionAlert', (friendlyTitle) => {
+  check(friendlyTitle, Match.Maybe(String));
+
+  const query = { type: 'actionAlert', friendlyTitle };
+  return News.collection.find(query, { sort: { date: 1 } });
+});
 
 Meteor.methods({
   /**

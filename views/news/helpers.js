@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
-import Sections from '/logic/sections/sections';
+
+const selectedType = new ReactiveVar();
 
 Template.inTheNews.helpers({
   lists: [{
@@ -43,7 +45,7 @@ Template.actionAlerts.helpers({
 
       // Dynamically create URL
       for (let i = 0; i < items.length; i += 1) {
-        items[i].url = `/action-alert/${Sections.generateId(items[i].title)}`;
+        items[i].url = `/action-alert/${items[i].friendlyTitle}`;
       }
 
       return items;
@@ -72,7 +74,7 @@ Template.press.helpers({
 
       // Dynamically create URL
       for (let i = 0; i < items.length; i += 1) {
-        items[i].url = `/press-release/${Sections.generateId(items[i].title)}`;
+        items[i].url = `/press-release/${items[i].friendlyTitle}`;
       }
 
       return items;
@@ -144,6 +146,17 @@ Template.annualReports.helpers({
   }],
 });
 
+// Admin helpers
 Template.newsSubHead.helpers({
   types: ['actionAlert', 'inTheNews', 'pressRelease', 'newsletter'],
+  inTheNews: () => selectedType.get() === 'inTheNews',
+  url: () => selectedType.get() === 'inTheNews' || selectedType.get() === 'newsletter',
+  content: () => selectedType.get() === 'pressRelease' || selectedType.get() === 'actionAlert',
+});
+
+// Keep track of form type
+Template.newsSubHead.events({
+  'click #newsForm [name="newsType"]'() {
+    selectedType.set(String(this));
+  },
 });
