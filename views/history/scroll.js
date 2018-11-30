@@ -76,7 +76,10 @@ const handleHeaderStateChange = () => {
 
   // Set a timeout to add the class after one millisecond
   timeout = setTimeout(() => {
-    if (window.scrollY > 260 && window.innerWidth > 767) {
+    // Read style calculations before writing to avoid forced synchronous layout
+    // @link https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts
+    const { scrollY, innerWidth } = window;
+    if (scrollY > 260 && innerWidth > 767) {
       document.body.classList.remove('fixedHeaderReturn');
       document.body.classList.add('fixedHeader');
     } else {
@@ -87,7 +90,7 @@ const handleHeaderStateChange = () => {
     // Back to Top
     // TODO(eoghantadhg): move this into appropriate module
     if (document.getElementById('back-to-top')) {
-      if (window.scrollY > 1000 && window.innerWidth > 767) {
+      if (scrollY > 1000 && innerWidth > 767) {
         document.getElementById('back-to-top').classList.add('active');
       } else document.getElementById('back-to-top').classList.remove('active');
     }
