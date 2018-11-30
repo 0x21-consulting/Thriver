@@ -15,7 +15,7 @@ const toggleTabs = (event) => {
   // Tabs Variables
   const menu = event.target.parentNode.parentNode;
   const links = menu.querySelectorAll('[aria-controls][data-toggle=tabs]');
-  const sections = menu.parentNode.querySelectorAll('div.tabs [aria-hidden]');
+  const sections = menu.parentNode.querySelectorAll(':scope > div.tabs > article[aria-hidden]');
 
   // Remove active state from all links
   for (let i = 0; i < links.length; i += 1) Util.makeActive(links[i], false);
