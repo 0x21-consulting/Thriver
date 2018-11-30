@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Accounts } from 'meteor/accounts-base';
 import { Template } from 'meteor/templating';
+import Toast from '/views/components/toasts';
 
 // When did the user last login?
 const lastLogin = new ReactiveVar(new Date());
@@ -35,6 +36,9 @@ Accounts.onEmailVerificationLink((token, done) => {
 
     // Update reactive vars
     getLastLogin();
+
+    // Toast indicating success
+    Toast({ text: 'Email address verified successfully.', duration: 5000 });
 
     // Complete
     done();

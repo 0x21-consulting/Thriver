@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { $ } from 'meteor/jquery';
 import { Notifications } from '/logic/accounts/schema';
 import News from '/logic/news/schema';
 import lastLogin from './user';
@@ -17,7 +16,7 @@ const count = new ReactiveVar(0);
 // Update page title with notifications count
 const updateTitle = () => {
   const title = 'WCASA | Wisconsin Coalition Against Sexual Assault';
-  console.log(`Notification count: ${count.get()}`);
+
   if (count.get() > 0) {
     document.title = `(${count.get()}) - ${title}`;
   } else document.title = title;
