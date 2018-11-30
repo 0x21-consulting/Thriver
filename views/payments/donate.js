@@ -49,7 +49,20 @@ Template.donate.onRendered(() => {
   elements = stripe.elements();
 
   // Create credit card form elements
-  card = elements.create('card');
+  const style = {
+    base: {
+      iconColor: '#586e7c',
+      color: '#f9f9f9',
+      fontWeight: 400,
+      fontFamily: 'Raleway',
+      fontSize: '14px',
+      '::placeholder': {
+        color: '#586e7c',
+      },
+    },
+  };
+
+  card = elements.create('card', { style });
   card.mount('#donate-card-element');
   card.addEventListener('change', ({ error }) => {
     const displayError = document.getElementById('donate-card-errors');
@@ -64,7 +77,7 @@ Template.donate.onRendered(() => {
 // Donate form helpers
 Template.donate.helpers({
   amountTitle: 'Donation Amount',
-  reoccurTitle: 'Donation Type',
+  recurTitle: 'Donation Type',
   detailsTitle: 'Payment Details',
   states: [{
     id: 'donateDefault',
@@ -78,16 +91,28 @@ Template.donate.helpers({
     content: '<h3>We\'re sorry, the donation was unsuccessful.<br> Please try again later.</h3><p><b>You</b> play an important role in ending sexual violence. Today is the day to act on preventing sexual violence and to provide the support needed to survivors. This is our chance to educate the public about sexual violence in our state and work together for the social change necessary to end sexual violence.</p>',
   }],
   amount: [{ value: '25' }, { value: '50' }, { value: '100', checked: 'checked' }, { value: '200' }],
-  /* reoccur: [{
-    value: 'Just Once',
-    checked: 'checked',
-  }, {
-    value: 'Weekly',
-  }, {
-    value: 'Monthly',
-  }, {
-    value: 'Yearly',
-  }], */
+  recur: () => {
+    if (Meteor.user()) {
+      return [{
+        text: 'Just Once',
+        value: 'once',
+        checked: 'checked',
+      }, {
+        text: 'Daily',
+        value: 'day',
+      }, {
+        text: 'Weekly',
+        value: 'week',
+      }, {
+        text: 'Monthly',
+        value: 'month',
+      }, {
+        text: 'Yearly',
+        value: 'year',
+      }];
+    }
+    return undefined;
+  },
 
   name: () => {
     const user = Meteor.user();
@@ -161,6 +186,7 @@ Template.donate.events({
     } else {
       token.amount = amount.get() * 100;
       token.description = 'WCASA Donation';
+      token.recur = event.target.recur.value;
 
       const user = Meteor.user();
       const metadata = {};
@@ -178,7 +204,7 @@ Template.donate.events({
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('donate-card-errors');
-          errorElement.textContent = error.message;
+          errorElement.textContent = err.message;
         } else {
           document.querySelector('#donateDefault').classList.add('hide');
           document.querySelector('#donateSuccess').removeAttribute('aria-hidden');

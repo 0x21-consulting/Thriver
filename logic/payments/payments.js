@@ -5,6 +5,7 @@ import { check, Match } from 'meteor/check';
 import Settings from '/logic/core/settings';
 
 let stripe;
+let product;
 
 /**
  * @summary Configure Stripe options
@@ -13,6 +14,27 @@ Meteor.startup(() => {
   const settings = Settings.get('stripe') || {};
   const { secretKey } = settings;
   stripe = StripeConstructor(secretKey);
+
+  // Check to see if there is an existing WCASA Donation product for
+  // recurring donations.  If not, create one.
+  stripe.products.list({ type: 'service' }, (error, products) => {
+    if (error) throw new Meteor.Error(error);
+
+    products.data.forEach((prod) => {
+      if (prod.name === 'WCASA Donation') product = prod;
+    });
+
+    // If no product was found, create one
+    if (!product) {
+      stripe.products.create({
+        name: 'WCASA Donation',
+        type: 'service',
+      }, (err, prod) => {
+        if (err) throw new Meteor.Error(err);
+        product = prod;
+      });
+    }
+  });
 });
 
 Meteor.methods({
@@ -25,33 +47,89 @@ Meteor.methods({
     check(token, Object);
     check(metadata, Match.Maybe(Object));
 
-    const { id, amount, description } = token;
+    let result;
+    const {
+      id, amount, description, recur,
+    } = token;
 
-    const result = await stripe.charges.create({
-      amount,
-      currency: 'usd',
-      description,
-      source: id,
-      metadata,
-    });
-
-    if (result.status === 'succeeded' && this.userId) {
-      // Write to user record
-      Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
-
-      const user = Meteor.users.findOne({ _id: this.userId });
-      const isDonation = /Donation/.test(result.description);
-
-      // Send receipt email
-      Email.send({
-        from: 'WCASA <website@wcasa.org>',
-        to: user.emails[0].address,
-        subject: isDonation ? 'Donation Receipt' : 'Purchase Receipt',
-        text: `Hello ${user.profile.firstname} ${user.profile.lastname
-        },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
-        } of $${result.amount / 100}.  You can access your receipt here:\n\n${
-          process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
+    if (!recur || recur === 'once') {
+      result = await stripe.charges.create({
+        amount,
+        currency: 'usd',
+        description,
+        source: id,
+        metadata,
       });
+
+      if (result.status === 'succeeded' && this.userId) {
+        // Write to user record
+        Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
+
+        const user = Meteor.users.findOne({ _id: this.userId });
+        const isDonation = /Donation/.test(result.description);
+
+        // Send receipt email
+        Email.send({
+          from: 'WCASA <website@wcasa.org>',
+          to: user.emails[0].address,
+          subject: isDonation ? 'Donation Receipt' : 'Purchase Receipt',
+          text: `Hello ${user.profile.firstname} ${user.profile.lastname
+          },\n\nThank you so much for your ${isDonation ? 'donation' : 'purchase'
+          } of $${result.amount / 100}.  You can access your receipt here:\n\n${
+            process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
+        });
+      }
+    } else {
+      // Recurring donation
+      // Start by creating a plan unless plan already exists
+      const plans = await stripe.plans.list({ product: product.id });
+      const nickname = `${product.name} $${amount / 100} every ${recur}`;
+      let plan;
+
+      // Use existing plan if available
+      plans.data.forEach((p) => {
+        if (p.nickname === nickname) plan = p;
+      });
+
+      // Otherwise create new plan
+      if (!plan) {
+        plan = await stripe.plans.create({
+          product: product.id,
+          nickname,
+          currency: 'usd',
+          interval: recur,
+          amount,
+        });
+      }
+
+      // Next, create a customer object that stores the payment method
+      // Unless customer object already exists
+      let customer = Meteor.users.findOne({ _id: this.userId }).stripeId;
+
+      if (!customer) {
+        customer = await stripe.customers.create({
+          email: metadata.user_email,
+          source: id, // token id
+          metadata,
+        });
+
+        customer = customer.id;
+
+        if (customer) {
+          Meteor.users.update({ _id: this.userId }, { $set: { stripeId: customer } });
+        }
+      }
+
+      // Finally, subscribe customer to the plan
+      result = await stripe.subscriptions.create({
+        customer,
+        items: [{ plan: plan.id }],
+      });
+
+      // Store subscription details
+      if (result.status === 'active') {
+        Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
+      }
     }
 
     return result;

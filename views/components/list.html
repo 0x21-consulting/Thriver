@@ -41,7 +41,7 @@
             </div>
             {{#if isAdmin}}
               <aside class="admin">
-                <button class="fa delete">&#xf1f8;</button>
+                <button class="fa delete delete-item">&#xf1f8;</button>
               </aside>
             {{/if}}
           </article>
@@ -95,7 +95,7 @@
                 </dl>
                 <menu class="availability">
                   {{#if equals status 'Available'}}
-                    <li><button class="request-copy">Request Copy</button></li>
+                    <li><button class="request-copy" data-id="{{_id}}">Request Copy</button></li>
                   {{/if}}
                 </menu>
               </aside>
@@ -106,7 +106,7 @@
       {{#if equals paginate 'true'}}
         <li class="loadMore">
           <button type="button">Load More <span class="fa"></span></button>
-          <span class="everything">That's everything!</span>
+          <span class="everything hide">That's everything!</span>
         </li>
       {{/if}}
     </section>

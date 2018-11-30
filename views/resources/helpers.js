@@ -49,84 +49,114 @@ Template.library.helpers({
     perPage: 10,
     style: 'stripes',
     tag: 'lc', // ?
-    items: () => Library.collection.find({
-      $or: Resources.search.get() instanceof RegExp ? [
-        { title: Resources.search.get() },
-        { description: Resources.search.get() },
-      ] : [{}],
-    }, {
-      limit: Resources.quantity.get(),
-      sort: { date: -1 },
-    }),
+    items: () => {
+      const query = {};
+
+      if (Resources.search.get() instanceof RegExp) {
+        query.$or = [
+          { title: Resources.search.get() },
+          { description: Resources.search.get() },
+        ];
+      }
+
+      // Library filters
+      if (Resources.material.get()) query.material = Resources.material.get();
+      if (Resources.classification.get()) query.classification = Resources.classification.get();
+      if (Resources.keywords.get()) query.keywords = Resources.keywords.get();
+
+      return Library.collection.find(query, {
+        limit: Resources.quantity.get(),
+        sort: { date: -1 },
+      });
+    },
   }],
 });
 
+const status = ['Available', 'Unavailable'];
+const materials = [
+  'Activities',
+  'Books',
+  'Curriculum',
+  'DVDs',
+  'Guide',
+  'Handbook',
+  'Manual',
+  'Report',
+  'Study Guide',
+  'Textbook',
+  'Toolkit',
+  'Workbook',
+];
+const classifications = [
+  'Resources',
+  'Providers',
+  'Survivors',
+];
+const keywords = [
+  'Activism',
+  'Advocacy',
+  'Based on a True Story',
+  'Campus',
+  'Child SA',
+  'Collected Stories',
+  'Counseling',
+  'Criminal Justice',
+  'Culturally Specific',
+  'Disability',
+  'Documentary',
+  'Evaluation',
+  'Fiction',
+  'Gender Socialization',
+  'Healing',
+  'Human Trafficking',
+  'Incest',
+  'Internet',
+  'K-12',
+  'Legal',
+  'LGBTQ',
+  'Medical',
+  'Memoirs',
+  'Mental Health',
+  'Military',
+  'Non-profits',
+  'Normalization of Violence',
+  'Objectification',
+  'Offenders',
+  'Oppression',
+  'Prevention',
+  'Prison',
+  'Privilege',
+  'Self-care',
+  'Seniors',
+  'Spanish',
+  'Spanish with English Subtitles',
+  'Substance Abuse',
+  'Survivors',
+  'Trauma',
+  'Treatment',
+  'Unhealthy Sexuality',
+  'WOC',
+];
+
 Template.libraryAddForm.helpers({
-  status: ['Available', 'Unavailable'],
-  materials: [
-    'Activities',
-    'Books',
-    'Curriculum',
-    'DVDs',
-    'Guide',
-    'Handbook',
-    'Manual',
-    'Report',
-    'Study Guide',
-    'Textbook',
-    'Toolkit',
-    'Workbook',
-  ],
-  classifications: [
-    'Resources',
-    'Providers',
-    'Survivors',
-  ],
-  keywords: [
-    'Activism',
-    'Advocacy',
-    'Based on a True Story',
-    'Campus',
-    'Child SA',
-    'Collected Stories',
-    'Counseling',
-    'Criminal Justice',
-    'Culturally Specific',
-    'Disability',
-    'Documentary',
-    'Evaluation',
-    'Fiction',
-    'Gender Socialization',
-    'Healing',
-    'Human Trafficking',
-    'Incest',
-    'Internet',
-    'K-12',
-    'Legal',
-    'LGBTQ',
-    'Medical',
-    'Memoirs',
-    'Mental Health',
-    'Military',
-    'Non-profits',
-    'Normalization of Violence',
-    'Objectification',
-    'Offenders',
-    'Oppression',
-    'Prevention',
-    'Prison',
-    'Privilege',
-    'Self-care',
-    'Seniors',
-    'Spanish',
-    'Spanish with English Subtitles',
-    'Substance Abuse',
-    'Survivors',
-    'Trauma',
-    'Treatment',
-    'Unhealthy Sexuality',
-    'WOC',
-  ],
+  status, materials, classifications, keywords,
+});
+
+Template.filterObject.helpers({
+  filters: [{
+    label: 'Classification',
+    name: 'library-classification',
+    options: classifications,
+  }, {
+    label: 'Materials',
+    name: 'library-material',
+    options: materials,
+  }, {
+    label: 'Keywords',
+    name: 'library-keywords',
+    options: keywords,
+    multiple: 'multiple',
+  }],
 });
 
 Template.resourceAddForm.helpers({

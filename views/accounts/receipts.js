@@ -32,7 +32,10 @@ Template.receiptsList.helpers({
   timestamp() { return this.created * 1000; },
   timestampUTC() { return new Date(this.created * 1000).toISOString(); },
 
-  total() { return this.amount / 100; },
+  description() {
+    if (this.object === 'subscription') return this.plan.nickname;
+    return `$${this.amount / 100} ${this.description}`;
+  },
 
   headingDonations: 'Donations',
   headingPurchases: 'Purchases',
