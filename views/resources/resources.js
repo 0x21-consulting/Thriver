@@ -89,8 +89,6 @@ Template.aside.events({
 
   // Library filters
   'change [data-id="library"] .flex-form .styledSelect > select'(event) {
-    const keywords = Array.from(event.target.selectedOptions).map(opt => opt.value);
-
     switch (event.target.id) {
       case 'library-classification':
         Resources.classification.set(event.target.value); break;
