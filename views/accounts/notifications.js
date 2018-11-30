@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
 import { Notifications } from '/logic/accounts/schema';
 import News from '/logic/news/schema';
-import { lastLogin } from './user';
+import lastLogin from './user';
 
 import './notifications.html';
 
@@ -35,7 +35,8 @@ Template.notifications.helpers({
 
     // Action alerts since last login
     const alerts = News.collection
-      .find({ date: { $gt: lastLogin.get() } }, { sort: { date: -1 } }).fetch();
+      .find({ timestamp: { $gte: lastLogin.get() } }, { sort: { date: -1 } })
+      .fetch();
 
     // Combination
     const all = notifs.concat(alerts);
@@ -47,31 +48,6 @@ Template.notifications.helpers({
     updateTitle();
 
     return all;
-  },
-});
-
-Template.notifications.events({
-  // Temp UX Alert Notes
-  // TODO(eoghantadhg): Clean up
-  'click .notificationRenewal button': () => {
-    if (window.innerWidth >= 768) {
-      $('.overlay').click();
-      $('li.donate').click();
-    } else {
-      // removeOpenAccounts(); not defined
-      $('.mobileOverlay').click();
-      $('.menuToggle').click();
-      $('.mobileMenu li.donate').click();
-    }
-  },
-  'click .notificationApproval > button': (event) => {
-    $(event.target).parent().addClass('selected');
-  },
-  'click .notificationApproval .undo': (event) => {
-    $(event.target).parent().parent().removeClass('selected');
-  },
-  'click section.notifications h2': () => {
-    // removeOpenAccounts(); not defined
   },
 });
 

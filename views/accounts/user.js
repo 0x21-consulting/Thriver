@@ -20,6 +20,7 @@ const getLastLogin = () => {
 // Bind to login and on load
 Template.body.onCreated(getLastLogin);
 Accounts.onLogin(getLastLogin);
+Accounts.onLogout(getLastLogin);
 
 /**
  * Update lastLogin upon account creation
