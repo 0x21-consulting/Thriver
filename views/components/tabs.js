@@ -30,14 +30,6 @@ const toggleTabs = (event) => {
   Util.hide(menu.parentElement
     .querySelector(`article[data-id="${event.target.dataset.id}"]`), false);
 
-  // Special case for Library??  Why??
-  switch (event.target.getAttribute('aria-controls')) {
-    case '#library':
-      document.querySelector('aside.filter').classList.add('active-filter'); break;
-    default:
-      document.querySelector('aside.filter').classList.remove('active-filter');
-  }
-
   // Select first child tab if any
   // TODO: Open first child tab
   /*

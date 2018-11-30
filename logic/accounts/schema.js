@@ -347,6 +347,10 @@ Accounts.schema.user = new SimpleSchema({
     blackbox: true,
     optional: true,
   },
+  stripeId: {
+    type: String,
+    optional: true,
+  },
 });
 
 // Attach schema to users collection
