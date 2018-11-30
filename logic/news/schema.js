@@ -38,6 +38,12 @@ News.schema = new SimpleSchema({
     optional: false,
     defaultValue: new Date(),
   },
+  /** When item was added to database */
+  timestamp: {
+    type: Date,
+    optional: false,
+    autoValue: () => new Date(),
+  },
   /** Item Link */
   url: {
     type: String,
