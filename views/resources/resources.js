@@ -232,7 +232,7 @@ Template.list.events({
    * @method
    *   @param {$.Event} event
    */
-  'click [data-tag="lc"] aside.admin button.delete': (event) => {
+  'click [data-tag="lc"] aside.admin button.delete-item': (event) => {
     event.stopPropagation();
 
     const { id } = event.target.parentElement.parentElement.dataset;
