@@ -2,12 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Accounts } from 'meteor/accounts-base';
 import { Template } from 'meteor/templating';
+import Toast from '/views/components/toasts';
 
 // When did the user last login?
 const lastLogin = new ReactiveVar(new Date());
-
-// What is the user's paired organization?
-const organization = new ReactiveVar('');
 
 /**
  * Determine last login and set to Reactive var
@@ -20,25 +18,13 @@ const getLastLogin = () => {
   });
 };
 
-/**
- * Get the user's assigned organization, if they have one
- * @method
- */
-const getOrganization = () => {
-  Meteor.call('getOrganization', (error, result) => {
-    // Update reactive var
-    organization.set(result);
-  });
-};
-
 // Bind to login and on load
 Template.body.onCreated(getLastLogin);
 Accounts.onLogin(getLastLogin);
-Template.body.onCreated(getOrganization);
-Accounts.onLogin(getOrganization);
+Accounts.onLogout(getLastLogin);
 
 /**
- * Assign a user's organization upon account creation
+ * Update lastLogin upon account creation
  * @method
  *   @param {string}   token - The email verification token
  *   @param {Function} done  - Callback once verification flow is complete
@@ -48,16 +34,15 @@ Accounts.onEmailVerificationLink((token, done) => {
   Accounts.verifyEmail(token, (error) => {
     if (error) throw new Meteor.Error(error);
 
-    // Assign organization
-    Meteor.call('assignOrganization', Meteor.userId(), () => {
-      // Update reactive vars
-      getLastLogin();
-      getOrganization();
+    // Update reactive vars
+    getLastLogin();
 
-      // Complete
-      done();
-    });
+    // Toast indicating success
+    Toast({ text: 'Email address verified successfully.', duration: 5000 });
+
+    // Complete
+    done();
   });
 });
 
-export { lastLogin, organization };
+export default lastLogin;

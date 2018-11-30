@@ -1,26 +1,21 @@
-<!--@micChickenBurger: lets get together on this one. I'm not sure how far you've brought the schema for notifications-->
-<!--I left reference to the initial template names, however perhaps these titles could be improved.-->
 <template name="notifications">
-    <ul class="notificationMenu stripes">
-        {{#each notifications}}
-            <li class="{{template}}">
-                {{#if equals template "notificationEmpty"}}No notifications at this time.{{/if}}
-                {{#if equals_or isRole "notificationGeneric,notificationApproval"}}
-                    <time datetime="{{date}}">{{date}}</time>
-                    <p>{{text}}</p>
-                {{/if}}
-                {{#if equals template "notificationApproval"}}
-                    <button type="button" class="approve">Approve</button>
-                    <button type="button" class="deny">Deny</button>
-                    <!--If approve/deny{
-                        <p class="event">
-                            if approve{ {{email}} has been granted account registration. }
-                            if deny{ {{email}} has been denied an account. }
-                            <button type="button" data-type="undo">Undo</button>
-                        </p>
-                    }-->
-                {{/if}}
-            </li>
-        {{/each}}
-    </ul>
+  <ul class="notificationMenu stripes">
+    {{#if notifications}}
+      {{#each notifications}}
+      {{global_debug this}}
+        <li class="{{type}}">
+          {{#if equals type "actionAlert"}}
+            <a href="/action-alert/{{friendlyTitle}}" title="{{friendlyTitle}}" target="_blank">
+              <span class="tag">Action Alert</span>
+              <span class="date-meta">{{friendlyDate date}}</span>
+              <h2>{{title}}</h2>
+              <p class="publisher">{{publisher}}</p>
+            </a>
+          {{/if}}
+        </li>
+      {{/each}}
+    {{else}}
+      <li>No notifications at this time.</li>
+    {{/if}}
+  </ul>
 </template>

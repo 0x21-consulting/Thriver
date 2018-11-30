@@ -94,6 +94,10 @@ Accounts.schema.profile = new SimpleSchema({
     optional: true,
     label: 'Job Title',
   },
+  organization: {
+    type: String,
+    optional: true,
+  },
   address1: {
     type: String,
     optional: true,
@@ -323,12 +327,6 @@ Accounts.schema.user = new SimpleSchema({
   profile: {
     type: Accounts.schema.profile,
     optional: false,
-  },
-
-  /** Organization to which a user belongs */
-  organization: {
-    type: Mongo.ObjectID,
-    optional: true,
   },
 
   /** Whether or not the user is an administrator */

@@ -15,10 +15,10 @@
       </div>
       <div class="w-66">
         {{#each user.emails}}
-        <div class="form-group">
-          <label for="userEmail{{@index}}" class="control-label">Email {{verified}}</label>
-          <input type="text" name="userEmail{{@index}}" class="form-control" value="{{address}}" disabled>
-        </div>
+          <div class="form-group">
+            <label for="userEmail{{@index}}" class="control-label {{verified}}">Email</label>
+            <input type="text" name="userEmail{{@index}}" class="form-control" value="{{address}}" disabled>
+          </div>
         {{/each}}
       </div>
       <div class="form-group w-33">
