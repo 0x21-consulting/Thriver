@@ -13,26 +13,32 @@ const smoothScroll = (path) => {
 
   // Get target element (that the anchor links to)
   // Otherwise, default to top of screen
-  const target = newPath ? $(`[id="${newPath}"]`) : $('body');
+  const target = newPath ? document.getElementById(newPath) : document.body;
 
   // If no target, don't bother
-  if (!target.length) return;
+  if (!target) return;
 
-  // Where are we presently?
-  const posY = window.scrollY;
+  // Use native scroll if browser supports it
+  if ('scrollBehavior' in document.documentElement.style) {
+    window.scroll({ top: target.offsetTop + 150, behavior: 'smooth' });
+  } else {
+    // Support for Edge, IE, and Safari still needs jQuery animation
+    // Where are we presently?
+    const posY = window.scrollY;
 
-  // Calculate target Y offset
-  const offset = target.offset().top - 96;
+    // Calculate target Y offset
+    const offset = $(target).offset().top - 96;
 
-  // We want to scroll at 750 pixels per second
-  const speed = Math.abs(posY - offset);
+    // We want to scroll at 750 pixels per second
+    const speed = Math.abs(posY - offset);
 
-  // Smooth scroll to target
-  $('.mainNav li a').removeClass('active');
+    // Smooth scroll to target
+    $('.mainNav li a').removeClass('active');
 
-  // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
-  $('body,html').stop(true, true)
-    .animate({ scrollTop: offset }, speed > 750 ? 750 : speed);
+    // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
+    $('body,html').stop(true, true)
+      .animate({ scrollTop: offset }, speed > 750 ? 750 : speed);
+  }
 };
 
 /**
