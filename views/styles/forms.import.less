@@ -37,7 +37,7 @@
             background-color: @radioSelect;
         }
     }
-    .styledSelect, .cvv2, input[type=text], input[type=tel]{
+    .styledSelect, .cvv2, input[type=text], div#donate-card-element{
         background-color: @baseColor;
         &:hover{
             background-color: darken(@baseColor, 2.5%);
@@ -45,6 +45,10 @@
         &:focus, input:focus{
             background-color: darken(@baseColor, 5%);
         }
+    }
+    div#donate-card-element {
+        padding: 16px;
+        margin-top: 5px;
     }
     button.submit, input[type=submit]{
         .buttonColor(@buttonColor);
