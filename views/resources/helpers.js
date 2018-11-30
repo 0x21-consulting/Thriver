@@ -62,13 +62,7 @@ Template.library.helpers({
       // Library filters
       if (Resources.material.get()) query.material = Resources.material.get();
       if (Resources.classification.get()) query.classification = Resources.classification.get();
-      if (Resources.keywords.get()) {
-        const $and = [];
-        Resources.keywords.get().forEach(kw => $and.push({ keywords: kw }));
-        query.$and = $and;
-      }
-
-      console.log(query);
+      if (Resources.keywords.get()) query.keywords = Resources.keywords.get();
 
       return Library.collection.find(query, {
         limit: Resources.quantity.get(),

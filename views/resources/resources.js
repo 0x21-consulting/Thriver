@@ -79,6 +79,8 @@ Template.aside.events({
 
     event.target.parentNode.replaceChild(textNode, event.target);
 
+    Meteor.call('requestLibraryItem', event.target.dataset.id);
+
     Toast({ text: 'Library item requested.' });
   },
 
@@ -95,7 +97,7 @@ Template.aside.events({
       case 'library-material':
         Resources.material.set(event.target.value); break;
       case 'library-keywords':
-        Resources.keywords.set(keywords); break;
+        Resources.keywords.set(event.target.value); break;
       default:
     }
   },
