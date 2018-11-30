@@ -46,9 +46,6 @@ Template.notifications.helpers({
     // Update title
     updateTitle();
 
-    // If no notifications, say so
-    if (!all.length) return [{ template: 'notificationEmpty' }];
-
     return all;
   },
 });
