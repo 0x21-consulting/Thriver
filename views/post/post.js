@@ -64,7 +64,7 @@ Template.post.helpers({
   title: () => (item.get() ? News.collection.findOne({ _id: item.get() }).title : ''),
 
   home: {
-    url: '/',
+    url: 'https://wcasa.org',
     text: 'Back to WCASA',
   },
   share: [{
@@ -89,11 +89,9 @@ Template.post.helpers({
     media: {
       title: 'Media Contacts',
       contact: [{
-        name: 'Peter Fiala',
+        name: 'Kelly Moe Litke',
         org: 'WCASA',
-        phone: '(608) 257-1516',
-        // phoneExt: '113',
-        email: 'peterf@wcasa.org',
+        email: 'kellyml@wcasa.org',
       }],
     },
     about: [],
