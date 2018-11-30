@@ -56,8 +56,7 @@ Meteor.methods({
   updateUserProfile(updatedUserProfile) {
     check(updatedUserProfile, Object);
 
-    // Nothing to do if no user is logged in, or if they
-    // don't have a designated organization
+    // Nothing to do if no user is logged in
     if (!Meteor.user()) return 'User not logged in';
 
     Meteor.users.update({ _id: Meteor.userId() }, { $set: updatedUserProfile });
