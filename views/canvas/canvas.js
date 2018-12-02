@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import Settings from '/logic/core/settings';
 import Util from '/views/canvas/ui/util';
+import { Accounts } from 'meteor/accounts-base';
 
 import './canvas.html';
 import './preloader';
@@ -198,6 +199,43 @@ Template.canvas.helpers({
   gaID: () => {
     if (Settings.ready.get()) return Settings.get('googleAnalyticsId');
     return false;
+  },
+});
+
+Template.canvas.events({
+  'click #testUpload button'(event) {
+    event.preventDefault();
+
+    const [file] = event.target.parentElement.querySelector('input').files;
+    const { name, type } = file;
+
+    const reader = new FileReader();
+
+    // Read in data
+    reader.addEventListener('load', (loadEvent) => {
+      const data = loadEvent.target.result;
+      const xhr = new XMLHttpRequest();
+      const form = new FormData();
+
+      form.append(name, new Blob([data], { type }));
+
+      xhr.addEventListener('readystatechange', () => {
+        console.log(xhr.readyState, xhr.responseText);
+      });
+
+      xhr.addEventListener('error', () => console.error(arguments));
+
+      xhr.open('POST', '/uploadFile', true);
+
+      // Send authentication details
+      // eslint-disable-next-line no-underscore-dangle
+      xhr.setRequestHeader('X-Auth-Token', Accounts._storedLoginToken());
+      xhr.setRequestHeader('X-User-Id', Meteor.userId());
+
+      xhr.send(form);
+    });
+
+    reader.readAsArrayBuffer(file);
   },
 });
 

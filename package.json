@@ -19,9 +19,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "aws-sdk": "^2.368.0",
     "bcrypt": "^3.0.1",
+    "connect-busboy": "0.0.2",
     "core-js": "^2.5.7",
     "fibers": "^3.0.0",
+    "mississippi": "^3.0.0",
     "simpl-schema": "1.4.3",
     "stripe": "^6.15.0"
   },

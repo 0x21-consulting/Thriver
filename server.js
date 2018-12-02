@@ -5,6 +5,7 @@ import '/logic/accounts/notifications';
 import '/logic/accounts/accounts';
 import '/logic/events/server';
 import '/logic/administration/server';
+import '/logic/administration/files';
 import '/logic/providers/providers';
 import '/logic/outreach/outreach';
 import '/logic/payments/payments';
