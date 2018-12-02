@@ -126,6 +126,14 @@ Template.markdownEditor.events({
         insertBefore = '`';
         insertAfter = '`';
         break;
+      case 'ol':
+        insertBefore = '\n1. ';
+        insertAfter = '\n';
+        break;
+      case 'ul':
+        insertBefore = '\n- ';
+        insertAfter = '\n';
+        break;
       default:
         return;
     }
