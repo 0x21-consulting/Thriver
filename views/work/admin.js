@@ -60,10 +60,7 @@ const updateSectionContent = (oldHash, id, event) => {
   if (newHash !== oldHash) Meteor.call('updateSectionData', id, { content });
 
   // Restore view
-  parent.classList.remove('edit');
-  parent.querySelector('textarea').remove();
-  parent.querySelector(':scope > button.save').remove();
-  parent.querySelector(':scope > button.cancel').remove();
+  edit.set(false);
 };
 
 Template.workNav.events({
