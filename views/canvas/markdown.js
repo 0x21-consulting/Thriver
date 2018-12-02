@@ -1,10 +1,13 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Accounts } from 'meteor/accounts-base';
 import Marked from '/views/lib/marked';
 
 import './markdown.html';
 
 const preview = new ReactiveVar('');
+const uploadUrl = new ReactiveVar();
 
 /**
  * @summary Convert markdown into HTML
@@ -209,17 +212,61 @@ Template.markdownEditor.events({
     const description = parent.querySelector('[name="description"]');
     const alignment = parent.querySelector('[name="alignment"][checked]');
     const url = parent.querySelector('[name="url"]');
+    let imageUrl;
+
+    if (uploadUrl.get()) imageUrl = uploadUrl.get(); else imageUrl = url.value;
 
     // Insert link markdown
     const start = textarea.selectionStart; // current cursor position
     const end = textarea.selectionEnd;
-    textarea.value = `${textarea.value.substring(0, start)}![${alignment.value}: ${description.value}](${url.value})${textarea.value.substring(end)}`;
+    const first = textarea.value.substring(0, start);
+    const last = textarea.value.substring(end);
+    textarea.value = `${first}![${alignment.value}: ${description.value}](${imageUrl})${last}`;
     textarea.focus();
 
     // Clear and close form
     description.value = '';
     url.value = '';
     parent.classList.add('hide');
+  },
+
+  /**
+   * Handle upload image
+   * @param {$.Event} event
+   */
+  'change ul.markdown-menu li.img input[type="file"]'(event) {
+    event.preventDefault();
+
+    const [file] = event.target.parentElement.querySelector('input').files;
+    const { name, type } = file;
+
+    const reader = new FileReader();
+
+    // Read in data
+    reader.addEventListener('load', (loadEvent) => {
+      const data = loadEvent.target.result;
+      const xhr = new XMLHttpRequest();
+      const form = new FormData();
+
+      form.append(name, new Blob([data], { type }));
+
+      xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState === 4) uploadUrl.set(xhr.responseText);
+      });
+
+      xhr.addEventListener('error', error => console.error(error));
+
+      xhr.open('POST', '/uploadFile', true);
+
+      // Send authentication details
+      // eslint-disable-next-line no-underscore-dangle
+      xhr.setRequestHeader('X-Auth-Token', Accounts._storedLoginToken());
+      xhr.setRequestHeader('X-User-Id', Meteor.userId());
+
+      xhr.send(form);
+    });
+
+    reader.readAsArrayBuffer(file);
   },
 });
 
