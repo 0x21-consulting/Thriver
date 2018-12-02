@@ -37,7 +37,32 @@ section.markdown {
         margin: 0 !important;
         padding: 5px 10px;
         cursor: pointer;
+        i.fa {
+          pointer-events: none;
+        }
       }
+
+      /* Headers drop down menu */
+      li.headers ul {
+        position: absolute;
+        display: block;
+        border: 1px solid #ddd;
+        margin-top: 5px !important;
+        margin-left: -11px !important;
+
+        li {
+          display: list-item !important;
+          border: none;
+          background: #fff;
+          border-top: 1px solid #ddd;
+          border-radius: 0;
+        }
+        li:hover {
+          background: @teal;
+          color: @white;
+        }
+      }
+
       li:first-child {
         border-radius: 10px 0 0 0;
       }

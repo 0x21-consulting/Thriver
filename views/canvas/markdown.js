@@ -56,6 +56,39 @@ Template.markdownEditor.events({
       .forEach(elem => elem.classList.remove('active'));
     event.target.classList.add('active');
   },
+
+  /**
+   * Handle showing headers dropdown menu
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.headers'(event) {
+    const ul = event.target.querySelector('ul');
+
+    if (ul) {
+      if (ul.classList.contains('hide')) ul.classList.remove('hide');
+      else ul.classList.add('hide');
+    }
+  },
+
+  /**
+   * Handle inserting headers
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.headers ul li'(event) {
+    event.stopPropagation();
+
+    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
+
+    switch (event.target.className) {
+      case 'h1': textarea.value += '\n\n# '; break;
+      case 'h2': textarea.value += '\n\n## '; break;
+      case 'h3': textarea.value += '\n\n### '; break;
+      default:
+    }
+
+    // Hide dropdown menu
+    event.target.parentElement.classList.add('hide');
+  },
 });
 
 Template.markdownEditor.onRendered(() => {

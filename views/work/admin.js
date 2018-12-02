@@ -49,8 +49,6 @@ const handler = (event) => {
  *   @param {Event} event - Click event passed to handler
  */
 const updateSectionContent = (oldHash, id, event) => {
-  const parent = event.target.parentElement;
-
   // Get section ID
   const { target } = event;
   const content = target.parentElement.querySelector('textarea').value;
