@@ -11,9 +11,32 @@
 </template>
 
 <template name="markdownEditor">
+  <section class="menu">
+    <ul class="edit-menu">
+      <li class="edit active">Edit</li>
+      <li class="preview">Preview</li>
+    </ul>
+    <ul class="markdown-menu">
+      <li class="headers" data-title="Insert a Header">
+        <i class="fa">&#xf1dc;</i>
+        <ul class="hide">
+          <li class="h1">Title</li>
+          <li class="h2">Header</li>
+          <li class="h3">Sub Header</li>
+        </ul>
+      </li>
+      <li class="bold" data-title="Embolden Text"><i class="fa">&#xf032;</i></li>
+      <li class="italics" data-title="Italicize Text"><i class="fa">&#xf033;</i></li>
+      <li class="quote" data-title="Insert a Quotation"><i class="fa">&#xf10e;</i></li>
+      <li class="code" data-title="Insert Code or Preformatted Text"><i class="fa">&#xf121;</i></li>
+      <li class="ol" data-title="Insert an Ordered List"><i class="fa">&#xf0cb;</i></li>
+      <li class="ul" data-title="Insert an Unordered List"><i class="fa">&#xf0ca;</i></li>
+      <li class="a" data-title="Insert a Link"><i class="fa">&#xf0c1;</i></li>
+    </ul>
+  </section>
   <section class="markdown-editor">
     <textarea>{{content}}</textarea>
-    <section class="preview">{{{markdown preview}}}</section>
+    <section class="preview hide">{{{markdown preview}}}</section>
   </section>
   <button class="save">Save</button>
   <button class="cancel">Cancel</button>
