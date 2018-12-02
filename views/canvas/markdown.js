@@ -152,10 +152,10 @@ Template.markdownEditor.events({
   },
 
   /**
-   * Handle showing link dropdown
+   * Handle showing link and image drop downs
    * @param {$.Event} event
    */
-  'click ul.markdown-menu li.a'(event) {
+  'click ul.markdown-menu li.a, click ul.markdown-menu li.img'(event) {
     const aside = event.target.querySelector('aside');
     const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
 
@@ -167,7 +167,7 @@ Template.markdownEditor.events({
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         if (start !== end) {
-          aside.querySelector('[name="text"]').value = textarea.value.substring(start, end);
+          aside.querySelector('[type="text"]').value = textarea.value.substring(start, end);
         }
       } else aside.classList.add('hide');
     }
@@ -193,6 +193,31 @@ Template.markdownEditor.events({
 
     // Clear and close form
     text.value = '';
+    url.value = '';
+    parent.classList.add('hide');
+  },
+
+  /**
+   * Handle inserting image
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.img button'(event) {
+    event.preventDefault();
+
+    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
+    const parent = event.target.parentElement;
+    const description = parent.querySelector('[name="description"]');
+    const alignment = parent.querySelector('[name="alignment"][checked]');
+    const url = parent.querySelector('[name="url"]');
+
+    // Insert link markdown
+    const start = textarea.selectionStart; // current cursor position
+    const end = textarea.selectionEnd;
+    textarea.value = `${textarea.value.substring(0, start)}![${alignment.value}: ${description.value}](${url.value})${textarea.value.substring(end)}`;
+    textarea.focus();
+
+    // Clear and close form
+    description.value = '';
     url.value = '';
     parent.classList.add('hide');
   },

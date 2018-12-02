@@ -39,6 +39,22 @@
           <button>Insert</button>
         </aside>
       </li>
+      <li class="img" data-title="Insert an image">
+        <i class="fa">&#xf03e;</i>
+        <aside class="hide">
+          <label>URL: <input type="url" name="url" /></label>
+          <label>OR File: <input type="file" /></label>
+          <label>Description: <input type="text" name="description" /></label>
+          Alignment:
+          <label for="markdown-align-left" title="Left"><i class="fa">&#xf036;</i></label>
+          <input class="radio" id="markdown-align-left" type="radio" name="alignment" value="Left" checked />
+          <label for="markdown-align-center" title="Center"><i class="fa">&#xf037;</i></label>
+          <input class="radio" id="markdown-align-center" type="radio" name="alignment" value="Center" />
+          <label for="markdown-align-right" title="Right"><i class="fa">&#xf038;</i></label>
+          <input class="radio" id="markdown-align-right" type="radio" name="alignment" value="Right" />
+          <button>Insert</button>        
+        </aside>
+      </li>
     </ul>
   </section>
   <section class="markdown-editor">
