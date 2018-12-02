@@ -88,6 +88,59 @@ Template.markdownEditor.events({
 
     // Hide dropdown menu
     event.target.parentElement.classList.add('hide');
+
+    // Set position
+    textarea.focus();
+  },
+
+  /**
+   * Handle markdown options
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li'(event) {
+    event.stopPropagation();
+
+    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const first = textarea.value.substring(0, start);
+    const last = textarea.value.substring(end);
+    const selection = textarea.value.substring(start, end);
+
+    // What do we insert?
+    let insertBefore = '';
+    let insertAfter = '';
+    switch (event.target.className) {
+      case 'bold':
+        insertBefore = '**';
+        insertAfter = '**';
+        break;
+      case 'italics':
+        insertBefore = '__';
+        insertAfter = '__';
+        break;
+      case 'quote':
+        insertBefore = '\n> ';
+        break;
+      case 'code':
+        insertBefore = '`';
+        insertAfter = '`';
+        break;
+      default:
+        return;
+    }
+
+    // Embolden selection
+    if (selection) {
+      textarea.value = `${first}${insertBefore}${selection}${insertAfter}${last}`;
+    } else {
+      // Insert bold and place cursor
+      textarea.value = `${first}${insertBefore}${insertAfter}${last}`;
+      textarea.selectionStart = start + insertBefore.length;
+      textarea.selectionEnd = textarea.selectionStart;
+    }
+
+    textarea.focus();
   },
 });
 
