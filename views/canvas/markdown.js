@@ -150,6 +150,52 @@ Template.markdownEditor.events({
 
     textarea.focus();
   },
+
+  /**
+   * Handle showing link dropdown
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.a'(event) {
+    const aside = event.target.querySelector('aside');
+    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
+
+    if (aside) {
+      if (aside.classList.contains('hide')) {
+        aside.classList.remove('hide');
+
+        // Populate text field if there is a selection
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        if (start !== end) {
+          aside.querySelector('[name="text"]').value = textarea.value.substring(start, end);
+        }
+      } else aside.classList.add('hide');
+    }
+  },
+
+  /**
+   * Handle inserting link
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.a button'(event) {
+    event.preventDefault();
+
+    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
+    const parent = event.target.parentElement;
+    const text = parent.querySelector('[name="text"]');
+    const url = parent.querySelector('[name="url"]');
+
+    // Insert link markdown
+    const start = textarea.selectionStart; // current cursor position
+    const end = textarea.selectionEnd;
+    textarea.value = `${textarea.value.substring(0, start)}[${text.value}](${url.value})${textarea.value.substring(end)}`;
+    textarea.focus();
+
+    // Clear and close form
+    text.value = '';
+    url.value = '';
+    parent.classList.add('hide');
+  },
 });
 
 Template.markdownEditor.onRendered(() => {
