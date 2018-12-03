@@ -187,11 +187,14 @@ Template.markdownEditor.events({
     const parent = event.target.parentElement;
     const text = parent.querySelector('[name="text"]');
     const url = parent.querySelector('[name="url"]');
+    let fileUrl;
+
+    if (uploadUrl.get()) fileUrl = uploadUrl.get(); else fileUrl = url.value;
 
     // Insert link markdown
     const start = textarea.selectionStart; // current cursor position
     const end = textarea.selectionEnd;
-    textarea.value = `${textarea.value.substring(0, start)}[${text.value}](${url.value})${textarea.value.substring(end)}`;
+    textarea.value = `${textarea.value.substring(0, start)}[${text.value}](${fileUrl})${textarea.value.substring(end)}`;
     textarea.focus();
 
     // Clear and close form
@@ -227,6 +230,7 @@ Template.markdownEditor.events({
     // Clear and close form
     description.value = '';
     url.value = '';
+    uploadUrl.set();
     parent.classList.add('hide');
   },
 
@@ -234,7 +238,7 @@ Template.markdownEditor.events({
    * Handle upload image
    * @param {$.Event} event
    */
-  'change ul.markdown-menu li.img input[type="file"]'(event) {
+  'change ul.markdown-menu li input[type="file"]'(event) {
     event.preventDefault();
 
     const [file] = event.target.parentElement.querySelector('input').files;
