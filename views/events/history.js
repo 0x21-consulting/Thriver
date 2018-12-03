@@ -42,12 +42,22 @@ Events.navigate = (id) => {
   $('.searchResultsList').removeClass('active');
 
   // Determine URI path
-  const parentName = document.querySelector('#main > .events').id;
+  const events = document.querySelector('#main > .events');
+  const parentName = events.id;
   const path = `${parentName}/${Calendar.thisYear.get()}/${Calendar
     .months[Calendar.thisMonth.get()]}/${Sections.generateId(thisEvent.name)}/`;
 
   // Update URI using History API
   History.update(parentName, path);
+
+  // Smooth scroll
+  const offset = events.offsetTop + 350;
+
+  if ('scrollBehavior' in document.documentElement.style) {
+    window.scroll({ top: offset, behavior: 'smooth' });
+  } else {
+    $('body,html').stop(true, true).animate({ scrollTop: offset }, 750);
+  }
 };
 
 /**
