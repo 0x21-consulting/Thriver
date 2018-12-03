@@ -36,10 +36,44 @@ section.markdown {
         border-bottom: none;
         margin: 0 !important;
         padding: 5px 10px;
+        position: relative;
         cursor: pointer;
         i.fa {
           pointer-events: none;
         }
+      }
+      &.markdown-menu > li{
+        &:hover{
+          background: rgba(0,0,0,0.025);
+          &:after{
+            content: attr(data-title);
+            position: absolute;
+            top: -23px;
+            left: 0;
+            background: #35809d;
+            color: #fff;
+            padding: 2px 4px;
+            white-space: nowrap;
+            font-weight: 600;
+            line-height: 1;
+            border-radius: 3px;
+          }
+          &:before{
+            content: '' !important; //override li
+            position: absolute;
+            left: 39%;
+            top: -7px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #35809d;
+            display: block;
+          }
+        }
+      }
+      &.edit-menu{
+        li{ font-weight: 600; }
       }
 
       /* Headers drop down menu */
@@ -47,6 +81,7 @@ section.markdown {
         position: absolute;
         display: block;
         border: 1px solid #ddd;
+        white-space: nowrap;
         margin-top: 5px !important;
         margin-left: -11px !important;
 
@@ -76,11 +111,11 @@ section.markdown {
       }
 
       li:first-child {
-        border-radius: 10px 0 0 0;
+        border-radius: 3px 0 0 0;
       }
       li:last-child {
         border-left: none;
-        border-radius: 0 10px 0 0;
+        border-radius: 0 3px 0 0;
       }
       li.active {
         background: @teal;
@@ -90,7 +125,7 @@ section.markdown {
 
     ul.markdown-menu {
       width: 100%;
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
   }
 }

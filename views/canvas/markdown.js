@@ -9,6 +9,13 @@ import './markdown.html';
 const preview = new ReactiveVar('');
 const uploadUrl = new ReactiveVar();
 
+const closeMenus = (container) => {
+  const menus = container.querySelectorAll('.markdown-menu-dropdown');
+  for (let i = 0, len = menus.length; i < len; i += 1) {
+    if (!menus[i].classList.contains('hide')) menus[i].classList.add('hide');
+  }
+};
+
 /**
  * @summary Convert markdown into HTML
  * @function
@@ -45,6 +52,8 @@ Template.markdownEditor.events({
     const edit = parent.querySelector('textarea');
     const prev = parent.querySelector('.preview');
 
+    closeMenus(event.target.parentElement.parentElement.querySelector('.markdown-menu'));
+
     // Show/hide edit and preview elements
     if (event.target.classList.contains('edit')) {
       edit.classList.remove('hide');
@@ -61,24 +70,13 @@ Template.markdownEditor.events({
   },
 
   /**
-   * Handle showing headers dropdown menu
-   * @param {$.Event} event
-   */
-  'click ul.markdown-menu li.headers'(event) {
-    const ul = event.target.querySelector('ul');
-
-    if (ul) {
-      if (ul.classList.contains('hide')) ul.classList.remove('hide');
-      else ul.classList.add('hide');
-    }
-  },
-
-  /**
    * Handle markdown options
    * @param {$.Event} event
    */
   'click ul.markdown-menu li'(event) {
     event.stopPropagation();
+
+    closeMenus(event.target.parentElement);
 
     const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
     const start = textarea.selectionStart;
@@ -145,6 +143,18 @@ Template.markdownEditor.events({
     // Close any drop downs
     if (!event.target.parentElement.classList.contains('markdown-menu')) {
       event.target.parentElement.classList.add('hide');
+    }
+  },
+
+  /**
+   * Handle showing headers dropdown menu
+   * @param {$.Event} event
+   */
+  'click ul.markdown-menu li.headers'(event) {
+    const ul = event.target.querySelector('ul');
+    if (ul) {
+      if (ul.classList.contains('hide')) ul.classList.remove('hide');
+      else ul.classList.add('hide');
     }
   },
 
@@ -265,6 +275,14 @@ Template.markdownEditor.events({
     });
 
     reader.readAsArrayBuffer(file);
+  },
+
+  /**
+   * Close menus on interaction with textarea
+   * @param {$.Event} event
+   */
+  'click .markdown-editor textarea'(event) {
+    closeMenus(event.target.parentElement.parentElement.querySelector('.markdown-menu'));
   },
 });
 

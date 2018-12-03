@@ -12,37 +12,33 @@
 
 <template name="markdownEditor">
   <section class="menu">
-    <ul class="edit-menu">
-      <li class="edit active">Edit</li>
-      <li class="preview">Preview</li>
-    </ul>
     <ul class="markdown-menu">
-      <li class="headers" data-title="Insert a Header">
+      <li class="headers" data-title="Header">
         <i class="fa">&#xf1dc;</i>
-        <ul class="hide">
+        <ul class="hide markdown-menu-dropdown">
           <li class="h1">Title</li>
           <li class="h2">Header</li>
           <li class="h3">Sub Header</li>
         </ul>
       </li>
-      <li class="bold" data-title="Embolden Text"><i class="fa">&#xf032;</i></li>
-      <li class="italics" data-title="Italicize Text"><i class="fa">&#xf033;</i></li>
-      <li class="quote" data-title="Insert a Quotation"><i class="fa">&#xf10e;</i></li>
-      <li class="code" data-title="Insert Code or Preformatted Text"><i class="fa">&#xf121;</i></li>
-      <li class="ol" data-title="Insert an Ordered List"><i class="fa">&#xf0cb;</i></li>
-      <li class="ul" data-title="Insert an Unordered List"><i class="fa">&#xf0ca;</i></li>
-      <li class="a" data-title="Insert a Link">
+      <li class="bold" data-title="Bold"><i class="fa">&#xf032;</i></li>
+      <li class="italics" data-title="Italic"><i class="fa">&#xf033;</i></li>
+      <li class="quote" data-title="Quote"><i class="fa">&#xf10e;</i></li>
+      <li class="code" data-title="Code or Preformatted Text"><i class="fa">&#xf121;</i></li>
+      <li class="ol" data-title="Ordered List"><i class="fa">&#xf0cb;</i></li>
+      <li class="ul" data-title="Unordered List"><i class="fa">&#xf0ca;</i></li>
+      <li class="a" data-title="Link">
         <i class="fa">&#xf0c1;</i>
-        <aside class="hide">
+        <aside class="hide markdown-menu-dropdown">
           <label>URL: <input type="url" name="url" /></label>
           <label>OR File: <input type="file" /></label>
           <label>Text: <input type="text" name="text" /></label>
           <button>Insert</button>
         </aside>
       </li>
-      <li class="img" data-title="Insert an image">
+      <li class="img" data-title="Add Media">
         <i class="fa">&#xf03e;</i>
-        <aside class="hide">
+        <aside class="hide markdown-menu-dropdown">
           <label>URL: <input type="url" name="url" /></label>
           <label>OR File: <input type="file" /></label>
           <label>Description: <input type="text" name="description" /></label>
@@ -56,6 +52,10 @@
           <button>Insert</button>        
         </aside>
       </li>
+    </ul>
+    <ul class="edit-menu">
+      <li class="edit active">Edit</li>
+      <li class="preview">Preview</li>
     </ul>
   </section>
   <section class="markdown-editor">
