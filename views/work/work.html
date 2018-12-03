@@ -1,5 +1,5 @@
 <template name="work">
-  <section class="mainSection work" id="{{anchor name=name}}" data-id="{{_id}}">
+  <section class="mainSection work {{truncate}}" id="{{anchor name=name}}" data-id="{{_id}}">
     {{#if isAdmin}}
       {{> sectionAdmin}}
     {{/if}}

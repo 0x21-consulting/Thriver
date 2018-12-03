@@ -73,7 +73,7 @@ section.work{
     }
 }
 
-.workReading section.work > .main .workTextContainer:after{display: none;}
+section.work.workReading > .main .workTextContainer:after{display: none;}
 
 
 //About SA
@@ -877,9 +877,7 @@ section.work .main.container{
     }
 }
 
-//Active Work Object
-
-//body.workReading section.work >main .workContent{height: 100vh;}
+// Active Work Object
 body.workActive section.work .main.container{
         //margin-top: 42px;
         //background-color: desaturate(@backgroundWork,35%);
@@ -916,7 +914,7 @@ body.workActive section.work .main.container{
 section.work > .main .workContent footer.truncate button.less { display: none; }
 
 // Truncation Opened
-.workReading section.work > .main {
+section.work.workReading > .main {
     .workTextContainer {
         margin-bottom: 50px;
         max-height: 9999px;
@@ -1332,7 +1330,7 @@ section.work .workNav > ul > li.new-section {
 }
 
 @media @mobile{ .workActive section.work .workNav > ul > li.backToIndexWork a{display: block !important;} }
-.mobile-article-open.workActive.workReading section.work .workContent{ @media @mobile{height: auto !important;}}
+.mobile-article-open.workActive section.work.workReading .workContent{ @media @mobile{height: auto !important;}}
 
 @media print{
     section.work .inner-container-wide{ max-width: none;}
