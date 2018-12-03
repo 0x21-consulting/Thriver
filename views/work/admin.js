@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { SHA256 } from 'meteor/sha';
-import Sections from '/logic/sections/sections';
 import getValue from './work';
 
 const edit = new ReactiveVar(false);
+const aboutSAEdit = new ReactiveVar(false);
 
 /**
  * Handler for updating work section names
@@ -200,55 +200,42 @@ Template.aboutSA.events({
    * @method
    *   @param {$.Event} event
    */
-  'click button.edit': (event) => {
-    const section = event.target.parentElement.querySelector('section > section');
-    const parent = section.parentElement;
+  'click button.edit': () => {
+    aboutSAEdit.set(true);
+  },
+
+  /**
+   * @summary Close edit page
+   * @method
+   */
+  'click button.cancel': () => {
+    aboutSAEdit.set(false);
+  },
+
+  /**
+   * @summary Commit edit
+   * @method
+   */
+  'click button.save'(event) {
+    const section = event.delegateTarget.querySelector('section.shadow-box');
     const id = Template.instance().data._id;
 
-    // Create a textarea element through which to edit markdown
-    const textarea = document.createElement('textarea');
+    // Get section ID
+    const content = event.target.parentElement.querySelector('textarea').value;
+    const newHash = SHA256(content);
 
-    // Button by which to okay changes and commit to db
-    const button = document.createElement('button');
+    // Don't commit if nothing changed
+    if (newHash !== section.dataset.hash) {
+      Meteor.call('updateSectionData', id, { aboutSA: content });
+    }
 
-    button.textContent = 'Save';
-    button.addEventListener('mouseup', (eventNew) => {
-      // Get section ID
-      const content = eventNew.target.parentElement.querySelector('textarea').value;
-      const newHash = SHA256(content);
-
-      // Don't commit if nothing changed
-      if (newHash !== section.dataset.hash) {
-        Meteor.call('updateSectionData', id, { aboutSA: content });
-      }
-
-      // Restore view
-      parent.parentElement.classList.remove('edit');
-      parent.querySelector('textarea').remove();
-      const buttons = parent.querySelectorAll('button');
-      for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
-    });
-
-    // Textarea should get markdown
-    textarea.textContent = Sections.get(id, ['data']).data.aboutSA;
-
-    // Cancel button
-    const cancel = document.createElement('button');
-    cancel.textContent = 'Cancel';
-    cancel.addEventListener('mouseup', (eventNew) => {
-      const parentNew = eventNew.target.parentElement;
-      parentNew.parentElement.classList.remove('edit');
-
-      // Remove buttons and textarea
-      parentNew.querySelector('textarea').remove();
-      const buttons = parentNew.querySelectorAll('button');
-      for (let i = 0; i < buttons.length; i += 1) buttons[i].remove();
-    });
-
-    // Add textarea but hide preview
-    parent.parentElement.classList.add('edit');
-    parent.appendChild(textarea);
-    parent.appendChild(button);
-    parent.appendChild(cancel);
+    aboutSAEdit.set(false);
   },
+});
+
+Template.aboutSA.helpers({
+  markdownData: () => ({
+    content: Template.instance().data.data.aboutSA,
+    edit: aboutSAEdit.get(),
+  }),
 });
