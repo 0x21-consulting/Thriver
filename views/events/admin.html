@@ -32,6 +32,7 @@
           {{#each getSpecialFields}}
             <th data-id="{{id}}">{{name}}</th>
           {{/each}}
+          <th>Price Paid</th>
         </tr>
       </thead>
       {{#each registrant}}
@@ -94,22 +95,22 @@
           </label>
           <hr />
           <div>
-            <div class="w-66">
-              <label for="event-add-form-multi-day" class="toggleSwitchLabel">
-                All-day or Multi-Day Event
-              </label>
-              <div class="toggleSwitch">
-                <input type="checkbox" name="" id="event-add-form-multi-day">
-                <label for="event-add-form-multi-day" role="checkbox"></label>
-              </div>
-            </div>
-            <div class="styledSelect fullBlockMob w-33 margin-right-0">
+            <div class="styledSelect fullBlockMob w-50 margin-right-0">
               <label>Awareness Event</label>
               <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
                 <option value="" {{selected "" doc.awareness}}>No</option>
                 <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
                 <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
               </select>
+            </div>
+            <div class="w-50">
+              <label for="event-add-form-multi-day" class="toggleSwitchLabel">
+                All/Multi-Day Event
+              </label>
+              <div class="toggleSwitch">
+                <input type="checkbox" name="" id="event-add-form-multi-day">
+                <label for="event-add-form-multi-day" role="checkbox"></label>
+              </div>
             </div>
           </div>
           <div class="clear-both">
