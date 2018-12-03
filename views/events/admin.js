@@ -39,7 +39,7 @@ Template.eventsAdmin.events({
 });
 
 Template.eventAddForm.helpers({
-  dateType: () => (isAllDayEvent.get() ? 'date' : 'datetime-local'),
+  showTimes: () => !isAllDayEvent.get(),
   formType: () => (formMethod.get() === 'updateEvent' ? 'Update' : 'Add'),
 
   /**
@@ -66,6 +66,16 @@ Template.eventAddForm.helpers({
    * @summary Get registration items
    */
   registrationItems: () => registrationItems.get(),
+
+  /**
+   * @summary Return time in expected format
+   */
+  time: time => (time ? time.toTimeString().replace(/^((.+:).+):.+/, '$1') : ''),
+
+  /**
+   * @summary Return date in expected format
+   */
+  date: date => (date ? date.toISOString().replace(/^(.+)T.+/, '$1') : ''),
 });
 
 /** Admin events */
@@ -140,28 +150,37 @@ Template.eventAddForm.events({
       return arr;
     };
 
-    const start = document.getElementById('event-add-form-dateStart').value;
-    const end = document.getElementById('event-add-form-dateEnd').value;
+    const startDate = form.dateStart.value;
+    const startTime = form.timeStart ? form.timeStart.value : '';
+    const endDate = form.dateEnd.value;
+    const endTime = form.timeEnd ? form.timeEnd.value : '';
+    const start = new Date(`${startDate} ${startTime}`);
+    let end;
+
+    if (endDate) {
+      if (endTime) end = new Date(`${endDate} ${endTime}`);
+      end = new Date(endDate);
+    }
 
     const data = {
-      name: document.getElementById('event-add-form-name').value,
-      description: document.getElementById('event-add-form-desc').value,
-      awareness: document.getElementById('event-add-form-awareness').value,
-      start: start ? (new Date(start)).getTime() : undefined,
-      end: end ? (new Date(end)).getTime() : undefined,
+      name: form.name.value,
+      description: form.description.value,
+      awareness: form.awareness.value,
+      start: start ? start.getTime() : undefined,
+      end: end ? end.getTime() : undefined,
       location: {
-        name: document.getElementById('event-add-form-location-name').value,
-        mapUrl: document.getElementById('event-add-form-location-map-url').value,
-        webinarUrl: document.getElementById('event-add-form-location-webinar-url').value,
+        name: form.locationName.value,
+        mapUrl: form.mapUrl.value,
+        webinarUrl: form.webinarUrl.value,
       },
       cost: priceTiersArray(),
     };
 
-    const required = document.getElementById('event-add-form-registration-required').checked;
+    const required = form.registrationRequired.checked;
     if (required) {
       data.registration = {
         required,
-        registerUrl: document.getElementById('event-add-form-registration-external-url').value,
+        registerUrl: form.registrationUrl.value,
         registrationDetails: registrationDetailsArray(),
       };
     }

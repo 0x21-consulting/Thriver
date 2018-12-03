@@ -94,30 +94,45 @@
           </label>
           <hr />
           <div>
-            <div class="toggleSwitch">
-              <input type="checkbox" name="" id="event-add-form-multi-day">
-              <label for="event-add-form-multi-day" role="checkbox"></label>
+            <div class="w-66">
+              <label for="event-add-form-multi-day" class="toggleSwitchLabel">
+                All-day or Multi-Day Event
+              </label>
+              <div class="toggleSwitch">
+                <input type="checkbox" name="" id="event-add-form-multi-day">
+                <label for="event-add-form-multi-day" role="checkbox"></label>
+              </div>
             </div>
-            <label for="event-add-form-multi-day" class="toggleSwitchLabel">
-              Multi-day Event
-            </label>
+            <div class="styledSelect fullBlockMob w-33 margin-right-0">
+              <label>Awareness Event</label>
+              <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
+                <option value="" {{selected "" doc.awareness}}>No</option>
+                <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
+                <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
+              </select>
+            </div>
           </div>
-          <!-- Multi-day or all-day event? if yes, input type="date"; else input type="datetime-local" -->
-          <label class="w-33">
-            Start Date
-            <input type="{{dateType}}" name="dateStart" id="event-add-form-dateStart" value="{{datetime doc.start}}" />
-          </label>
-          <label class="w-33">
-            End Date
-            <input type="{{dateType}}" name="dateEnd" id="event-add-form-dateEnd" value="{{datetime doc.end}}" />
-          </label>
-          <div class="styledSelect fullBlockMob w-33 margin-right-0">
-            <label>Awareness Event</label>
-            <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
-              <option value="" {{selected "" doc.awareness}}>No</option>
-              <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
-              <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
-            </select>
+          <div class="clear-both">
+            <label class="w-25">
+              Start Date
+              <input type="date" name="dateStart" id="event-add-form-dateStart" value="{{datetime doc.start}}" />
+            </label>
+            {{#if showTimes}}
+              <label class="w-25">
+                Start Time
+                <input type="time" name="timeStart" id="event-add-form-timeStart" value="{{time doc.start}}" />
+              </label>
+            {{/if}}
+            <label class="w-25">
+              End Date
+              <input type="date" name="dateEnd" id="event-add-form-dateEnd" value="{{datetime doc.end}}" />
+            </label>
+            {{#if showTimes}}
+              <label class="w-25">
+                End Time
+                <input type="time" name="timeEnd" id="event-add-form-timeEnd" value="{{time doc.end}}" />
+              </label>
+            {{/if}}
           </div>
         </fieldset>
         <hr />
@@ -125,15 +140,15 @@
           <h5>Location</h5>
           <label>
             Location Name
-            <input id="event-add-form-location-name" name="name" type="text" value="{{doc.location.name}}" />
+            <input id="event-add-form-location-name" name="locationName" type="text" value="{{doc.location.name}}" />
           </label>
           <label>
             Location Map URL
-            <input id="event-add-form-location-map-url" name="map-url" type="text" value="{{doc.location.mapUrl}}" />
+            <input id="event-add-form-location-map-url" name="mapUrl" type="text" value="{{doc.location.mapUrl}}" />
           </label>
           <label>
             Webinar URL
-            <input id="event-add-form-location-webinar-url" name="webinar-url" type="text" value="{{doc.location.webinarUrl}}" />
+            <input id="event-add-form-location-webinar-url" name="webinarUrl" type="text" value="{{doc.location.webinarUrl}}" />
           </label>
         </fieldset>
         <hr />
@@ -160,7 +175,7 @@
           <h5>Registration</h5>
           <div>
             <div class="toggleSwitch">
-              <input type="checkbox" name="library-add-form-keywords" id="event-add-form-registration-required" {{checked doc.registration.required}}>
+              <input type="checkbox" name="registrationRequired" id="event-add-form-registration-required" {{checked doc.registration.required}}>
               <label for="event-add-form-registration-required" role="checkbox"></label>
             </div>
             <label for="event-add-form-registration-required" class="toggleSwitchLabel">
@@ -169,7 +184,7 @@
           </div>
           <label>
             Registration URL for Third-Party Site (If Applicable)
-            <input id="event-add-form-registration-external-url" name="webinar-url" type="text" />
+            <input id="event-add-form-registration-external-url" name="registrationUrl" type="text" />
           </label>
           <h5>Registration Fields</h5>
           {{#each registrationItems}}
