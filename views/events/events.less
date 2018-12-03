@@ -2,6 +2,7 @@
 @import (reference) "/views/styles/forms.import.less";
 
 #main section.events{
+    & > div > header p{ margin-bottom: 0px; }
     @media @mobile{
         background: #fff;
         padding-top: 30px !important;
@@ -26,9 +27,12 @@
         max-width: 200px;
         font-size: 12px;
         padding: 10px;
-        margin: 0 auto 40px auto;
+        margin: 10px auto 40px auto;
         &:focus{ .boxShadow(none); }
         @media @mobile{ display: none; }
+    }
+    .tabs ul {
+      margin: 0;
     }
     .no-upcoming-list {
         color: #fff;
@@ -47,7 +51,7 @@
     }
     aside.eventsSidebar{
         width: 300px;
-        min-height: 650px;
+        min-height: 800px;
         @media @mobile{ min-height: 0px; }
         background-color: darken(@teal,0.5%);
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00b5c2+0,00b3c6+100 */
@@ -63,7 +67,7 @@
             .font(1.4,1.4,0.025,@light,none);
         }
         h2.sidebarHeader{
-            .font(1.4,1.4,0.025,@normal,uppercase);
+            .font(1.4,1.4,0.025,600,uppercase);
             color: @white;
             border-bottom: 2px solid @white;
             margin: 20px 20px 0px 20px;
@@ -87,7 +91,7 @@
         background: @white;
         flex:3;
         .shadow(closeLeft);
-        ul{margin: 0px;}
+        //ul{margin: 0px;}
         width: ~'calc(100% - 300px)';
         overflow-x: hidden;
         .listViewEventsObject{
@@ -100,7 +104,7 @@
                 font-size: 14px;
                 text-transform: uppercase;
                 font-weight: 500;
-
+                padding: 0;
             }
             ul{
                 border-bottom: 2px solid @gray;
@@ -188,7 +192,7 @@
                 height: 40px;
                 font-size: 26px;
                 font-weight: 100;
-                top: 13px;
+                top: 39px;
                 left: 0px;
                 position: absolute;
                 z-index: 99 !important;
@@ -245,11 +249,21 @@
                         .eventContainer{
                             padding: 0px;
                             overflow: auto;
+                            a{ font-weight: 600; }
                             .inner{
                                 padding: 0px;
                                 background-color: @white;
                                 min-height: 575px;
                                 @media @mobile{ min-height: 0px; }
+                            }
+                            .excerpt{
+                              &, a{ font-weight: 600; }
+                              .fa{
+                                font-size: 19px;
+                                color: #006691;
+                                margin-right: 2px;
+                                &.red{ color: #f05929; }
+                              }
                             }
                         }
                         &.no-events-this-month{
@@ -257,7 +271,7 @@
                             height: 589px;
                             h2{ text-align: center; border: none; margin-bottom: 0px; }
                             .icon-main .fa{
-                                background: @orange;
+                                background: #838f97;
                                 border-radius: 50%;
                                 -webkit-border-radius:50%;
                                 color: #fff;
@@ -298,10 +312,10 @@
                           color: @navy;
                           margin: 20px 0px 0px 0px;
                           text-align: left;
-                          border-bottom: 2px solid darken(@gray, 5%);
+                          border-bottom: none;
                           color: @black;
-                          font-size: 28px;
-                          line-height: 32px;
+                          font-size: 34px;
+                          line-height: 34px;
                           font-weight: 100;
                           padding: 0px 10px 10px 10px;
                           margin-bottom: 10px;
@@ -352,7 +366,7 @@
                             list-style: none;
                             li.action {
                                 display: inline-block;
-                                background: @orange;
+                                background: #006691;
                                 color: #fff;
                                 font-weight: bold;
                                 padding: 8px 32px;
@@ -575,6 +589,7 @@ header.eventsHeader{
                 position: relative;
                 float: right;
                 width: 84px;
+                font-weight: 600;
                 @media @mobile{display: none;}
                 &:hover{
                     color: @white;
@@ -687,7 +702,10 @@ ul.upcomingEvents{
         .font(1.4,1.7,0.025,@normal,none);
     }
     .notAccount.info{
-        color: @white;
+      margin-top: 10px;
+      padding: 10px;
+      background: #e7edf1;
+      display: inline-block;
     }
     .notAccount.info a{
         .textButtonColor(@yellow) !important;
@@ -706,6 +724,7 @@ ul.upcomingEvents{
         display: block;
         padding: 10px;
         .borderRadius(2px);
+        font-weight: 600;
         &:hover{
             color: @white;
             background: darken(@teal, 6%);
@@ -982,7 +1001,7 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
         background: #fff;
         box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
         -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-        margin: 20px auto 30px auto;
+        margin: 30px auto 41px auto;
         clear: both;
         padding: 0px;
         input{
@@ -1064,14 +1083,6 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
 .calendar span.hasEvent.awareness button.eventDate{
     background: lighten(@yellow,10%);
     color: @black;
-    &:after{
-        .fa;
-        content: "\f005";
-        color: #006691;
-        position: absolute;
-        top: -6px;
-        left: -1px;
-    }
 }
 
 // Month
@@ -1090,13 +1101,13 @@ li.mobile.back-to-events button, li.mobile.back-to-events button:hover{
     }
     & li:first-child{ padding-top: 20px;}
     & li:last-child{ padding-bottom: 20px;}
-    li:before{
-        .fa;
-        margin-right: 5px;
-        content: "\f005";
-    }
     list-style: none;
-    a{ color: #fff; }
+    a{ 
+        color: #fff;
+        font-weight: bold;
+        line-height: 1.2;
+        display: block;        
+     }
     text-align: left;
     li:hover{
         &:before{ color: lighten(@yellow,10%); }

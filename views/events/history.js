@@ -51,7 +51,7 @@ Events.navigate = (id) => {
   History.update(parentName, path);
 
   // Smooth scroll
-  const offset = events.offsetTop + 450;
+  const offset = events.offsetTop + 350;
 
   if ('scrollBehavior' in document.documentElement.style) {
     window.scroll({ top: offset, behavior: 'smooth' });
