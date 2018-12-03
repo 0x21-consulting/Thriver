@@ -31,7 +31,7 @@ Calendar.thisYear = new ReactiveVar(new Date().getFullYear());
 Calendar.lastDate = (specificMonth) => {
   let month = specificMonth;
 
-  if (Number.isNaN(month) || month < 0 || month > 11) {
+  if (!month || Number.isNaN(month) || month < 0 || month > 11) {
     // if invalid month number, just use current month
     month = Calendar.thisMonth.get();
   }

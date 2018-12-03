@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random';
 import { Template } from 'meteor/templating';
 import { Mongo } from 'meteor/mongo';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -10,8 +11,8 @@ import './admin.html';
 const formMethod = new ReactiveVar('addEvent');
 const activeEvent = new ReactiveVar();
 const isAllDayEvent = new ReactiveVar(false);
-const registrationItems = new ReactiveVar([]);
-const pricingItems = new ReactiveVar([]);
+const registrationItems = new ReactiveVar(new Map());
+const pricingItems = new ReactiveVar(new Map());
 const Registrations = new Mongo.Collection('registrations');
 
 /**
@@ -39,7 +40,7 @@ Template.eventsAdmin.events({
 });
 
 Template.eventAddForm.helpers({
-  dateType: () => (isAllDayEvent.get() ? 'date' : 'datetime-local'),
+  showTimes: () => !isAllDayEvent.get(),
   formType: () => (formMethod.get() === 'updateEvent' ? 'Update' : 'Add'),
 
   /**
@@ -60,12 +61,22 @@ Template.eventAddForm.helpers({
   /**
    * @summary Get pricing items
    */
-  pricingItems: () => pricingItems.get(),
+  pricingItems: () => Array.from(pricingItems.get().values()),
 
   /**
    * @summary Get registration items
    */
-  registrationItems: () => registrationItems.get(),
+  registrationItems: () => Array.from(registrationItems.get().values()),
+
+  /**
+   * @summary Return time in expected format
+   */
+  time: time => (time ? time.toTimeString().replace(/^((.+:).+):.+/, '$1') : ''),
+
+  /**
+   * @summary Return date in expected format
+   */
+  date: date => (date ? date.toISOString().replace(/^(.+)T.+/, '$1') : ''),
 });
 
 /** Admin events */
@@ -82,9 +93,14 @@ Template.eventAddForm.events({
    */
   'click #admin-btn-event-add-pricing-tier'(event) {
     event.preventDefault();
-    const items = pricingItems.get();
-    items.push({});
-    pricingItems.set(items);
+
+    // Create new item with random ID
+    const id = Random.id();
+    const map = pricingItems.get();
+    map.set(id, { id });
+
+    // Trigger reactivity
+    pricingItems.set(pricingItems.get());
   },
 
   /**
@@ -92,8 +108,41 @@ Template.eventAddForm.events({
    */
   'click #admin-btn-event-add-registration-item'(event) {
     event.preventDefault();
+
+    // Create new item with random ID
+    const id = Random.id();
+    const map = registrationItems.get();
+    map.set(id, { id });
+
+    // Trigger reactivity
+    registrationItems.set(registrationItems.get());
+  },
+
+  /**
+   * @summary Remove pricing tier
+   */
+  'click .event-price-tier-delete'(event) {
+    event.preventDefault();
+
+    const items = pricingItems.get();
+    const item = event.target.parentElement.parentElement;
+    items.delete(item.dataset.id);
+
+    // Trigger reactivity
+    pricingItems.set(items);
+  },
+
+  /**
+   * @summary Remove registration item
+   */
+  'click .event-registration-item-delete'(event) {
+    event.preventDefault();
+
     const items = registrationItems.get();
-    items.push({});
+    const item = event.target.parentElement.parentElement;
+    items.delete(item.dataset.id);
+
+    // Trigger reactivity
     registrationItems.set(items);
   },
 
@@ -140,28 +189,37 @@ Template.eventAddForm.events({
       return arr;
     };
 
-    const start = document.getElementById('event-add-form-dateStart').value;
-    const end = document.getElementById('event-add-form-dateEnd').value;
+    const startDate = form.dateStart.value;
+    const startTime = form.timeStart ? form.timeStart.value : '';
+    const endDate = form.dateEnd.value;
+    const endTime = form.timeEnd ? form.timeEnd.value : '';
+    const start = new Date(`${startDate} ${startTime}`);
+    let end;
+
+    if (endDate) {
+      if (endTime) end = new Date(`${endDate} ${endTime}`);
+      else end = new Date(`${endDate} `); // extra space forces local time input, otherwise UTC is assumed
+    }
 
     const data = {
-      name: document.getElementById('event-add-form-name').value,
-      description: document.getElementById('event-add-form-desc').value,
-      awareness: document.getElementById('event-add-form-awareness').value,
-      start: start ? (new Date(start)).getTime() : undefined,
-      end: end ? (new Date(end)).getTime() : undefined,
+      name: form.name.value,
+      description: form.description.value,
+      awareness: form.awareness.value,
+      start: start ? start.getTime() : undefined,
+      end: end ? end.getTime() : undefined,
       location: {
-        name: document.getElementById('event-add-form-location-name').value,
-        mapUrl: document.getElementById('event-add-form-location-map-url').value,
-        webinarUrl: document.getElementById('event-add-form-location-webinar-url').value,
+        name: form.locationName.value,
+        mapUrl: form.mapUrl.value,
+        webinarUrl: form.webinarUrl.value,
       },
       cost: priceTiersArray(),
     };
 
-    const required = document.getElementById('event-add-form-registration-required').checked;
+    const required = form.registrationRequired.checked;
     if (required) {
       data.registration = {
         required,
-        registerUrl: document.getElementById('event-add-form-registration-external-url').value,
+        registerUrl: form.registrationUrl.value,
         registrationDetails: registrationDetailsArray(),
       };
     }
@@ -169,15 +227,22 @@ Template.eventAddForm.events({
     if (formMethod.get() === 'updateEvent') {
       // Add event ID
       data._id = activeEvent.get()._id;
-      Meteor.call('updateEvent', data, (error) => {
+      Meteor.call('updateEvent', data, (error, id) => {
         if (error) console.error(error);
-        else document.querySelector('#admin-form-container-event-add button.close').click();
+        else {
+          document.querySelector('#admin-form-container-event-add button.close').click();
+          Events.navigate(id);
+        }
       });
     } else {
       // Insert event into the collection
-      Meteor.call('addEvent', data, (error) => {
+      Meteor.call('addEvent', data, (error, id) => {
         if (error) console.error(error);
-        else form.reset();
+        else {
+          form.reset();
+          document.querySelector('#admin-form-container-event-add button.close').click();
+          Events.navigate(id);
+        }
       });
     }
   },
@@ -194,8 +259,8 @@ Template.upcomingEvents.events({
     formMethod.set('addEvent');
     activeEvent.set(null);
 
-    pricingItems.set([]);
-    registrationItems.set([]);
+    pricingItems.set(new Map());
+    registrationItems.set(new Map());
 
     const slider = document.getElementById('events-slider');
     const admin = document.getElementById('admin-form-container-context-event-add');
@@ -238,8 +303,27 @@ Template.eventSlide.events({
     const { data } = Template.instance();
     activeEvent.set(data);
 
-    pricingItems.set(data.cost);
-    registrationItems.set(data.registration.registrationDetails);
+    const pricingMap = new Map();
+    data.cost.forEach((cost) => {
+      const id = Random.id();
+      pricingMap.set(id, {
+        id,
+        description: cost.description,
+        cost: cost.cost,
+      });
+    });
+    pricingItems.set(pricingMap);
+
+    const registrationMap = new Map();
+    data.registration.registrationDetails.forEach((reg) => {
+      const id = Random.id();
+      registrationMap.set(id, {
+        id,
+        name: reg.name,
+        type: reg.type,
+      });
+    });
+    registrationItems.set(registrationMap);
 
     // Hide Slider and show admin interface
     const eventsSlider = event.delegateTarget.parentElement.parentElement;
