@@ -1,20 +1,20 @@
 <template name="outreach">
-    <section class="outreach" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#if isAdmin}}
-            {{> sectionAdmin}}
-        {{/if}}
-        <div class="containerSmall">
-            <header>
-                <h1>{{headline}}</h1>
-                {{{content}}}
-            </header>
-            <div class="container">
-                <div class="tab-box shadow-box">
-                    {{#each sections this}}
-                        {{> tabs}}
-                    {{/each}}
-                </div>
-            </div>
+  <section class="outreach" id="{{anchor name=name}}" data-id="{{_id}}">
+    {{#if isAdmin}}
+    {{> sectionAdmin}}
+    {{/if}}
+    <div class="containerSmall">
+      <header>
+        <h1>{{headline}}</h1>
+        {{{content}}}
+      </header>
+      <div class="shadow-box container">
+        <div class="tab-box">
+          {{#each sections this}}
+          {{> tabs}}
+          {{/each}}
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>

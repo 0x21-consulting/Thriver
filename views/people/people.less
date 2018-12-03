@@ -1,10 +1,10 @@
 @import (reference) "/views/styles/index.less";
 
-section.who div.tabs > article{
+section.who div.tabs > article, section.who div.outreach > article{
     .boxShadow(-11px 0px 5px -6px 0.3);
 }
 
-section.who div.tabs{
+section.who div.tabs, section.outreach div.tabs{
     .addPerson{ margin-top: 40px; }
     aside.admin button {
         font-weight: bold;
@@ -134,7 +134,7 @@ section.who div.tabs{
 }
 
 
-section.who{
+section.who, section.outreach{
     ul, li{margin: 0px;}
     background-color: lighten(@blueGray, 70%);
     //.tabStyle(@white,300px,60px,none);
@@ -188,7 +188,7 @@ section.who{
 
 //New Navigation needs to be merged with work section nav styles
 //Nav Open
-section.who menu.tabs{
+section.who menu.tabs, section.outreach menu.tabs{
     //media query temp for mobile UX flow
     //@media @mobile{display: none !important;}
     //width: auto;
@@ -288,7 +288,7 @@ section.who menu.tabs{
     }
 }
 
-section.who menu.tabs.left{
+section.who menu.tabs.left, section.outreach menu.tabs.left{
     >li:first-child:before{
         content: 'Who We Are';
         padding-bottom: 20px;
@@ -361,7 +361,7 @@ section.who article[data-id="staff"], section.who article[data-id="board"] {
 
 
 @media print{
-    section.who div.tabs > article h2{
+    section.who div.tabs > article h2, section.outreach div.tabs > article h2{
         border-bottom: none !important;
     }
     section.who div.tabs > article {
