@@ -74,29 +74,6 @@ Template.markdownEditor.events({
   },
 
   /**
-   * Handle inserting headers
-   * @param {$.Event} event
-   */
-  'click ul.markdown-menu li.headers ul li'(event) {
-    event.stopPropagation();
-
-    const textarea = event.delegateTarget.querySelector('.markdown-editor textarea');
-
-    switch (event.target.className) {
-      case 'h1': textarea.value += '\n\n# '; break;
-      case 'h2': textarea.value += '\n\n## '; break;
-      case 'h3': textarea.value += '\n\n### '; break;
-      default:
-    }
-
-    // Hide dropdown menu
-    event.target.parentElement.classList.add('hide');
-
-    // Set position
-    textarea.focus();
-  },
-
-  /**
    * Handle markdown options
    * @param {$.Event} event
    */
@@ -137,6 +114,18 @@ Template.markdownEditor.events({
         insertBefore = '\n- ';
         insertAfter = '\n';
         break;
+      case 'h1':
+        insertBefore = '\n\n# ';
+        insertAfter = '\n\n';
+        break;
+      case 'h2':
+        insertBefore = '\n\n## ';
+        insertAfter = '\n\n';
+        break;
+      case 'h3':
+        insertBefore = '\n\n### ';
+        insertAfter = '\n\n';
+        break;
       default:
         return;
     }
@@ -152,6 +141,11 @@ Template.markdownEditor.events({
     }
 
     textarea.focus();
+
+    // Close any drop downs
+    if (!event.target.parentElement.classList.contains('markdown-menu')) {
+      event.target.parentElement.classList.add('hide');
+    }
   },
 
   /**
