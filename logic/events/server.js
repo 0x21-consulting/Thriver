@@ -62,12 +62,12 @@ Meteor.methods({
     check(event, Object);
 
     // Perform update
-    const result = Events.collection.update(
+    Events.collection.update(
       { _id: event._id },
       { $set: event },
     );
 
-    return result;
+    return event._id;
   },
 
   /**
