@@ -159,7 +159,7 @@ Template.eventAddForm.events({
 
     if (endDate) {
       if (endTime) end = new Date(`${endDate} ${endTime}`);
-      end = new Date(endDate);
+      else end = new Date(`${endDate} `); // extra space forces local time input, otherwise UTC is assumed
     }
 
     const data = {
