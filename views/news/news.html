@@ -48,7 +48,7 @@
       <button id="inquire" class="inquire">
         Inquire About our News <span class="fa"></span>
         <span class="contactInfo">
-            For information regarding WCASA News: email Peter Fiala at <a href="mailto:peterf@wcasa.org">peterf@wcasa.org</a>.
+            For information regarding WCASA News: email WCASA at <a href="mailto:wcasa@wcasa.org">wcasa@wcasa.org</a>.
         </span>
     </button>
   </div>
@@ -62,35 +62,50 @@
           <h4>Add News Item</h4>
           <button class="fa add exit">&#xf00d;</button>
           <form id="newsForm">
+            {{#each types}}
+              <input id="news-{{this}}" type="radio" name="newsType" value="{{this}}" />
+              <label for="news-{{this}}" class="radio">{{this}}</label>
+            {{/each}}
+
+            {{! All types have a title and date }}
             <label>
               Title
               <input type="text" name="title" id="news-add-form-title" required />
             </label>
-            <label>
-              Publisher
-              <input type="text" name="publisher" id="news-add-form-publisher" required />
-            </label>
-            <label class="clear-both">
-              Description
-              <textarea rows="5" name="content" id="news-add-form-content" ></textarea>
-            </label>
-            <hr />
-            <div class="styledSelect fullBlockMob w-50">
-              <label>Type</label>
-              <select name="type" id="news-add-form-type" required >
-                {{#each types}}
-                  <option name="{{this}}">{{this}}</option>
-                {{/each}}
-              </select>
-            </div>
             <label class="w-50 margin-right-0">
               Date
               <input type="date" name="date" id="news-add-form-date" required />
             </label>
-            <label class="clear-both">
-              Url
-              <input type="text" name="url" id="news-add-form-url" required />
-            </label>
+            <hr />
+
+            {{! Only inTheNews has a publisher and description }}
+            {{#if inTheNews}}
+              <label>
+                Publisher
+                <input type="text" name="publisher" id="news-add-form-publisher" required />
+              </label>
+              <label class="clear-both">
+                Description
+                <textarea rows="3" name="description" id="news-add-form-description" ></textarea>
+              </label>
+              <hr />
+            {{/if}}
+
+            {{! inTheNews and Newsletters use URLs }}
+            {{#if url}}
+              <label class="clear-both">
+                Url
+                <input type="text" name="url" id="news-add-form-url" required />
+              </label>
+            {{/if}}
+
+            {{! pressReleases and actionAlerts use content }}
+            {{#if content}}
+              <label class="clear-both">
+                Content (in Markdown)
+                <textarea rows="7" name="content" id="news-add-form-content" ></textarea>
+              </label>
+            {{/if}}
             <input type="submit" class="btn btn-primary" value="Add Item" />
           </form>
         </div>

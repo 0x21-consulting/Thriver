@@ -32,13 +32,14 @@
           {{#each getSpecialFields}}
             <th data-id="{{id}}">{{name}}</th>
           {{/each}}
+          <th>Price Paid</th>
         </tr>
       </thead>
       {{#each registrant}}
         <tr data-id="{{_id}}">
           <td>{{profile.firstname}}</td>
           <td>{{profile.lastname}}</td>
-          <td>{{organization}}</td>
+          <td>{{profile.organization}}</td>
           <td>{{profile.title}}</td>
           <td>{{profile.address1}} {{profile.address2}}</td>
           <td>{{profile.city}}</td>
@@ -94,30 +95,45 @@
           </label>
           <hr />
           <div>
-            <div class="toggleSwitch">
-              <input type="checkbox" name="" id="event-add-form-multi-day">
-              <label for="event-add-form-multi-day" role="checkbox"></label>
+            <div class="styledSelect fullBlockMob w-50 margin-right-0">
+              <label>Awareness Event</label>
+              <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
+                <option value="" {{selected "" doc.awareness}}>No</option>
+                <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
+                <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
+              </select>
             </div>
-            <label for="event-add-form-multi-day" class="toggleSwitchLabel">
-              Multi-day Event
-            </label>
+            <div class="w-50">
+              <label for="event-add-form-multi-day" class="toggleSwitchLabel">
+                All/Multi-Day Event
+              </label>
+              <div class="toggleSwitch">
+                <input type="checkbox" name="" id="event-add-form-multi-day">
+                <label for="event-add-form-multi-day" role="checkbox"></label>
+              </div>
+            </div>
           </div>
-          <!-- Multi-day or all-day event? if yes, input type="date"; else input type="datetime-local" -->
-          <label class="w-33">
-            Start Date
-            <input type="{{dateType}}" name="dateStart" id="event-add-form-dateStart" value="{{datetime doc.start}}" />
-          </label>
-          <label class="w-33">
-            End Date
-            <input type="{{dateType}}" name="dateEnd" id="event-add-form-dateEnd" value="{{datetime doc.end}}" />
-          </label>
-          <div class="styledSelect fullBlockMob w-33 margin-right-0">
-            <label>Awareness Event</label>
-            <select name="awareness" id="event-add-form-awareness" value="{{doc.awareness}}">
-              <option value="" {{selected "" doc.awareness}}>No</option>
-              <option value="day" {{selected "day" doc.awareness}}>Yes, Awareness Day</option>
-              <option value="month" {{selected "month" doc.awareness}}>Yes, Awareness Month</option>
-            </select>
+          <div class="clear-both">
+            <label class="w-50">
+              Start Date
+              <input type="date" name="dateStart" id="event-add-form-dateStart" value="{{date doc.start}}" />
+            </label>
+            {{#if showTimes}}
+              <label class="w-50">
+                Start Time
+                <input type="time" name="timeStart" id="event-add-form-timeStart" value="{{time doc.start}}" />
+              </label>
+            {{/if}}
+            <label class="w-50">
+              End Date
+              <input type="date" name="dateEnd" id="event-add-form-dateEnd" value="{{date doc.end}}" />
+            </label>
+            {{#if showTimes}}
+              <label class="w-50">
+                End Time
+                <input type="time" name="timeEnd" id="event-add-form-timeEnd" value="{{time doc.end}}" />
+              </label>
+            {{/if}}
           </div>
         </fieldset>
         <hr />
@@ -125,30 +141,35 @@
           <h5>Location</h5>
           <label>
             Location Name
-            <input id="event-add-form-location-name" name="name" type="text" value="{{doc.location.name}}" />
+            <input id="event-add-form-location-name" name="locationName" type="text" value="{{doc.location.name}}" />
           </label>
           <label>
             Location Map URL
-            <input id="event-add-form-location-map-url" name="map-url" type="text" value="{{doc.location.mapUrl}}" />
+            <input id="event-add-form-location-map-url" name="mapUrl" type="text" value="{{doc.location.mapUrl}}" />
           </label>
           <label>
             Webinar URL
-            <input id="event-add-form-location-webinar-url" name="webinar-url" type="text" value="{{doc.location.webinarUrl}}" />
+            <input id="event-add-form-location-webinar-url" name="webinarUrl" type="text" value="{{doc.location.webinarUrl}}" />
           </label>
         </fieldset>
         <hr />
         <fieldset>
           <h5>Pricing</h5>
           {{#each pricingItems}}
-            <div class="event-price-tier">
-              <label class="w-75">
-                Tier Description
-                <input type="text" class="description-inp" value="{{description}}" />
-              </label>
-              <label class="w-25">
-                Cost
-                <input type="number"  class="cost-inp" value="{{cost}}" />
-              </label>
+            <div class="event-price-tier" data-id="{{id}}">
+              <div class="w-90">
+                <label class="w-75">
+                  Tier Description
+                  <input type="text" class="description-inp" value="{{description}}" />
+                </label>
+                <label class="w-25">
+                  Cost
+                  <input type="number"  class="cost-inp" value="{{cost}}" />
+                </label>
+              </div>
+              <div class="w-10">
+                <button class="event-price-tier-delete admin-row-delete" type="button"><i class="fas fa-times"></i></button>
+              </div>
             </div>
           {{/each}}
           <div class="clear-both">
@@ -160,7 +181,7 @@
           <h5>Registration</h5>
           <div>
             <div class="toggleSwitch">
-              <input type="checkbox" name="library-add-form-keywords" id="event-add-form-registration-required" {{checked doc.registration.required}}>
+              <input type="checkbox" name="registrationRequired" id="event-add-form-registration-required" {{checked doc.registration.required}}>
               <label for="event-add-form-registration-required" role="checkbox"></label>
             </div>
             <label for="event-add-form-registration-required" class="toggleSwitchLabel">
@@ -169,25 +190,30 @@
           </div>
           <label>
             Registration URL for Third-Party Site (If Applicable)
-            <input id="event-add-form-registration-external-url" name="webinar-url" type="text" />
+            <input id="event-add-form-registration-external-url" name="registrationUrl" type="text" />
           </label>
           <h5>Registration Fields</h5>
           {{#each registrationItems}}
-            <div class="event-registration-item">
-              <label class="w-75">
-                Field Name
-                <input type="text" class="field-name-inp" value="{{name}}" />
-              </label>
-              <div class="styledSelect fullBlockMob w-25">
-                <label>Field Type</label>
-                <select name="field-type" class="field-type-inp">
-                  <option value="text" {{selected "text" type}}>text</option>
-                  <option value="email" {{selected "email" type}}>email</option>
-                  <option value="yes/no" {{selected "yes/no" type}}>yes/no</option>
-                  <option value="date" {{selected "date" type}}>date</option>
-                  <option value="color" {{selected "color" type}}>color</option>
-                  <option value="textarea" {{selected "textarea" type}}>textarea</option>
-                </select>
+            <div class="event-registration-item" data-id="{{id}}">
+              <div class="w-90">
+                <label class="w-75">
+                  Field Name
+                  <input type="text" class="field-name-inp" value="{{name}}" />
+                </label>
+                <div class="styledSelect fullBlockMob w-25">
+                  <label>Field Type</label>
+                  <select name="field-type" class="field-type-inp">
+                    <option value="text" {{selected "text" type}}>text</option>
+                    <option value="email" {{selected "email" type}}>email</option>
+                    <option value="yes/no" {{selected "yes/no" type}}>yes/no</option>
+                    <option value="date" {{selected "date" type}}>date</option>
+                    <option value="color" {{selected "color" type}}>color</option>
+                    <option value="textarea" {{selected "textarea" type}}>textarea</option>
+                  </select>
+                </div>
+              </div>
+              <div class="w-10">
+                <button class="event-registration-item-delete admin-row-delete" type="button"><i class="fas fa-times"></i></button>
               </div>
             </div>
           {{/each}}

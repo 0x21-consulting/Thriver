@@ -2,7 +2,7 @@ import SimpleSchema from 'simpl-schema';
 import { Mongo } from 'meteor/mongo';
 import { Tracker } from 'meteor/tracker';
 import { Template } from 'meteor/templating';
-import { $ } from 'meteor/jquery';
+// import { $ } from 'meteor/jquery';
 import Canvas from '/views/canvas/canvas';
 import { smoothScroll } from './scroll';
 
@@ -97,29 +97,30 @@ History.updateLocation = () => {
   }
 
   // Does the current scroll position match with any element?
+  const { scrollY, innerHeight } = window;
   for (let i = 0; i < elements.length; i += 1) {
     // If this is the last element OR
     // If the section height minus the portion hidden off the screen is more
     // than half the height of the visible area, we're good.
     if (i === elements.length - 1
-        || (elements[i].h - (window.scrollY - elements[i].y)) > (window.innerHeight / 2)) {
+        || (elements[i].h - (scrollY - elements[i].y)) > (innerHeight / 2)) {
       // Update URL/location bar
       History.updateLocationBar(elements[i].currentPath);
+
+      link = document.querySelector(`nav.mainNav a[href="/${elements[i].element}"]`);
+      section = document.querySelector(`main > section[id="${elements[i].element}"]`);
 
       // Remove active class from all main nav items and sections
       for (let k = 0; k < links.length; k += 1) links[k].classList.remove('active');
       for (let k = 0; k < sections.length; k += 1) sections[k].classList.remove('active');
 
       // Add active class to associated menu item
-      link = document.querySelector(`nav.mainNav a[href="/${elements[i].element}"]`);
-      section = document.querySelector(`main > section[id="${elements[i].element}"]`);
-
       if (link instanceof Element) {
         link.classList.add('active');
         section.classList.add('active');
 
         // This allows the UI to remove unwanted :focus class to last selection
-        $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
+        // $('header#menu nav.mainNav > ul li[data-type="main-navigation-item"] a').blur();
       }
 
       // Check if there are currently no active items: apply to masthead

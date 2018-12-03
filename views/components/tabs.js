@@ -15,7 +15,7 @@ const toggleTabs = (event) => {
   // Tabs Variables
   const menu = event.target.parentNode.parentNode;
   const links = menu.querySelectorAll('[aria-controls][data-toggle=tabs]');
-  const sections = menu.parentNode.querySelectorAll('div.tabs [aria-hidden]');
+  const sections = menu.parentNode.querySelectorAll(':scope > div.tabs > article[aria-hidden]');
 
   // Remove active state from all links
   for (let i = 0; i < links.length; i += 1) Util.makeActive(links[i], false);
@@ -29,14 +29,6 @@ const toggleTabs = (event) => {
   // Set section as active
   Util.hide(menu.parentElement
     .querySelector(`article[data-id="${event.target.dataset.id}"]`), false);
-
-  // Special case for Library??  Why??
-  switch (event.target.getAttribute('aria-controls')) {
-    case '#library':
-      document.querySelector('aside.filter').classList.add('active-filter'); break;
-    default:
-      document.querySelector('aside.filter').classList.remove('active-filter');
-  }
 
   // Select first child tab if any
   // TODO: Open first child tab

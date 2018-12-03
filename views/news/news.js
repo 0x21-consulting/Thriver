@@ -69,30 +69,32 @@ Template.aside.events({
    * @method
    *   @param {$.Event} event
    */
-  'submit form#newsForm': (event) => {
+  'submit form#newsForm'(event) {
     event.preventDefault();
 
+    const form = event.target;
+    const type = form.newsType.value;
+
+    if (!type) return;
+
     const data = {
-      title: document.getElementById('news-add-form-title').value,
-      url: document.getElementById('news-add-form-url').value,
-      publisher: document.getElementById('news-add-form-publisher').value,
-      date: new Date(document.getElementById('news-add-form-date').value),
-      type: document.getElementById('news-add-form-type').value,
-      content: document.getElementById('news-add-form-content').value,
+      type,
+      title: form.title.value,
+      date: new Date(form.date.value),
+      publisher: form.publisher ? form.publisher.value : undefined,
+      description: form.description ? form.description.value : undefined,
+      url: form.url ? form.url.value : undefined,
+      content: form.content ? form.content.value : undefined,
     };
 
     // Insert subscriber into the collection
     Meteor.call('addNewsItem', data, function(error) {
-      console.log('calling');
       if (error) {
-        console.log(error.reason);
+        console.error(error.reason);
       } else {
-        console.log('Subscription successful');
-        console.log(data);
+        document.getElementById('newsForm').reset();
+        Toast({ text: 'News item added.', duration: 3000 });
       }
-      document.querySelector('#admin-form-container-news-add button.exit').click();
-      document.getElementById('newsForm').reset();
-      Toast({ text: 'News item added.', duration: 3000 });
     });
   },
 

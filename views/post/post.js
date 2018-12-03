@@ -1,9 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { SHA256 } from 'meteor/sha';
+import { ReactiveVar } from 'meteor/reactive-var';
 import News from '/logic/news/schema';
 
 import './post.html';
+
+const item = new ReactiveVar();
 
 /**
  * Handler for updating content
@@ -36,6 +39,11 @@ const updateContent = oldHash => (event) => {
   parent.querySelector(':scope > button').remove();
 };
 
+Template.post.onRendered(function () {
+  item.set(News.collection
+    .findOne({ friendlyTitle: this.data.friendlyTitle })._id);
+});
+
 /** Helpers */
 Template.post.helpers({
   /**
@@ -43,25 +51,20 @@ Template.post.helpers({
    * @function
    * @returns {String}
    */
-  hash: () => {
-    const content = News.collection
-      .findOne({}, { content: 1 });
-
-    // Sometimes this helper executes before the collection is ready
-    // If so, just return and wait for the rerun
-    if (!content) return '';
+  hash() {
+    const post = News.collection.findOne({ _id: item.get() });
 
     // Get content
-    if (content.content) return SHA256(content.content);
-
+    if (post && post.content) return SHA256(post.content);
     return '';
   },
 
-  content: () => News.collection.findOne({}).content,
-  title: () => News.collection.findOne({}).title,
+  id: () => (item.get() ? News.collection.findOne({ _id: item.get() })._id : ''),
+  content: () => (item.get() ? News.collection.findOne({ _id: item.get() }).content : ''),
+  title: () => (item.get() ? News.collection.findOne({ _id: item.get() }).title : ''),
 
   home: {
-    url: '/',
+    url: 'https://wcasa.org',
     text: 'Back to WCASA',
   },
   share: [{
@@ -86,11 +89,9 @@ Template.post.helpers({
     media: {
       title: 'Media Contacts',
       contact: [{
-        name: 'Dominic Holt',
+        name: 'Kelly Moe Litke',
         org: 'WCASA',
-        phone: '608-257-1516',
-        phoneExt: '113',
-        email: 'dominich@wcasa.org',
+        email: 'kellyml@wcasa.org',
       }],
     },
     about: [],
@@ -119,8 +120,8 @@ Template.post.events({
    */
   'click aside.admin button.edit': () => {
     // Get section to edit
-    const { data } = Template.instance();
-    const content = document.body.querySelector(`[data-id="${data._id}"]`);
+    const id = item.get();
+    const content = document.body.querySelector(`[data-id="${id}"]`);
     const parent = content.parentElement;
 
     // Create a textarea element through which to edit markdown
@@ -130,14 +131,13 @@ Template.post.events({
     const button = document.createElement('button');
     button.textContent = 'Save';
     button.addEventListener(
-      'mouseup',
+      'click',
       // Pass along hash of existing markdown
       updateContent(content.dataset.hash),
     );
 
     // Textarea should get markdown
-    textarea.textContent = News.collection
-      .findOne({ _id: data._id }, { content: 1 }).content;
+    textarea.textContent = News.collection.findOne({ _id: item.get() }).content;
 
     // Add textarea but hide preview
     parent.classList.add('edit');

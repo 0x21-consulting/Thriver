@@ -37,7 +37,8 @@
             background-color: @radioSelect;
         }
     }
-    .styledSelect, .cvv2, input[type=text]{
+    input[type=time]{ padding: 13px 0; }
+    .styledSelect, .cvv2, input[type=text], div#donate-card-element{
         background-color: @baseColor;
         &:hover{
             background-color: darken(@baseColor, 2.5%);
@@ -45,6 +46,10 @@
         &:focus, input:focus{
             background-color: darken(@baseColor, 5%);
         }
+    }
+    div#donate-card-element {
+        padding: 16px;
+        margin-top: 5px;
     }
     button.submit, input[type=submit]{
         .buttonColor(@buttonColor);
@@ -281,6 +286,22 @@ form{
             z-index: 4;
             top: -10px;
             .opacity(1);
+        }
+        main.main &{ 
+          background: #ebf2f2;
+          margin-right: 5px;
+          label.toggleSwitchLabel{ padding: 0; }
+          &:before{ top: 7px; color: #fff; }
+          input[type=checkbox]{
+            & + label{
+              &:before{ background: #fff;  }
+            }
+            &:checked + label{
+              color: #fff;
+              &:before{ background: #fff; }
+            }
+            &:checked{ background: #1db7c5; }
+          }
         }
         label:first-child{
             color: @white;

@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import News from '/logic/news/schema';
 
 Meteor.methods({
   // Return whether or not the logged-in user is an administrator
-  isAdmin: () => !!Meteor.user() && !!Meteor.user().admin,
+  isAdmin: () => !!Meteor.user() && Meteor.user().admin,
 
   /**
    * Determine last login for user.  Returns right now if not logged in.
@@ -12,45 +10,11 @@ Meteor.methods({
    * @returns {Date}
    */
   lastLogin: () => {
-    if (Meteor.user() && Meteor.user().status && Meteor.user().status.lastLogin) {
-      return Meteor.user().status.lastLogin.date;
+    const user = Meteor.user();
+    if (user && user.status && user.status.lastLogin) {
+      return user.status.lastLogin.date;
     }
 
     return new Date();
-  },
-
-  /**
-   * Add new Action Alert
-   * @method
-   *   @param {string} title   - Action alert title
-   *   @param {Date}   date    - Datetime object instance
-   *   @param {string} content - Action alert content
-   */
-  addActionAlert: (title, date, content) => {
-    check(title, String);
-    check(date, Date);
-    check(content, String);
-
-    // Check authorization
-    if (!Meteor.userId() || !Meteor.user().admin) {
-      throw new Meteor.Error('not-authorized');
-    }
-
-    // Generate URL for action alert
-    // Spaces become hyphens, no numbers or other characters,
-    // lowercase, and only up to eight words
-    const generateHref = () => `/action-alert/${title.toLowerCase()
-      .replace(/[^a-z\s]/g, '').trim().split(/\s/)
-      .join('-')
-      .replace(/^((?:.+?-){7}.+?)-.+/, '$1')}/`;
-
-    // Add action alert to db
-    News.collection.insert({
-      title,
-      url: generateHref,
-      date,
-      type: 'actionAlert',
-      content,
-    });
   },
 });

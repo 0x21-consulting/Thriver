@@ -1,68 +1,81 @@
 <template name="post">
-  <section class="post">
-    <article class="{{data.category}}" id="{{id}}">
-      <header>
-        {{#each logos}}
-          <a href="{{url}}" title="{{title}}">
-            <img src="{{src}}" alt="{{title}}" />
-          </a>
-        {{/each}}
-      </header>
-      <aside>
-        <div class="left">
-          <h3><a href="{{home.url}}" title="{{home.text}}">
-            <span class="fa">&#xf0d9;</span> {{home.text}}</a></h3>
-        </div>
-        <div class="right">
-          <h3>Share this {{category}}:</h3>
-          <ul class="share">
-            {{#each share}}
-              <li>
-                <a href="{{url}}" title="{{title}}" target="_blank" onClick="{{#if print}}window.print();{{/if}}" class="fa">{{{icon}}}</a>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-      </aside>
-      <header class="title">
-        <p> {{category}}</p>
-        <h1>{{title}}</h1>
-      </header>
-      <main class="textBody">
-        {{#if isAdmin}}
-          <aside class="admin">
-            <button class="fa edit" title="Edit Post">&#xf044;</button>
-          </aside>
-        {{/if}}
+  <div class="post-page-container">
+    <section class="post">
+      <article class="{{data.category}}" id="{{id}}">
+        <header>
+          {{#each logos}}
+            <a href="{{url}}" title="{{title}}">
+              <img src="{{src}}" alt="{{title}}" />
+            </a>
+          {{/each}}
+        </header>
+        <aside>
+          <div class="contain">
+            <div class="left">
+              <h3><a href="{{home.url}}" title="{{home.text}}">
+                <span class="fa">&#xf0d9;</span> {{home.text}}</a>
+              </h3>
+            </div>
+            <div class="right">
+              <h3>Share this {{category}}:</h3>
+              <ul class="share">
+                {{#each share}}
+                  <li>
+                    <a href="{{url}}" title="{{title}}" target="_blank" onClick="{{#if print}}window.print();{{/if}}" class="fa">{{{icon}}}</a>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </aside>
+        <header class="title">
+          <div class="contain">
+            <p> {{category}}</p>
+            <h1>{{title}}</h1>
+          </div>
+        </header>
+        <main class="textBody">
+          {{#if isAdmin}}
+            <aside class="admin">
+              <button class="fa edit" title="Edit Post">&#xf044;</button>
+            </aside>
+          {{/if}}
 
-        <section data-id="{{_id}}" data-hash="{{hash}}">
-          {{{markdown content}}}
-        </section>
-      </main>
-      <footer>
-        <p class="hash">###</p>
-        <address>
-          <h3>{{footer.media.title}}</h3>
-          {{#each footer.media.contact}}
-            <ul>
-              <li class="name">{{name}}, {{org}}</li>
-              <li class="phone"><a href="tel://1{{phone}}">{{phone}}</a>{{#if phoneExt}}, x {{phoneExt}}{{/if}}</li>
-              <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
+          <section data-id="{{id}}" data-hash="{{hash}}">
+            <div class="contain">
+              {{{markdown content}}}
+            </div>
+          </section>
+        </main>
+        <footer>
+          <div class="contain">
+            <p class="hash">###</p>
+            <address>
+              <h3>{{footer.media.title}}</h3>
+              {{#each footer.media.contact}}
+                <ul>
+                  <li class="name">{{name}}, {{org}}</li>
+                  {{#if phone}}
+                    <li class="phone"><a href="tel://1{{phone}}">{{phone}}</a>{{#if phoneExt}}, x {{phoneExt}}{{/if}}</li>
+                  {{/if}}
+                  <li class="email"><a href="mailto:{{email}}">{{email}}</a></li>
+                </ul>
+              {{/each}}
+            </address>
+            <hr>
+            {{#each footer.about}}
+              {{{content}}}
+            {{/each}}
+            <ul class="social">
+              {{#each footer.social}}
+                <li>
+                  <a href="{{url}}" title="{{id}}" target="_blank" class="fa" {{onClick}}>{{{icon}}}</a>
+                </li>
+              {{/each}}
             </ul>
-          {{/each}}
-        </address>
-        <hr>
-        {{#each footer.about}}
-          {{{content}}}
-        {{/each}}
-        <ul class="social">
-          {{#each footer.social}}
-            <li>
-              <a href="{{url}}" title="{{id}}" target="_blank" class="fa" {{onClick}}>{{{icon}}}</a>
-            </li>
-          {{/each}}
-        </ul>
-      </footer>
-    </article>
-  </section>
+          </div>
+        </footer>
+      </article>
+    </section>
+  </div>
 </template>

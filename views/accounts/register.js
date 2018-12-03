@@ -40,19 +40,19 @@ Template.register.helpers({
     placeholder: 'ZIP Code',
     pattern: '\\d{5}(-?\\d{4})?',
   }, {
-    title: 'Password',
-    id: 'password',
-    name: 'password',
+    title: 'Passphrase',
+    id: 'register-passphrase',
+    name: 'passphrase',
     type: 'password',
     required: 'required',
-    placeholder: 'Password',
+    placeholder: 'Passphrase',
   }, {
-    title: 'Repeat Password',
-    id: 'repeatPassword',
+    title: 'Repeat Passphrase',
+    id: 'register-repeat-passphrase',
     name: 'repeat',
     type: 'password',
     required: 'required',
-    placeholder: 'Repeat Password',
+    placeholder: 'Repeat Passphrase',
   }],
 });
 
@@ -71,7 +71,7 @@ Template.register.events({
     const firstname = event.target.firstName.value;
     const lastname = event.target.lastName.value;
     const email = event.target.email.value;
-    const password = event.target.password.value;
+    const passphrase = event.target.passphrase.value;
     const zip = event.target.zip.value;
 
     // Handle login errors
@@ -85,7 +85,7 @@ Template.register.events({
     Accounts.createUser(
       {
         email,
-        password,
+        password: passphrase,
         profile: {
           // Name
           firstname,
@@ -137,10 +137,10 @@ Template.register.events({
    */
   'keyup [name="repeat"]': (event) => {
     const parent = event.target.parentElement;
-    const { password } = parent;
+    const { passphrase } = parent;
 
-    if (password instanceof Element) {
-      if (password.value === event.target.value) {
+    if (passphrase instanceof Element) {
+      if (passphrase.value === event.target.value) {
         // Let user know passwords match
         parent.classList.remove('noMatch');
 

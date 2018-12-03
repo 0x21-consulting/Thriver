@@ -1,143 +1,143 @@
 <template name="list">
-    {{#if equals type 'article'}}
-        <section data-list-type="{{type}}" data-list-paginate="{{paginate}}"
-          data-list-paginate-count="{{perPage}}"
-          data-tag="{{tag}}" class="{{type}} {{style}}">
-            {{#if equals itemType 'category'}}
-                {{#each categories}}
-                    <article class="itemCategory" data-id="{{id}}">
-                        <details aria-expanded="false" aria-controls="{{id}}">
-                            <summary id="{{id}}">
-                                <h1>{{{title}}}</h1>
-                                {{#if isAdmin}}
-                                    <aside class="admin">
-                                        <button class="fa oppEdit">&#xf044;</button>
-                                        <button class="fa oppDelete">&#xf1f8;</button>
-                                    </aside>
-                                {{/if}}
-                            </summary>
-                            <div class="inner">
-                                {{#if content}}
-                                    {{> articleItem this}}
-                                {{/if}}
-                                {{#each items}}
-                                    {{>articleItem}}
-                                {{/each}}
-                            </div>
-                        </details>
-                    </article>
-                {{/each}}
-            {{else}}
+  {{#if equals type 'article'}}
+    <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-list-paginate-count="{{perPage}}" data-tag="{{tag}}"
+      class="{{type}} {{style}}">
+      {{#if equals itemType 'category'}}
+        {{#each categories}}
+          <article class="itemCategory" data-id="{{id}}">
+            <details aria-expanded="false" aria-controls="{{id}}">
+              <summary id="{{id}}">
+                <h1>{{{title}}}</h1>
+                {{#if isAdmin}}
+                  <aside class="admin">
+                    <button class="fa oppEdit">&#xf044;</button>
+                    <button class="fa oppDelete">&#xf1f8;</button>
+                  </aside>
+                {{/if}}
+              </summary>
+              <div class="inner">
+                {{#if content}}
+                  {{> articleItem this}}
+                {{/if}}
                 {{#each items}}
-                    <article role="document" class="document" data-id="{{_id}}">
-                        <div class="inner-container-wide">
-                            <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{icon}}{{/if}}">
-                                <time class="dateMeta" datetime="{{ISODate date}}">
-                                    {{friendlyDate date}}
-                                </time>
-                                {{#if title}}<h3>{{title}}</h3>{{/if}}
-                                {{#if publisher}}<p class="content text">{{publisher}}</p>{{/if}}
-                                {{#if description}}<p class="content text description">{{description}}</p>{{/if}}
-                                {{#if content}}<p class="content text description">{{content}}</p>{{/if}}
-                            </a>
-                        </div>
-                        {{#if isAdmin}}
-                            <aside class="admin">
-                                <button class="fa delete">&#xf1f8;</button>
-                            </aside>
-                        {{/if}}
-                    </article>
+                  {{>articleItem}}
                 {{/each}}
-            {{/if}}
-            {{#if equals paginate 'true'}}
-            <li class="loadMore">
-                <button type="button">Load More <span class="fa"></span></button>
-                <span class="everything hide">That's everything!</span>
-            </li>
-            {{/if}}
-        </section>
-    {{/if}}
-    {{#if equals type 'catalog'}}
-      <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}"
-        data-list-paginate-count="{{perPage}}" class="{{type}} {{style}}">
-          {{#each items}}
-            <article data-id="{{_id}}" class="library-item">
-                <div class="inner">
-                    <details aria-expanded="false" aria-controls="{{id}}">
-                        <summary id="catalog{{id}}">
-                            <h1>{{title}}</h1>
-                            {{#if isAdmin}}
-                                <aside class="admin">
-                                    <!--<button class="fa libEdit">&#xf044;</button>-->
-                                    <button class="fa libDelete delete">&#xf1f8;</button>
-                                </aside>
-                            {{/if}}
-                            <span class="status gem" title={{status}}><i class="fas fa-circle {{status}}"></i></span>
-                            <ul class="cats-tags">
-                                <li class="category material-{{material}}">{{material}}</li>
-                                {{#if isAdmin}}
-                                    <li class="classification">{{classification}}</li>
-                                {{/if}}
-                                {{#each keywords}}
-                                    <li class="tag">{{this}}</li>
-                                {{/each}}
-                            </ul>
-                            <p class="meta">{{truncate description}}</p>
-                        </summary>
-                        <p class="meta inner-desc">{{description}}</p>
-                        <hr />
-                        <aside class="info">
-                            <dl>
-                                <dt>Status</dt><dd>{{status}}</dd>
-                                {{#if isAdmin}}
-                                    <dt>Copies</dt><dd>{{copies}}</dd>
-                                {{/if}}
-                            </dl>
-                            <menu class="availability">
-                                {{#if equals status 'Available'}}
-                                    <li><button class="request-copy">Request Copy</button></li>
-                                {{/if}}
-                            </menu>
-                        </aside>
-                    </details>
-                </div>
-            </article>
+              </div>
+            </details>
+          </article>
         {{/each}}
-        {{#if equals paginate 'true'}}
+      {{else}}
+        {{#each items}}
+          <article role="document" class="document" data-id="{{_id}}">
+            <div class="inner-container-wide">
+              <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{icon}}{{/if}}">
+                <time class="dateMeta" datetime="{{ISODate date}}">
+                  {{friendlyDate date}}
+                </time>
+                {{#if title}}<h3>{{title}}</h3>{{/if}}
+                {{#if publisher}}<p class="content text">{{publisher}}</p>{{/if}}
+                {{#if description}}<p class="content text description">{{description}}</p>{{/if}}
+              </a>
+            </div>
+            {{#if isAdmin}}
+              <aside class="admin">
+                <button class="fa delete delete-item">&#xf1f8;</button>
+              </aside>
+            {{/if}}
+          </article>
+        {{/each}}
+      {{/if}}
+      {{#if equals paginate 'true'}}
         <li class="loadMore">
-            <button type="button">Load More <span class="fa"></span></button>
-            <span class="everything">That's everything!</span>
+          <button type="button">Load More <span class="fa"></span></button>
+          <span class="everything hide">That's everything!</span>
         </li>
-        {{/if}}
-        </section>
-    {{/if}}
-    {{#if equals type 'event'}}
+      {{/if}}
+    </section>
+  {{/if}}
+  {{#if equals type 'catalog'}}
+    <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-tag="{{tag}}" data-list-paginate-count="{{perPage}}"
+      class="{{type}} {{style}}">
+      {{#each items}}
+        <article data-id="{{_id}}" class="library-item">
+          <div class="inner">
+            <details aria-expanded="false" aria-controls="{{id}}">
+              <summary id="catalog{{id}}">
+                <h1>{{title}}</h1>
+                {{#if isAdmin}}
+                  <aside class="admin">
+                    <!--<button class="fa libEdit">&#xf044;</button>-->
+                    <button class="fa libDelete delete">&#xf1f8;</button>
+                  </aside>
+                {{/if}}
+                <span class="status gem" title={{status}}><i class="fas fa-circle {{status}}"></i></span>
+                <ul class="cats-tags">
+                  <li class="category material-{{material}}">{{material}}</li>
+                  {{#if isAdmin}}
+                    <li class="classification">{{classification}}</li>
+                  {{/if}}
+                  {{#each keywords}}
+                    <li class="tag">{{this}}</li>
+                  {{/each}}
+                </ul>
+                <p class="meta">{{truncate description}}</p>
+              </summary>
+              <p class="meta inner-desc">{{description}}</p>
+              <hr />
+              <aside class="info">
+                <dl>
+                  <dt>Status</dt>
+                  <dd>{{status}}</dd>
+                  {{#if isAdmin}}
+                    <dt>Copies</dt>
+                    <dd>{{copies}}</dd>
+                  {{/if}}
+                </dl>
+                <menu class="availability">
+                  {{#if equals status 'Available'}}
+                    <li><button class="request-copy" data-id="{{_id}}">Request Copy</button></li>
+                  {{/if}}
+                </menu>
+              </aside>
+            </details>
+          </div>
+        </article>
+      {{/each}}
+      {{#if equals paginate 'true'}}
+        <li class="loadMore">
+          <button type="button">Load More <span class="fa"></span></button>
+          <span class="everything hide">That's everything!</span>
+        </li>
+      {{/if}}
+    </section>
+  {{/if}}
+  {{#if equals type 'event'}}
     <!--container-->
-        {{#each items}}
-        {{/each}}
+    {{#each items}}
+    {{/each}}
     <!--container-->
-    {{/if}}
-    {{#if equals type 'location'}}
+  {{/if}}
+  {{#if equals type 'location'}}
     <!--container-->
-        {{#each items}}
-        {{/each}}
+    {{#each items}}
+    {{/each}}
     <!--container-->
-    {{/if}}
-    {{#if equals type 'toggle'}}
+  {{/if}}
+  {{#if equals type 'toggle'}}
     <!--container-->
-        {{#each items}}
-        {{/each}}
+    {{#each items}}
+    {{/each}}
     <!--container-->
-    {{/if}}
+  {{/if}}
 </template>
 
 <!--This could exist in another file perhaps.-->
 <template name="articleItem">
-    <article role="document">
-        <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">
-            {{#if date}}<time class="dateMeta" datetime="{{date}}">{{{friendlyDate}}}</time>{{/if}}
-            {{#if title}}<h3>{{{title}}}</h3>{{/if}}
-            {{#if content}}<p class="content">{{{content}}}</p>{{/if}}
-        </a>
-    </article>
+  <article role="document">
+    <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">
+      {{#if date}}<time class="dateMeta" datetime="{{date}}">{{{friendlyDate}}}</time>{{/if}}
+      {{#if title}}<h3>{{{title}}}</h3>{{/if}}
+      {{#if content}}<p class="content">{{{content}}}</p>{{/if}}
+    </a>
+  </article>
 </template>

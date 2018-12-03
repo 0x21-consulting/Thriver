@@ -58,9 +58,6 @@
                       <li data-id="{{_id}}" class="{{which}} {{position}} no-events-this-month{{#if noFutureEvents}} no-future-events{{/if}}{{#if noPastEvents}} no-past-events{{/if}} ">
                         <div class="eventContainer">
                           <div class="inner">
-                            <header>
-                              <p class="eventDate">{{month}} {{year}}</p>
-                            </header>
                             <div class="main">
                               <div class="icon-main">
                                 <i class="fa">&#xf273;</i>
@@ -125,9 +122,6 @@
   <li data-id="{{_id}}" class="eventSlide {{which}} {{position}}">
     <div class="eventContainer">
       <div class="inner">
-        <header>
-          <p class="eventDate">{{startDate this}}</p>
-        </header>
         <div class="main">
           <h2>{{name}}
             {{#if isAdmin}}
@@ -152,8 +146,9 @@
             </aside>
           {{/if}}
           <p class="excerpt">
-            <b>{{startTime this}}{{endTime this}}
-              {{#if address this}}: {{{ address this }}}{{/if}}</b>
+            <i class="fa fa-calendar" aria-hidden="true"></i> {{startTime this}}{{endTime this}}<br />
+            <i class="fa fa-map-marker red" aria-hidden="true"></i> {{#if address this}} {{{ address this }}}{{/if}}
+            
           </p>
           {{{markdown description}}}
         </div>
@@ -259,11 +254,9 @@
 
 <template name="actionNotRegistered">
   <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
-  {{#if pastEvent}}
-    <li class="registered info">This event occurred in the past.</li>
-  {{else}}
+  {{#unless pastEvent}}
     <li class="register action">Register</li>
-  {{/if}}
+  {{/unless}}
 </template>
 
 <template name="actionUnregisterPrompt">
