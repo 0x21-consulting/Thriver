@@ -259,11 +259,9 @@
 
 <template name="actionNotRegistered">
   <li class="view action"><a href="#" class="eventDate" data-value="2">View Event</a></li>
-  {{#if pastEvent}}
-    <li class="registered info">This event occurred in the past.</li>
-  {{else}}
+  {{#unless pastEvent}}
     <li class="register action">Register</li>
-  {{/if}}
+  {{/unless}}
 </template>
 
 <template name="actionUnregisterPrompt">

@@ -12,10 +12,11 @@
     @media (max-width:1000px){
         padding-bottom: 0px;
     }
-    form { .formColors(@gray, desaturate(darken(@gray,50%),25%), @teal,@blueGrayLight,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
+    form { .formColors(@gray, desaturate(darken(@gray,50%),25%), #f05929,@blueGrayLight,darken(@blue, 2%),@teal,@gray,darken(@blue, 2%)); }
     form input, form textarea{
         &:focus{-webkit-box-shadow: none !important; box-shadow:none-important;}
     }
+    form input[type=submit]{ color: #fff; }
     .see-all-link{
         display: block;
         text-align: center;
@@ -25,7 +26,7 @@
         max-width: 200px;
         font-size: 12px;
         padding: 10px;
-        margin: 0 auto;
+        margin: 0 auto 40px auto;
         &:focus{ .boxShadow(none); }
         @media @mobile{ display: none; }
     }
