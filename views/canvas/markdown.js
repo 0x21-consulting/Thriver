@@ -51,6 +51,7 @@ Template.markdownEditor.events({
       .parentElement.querySelector('.markdown-editor');
     const edit = parent.querySelector('textarea');
     const prev = parent.querySelector('.preview');
+    const menu = event.target.parentElement.parentElement.querySelector('.markdown-menu');
 
     closeMenus(event.target.parentElement.parentElement.querySelector('.markdown-menu'));
 
@@ -58,9 +59,11 @@ Template.markdownEditor.events({
     if (event.target.classList.contains('edit')) {
       edit.classList.remove('hide');
       prev.classList.add('hide');
+      if (menu.classList.contains('disabled')) menu.classList.remove('disabled');
     } else {
       edit.classList.add('hide');
       prev.classList.remove('hide');
+      if (!menu.classList.contains('disabled')) menu.classList.add('disabled');
     }
 
     // Mark active

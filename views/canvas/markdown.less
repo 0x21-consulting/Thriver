@@ -43,33 +43,39 @@ section.markdown {
           pointer-events: none;
         }
       }
-      &.markdown-menu > li{
-        &:hover{
-          background: rgba(0,0,0,0.025);
-          &:after{
-            content: attr(data-title);
-            position: absolute;
-            top: -23px;
-            left: 0;
-            background: #35809d;
-            color: #fff;
-            padding: 2px 4px;
-            white-space: nowrap;
-            font-weight: 600;
-            line-height: 1;
-            border-radius: 3px;
-          }
-          &:before{
-            content: '' !important; //override li
-            position: absolute;
-            left: 39%;
-            top: -7px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid #35809d;
-            display: block;
+      &.markdown-menu{
+        &.disabled{
+          opacity: 0.25;
+          pointer-events: none;
+        }
+        & > li{
+          &:hover{
+            background: rgba(0,0,0,0.025);
+            &:after{
+              content: attr(data-title);
+              position: absolute;
+              top: -23px;
+              left: 0;
+              background: #35809d;
+              color: #fff;
+              padding: 2px 4px;
+              white-space: nowrap;
+              font-weight: 600;
+              line-height: 1;
+              border-radius: 3px;
+            }
+            &:before{
+              content: '' !important; //override li
+              position: absolute;
+              left: 39%;
+              top: -7px;
+              width: 0;
+              height: 0;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid #35809d;
+              display: block;
+            }
           }
         }
       }
@@ -102,10 +108,12 @@ section.markdown {
       li.a aside, li.img aside {
         position: absolute;
         background: #fff;
-        padding: 1rem;
+        padding: 2rem;
         margin-top: 5px;
         margin-left: -130px;
-        border: 1px solid #ddd;
+        border: 1px solid #dce8e8;
+        box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.1);
+        -webkit-box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.1);
       }
       li.img aside {
         margin-left: -240px;
