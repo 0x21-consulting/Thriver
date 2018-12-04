@@ -82,6 +82,44 @@ section.markdown {
       &.edit-menu{
         li{ font-weight: 600; }
       }
+      // Generic Dropdown Styles
+      .markdown-menu-dropdown{
+        cursor: default;
+        input[type=file], label{ 
+          cursor: pointer;
+          max-width: 100%; 
+        }
+        input[type=url], 
+        input[type=text] {
+          background: #f3f7f7;
+          margin-bottom: 5px;
+          padding: 5px;
+          border: 1px solid #d8e9e9;
+          display: block;
+          width: 100%;
+          width: ~"calc(100% - 10px)";
+        }
+        input[type="radio"]{
+          display: block;
+          position: absolute;
+          height: 19px;
+          width: 10px;
+          z-index: 2;
+          cursor: pointer;
+          & + label{ opacity: 0.5;}
+          &:checked{
+            & + label{ opacity: 1; }
+          }
+        }
+        .radio-input-group{
+          display: inline-block;
+          position: relative;
+          margin-right: 2px;
+        }
+        .alignment, hr{
+          margin: 12px 0;
+        }
+      }
 
       /* Headers drop down menu */
       li.headers ul {
@@ -106,6 +144,7 @@ section.markdown {
       }
 
       li.a aside, li.img aside {
+        width: 167px;
         position: absolute;
         background: #fff;
         padding: 2rem;
@@ -116,7 +155,7 @@ section.markdown {
         -webkit-box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.1);
       }
       li.img aside {
-        margin-left: -240px;
+        margin-left: -100px;
       }
 
       li:first-child {

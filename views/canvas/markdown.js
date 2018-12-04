@@ -87,7 +87,11 @@ Template.markdownEditor.events({
     const selection = textarea.value.substring(start, end);
     const dropdown = event.target.querySelector('.markdown-menu-dropdown');
 
-    if (dropdown === null || dropdown.classList.contains('hide')) closeMenus(event.target.parentElement);
+    if (dropdown === null) {
+      if (!event.target.classList.contains('markdown-menu-dropdown')) closeMenus(event.target.parentElement);
+    } else if (dropdown.classList.contains('hide')) {
+      closeMenus(event.target.parentElement);
+    }
 
     // What do we insert?
     let insertBefore = '';

@@ -27,29 +27,55 @@
       <li class="code" data-title="Code or Preformatted Text"><i class="fa">&#xf121;</i></li>
       <li class="ol" data-title="Ordered List"><i class="fa">&#xf0cb;</i></li>
       <li class="ul" data-title="Unordered List"><i class="fa">&#xf0ca;</i></li>
-      <li class="a" data-title="Link">
+      <li class="a" data-title="Add Link">
         <i class="fa">&#xf0c1;</i>
         <aside class="hide markdown-menu-dropdown">
-          <label>URL: <input type="url" name="url" /></label>
-          <label>OR File: <input type="file" /></label>
-          <label>Text: <input type="text" name="text" /></label>
+          <label>
+            <input type="file" />
+          </label>
+          <br />
+          <label>
+            <strong>OR</strong><br />
+            <input type="url" name="url" placeholder="Link URL" />
+          </label>
+          <hr />
+          <label>
+            <input type="text" name="text" placeholder="Link Text" />
+          </label>
           <button>Insert</button>
         </aside>
       </li>
       <li class="img" data-title="Add Media">
         <i class="fa">&#xf03e;</i>
         <aside class="hide markdown-menu-dropdown">
-          <label>URL: <input type="url" name="url" /></label>
-          <label>OR File: <input type="file" /></label>
-          <label>Description: <input type="text" name="description" /></label>
-          Alignment:
-          <label for="markdown-align-left" title="Left"><i class="fa">&#xf036;</i></label>
-          <input class="radio" id="markdown-align-left" type="radio" name="alignment" value="Left" checked />
-          <label for="markdown-align-center" title="Center"><i class="fa">&#xf037;</i></label>
-          <input class="radio" id="markdown-align-center" type="radio" name="alignment" value="Center" />
-          <label for="markdown-align-right" title="Right"><i class="fa">&#xf038;</i></label>
-          <input class="radio" id="markdown-align-right" type="radio" name="alignment" value="Right" />
-          <button>Insert</button>        
+          <label>
+            <input type="file" />
+          </label>
+          <br />
+          <label>
+            <strong>OR</strong><br />
+            <input type="url" name="url" placeholder="Media url" />
+          </label>
+          <hr />
+          <label>
+            <input type="text" name="description" placeholder="Description" />
+          </label>
+          <div class="alignment">
+            Alignment: &nbsp;&nbsp;
+            <div class="radio-input-group">
+              <input class="radio" id="markdown-align-left" type="radio" name="alignment" value="Left" checked />
+              <label for="markdown-align-left" title="Left"><i class="fa">&#xf036;</i></label>
+            </div>
+            <div class="radio-input-group">
+              <input class="radio" id="markdown-align-center" type="radio" name="alignment" value="Center" />
+              <label for="markdown-align-center" title="Center"><i class="fa">&#xf037;</i></label>
+            </div>
+            <div class="radio-input-group">
+              <input class="radio" id="markdown-align-right" type="radio" name="alignment" value="Right" />
+              <label for="markdown-align-right" title="Right"><i class="fa">&#xf038;</i></label>
+            </div>
+          </div>
+          <button>Insert</button>
         </aside>
       </li>
     </ul>
