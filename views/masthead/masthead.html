@@ -1,76 +1,92 @@
 <template name="masthead">
-    {{#if isAdmin}}
-        {{> sectionAdmin}}
-    {{/if}}
-    <section class="masthead active" id="{{anchor name=name}}" data-id="{{_id}}">
-        <div class="container">
-            {{#each items}}
-                {{>tabs}}
-            {{/each}}
-        </div>
-    </section>
+  {{#if isAdmin}}
+  {{> sectionAdmin}}
+  {{/if}}
+  <section class="masthead active" id="{{anchor name=name}}" data-id="{{_id}}">
+    <div class="container">
+      {{#each items}}
+      {{>tabs}}
+      {{/each}}
+    </div>
+  </section>
 </template>
 
 <!--Content Templates (Could be markdown editable areas)-->
 <template name="slideA">
-    <h1>New Site, <br />New Features!</h1>
-    <p class="subhead">More user friendly so you can find the information you need.</p>
-    <ul>
-        <li>Search by zip code for the nearest SASP under <a href="/service-providers">Service Providers</a>.</li>
-        <li>Register (and unregister) for an event just by clicking a link.</li>
-        <li>Subscribe to email lists and listservs and check out resources</li>
-        <li>See WCASA’s <a href="/twitter">Twitter feed</a>.</li>
-        <li>Receive notifications when there is an action alert or when your membership payment is due.</li>
-        <li>Keep track of donations and payments and much more!</li>
-    </ul>
-    <a class="cta button" href="/register">Create an Account</a>
-    <img class="masthead-bg" src="/lib/img/slide2.jpg" alt="" />
+  <h1>New Site, <br />New Features!</h1>
+  <p class="subhead">More user friendly so you can find the information you need.</p>
+  <ul>
+    <li>Search by zip code for the nearest SASP under <a href="/service-providers">Service Providers</a>.</li>
+    <li>Register (and unregister) for an event just by clicking a link.</li>
+    <li>Subscribe to email lists and listservs and check out resources</li>
+    <li>See WCASA’s <a href="/twitter">Twitter feed</a>.</li>
+    <li>Receive notifications when there is an action alert or when your membership payment is due.</li>
+    <li>Keep track of donations and payments and much more!</li>
+  </ul>
+  <a class="cta button" href="/register">Create an Account</a>
+  <img class="masthead-bg" src="/lib/img/slide2.jpg" alt="" />
 </template>
 
 <template name="slideB">
-    <h1>The Movement is <br />Bigger than WCASA</h1>
-    <p class="subhead">Thanks to the #MeToo campaign, <br />America is experiencing a watershed moment.</p>
-    <p>A reckoning has begun, led by survivors and women of color, that calls on all of us to name sexual violence and harassment as unacceptable and intolerable. Now more than ever, the movement needs your help!</p>
-    <p>Join us in shifting the paradigm to support survivors, dismantle oppression, and champion prevention. This is how we end sexual violence.</p>
-    <a class="cta button" href="/donate">Donate Today</a>
-    <a class="cta button" href="/account/subscriptions">Get action alerts</a>
-    <img class="masthead-bg" src="/lib/img/slide3.jpg" alt="" />
+  <h1>The Movement is <br />Bigger than WCASA</h1>
+  <p class="subhead">Thanks to the #MeToo campaign, <br />America is experiencing a watershed moment.</p>
+  <p>A reckoning has begun, led by survivors and women of color, that calls on all of us to name sexual violence and
+    harassment as unacceptable and intolerable. Now more than ever, the movement needs your help!</p>
+  <p>Join us in shifting the paradigm to support survivors, dismantle oppression, and champion prevention. This is how
+    we end sexual violence.</p>
+  <a class="cta button" href="/donate">Donate Today</a>
+  <a class="cta button" href="/account/subscriptions">Get action alerts</a>
+  <img class="masthead-bg" src="/lib/img/slide3.jpg" alt="" />
 </template>
 
 <template name="slideD">
-    <br />
-    <h1>We Value <br />your Feedback</h1>
-    <p class="subhead">Please bear with us while we work on <br />migrating content to this site.</p>
-    <p>If you unable to access information or if you notice any broken links, <br />please don’t hesitate to contact us at <a href="mailto:wcasa@wcasa.org">wcasa@wcasa.org</a>.</p>
-    <a class="cta button" href="mailto:wcasa@wcasa.org">Provide Feedback</a>
-    <img class="masthead-bg" src="/lib/img/slide4.jpg" alt="" />
+  <br />
+  <h1>We Value <br />your Feedback</h1>
+  <p class="subhead">Please bear with us while we work on <br />migrating content to this site.</p>
+  <p>If you unable to access information or if you notice any broken links, <br />please don’t hesitate to contact us
+    at <a href="mailto:wcasa@wcasa.org">wcasa@wcasa.org</a>.</p>
+  <a class="cta button" href="mailto:wcasa@wcasa.org">Provide Feedback</a>
+  <img class="masthead-bg" src="/lib/img/slide4.jpg" alt="" />
 </template>
 
 <template name="slideE">
-    <h1>2019 Calendar</h1>
-    <p class="subhead">As the year comes to a close we reflect on this past year’s events. Take a look and what is happening in 2019 and register for upcoming events:</p>
-    <ul>
-        <li>
-            <strong>Sexual Assault Victim Advocacy School</strong> <br />
-            February 12-15, 2019 (Also May, Aug &amp; Dec) <br />
-            SAVAS addresses the needs of being a victim advocate - crisis line, medical/legal advocacy, and much more.
-        </li>
-        <li>
-            <strong>Legislative Advocacy Day</strong> <br />
-            March 19, 2019 <br />
-            An opportunity for those who care about ending sexual and domestic violence to speak to their state lawmakers.
-        </li>
-        <li>
-            <strong>Survivors & Allies</strong> <br />
-            April 6, 2019 <br />
-            Bring Wisconsin survivors and their allies together to promote healing and advance social change in Wisconsin.
-        </li>
-        <li>
-            <strong>8th Annual Wrap Around the Capitol</strong> <br />
-            April 6, 2019 <br />
-            United voices for their own individual healing and to promote continued healing for all survivors.
-        </li>
-    </ul>
-    <a class="cta button" href="/events">View Events Calendar</a>
-    <img class="masthead-bg" src="/lib/img/slide5.jpg" alt="" />
+  <h1>2019 Calendar</h1>
+  <p class="subhead">As the year comes to a close we reflect on this past year’s events. Take a look and what is
+    happening in 2019 and register for upcoming events:</p>
+  <ul>
+    <li>
+      <a href="/events/2019/February/sexual-assault-victim-advocacy-school-savas/">
+        <strong>Sexual Assault Victim Advocacy School</strong>
+      </a>
+      <br />
+      February 12-15, 2019 (Also May, Aug &amp; Dec) <br />
+      SAVAS addresses the needs of being a victim advocate - crisis line, medical/legal advocacy, and much more.
+    </li>
+    <li>
+      <a href="/events/2019/March/legislative-advocacy-day/">
+        <strong>Legislative Advocacy Day</strong> 
+      </a>
+      <br />
+      March 19, 2019 <br />
+      An opportunity for those who care about ending sexual and domestic violence to speak to their state lawmakers.
+    </li>
+    <li>
+      <a href="/events/2019/April/survivors-allies/">
+        <strong>Survivors & Allies</strong>
+      </a>
+      <br />
+      April 6, 2019 <br />
+      Bring Wisconsin survivors and their allies together to promote healing and advance social change in Wisconsin.
+    </li>
+    <li>
+      <a href="/events/2019/April/th-annual-wrap-around-the-capitol/">
+        <strong>8th Annual Wrap Around the Capitol</strong>
+      </a>
+      <br />
+      April 6, 2019 <br />
+      United voices for their own individual healing and to promote continued healing for all survivors.
+    </li>
+  </ul>
+  <a class="cta button" href="/events">View Events Calendar</a>
+  <img class="masthead-bg" src="/lib/img/slide5.jpg" alt="" />
 </template>
