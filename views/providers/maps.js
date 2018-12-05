@@ -15,6 +15,166 @@ let { google } = window;
 // Map handler
 // eslint-disable-next-line import/no-mutable-exports
 let mapObject = {};
+let mapMarkers = [];
+
+
+// Helper for Toggling Map Style based on zoom position
+const mapStyle = (map, markers, zoom) => {
+  if (zoom === 'county') {
+    const styles = [{
+      featureType: 'landscape.man_made',
+      elementType: 'geometry',
+      stylers: [{
+        color: '#00c6dd',
+      }],
+    }, {
+      featureType: 'landscape.natural',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#00b7c5',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'water',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#0094c4',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      elementType: 'labels',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative.land_parcel',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative.neighborhood',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'poi',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'transit',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }];
+    // Set Style Options
+    map.setOptions({ styles });
+
+    // Hide Pins
+    for (let i = 0; i < markers.length; i += 1) {
+      console.log(markers[i]);
+      markers[i].setVisible(false);
+    }
+    // Center the map
+    map.panTo(new google.maps.LatLng(44.668543, -89.756508));
+    // Map Options
+    map.set('draggable', false);
+  } else {
+    const styles = [{
+      featureType: 'landscape.man_made',
+      elementType: 'geometry',
+      stylers: [{
+        color: '#e8e8e8',
+      }],
+    }, {
+      featureType: 'landscape.natural',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#eceae4',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'water',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#0094c4',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      elementType: 'labels',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative.land_parcel',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative.neighborhood',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'poi',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'transit',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }];
+    // Set Style Options
+    map.setOptions({ styles });
+    // Map Options
+    map.set('draggable', true);
+    // Show Pins
+    for (let i = 0; i < markers.length; i += 1) {
+      console.log(markers[i]);
+      markers[i].setVisible(true);
+    }
+  }
+};
 
 // Helper for moving map based on provider locations
 const moveMap = (county) => {
@@ -165,7 +325,7 @@ const initialize = () => {
     const options = {
       scrollwheel: false,
       zoom: 7,
-      center: new google.maps.LatLng(43.1, -89.4),
+      center: new google.maps.LatLng(44.668543, -89.756508),
       zoomControl: true,
       minZoom: 7,
       maxZoom: 16,
@@ -196,11 +356,19 @@ const initialize = () => {
       mapObject.panTo(lastValidCenter);
     });
 
+    // Zoom Listener
+    google.maps.event.addListener(mapObject, 'zoom_changed', function() {
+      // Set Map View Style
+      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
+      else mapStyle(mapObject, mapMarkers, 'default');
+    });
+
     // State Layer
     const stateLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
       singleInfoWindow: true,
       suppressInfoWindows: true,
+      zIndex: 1,
     });
     stateLayer.parse('/wisconsin_state.kml');
 
@@ -234,6 +402,7 @@ const initialize = () => {
       map: mapObject,
       singleInfoWindow: true,
       suppressInfoWindows: true,
+      zIndex: 2,
       afterParse: (doc) => {
         for (let i = 0; i < doc[0].placemarks.length; i += 1) {
           const p = doc[0].placemarks[i];
@@ -277,8 +446,14 @@ const initialize = () => {
         text,
         position: new google.maps.LatLng(coordinates[0], coordinates[1]),
         map: mapObject,
-        fontSize: 12,
+        fontSize: 11,
         align: 'center',
+        fontFamily: '\'Lato\', sans-serif',
+        fontColor: '#ffffff',
+        textTransform: 'uppercase',
+        strokeWeight: 0,
+        strokeColor: 'transparent',
+        zIndex: 3,
       });
     };
 
@@ -392,6 +567,10 @@ const initialize = () => {
         // Hide Label
         google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
+        // Add to Global Marker Array
+        mapMarkers.push(marker);
+        marker.setVisible(false); // maps API hide call
+
         // Add to map
         marker.setMap(mapObject);
 
@@ -433,6 +612,12 @@ const initialize = () => {
 
       // Add to map
       marker.setMap(mapObject);
+    })();
+
+    // Set the Map Style
+    (() => {
+      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
+      else mapStyle(mapObject, mapMarkers, 'default');
     })();
   };
 

@@ -119,7 +119,8 @@ MapLabel.prototype.initialize = function () {
   
     var panes = this.getPanes();
     if (panes) {
-      panes.mapPane.appendChild(canvas);
+      // TODO: Find way to hook into this without editing library / Used for z-indexing
+      panes.floatPane.appendChild(canvas);
     }
   };
   MapLabel.prototype['onAdd'] = MapLabel.prototype.onAdd;
