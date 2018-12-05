@@ -31,9 +31,15 @@
           <article role="document" class="document" data-id="{{_id}}">
             <div class="inner-container-wide">
               <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{icon}}{{/if}}">
-                <time class="dateMeta" datetime="{{ISODate date}}">
-                  {{friendlyDate date}}
-                </time>
+                {{#if ../yearOnly}}
+                  <time class="dateMeta" datetime="{{yearDate this.date}}">
+                    {{yearDate this.date}}
+                  </time>
+                {{else}}
+                  <time class="dateMeta" datetime="{{ISODate date}}">
+                    {{friendlyDate date}}
+                  </time>
+                {{/if}}
                 {{#if title}}<h3>{{title}}</h3>{{/if}}
                 {{#if publisher}}<p class="content text">{{publisher}}</p>{{/if}}
                 {{#if description}}<p class="content text description">{{description}}</p>{{/if}}
@@ -131,7 +137,6 @@
   {{/if}}
 </template>
 
-<!--This could exist in another file perhaps.-->
 <template name="articleItem">
   <article role="document">
     <a href="{{url}}" target="_blank" class="{{#if icon}}icon icon-{{{icon}}}{{/if}}">

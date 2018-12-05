@@ -29,6 +29,7 @@ Template.webinars.helpers({
     perPage: 10,
     style: 'stripes',
     tag: 'lc',
+    yearOnly: true,
     items: () => Resources.collection.find({
       type: 'webinar',
       $or: Resources.search.get() instanceof RegExp ? [
