@@ -172,6 +172,15 @@ const utilityNavigationHelpers = {
     position: 'right',
     target: '_blank',
     user: 'public',
+  }, {
+    // File Manager
+    title: 'File Manager',
+    icon: 'caret-right',
+    iconAfter: true,
+    type: 'sidebar',
+    sidebar: 'file-manager',
+    user: 'active',
+    classes: 'hide',
   }],
 };
 

@@ -167,6 +167,14 @@ Template.aside.helpers({
       id: 'espanolRecursos',
       template: 'espanolRecursos',
     }],
+  }, {
+    title: 'File Manager',
+    icon: '',
+    filter: 'true',
+    id: 'file-manager',
+    width: 500,
+    position: 'left',
+    template: 'fileManager',
   }],
 });
 
