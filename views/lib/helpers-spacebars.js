@@ -28,6 +28,21 @@ Template.registerHelper('friendlyDate', (date) => {
 });
 
 /**
+ * @summary Produce a Year Date String
+ * @function
+ *   @param {Date} date
+ * @returns {String}
+ */
+Template.registerHelper('yearDate', (date) => {
+  // If string, convert to date
+  const newDate = date instanceof Date ? date : new Date(date);
+  console.log(newDate);
+
+  // Create year date string
+  return `${newDate.getUTCFullYear()}`;
+});
+
+/**
  * @summary Produce a Date ISOString
  * @function
  *   @param {Date} date
