@@ -97,7 +97,6 @@ const mapStyle = (map, markers, zoom) => {
     // Center the map
     map.panTo(new google.maps.LatLng(44.668543, -89.756508));
     // Map Options
-    map.set('draggable', false);
   } else {
     const styles = [{
       featureType: 'landscape.man_made',
@@ -184,8 +183,6 @@ const mapStyle = (map, markers, zoom) => {
     }];
     // Set Style Options
     map.setOptions({ styles });
-    // Map Options
-    map.set('draggable', true);
     // Show Pins
     for (let i = 0; i < markers.length; i += 1) {
       console.log(markers[i]);
@@ -870,4 +867,3 @@ Template.providersList.events({
     fullMap(true, providerSection);
   },
 });
-
