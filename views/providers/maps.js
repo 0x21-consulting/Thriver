@@ -15,6 +15,248 @@ let { google } = window;
 // Map handler
 // eslint-disable-next-line import/no-mutable-exports
 let mapObject = {};
+const mapMarkers = [];
+
+
+// Helper for Toggling Map Style based on zoom position
+const mapStyle = (map, markers, zoom) => {
+  if (zoom === 'county') {
+    const styles = [{
+      featureType: 'landscape.man_made',
+      elementType: 'geometry',
+      stylers: [{
+        color: '#00c6dd',
+      }],
+    }, {
+      featureType: 'landscape.natural',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#00b7c5',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'water',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#0094c4',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      elementType: 'labels',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative.land_parcel',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'administrative.neighborhood',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'poi',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'transit',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }];
+    // Set Style Options
+    map.setOptions({ styles });
+
+    // Hide Pins
+    for (let i = 0; i < markers.length; i += 1) {
+      console.log(markers[i]);
+      markers[i].setVisible(false);
+    }
+    // Center the map
+    map.panTo(new google.maps.LatLng(44.668543, -89.756508));
+    // Map Options
+  } else {
+    const styles = [{
+      featureType: 'landscape.man_made',
+      elementType: 'geometry',
+      stylers: [{
+        color: '#00c6dd',
+      }],
+    }, {
+      featureType: 'landscape.natural',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#00b7c5',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'water',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#0094c4',
+      }, {
+        visibility: 'on',
+      }],
+    }, {
+      elementType: 'labels',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative',
+      elementType: 'geometry',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative.land_parcel',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'administrative.neighborhood',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'poi',
+      stylers: [{
+        visibility: 'off',
+      }],
+    }, {
+      featureType: 'road',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'labels.icon',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'transit',
+      stylers: [{
+        visibility: 'on',
+      }],
+    }, {
+      featureType: 'road.highway',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#00c7c0',
+      }],
+    }, {
+      featureType: 'road.highway',
+      elementType: 'geometry.stroke',
+      stylers: [{
+        color: '#5ae7ff',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#adefec',
+      }],
+    }];
+    // Set Style Options
+    map.setOptions({ styles });
+    // Show Pins
+    for (let i = 0; i < markers.length; i += 1) {
+      console.log(markers[i]);
+      markers[i].setVisible(true);
+    }
+  }
+};
+
+// Helper for moving map based on provider locations
+const moveMap = (county) => {
+  let providers = [];
+  let x = [];
+  let y = [];
+
+  // Get coordinates for all providers for that county
+  providers = Providers.collection.find({
+    counties: { $elemMatch: { $in: [county] } },
+  }, { coordinates: 1, name: 1 }).map(provider => ({
+    // We only care about the coordinates
+    coordinates: provider.coordinates,
+    id: provider._id,
+    name: provider.name,
+  }));
+
+  // If there aren't any providers for this county, report that
+  if (!providers.length) return false;
+
+  // Calculate bounding box
+  // Determine lowest and highest Lat values
+  providers.sort((a, b) => b.coordinates.lat - a.coordinates.lat);
+
+  x = [providers[0].coordinates.lat,
+    providers[providers.length - 1].coordinates.lat];
+
+  // Determine lowest and highest Lon values
+  providers.sort((a, b) => b.coordinates.lon - a.coordinates.lon);
+
+  y = [providers[0].coordinates.lon,
+    providers[providers.length - 1].coordinates.lon];
+
+  // If there was only one result, click on it for the user
+  if (providers.length === 1) {
+    Providers.active.set(Providers.collection
+      .findOne({ _id: providers[0].id }));
+    document.getElementById('service-providers').classList.remove('full-view');
+    google.maps.event.trigger(mapObject, 'resize');
+  } else {
+    document.getElementById('service-providers').classList.add('full-view');
+    google.maps.event.trigger(mapObject, 'resize');
+  }
+
+  // Bounds
+  mapObject.fitBounds(new google.maps.LatLngBounds(
+    new google.maps.LatLng(x[1], y[1]), // Southwest
+    new google.maps.LatLng(x[0], y[0]), // to Northeast
+  ));
+
+  return true;
+};
+
+// Get county from ZIP code number
+const getCounty = (zip) => {
+  let county = '';
+
+  // Get county
+  county = Providers.counties.findOne({
+    // Minimongo doesn't support $eq for some reason
+    zips: { $elemMatch: { $in: [zip] } },
+  });
+
+  // Now get providers that support that county
+  if (!county || !moveMap(county.name)) return false;
+  return true;
+};
 
 // Close Map Search
 Providers.closeMapSearch = () => {
@@ -98,7 +340,7 @@ const initialize = () => {
     const options = {
       scrollwheel: false,
       zoom: 7,
-      center: new google.maps.LatLng(43.1, -89.4),
+      center: new google.maps.LatLng(44.668543, -89.756508),
       zoomControl: true,
       minZoom: 7,
       maxZoom: 16,
@@ -129,19 +371,76 @@ const initialize = () => {
       mapObject.panTo(lastValidCenter);
     });
 
+    // Zoom Listener
+    google.maps.event.addListener(mapObject, 'zoom_changed', function() {
+      // Set Map View Style
+      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
+      else mapStyle(mapObject, mapMarkers, 'default');
+    });
+
     // State Layer
     const stateLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
       singleInfoWindow: true,
-      suppressInfoWindows: false,
+      suppressInfoWindows: true,
+      zIndex: 1,
     });
     stateLayer.parse('/wisconsin_state.kml');
 
     // County Layer
+    const clickablePolygon = (p) => {
+      google.maps.event.addListener(
+        p.polygon,
+        'click',
+        function () {
+          moveMap(p.name);
+        },
+      );
+      google.maps.event.addListener(
+        p.polygon,
+        'mouseover',
+        function () {
+          p.polygon.setOptions({
+            fillOpacity: 0.95,
+            strokeColor: '#04cbe4',
+            strokeOpacity: 0.95,
+          });
+          console.log(p.polygon);
+        },
+      );
+      google.maps.event.addListener(
+        p.polygon,
+        'mouseout',
+        function () {
+          p.polygon.setOptions({
+            fillOpacity: 0,
+            strokeColor: '#f0fdff',
+            strokeOpacity: 0.25,
+          });
+        },
+      );
+
+      // Set Polygon Options
+      p.polygon.setOptions({
+        fillColor: '#04cbe4',
+        strokeColor: '#f0fdff',
+        fillOpacity: 0,
+        strokeOpacity: 0.25,
+      });
+    };
+
+
     const countyLayer = new geoXML3.parser({ // eslint-disable-line new-cap
       map: mapObject,
       singleInfoWindow: true,
-      suppressInfoWindows: false,
+      suppressInfoWindows: true,
+      zIndex: 2,
+      afterParse: (doc) => {
+        for (let i = 0; i < doc[0].placemarks.length; i += 1) {
+          const p = doc[0].placemarks[i];
+          clickablePolygon(p);
+        }
+      },
     });
     countyLayer.parse('/wisconsin_counties.kml');
 
@@ -179,25 +478,31 @@ const initialize = () => {
         text,
         position: new google.maps.LatLng(coordinates[0], coordinates[1]),
         map: mapObject,
-        fontSize: 12,
+        fontSize: 11,
         align: 'center',
+        fontFamily: '\'Lato\', sans-serif',
+        fontColor: '#ffffff',
+        textTransform: 'uppercase',
+        strokeWeight: 0,
+        strokeColor: 'transparent',
+        zIndex: 3,
       });
     };
 
     newLabel('Adams', [43.973763, -89.767223]);
-    newLabel('Ashland', [46.546291, -90.665154]);
+    newLabel('Ashland', [46.346291, -90.665154]);
     newLabel('Barron', [45.437192, -91.852892]);
-    newLabel('Bayfield', [46.634199, -91.177282]);
+    newLabel('Bayfield', [46.434199, -91.257282]);
     newLabel('Brown', [44.473961, -87.995926]);
     newLabel('Buffalo', [44.389759, -91.758714]);
     newLabel('Burnett', [45.865255, -92.367978]);
-    newLabel('Calumet', [44.078410, -88.212132]);
+    newLabel('Calumet', [44.128410, -88.212132]);
     newLabel('Chippewa', [45.069092, -91.283505]);
     newLabel('Clark', [44.733596, -90.610201]);
     newLabel('Columbia', [43.471882, -89.330472]);
     newLabel('Crawford', [43.249910, -90.951230]);
     newLabel('Dane', [43.067468, -89.417852]);
-    newLabel('Dodge', [43.422706, -88.704379]);
+    newLabel('Dodge', [43.472706, -88.704379]);
     newLabel('Door', [45.067808, -87.087936]);
     newLabel('Douglas', [46.463316, -91.892580]);
     newLabel('Dunn', [44.947741, -91.897720]);
@@ -206,35 +511,35 @@ const initialize = () => {
     newLabel('Fond Du Lac', [43.754722, -88.493284]);
     newLabel('Forest', [45.666882, -88.773225]);
     newLabel('Grant', [42.870062, -90.695368]);
-    newLabel('Green', [42.677728, -89.605639]);
-    newLabel('Green Lake', [43.761410, -88.987228]);
+    newLabel('Green', [42.697728, -89.605639]);
+    newLabel('Green Lake', [43.871410, -88.987228]);
     newLabel('Iowa', [43.001021, -90.133692]);
     newLabel('Iron', [46.326550, -90.261299]);
     newLabel('Jackson', [44.324895, -90.806541]);
-    newLabel('Jefferson', [43.013807, -88.773986]);
-    newLabel('Juneau', [43.932836, -90.113984]);
+    newLabel('Jefferson', [43.073807, -88.773986]);
+    newLabel('Juneau', [43.902836, -90.113984]);
     newLabel('Kenosha', [42.579703, -87.424898]);
-    newLabel('Kewaunee', [44.500949, -87.161813]);
+    newLabel('Kewaunee', [44.500949, -87.291813]);
     newLabel('La Crosse', [43.908222, -91.111758]);
     newLabel('Lafayette', [42.655578, -90.130292]);
     newLabel('Langlade', [45.259204, -89.068190]);
     newLabel('Lincoln', [45.338319, -89.742082]);
-    newLabel('Manitowoc', [44.105108, -87.313828]);
+    newLabel('Manitowoc', [44.105108, -87.413828]);
     newLabel('Marathon', [44.898036, -89.757823]);
     newLabel('Marinette', [45.346899, -87.991198]);
-    newLabel('Marquette', [43.826053, -89.409095]);
+    newLabel('Marquette', [43.776053, -89.409095]);
     newLabel('Menominee', [44.991304, -88.669251]);
     newLabel('Milwaukee', [43.017655, -87.481575]);
     newLabel('Monroe', [43.945175, -90.619969]);
-    newLabel('Oconto', [44.996575, -88.206516]);
+    newLabel('Oconto', [44.926575, -88.006516]);
     newLabel('Oneida', [45.713791, -89.536693]);
-    newLabel('Outagamie', [44.418226, -88.464988]);
+    newLabel('Outagamie', [44.388226, -88.464988]);
     newLabel('Ozaukee', [43.360715, -87.496553]);
-    newLabel('Pepin', [44.627436, -91.834890]);
+    newLabel('Pepin', [44.660436, -91.834890]);
     newLabel('Pierce', [44.725337, -92.426279]);
     newLabel('Polk', [45.468030, -92.453154]);
     newLabel('Portage', [44.476246, -89.498070]);
-    newLabel('Prince', [45.679072, -90.359650]);
+    newLabel('Price', [45.679072, -90.359650]);
     newLabel('Racine', [42.754075, -87.414676]);
     newLabel('Richland', [43.376199, -90.435693]);
     newLabel('Rock', [42.669931, -89.075119]);
@@ -243,19 +548,20 @@ const initialize = () => {
     newLabel('Sauk', [43.427998, -89.943329]);
     newLabel('Sawyer', [45.864913, -91.147130]);
     newLabel('Shawano', [44.789641, -88.755813]);
-    newLabel('Sheboygan', [43.746002, -87.730546]);
+    newLabel('Sheboygan', [43.746002, -87.60546]);
     newLabel('Taylor', [45.211656, -90.504853]);
-    newLabel('Trempealeau', [44.303050, -91.358867]);
+    newLabel('Trempealeau', [44.253050, -91.358867]);
     newLabel('Vernon', [43.599858, -90.815226]);
     newLabel('Vilas', [46.049848, -89.501254]);
     newLabel('Walworth', [42.668110, -88.541731]);
     newLabel('Washburn', [45.892463, -91.796423]);
-    newLabel('Washington', [43.391156, -88.232917]);
-    newLabel('Waukesha', [43.019308, -88.306707]);
+    newLabel('Washington', [43.371156, -88.232917]);
+    newLabel('Waukesha', [42.963807, -88.306707]);
     newLabel('Waupaca', [44.478004, -88.967006]);
-    newLabel('Waushara', [44.112825, -89.239752]);
-    newLabel('Winnebago', [44.085707, -88.668149]);
+    newLabel('Waushara', [44.122825, -89.239752]);
+    newLabel('Winnebago', [44.055707, -88.668149]);
     newLabel('Wood', [44.461413, -90.038825]);
+    // vertical: up is up / horizontal: up is left (sans negative)
 
     // Wait for collection to become available before acting on it
     Tracker.autorun((c) => {
@@ -293,6 +599,10 @@ const initialize = () => {
 
         // Hide Label
         google.maps.event.addListener(marker, 'mouseout', hideLabel);
+
+        // Add to Global Marker Array
+        mapMarkers.push(marker);
+        marker.setVisible(false); // maps API hide call
 
         // Add to map
         marker.setMap(mapObject);
@@ -336,6 +646,12 @@ const initialize = () => {
       // Add to map
       marker.setMap(mapObject);
     })();
+
+    // Set the Map Style
+    (() => {
+      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
+      else mapStyle(mapObject, mapMarkers, 'default');
+    })();
   };
 
   // Create maps API script
@@ -352,73 +668,6 @@ const initialize = () => {
 
   // Maps API will look for initialize script in global scope
   window.initializeMap = init;
-};
-
-// Helper for moving map based on provider locations
-const moveMap = (county) => {
-  let providers = [];
-  let x = [];
-  let y = [];
-
-  // Get coordinates for all providers for that county
-  providers = Providers.collection.find({
-    counties: { $elemMatch: { $in: [county] } },
-  }, { coordinates: 1, name: 1 }).map(provider => ({
-    // We only care about the coordinates
-    coordinates: provider.coordinates,
-    id: provider._id,
-    name: provider.name,
-  }));
-
-  // If there aren't any providers for this county, report that
-  if (!providers.length) return false;
-
-  // Calculate bounding box
-  // Determine lowest and highest Lat values
-  providers.sort((a, b) => b.coordinates.lat - a.coordinates.lat);
-
-  x = [providers[0].coordinates.lat,
-    providers[providers.length - 1].coordinates.lat];
-
-  // Determine lowest and highest Lon values
-  providers.sort((a, b) => b.coordinates.lon - a.coordinates.lon);
-
-  y = [providers[0].coordinates.lon,
-    providers[providers.length - 1].coordinates.lon];
-
-  // If there was only one result, click on it for the user
-  if (providers.length === 1) {
-    Providers.active.set(Providers.collection
-      .findOne({ _id: providers[0].id }));
-    document.getElementById('service-providers').classList.remove('full-view');
-    google.maps.event.trigger(mapObject, 'resize');
-  } else {
-    document.getElementById('service-providers').classList.add('full-view');
-    google.maps.event.trigger(mapObject, 'resize');
-  }
-
-  // Bounds
-  mapObject.fitBounds(new google.maps.LatLngBounds(
-    new google.maps.LatLng(x[1], y[1]), // Southwest
-    new google.maps.LatLng(x[0], y[0]), // to Northeast
-  ));
-
-  return true;
-};
-
-// Get county from ZIP code number
-const getCounty = (zip) => {
-  let county = '';
-
-  // Get county
-  county = Providers.counties.findOne({
-    // Minimongo doesn't support $eq for some reason
-    zips: { $elemMatch: { $in: [zip] } },
-  });
-
-  // Now get providers that support that county
-  if (!county || !moveMap(county.name)) return false;
-  return true;
 };
 
 Template.providers.onRendered(initialize);
@@ -509,6 +758,9 @@ Template.providers.events({
 
     google.maps.event.trigger(mapObject, 'resize');
 
+    // Hide any open results
+    Providers.active.set(undefined);
+
     hideLabel();
     fullMap(true, providerSection);
   },
@@ -594,4 +846,24 @@ Template.providerListViewItem.events({
   'click div.pad': followProviderLink,
 });
 
-export default moveMap;
+// TODO: Reuse from providers event
+Template.providersList.events({
+  'click .fullMap': (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const providerSection = event.target.parentElement
+      .parentElement.parentElement.parentElement;
+
+    document.body.classList.remove('providersListOpen');
+    providerSection.classList.add('full-view');
+
+    google.maps.event.trigger(mapObject, 'resize');
+
+    // Hide any open results
+    Providers.active.set(undefined);
+
+    hideLabel();
+    fullMap(true, providerSection);
+  },
+});

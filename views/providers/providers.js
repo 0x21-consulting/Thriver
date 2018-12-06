@@ -39,7 +39,7 @@ Providers.collection.find({ parent: null }).observe({
 });
 
 // Counties and other provider data
-Template.providers.helpers({
+Template.findProvider.helpers({
   // All counties (for dropdown list)
   // NOTE: We only want to display counties which have providers,
   //       which is why we aren't using the counties collection here
