@@ -103,13 +103,13 @@ const mapStyle = (map, markers, zoom) => {
       featureType: 'landscape.man_made',
       elementType: 'geometry',
       stylers: [{
-        color: '#e8e8e8',
+        color: '#00c6dd',
       }],
     }, {
       featureType: 'landscape.natural',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#eceae4',
+        color: '#00b7c5',
       }, {
         visibility: 'on',
       }],
@@ -162,6 +162,24 @@ const mapStyle = (map, markers, zoom) => {
       featureType: 'transit',
       stylers: [{
         visibility: 'on',
+      }],
+    }, {
+      featureType: 'road.highway',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#00c7c0',
+      }],
+    }, {
+      featureType: 'road.highway',
+      elementType: 'geometry.stroke',
+      stylers: [{
+        color: '#5ae7ff',
+      }],
+    }, {
+      featureType: 'road',
+      elementType: 'geometry.fill',
+      stylers: [{
+        color: '#adefec',
       }],
     }];
     // Set Style Options
@@ -743,6 +761,9 @@ Template.providers.events({
 
     google.maps.event.trigger(mapObject, 'resize');
 
+    // Hide any open results
+    Providers.active.set(undefined);
+
     hideLabel();
     fullMap(true, providerSection);
   },
@@ -827,3 +848,26 @@ const followProviderLink = (event) => {
 Template.providerListViewItem.events({
   'click div.pad': followProviderLink,
 });
+
+// TODO: Reuse from providers event
+Template.providersList.events({
+  'click .fullMap': (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const providerSection = event.target.parentElement
+      .parentElement.parentElement.parentElement;
+
+    document.body.classList.remove('providersListOpen');
+    providerSection.classList.add('full-view');
+
+    google.maps.event.trigger(mapObject, 'resize');
+
+    // Hide any open results
+    Providers.active.set(undefined);
+
+    hideLabel();
+    fullMap(true, providerSection);
+  },
+});
+

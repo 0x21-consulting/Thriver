@@ -1,6 +1,8 @@
 <template name="addProvider">
   <section class="hide addProvider">
-    {{> addProviderForm}}
+    {{#if isAdmin}}
+      {{> addProviderForm}}
+    {{/if}}
   </section>
 </template>
 

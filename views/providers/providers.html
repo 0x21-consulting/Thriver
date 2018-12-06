@@ -1,151 +1,176 @@
 <template name="providers">
-    <section class="providers mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
-        {{#if isAdmin}}
-            {{> sectionAdmin}}
-        {{/if}}
-        <div class="containerSmall">
-            <header>
-                <h1>Service Providers</h1>
-                <p>
-                    We believe that diversity and safe, accessible services are fundamental
-                    to social change. WCASA supports service providers agencies
-                    all over the state of Wisconsin.
-                </p>
-            </header>
+  <section class="providers mainSection" id="{{anchor name=name}}" data-id="{{_id}}">
+    {{#if isAdmin}}
+    {{> sectionAdmin}}
+    {{/if}}
+    <div class="containerSmall">
+      <header>
+        <h1>Service Providers</h1>
+        <p>
+          We believe that diversity and safe, accessible services are fundamental
+          to social change. WCASA supports service providers agencies
+          all over the state of Wisconsin.
+        </p>
+      </header>
+    </div>
+    {{> addProvider}}
+    <div class="main mapTool">
+      <figure class="map provider-left">
+        <div id="mapCanvas">
         </div>
-        <div class="providerSearch">
-            <form id="search">
-                <div class="styledSelect fullBlockMob">
-                    <label for="county">Find by County</label>
-                    <select id="county" class="county">
-                        <option>- Select a County -</option>
-                        {{#each counties}}
-                            <option value="{{this}}">{{this}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="findByZip">
-                    <label for="zipCodeSearch">Find by Zip Code</label>
-                    <!-- All of Wisconsin's ZIP codes fall between 53001 and 54990 -->
-                    <input id="zipCodeSearch" type="text" pattern="[0-9]*"
-                        maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
-                        min="53001" max="54990" name="zip">
-                </div>
-                <div class="geolocate">
-                    <label>Geolocate</label>
-                    <button class="button geolocate"><span class="fa">&#xf05b;</span> Nearest Me</button>
-                </div>
-                <div>
-                    <label>View All</label>
-                    <button class="fullMap button"><span class="fa">&#xf279;</span> Map</button>
-                    <button class="seeAllProviders button"><span class="fa">&#xf03a;</span> List</button>
-                    <button class="pdf button"><span class="fa">&#xf1c1;</span> PDF</button>
-                </div>
-                {{#if isAdmin}}
-                    <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
-                {{/if}}
-            </form>
-        </div>
-        {{> addProvider}}
-        <div class="main mapTool">
-            <figure class="map">
-                <div id="mapCanvas">
-                </div>
-            </figure>
-            {{> provider}}
-        </div>
-    </section>
+      </figure>
+      {{> provider}}
+    </div>
+  </section>
 </template>
 
+<template name="findProvider">
+  <div class="find-provider-inner">
+    <h2><i class="fa fa-search" aria-hidden="true"></i> Find a Service Provider</h2>
+    <div class="providerSearch">
+      <form id="search">
+        <div class="styledSelect fullBlockMob">
+          <label for="county">Find by County</label>
+          <select id="county" class="county">
+            <option>- Select a County -</option>
+            {{#each counties}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="findByZip">
+          <label for="zipCodeSearch" class="hide">Find by Zip Code</label>
+          <input id="zipCodeSearch" type="text" pattern="[0-9]*" maxlength="5" minlength="5" title="ZIP codes have 5 Digits"
+            min="53001" max="54990" name="zip" placeholder="Find by Zip Code">
+        </div>
+        <div class="geolocate">
+          <button class="button geolocate"><span class="fa">&#xf05b;</span> Nearest Me</button>
+        </div>
+        <hr />
+        <div class="providers-list-buttons">
+          <button class="fullMap button"><span class="fa">&#xf279;</span> View Full Map</button>
+          <button class="seeAllProviders button"><span class="fa">&#xf03a;</span> See All Providers</button>
+          <br /><a href="#"><span class="fa">&#xf1c1;</span> Download Service Providers PDF</a>
+        </div>
+          <!--
+          TODO: Add back in once admin working.
+          -->
+          <!--
+          {{#if isAdmin}}
+            <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
+          {{/if}}
+          -->
+      </form>
+    </div>
+  </div>
+</template>
 <template name="provider">
-    <article class="locationDetails details">
-        {{> providersList}}
-        {{#with currentProvider}}
-            <div class="inner">
-                <header>
-                    <h2>{{name}}</h2>
-                    <address>{{address}}</address>
-                    <p class="county-served">Counties Served: {{providerCounties this}}</p>
-                    <p class="crisis-line" data-tty="{{#if crisis.tty}}TTY{{/if}}">
-                        <span class="fa">&#xf06a;</span>
-                        <strong>24-Hour Crisis Line:</strong> 
-                        <a href="tel:{{crisis.number}}{{#if crisis.ext}};ext={{crisis.ext}}{{/if}}">{{friendlyNumber crisis.number}} {{#if crisis.ext}}x{{crisis.ext}}{{/if}}</a>
-                    </p>
-                    {{#if isAdmin}}
-                        <aside class="adminControls">
-                            <span class="fa edit" title="Edit Provider">&#xf044;</span>
-                            <span class="fa delete" title="Delete Provider">&#xf014;</span>
-                        </aside>
-                    {{/if}}
-                </header>
-                <div class="main">
-                    <ul class="outreach">
-                        {{#each phones}}
-                            <li class="phone">
-                                <h3>Phone{{#if description}} - {{description}}{{/if}}</h3>
-                                <a href="tel:{{number}}{{#if ext}};ext={{ext}}{{/if}}" data-tty="{{#if tty}}TTY{{/if}}">{{friendlyNumber number}} {{#if ext}}x{{ext}}{{/if}}</a>
-                            </li>
-                        {{/each}}
-                        {{#each emails}}
-                            <li class="email">
-                                <h3>Email{{#if description}} - {{description}}{{/if}}</h3>
-                                <a href="mailto:{{address}}">{{address}}</a>
-                            </li>
-                        {{/each}}
-                        {{#if website}}
-                            <li class="website">
-                                <h3>Website</h3>
-                                <a href="{{website}}" target="_blank">{{website}}</a>
-                            </li>
-                        {{/if}}
-                        {{#if facebook}}
-                            <li class="facebook">
-                                <h3>Facebook</h3>
-                                <a href="{{facebook}}" target="_blank">{{name}} on Facebook</a>
-                            </li>
-                        {{/if}}
-                        {{#if twitter}}
-                            <li class="twitter">
-                                <h3>Twitter</h3>
-                                <a href="{{twitter}}" target="_blank">{{name}} on Twitter</a>
-                            </li>
-                        {{/if}}
-                    </ul>
-                    {{#if notes}}
-                        <p class="notes">{{notes}}</p>
-                    {{/if}}
-                    {{#if getOtherOffices this}}
-                        <p class="other-offices">This provider also has the following offices: 
-                            <ul>{{#each getOtherOffices this}}
-                                <li><a href="{{uri name}}">{{name}}</a></li>
-                            {{/each}}</ul>
-                        </p>
-                    {{/if}}
-                    <!--<button class="cta button-aqua">Jobs &amp; More</button>-->
-                </div>
-            </div>
-        {{/with}}
-    </article>
+  <article class="locationDetails details provider-right">
+    {{> providersList}}
+    {{#if currentProvider}}
+      {{#with currentProvider}}
+        <button class="clearProvider fullMap providers-back-to-all">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Search All
+        </button>
+        <div class="inner providerItem">
+          <header>
+            <h2>{{name}}</h2>
+            <address>{{address}}</address>
+            <p class="county-served">Counties Served: {{providerCounties this}}</p>
+            <p class="crisis-line" data-tty="{{#if crisis.tty}}TTY{{/if}}">
+              <span class="fa">&#xf06a;</span>
+              <strong>24-Hour Crisis Line:</strong>
+              <a href="tel:{{crisis.number}}{{#if crisis.ext}};ext={{crisis.ext}}{{/if}}">{{friendlyNumber crisis.number}}
+                {{#if crisis.ext}}x{{crisis.ext}}{{/if}}</a>
+            </p>
+            {{#if isAdmin}}
+              <!--
+                TODO: Add back in once admin working.
+              -->
+              <!--
+              <aside class="adminControls">
+                <span class="fa edit" title="Edit Provider">&#xf044;</span>
+                <span class="fa delete" title="Delete Provider">&#xf014;</span>
+              </aside>
+              -->
+            {{/if}}
+          </header>
+          <div class="main">
+            <ul class="outreach">
+              {{#each phones}}
+              <li class="phone">
+                <h3>Phone{{#if description}} - {{description}}{{/if}}</h3>
+                <a href="tel:{{number}}{{#if ext}};ext={{ext}}{{/if}}" data-tty="{{#if tty}}TTY{{/if}}">{{friendlyNumber
+                  number}} {{#if ext}}x{{ext}}{{/if}}</a>
+              </li>
+              {{/each}}
+              {{#each emails}}
+              <li class="email">
+                <h3>Email{{#if description}} - {{description}}{{/if}}</h3>
+                <a href="mailto:{{address}}">{{address}}</a>
+              </li>
+              {{/each}}
+              {{#if website}}
+              <li class="website">
+                <h3>Website</h3>
+                <a href="{{website}}" target="_blank">{{website}}</a>
+              </li>
+              {{/if}}
+              {{#if facebook}}
+              <li class="facebook">
+                <h3>Facebook</h3>
+                <a href="{{facebook}}" target="_blank">{{name}} on Facebook</a>
+              </li>
+              {{/if}}
+              {{#if twitter}}
+              <li class="twitter">
+                <h3>Twitter</h3>
+                <a href="{{twitter}}" target="_blank">{{name}} on Twitter</a>
+              </li>
+              {{/if}}
+            </ul>
+            {{#if notes}}
+            <p class="notes">{{notes}}</p>
+            {{/if}}
+            {{#if getOtherOffices this}}
+            <p class="other-offices">This provider also has the following offices:
+              <ul>{{#each getOtherOffices this}}
+                <li><a href="{{uri name}}">{{name}}</a></li>
+                {{/each}}</ul>
+            </p>
+            {{/if}}
+            <!--<button class="cta button-aqua">Jobs &amp; More</button>-->
+          </div>
+        </div>
+      {{/with}}
+    {{else}}
+      {{> findProvider}}
+    {{/if}}
+  </article>
 </template>
 
 
 <template name="providersList">
-    <div class="providersList">
-        <h1>Wisconsin Service Provider Agencies</h1>
-        <ul>
-            {{#each provider}}
-                {{>providerListViewItem}}
-            {{/each}}
-        </ul>
-        <button class="closeProvider mapView">Back to Map View <span class="fa">&#xf0d8;</span></button>
+  <div class="providersList">
+    <button class="clearProvider fullMap providers-back-to-all">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Search All
+    </button>
+    <h2>Wisconsin Service Provider Agencies</h2>
+    <div class="list-container">
+      <ul>
+        {{#each provider}}
+        {{>providerListViewItem}}
+        {{/each}}
+      </ul>
     </div>
+  </div>
 </template>
 
 <template name="providerListViewItem">
-    <li>
-        <div class="pad">
-            <b>{{name}}</b><br>
-            {{counties this}}
-        </div>
-    </li>
+  <li>
+    <div class="pad">
+      <b>{{name}}</b><br>
+      {{counties this}}
+    </div>
+  </li>
 </template>
