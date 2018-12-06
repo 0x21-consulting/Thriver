@@ -15,7 +15,7 @@ let { google } = window;
 // Map handler
 // eslint-disable-next-line import/no-mutable-exports
 let mapObject = {};
-let mapMarkers = [];
+const mapMarkers = [];
 
 
 // Helper for Toggling Map Style based on zoom position
