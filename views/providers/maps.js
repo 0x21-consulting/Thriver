@@ -385,16 +385,33 @@ const initialize = () => {
         p.polygon,
         'mouseover',
         function () {
-          p.polygon.setOptions({ color: '#FFFF00' });
+          p.polygon.setOptions({ 
+            fillOpacity: 0.95,
+            strokeColor: '#04cbe4',
+            strokeOpacity: 0.95,
+          });
+          console.log(p.polygon);
         },
       );
       google.maps.event.addListener(
         p.polygon,
         'mouseout',
         function () {
-          p.polygon.setOptions({ color: '#00FFFF' });
+          p.polygon.setOptions({ 
+            fillOpacity: 0,
+            strokeColor: '#f0fdff',
+            strokeOpacity: 0.25,
+          });
         },
       );
+
+      // Set Polygon Options
+      p.polygon.setOptions({
+        fillColor: '#04cbe4',
+        strokeColor: '#f0fdff',
+        fillOpacity: 0,
+        strokeOpacity: 0.25,
+      });
     };
 
 
