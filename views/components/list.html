@@ -1,4 +1,21 @@
 <template name="list">
+  {{#if equals type 'file'}}
+  <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-list-paginate-count="{{perPage}}" data-tag="{{tag}}"
+    class="{{type}} {{style}}">
+    <ul class="file-list stripes">
+      {{#each items}}
+        <li>
+          <a href="{{url}}" target="_blank" class="">
+            <h3>{{title}}</h3>
+          </a>
+          <input type="readonly" value={{url}} />
+          <time class="dateMeta" datetime="{{date}}">{{date}}</time>
+          <button class="fa delete">&#xf1f8;</button>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
   {{#if equals type 'article'}}
     <section data-list-type="{{type}}" data-list-paginate="{{paginate}}" data-list-paginate-count="{{perPage}}" data-tag="{{tag}}"
       class="{{type}} {{style}}">

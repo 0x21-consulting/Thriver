@@ -19,8 +19,7 @@ section.work{
         padding-bottom:0px !important;
         header h1{margin-top: 20px !important;}
     }
-    .markdown{
-        margin-top: 25px;
+    div.markdown{
         padding-right: 80px;
         @media @mobile{padding: 0px;}
     }
@@ -74,7 +73,7 @@ section.work{
     }
 }
 
-.workReading section.work > .main .workTextContainer:after{display: none;}
+section.work.workReading > .main .workTextContainer:after{display: none;}
 
 
 //About SA
@@ -736,7 +735,7 @@ section.work .main.container{
         .main{
             //width: 890px;
             //padding: 20px;
-            ul{
+            .markdown > ul, .markdown > ul ul{
                 li{
                     margin: 10px 0px;
                     display: block;
@@ -878,9 +877,7 @@ section.work .main.container{
     }
 }
 
-//Active Work Object
-
-//body.workReading section.work >main .workContent{height: 100vh;}
+// Active Work Object
 body.workActive section.work .main.container{
         //margin-top: 42px;
         //background-color: desaturate(@backgroundWork,35%);
@@ -917,7 +914,7 @@ body.workActive section.work .main.container{
 section.work > .main .workContent footer.truncate button.less { display: none; }
 
 // Truncation Opened
-.workReading section.work > .main {
+section.work.workReading > .main {
     .workTextContainer {
         margin-bottom: 50px;
         max-height: 9999px;
@@ -1181,7 +1178,7 @@ h2.workContentAdmin {
 }
 section.workContent article button {
     color: #fff;
-    background: @orange;
+    .buttonColor(@teal);
     margin-right: 5px;
 }
 section.workContent textarea {
@@ -1333,7 +1330,7 @@ section.work .workNav > ul > li.new-section {
 }
 
 @media @mobile{ .workActive section.work .workNav > ul > li.backToIndexWork a{display: block !important;} }
-.mobile-article-open.workActive.workReading section.work .workContent{ @media @mobile{height: auto !important;}}
+.mobile-article-open.workActive section.work.workReading .workContent{ @media @mobile{height: auto !important;}}
 
 @media print{
     section.work .inner-container-wide{ max-width: none;}

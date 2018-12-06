@@ -1,5 +1,5 @@
 <template name="work">
-  <section class="mainSection work" id="{{anchor name=name}}" data-id="{{_id}}">
+  <section class="mainSection work {{truncate}}" id="{{anchor name=name}}" data-id="{{_id}}">
     {{#if isAdmin}}
       {{> sectionAdmin}}
     {{/if}}
@@ -139,8 +139,8 @@
     {{#if isAdmin}}
       <button class="fa edit" title="Edit Section">&#xf044;</button>
     {{/if}}
-    <section class="shadow-box">
-      <section data-hash="{{hash}}" class="markdown">{{{ markdown data.aboutSA }}}</section>
+    <section class="shadow-box" data-hash="{{hash}}">
+      {{> markdown markdownData}}
     </section>
   </details>
 </template>

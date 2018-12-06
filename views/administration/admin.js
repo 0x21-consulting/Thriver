@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Accounts } from 'meteor/accounts-base';
+import History from '/views/history/history';
 
 import './admin.html';
 import './deleteSection';
@@ -54,6 +55,30 @@ Template.admin.events({
       }
     }
   },
+  /**
+   * @summary Admin File Manager Button
+   * @method
+   *   @param {$.Event} event
+   */
+  'click #admin-file-manager': () => History.navigate('/file-manager/'),
+});
+
+// File Manager
+Template.fileManager.helpers({
+  title: 'File Manager',
+  lists: [{
+    type: 'file',
+    paginate: 'true',
+    perPage: 10,
+    style: 'stripes',
+    tag: 'files',
+    items: [{
+      title: 'Annual_Report_Document.jpg',
+      type: 'jpg',
+      date: new Date('2018-11-06'),
+      url: 'https://wcasa.org/some/file.jpg',
+    }],
+  }],
 });
 
 export default checkAdmin;

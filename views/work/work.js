@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
 import { SHA256 } from 'meteor/sha';
 import Sections from '/logic/sections/sections';
@@ -8,6 +9,8 @@ import History from '/views/history/history';
 import './work.html';
 import './sticky';
 import './admin';
+
+const truncate = new ReactiveVar(true);
 
 /**
  * Sections collection getter
@@ -94,7 +97,7 @@ const changeTabs = (event) => {
       });
       // Calculate height of article content to determine
       // whether Read More button should display
-      if (article.querySelector('.markdown').offsetHeight >= 650) {
+      if (article.offsetHeight >= 650) {
         article.querySelector('footer.truncate').classList.remove('hide');
       }
     }, 250);
@@ -110,6 +113,14 @@ const changeTabs = (event) => {
     article.querySelector('footer.truncate').classList.remove('hide');
   }
 };
+
+// Work helpers
+Template.work.helpers({
+  /**
+   * Whether or not to show read more/less buttons
+   */
+  truncate: () => (truncate.get() ? '' : 'workReading'),
+});
 
 // Tabs
 Template.workNav.helpers({
@@ -187,7 +198,12 @@ Template.workNav.events({
   'click li > ul > li > a': changeTabs,
   'click button.backToTopWork': () => {
     const offset = $('.work .main.container').offset().top - 125;
-    $('body').animate({ scrollTop: offset }, 750);
+
+    if ('scrollBehavior' in document.documentElement.style) {
+      window.scroll({ top: offset, behavior: 'smooth' });
+    } else {
+      $('body,html').stop(true, true).animate({ scrollTop: offset }, 750);
+    }
   },
 
   /**
@@ -212,30 +228,31 @@ Template.workNav.events({
 
 Template.workContent.events({
   /**
-   * @summary Handle Read More
+   * @summary Handle Read More/Less
    * @method
    *   @param {$.Event} event
    */
-  'click footer.truncate button.more': (event) => {
-    event.preventDefault();
-    document.body.classList.add('workReading');
-    $('.sticky').trigger('sticky_kit:recalc');
-  },
-
-  /**
-   * @summary Handle Read Less
-   * @method
-   *   @param {$.Event} event
-   */
-  'click footer.truncate button.less': (event) => {
+  'click footer.truncate button': (event) => {
     event.preventDefault();
 
-    document.body.classList.remove('workReading');
-    $('.sticky').trigger('sticky_kit:recalc');
+    // Don't truncate
+    if (truncate.get()) truncate.set(false);
+    else {
+      // Do truncate
+      truncate.set(true);
 
-    // Scroll back to top
-    const offset = $('.work .main.container').offset().top - 125;
-    $('body').animate({ scrollTop: offset }, 750);
+      // Scroll back to top
+      const offset = $('.work .main.container').offset().top - 125;
+
+      if ('scrollBehavior' in document.documentElement.style) {
+        window.scroll({ top: offset, behavior: 'smooth' });
+      } else {
+        $('body,html').stop(true, true).animate({ scrollTop: offset }, 750);
+      }
+    }
+
+    // Recalculate sticky library
+    $('.sticky').trigger('sticky_kit:recalc');
   },
 
   /**

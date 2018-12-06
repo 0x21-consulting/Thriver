@@ -11,12 +11,12 @@ Picker.route('/file_open.php', (params, req, res) => {
   const file = Files.collection.findOne({ fileId });
 
   if (file) {
-    const { bucket } = Settings.get('aws');
+    const { bucket, region } = Settings.get('aws');
 
     // HTTP 301 Permanent Redirect
     res.writeHead(
       301,
-      { Location: `https://s3.us-east-2.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` },
+      { Location: `https://s3.${region}.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` },
     );
     res.end();
   } else { res.end('This file does not exist.'); }
