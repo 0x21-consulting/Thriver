@@ -1,8 +1,36 @@
 <template name="receipt">
-  {{#with receipt}}
-    {{global_debug this}}
-    <div class="inline-page">
-      This is a receipt.
+  <div class="receipt-page">
+    <div class="receipt-container">
+      {{#with receipt}}
+        <header>
+          <h1>WCASA Donation $100 every week</h1>
+          <p>John Doe - Visa 4242</p>
+        </header>
+        <aside class="clearfix">
+          <p>April 3rd, 2018</p>
+          <p>#1327-1655</p>
+        </aside>
+        <main>
+          <table>
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Donation</td>
+                <td>$1</td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+        <footer>
+            <p>Have a question or need help? <a href="mailto:wcasa@wcasa.org">Send us an email</a> or give us a call at +1 (608) 257-1516.</p>
+        </footer>
+        {{global_debug this}}
+      {{/with}}
     </div>
-  {{/with}}
+  </div>
 </template>
