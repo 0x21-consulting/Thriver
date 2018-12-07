@@ -1,8 +1,11 @@
 <template name="register">
   <form>
     {{#each items}}
-      <label for="{{id}}">{{title}}</label>
-      <input id="{{id}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" {{disabled}} {{required}} pattern="{{pattern}}" />
+      <div class="form-item">
+        <label for="{{id}}">{{title}}</label>
+        <input id="{{id}}" type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" {{disabled}} {{required}} pattern="{{pattern}}" />
+      </div>
+      {{#if hrAfter}}<hr />{{/if}}
     {{/each}}
     <input type="submit" name="submitButton" value="{{submitValue}}" disabled />
     <p id="login-error" class="hide"></p>

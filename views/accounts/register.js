@@ -32,6 +32,45 @@ Template.register.helpers({
     required: 'required',
     placeholder: 'Email',
   }, {
+    title: 'Telephone',
+    id: 'register-telephone',
+    name: 'telephone',
+    type: 'text',
+    required: 'required',
+    placeholder: 'Telephone',
+  }, {
+    title: 'Organization',
+    id: 'register-organization',
+    name: 'organization',
+    type: 'text',
+    placeholder: 'Organization (optional)',
+    hrAfter: true,
+  }, {
+    title: 'Address',
+    id: 'register-address1',
+    name: 'address1',
+    type: 'text',
+    required: 'required',
+    placeholder: 'Address',
+  }, {
+    title: 'Address 2',
+    id: 'register-address2',
+    name: 'address2',
+    type: 'text',
+    placeholder: 'Address 2',
+  }, {
+    title: 'City',
+    id: 'register-city',
+    name: 'city',
+    type: 'text',
+    placeholder: 'City',
+  }, {
+    title: 'State',
+    id: 'register-state',
+    name: 'state',
+    type: 'text',
+    placeholder: 'State',
+  }, {
     title: 'ZIP Code',
     id: 'zip',
     name: 'zip',
@@ -39,6 +78,7 @@ Template.register.helpers({
     required: 'required',
     placeholder: 'ZIP Code',
     pattern: '\\d{5}(-?\\d{4})?',
+    hrAfter: true,
   }, {
     title: 'Passphrase',
     id: 'register-passphrase',
@@ -70,8 +110,14 @@ Template.register.events({
     // Get form values
     const firstname = event.target.firstName.value;
     const lastname = event.target.lastName.value;
+    const telephone = event.target.telephone.value;
     const email = event.target.email.value;
+    const organization = event.target.organization.value;
     const passphrase = event.target.passphrase.value;
+    const address1 = event.target.address1.value;
+    const address2 = event.target.address2.value;
+    const city = event.target.city.value;
+    const state = event.target.state.value;
     const zip = event.target.zip.value;
 
     // Handle login errors
@@ -90,6 +136,12 @@ Template.register.events({
           // Name
           firstname,
           lastname,
+          telephone,
+          organization,
+          address1,
+          address2,
+          city,
+          state,
           zip,
 
           // Email subscriptions by default
@@ -136,7 +188,7 @@ Template.register.events({
    *   @param {$.Event} event - Event received from keyup event
    */
   'keyup [name="repeat"]': (event) => {
-    const parent = event.target.parentElement;
+    const parent = event.target.parentElement.parentElement;
     const { passphrase } = parent;
 
     if (passphrase instanceof Element) {

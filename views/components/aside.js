@@ -69,7 +69,7 @@ Template.aside.helpers({
   }, {
     title: 'Create an Account',
     id: 'register',
-    width: 500,
+    width: 700,
     position: 'left',
     template: 'register',
   }, {
