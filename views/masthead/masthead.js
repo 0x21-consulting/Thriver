@@ -22,6 +22,10 @@ Template.masthead.helpers({
       title: 'We Value your Feedback',
       id: 'mastheadSlideD',
       template: 'slideD',
+    }, {
+      title: 'Support WCASA',
+      id: 'mastheadSlideF',
+      template: 'slideF',
     }],
   }],
 });
