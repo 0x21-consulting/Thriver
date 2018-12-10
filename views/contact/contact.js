@@ -21,7 +21,7 @@ Template.contact.helpers({
   phone: '(608) 257-1516',
   email: 'wcasa@wcasa.org',
   fax: '(608) 257-2150',
-  copyright: '2010-2017 Wisconsin Coalition Against Sexual Assault, Inc.',
+  copyright: `2010-${(new Date()).getFullYear()} Wisconsin Coalition Against Sexual Assault, Inc.`,
   imgSrc: '/lib/img/wisconsin-coalition-against-sexual-assault.svg',
   imgAlt: 'Wisconsin Coalition Against Sexual Assault',
   addressL1: '2801 West Beltine Highway, Suite 202',
