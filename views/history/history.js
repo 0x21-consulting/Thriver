@@ -277,7 +277,7 @@ Template.body.events({
 
       // Navigate to path
       History.navigate(event.target.pathname || '/');
-    }
+    } else window.open(event.target.pathname);
   },
 });
 
