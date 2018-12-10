@@ -38,6 +38,12 @@
           Name on Card
           <input type="text" name="name" value="{{name}}" placeholder="Name on Card" required />
         </label>
+        {{#unless currentUser}}
+          <label>
+            Email Address
+            <input type="text" name="email" placeholder="Email Address (Required if you wish to receive a Receipt)">
+          </label>
+        {{/unless}}
         <label>
           Card Details
           <div id="donate-card-element"></div>

@@ -59,12 +59,15 @@ Meteor.methods({
         description,
         source: id,
         metadata,
+        receipt_email: metadata.email,
       });
 
       if (result.status === 'succeeded' && this.userId) {
         // Write to user record
         Meteor.users.update({ _id: this.userId }, { $push: { payments: result } });
 
+        // Let Stripe handle receipt emails now
+        /*
         const user = Meteor.users.findOne({ _id: this.userId });
         const isDonation = /Donation/.test(result.description);
 
@@ -78,6 +81,7 @@ Meteor.methods({
           } of $${result.amount / 100}.  You can access your receipt here:\n\n${
             process.env.ROOT_URL}receipt/${result.id}\n\nFrom all of us at WCASA`,
         });
+        */
       }
     } else {
       // Recurring donation
@@ -108,7 +112,7 @@ Meteor.methods({
 
       if (!customer) {
         customer = await stripe.customers.create({
-          email: metadata.user_email,
+          email: metadata.email,
           source: id, // token id
           metadata,
         });

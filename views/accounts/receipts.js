@@ -7,20 +7,30 @@ Meteor.subscribe('donations');
 Meteor.subscribe('purchases');
 
 Template.receiptsList.helpers({
-  donations: () => Meteor.user().payments.map((donation) => {
-    // Subscriptions don't have descriptions
-    if (!donation.description || /WCASA Donation/i.test(donation.description)) {
-      return donation;
+  donations: () => {
+    if (Meteor.user()) {
+      return Meteor.user().payments.map((donation) => {
+        // Subscriptions don't have descriptions
+        if (!donation.description || /WCASA Donation/i.test(donation.description)) {
+          return donation;
+        }
+        return undefined;
+      }).filter(el => el); // remove empty items
     }
     return undefined;
-  }).filter(el => el),
+  },
 
-  purchases: () => Meteor.user().payments.map((purchase) => {
-    if (purchase.description && !/WCASA Donation/i.test(purchase.description)) {
-      return purchase;
+  purchases: () => {
+    if (Meteor.user()) {
+      return Meteor.user().payments.map((purchase) => {
+        if (purchase.description && !/WCASA Donation/i.test(purchase.description)) {
+          return purchase;
+        }
+        return undefined;
+      }).filter(el => el); // remove empty items
     }
     return undefined;
-  }).filter(el => el),
+  },
 
   headingDonations: 'Donations',
   headingPurchases: 'Purchases',

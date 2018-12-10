@@ -177,7 +177,9 @@ Template.donate.events({
     submit.disabled = true;
 
     // Create token
-    const { token, error } = await stripe.createToken(card);
+    const { token, error } = await stripe.createToken(card, {
+      name: event.target.name.value,
+    });
 
     if (error) {
       // Inform the customer that there was an error.
@@ -186,17 +188,22 @@ Template.donate.events({
     } else {
       token.amount = amount.get() * 100;
       token.description = 'WCASA Donation';
-      token.recur = event.target.recur.value;
+      if (event.target.recur) token.recur = event.target.recur.value;
 
       const user = Meteor.user();
       const metadata = {};
 
       if (user) {
         metadata.user_id = Meteor.userId();
-        metadata.user_name = `${user.profile.firstname} ${user.profile.lastname}`;
-        metadata.user_email = user.emails[0].address;
+        metadata.name = `${user.profile.firstname} ${user.profile.lastname}`;
+        metadata.email = user.emails[0].address;
+        metadata.organization = user.profile.organization;
+        metadata.city = user.profile.city;
+        metadata.state = user.profile.state;
+        metadata.zip = user.profile.zip;
       } else {
-        metadata.name = event.target.querySelector('[name="name"]').value;
+        metadata.name = event.target.name.value;
+        metadata.email = event.target.email.value;
       }
 
       // Send token to server

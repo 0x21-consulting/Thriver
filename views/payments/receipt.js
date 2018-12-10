@@ -35,7 +35,7 @@ Template.receipt.helpers({
     }
 
     // For charges, including payments and one-time donations
-    return receipt.get().metadata.user_name;
+    return receipt.get().metadata.name;
   },
 
   /**
