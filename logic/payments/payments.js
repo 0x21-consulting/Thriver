@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Email } from 'meteor/email';
+// import { Email } from 'meteor/email';
 import StripeConstructor from 'stripe';
 import { check, Match } from 'meteor/check';
 import Settings from '/logic/core/settings';
