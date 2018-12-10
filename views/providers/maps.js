@@ -91,7 +91,6 @@ const mapStyle = (map, markers, zoom) => {
 
     // Hide Pins
     for (let i = 0; i < markers.length; i += 1) {
-      console.log(markers[i]);
       markers[i].setVisible(false);
     }
     // Center the map
@@ -145,14 +144,12 @@ const mapStyle = (map, markers, zoom) => {
     styles = styles.filter(featureType => featureType.name !== 'administrative.land_parcel');
     styles = styles.filter(featureType => featureType.name !== 'administrative.neighborhood');
     styles = styles.filter(featureType => featureType.name !== 'poi');
-    //styles = styles.filter(featureType => featureType.name !== 'road');
     styles = styles.filter(featureType => featureType.name !== 'transit');
 
     // Set Style Options
     map.setOptions({ styles });
     // Show Pins
     for (let i = 0; i < markers.length; i += 1) {
-      console.log(markers[i]);
       markers[i].setVisible(true);
     }
   }
@@ -360,30 +357,33 @@ const initialize = () => {
         p.polygon,
         'click',
         function () {
-          moveMap(p.name);
+          if (mapObject.getZoom() < 10) moveMap(p.name);
         },
       );
       google.maps.event.addListener(
         p.polygon,
         'mouseover',
         function () {
-          p.polygon.setOptions({
-            fillOpacity: 0.95,
-            strokeColor: '#04cbe4',
-            strokeOpacity: 0.95,
-          });
-          console.log(p.polygon);
+          if (mapObject.getZoom() < 10) {
+            p.polygon.setOptions({
+              fillOpacity: 0.95,
+              strokeColor: '#04cbe4',
+              strokeOpacity: 0.95,
+            });
+          }
         },
       );
       google.maps.event.addListener(
         p.polygon,
         'mouseout',
         function () {
-          p.polygon.setOptions({
-            fillOpacity: 0,
-            strokeColor: '#f0fdff',
-            strokeOpacity: 0.25,
-          });
+          if (mapObject.getZoom() < 10) {
+            p.polygon.setOptions({
+              fillOpacity: 0,
+              strokeColor: '#f0fdff',
+              strokeOpacity: 0.25,
+            });
+          }
         },
       );
 
@@ -608,7 +608,7 @@ const initialize = () => {
 
       // Display Label
       google.maps.event.addListener(marker, 'mouseover', displayLabel);
-      google.maps.event.addListener(marker, 'mouseout', hideLabel);
+      // google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
       // Add to map
       marker.setMap(mapObject);
