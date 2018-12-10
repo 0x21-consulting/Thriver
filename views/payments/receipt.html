@@ -3,12 +3,12 @@
     <div class="receipt-container">
       {{#with receipt}}
         <header>
-          <h1>WCASA Donation $100 every week</h1>
-          <p>John Doe - Visa 4242</p>
+          <h1>{{type}}</h1>
+          <p>{{name}}{{#if source}} - {{source.brand}} {{source.last4}}{{/if}}</p>
         </header>
         <aside class="clearfix">
-          <p>April 3rd, 2018</p>
-          <p>#1327-1655</p>
+          <p>{{date}}</p>
+          <p>#{{id}}</p>
         </aside>
         <main>
           <table>
@@ -20,14 +20,14 @@
             </thead>
             <tbody>
               <tr>
-                <td>Donation</td>
-                <td>$1</td>
+                <td>{{desc}}</td>
+                <td>${{dollars}}</td>
               </tr>
             </tbody>
           </table>
         </main>
         <footer>
-            <p>Have a question or need help? <a href="mailto:wcasa@wcasa.org">Send us an email</a> or give us a call at +1 (608) 257-1516.</p>
+          <p>Have a question or need help? <a href="mailto:wcasa@wcasa.org">Send us an email</a> or give us a call at +1 (608) 257-1516.</p>
         </footer>
         {{global_debug this}}
       {{/with}}
