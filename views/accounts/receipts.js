@@ -8,27 +8,37 @@ Meteor.subscribe('purchases');
 
 Template.receiptsList.helpers({
   donations: () => {
-    const user = Meteor.users.findOne({
-      _id: Meteor.userId(),
-      'payments.description': 'WCASA Donation',
-    });
-    if (user && user.payments && user.payments.length) {
-      return user.payments;
+    if (Meteor.user()) {
+      return Meteor.user().payments.map((donation) => {
+        // Subscriptions don't have descriptions
+        if (!donation.description || /WCASA Donation/i.test(donation.description)) {
+          return donation;
+        }
+        return undefined;
+      }).filter(el => el); // remove empty items
     }
     return undefined;
   },
 
   purchases: () => {
-    const user = Meteor.users.findOne({
-      _id: Meteor.userId(),
-      'payments.description': { $ne: 'WCASA Donation' },
-    });
-    if (user && user.payments && user.payments.length) {
-      return user.payments;
+    if (Meteor.user()) {
+      return Meteor.user().payments.map((purchase) => {
+        if (purchase.description && !/WCASA Donation/i.test(purchase.description)) {
+          return purchase;
+        }
+        return undefined;
+      }).filter(el => el); // remove empty items
     }
     return undefined;
   },
 
+  headingDonations: 'Donations',
+  headingPurchases: 'Purchases',
+  noneDonations: 'No donations yet.',
+  nonePurchases: 'No purchases have been made.',
+});
+
+Template.receiptItem.helpers({
   timestamp() { return this.created * 1000; },
   timestampUTC() { return new Date(this.created * 1000).toISOString(); },
 
@@ -36,9 +46,4 @@ Template.receiptsList.helpers({
     if (this.object === 'subscription') return this.plan.nickname;
     return `$${this.amount / 100} ${this.description}`;
   },
-
-  headingDonations: 'Donations',
-  headingPurchases: 'Purchases',
-  noneDonations: 'No donations yet.',
-  nonePurchases: 'No purchases have been made.',
 });

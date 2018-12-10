@@ -1,8 +1,38 @@
 <template name="receipt">
-  {{#with receipt}}
-    {{global_debug this}}
-    <div class="inline-page">
-      This is a receipt.
+  <div class="receipt-page">
+    <div class="receipt-container">
+      {{#with receipt}}
+        <div class="brand-logo">
+          <img src="/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg" alt="WCASA" />
+        </div>
+        <header>
+          <h1>{{type}}</h1>
+          <p>{{name}}{{#if source}} - {{source.brand}} {{source.last4}}{{/if}}</p>
+        </header>
+        <aside class="clearfix">
+          <p>{{date}}</p>
+          <p>#{{id}}</p>
+        </aside>
+        <main>
+          <table>
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{desc}}</td>
+                <td>${{dollars}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+        <footer>
+          <p>Have a question or need help? <a href="mailto:wcasa@wcasa.org">Send us an email</a> or give us a call at +1 (608) 257-1516.</p>
+        </footer>
+      {{/with}}
     </div>
-  {{/with}}
+  </div>
 </template>
