@@ -342,8 +342,7 @@ const initialize = () => {
         mapStyle(mapObject, mapMarkers, 'county');
         // Clear any infowindows
         hideLabel();
-      }
-      else mapStyle(mapObject, mapMarkers, 'default');
+      } else mapStyle(mapObject, mapMarkers, 'default');
     });
 
     // State Layer
@@ -664,7 +663,7 @@ Template.providers.events({
   'click button.geolocate': () => {
     // Clear any infowindows
     hideLabel();
-    
+
     // Geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
