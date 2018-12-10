@@ -373,6 +373,12 @@ const initialize = () => {
               strokeColor: '#04cbe4',
               strokeOpacity: 0.95,
             });
+          } else {
+            p.polygon.setOptions({
+              fillOpacity: 0,
+              strokeColor: '#f0fdff',
+              strokeOpacity: 0.25,
+            });
           }
         },
       );
