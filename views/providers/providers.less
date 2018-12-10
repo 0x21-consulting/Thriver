@@ -350,8 +350,8 @@ section.providers {
       margin-bottom: 0px;
     }
     h2 {
-      font-size: 28px;
-      line-height: 32px;
+      font-size: 32px;
+      line-height: 40px;
       font-weight: 100;
       padding: 0px 10px 10px 0px;
       margin-bottom: 25px;
@@ -398,6 +398,7 @@ section.providers {
     }
     a {
       .textButtonColor(@teal);
+      font-weight: 600;
     }
     ul.phones {
       margin: 0px !important;
@@ -420,23 +421,21 @@ section.providers {
         line-height: 20px;
         letter-spacing: 0.5px;
         a {
-          color: @yellow;
-          font-weight: 800;
+          color: #00b7c4;
+          font-weight: 600;
         }
         &:before {
           .fa;
           margin-right: 5px;
-          font-size: 17px; //margin-left:-20px;
-          font-size: 31px;
           position: absolute;
           margin-top: 9px;
           opacity: 1;
-          color: #2c5465;
+          color: #fff;
           background: lighten(#2c5465, 20%);
           height: 27px;
           line-height: 28px;
           text-align: center;
-          font-size: 14px;
+          font-size: 12px;
           border-radius: 50%;
           width: 27px;
         }
@@ -501,6 +500,7 @@ section.providers {
     text-align: left;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     margin-top: 0;
     > li{ 
       flex: 0 0 50%; 
@@ -535,7 +535,7 @@ section.providers {
   li {
     //margin-top: 10px;
     cursor: pointer;
-    .textButtonColor(@white);
+    //.textButtonColor(@white);
     .avoidColumnSplit;
     .pad {
       padding: 7px 23px;
