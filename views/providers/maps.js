@@ -98,17 +98,17 @@ const mapStyle = (map, markers, zoom) => {
     map.panTo(new google.maps.LatLng(44.668543, -89.756508));
     // Map Options
   } else {
-    const styles = [{
+    let styles = [{
       featureType: 'landscape.man_made',
       elementType: 'geometry',
       stylers: [{
-        color: '#00c6dd',
+        color: '#dff3f3',
       }],
     }, {
       featureType: 'landscape.natural',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#00b7c5',
+        color: '#d7ece9',
       }, {
         visibility: 'on',
       }],
@@ -121,66 +121,33 @@ const mapStyle = (map, markers, zoom) => {
         visibility: 'on',
       }],
     }, {
-      elementType: 'labels',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative',
-      elementType: 'geometry',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative.land_parcel',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative.neighborhood',
-      stylers: [{
-        visibility: 'off',
-      }],
-    }, {
-      featureType: 'poi',
-      stylers: [{
-        visibility: 'off',
-      }],
-    }, {
       featureType: 'road',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'road',
-      elementType: 'labels.icon',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'transit',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'road.highway',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#00c7c0',
+        color: '#ffffff',
       }],
     }, {
       featureType: 'road.highway',
       elementType: 'geometry.stroke',
       stylers: [{
-        color: '#5ae7ff',
+        color: '#00b7c5',
       }],
     }, {
-      featureType: 'road',
+      featureType: 'road.highway',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#adefec',
+        color: '#02deef',
       }],
     }];
+
+    styles = styles.filter(featureType => featureType.name !== 'labels');
+    styles = styles.filter(featureType => featureType.name !== 'administrative');
+    styles = styles.filter(featureType => featureType.name !== 'administrative.land_parcel');
+    styles = styles.filter(featureType => featureType.name !== 'administrative.neighborhood');
+    styles = styles.filter(featureType => featureType.name !== 'poi');
+    //styles = styles.filter(featureType => featureType.name !== 'road');
+    styles = styles.filter(featureType => featureType.name !== 'transit');
+
     // Set Style Options
     map.setOptions({ styles });
     // Show Pins
