@@ -338,7 +338,11 @@ const initialize = () => {
     // Zoom Listener
     google.maps.event.addListener(mapObject, 'zoom_changed', function() {
       // Set Map View Style
-      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
+      if (mapObject.getZoom() < 10) {
+        mapStyle(mapObject, mapMarkers, 'county');
+        // Clear any infowindows
+        hideLabel();
+      }
       else mapStyle(mapObject, mapMarkers, 'default');
     });
 
@@ -563,9 +567,10 @@ const initialize = () => {
 
         // Display Label
         google.maps.event.addListener(marker, 'mouseover', displayLabel);
+        google.maps.event.addListener(marker, 'click', displayLabel);
 
         // Hide Label
-        google.maps.event.addListener(marker, 'mouseout', hideLabel);
+        // google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
         // Add to Global Marker Array
         mapMarkers.push(marker);
@@ -657,6 +662,9 @@ Template.providers.events({
 
   // Geolocate
   'click button.geolocate': () => {
+    // Clear any infowindows
+    hideLabel();
+    
     // Geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -736,6 +744,9 @@ Template.providers.events({
     event.stopPropagation();
     event.preventDefault();
 
+    // Clear any infowindows
+    hideLabel();
+
     const providerSection = event.target.parentElement
       .parentElement.parentElement.parentElement;
 
@@ -806,7 +817,7 @@ const followProviderLink = (event) => {
     data.coordinates.lat,
     data.coordinates.lon,
   ));
-  mapObject.setZoom(13);
+  mapObject.setZoom(11);
 };
 
 Template.providerListViewItem.events({
