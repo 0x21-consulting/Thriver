@@ -2,6 +2,9 @@
   <div class="receipt-page">
     <div class="receipt-container">
       {{#with receipt}}
+        <div class="brand-logo">
+          <img src="/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg" alt="WCASA" />
+        </div>
         <header>
           <h1>{{type}}</h1>
           <p>{{name}}{{#if source}} - {{source.brand}} {{source.last4}}{{/if}}</p>
