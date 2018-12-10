@@ -147,7 +147,7 @@
           {{/if}}
           <p class="excerpt">
             <i class="fa fa-calendar" aria-hidden="true"></i> {{startTime this}}{{endTime this}}<br />
-            <i class="fa fa-map-marker red" aria-hidden="true"></i> {{#if address this}} {{{ address this }}}{{/if}}
+            {{#if address this}}<i class="fa fa-map-marker red" aria-hidden="true"></i> {{{ address this }}}{{/if}}
             
           </p>
           {{{markdown description}}}
