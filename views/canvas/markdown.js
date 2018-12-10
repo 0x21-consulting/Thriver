@@ -38,10 +38,6 @@ Template.markdownEditor.helpers({
 });
 
 Template.markdownEditor.events({
-  'keyup .markdown-editor textarea'(event) {
-    preview.set(event.target.value);
-  },
-
   /**
    * Handle switching between edit and preview modes
    * @param {$.Event} event
@@ -51,19 +47,22 @@ Template.markdownEditor.events({
       .parentElement.querySelector('.markdown-editor');
     const edit = parent.querySelector('textarea');
     const prev = parent.querySelector('.preview');
-    const menu = event.target.parentElement.parentElement.querySelector('.markdown-menu');
+    const menu = parent.parentElement.querySelector('.markdown-menu');
+    const textarea = parent.querySelector('textarea');
 
-    closeMenus(event.target.parentElement.parentElement.querySelector('.markdown-menu'));
+    closeMenus(menu);
 
     // Show/hide edit and preview elements
     if (event.target.classList.contains('edit')) {
       edit.classList.remove('hide');
       prev.classList.add('hide');
-      if (menu.classList.contains('disabled')) menu.classList.remove('disabled');
+      menu.classList.remove('disabled');
+      preview.set('');
     } else {
+      preview.set(textarea.value);
       edit.classList.add('hide');
       prev.classList.remove('hide');
-      if (!menu.classList.contains('disabled')) menu.classList.add('disabled');
+      menu.classList.add('disabled');
     }
 
     // Mark active
@@ -207,6 +206,8 @@ Template.markdownEditor.events({
     const start = textarea.selectionStart; // current cursor position
     const end = textarea.selectionEnd;
     textarea.value = `${textarea.value.substring(0, start)}[${text.value}](${fileUrl})${textarea.value.substring(end)}`;
+    textarea.selectionStart = start + text.value.length + fileUrl.length + 4;
+    textarea.selectionEnd = textarea.selectionStart;
     textarea.focus();
 
     // Clear and close form
@@ -237,6 +238,9 @@ Template.markdownEditor.events({
     const first = textarea.value.substring(0, start);
     const last = textarea.value.substring(end);
     textarea.value = `${first}![${alignment.value}: ${description.value}](${imageUrl})${last}`;
+    textarea.selectionStart = start + alignment.value.length + description.value.length
+      + imageUrl.length + 7;
+    textarea.selectionEnd = textarea.selectionStart;
     textarea.focus();
 
     // Clear and close form

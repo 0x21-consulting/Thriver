@@ -41,7 +41,34 @@
     //@media @mobile { padding-bottom: 15px;}
   }
 }
-
+#register form {
+  max-width: 550px;
+  & > div{
+    &:first-child, &:nth-child(3), &:nth-child(7), &:nth-child(13){
+      width: 49%;
+      float: left;
+    }
+    &:nth-child(9){
+      width: 43%;
+      float: left;
+    }
+    &:nth-child(10){
+      width: 29%;
+      margin-left: 2%; 
+      float: left;
+    }
+    &:nth-child(11){
+      width: 24%;
+      float: left;
+      margin-left: 2%;
+    }
+    &:nth-child(2), &:nth-child(4), &:nth-child(8), &:nth-child(14){
+      width: 49%;
+      float: left;
+      margin-left: 2%;
+    }
+  }
+}
 #accounts {
   .sidebar-content {
     padding-bottom: 0px;

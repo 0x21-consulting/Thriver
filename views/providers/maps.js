@@ -91,24 +91,23 @@ const mapStyle = (map, markers, zoom) => {
 
     // Hide Pins
     for (let i = 0; i < markers.length; i += 1) {
-      console.log(markers[i]);
       markers[i].setVisible(false);
     }
     // Center the map
     map.panTo(new google.maps.LatLng(44.668543, -89.756508));
     // Map Options
   } else {
-    const styles = [{
+    let styles = [{
       featureType: 'landscape.man_made',
       elementType: 'geometry',
       stylers: [{
-        color: '#00c6dd',
+        color: '#dff3f3',
       }],
     }, {
       featureType: 'landscape.natural',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#00b7c5',
+        color: '#d7ece9',
       }, {
         visibility: 'on',
       }],
@@ -121,71 +120,36 @@ const mapStyle = (map, markers, zoom) => {
         visibility: 'on',
       }],
     }, {
-      elementType: 'labels',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative',
-      elementType: 'geometry',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative.land_parcel',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'administrative.neighborhood',
-      stylers: [{
-        visibility: 'off',
-      }],
-    }, {
-      featureType: 'poi',
-      stylers: [{
-        visibility: 'off',
-      }],
-    }, {
       featureType: 'road',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'road',
-      elementType: 'labels.icon',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'transit',
-      stylers: [{
-        visibility: 'on',
-      }],
-    }, {
-      featureType: 'road.highway',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#00c7c0',
+        color: '#ffffff',
       }],
     }, {
       featureType: 'road.highway',
       elementType: 'geometry.stroke',
       stylers: [{
-        color: '#5ae7ff',
+        color: '#00b7c5',
       }],
     }, {
-      featureType: 'road',
+      featureType: 'road.highway',
       elementType: 'geometry.fill',
       stylers: [{
-        color: '#adefec',
+        color: '#02deef',
       }],
     }];
+
+    styles = styles.filter(featureType => featureType.name !== 'labels');
+    styles = styles.filter(featureType => featureType.name !== 'administrative');
+    styles = styles.filter(featureType => featureType.name !== 'administrative.land_parcel');
+    styles = styles.filter(featureType => featureType.name !== 'administrative.neighborhood');
+    styles = styles.filter(featureType => featureType.name !== 'poi');
+    styles = styles.filter(featureType => featureType.name !== 'transit');
+
     // Set Style Options
     map.setOptions({ styles });
     // Show Pins
     for (let i = 0; i < markers.length; i += 1) {
-      console.log(markers[i]);
       markers[i].setVisible(true);
     }
   }
@@ -374,8 +338,11 @@ const initialize = () => {
     // Zoom Listener
     google.maps.event.addListener(mapObject, 'zoom_changed', function() {
       // Set Map View Style
-      if (mapObject.getZoom() < 10) mapStyle(mapObject, mapMarkers, 'county');
-      else mapStyle(mapObject, mapMarkers, 'default');
+      if (mapObject.getZoom() < 10) {
+        mapStyle(mapObject, mapMarkers, 'county');
+        // Clear any infowindows
+        hideLabel();
+      } else mapStyle(mapObject, mapMarkers, 'default');
     });
 
     // State Layer
@@ -393,30 +360,33 @@ const initialize = () => {
         p.polygon,
         'click',
         function () {
-          moveMap(p.name);
+          if (mapObject.getZoom() < 10) moveMap(p.name);
         },
       );
       google.maps.event.addListener(
         p.polygon,
         'mouseover',
         function () {
-          p.polygon.setOptions({
-            fillOpacity: 0.95,
-            strokeColor: '#04cbe4',
-            strokeOpacity: 0.95,
-          });
-          console.log(p.polygon);
+          if (mapObject.getZoom() < 10) {
+            p.polygon.setOptions({
+              fillOpacity: 0.95,
+              strokeColor: '#04cbe4',
+              strokeOpacity: 0.95,
+            });
+          }
         },
       );
       google.maps.event.addListener(
         p.polygon,
         'mouseout',
         function () {
-          p.polygon.setOptions({
-            fillOpacity: 0,
-            strokeColor: '#f0fdff',
-            strokeOpacity: 0.25,
-          });
+          if (mapObject.getZoom() < 10) {
+            p.polygon.setOptions({
+              fillOpacity: 0,
+              strokeColor: '#f0fdff',
+              strokeOpacity: 0.25,
+            });
+          }
         },
       );
 
@@ -596,9 +566,10 @@ const initialize = () => {
 
         // Display Label
         google.maps.event.addListener(marker, 'mouseover', displayLabel);
+        google.maps.event.addListener(marker, 'click', displayLabel);
 
         // Hide Label
-        google.maps.event.addListener(marker, 'mouseout', hideLabel);
+        // google.maps.event.addListener(marker, 'mouseout', hideLabel);
 
         // Add to Global Marker Array
         mapMarkers.push(marker);
@@ -690,6 +661,9 @@ Template.providers.events({
 
   // Geolocate
   'click button.geolocate': () => {
+    // Clear any infowindows
+    hideLabel();
+
     // Geolocation
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -769,6 +743,9 @@ Template.providers.events({
     event.stopPropagation();
     event.preventDefault();
 
+    // Clear any infowindows
+    hideLabel();
+
     const providerSection = event.target.parentElement
       .parentElement.parentElement.parentElement;
 
@@ -839,7 +816,7 @@ const followProviderLink = (event) => {
     data.coordinates.lat,
     data.coordinates.lon,
   ));
-  mapObject.setZoom(13);
+  mapObject.setZoom(11);
 };
 
 Template.providerListViewItem.events({

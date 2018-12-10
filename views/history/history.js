@@ -270,14 +270,24 @@ window.addEventListener('popstate', (event) => {
 Template.body.events({
   // If href starts with a slash and is intended to remain in this tab
   'click a[href^="/"][target!="_blank"]': (event) => {
+    let pathname;
+    let elem = event.target;
+
+    do {
+      if (elem.tagName.toLowerCase() === 'a') {
+        ({ pathname } = elem);
+        break;
+      } else elem = elem.parentElement;
+    } while (true);
+
     // Only for internal paths; file_open.php is a 301 redirect
-    if (!event.target.pathname.match(/\/file_open.php/i)) {
+    if (!pathname.match(/\/file_open.php/i)) {
       // Prevent navigation away from page
       event.preventDefault();
 
       // Navigate to path
-      History.navigate(event.target.pathname || '/');
-    }
+      History.navigate(pathname || '/');
+    } else window.open(pathname);
   },
 });
 
