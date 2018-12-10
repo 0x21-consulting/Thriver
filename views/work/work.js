@@ -274,7 +274,7 @@ const smoothScroll = (event) => {
   // If anchor exists (and why shouldn't it?)
   if (element instanceof Element) {
     // Active Read More
-    event.path[7].querySelector('footer.truncate button').click();
+    truncate.set(false);
 
     // Aggregate offset top
     while (element.offsetParent) {
@@ -282,10 +282,13 @@ const smoothScroll = (event) => {
       element = element.offsetParent;
     }
 
-    // Then animate scroll
-    // http://stackoverflow.com/questions/8149155/animate-scrolltop-not-working-in-firefox
-    $('body,html').stop(true, true)
-      .animate({ scrollTop: offsetTop - 130 }, 750);
+    const offset = offsetTop - 130;
+
+    if ('scrollBehavior' in document.documentElement.style) {
+      window.scroll({ top: offset, behavior: 'smooth' });
+    } else {
+      $('body,html').stop(true, true).animate({ scrollTop: offset }, 750);
+    }
   }
 };
 
