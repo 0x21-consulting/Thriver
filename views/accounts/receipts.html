@@ -3,15 +3,7 @@
   <ul class="receiptsMenu stripes">
     {{#if donations}}
       {{#each donations}}
-        <li class="receiptItem">
-          <div class="item-container">
-            <a href="/receipt/{{id}}" target="_blank">
-              <h4 class="text">{{description}}</h4>
-              <time class="dateMeta" datetime="{{timestampUTC}}">{{friendlyDate timestamp}}</time>
-              <a href="/receipt/{{id}}" target="_blank" class="viewReceipts redirectButton button btn"><i class="fas fa-file"></i></a>
-            </a>
-          </div>
-        </li>
+        {{> receiptItem}}
       {{/each}}
     {{else}}
       <li class="none">{{noneDonations}}</li>
@@ -21,16 +13,22 @@
   <ul class="receiptsMenu stripes">
     {{#if purchases}}
       {{#each purchases}}
-        <li class="receiptItem">
-          <div class="item-container">
-              <h4 class="text">${{total}} {{description}}</h4>
-              <time class="dateMeta" datetime="{{timestampUTC}}">{{friendlyDate timestamp}}</time>
-              <a href="/receipt/{{id}}" target="_blank" class="viewReceipts redirectButton button btn"><i class="fas fa-file"></i></a>
-          </div>
-        </li>
+        {{> receiptItem}}
       {{/each}}
     {{else}}
       <li class="none">{{nonePurchases}}</li>
     {{/if}}
   </ul>
+</template>
+
+<template name="receiptItem">
+  <li class="receiptItem">
+    <div class="item-container">
+      <a href="/receipt/{{id}}" target="_blank">
+        <h4 class="text">{{description}}</h4>
+        <time class="dateMeta" datetime="{{timestampUTC}}">{{friendlyDate timestamp}}</time>
+        <a href="/receipt/{{id}}" target="_blank" class="viewReceipts redirectButton button btn"><i class="fas fa-file"></i></a>
+      </a>
+    </div>
+  </li>
 </template>
