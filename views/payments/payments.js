@@ -93,8 +93,31 @@ Template.payments.onRendered(() => {
 
       // Handle tokenization and send to server
       paymentRequest.on('token', async (event) => {
-        console.log(event.token);
-        Meteor.call('pay', event.token);
+        console.log(event);
+
+        const user = Meteor.user();
+        const metadata = {
+          event_id: paymentDetails.get().id,
+          event_name: paymentDetails.get().name,
+          user_id: Meteor.userId(),
+          name: `${user.profile.firstname} ${user.profile.lastname}`,
+          email: user.emails[0].address,
+          organization: user.profile.organization,
+          city: user.profile.city,
+          state: user.profile.state,
+          zip: user.profile.zip,
+        };
+
+        Meteor.call('pay', event.token, metadata, (err) => {
+          if (err) {
+            // Inform the customer that there was an error.
+            const errorElement = document.getElementById('pay-card-errors');
+            errorElement.textContent = err.message;
+          } else {
+            // success
+            paymentDetails.get().callback();
+          }
+        });
       });
     }
   });
@@ -116,6 +139,7 @@ Template.payments.events({
       // Inform the customer that there was an error.
       const errorElement = document.getElementById('pay-card-errors');
       errorElement.textContent = error.message;
+      submit.removeAttribute('disabled');
     } else {
       token.amount = paymentDetails.get().cost * 100;
       token.description = `WCASA ${paymentDetails.get().name}`;
@@ -125,8 +149,12 @@ Template.payments.events({
         event_id: paymentDetails.get().id,
         event_name: paymentDetails.get().name,
         user_id: Meteor.userId(),
-        user_name: `${user.profile.firstname} ${user.profile.lastname}`,
-        user_email: user.emails[0].address,
+        name: `${user.profile.firstname} ${user.profile.lastname}`,
+        email: user.emails[0].address,
+        organization: user.profile.organization,
+        city: user.profile.city,
+        state: user.profile.state,
+        zip: user.profile.zip,
       };
 
       // Send token to server
@@ -134,7 +162,7 @@ Template.payments.events({
         if (err) {
           // Inform the customer that there was an error.
           const errorElement = document.getElementById('pay-card-errors');
-          errorElement.textContent = error.message;
+          errorElement.textContent = err.message;
         } else {
           // success
           paymentDetails.get().callback();

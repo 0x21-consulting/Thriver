@@ -38,8 +38,34 @@ const createPaymentRequest = () => {
 
   // Handle tokenization and send to server
   paymentRequest.on('token', async (event) => {
-    console.log(event.token);
-    Meteor.call('pay', event.token);
+    console.log(event);
+    const user = Meteor.user();
+    const metadata = {};
+
+    if (user) {
+      metadata.user_id = Meteor.userId();
+      metadata.name = `${user.profile.firstname} ${user.profile.lastname}`;
+      metadata.email = user.emails[0].address;
+      metadata.organization = user.profile.organization;
+      metadata.city = user.profile.city;
+      metadata.state = user.profile.state;
+      metadata.zip = user.profile.zip;
+    } else {
+      metadata.name = event.token.card.name;
+      metadata.email = event.token.card.email;
+    }
+
+    Meteor.call('pay', event.token, metadata, (err) => {
+      if (err) {
+        // Inform the customer that there was an error.
+        const errorElement = document.getElementById('donate-card-errors');
+        errorElement.textContent = err.message;
+      } else {
+        document.querySelector('#donateDefault').classList.add('hide');
+        document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
+        document.querySelector('#donateForm').classList.add('hide');
+      }
+    });
   });
 };
 
