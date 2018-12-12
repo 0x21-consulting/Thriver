@@ -185,6 +185,7 @@ Template.donate.events({
       // Inform the customer that there was an error.
       const errorElement = document.getElementById('donate-card-errors');
       errorElement.textContent = error.message;
+      submit.removeAttribute('disabled');
     } else {
       token.amount = amount.get() * 100;
       token.description = 'WCASA Donation';
