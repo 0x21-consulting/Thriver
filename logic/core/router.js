@@ -7,7 +7,7 @@ import Settings from './settings';
  *   to continue to allow old download links to work
  */
 Picker.route('/file_open.php', (params, req, res) => {
-  const fileId = params.query.id;
+  const fileId = Number(params.query.id);
   const file = Files.collection.findOne({ fileId });
 
   if (file) {
