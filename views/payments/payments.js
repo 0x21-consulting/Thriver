@@ -116,9 +116,11 @@ Template.payments.onRendered(() => {
             // Inform the customer that there was an error.
             const errorElement = document.getElementById('pay-card-errors');
             errorElement.textContent = err.message;
+            event.complete('fail');
           } else {
             // success
             paymentDetails.get().callback();
+            event.complete('success');
           }
         });
       });
