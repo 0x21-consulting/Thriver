@@ -250,6 +250,23 @@
                             padding: 0px;
                             overflow: auto;
                             a{ font-weight: 600; }
+                            .main{
+                                ul, ol{ margin: 20px 0 20px 38px; }
+                                ul li{
+                                    list-style: none;
+                                    &:before{
+                                        content:'';
+                                        height: 6px;
+                                        width: 6px;
+                                        background-color: darken(@teal, 5%);
+                                        display: block;
+                                        margin-top: 8px;
+                                        margin-left: -20px;
+                                        position: absolute;
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
                             .inner{
                                 padding: 0px;
                                 background-color: @white;
