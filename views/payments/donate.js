@@ -198,6 +198,13 @@ Template.donate.events({
   'keyup form .customAmt': (event) => {
     if (!Number.isNaN(Number(event.target.value))) {
       amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
     }
   },
 
