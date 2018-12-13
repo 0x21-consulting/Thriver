@@ -373,6 +373,12 @@ const initialize = () => {
               strokeColor: '#04cbe4',
               strokeOpacity: 0.95,
             });
+          } else {
+            p.polygon.setOptions({
+              fillOpacity: 0,
+              strokeColor: '#f0fdff',
+              strokeOpacity: 0.25,
+            });
           }
         },
       );
@@ -586,7 +592,7 @@ const initialize = () => {
           google.maps.event.trigger(mapObject, 'resize');
 
           // Appropriate zoom level
-          mapObject.setZoom(11);
+          mapObject.setZoom(12);
           mapObject.panTo(marker.getPosition());
 
           // Show results if the result has an ID
@@ -704,7 +710,7 @@ Template.providers.events({
           closest.coordinates.lon,
         ));
 
-        mapObject.setZoom(11);
+        mapObject.setZoom(12);
 
         // Show results
         Providers.active.set(closest);
@@ -816,7 +822,7 @@ const followProviderLink = (event) => {
     data.coordinates.lat,
     data.coordinates.lon,
   ));
-  mapObject.setZoom(11);
+  mapObject.setZoom(12);
 };
 
 Template.providerListViewItem.events({

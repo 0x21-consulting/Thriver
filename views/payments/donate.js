@@ -38,8 +38,41 @@ const createPaymentRequest = () => {
 
   // Handle tokenization and send to server
   paymentRequest.on('token', async (event) => {
-    console.log(event.token);
-    Meteor.call('pay', event.token);
+    const { token } = event;
+
+    token.amount = amount.get() * 100;
+    token.description = 'WCASA Donation';
+
+    const form = document.querySelector('#donateForm');
+    if (form && form.recur) token.recur = form.recur.value;
+
+    const user = Meteor.user();
+    const metadata = {};
+
+    if (user) {
+      metadata.user_id = Meteor.userId();
+      metadata.name = `${user.profile.firstname} ${user.profile.lastname}`;
+      metadata.email = user.emails[0].address;
+      metadata.organization = user.profile.organization;
+      metadata.city = user.profile.city;
+      metadata.state = user.profile.state;
+      metadata.zip = user.profile.zip;
+    } else {
+      metadata.name = event.payerName;
+      metadata.email = event.payerEmail;
+    }
+
+    Meteor.call('pay', token, metadata, (err) => {
+      if (err) {
+        // Inform the customer that there was an error.
+        const errorElement = document.getElementById('donate-card-errors');
+        errorElement.textContent = err.message;
+      } else {
+        document.querySelector('#donateDefault').classList.add('hide');
+        document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
+        document.querySelector('#donateForm').classList.add('hide');
+      }
+    });
   });
 };
 
@@ -165,6 +198,13 @@ Template.donate.events({
   'keyup form .customAmt': (event) => {
     if (!Number.isNaN(Number(event.target.value))) {
       amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
     }
   },
 
@@ -185,6 +225,7 @@ Template.donate.events({
       // Inform the customer that there was an error.
       const errorElement = document.getElementById('donate-card-errors');
       errorElement.textContent = error.message;
+      submit.removeAttribute('disabled');
     } else {
       token.amount = amount.get() * 100;
       token.description = 'WCASA Donation';

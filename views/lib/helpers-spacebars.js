@@ -36,7 +36,6 @@ Template.registerHelper('friendlyDate', (date) => {
 Template.registerHelper('yearDate', (date) => {
   // If string, convert to date
   const newDate = date instanceof Date ? date : new Date(date);
-  console.log(newDate);
 
   // Create year date string
   return `${newDate.getUTCFullYear()}`;

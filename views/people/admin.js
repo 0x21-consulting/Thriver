@@ -162,25 +162,23 @@ Template.addPersonForm.events({
       return undefined;
     };
 
-    const form = event.delegateTarget.querySelectorAll('.admin-form-person-add')[0];
+    const form = event.delegateTarget.querySelector('.admin-form-person-add');
 
     const addPerson = (picture) => {
       const data = {
-        name: form.querySelectorAll('input[name=person-add-form-name]')[0].value,
-        title: form.querySelectorAll('input[name=person-add-form-title]')[0].value,
-        email: form.querySelectorAll('input[name=person-add-form-email]')[0].value,
-        boardMember: form.querySelectorAll('input[name=person-add-form-board-member]')[0].checked,
+        name: form['person-add-form-name'].value,
+        title: form['person-add-form-title'].value,
+        email: form['person-add-form-email'].value,
+        boardMember: form['person-add-form-board-member'].checked,
         picture,
       };
 
       // Insert subscriber into the collection
       Meteor.call('addPerson', data, function(error) {
-        console.log('calling');
         if (error) {
-          console.log(error.reason);
+          throw new Meteor.Error(error);
         } else {
-          console.log('Subscription successful');
-          console.log(data);
+          form.reset();
         }
       });
     };
