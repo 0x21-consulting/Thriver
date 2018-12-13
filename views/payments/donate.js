@@ -42,7 +42,9 @@ const createPaymentRequest = () => {
 
     token.amount = amount.get() * 100;
     token.description = 'WCASA Donation';
-    if (event.target.recur) token.recur = event.target.recur.value;
+
+    const form = document.querySelector('#donateForm');
+    if (form && form.recur) token.recur = form.recur.value;
 
     const user = Meteor.user();
     const metadata = {};
