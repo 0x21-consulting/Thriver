@@ -8,7 +8,7 @@ Meteor.subscribe('purchases');
 
 Template.receiptsList.helpers({
   donations: () => {
-    if (Meteor.user()) {
+    if (Meteor.user() && Meteor.user().payments instanceof Array) {
       return Meteor.user().payments.map((donation) => {
         // Subscriptions don't have descriptions
         if (!donation.description || /WCASA Donation/i.test(donation.description)) {
@@ -21,7 +21,7 @@ Template.receiptsList.helpers({
   },
 
   purchases: () => {
-    if (Meteor.user()) {
+    if (Meteor.user() && Meteor.user().payments instanceof Array) {
       return Meteor.user().payments.map((purchase) => {
         if (purchase.description && !/WCASA Donation/i.test(purchase.description)) {
           return purchase;

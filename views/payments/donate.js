@@ -38,7 +38,14 @@ const createPaymentRequest = () => {
 
   // Handle tokenization and send to server
   paymentRequest.on('token', async (event) => {
-    console.log(event);
+    const { token } = event;
+
+    token.amount = amount.get() * 100;
+    token.description = 'WCASA Donation';
+
+    const form = document.querySelector('#donateForm');
+    if (form && form.recur) token.recur = form.recur.value;
+
     const user = Meteor.user();
     const metadata = {};
 
@@ -51,11 +58,11 @@ const createPaymentRequest = () => {
       metadata.state = user.profile.state;
       metadata.zip = user.profile.zip;
     } else {
-      metadata.name = event.token.card.name;
-      metadata.email = event.token.card.email;
+      metadata.name = event.payerName;
+      metadata.email = event.payerEmail;
     }
 
-    Meteor.call('pay', event.token, metadata, (err) => {
+    Meteor.call('pay', token, metadata, (err) => {
       if (err) {
         // Inform the customer that there was an error.
         const errorElement = document.getElementById('donate-card-errors');
@@ -191,6 +198,13 @@ Template.donate.events({
   'keyup form .customAmt': (event) => {
     if (!Number.isNaN(Number(event.target.value))) {
       amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
     }
   },
 
