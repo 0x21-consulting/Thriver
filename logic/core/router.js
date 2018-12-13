@@ -14,10 +14,10 @@ Picker.route('/file_open.php', (params, req, res) => {
     const { bucket, region } = Settings.get('aws');
 
     // HTTP 301 Permanent Redirect
-    res.writeHead(
-      301,
-      { Location: `https://s3.${region}.amazonaws.com/${bucket}/old-website-resources/${file.fileName}` },
-    );
+    res.writeHead(301, {
+      Location: `https://s3.${region}.amazonaws.com/${bucket}/old-website-resources/${
+        encodeURIComponent(file.fileName)}`,
+    });
     res.end();
   } else { res.end('This file does not exist.'); }
 });
