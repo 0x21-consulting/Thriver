@@ -42,7 +42,9 @@ const createPaymentRequest = () => {
 
     token.amount = amount.get() * 100;
     token.description = 'WCASA Donation';
-    if (event.target.recur) token.recur = event.target.recur.value;
+
+    const form = document.querySelector('#donateForm');
+    if (form && form.recur) token.recur = form.recur.value;
 
     const user = Meteor.user();
     const metadata = {};
@@ -196,6 +198,13 @@ Template.donate.events({
   'keyup form .customAmt': (event) => {
     if (!Number.isNaN(Number(event.target.value))) {
       amount.set(parseInt(event.target.value, 10));
+      paymentRequest.update({
+        total: {
+          // Convert to cents
+          amount: amount.get() * 100,
+          label: 'Donation',
+        },
+      });
     }
   },
 
