@@ -51,8 +51,8 @@ const createPaymentRequest = () => {
       metadata.state = user.profile.state;
       metadata.zip = user.profile.zip;
     } else {
-      metadata.name = event.token.card.name;
-      metadata.email = event.token.card.email;
+      metadata.name = event.payerName;
+      metadata.email = event.payerEmail;
     }
 
     Meteor.call('pay', event.token, metadata, (err) => {
