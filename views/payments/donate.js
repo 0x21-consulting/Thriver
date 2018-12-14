@@ -67,10 +67,12 @@ const createPaymentRequest = () => {
         // Inform the customer that there was an error.
         const errorElement = document.getElementById('donate-card-errors');
         errorElement.textContent = err.message;
+        event.complete('fail');
       } else {
         document.querySelector('#donateDefault').classList.add('hide');
         document.querySelector('#donateSuccess').removeAttribute('aria-hidden');
         document.querySelector('#donateForm').classList.add('hide');
+        event.complete('success');
       }
     });
   });

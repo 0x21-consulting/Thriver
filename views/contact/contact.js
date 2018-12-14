@@ -20,7 +20,7 @@ Template.contact.helpers({
   heading: 'Contact WCASA',
   phone: '(608) 257-1516',
   email: 'wcasa@wcasa.org',
-  fax: '(608) 257-2150',
+  fax: '(608) 646-7753',
   copyright: `2010-${(new Date()).getFullYear()} Wisconsin Coalition Against Sexual Assault, Inc.`,
   imgSrc: '/lib/img/wisconsin-coalition-against-sexual-assault.svg',
   imgAlt: 'Wisconsin Coalition Against Sexual Assault',
