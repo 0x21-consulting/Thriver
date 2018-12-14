@@ -1,5 +1,6 @@
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { Meteor } from 'meteor/meteor';
+import History from '/views/history/history';
 
 /**
  * @summary Action Alerts Route
@@ -47,16 +48,6 @@ FlowRouter.route('/receipt/:id', {
   waitOn: params => Meteor.subscribe('receipt', params.id),
   action() {
     this.render('receipt');
-  },
-});
-
-/**
- * @summary Default route
- */
-FlowRouter.route('/*', {
-  name: 'App.home',
-  action() {
-    this.render('canvas');
   },
 });
 
@@ -170,3 +161,13 @@ FlowRouter.route('/pages/Media-SA-Agency-Toolkit.php', { action() { this.render(
 FlowRouter.route('/pages/Media-Social_Media.php', { action() { this.render('canvas'); History.navigate('/twitter'); } });
 FlowRouter.route('/pages/en-Espanol.php', { action() { this.render('canvas'); History.navigate('/espanol/servicios-bilinges'); } });
 FlowRouter.route('/pages/Members.php', { action() { this.render('canvas'); History.navigate('/get-involved/sasp-membership'); } });
+
+/**
+ * @summary Default route
+ */
+FlowRouter.route('/*', {
+  name: 'App.home',
+  action() {
+    this.render('canvas');
+  },
+});
