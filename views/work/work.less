@@ -244,7 +244,7 @@ section.work .workNav{
     &.grid-4 > ul > li{ width: 25.08%;}
     & > ul > li{
         @media (max-width:865px){ width:42%; }
-        @media @mobile{ width:100%; }
+        @media @mobile{ width:100% !important; } // Override any class
     }
 }
 section.work .workNav > ul{
