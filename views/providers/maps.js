@@ -360,7 +360,14 @@ const initialize = () => {
         p.polygon,
         'click',
         function () {
-          if (mapObject.getZoom() < 10) moveMap(p.name);
+          if (mapObject.getZoom() < 10) {
+            moveMap(p.name);
+            p.polygon.setOptions({
+              fillOpacity: 0,
+              strokeColor: '#f0fdff',
+              strokeOpacity: 0.25,
+            });
+          }
         },
       );
       google.maps.event.addListener(
