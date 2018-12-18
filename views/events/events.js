@@ -171,7 +171,7 @@ Template.events.events({
    * @method
    *   @param {$.Event} event
    */
-  'click .eventsSlider button': (event) => {
+  'click .eventsSlider > button': (event) => {
     const parent = event.target.parentElement;
     const prev = parent.querySelector('li.prev');
     const current = parent.querySelector('li.current');
@@ -340,6 +340,7 @@ Template.eventSlide.events({
   'click li.register': (event) => {
     let a;
     let registrationForm;
+    let eventContent;
 
     // If this is a third-party register link, navigate to it
     if (Template.instance().data.registerUrl) {
@@ -354,8 +355,14 @@ Template.eventSlide.events({
       a.remove();
     } else {
       // Find registration form
-      registrationForm = event.target.parentElement
-        .querySelector('.registration-form');
+      registrationForm = event.target.parentElement.querySelector('.registration-form');
+      eventContent = event.target.parentElement.parentElement.querySelector('.events-item-desc');
+
+      // Show Cancel Button
+      event.target.parentElement.parentElement.querySelector('button.cancel').classList.remove('hide');
+
+      // Hide event contents
+      eventContent.classList.add('hide');
 
       // Show registration form if it has any fields
       if (registrationForm.querySelector('label')) {
@@ -416,8 +423,14 @@ Template.eventSlide.events({
       // Hide registration form
       form.parentElement.classList.add('hide');
 
+      // Show event contents
+      event.target.parentElement.parentElement.parentElement.querySelector('.events-item-desc').classList.remove('hide');
+
       // Show register button again
       form.parentElement.parentElement.querySelector('li.action').classList.remove('hide');
+
+      // Hide cancel button
+      event.target.parentElement.parentElement.parentElement.querySelector('button.cancel').classList.add('hide');
     }
   },
 
@@ -439,6 +452,26 @@ Template.eventSlide.events({
 
     // Navigate
     Events.navigate(event.currentTarget.dataset.id);
+  },
+
+  /**
+   * @summary Cancel Event Registration
+   * @method
+   *   @param {$.Event} event
+   */
+  'click .eventContainer button.cancel': (event) => {
+    // Do nothing else
+    event.preventDefault();
+
+    // Hide registration form
+    event.target.parentElement.parentElement.parentElement.querySelector('.registration-form').classList.add('hide');
+    event.target.classList.add('hide');
+
+    // Show event contents
+    event.target.parentElement.parentElement.parentElement.querySelector('.events-item-desc').classList.remove('hide');
+
+    // Show register button again
+    event.target.parentElement.parentElement.parentElement.querySelector('li.action.register').classList.remove('hide');
   },
 });
 

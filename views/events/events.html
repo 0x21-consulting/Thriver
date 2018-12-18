@@ -150,7 +150,9 @@
             {{#if address this}}<i class="fa fa-map-marker red" aria-hidden="true"></i> {{{ address this }}}{{/if}}
             
           </p>
-          {{{markdown description}}}
+          <div class="events-item-desc">
+            {{{markdown description}}}
+          </div>
         </div>
         <ul class="actions">
           {{#if registration.required}}
@@ -166,10 +168,14 @@
                       <textarea name="{{id}}" required></textarea>
                     {{else}}
                       {{#if equals type "yes/no"}}
-                        <select name="{{id}}" required>
-                          <option value="yes">Yes</option>
-                          <option value="no">No</option>
-                        </select>
+                        <div class="styledSelect fullBlockMob">
+                          <label>Type</label>
+                          <select name="{{id}}" required>
+                              <option value="">Select Option</option>
+                              <option value="yes">Yes</option>
+                              <option value="no">No</option>
+                          </select>
+                        </div>
                       {{else}}
                         <input type="{{type}}" name="{{id}}" required />
                       {{/if}}
@@ -182,15 +188,14 @@
                   <fieldset>
                     <h4>Please select the appropriate option:</h4>
                     {{#each cost}}
-                      <label>
-                        <input type="radio" name="cost-tier" value="{{cost}}" required>
-                        ${{cost}} {{description}}
-                      </label>
+                      <input id="event-cost-tier-{{cost}}" type="radio" name="cost-tier" value="{{cost}}" required>
+                      <label for="event-cost-tier-{{cost}}" class="radio"><span class="the-cost">${{cost}}</span><span class="the-text">{{description}}</span></label>  
                     {{/each}}
                   </fieldset>
                 {{/if}}
                 <input type="submit" value="Register" />
               </form>
+              <button class="cancel">Cancel</button>
             </li>
             {{#if isAdmin}}
               <li class="viewRegistrations action">View Registrations</li>

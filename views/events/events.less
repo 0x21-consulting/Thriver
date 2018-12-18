@@ -2,6 +2,51 @@
 @import (reference) "/views/styles/forms.import.less";
 
 #main section.events{
+    .styledSelect{
+        float: none;
+        select, &:before{ color: #333; }
+    }
+    form textarea{ min-height: 53px; }
+    form{
+        label.radio{
+            text-align: left;
+            font-size: 14px;
+            line-height: 19px;
+            min-height: 119px;
+            background-color: #ebf2f2 !important;
+            &, &:hover{ 
+                color: #333; 
+            }
+            &:hover{ background-color: #e3eded !important; }
+            margin-bottom: 10px;
+            display: block;
+            span.the-cost {
+                font-size: 30px;
+                margin: 0;
+                padding: 22px;
+                display: block;
+                float: left;
+                border: 2px solid rgba(255,255,255,0.5);
+                line-height: 30px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+            }
+            span.the-text{
+                display: block;
+                padding: 20px;
+            }
+        }
+        input:checked +label.radio, input:checked + label.radio:hover{ color: #fff !important; background: #00b7c5 !important;}
+    }
+    button.cancel{
+        position: static !important;
+        border: 2px solid gray;
+        margin-top: 10px;
+        font-size: 13px !important;
+        padding: 0 14px !important;
+        line-height: 13px !important;
+    }
     & > div > header p{ margin-bottom: 0px; }
     @media @mobile{
         background: #fff;
