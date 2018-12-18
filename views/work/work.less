@@ -245,7 +245,7 @@ section.work .workNav{
     &.grid-4 > ul > li{ width: 25.08%;}
     & > ul > li{
         @media (max-width:865px){ width:42%; }
-        @media @mobile{ width:100%; }
+        @media @mobile{ width:100% !important; } // Override any class
     }
 }
 section.work .workNav > ul{
@@ -873,7 +873,12 @@ section.work .main.container{
                 }
             }
             @media @mobile{
-                margin-left: -65px !important;
+                width: 100%;
+                left: auto;
+                margin-left: 0;
+                text-indent: 0;
+                right: 0;
+                bottom: 0px;
             }
         }
     }
