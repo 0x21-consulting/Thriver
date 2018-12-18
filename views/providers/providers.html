@@ -13,7 +13,6 @@
         </p>
       </header>
     </div>
-    {{> addProvider}}
     <div class="main mapTool">
       <figure class="map provider-left">
         <div id="mapCanvas">
@@ -52,14 +51,9 @@
           <button class="seeAllProviders button"><span class="fa">&#xf03a;</span> See All Providers</button>
           <br /><a href="https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP%20Map%20%26%20Contacts_2018%20Updated.pdf"><span class="fa">&#xf1c1;</span> Download Service Providers PDF</a>
         </div>
-          <!--
-          TODO: Add back in once admin working.
-          -->
-          <!--
           {{#if isAdmin}}
             <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
           {{/if}}
-          -->
       </form>
     </div>
   </div>
@@ -72,6 +66,7 @@
         <button class="clearProvider fullMap providers-back-to-all">
           <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Search All
         </button>
+        {{> addProvider}}
         <div class="inner providerItem">
           <header>
             <h2>{{name}}</h2>
@@ -84,15 +79,10 @@
                 {{#if crisis.ext}}x{{crisis.ext}}{{/if}}</a>
             </p>
             {{#if isAdmin}}
-              <!--
-                TODO: Add back in once admin working.
-              -->
-              <!--
               <aside class="adminControls">
                 <span class="fa edit" title="Edit Provider">&#xf044;</span>
                 <span class="fa delete" title="Delete Provider">&#xf014;</span>
               </aside>
-              -->
             {{/if}}
           </header>
           <div class="main">
