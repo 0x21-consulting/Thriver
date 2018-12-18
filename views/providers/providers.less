@@ -160,6 +160,12 @@ section.providers {
         background-color: darken(@orange, 5%);
       }
     }
+    height: 670px;
+    overflow: scroll;
+    @media @mobile{
+      height: auto;
+      overflow: auto;
+    }
     @media @1450 {
       width: 500px;
     }
@@ -598,6 +604,7 @@ section.providers {
       ul.outreach {
         margin-bottom: -10px;
         padding: 0px;
+        li{ margin-bottom: 0; }
       }
       @media (max-width:1000px) {
         ul.outreach {
