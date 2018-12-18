@@ -295,8 +295,8 @@ section.providers {
           margin-left: -15px;
         }
         @media @mobile {
-          width: 50%;
           text-align: center;
+          margin-bottom: 13px;
         }
       }
     }
@@ -316,6 +316,9 @@ section.providers {
       max-width: 590px;
       margin: 0 auto;
       padding: 191px 40px;
+      @media @mobile{
+        padding: 60px 30px 25px 30px;
+      }
     }
     hr{
       max-width: 442px;
@@ -770,4 +773,10 @@ div.mapTool article.details aside.adminControls {
 
 #main > section.providers > div > header p {
   margin-bottom: 18px;
+}
+
+@media @mobile{
+  #main > section.providers > div > header {
+    margin-bottom: -19px !important;
+  }
 }
