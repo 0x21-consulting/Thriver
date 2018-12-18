@@ -59,7 +59,21 @@ Template.payments.onRendered(() => {
   elements = stripe.elements();
 
   // Create credit card form elements
-  card = elements.create('card');
+  const style = {
+    base: {
+      iconColor: '#586e7c',
+      color: '#f9f9f9',
+      fontWeight: 400,
+      fontFamily: 'Raleway',
+      fontSize: '14px',
+      '::placeholder': {
+        color: '#586e7c',
+      },
+    },
+  };
+
+  // Create credit card form elements
+  card = elements.create('card', { style });
   card.mount('#pay-card-element');
   card.addEventListener('change', ({ error }) => {
     const displayError = document.getElementById('pay-card-errors');
