@@ -1174,6 +1174,13 @@ div.eventsSlider ul.slides {
 
     &.prev { transform: translateX(-100%); }
     &.next { transform: translateX(100%); }
+    @media @mobile{
+        &, &.prev, &.next { display: none; }
+        &.current{
+            display: block;
+            position: static;
+        }
+    }
   }
 }
 
