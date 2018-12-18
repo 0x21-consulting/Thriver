@@ -259,8 +259,12 @@ Template.markdownEditor.events({
 
     const [file] = event.target.parentElement.querySelector('input').files;
     const { name, type } = file;
+    const btn = event.target.parentElement.parentElement.querySelector('button');
 
     const reader = new FileReader();
+
+    // Disable button
+    btn.disabled = true;
 
     // Read in data
     reader.addEventListener('load', (loadEvent) => {
@@ -271,7 +275,10 @@ Template.markdownEditor.events({
       form.append(name, new Blob([data], { type }));
 
       xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState === 4) uploadUrl.set(xhr.responseText);
+        if (xhr.readyState === 4) {
+          uploadUrl.set(xhr.responseText);
+          btn.disabled = false;
+        }
       });
 
       xhr.addEventListener('error', error => console.error(error));

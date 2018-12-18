@@ -160,6 +160,12 @@ section.providers {
         background-color: darken(@orange, 5%);
       }
     }
+    height: 670px;
+    overflow: scroll;
+    @media @mobile{
+      height: auto;
+      overflow: auto;
+    }
     @media @1450 {
       width: 500px;
     }
@@ -208,7 +214,7 @@ section.providers {
         display: inline-block;
         margin: 0px;
         text-align: left;
-        width: 180px;
+        width: 157px;
         &:first-child,
         &:nth-child(2) {
           margin-right: 10px;
@@ -315,10 +321,11 @@ section.providers {
     .find-provider-inner {
       max-width: 590px;
       margin: 0 auto;
-      padding: 191px 40px;
+      padding: 156px 40px;
       @media @mobile{
         padding: 60px 30px 25px 30px;
       }
+      padding: 156px 40px;
     }
     hr{
       max-width: 442px;
@@ -601,6 +608,7 @@ section.providers {
       ul.outreach {
         margin-bottom: -10px;
         padding: 0px;
+        li{ margin-bottom: 0; }
       }
       @media (max-width:1000px) {
         ul.outreach {
