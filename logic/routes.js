@@ -13,7 +13,7 @@ FlowRouter.route('/action-alert/:title', {
       logos: [{
         title: 'WCASA',
         src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
-        url: '/',
+        url: 'https://wcasa.org',
       }],
       friendlyTitle: params.title,
     });
@@ -32,7 +32,7 @@ FlowRouter.route('/press-release/:title', {
       logos: [{
         title: 'WCASA',
         src: '/lib/img/wcasa-wisconsin-coalition-against-sexual-assault.svg',
-        url: '/',
+        url: 'https://wcasa.org',
       }],
       friendlyTitle: params.title,
     });
