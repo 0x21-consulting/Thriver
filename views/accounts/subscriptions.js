@@ -40,39 +40,6 @@ const listServSubscribe = (url, email, subscribe) => {
 
 Template.subscriptions.helpers({
   lists: [{
-    heading: 'Email Subscriptions',
-    items: [{
-      title: 'Press Releases',
-      id: 'pressReleasesToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.pressReleases;
-        }
-
-        return false;
-      },
-    }, {
-      title: 'Action Alerts',
-      id: 'actionAlertsToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.actionAlerts;
-        }
-
-        return false;
-      },
-    }, {
-      title: 'Newsletter',
-      id: 'newsletterToggle',
-      checked: () => {
-        if (Meteor.user() && Meteor.user().profile) {
-          return Meteor.user().profile.subscriptions.newsletter;
-        }
-
-        return false;
-      },
-    }],
-  }, {
     heading: 'Mailing Lists (Listservs)',
     items: [{
       title: 'Expert Witness',
