@@ -9,6 +9,7 @@ Template.infosheets.helpers({
     perPage: 10, // if paginate:true, how many before paginate
     style: 'stripes',
     tag: 'lc',
+    yearOnly: true,
     items: () => Resources.collection.find({
       type: 'infosheet',
       $or: Resources.search.get() instanceof RegExp ? [
