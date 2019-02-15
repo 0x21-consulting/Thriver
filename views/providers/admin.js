@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Random } from 'meteor/random';
 import { ReactiveVar } from 'meteor/reactive-var';
 import Providers from '/logic/providers/schema';
 
@@ -21,7 +22,7 @@ const closeForm = () => {
   document.querySelector('.providers section.addProvider').classList.add('hide');
 
   // Show inner again
-  document.querySelector('.providers .mapTool').classList.remove('hide');
+  document.querySelector('.providers .find-provider-inner').classList.remove('hide');
 };
 
 /** Admin events */
@@ -38,7 +39,7 @@ Template.addProviderForm.events({
    */
   'submit form#admin-form-provider-add': (event) => {
     event.preventDefault();
-    closeForm();
+    //closeForm();
 
     const getCounties = (checkboxesName) => {
       const checkboxes = document.getElementsByName(checkboxesName);
@@ -101,10 +102,9 @@ Template.addProviderForm.events({
       parent: form.querySelector('select[name=parent-location]').value,
     };
 
-    console.log(data);
-
     // Insert subscriber into the collection
     Meteor.call('addProvider', data, function(error, results) {
+      console.log(data);
       if (error) {
         console.error(error);
       } else {
@@ -112,6 +112,65 @@ Template.addProviderForm.events({
       }
     });
   },
+
+  /**
+   * @summary Add a new phone number
+   */
+  'click #admin-btn-provider-add-number'(event) {
+    event.preventDefault();
+
+    // Create new item with random ID
+    const id = Random.id();
+    const map = phones.get();
+    map.set(id, { id });
+
+    // Trigger reactivity
+    phones.set(phones.get());
+  },
+
+  /**
+   * @summary Add a new email address
+   */
+  'click #admin-btn-provider-add-email'(event) {
+    event.preventDefault();
+
+    // Create new item with random ID
+    const id = Random.id();
+    const map = emails.get();
+    map.set(id, { id });
+
+    // Trigger reactivity
+    emails.set(emails.get());
+  },
+
+  /**
+   * @summary Remove phone number
+   */
+  'click .provider-phone-number-delete'(event) {
+    event.preventDefault();
+
+    const items = phones.get();
+    const item = event.target.parentElement.parentElement;
+    items.delete(item.dataset.id);
+
+    // Trigger reactivity
+    phones.set(items);
+  },
+
+  /**
+   * @summary Remove email address
+   */
+  'click .provider-email-delete'(event) {
+    event.preventDefault();
+
+    const items = emails.get();
+    const item = event.target.parentElement.parentElement;
+    items.delete(item.dataset.id);
+
+    // Trigger reactivity
+    emails.set(items);
+  },
+
 });
 
 Template.addProviderForm.helpers({
@@ -142,21 +201,16 @@ Template.providers.events({
    *   @param {$.Event} event
    */
   'click button.addProvider': (event) => {
-    event.preventDefault();
-
     // Set appropriate form type
     Providers.formMethod.set('addProvider');
     activeProvider.set(null);
 
-    const popout = event.target.parentElement.parentElement.parentElement;
-    const form = event.target.parentElement.parentElement.parentElement
+    const form = event.target.parentElement.parentElement.parentElement.parentElement
       .querySelector('section.addProvider');
-    const mapTool = event.target.parentElement.parentElement.parentElement
-      .querySelector('.mapTool');
+    const contents = event.target.parentElement.parentElement.parentElement;
 
-    if (popout instanceof Element) popout.classList.remove('full-view');
     if (form instanceof Element) form.classList.remove('hide');
-    if (mapTool instanceof Element) mapTool.classList.add('hide');
+    if (contents instanceof Element) contents.classList.add('hide');
   },
 });
 
@@ -219,13 +273,14 @@ Template.provider.events({
    */
   'click .adminControls .delete': () => {
     if (window.confirm('Are you sure you want to delete this provider?')) {
+
       Meteor.call('deleteProvider', Providers.active.get()._id);
 
       // Close side pane and show whole map
-      document.querySelector('.mapView').click();
+      document.querySelector('.fullMap').click();
 
       // Unset current provider
-      Providers.current.set(null);
+      Providers.active.set(null);
     }
   },
 });

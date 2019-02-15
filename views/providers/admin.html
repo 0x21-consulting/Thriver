@@ -32,11 +32,11 @@
         <h5 class="clear-both">Coordinates</h5>
         <label class="w-50">
           Longitude
-          <input type="number" min="-92.883" max="-86.768" name="longitude" value="{{doc.coordinates.lon}}" required />
+          <input step="0.0001" type="number" name="longitude" value="{{doc.coordinates.lon}}" required />
         </label>
         <label class="w-50 margin-right-0">
           Latitude
-          <input type="number" min="42.6" max="47.083" name="latitude" value="{{doc.coordinates.lat}}" required />
+          <input step="0.0001" type="number" name="latitude" value="{{doc.coordinates.lat}}" required />
         </label>
         <hr />
         <details aria-expanded="false" class="admin-form-details">
@@ -47,8 +47,8 @@
             {{#each counties}}
               <div>
                 <div class="toggleSwitch">
-                  <input type="checkbox" name="provider-add-form-county" value="{{this}}" id="provider-county-id-{{simpleString this}}">
-                  <label for="provider-county-id-{{simpleString this}}" role="checkbox" aria-checked="{{simpleString this}}"></label>
+                  <input type="checkbox" name="provider-add-form-county" value="{{this}}" id="provider-county-id-{{simpleString this}}" {{checked}}>
+                  <label for="provider-county-id-{{simpleString this}}" role="checkbox"></label>
                 </div>
                 <label for="provider-county-id-{{simpleString this}}" class="toggleSwitchLabel">
                   {{this}}
@@ -68,7 +68,7 @@
                 Number
                 <input type="text" class="number-inp" value="{{number}}" />
               </label>
-              <label class="w-25">
+              <label class="w-10">
                 Ext
                 <input type="text" class="number-ext-inp" value="{{ext}}" />
               </label>
@@ -84,6 +84,9 @@
                 <label for="provider-add-form-tty-{{@index}}}" class="toggleSwitchLabel">
                   TTY-Enabled
                 </label>
+              </div>
+              <div class="w-10">
+                <button class="provider-phone-number-delete admin-row-delete" type="button"><i class="fas fa-times"></i></button>
               </div>
             </div>
           {{/each}}
@@ -120,7 +123,7 @@
           </summary>
           {{#each emails}}
             <div class="provider-email-item">
-              <label class="w-50">
+              <label class="w-33">
                 Email
                 <input type="email" class="email-inp" value="{{address}}" />
               </label>
@@ -128,6 +131,9 @@
                 Description
                 <input type="text" class="email-desc-inp" value="{{description}}" />
               </label>
+              <div class="w-10">
+                <button class="provider-email-delete admin-row-delete" type="button"><i class="fas fa-times"></i></button>
+              </div>
             </div>
           {{/each}}
           <div class="clear-both">
@@ -152,7 +158,7 @@
           Twitter
           <input type="text" name="twitter-url" value="{{doc.twitter}}" />
         </label>
-        <input type="submit" class="btn btn-primary" value="Add Service Provider" />        
+        <input type="submit" class="btn btn-primary" value="{{submitVal}}" />        
       </form>
     </div>
   </section>

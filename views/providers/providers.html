@@ -61,12 +61,12 @@
 <template name="provider">
   <article class="locationDetails details provider-right">
     {{> providersList}}
+    {{> addProvider}}
     {{#if currentProvider}}
       {{#with currentProvider}}
         <button class="clearProvider fullMap providers-back-to-all">
           <i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Search All
         </button>
-        {{> addProvider}}
         <div class="inner providerItem">
           <header>
             <h2>{{name}}</h2>
