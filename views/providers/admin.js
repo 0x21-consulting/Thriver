@@ -20,9 +20,7 @@ const emails = new ReactiveVar(new Map());
 const closeForm = () => {
   // Close add Provider Form
   document.querySelector('.providers section.addProvider').classList.add('hide');
-
-  // Show inner again
-  document.querySelector('.providers .find-provider-inner').classList.remove('hide');
+  document.querySelector('.providers-back-to-all').click();
 };
 
 /** Admin events */
@@ -102,15 +100,28 @@ Template.addProviderForm.events({
       parent: form.querySelector('select[name=parent-location]').value,
     };
 
-    // Insert subscriber into the collection
-    Meteor.call('addProvider', data, function(error, results) {
-      console.log(data);
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(results);
-      }
-    });
+    // Insert subscriber into the collection or update
+    if (Providers.formMethod.get() === 'updateProvider') {
+      data._id = Providers.active.get()._id;
+      Meteor.call('updateProvider', data, function(error, results) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log(results);
+          closeForm();
+        }
+      });
+    } else {
+      Meteor.call('addProvider', data, function(error, results) {
+        console.log(data);
+        if (error) {
+          console.error(error);
+        } else {
+          console.log(results);
+          closeForm();
+        }
+      });
+    }
   },
 
   /**
@@ -256,6 +267,9 @@ Template.provider.events({
     Providers.formMethod.set('updateProvider');
     activeProvider.set(Providers.active.get());
 
+    console.log('this is the provider we are editing');
+    console.log(activeProvider.get());
+
     // Hide Slider and show admin interface
     const popout = event.delegateTarget.parentElement;
     const form = event.delegateTarget.querySelector('section.addProvider');
@@ -273,11 +287,10 @@ Template.provider.events({
    */
   'click .adminControls .delete': () => {
     if (window.confirm('Are you sure you want to delete this provider?')) {
-
       Meteor.call('deleteProvider', Providers.active.get()._id);
 
       // Close side pane and show whole map
-      document.querySelector('.fullMap').click();
+      closeForm();
 
       // Unset current provider
       Providers.active.set(null);

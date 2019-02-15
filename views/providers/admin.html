@@ -32,11 +32,11 @@
         <h5 class="clear-both">Coordinates</h5>
         <label class="w-50">
           Longitude
-          <input step="0.0001" type="number" name="longitude" value="{{doc.coordinates.lon}}" required />
+          <input step="0.000001" type="number" min="-92.883" max="-86.767" name="longitude" value="{{doc.coordinates.lon}}" required />
         </label>
         <label class="w-50 margin-right-0">
           Latitude
-          <input step="0.0001" type="number" name="latitude" value="{{doc.coordinates.lat}}" required />
+          <input step="0.000001" type="number" min="42.5" max="47.083" name="latitude" value="{{doc.coordinates.lat}}" required />
         </label>
         <hr />
         <details aria-expanded="false" class="admin-form-details">
@@ -105,7 +105,7 @@
           </label>
           <label class="w-25">
             Ext
-            <input type="text" name="crisis-ext" value="{{doc.crisis.ext}}" required />
+            <input type="text" name="crisis-ext" value="{{doc.crisis.ext}}" />
           </label>
           <div class="w-25">
             <div class="toggleSwitch">

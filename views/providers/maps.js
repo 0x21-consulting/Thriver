@@ -191,10 +191,10 @@ const moveMap = (county) => {
   if (providers.length === 1) {
     Providers.active.set(Providers.collection
       .findOne({ _id: providers[0].id }));
-    document.getElementById('service-providers').classList.remove('full-view');
+    //document.getElementById('service-providers').classList.remove('full-view');
     google.maps.event.trigger(mapObject, 'resize');
   } else {
-    document.getElementById('service-providers').classList.add('full-view');
+    //document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(mapObject, 'resize');
   }
 
@@ -814,8 +814,7 @@ const followProviderLink = (event) => {
   event.preventDefault();
 
   const { data } = Template.instance();
-  console.log("updating");
-  console.log(Providers.collection.findOne({ _id: data._id }));
+
   // Update info section
   Providers.active.set(Providers.collection
     .findOne({ _id: data._id }));
@@ -830,7 +829,6 @@ const followProviderLink = (event) => {
     data.coordinates.lon,
   ));
   mapObject.setZoom(12);
-
 };
 
 Template.providerListViewItem.events({
