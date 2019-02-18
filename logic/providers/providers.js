@@ -70,6 +70,7 @@ Meteor.methods({
     if (!Meteor.userId() || !Meteor.user().admin) throw new Meteor.Error('not-authorized');
 
     // Parameter checks
+    console.log(provider);
     check(provider, Object);
 
     // Perform update
