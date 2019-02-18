@@ -191,10 +191,8 @@ const moveMap = (county) => {
   if (providers.length === 1) {
     Providers.active.set(Providers.collection
       .findOne({ _id: providers[0].id }));
-    //document.getElementById('service-providers').classList.remove('full-view');
     google.maps.event.trigger(mapObject, 'resize');
   } else {
-    //document.getElementById('service-providers').classList.add('full-view');
     google.maps.event.trigger(mapObject, 'resize');
   }
 
