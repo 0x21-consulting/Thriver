@@ -37,7 +37,6 @@ Template.addProviderForm.events({
    */
   'submit form#admin-form-provider-add': (event) => {
     event.preventDefault();
-    //closeForm();
 
     const getCounties = (checkboxesName) => {
       const checkboxes = document.getElementsByName(checkboxesName);
