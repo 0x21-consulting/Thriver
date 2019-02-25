@@ -11,15 +11,15 @@ Template.masthead.helpers({
       id: 'mastheadSlideA', // These are for aria-controls
       template: 'slideA', // This could really just be an editable content area instead of unique templates
     }, {
-      title: 'Year-End Support',
-      id: 'mastheadSlideF',
-      template: 'slideF',
-    }, {
       title: '2019 Calendar',
       id: 'mastheadSlideE',
       template: 'slideE',
     }, {
-      title: 'We Value your Feedback',
+      title: 'The Big Share',
+      id: 'mastheadSlideF',
+      template: 'slideF',
+    }, {
+      title: 'SASP-PDI',
       id: 'mastheadSlideD',
       template: 'slideD',
     }, {
