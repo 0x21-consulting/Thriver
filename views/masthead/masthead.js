@@ -15,11 +15,7 @@ Template.masthead.helpers({
       id: 'mastheadSlideE',
       template: 'slideE',
     }, {
-      title: 'The Big Share',
-      id: 'mastheadSlideF',
-      template: 'slideF',
-    }, {
-      title: 'SASP-PDI',
+      title: 'Sexual Assault Awareness Month',
       id: 'mastheadSlideD',
       template: 'slideD',
     }, {
