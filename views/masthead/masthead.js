@@ -22,6 +22,10 @@ Template.masthead.helpers({
       title: 'The Bigger Movement',
       id: 'mastheadSlideB',
       template: 'slideB',
+    }, {
+      title: 'New SASPs Just Added!',
+      id: 'mastheadSlideC',
+      template: 'slideC',
     }],
   }],
 });
