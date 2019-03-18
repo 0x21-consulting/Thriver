@@ -15,6 +15,10 @@ Template.masthead.helpers({
       id: 'mastheadSlideE',
       template: 'slideE',
     }, {
+      title: 'Free Chrystul Kizer',
+      id: 'mastheadSlideG',
+      template: 'slideG',
+    }, {
       title: 'Sexual Assault Awareness Month',
       id: 'mastheadSlideD',
       template: 'slideD',
