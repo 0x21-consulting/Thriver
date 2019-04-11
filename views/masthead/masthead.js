@@ -11,7 +11,7 @@ Template.masthead.helpers({
       id: 'mastheadSlideA', // These are for aria-controls
       template: 'slideA', // This could really just be an editable content area instead of unique templates
     }, {
-      title: '2019 Calendar',
+      title: '2019 Events',
       id: 'mastheadSlideE',
       template: 'slideE',
     }, {
