@@ -48,8 +48,14 @@
         <hr />
         <div class="providers-list-buttons">
           <button class="fullMap button"><span class="fa">&#xf279;</span> View Full Map</button>
-          <button class="seeAllProviders button"><span class="fa">&#xf03a;</span> See All Providers</button>
-          <br /><a href="https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP-Map%20%26%20Contacts_2019_2.pdf"><span class="fa">&#xf1c1;</span> Download Service Providers PDF</a>
+          <a 
+            class="seeAllProviders button" 
+            href="https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP-Map%20%26%20Contacts_2019_Updated.pdf" 
+            target="_blank"
+            style="background-color: #04648d; line-height: 29px; border-radius: 0; margin-left: -1px;"
+          >
+            <span class="fa">&#xf03a;</span> See All Providers
+          </a>
         </div>
           {{#if isAdmin}}
             <button class="addProvider button" title="Add Provider"><span class="fa">&#xf055;</span> Add Provider</button>
