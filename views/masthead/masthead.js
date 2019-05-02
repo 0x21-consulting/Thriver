@@ -19,10 +19,6 @@ Template.masthead.helpers({
       id: 'mastheadSlideG',
       template: 'slideG',
     }, {
-      title: 'Sexual Assault Awareness Month',
-      id: 'mastheadSlideD',
-      template: 'slideD',
-    }, {
       title: 'The Bigger Movement',
       id: 'mastheadSlideB',
       template: 'slideB',
