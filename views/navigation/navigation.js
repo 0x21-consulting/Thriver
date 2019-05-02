@@ -32,7 +32,7 @@ Template.navigation.helpers(mainNavigationHelpers);
 
 /*  Temporarily redirect Providers section link */
 Template.navigation.onRendered(() => {
-  const providersLink = document.querySelectorAll("#menu a[href='/service-providers/']")[0] || undefined;
+  const providersLink = document.querySelectorAll("#menu a[href='/service-providers']")[0] || undefined;
   if (providersLink !== undefined) {
     providersLink.setAttribute('href', 'https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP-Map%20%26%20Contacts_2019_Updated.pdf');
   }
