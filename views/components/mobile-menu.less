@@ -52,8 +52,8 @@
             &[data-action="signout"], &[data-action="register"]{
                 //border-bottom:2px solid darken(@mobileNavigationBgColor,15%);
             }
-            &[href="/service-providers"]{background-color: @orange;}
-            &[href="/service-providers"]{background-color: @orange;}
+            &[href="/service-providers"],
+            &[href^="https"]{background-color: @orange;}
             &[href="/payments"]{ display: none; }
             &[aria-expanded]:after{
                 content:"\f0da";
