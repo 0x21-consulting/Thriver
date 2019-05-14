@@ -71,7 +71,7 @@ WebApp.connectHandlers
     }
 
     if (req.busboy) {
-      req.busboy.on('file', Meteor.bindEnvironment((name, fileStream) => {
+      req.busboy.on('file', Meteor.bindEnvironment((name, fileStream, fileName, encoding, mimeType) => {
         console.log(`Receiving ${name}`);
 
         let file;
@@ -93,7 +93,12 @@ WebApp.connectHandlers
 
             // Settings and options
             const Bucket = Settings.get('aws').bucket;
-            const params = { Bucket, Key: `resources/${name}`, Body: file };
+            const params = {
+              Bucket,
+              Key: `resources/${name}`,
+              Body: file,
+              ContentType: mimeType,
+            };
 
             console.log(`Params: ${params.Bucket}, ${params.Key}`);
 
