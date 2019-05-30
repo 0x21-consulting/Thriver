@@ -219,7 +219,7 @@ Template.utilityItem.events({
 Template.utility.onRendered(() => {
   const providersLink = document.querySelectorAll("#utility a[href='/service-providers']")[0] || undefined;
   if (providersLink !== undefined) {
-    providersLink.setAttribute('href', 'https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP-Map-Contacts_2019-Updated_050719.pdf');
+    providersLink.setAttribute('href', 'https://wcasa.s3.us-east-2.amazonaws.com/resources/WCASA-SASP-Map-Contacts_2019+Updated_53019.pdf');
     providersLink.setAttribute('target', '_blank');
   }
 });
