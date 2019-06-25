@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-
 import './masthead.html';
 
 // Populate Profile tab under Account Overview
@@ -7,6 +6,10 @@ Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
     tabs: [{
+      title: 'WCASA is hiring',
+      id: 'mastheadSlideD',
+      template: 'slideD',
+    }, {
       title: 'New Site, New Features!',
       id: 'mastheadSlideA', // These are for aria-controls
       template: 'slideA', // This could really just be an editable content area instead of unique templates
