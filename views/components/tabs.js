@@ -15,7 +15,7 @@ const toggleTabs = (event) => {
   // Tabs Variables
   const menu = event.target.parentNode.parentNode;
   const links = menu.querySelectorAll('[aria-controls][data-toggle=tabs]');
-  const sections = menu.parentNode.querySelectorAll(':scope > div.tabs > article[aria-hidden]');
+  const sections = menu.parentNode.querySelectorAll('div.tabs > article[aria-hidden]');
 
   // Remove active state from all links
   for (let i = 0; i < links.length; i += 1) Util.makeActive(links[i], false);
@@ -30,12 +30,19 @@ const toggleTabs = (event) => {
   Util.hide(menu.parentElement
     .querySelector(`article[data-id="${event.target.dataset.id}"]`), false);
 
-  // Select first child tab if any
-  // TODO: Open first child tab
-  /*
-  const firstTab = menu.parentNode.querySelectorAll('div.tabs menu.tabs > li:first-child a');
-  if (firstTab.length > 0) firstTab[0].click();
-  */
+  // Display First Subarticle on parent article open
+  let subTabsOpen = false;
+  for (let i = 0; i < sections.length; i += 1) {
+    if (sections[i].querySelectorAll('div.tabs').length > 0) {
+      const subArticles = sections[i].querySelectorAll('div.tabs > article');
+      for (let z = 0; z < subArticles.length; z += 1) {
+        if (subArticles[z].getAttribute('aria-hidden') === 'false') subTabsOpen = true;
+      }
+      if (!subTabsOpen) {
+        sections[i].querySelectorAll('div.tabs > article')[0].setAttribute('aria-hidden', 'false');
+      }
+    }
+  }
 };
 
 Template.tabs.onRendered(() => {
