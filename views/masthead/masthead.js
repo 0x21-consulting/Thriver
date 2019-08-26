@@ -6,10 +6,6 @@ Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
     tabs: [{
-      title: 'New Site, New Features!',
-      id: 'mastheadSlideA', // These are for aria-controls
-      template: 'slideA', // This could really just be an editable content area instead of unique templates
-    }, {
       title: '2019 Events',
       id: 'mastheadSlideE',
       template: 'slideE',
