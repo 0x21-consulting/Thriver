@@ -21,6 +21,10 @@ Template.masthead.helpers({
       title: 'New SASPs Just Added!',
       id: 'mastheadSlideC',
       template: 'slideC',
+    }, {
+      title: 'WCASA is hiring a Prevention Coordinator',
+      id: 'mastheadSlideA',
+      template: 'slideA',
     }],
   }],
 });
