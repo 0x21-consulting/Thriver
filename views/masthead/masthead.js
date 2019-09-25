@@ -6,7 +6,7 @@ Template.masthead.helpers({
   items: [{
     // Need to find away to get background images in here
     tabs: [{
-      title: '2019 Events',
+      title: 'Events',
       id: 'mastheadSlideE',
       template: 'slideE',
     }, {
