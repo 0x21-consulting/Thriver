@@ -22,7 +22,7 @@ Template.masthead.helpers({
       id: 'mastheadSlideB',
       template: 'slideB',
     }, {
-      title: 'New SASPs Just Added!',
+      title: 'Welcome New Members',
       id: 'mastheadSlideC',
       template: 'slideC',
     }],
