@@ -35,3 +35,12 @@ Template.navigationMobile.events({
     document.body.classList.remove('noScroll');
   },
 });
+
+/*  Temporarily redirect Providers section link */
+Template.navigationMobile.onRendered(() => {
+  const providersLink = document.querySelectorAll("#mobile-navigation a[href='/service-providers']")[0] || undefined;
+  if (providersLink !== undefined) {
+    providersLink.setAttribute('href', 'https://wcasa.s3.us-east-2.amazonaws.com/resources/SASP+Map+%26+Contacts.pdf');
+    providersLink.setAttribute('target', '_blank');
+  }
+});
