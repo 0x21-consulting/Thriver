@@ -87,6 +87,7 @@ Events.parsePath = (path) => {
     }
     // Specific event ID
     if (path[i].match(/^[a-z0-9]{17}$/i)) {
+      console.log(path[i]);
       Events.navigate(path[i]);
     }
 
