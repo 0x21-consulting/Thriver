@@ -29,6 +29,7 @@ Template.events.onRendered(() => {
  *   @param {String} id - The ID of an event to navigate to
  */
 Events.navigate = (id) => {
+  console.log(id);
   const thisEvent = Events.collection.findOne({ _id: id });
 
   // Set Month and year based on event Start date
@@ -81,13 +82,13 @@ Events.parsePath = (path) => {
   };
 
   for (let i = 0; i < path.length; i += 1) {
+    console.log(path[i]);
     // Year
     if (path[i].match(/^\d{4}$/)) {
       Calendar.thisYear.set(Number(path[i]));
     }
     // Specific event ID
     if (path[i].match(/^[a-z0-9]{17}$/i)) {
-      console.log(path[i]);
       Events.navigate(path[i]);
     }
 
