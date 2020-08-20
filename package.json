@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "aws-sdk": "^2.368.0",
-    "bcrypt": "^3.0.1",
+    "bcrypt": "^5.0.0",
     "connect-busboy": "0.0.2",
     "core-js": "^2.5.7",
     "fibers": "^3.0.0",
